@@ -19,6 +19,14 @@ No cambies código del repositorio ni la tarea programada. Los únicos commits s
 `ToolSearch` con `select:mcp__claude-code-remote__add_repo,mcp__claude-code-remote__send_later`.
 Sin `add_repo` no hay permiso para guardar en la rama `datos`; sin `send_later` no hay chequeos.
 
+Si `ToolSearch` no los encuentra:
+- **Clonar**: `git clone https://github.com/eching8/apuestas-.git` funciona igual.
+- **Programar chequeos sin `send_later`**: espera con Bash en segundo plano hasta la hora del chequeo
+  (`sleep <segundos>` con `run_in_background: true` y `timeout` de hasta 7200000 ms; si faltan más
+  de 2 horas, encadena esperas). Cuando llegue la notificación de que terminó, ejecuta el paso 2.
+- **Guardar datos**: si `datos.sh guardar` da 403, dilo una vez en el chat (el usuario tiene que
+  añadir el repositorio a la tarea programada en claude.ai) y sigue sin guardar.
+
 ## Paso 1: mañana (al abrirse la sesión)
 
 1. Llama a `add_repo` con owner `eching8`, repo `apuestas-` y `access: "push"`, y clona con el
@@ -27,7 +35,8 @@ Sin `add_repo` no hay permiso para guardar en la rama `datos`; sin `send_later` 
    bash scripts/preparar.sh
    bash scripts/datos.sh restaurar
    ```
-2. Comprueba la clave con `python3 -m apuestas api` (no gasta peticiones). La clave puede llegar
+2. Comprueba la clave con `python3 -m apuestas api` (no gasta peticiones). Si dice que la cuenta está
+   **suspendida**, no vuelvas a llamar a la API en todo el día: avisa y sigue como si no hubiera clave. La clave puede llegar
    como variable `API_FOOTBALL_KEY` o como *network secret* que añade el proxy sin que la veas.
    - **Si dice NO DISPONIBLE**: ejecuta `python3 -m apuestas predecir --dias 1`, resume en el chat las
      probabilidades de los partidos del día y la combinada lotería del informe
