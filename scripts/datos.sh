@@ -16,7 +16,7 @@ case "${1:-}" in
       exit 0
     fi
     mkdir -p data reportes
-    for f in apuestas.db uso_api.json; do
+    for f in apuestas.db uso_api.json uso_bzzoiro.json uso_sgo.json sgo_ligas.json; do
       if git cat-file -e "origin/$RAMA:$f" 2>/dev/null; then
         git show "origin/$RAMA:$f" > "data/$f"
       fi
@@ -35,7 +35,7 @@ case "${1:-}" in
       git worktree add -q --detach "$tmp"
       (cd "$tmp" && git checkout -q --orphan "$RAMA" && git rm -rqf . && git clean -fdxq)
     fi
-    for f in apuestas.db uso_api.json; do
+    for f in apuestas.db uso_api.json uso_bzzoiro.json uso_sgo.json sgo_ligas.json; do
       if [ -f "data/$f" ]; then cp "data/$f" "$tmp/$f"; fi
     done
     if [ -d reportes ]; then mkdir -p "$tmp/reportes" && cp -r reportes/. "$tmp/reportes/"; fi

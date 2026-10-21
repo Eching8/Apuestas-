@@ -19,7 +19,7 @@ from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .analyzer import analyze_fixture, candidates, combinadas_extra
-from .api_football import ApiError, ApiFootball
+from .api_football import ApiError
 from .api_football import REGISTRO_USO, leer_registro
 from .api_football import estado as estado_api
 from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
@@ -29,6 +29,7 @@ from .config import FECHA_INICIO, Config, ligas_filtro, load_config
 from .db import Database
 from .chequeo import agenda, chequear, render_chequeo
 from .football_data import FootballData, validate_day
+from .fuentes import cliente_bzzoiro, cliente_partidos, enriquecer, estado_fuentes
 from .historico import NOMBRES_LIGA, Historico
 from .predicciones import predecir
 from .puente import ModeloHistorico
@@ -55,10 +56,14 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         log.error("El seguimiento empieza el %s; usa una fecha igual o posterior.", FECHA_INICIO)
         return 2
     if not args.sin_descarga:
-        api = getattr(args, "api", None) or ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
-        Collector(api, db, cfg).collect_day(fecha, con_jugadores=not args.sin_jugadores,
-                                            con_cuotas=not args.sin_cuotas_api)
+        api = getattr(args, "api", None) or cliente_partidos(cfg)
+        listos = Collector(api, db, cfg).collect_day(fecha, con_jugadores=not args.sin_jugadores,
+                                                     con_cuotas=not args.sin_cuotas_api)
         log.info("Peticiones usadas: %d (quedan hoy según la API: %s)", api.peticiones, api.restantes_hoy)
+        # Árbitro y cuotas de Bzzoiro y SportsGameOdds, solo para los partidos que se van a analizar.
+        if not args.sin_cuotas_api:
+            for nota in enriquecer(db, cfg, [dict(db.fixture(i)) for i in listos]):
+                log.info("%s", nota)
 
     fixtures = [dict(r) for r in db.fixtures_on(fecha) if r["status"] not in ANULADOS]
     filtro = ligas_filtro(cfg)
@@ -97,7 +102,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
 
 def cmd_actualizar(args, cfg: Config, db: Database) -> int:
     fecha = _fecha(args.fecha, cfg, offset=-1)
-    api = getattr(args, "api", None) or ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
+    api = getattr(args, "api", None) or cliente_partidos(cfg)
     n = Collector(api, db, cfg).update_results(fecha, con_jugadores=not args.sin_jugadores)
     liquidadas = settle_pending(db)
     print(f"{n} partidos terminados guardados del {fecha}; {liquidadas} selecciones liquidadas. "
@@ -109,9 +114,10 @@ def cmd_diario(args, cfg: Config, db: Database) -> int:
     args.fecha = None
     # Un solo presupuesto para las dos fases: el resto del día queda para los chequeos de alineación.
     # Los resultados de ayer tienen un tope propio para que no se coman el análisis de hoy.
-    args.api = ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
+    args.api = cliente_partidos(cfg)
     total = args.api.presupuesto
-    args.api.presupuesto = min(total, cfg.presupuesto_actualizar)
+    if cfg.fuente == "api-football":
+        args.api.presupuesto = min(total, cfg.presupuesto_actualizar)
     if _hoy(cfg) - timedelta(days=1) >= FECHA_INICIO:
         cmd_actualizar(args, cfg, db)
     args.api.presupuesto = total
@@ -164,9 +170,9 @@ def _modelo_historico(cfg: Config, fecha: str) -> ModeloHistorico | None:
 
 def cmd_chequeo(args, cfg: Config, db: Database) -> int:
     fecha = _fecha(args.fecha, cfg)
-    api = ApiFootball(cfg.api_football_key, cfg.presupuesto_chequeo)
+    api = cliente_partidos(cfg, cfg.presupuesto_chequeo if cfg.fuente == "api-football" else 60)
     resultados = chequear(db, api, cfg, fecha, ventana_min=args.ventana, historico=_modelo_historico(cfg, fecha),
-                          forzar=args.forzar, con_cuotas=not args.sin_cuotas_api)
+                          forzar=args.forzar, con_cuotas=not args.sin_cuotas_api, bzzoiro=cliente_bzzoiro(cfg))
     if not resultados:
         print(f"Ningún partido con selecciones empieza en los próximos {args.ventana} minutos (o ya están chequeados).")
     for r in resultados:
@@ -186,6 +192,16 @@ def cmd_chequeo(args, cfg: Config, db: Database) -> int:
     if any(r.estado == "esperando" for r in resultados):
         print("PENDIENTE: hay alineaciones sin publicar; vuelve a ejecutar 'chequeo' en 10-15 minutos.")
     return 0
+
+
+def cmd_fuentes(args, cfg: Config, db: Database) -> int:
+    print(f"Fuente principal: {cfg.fuente}")
+    todo_ok = True
+    for nombre, ok, detalle in estado_fuentes(cfg):
+        print(f"  {'✅' if ok else '⚠️ '} {nombre}: {detalle}")
+        if not ok and nombre.startswith(cfg.fuente.split("-")[0].upper()[:4]):
+            todo_ok = False
+    return 0 if todo_ok else 1
 
 
 def cmd_api(args, cfg: Config, db: Database) -> int:
@@ -351,6 +367,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     ap = sub.add_parser("api", help="comprueba la clave y el consumo de API-Football (no gasta peticiones)")
     ap.set_defaults(func=cmd_api)
+
+    fu = sub.add_parser("fuentes", help="estado y consumo de ESPN, Bzzoiro, SportsGameOdds y API-Football")
+    fu.set_defaults(func=cmd_fuentes)
 
     ag = sub.add_parser("agenda", help="a qué horas ejecutar 'chequeo' hoy")
     ag.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")

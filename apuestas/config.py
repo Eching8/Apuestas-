@@ -60,6 +60,14 @@ def _ligas_historico() -> list[str]:
 
 @dataclass
 class Config:
+    # Fuente principal de partidos, estadísticas y alineaciones: "espn" (sin clave) o "api-football".
+    fuente: str = field(default_factory=lambda: os.environ.get("APUESTAS_FUENTE", "espn").lower())
+    presupuesto_espn: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO_ESPN", 400))
+    # Fuentes secundarias (si no hay clave, se ignoran solas).
+    usar_bzzoiro: bool = field(default_factory=lambda: os.environ.get("APUESTAS_BZZOIRO", "1") != "0")
+    bzzoiro_token: str = field(default_factory=lambda: os.environ.get("BZZOIRO_TOKEN", ""))
+    usar_sgo: bool = field(default_factory=lambda: os.environ.get("APUESTAS_SGO", "1") != "0")
+    sgo_api_key: str = field(default_factory=lambda: os.environ.get("SGO_API_KEY", ""))
     api_football_key: str = field(default_factory=lambda: os.environ.get("API_FOOTBALL_KEY", ""))
     football_data_key: str = field(default_factory=lambda: os.environ.get("FOOTBALL_DATA_KEY", ""))
     zona_horaria: str = field(default_factory=lambda: os.environ.get("APUESTAS_TZ", "America/Mexico_City"))

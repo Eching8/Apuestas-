@@ -12,12 +12,32 @@ arma combinadas de **alta probabilidad** y de **alto valor**.
 
 | Fuente | Para qué | Clave |
 |---|---|---|
-| [API-Football](https://www.api-football.com) (api-sports.io) | Partidos del día, estadísticas por partido (córners, tarjetas, goles, tiros a puerta, remates), estadísticas de jugadores, cuotas de varias casas | Obligatoria. Plan gratuito: 100 peticiones/día |
+| **ESPN** (API pública de su web, `espn.py`) — **principal** | Partidos del día, historial de cada equipo en todas sus competiciones, estadísticas por partido (córners, tarjetas, remates, tiros a puerta, atajadas, faltas), jugadores, alineaciones, cuotas de DraftKings (1X2 y goles) | No necesita. No es oficial: puede cambiar sin aviso; se usa a 1 petición/s como mucho y se para ante cualquier bloqueo |
+| [Bzzoiro Sports Data](https://sports.bzzoiro.com) (`bzzoiro.py`) | Árbitro, cuotas de consenso de ~14 casas (1X2, más/menos 1.5/2.5/3.5, ambos marcan), alineaciones confirmadas y bajas | Gratis con registro (7.500 peticiones/día; el programa se queda en 1.000) |
+| [SportsGameOdds](https://sportsgameodds.com) (`sgo.py`) | Cuotas de córners, tarjetas y tiros | Plan gratis "Amateur": 2.500 objetos/mes (el programa se queda en 2.000), 1 consulta al día |
+| [API-Football](https://www.api-football.com) (api-sports.io) | Alternativa a ESPN (`APUESTAS_FUENTE=api-football`) | Plan gratuito: 100 peticiones/día. Ojo: suspendió una cuenta usada desde la nube |
 | [football-data.org](https://www.football-data.org) | Segunda fuente independiente para validar horarios y marcadores | Opcional, gratuita |
 | [football-data.co.uk](https://www.football-data.co.uk) | Historial de muchas temporadas (resultados, remates, tiros a puerta, córners, tarjetas y cuotas previas y de cierre) para el **modelo histórico**, y próximos partidos con cuotas | No necesita clave |
 
 No se inventa ningún dato: si falta la clave o la API no tiene cobertura de un partido, el
-programa lo dice y lo deja fuera del análisis.
+programa lo dice y lo deja fuera del análisis. Bzzoiro y SportsGameOdds son opcionales: sin clave,
+o con su cupo agotado, el análisis sigue sin ellas. `python -m apuestas fuentes` muestra el estado y
+el consumo de cada una.
+
+Cada fuente con límite lleva un **registro propio** del consumo (`data/uso_*.json`, guardado en la
+rama `datos`), porque los contadores de los proveedores van con retraso: nunca se pasa del tope.
+
+### Claves en la nube (network secrets)
+
+En el entorno en la nube → Editar → **Network secrets** → **Add secret** (la sesión las usa sin verlas):
+
+| Fuente | Allowed websites | Cabecera (Name) | Prefix | Value |
+|---|---|---|---|---|
+| Bzzoiro | `sports.bzzoiro.com` | `Authorization` | `Token` | tu token |
+| SportsGameOdds | `api.sportsgameodds.com` | `x-api-key` | (vacío) | tu clave |
+| API-Football | `v3.football.api-sports.io` | `x-apisports-key` | (vacío) | tu clave |
+
+En tu ordenador, en `.env`: `BZZOIRO_TOKEN`, `SGO_API_KEY`, `API_FOOTBALL_KEY`.
 
 ## Instalación
 
@@ -190,8 +210,8 @@ tarjetas (sin estadísticas de jugadores, para gastar menos).
 
 El modelo histórico cubre Premier, LaLiga, Bundesliga y Brasileirão (`APUESTAS_LIGAS_HISTORICO`).
 Las copas (Champions, Libertadores...) y Colombia no están en football-data.co.uk: usan el modelo de
-forma reciente cuando la base tiene al menos 4 partidos de cada equipo y, mientras tanto, solo las
-cuotas de las casas.
+forma reciente con los últimos partidos de cada equipo en todas sus competiciones, que ESPN da desde
+el primer día (se descargan una vez y quedan en la base).
 
 ## Rutina automática diaria
 

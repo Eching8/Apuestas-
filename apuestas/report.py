@@ -73,7 +73,9 @@ def render_markdown(fecha: str, analyses: list[Analysis], picks: dict[int, list[
     out += ["## Partidos", ""]
     for a in analyses:
         fx = a.fixture
-        liga = f"{fx['league_name'] or ''} ({fx['league_country'] or ''})"
+        liga = fx["league_name"] or ""
+        if fx.get("league_country"):
+            liga += f" ({fx['league_country']})"
         cuando = fx.get("cuando") or f"{fx['date_utc']} UTC"
         out += [f"### {_partido(fx)}", f"{liga} · {cuando}", ""]
         for n in a.notas:

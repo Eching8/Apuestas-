@@ -243,8 +243,10 @@ class Database:
             self.conn.execute("UPDATE fixtures SET players_ok = ? WHERE id = ?", (int(players_ok), fixture_id))
 
     def save_odds(self, fixture_id: int, rows: list[tuple[str, str, str, float]]) -> None:
+        """Sustituye las cuotas de las casas que vienen en `rows`; las de otras fuentes se conservan."""
         ts = now_iso()
-        self.conn.execute("DELETE FROM odds WHERE fixture_id = ?", (fixture_id,))
+        for casa in {r[0] for r in rows}:
+            self.conn.execute("DELETE FROM odds WHERE fixture_id = ? AND bookmaker = ?", (fixture_id, casa))
         self.conn.executemany(
             "INSERT OR REPLACE INTO odds(fixture_id, bookmaker, bet, value, odd, fetched_at) VALUES (?, ?, ?, ?, ?, ?)",
             [(fixture_id, b, bet, v, o, ts) for b, bet, v, o in rows],

@@ -35,19 +35,15 @@ Si `ToolSearch` no los encuentra:
    bash scripts/preparar.sh
    bash scripts/datos.sh restaurar
    ```
-2. Comprueba la clave con `python3 -m apuestas api` (no gasta peticiones). Si dice que la cuenta está
-   **suspendida**, no vuelvas a llamar a la API en todo el día: avisa y sigue como si no hubiera clave. La clave puede llegar
-   como variable `API_FOOTBALL_KEY` o como *network secret* que añade el proxy sin que la veas.
-   - **Si dice NO DISPONIBLE**: ejecuta `python3 -m apuestas predecir --dias 1`, resume en el chat las
-     probabilidades de los partidos del día y la combinada lotería del informe
-     `reportes/predicciones-AAAA-MM-DD.md`, y explica que sin `API_FOOTBALL_KEY` en el entorno no hay
-     cuotas reales de córners/tarjetas ni chequeo de alineaciones. Se añade en la configuración del
-     entorno en la nube → Network secrets → Add secret: sitio `v3.football.api-sports.io`, cabecera
-     `x-apisports-key` sin prefijo y la clave como valor (que nunca la pegue en el chat). Después
-     `bash scripts/datos.sh guardar` y termina.
-3. Ejecuta `python3 -m apuestas diario` (guarda resultados de ayer, liquida y analiza hoy).
-   Si falla por la API (plan, límite, clave inválida), dilo en el chat con el mensaje exacto y
-   recurre a `python3 -m apuestas predecir --dias 1`.
+2. Comprueba las fuentes con `python3 -m apuestas fuentes` (gasta como mucho una petición por fuente).
+   ESPN (la principal) no necesita clave. Bzzoiro y SportsGameOdds son opcionales: si aparecen sin
+   clave, menciónalo una vez en el resumen (se añaden como *network secrets*, ver README) y sigue.
+   - **Si ESPN falla**: ejecuta `python3 -m apuestas predecir --dias 1`, resume en el chat las
+     probabilidades del día y la combinada lotería de `reportes/predicciones-AAAA-MM-DD.md`, explica
+     que hoy no hay alineaciones ni chequeos, `bash scripts/datos.sh guardar` y termina.
+3. Ejecuta `python3 -m apuestas diario` (guarda resultados de ayer, liquida y analiza hoy). Tarda
+   unos minutos: ESPN se consulta a 1 petición por segundo. Si falla, dilo en el chat con el
+   mensaje exacto y recurre a `python3 -m apuestas predecir --dias 1`.
 4. Ejecuta `python3 -m apuestas rendimiento` para el acierto acumulado.
 5. Escribe en el chat el **resumen de la mañana**, leyendo `reportes/AAAA-MM-DD.md`:
    - rendimiento de ayer y acumulado (una o dos líneas);
@@ -82,18 +78,19 @@ Si `ToolSearch` no los encuentra:
 6. Si era el último chequeo del día (`python3 -m apuestas agenda` no devuelve más momentos), cierra
    con una línea: "Último chequeo del día. Mañana a primera hora, resultados y nuevo análisis."
 
-## Límite de la API (obligatorio: si se pasa, suspenden la cuenta del usuario)
+## Límites de las fuentes (obligatorio: si se pasan, bloquean o suspenden la cuenta)
 
-- Plan gratuito: 100 peticiones al día (se reinicia a las 00:00 UTC) y 10 por minuto. El programa
-  nunca pasa de 90: lleva un registro propio (`data/uso_api.json`, que viaja en la rama `datos`)
-  además de `/status`, que se actualiza con retraso. Por eso **restaura los datos antes de usar la
-  API y guárdalos después de cada ejecución**, siempre.
-- Solo estos comandos gastan peticiones: `diario` (máx. 60: 25 para ayer y el resto para hoy) y
-  `chequeo` (2 por partido, máx. 30 por ejecución); entre todo, nunca más de 90 al día. Ejecuta `diario` **una sola vez al día** y no
-  repitas un `chequeo` salvo cuando la salida diga `PENDIENTE`. Nunca uses `--forzar`.
-- `python3 -m apuestas api`, `agenda`, `predecir`, `backtest` y `rendimiento` no gastan peticiones.
-- No hagas llamadas a la API por tu cuenta (curl, scripts sueltos) ni pruebas extra.
-- Si aparece "presupuesto agotado" o "reserva del día", dilo en el chat y no insistas hasta mañana.
+- **ESPN**: sin clave ni cuota, pero no es oficial. El programa va a 1 petición por segundo, con un
+  tope por ejecución, y se para solo si responde 403/429. Si eso pasa, no insistas ese día.
+- **Bzzoiro**: tope propio de 1.000 peticiones al día (el plan da 7.500). **SportsGameOdds**: tope
+  propio de 2.000 objetos al mes (el plan da 2.500) y solo se consulta en `diario`.
+- **API-Football**: no se usa (la cuenta del usuario fue suspendida). No la actives.
+- Los registros propios (`data/uso_*.json`) viajan en la rama `datos`: **restaura los datos antes de
+  usar ninguna API y guárdalos después de cada ejecución**, siempre.
+- Ejecuta `diario` **una sola vez al día** y no repitas un `chequeo` salvo cuando la salida diga
+  `PENDIENTE`. Nunca uses `--forzar`. No hagas llamadas a las APIs por tu cuenta (curl, scripts).
+- `fuentes`, `agenda`, `predecir`, `backtest` y `rendimiento` no gastan (o casi nada).
+- Si aparece "presupuesto agotado", "tope" o un bloqueo, dilo en el chat y no insistas hasta mañana.
 
 ## Límites
 

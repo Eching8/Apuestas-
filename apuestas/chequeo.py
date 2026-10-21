@@ -16,13 +16,20 @@ cuotas del momento.
 """
 from __future__ import annotations
 
+import difflib
 import json
 import logging
+import re
+import unicodedata
+import zlib
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 
+import requests
+
 from .analyzer import analyze_fixture, candidates
-from .api_football import ApiFootball, PresupuestoAgotado
+from .api_football import ApiError, ApiFootball, PresupuestoAgotado
+from .bzzoiro import buscar
 from .collector import POR_JUGAR, parse_odds
 from .config import Config
 from .db import Database, now_iso
@@ -132,13 +139,63 @@ def partidos_a_chequear(db: Database, fecha: str, ahora: datetime, ventana: time
     return sorted(out, key=lambda f: f["date_utc"])
 
 
+def _normalizar(nombre: str | None) -> str:
+    texto = unicodedata.normalize("NFKD", nombre or "").encode("ascii", "ignore").decode().lower()
+    return " ".join(re.sub(r"[^a-z ]+", " ", texto).split())
+
+
+def _mismo_jugador(a: str, b: str) -> bool:
+    a, b = _normalizar(a), _normalizar(b)
+    if not a or not b:
+        return False
+    if a == b or a.split()[-1] == b.split()[-1] and a[0] == b[0]:
+        return True
+    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.85
+
+
+def alineaciones_bzzoiro(bz, db: Database, fx: dict, eventos: list[dict]) -> tuple[dict[int, dict], list[str], str]:
+    """Alineaciones y bajas de Bzzoiro para un partido, con los jugadores emparejados por nombre con los
+    ids de la base (los que no aparecen reciben un id negativo propio). -> (alineaciones, bajas, estado)."""
+    ev = buscar(eventos, fx["home_name"], fx["away_name"], datetime.fromisoformat(fx["date_utc"]))
+    if ev is None:
+        return {}, [], "no encontrado"
+    al = bz.alineacion(ev["id"])
+    if al is None:
+        return {}, [], "sin alineación"
+    out = {}
+    if al["estado"] == "confirmed":
+        for team_id, lado in ((fx["home_id"], "local"), (fx["away_id"], "visitante")):
+            conocidos = db.conn.execute("SELECT DISTINCT player_id, name FROM player_stats WHERE team_id = ?",
+                                        (team_id,)).fetchall()
+            titulares = {}
+            for nombre, pos in al[lado]:
+                pid = next((r["player_id"] for r in conocidos if _mismo_jugador(nombre, r["name"])),
+                           -(zlib.crc32(f"{team_id}:{_normalizar(nombre)}".encode()) % 10 ** 9) - 1)
+                titulares[pid] = (nombre, "G" if (pos or "").upper().startswith("G") else pos)
+            if titulares:
+                out[team_id] = {"titulares": titulares, "formacion": None}
+    return out, al["bajas"], al["estado"]
+
+
 def chequear_partido(db: Database, api: ApiFootball, cfg: Config, fx: dict, ahora: datetime, historico=None,
-                     con_cuotas: bool = True) -> ResultadoChequeo:
+                     con_cuotas: bool = True, bzzoiro=None, eventos_bzzoiro: list[dict] | None = None
+                     ) -> ResultadoChequeo:
     partido = f"{fx['home_name']} vs {fx['away_name']}"
     res = ResultadoChequeo(fx["id"], partido, fx["date_utc"], "chequeado")
     inicio = datetime.fromisoformat(fx["date_utc"])
     alineaciones = parse_alineaciones(api.alineaciones(fx["id"]))
     completas = fx["home_id"] in alineaciones and fx["away_id"] in alineaciones
+    if bzzoiro is not None and eventos_bzzoiro is not None:
+        # Bzzoiro: bajas siempre; alineación confirmada solo si la fuente principal aún no la tiene.
+        try:
+            al_bz, bajas, estado_bz = alineaciones_bzzoiro(bzzoiro, db, fx, eventos_bzzoiro)
+            if bajas:
+                res.notas.append("Bajas (Bzzoiro): " + ", ".join(bajas[:12]))
+            if not completas and fx["home_id"] in al_bz and fx["away_id"] in al_bz:
+                alineaciones, completas = al_bz, True
+                res.notas.append("Alineaciones confirmadas tomadas de Bzzoiro")
+        except (ApiError, PresupuestoAgotado, requests.RequestException, ValueError, KeyError) as e:
+            res.notas.append(f"Bzzoiro no disponible: {e}")
     if not completas and inicio - ahora > ESPERA_ALINEACION:
         res.estado = "esperando"
         res.notas.append("Alineaciones aún no publicadas: vuelve a chequear en 10-15 minutos")
@@ -227,12 +284,19 @@ def _evaluar_pick(p, mercados: dict, titulares: set[int], cfg: Config):
 
 def chequear(db: Database, api: ApiFootball, cfg: Config, fecha: str, ahora: datetime | None = None,
              ventana_min: int = 60, historico=None, forzar: bool = False,
-             con_cuotas: bool = True) -> list[ResultadoChequeo]:
+             con_cuotas: bool = True, bzzoiro=None) -> list[ResultadoChequeo]:
     ahora = ahora or datetime.now(timezone.utc)
     out = []
-    for fx in partidos_a_chequear(db, fecha, ahora, timedelta(minutes=ventana_min), forzar):
+    pendientes = partidos_a_chequear(db, fecha, ahora, timedelta(minutes=ventana_min), forzar)
+    eventos_bz = None
+    if bzzoiro is not None and pendientes:
         try:
-            out.append(chequear_partido(db, api, cfg, fx, ahora, historico, con_cuotas))
+            eventos_bz = bzzoiro.partidos(ahora.date(), (ahora + timedelta(minutes=ventana_min)).date())
+        except (ApiError, PresupuestoAgotado, requests.RequestException, ValueError) as e:
+            logging.getLogger(__name__).warning("Bzzoiro no disponible: %s", e)
+    for fx in pendientes:
+        try:
+            out.append(chequear_partido(db, api, cfg, fx, ahora, historico, con_cuotas, bzzoiro, eventos_bz))
         except PresupuestoAgotado as e:
             logging.getLogger(__name__).warning("%s", e)
             out.append(ResultadoChequeo(fx["id"], f"{fx['home_name']} vs {fx['away_name']}", fx["date_utc"],
