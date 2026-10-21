@@ -13,20 +13,28 @@ las casas y que la combinada lotería tiene valor esperado negativo.
 No cambies código del repositorio ni la tarea programada. Los únicos commits son los de
 `scripts/datos.sh guardar`.
 
+## Herramientas que necesitas
+
+`add_repo` y `send_later` (servidor `claude-code-remote`) se cargan bajo demanda. Antes de nada:
+`ToolSearch` con `select:mcp__claude-code-remote__add_repo,mcp__claude-code-remote__send_later`.
+Sin `add_repo` no hay permiso para guardar en la rama `datos`; sin `send_later` no hay chequeos.
+
 ## Paso 1: mañana (al abrirse la sesión)
 
-1. Prepara el código y los datos:
+1. Llama a `add_repo` con owner `eching8`, repo `apuestas-` y `access: "push"`, y clona con el
+   comando que te devuelva (si ya está clonado, no hace falta). Después:
    ```bash
    bash scripts/preparar.sh
    bash scripts/datos.sh restaurar
    ```
-   (Si el repo no está en el directorio de trabajo, añádelo con `add_repo` — `eching8/apuestas-` — y clónalo.)
-2. Comprueba la clave: `python3 -c "import os; print(bool(os.environ.get('API_FOOTBALL_KEY')))"`.
-   - **Si es False**: ejecuta `python3 -m apuestas predecir --dias 1`, resume en el chat las
+2. Comprueba la clave con `python3 -m apuestas api` (no gasta peticiones). La clave puede llegar
+   como variable `API_FOOTBALL_KEY` o como *network secret* que añade el proxy sin que la veas.
+   - **Si dice NO DISPONIBLE**: ejecuta `python3 -m apuestas predecir --dias 1`, resume en el chat las
      probabilidades de los partidos del día y la combinada lotería del informe
      `reportes/predicciones-AAAA-MM-DD.md`, y explica que sin `API_FOOTBALL_KEY` en el entorno no hay
-     cuotas reales de córners/tarjetas ni chequeo de alineaciones (se añade en la configuración del
-     entorno en la nube como variable `API_FOOTBALL_KEY`; que nunca la pegue en el chat). Después
+     cuotas reales de córners/tarjetas ni chequeo de alineaciones. Se añade en la configuración del
+     entorno en la nube → Network secrets → Add secret: sitio `v3.football.api-sports.io`, cabecera
+     `x-apisports-key` sin prefijo y la clave como valor (que nunca la pegue en el chat). Después
      `bash scripts/datos.sh guardar` y termina.
 3. Ejecuta `python3 -m apuestas diario` (guarda resultados de ayer, liquida y analiza hoy).
    Si falla por la API (plan, límite, clave inválida), dilo en el chat con el mensaje exacto y
@@ -38,7 +46,8 @@ No cambies código del repositorio ni la tarea programada. Los únicos commits s
    - combinadas: alta probabilidad, valor, **lotería (cuota ≥ 100)** y las mejores
      **"crea tu apuesta"** (con su cuota justa);
    - aviso: "son provisionales hasta el chequeo de alineaciones".
-6. Programa los chequeos: `python3 -m apuestas agenda --json` devuelve una lista con `chequeo_utc`.
+6. Programa los chequeos (solo si `diario` funcionó con la API): `python3 -m apuestas agenda --json`
+   devuelve una lista con `chequeo_utc`.
    Para cada momento llama a `send_later` (servidor `claude-code-remote`) con `at` = `chequeo_utc`
    (formato RFC3339, añade `:00Z` si hace falta), `name` = "Chequeo de alineaciones HH:MM" y
    `message` = "Chequeo de alineaciones: sigue el paso 2 de .claude/skills/apuestas-diario/SKILL.md".

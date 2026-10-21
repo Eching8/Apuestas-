@@ -27,17 +27,34 @@ class PresupuestoAgotado(ApiError):
     """Se alcanzó el tope de peticiones configurado para esta ejecución."""
 
 
+def estado(session: requests.Session | None = None, api_key: str = "", base_url: str = BASE_URL) -> dict:
+    """Respuesta de /status (no gasta peticiones del día). Sirve también para saber si la clave llega
+    por otra vía: en la nube, un "network secret" la añade el proxy sin que la sesión la vea."""
+    session = session or requests.Session()
+    headers = {"x-apisports-key": api_key} if api_key else {}
+    data = session.get(f"{base_url}/status", headers=headers, timeout=30).json()
+    if data.get("errors"):
+        raise ApiError(f"API-Football rechaza la clave: {data['errors']}")
+    return data.get("response") or {}
+
+
 class ApiFootball:
     def __init__(self, api_key: str, presupuesto: int = 90, session: requests.Session | None = None,
                  base_url: str = BASE_URL):
-        if not api_key:
-            raise ApiError(
-                "Falta API_FOOTBALL_KEY. Crea una cuenta gratis en https://dashboard.api-football.com "
-                "y pon la clave en el archivo .env"
-            )
         self.base_url = base_url
         self.session = session or requests.Session()
-        self.session.headers.update({"x-apisports-key": api_key})
+        if api_key:
+            self.session.headers.update({"x-apisports-key": api_key})
+        else:
+            # Sin clave en el entorno: solo vale si un proxy la añade (network secret en la nube).
+            try:
+                estado(self.session, base_url=base_url)
+            except (ApiError, requests.RequestException, ValueError):
+                raise ApiError(
+                    "Falta la clave de API-Football. Crea una cuenta gratis en https://dashboard.api-football.com "
+                    "y ponla en el archivo .env (API_FOOTBALL_KEY) o, en la nube, como network secret para "
+                    "v3.football.api-sports.io con la cabecera x-apisports-key"
+                ) from None
         self.presupuesto = presupuesto
         self.peticiones = 0
         self.restantes_hoy: int | None = None

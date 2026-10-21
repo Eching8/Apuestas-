@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 from .analyzer import analyze_fixture, candidates, combinadas_extra
 from .api_football import ApiError, ApiFootball
+from .api_football import estado as estado_api
 from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
 from .collector import ANULADOS, Collector
 from .combinadas import Leg, build_combos
@@ -181,6 +182,20 @@ def cmd_chequeo(args, cfg: Config, db: Database) -> int:
     return 0
 
 
+def cmd_api(args, cfg: Config, db: Database) -> int:
+    try:
+        r = estado_api(api_key=cfg.api_football_key)
+    except (ApiError, OSError) as e:
+        print(f"API-Football: NO DISPONIBLE — {e}")
+        return 1
+    origen = "API_FOOTBALL_KEY" if cfg.api_football_key else "network secret (la añade el proxy)"
+    sub_ = r.get("subscription") or {}
+    req = r.get("requests") or {}
+    print(f"API-Football: OK — clave por {origen}; plan {sub_.get('plan', '?')}; "
+          f"peticiones hoy {req.get('current', '?')} de {req.get('limit_day', '?')}")
+    return 0
+
+
 def cmd_agenda(args, cfg: Config, db: Database) -> int:
     fecha = _fecha(args.fecha, cfg)
     momentos = agenda(db, fecha, antelacion_min=args.antelacion)
@@ -325,6 +340,9 @@ def build_parser() -> argparse.ArgumentParser:
     ch.add_argument("--forzar", action="store_true", help="repetir partidos ya chequeados")
     ch.add_argument("--sin-cuotas-api", action="store_true", help="no volver a pedir cuotas (ahorra peticiones)")
     ch.set_defaults(func=cmd_chequeo)
+
+    ap = sub.add_parser("api", help="comprueba la clave y el consumo de API-Football (no gasta peticiones)")
+    ap.set_defaults(func=cmd_api)
 
     ag = sub.add_parser("agenda", help="a qué horas ejecutar 'chequeo' hoy")
     ag.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
