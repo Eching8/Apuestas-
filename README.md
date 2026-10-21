@@ -87,9 +87,12 @@ Windows: Programador de tareas → acción `python -m apuestas diario` con "Inic
 
 ## Límites a tener en cuenta
 
-- Con el plan gratuito (100 peticiones/día) el primer día solo alcanza para pocos partidos
-  (cada equipo nuevo cuesta ~13 peticiones con jugadores, ~7 sin ellos). Mejora con los días
-  porque el historial ya queda guardado. Para analizar muchas ligas a diario conviene un plan de pago.
+- El plan gratuito de API-Football solo da partidos de ayer, hoy y mañana (y temporadas
+  2022-2024), 100 peticiones al día y 10 por minuto. No permite descargar el historial de esta
+  temporada, así que la base se llena día a día con `actualizar` y el modelo propio se activa
+  cuando cada equipo tiene al menos 4 partidos guardados. Mientras tanto, el análisis usa solo
+  las probabilidades implícitas de las casas (sin margen), que no sirven para encontrar valor.
+  Con un plan de pago el historial se descarga al momento.
 - Revisa en tu panel de API-Football que tu plan incluye la temporada actual y las cuotas.
 - Las casas no siempre publican cuotas de córners, tarjetas o tiros en la API; sin cuota no
   hay forma de medir el valor, solo la cuota justa.
