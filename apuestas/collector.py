@@ -246,6 +246,8 @@ class Collector:
         with self.db.tx():
             for fx in fixtures:
                 self._store_fixture(fx)
+        # Primero los partidos que ya estaban en la base (los que tienen selecciones que liquidar).
+        fixtures.sort(key=lambda f: f["id"] not in conocidos)
         n = 0
         try:
             for fx in fixtures:

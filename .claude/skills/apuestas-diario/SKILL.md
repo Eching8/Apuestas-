@@ -73,9 +73,19 @@ Sin `add_repo` no hay permiso para guardar en la rama `datos`; sin `send_later` 
 6. Si era el último chequeo del día (`python3 -m apuestas agenda` no devuelve más momentos), cierra
    con una línea: "Último chequeo del día. Mañana a primera hora, resultados y nuevo análisis."
 
+## Límite de la API (obligatorio: si se pasa, suspenden la cuenta del usuario)
+
+- Plan gratuito: 100 peticiones al día (se reinicia a las 00:00 UTC) y 10 por minuto. El programa
+  nunca pasa de 90: lleva un registro propio (`data/uso_api.json`, que viaja en la rama `datos`)
+  además de `/status`, que se actualiza con retraso. Por eso **restaura los datos antes de usar la
+  API y guárdalos después de cada ejecución**, siempre.
+- Solo estos comandos gastan peticiones: `diario` (máx. 60: 25 para ayer y el resto para hoy) y
+  `chequeo` (2 por partido, máx. 30 por ejecución); entre todo, nunca más de 90 al día. Ejecuta `diario` **una sola vez al día** y no
+  repitas un `chequeo` salvo cuando la salida diga `PENDIENTE`. Nunca uses `--forzar`.
+- `python3 -m apuestas api`, `agenda`, `predecir`, `backtest` y `rendimiento` no gastan peticiones.
+- No hagas llamadas a la API por tu cuenta (curl, scripts sueltos) ni pruebas extra.
+- Si aparece "presupuesto agotado" o "reserva del día", dilo en el chat y no insistas hasta mañana.
+
 ## Límites
 
-- Plan gratuito de API-Football: 100 peticiones al día. `diario` usa como mucho
-  `APUESTAS_PRESUPUESTO` (60) y cada chequeo 2 por partido (`APUESTAS_PRESUPUESTO_CHEQUEO`, 30). Si
-  aparece "presupuesto agotado", dilo y no insistas hasta el día siguiente.
 - Si algo falla, informa del error concreto en el chat; no inventes resultados.

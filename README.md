@@ -172,7 +172,12 @@ bajó la probabilidad, la cuota se movió y ya no hay valor) o 🆕 nueva. El in
 los primeros días solo se comprueba que la alineación está publicada, se anulan las apuestas de
 jugadores suplentes y se recalcula con las cuotas del momento.
 
-El presupuesto diario de 100 peticiones se reparte: `diario` usa hasta 60 y los chequeos hasta 30.
+El presupuesto diario de 100 peticiones se reparte: `diario` usa hasta 60 (25 para los resultados de
+ayer) y cada `chequeo` hasta 30. Por encima de eso hay un **tope global de 90 al día**
+(`APUESTAS_RESERVA=10` nunca se tocan), sumando todas las ejecuciones: cada cliente consulta
+`/status` (gratis) y un registro propio, `data/uso_api.json`, porque `/status` se actualiza con
+retraso; se queda con la cifra más pesimista. Las peticiones fallidas y los reintentos también
+cuentan. `python -m apuestas api` muestra el consumo sin gastar ninguna.
 
 ## Rutina automática diaria
 

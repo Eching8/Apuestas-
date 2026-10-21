@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 from .analyzer import analyze_fixture, candidates, combinadas_extra
 from .api_football import ApiError, ApiFootball
+from .api_football import REGISTRO_USO, leer_registro
 from .api_football import estado as estado_api
 from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
 from .collector import ANULADOS, Collector
@@ -106,9 +107,13 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
 def cmd_diario(args, cfg: Config, db: Database) -> int:
     args.fecha = None
     # Un solo presupuesto para las dos fases: el resto del día queda para los chequeos de alineación.
+    # Los resultados de ayer tienen un tope propio para que no se coman el análisis de hoy.
     args.api = ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
+    total = args.api.presupuesto
+    args.api.presupuesto = min(total, cfg.presupuesto_actualizar)
     if _hoy(cfg) - timedelta(days=1) >= FECHA_INICIO:
         cmd_actualizar(args, cfg, db)
+    args.api.presupuesto = total
     args.sin_descarga = False
     return cmd_analizar(args, cfg, db)
 
@@ -191,8 +196,10 @@ def cmd_api(args, cfg: Config, db: Database) -> int:
     origen = "API_FOOTBALL_KEY" if cfg.api_football_key else "network secret (la añade el proxy)"
     sub_ = r.get("subscription") or {}
     req = r.get("requests") or {}
+    propio = leer_registro(REGISTRO_USO)
     print(f"API-Football: OK — clave por {origen}; plan {sub_.get('plan', '?')}; "
-          f"peticiones hoy {req.get('current', '?')} de {req.get('limit_day', '?')}")
+          f"peticiones hoy según /status {req.get('current', '?')} de {req.get('limit_day', '?')}; "
+          f"según el registro propio {propio.get('peticiones', 0)} (restantes {propio.get('restantes', '?')})")
     return 0
 
 

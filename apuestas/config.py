@@ -61,6 +61,8 @@ class Config:
     # Se reservan peticiones para los chequeos de alineación del día (2 por partido).
     presupuesto_peticiones: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO", 60))
     presupuesto_chequeo: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO_CHEQUEO", 30))
+    # Dentro de `diario`, tope para los resultados de ayer (el resto es para analizar hoy).
+    presupuesto_actualizar: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO_ACTUALIZAR", 25))
     # Máximo de partidos del día a analizar.
     max_partidos: int = field(default_factory=lambda: _int("APUESTAS_MAX_PARTIDOS", 15))
 
