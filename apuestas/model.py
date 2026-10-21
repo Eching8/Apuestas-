@@ -108,6 +108,8 @@ class MatchExpectation:
     dispersion: dict[str, float]
     n_home: int
     n_away: int
+    # Corrección de Dixon-Coles para marcadores bajos (0 = goles independientes).
+    rho: float = 0.0
 
     def total(self, stat: str) -> float:
         return self.home[stat] + self.away[stat]
@@ -157,13 +159,30 @@ def _lines_around(mu: float, spread: int = 2) -> list[float]:
     return [x + 0.5 for x in range(max(0, base - spread - 1), base + spread + 1)]
 
 
+MAX_GOLES = 15
+
+
+def score_grid(lh: float, la: float, rho: float = 0.0) -> list[list[float]]:
+    """P(local = i, visitante = j), con la corrección de Dixon-Coles para 0-0, 1-0, 0-1 y 1-1."""
+    n = MAX_GOLES + 1
+    grid = [[poisson_pmf(i, lh) * poisson_pmf(j, la) for j in range(n)] for i in range(n)]
+    if rho:
+        grid[0][0] *= max(0.0, 1 - lh * la * rho)
+        grid[0][1] *= max(0.0, 1 + lh * rho)
+        grid[1][0] *= max(0.0, 1 + la * rho)
+        grid[1][1] *= max(0.0, 1 - rho)
+    total = sum(map(sum, grid))
+    return [[x / total for x in fila] for fila in grid]
+
+
 def goal_markets(e: MatchExpectation, home: str, away: str) -> list[Market]:
     lh, la = e.home["goals"], e.away["goals"]
-    grid = [[poisson_pmf(i, lh) * poisson_pmf(j, la) for j in range(11)] for i in range(11)]
-    p1 = sum(grid[i][j] for i in range(11) for j in range(11) if i > j)
-    px = sum(grid[i][i] for i in range(11))
+    grid = score_grid(lh, la, e.rho)
+    n = len(grid)
+    p1 = sum(grid[i][j] for i in range(n) for j in range(n) if i > j)
+    px = sum(grid[i][i] for i in range(n))
     p2 = 1 - p1 - px
-    btts = (1 - poisson_pmf(0, lh)) * (1 - poisson_pmf(0, la))
+    btts = 1 - sum(grid[0]) - sum(fila[0] for fila in grid) + grid[0][0]
     out = [
         Market("result:1", f"Gana {home}", p1, "goals", "match", "1"),
         Market("result:X", "Empate", px, "goals", "match", "X"),
@@ -175,12 +194,13 @@ def goal_markets(e: MatchExpectation, home: str, away: str) -> list[Market]:
         Market("btts:no", "Ambos marcan: no", 1 - btts, "goals", "match", "no"),
     ]
     for line in (0.5, 1.5, 2.5, 3.5, 4.5):
-        po = prob_over(line, lh + la)
+        po = sum(grid[i][j] for i in range(n) for j in range(n) if i + j > line)
         out.append(Market(f"goals:total:over:{line}", f"Más de {line} goles", po, "goals", "total", "over", line))
         out.append(Market(f"goals:total:under:{line}", f"Menos de {line} goles", 1 - po, "goals", "total", "under", line))
-    for scope, name, lam in (("home", home, lh), ("away", away, la)):
+    marginal = {"home": [sum(fila) for fila in grid], "away": [sum(grid[i][j] for i in range(n)) for j in range(n)]}
+    for scope, name in (("home", home), ("away", away)):
         for line in (0.5, 1.5, 2.5):
-            po = prob_over(line, lam)
+            po = sum(p for k, p in enumerate(marginal[scope]) if k > line)
             out.append(Market(f"goals:{scope}:over:{line}", f"{name} más de {line} goles", po, "goals", scope, "over", line))
             out.append(Market(f"goals:{scope}:under:{line}", f"{name} menos de {line} goles", 1 - po, "goals", scope, "under", line))
     return out
@@ -207,7 +227,8 @@ def count_markets(e: MatchExpectation, stat: str, home: str, away: str) -> list[
 def match_markets(e: MatchExpectation, home: str, away: str) -> list[Market]:
     out = goal_markets(e, home, away)
     for s in ("corners", "cards", "shots_on", "shots_total"):
-        out += count_markets(e, s, home, away)
+        if s in e.home:
+            out += count_markets(e, s, home, away)
     return out
 
 

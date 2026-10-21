@@ -8,6 +8,7 @@ from .db import Database
 from .model import (MEDIAS_POR_DEFECTO, STATS, Market, MatchExpectation, expect_match, match_markets,
                     player_markets, team_profile)
 from .odds import attach_odds, market_only
+from .puente import ModeloHistorico
 
 
 @dataclass
@@ -24,14 +25,22 @@ class Analysis:
         return self.expectation is not None or (self.solo_mercado and bool(self.markets))
 
 
-def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = True) -> Analysis:
+def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = True,
+                    historico: ModeloHistorico | None = None) -> Analysis:
+    """Modelo histórico (Dixon-Coles con años de datos) si cubre el partido; si no, el modelo de forma
+    reciente con lo guardado en la base; y si tampoco hay historial, solo las cuotas de las casas."""
     a = Analysis(fixture=fx)
     hist_h = db.team_history(fx["home_id"], fx["date_utc"], cfg.partidos_historial)
     hist_a = db.team_history(fx["away_id"], fx["date_utc"], cfg.partidos_historial)
-    for name, hist in ((fx["home_name"], hist_h), (fx["away_name"], hist_a)):
-        if len(hist) < cfg.min_partidos_equipo:
-            a.notas.append(f"{name}: solo {len(hist)} partidos con estadísticas (mínimo {cfg.min_partidos_equipo})")
-    if a.notas:
+    faltan = [f"{name}: solo {len(hist)} partidos con estadísticas (mínimo {cfg.min_partidos_equipo})"
+              for name, hist in ((fx["home_name"], hist_h), (fx["away_name"], hist_a))
+              if len(hist) < cfg.min_partidos_equipo]
+
+    if historico is not None:
+        a.expectation, nota = historico.expectativa(fx)
+        a.notas.append(nota if a.expectation is not None else f"Modelo histórico no disponible: {nota}")
+    if a.expectation is None and faltan:
+        a.notas += faltan
         a.markets = market_only(db.odds_for(fx["id"]), fx["home_name"], fx["away_name"])
         if a.markets:
             a.solo_mercado = True
@@ -39,17 +48,20 @@ def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = T
                            "el modelo propio se activa cuando haya historial suficiente")
         return a
 
-    means = db.league_means(fx["league_id"], fx["date_utc"])
-    if means is None:
-        means = db.league_means(None, fx["date_utc"])
-        a.notas.append("Media de liga estimada con todos los partidos guardados (pocos datos de esta liga)")
-    means = {s: (means or {}).get(s) or MEDIAS_POR_DEFECTO[s] for s in STATS}
-
-    prof_h, prof_a = team_profile(fx["home_id"], hist_h), team_profile(fx["away_id"], hist_a)
-    a.expectation = expect_match(prof_h, prof_a, means)
+    if not faltan:
+        means = db.league_means(fx["league_id"], fx["date_utc"])
+        if means is None:
+            means = db.league_means(None, fx["date_utc"])
+            if a.expectation is None:
+                a.notas.append("Media de liga estimada con todos los partidos guardados (pocos datos de esta liga)")
+        means = {s: (means or {}).get(s) or MEDIAS_POR_DEFECTO[s] for s in STATS}
+        prof_h, prof_a = team_profile(fx["home_id"], hist_h), team_profile(fx["away_id"], hist_a)
+        if a.expectation is None:
+            a.expectation = expect_match(prof_h, prof_a, means)
     a.markets = match_markets(a.expectation, fx["home_name"], fx["away_name"])
 
-    if con_jugadores:
+    # Mercados de jugador: necesitan el historial por jugador de la base.
+    if con_jugadores and not faltan:
         for team_id, rival in ((fx["home_id"], prof_a), (fx["away_id"], prof_h)):
             factor = {s: (rival.contra.get(s) or means[s]) / means[s] for s in ("shots_on", "shots_total", "goals")}
             rows = db.player_history(team_id, fx["date_utc"], cfg.partidos_historial)

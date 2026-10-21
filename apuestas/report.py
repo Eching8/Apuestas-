@@ -35,8 +35,8 @@ def _market_row(m: Market) -> str:
 
 
 def render_markdown(fecha: str, analyses: list[Analysis], picks: dict[int, list[Market]],
-                    combos: dict[str, list[Combo]]) -> str:
-    out = [f"# Análisis de partidos — {fecha}", "", AVISO, ""]
+                    combos: dict[str, list[Combo]], titulo: str = "Análisis de partidos") -> str:
+    out = [f"# {titulo} — {fecha}", "", AVISO, ""]
 
     out += ["## Combinadas", ""]
     titulos = {"alta_probabilidad": "Alta probabilidad", "valor": "Alto valor (EV positivo)"}
@@ -56,7 +56,8 @@ def render_markdown(fecha: str, analyses: list[Analysis], picks: dict[int, list[
     for a in analyses:
         fx = a.fixture
         liga = f"{fx['league_name'] or ''} ({fx['league_country'] or ''})"
-        out += [f"### {_partido(fx)}", f"{liga} · {fx['date_utc']} UTC", ""]
+        cuando = fx.get("cuando") or f"{fx['date_utc']} UTC"
+        out += [f"### {_partido(fx)}", f"{liga} · {cuando}", ""]
         for n in a.notas:
             out.append(f"- _{n}_")
         if not a.ok:
@@ -64,11 +65,12 @@ def render_markdown(fecha: str, analyses: list[Analysis], picks: dict[int, list[
             continue
         e = a.expectation
         if e is not None:
-            out += ["", "| Esperado | " + " | ".join(NOMBRES[s] for s in STATS) + " |",
-                    "|---|" + "---|" * len(STATS)]
-            out.append(f"| {fx['home_name']} | " + " | ".join(f"{e.home[s]:.2f}" for s in STATS) + " |")
-            out.append(f"| {fx['away_name']} | " + " | ".join(f"{e.away[s]:.2f}" for s in STATS) + " |")
-            out.append("| Total | " + " | ".join(f"{e.total(s):.2f}" for s in STATS) + " |")
+            stats = [s for s in STATS if s in e.home]
+            out += ["", "| Esperado | " + " | ".join(NOMBRES[s] for s in stats) + " |",
+                    "|---|" + "---|" * len(stats)]
+            out.append(f"| {fx['home_name']} | " + " | ".join(f"{e.home[s]:.2f}" for s in stats) + " |")
+            out.append(f"| {fx['away_name']} | " + " | ".join(f"{e.away[s]:.2f}" for s in stats) + " |")
+            out.append("| Total | " + " | ".join(f"{e.total(s):.2f}" for s in stats) + " |")
             out.append(f"\nPartidos usados: {e.n_home} (local) y {e.n_away} (visitante).\n")
         else:
             out.append("")
@@ -89,10 +91,11 @@ def _market_json(m: Market) -> dict:
 
 
 def write_reports(directory: Path, fecha: str, analyses: list[Analysis], picks: dict[int, list[Market]],
-                  combos: dict[str, list[Combo]]) -> tuple[Path, Path]:
+                  combos: dict[str, list[Combo]], prefijo: str = "",
+                  titulo: str = "Análisis de partidos") -> tuple[Path, Path]:
     directory.mkdir(parents=True, exist_ok=True)
-    md = directory / f"{fecha}.md"
-    md.write_text(render_markdown(fecha, analyses, picks, combos), encoding="utf-8")
+    md = directory / f"{prefijo}{fecha}.md"
+    md.write_text(render_markdown(fecha, analyses, picks, combos, titulo), encoding="utf-8")
     data = {
         "fecha": fecha,
         "partidos": [{
@@ -106,7 +109,7 @@ def write_reports(directory: Path, fecha: str, analyses: list[Analysis], picks: 
             "selecciones": [{"fixture_id": l.fixture_id, "partido": l.partido, **_market_json(l.market)} for l in c.legs],
         } for c in lista] for perfil, lista in combos.items()},
     }
-    js = directory / f"{fecha}.json"
+    js = directory / f"{prefijo}{fecha}.json"
     js.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     return md, js
 
