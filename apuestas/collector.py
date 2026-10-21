@@ -30,6 +30,7 @@ _STAT_MAP = {
     "Shots on Goal": "shots_on",
     "Total Shots": "shots_total",
     "Fouls": "fouls",
+    "Goalkeeper Saves": "saves",
     "Ball Possession": "possession",
     "expected_goals": "xg",
 }
@@ -60,6 +61,7 @@ def parse_fixture(item: dict, zona_horaria: str) -> dict:
         "away_id": teams["away"]["id"],
         "away_name": teams["away"]["name"],
         "status": fx["status"]["short"],
+        "referee": fx.get("referee"),
         "home_goals": goals.get("home"),
         "away_goals": goals.get("away"),
     }
@@ -105,6 +107,8 @@ def parse_statistics(fx: dict, response: list[dict]) -> list[dict]:
             "fixture_id": fx["id"], "team_id": team_id, "opponent_id": opp_id, "is_home": is_home,
             "goals": goals, **count, "cards": count["yellow"] + count["red"],
             "possession": stats.get("possession"), "xg": stats.get("xg"),
+            # Si la API no informa atajadas del partido, se deja vacío (no es lo mismo que 0).
+            "saves": int(stats.get("saves") or 0) if "saves" in stats else None,
         })
     return rows
 

@@ -14,10 +14,10 @@ import math
 from dataclasses import dataclass, field
 from statistics import median
 
-STATS = ("goals", "corners", "cards", "shots_on", "shots_total")
+STATS = ("goals", "corners", "cards", "shots_on", "shots_total", "saves")
 NOMBRES = {
     "goals": "goles", "corners": "córners", "cards": "tarjetas",
-    "shots_on": "tiros a puerta", "shots_total": "remates totales",
+    "shots_on": "tiros a puerta", "shots_total": "remates totales", "saves": "atajadas",
 }
 DECAY = 0.85          # peso del partido i-ésimo más antiguo: DECAY**i
 SHRINK_K = 3.0        # partidos "virtuales" de media de liga que se suman al historial
@@ -25,9 +25,12 @@ SHRINK_K = 3.0        # partidos "virtuales" de media de liga que se suman al hi
 VENTAJA_LOCAL = {
     "goals": (1.08, 0.93), "corners": (1.06, 0.95), "shots_on": (1.06, 0.95),
     "shots_total": (1.06, 0.95), "cards": (0.95, 1.05),
+    # El portero local ataja menos: recibe menos tiros.
+    "saves": (0.94, 1.06),
 }
 # Medias por equipo y partido si la base aún no tiene datos de la liga (referencias europeas típicas).
-MEDIAS_POR_DEFECTO = {"goals": 1.35, "corners": 5.0, "cards": 2.1, "shots_on": 4.3, "shots_total": 12.0}
+MEDIAS_POR_DEFECTO = {"goals": 1.35, "corners": 5.0, "cards": 2.1, "shots_on": 4.3, "shots_total": 12.0,
+                      "saves": 2.9}
 
 
 # --- Distribuciones -------------------------------------------------------------------
@@ -226,7 +229,7 @@ def count_markets(e: MatchExpectation, stat: str, home: str, away: str) -> list[
 
 def match_markets(e: MatchExpectation, home: str, away: str) -> list[Market]:
     out = goal_markets(e, home, away)
-    for s in ("corners", "cards", "shots_on", "shots_total"):
+    for s in ("corners", "cards", "shots_on", "shots_total", "saves"):
         if s in e.home:
             out += count_markets(e, s, home, away)
     return out

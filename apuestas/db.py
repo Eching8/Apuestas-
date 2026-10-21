@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS fixtures (
     away_goals INTEGER,
     stats_ok INTEGER NOT NULL DEFAULT 0,
     players_ok INTEGER NOT NULL DEFAULT 0,
-    updated_at TEXT
+    updated_at TEXT,
+    referee TEXT
 );
 CREATE INDEX IF NOT EXISTS ix_fixtures_fecha ON fixtures(fecha_local);
 CREATE INDEX IF NOT EXISTS ix_fixtures_home ON fixtures(home_id);
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS team_stats (
     fouls INTEGER,
     possession REAL,
     xg REAL,
+    saves INTEGER,
     PRIMARY KEY (fixture_id, team_id)
 );
 CREATE INDEX IF NOT EXISTS ix_team_stats_team ON team_stats(team_id);
@@ -111,9 +113,32 @@ CREATE TABLE IF NOT EXISTS picks (
     edge REAL,
     combo_id INTEGER REFERENCES combos(id),
     result INTEGER,
-    created_at TEXT NOT NULL
+    created_at TEXT NOT NULL,
+    -- Chequeo de alineaciones: confirmada | anulada, con la probabilidad y cuota de ese momento.
+    estado TEXT,
+    nota TEXT,
+    prob_chequeo REAL,
+    odd_chequeo REAL
 );
 CREATE INDEX IF NOT EXISTS ix_picks_fixture ON picks(fixture_id);
+
+-- Un chequeo previo al partido (alineaciones + cuotas actualizadas) por partido.
+CREATE TABLE IF NOT EXISTS lineup_checks (
+    fixture_id INTEGER PRIMARY KEY,
+    checked_at TEXT NOT NULL,
+    lineups_ok INTEGER NOT NULL,
+    detail TEXT
+);
+
+-- Titulares de cada equipo en cada partido (sirve para saber quién es habitual).
+CREATE TABLE IF NOT EXISTS lineups (
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    name TEXT,
+    position TEXT,
+    PRIMARY KEY (fixture_id, team_id, player_id)
+);
 
 CREATE TABLE IF NOT EXISTS validations (
     fixture_id INTEGER NOT NULL,
@@ -139,6 +164,18 @@ class Database:
         self.conn.row_factory = sqlite3.Row
         self.conn.execute("PRAGMA foreign_keys = ON")
         self.conn.executescript(SCHEMA)
+        self._migrar()
+
+    def _migrar(self) -> None:
+        """Añade a una base antigua las columnas que han ido apareciendo."""
+        nuevas = {"fixtures": {"referee": "TEXT"}, "team_stats": {"saves": "INTEGER"},
+                  "picks": {"estado": "TEXT", "nota": "TEXT", "prob_chequeo": "REAL", "odd_chequeo": "REAL"}}
+        for tabla, columnas in nuevas.items():
+            existentes = {r["name"] for r in self.conn.execute(f"PRAGMA table_info({tabla})")}
+            for col, tipo in columnas.items():
+                if col not in existentes:
+                    self.conn.execute(f"ALTER TABLE {tabla} ADD COLUMN {col} {tipo}")
+        self.conn.commit()
 
     @contextmanager
     def tx(self):
@@ -170,23 +207,23 @@ class Database:
     def upsert_fixture(self, f: dict) -> None:
         self.conn.execute(
             """INSERT INTO fixtures(id, date_utc, fecha_local, league_id, season, home_id, away_id, status,
-                                    home_goals, away_goals, updated_at)
+                                    home_goals, away_goals, updated_at, referee)
                VALUES (:id, :date_utc, :fecha_local, :league_id, :season, :home_id, :away_id, :status,
-                       :home_goals, :away_goals, :updated_at)
+                       :home_goals, :away_goals, :updated_at, :referee)
                ON CONFLICT(id) DO UPDATE SET
                    date_utc = excluded.date_utc, fecha_local = excluded.fecha_local, status = excluded.status,
                    home_goals = excluded.home_goals, away_goals = excluded.away_goals,
-                   updated_at = excluded.updated_at""",
-            {**f, "updated_at": now_iso()},
+                   updated_at = excluded.updated_at, referee = COALESCE(excluded.referee, fixtures.referee)""",
+            {"referee": None, **f, "updated_at": now_iso()},
         )
 
     def save_team_stats(self, rows: list[dict]) -> None:
         self.conn.executemany(
             """INSERT OR REPLACE INTO team_stats(fixture_id, team_id, opponent_id, is_home, goals, corners, yellow,
-                   red, cards, shots_on, shots_total, fouls, possession, xg)
+                   red, cards, shots_on, shots_total, fouls, possession, xg, saves)
                VALUES (:fixture_id, :team_id, :opponent_id, :is_home, :goals, :corners, :yellow, :red, :cards,
-                       :shots_on, :shots_total, :fouls, :possession, :xg)""",
-            rows,
+                       :shots_on, :shots_total, :fouls, :possession, :xg, :saves)""",
+            [{"saves": None, **r} for r in rows],
         )
 
     def save_player_stats(self, rows: list[dict]) -> None:
@@ -247,9 +284,10 @@ class Database:
         """Partidos terminados del equipo antes de una fecha, con lo hecho y lo recibido."""
         return self.conn.execute(
             """SELECT f.id AS fixture_id, f.date_utc, f.league_id, t.is_home,
-                      t.goals, t.corners, t.cards, t.yellow, t.red, t.shots_on, t.shots_total, t.xg,
+                      t.goals, t.corners, t.cards, t.yellow, t.red, t.shots_on, t.shots_total, t.xg, t.saves,
                       o.goals AS goals_against, o.corners AS corners_against, o.cards AS cards_against,
-                      o.shots_on AS shots_on_against, o.shots_total AS shots_total_against
+                      o.shots_on AS shots_on_against, o.shots_total AS shots_total_against,
+                      o.saves AS saves_against
                FROM team_stats t
                JOIN team_stats o ON o.fixture_id = t.fixture_id AND o.team_id = t.opponent_id
                JOIN fixtures f ON f.id = t.fixture_id
@@ -267,13 +305,14 @@ class Database:
             params.append(league_id)
         row = self.conn.execute(
             f"""SELECT COUNT(*) AS n, AVG(t.goals) AS goals, AVG(t.corners) AS corners, AVG(t.cards) AS cards,
-                       AVG(t.shots_on) AS shots_on, AVG(t.shots_total) AS shots_total
+                       AVG(t.shots_on) AS shots_on, AVG(t.shots_total) AS shots_total, AVG(t.saves) AS saves
                 FROM team_stats t JOIN fixtures f ON f.id = t.fixture_id WHERE {where}""",
             params,
         ).fetchone()
         if not row or row["n"] < 20:
             return None
-        return {k: row[k] for k in ("goals", "corners", "cards", "shots_on", "shots_total") if row[k] is not None}
+        return {k: row[k] for k in ("goals", "corners", "cards", "shots_on", "shots_total", "saves")
+                if row[k] is not None}
 
     def player_history(self, team_id: int, before_utc: str, partidos: int) -> list[sqlite3.Row]:
         """Estadísticas de jugadores del equipo en sus últimos `partidos` partidos con datos."""

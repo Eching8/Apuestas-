@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Callable
 
+from .combinadas import Combo, CreaTuApuesta, Leg, build_loteria, crea_tu_apuesta
 from .config import Config
 from .db import Database
 from .model import (MEDIAS_POR_DEFECTO, STATS, Market, MatchExpectation, expect_match, match_markets,
@@ -26,9 +28,12 @@ class Analysis:
 
 
 def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = True,
-                    historico: ModeloHistorico | None = None) -> Analysis:
+                    historico: ModeloHistorico | None = None,
+                    ajuste: Callable[[MatchExpectation], None] | None = None) -> Analysis:
     """Modelo histórico (Dixon-Coles con años de datos) si cubre el partido; si no, el modelo de forma
-    reciente con lo guardado en la base; y si tampoco hay historial, solo las cuotas de las casas."""
+    reciente con lo guardado en la base; y si tampoco hay historial, solo las cuotas de las casas.
+
+    `ajuste` corrige lo esperado antes de calcular los mercados (p. ej. por la alineación)."""
     a = Analysis(fixture=fx)
     hist_h = db.team_history(fx["home_id"], fx["date_utc"], cfg.partidos_historial)
     hist_a = db.team_history(fx["away_id"], fx["date_utc"], cfg.partidos_historial)
@@ -58,6 +63,8 @@ def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = T
         prof_h, prof_a = team_profile(fx["home_id"], hist_h), team_profile(fx["away_id"], hist_a)
         if a.expectation is None:
             a.expectation = expect_match(prof_h, prof_a, means)
+    if ajuste is not None:
+        ajuste(a.expectation)
     a.markets = match_markets(a.expectation, fx["home_name"], fx["away_name"])
 
     # Mercados de jugador: necesitan el historial por jugador de la base.
@@ -90,3 +97,21 @@ def candidates(analysis: Analysis, cfg: Config, sin_cuotas: bool = False) -> lis
             continue
         out.append(m)
     return out
+
+
+def combinadas_extra(analyses: list[Analysis], cfg: Config) -> tuple[list[Combo], list[CreaTuApuesta]]:
+    """Combinadas lotería (entre partidos, con cuotas reales) y "crea tu apuesta" (dentro de cada partido)."""
+    loteria, builders = [], []
+    if cfg.cuota_loteria > 1:
+        legs = [Leg(a.fixture["id"], f"{a.fixture['home_name']} vs {a.fixture['away_name']}", m)
+                for a in analyses if a.ok for m in a.markets if m.odd and m.scope != "player"]
+        loteria = build_loteria(legs, cfg.cuota_loteria, cfg.max_selecciones_loteria)
+    if cfg.cuota_crea_tu_apuesta > 1:
+        for a in analyses:
+            if a.expectation is None:
+                continue
+            b = crea_tu_apuesta(a.fixture["id"], f"{a.fixture['home_name']} vs {a.fixture['away_name']}",
+                                a.expectation, a.markets, cfg.cuota_crea_tu_apuesta)
+            if b is not None:
+                builders.append(b)
+    return loteria, builders

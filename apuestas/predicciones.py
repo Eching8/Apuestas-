@@ -13,7 +13,7 @@ from .combinadas import Leg, build_combos
 from .config import Config
 from .historico import NOMBRES_LIGA, Historico, Partido
 from .model import Market, match_markets
-from .modelo_historico import entrenar_liga
+from .modelo_historico import entrenar_liga, nota_arbitro
 from .odds import attach_odds
 
 # Mercado interno -> (bet, value) con los nombres de API-Football que entiende odds.attach_odds.
@@ -51,7 +51,10 @@ def predecir(cfg: Config, hoy: date, dias: int, ligas: list[str] | None = None, 
             if not modelo.conoce(equipo):
                 a.notas.append(f"{equipo}: sin partidos en la liga en las últimas temporadas; "
                                "se usa la fuerza media de un recién ascendido")
-        a.expectation = modelo.expectativa(p.local, p.visitante, p.temporada)
+        a.expectation = modelo.expectativa(p.local, p.visitante, p.temporada, p.arbitro or None)
+        if p.arbitro:
+            nota = nota_arbitro(modelo, p.arbitro).lstrip("; ")
+            a.notas.append(nota[:1].upper() + nota[1:])
         a.markets = match_markets(a.expectation, p.local, p.visitante)
         attach_odds(a.markets, filas_cuotas(p), cfg.peso_modelo)
         analyses.append(a)

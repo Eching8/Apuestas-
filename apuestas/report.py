@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from .analyzer import Analysis
-from .combinadas import Combo
+from .combinadas import Combo, CreaTuApuesta
 from .db import Database, now_iso
 from .model import NOMBRES, STATS, Market
 
@@ -35,21 +35,39 @@ def _market_row(m: Market) -> str:
 
 
 def render_markdown(fecha: str, analyses: list[Analysis], picks: dict[int, list[Market]],
-                    combos: dict[str, list[Combo]], titulo: str = "Análisis de partidos") -> str:
+                    combos: dict[str, list[Combo]], titulo: str = "Análisis de partidos",
+                    builders: list[CreaTuApuesta] | None = None) -> str:
     out = [f"# {titulo} — {fecha}", "", AVISO, ""]
 
     out += ["## Combinadas", ""]
-    titulos = {"alta_probabilidad": "Alta probabilidad", "valor": "Alto valor (EV positivo)"}
+    titulos = {"alta_probabilidad": "Alta probabilidad", "valor": "Alto valor (EV positivo)",
+               "loteria": "Lotería (cuota 100 o más)"}
     for perfil, lista in combos.items():
         out += [f"### {titulos.get(perfil, perfil)}", ""]
+        if perfil == "loteria":
+            out += ["_La combinada más probable que paga al menos la cuota objetivo, con cuotas reales. Acierta "
+                    "muy pocas veces y su valor esperado es negativo (el margen de la casa se multiplica en cada "
+                    "selección): apuesta solo un importe simbólico._", ""]
         if not lista:
             out += ["Ninguna combinada cumple los filtros hoy.", ""]
         for i, c in enumerate(lista, 1):
             cuota = f"cuota {c.odd:.2f}" if c.con_cuotas else f"cuota justa {c.odd:.2f} (pide más que esto a tu casa)"
             ev = f", EV {c.ev * 100:+.1f}%, stake sugerido {c.kelly * 100:.1f}% del bankroll" if c.con_cuotas else ""
-            out.append(f"**{i}. Probabilidad {_pct(c.prob)}, {cuota}{ev}**")
+            prob = f"{c.prob * 100:.2f}%" if c.prob < 0.01 else _pct(c.prob)
+            out.append(f"**{i}. Probabilidad {prob}, {cuota}{ev}**")
             for l in c.legs:
                 out.append(f"- {l.partido}: {l.market.label} ({_pct(l.prob)}, {_odd(l.market.odd or l.market.fair_odd)})")
+            out.append("")
+
+    if builders:
+        out += ["## Crea tu apuesta (mismo partido)", "",
+                "Probabilidad conjunta simulada (las selecciones de un partido están correlacionadas). "
+                "La casa paga menos que el producto de las cuotas sueltas: solo hay valor si su cuota "
+                "\"crea tu apuesta\" supera la cuota justa.", ""]
+        for b in builders:
+            ref = f", producto de cuotas sueltas {b.cuota_producto:.2f}" if b.cuota_producto else ""
+            out.append(f"**{b.partido}: probabilidad {_pct(b.prob)}, cuota justa {b.cuota_justa:.2f}{ref}**")
+            out += [f"- {m.label} ({_pct(m.prob)})" for m in b.markets]
             out.append("")
 
     out += ["## Partidos", ""]
@@ -92,10 +110,11 @@ def _market_json(m: Market) -> dict:
 
 def write_reports(directory: Path, fecha: str, analyses: list[Analysis], picks: dict[int, list[Market]],
                   combos: dict[str, list[Combo]], prefijo: str = "",
-                  titulo: str = "Análisis de partidos") -> tuple[Path, Path]:
+                  titulo: str = "Análisis de partidos",
+                  builders: list[CreaTuApuesta] | None = None) -> tuple[Path, Path]:
     directory.mkdir(parents=True, exist_ok=True)
     md = directory / f"{prefijo}{fecha}.md"
-    md.write_text(render_markdown(fecha, analyses, picks, combos, titulo), encoding="utf-8")
+    md.write_text(render_markdown(fecha, analyses, picks, combos, titulo, builders), encoding="utf-8")
     data = {
         "fecha": fecha,
         "partidos": [{
@@ -108,6 +127,10 @@ def write_reports(directory: Path, fecha: str, analyses: list[Analysis], picks: 
             "prob": c.prob, "cuota": c.odd, "con_cuotas": c.con_cuotas, "ev": c.ev, "kelly": c.kelly,
             "selecciones": [{"fixture_id": l.fixture_id, "partido": l.partido, **_market_json(l.market)} for l in c.legs],
         } for c in lista] for perfil, lista in combos.items()},
+        "crea_tu_apuesta": [{
+            "fixture_id": b.fixture_id, "partido": b.partido, "prob": b.prob, "cuota_justa": b.cuota_justa,
+            "cuota_producto": b.cuota_producto, "selecciones": [_market_json(m) for m in b.markets],
+        } for b in builders or []],
     }
     js = directory / f"{prefijo}{fecha}.json"
     js.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")

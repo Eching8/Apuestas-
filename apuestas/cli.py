@@ -12,18 +12,20 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from .analyzer import analyze_fixture, candidates
+from .analyzer import analyze_fixture, candidates, combinadas_extra
 from .api_football import ApiError, ApiFootball
-from .backtest import backtest_liga, render_backtest
+from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
 from .collector import ANULADOS, Collector
 from .combinadas import Leg, build_combos
 from .config import FECHA_INICIO, Config, load_config
 from .db import Database
+from .chequeo import agenda, chequear, render_chequeo
 from .football_data import FootballData, validate_day
 from .historico import NOMBRES_LIGA, Historico
 from .predicciones import predecir
@@ -51,7 +53,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         log.error("El seguimiento empieza el %s; usa una fecha igual o posterior.", FECHA_INICIO)
         return 2
     if not args.sin_descarga:
-        api = ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
+        api = getattr(args, "api", None) or ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
         Collector(api, db, cfg).collect_day(fecha, con_jugadores=not args.sin_jugadores,
                                             con_cuotas=not args.sin_cuotas_api)
         log.info("Peticiones usadas: %d (quedan hoy según la API: %s)", api.peticiones, api.restantes_hoy)
@@ -59,10 +61,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     fixtures = [dict(r) for r in db.fixtures_on(fecha) if r["status"] not in ANULADOS]
     if cfg.ligas:
         fixtures = [f for f in fixtures if f["league_id"] in cfg.ligas]
-    historico = None
-    if cfg.usar_historico:
-        historico = ModeloHistorico(Historico(cfg.historico_dir), cfg.ligas_historico, cfg.temporadas_historico,
-                                    date.fromisoformat(fecha))
+    historico = _modelo_historico(cfg, fecha)
     analyses = [analyze_fixture(db, fx, cfg, con_jugadores=not args.sin_jugadores, historico=historico)
                 for fx in fixtures]
     analyses = [a for a in analyses if a.ok] + [a for a in analyses if not a.ok]
@@ -78,7 +77,8 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         legs += [Leg(a.fixture["id"], partido, m) for m in sel]
 
     combos = build_combos(legs, cfg.prob_min_combinada, cfg.max_selecciones_combinada)
-    md, js = write_reports(cfg.reportes_dir, fecha, analyses, picks, combos)
+    combos["loteria"], builders = combinadas_extra(analyses, cfg)
+    md, js = write_reports(cfg.reportes_dir, fecha, analyses, picks, combos, builders=builders)
     save_picks(db, fecha, picks, combos)
 
     analizados = sum(a.ok for a in analyses)
@@ -94,7 +94,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
 
 def cmd_actualizar(args, cfg: Config, db: Database) -> int:
     fecha = _fecha(args.fecha, cfg, offset=-1)
-    api = ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
+    api = getattr(args, "api", None) or ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
     n = Collector(api, db, cfg).update_results(fecha, con_jugadores=not args.sin_jugadores)
     liquidadas = settle_pending(db)
     print(f"{n} partidos terminados guardados del {fecha}; {liquidadas} selecciones liquidadas. "
@@ -104,6 +104,8 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
 
 def cmd_diario(args, cfg: Config, db: Database) -> int:
     args.fecha = None
+    # Un solo presupuesto para las dos fases: el resto del día queda para los chequeos de alineación.
+    args.api = ApiFootball(cfg.api_football_key, cfg.presupuesto_peticiones)
     if _hoy(cfg) - timedelta(days=1) >= FECHA_INICIO:
         cmd_actualizar(args, cfg, db)
     args.sin_descarga = False
@@ -143,6 +145,54 @@ def cmd_rendimiento(args, cfg: Config, db: Database) -> int:
               f"prob. media {r['prob_media'] * 100:5.1f}%  {ben}")
     print("\nSi el acierto real queda por debajo de la probabilidad media, el modelo es optimista: "
           "sube APUESTAS_PROB_MIN o baja APUESTAS_PESO_MODELO.")
+    return 0
+
+
+def _modelo_historico(cfg: Config, fecha: str) -> ModeloHistorico | None:
+    if not cfg.usar_historico:
+        return None
+    return ModeloHistorico(Historico(cfg.historico_dir), cfg.ligas_historico, cfg.temporadas_historico,
+                           date.fromisoformat(fecha))
+
+
+def cmd_chequeo(args, cfg: Config, db: Database) -> int:
+    fecha = _fecha(args.fecha, cfg)
+    api = ApiFootball(cfg.api_football_key, cfg.presupuesto_chequeo)
+    resultados = chequear(db, api, cfg, fecha, ventana_min=args.ventana, historico=_modelo_historico(cfg, fecha),
+                          forzar=args.forzar, con_cuotas=not args.sin_cuotas_api)
+    if not resultados:
+        print(f"Ningún partido con selecciones empieza en los próximos {args.ventana} minutos (o ya están chequeados).")
+    for r in resultados:
+        print(f"\n{r.partido} ({r.inicio_utc[11:16]} UTC) — {r.estado}")
+        for n in r.notas:
+            print(f"  · {n}")
+        for t in r.confirmadas:
+            print(f"  ✅ {t}")
+        for t in r.anuladas:
+            print(f"  ❌ {t}")
+        for t in r.nuevas:
+            print(f"  🆕 {t}")
+    cfg.reportes_dir.mkdir(parents=True, exist_ok=True)
+    md = cfg.reportes_dir / f"{fecha}-chequeo.md"
+    md.write_text(render_chequeo(db, fecha), encoding="utf-8")
+    print(f"\nPeticiones usadas: {api.peticiones} (quedan hoy según la API: {api.restantes_hoy}). Informe: {md}")
+    if any(r.estado == "esperando" for r in resultados):
+        print("PENDIENTE: hay alineaciones sin publicar; vuelve a ejecutar 'chequeo' en 10-15 minutos.")
+    return 0
+
+
+def cmd_agenda(args, cfg: Config, db: Database) -> int:
+    fecha = _fecha(args.fecha, cfg)
+    momentos = agenda(db, fecha, antelacion_min=args.antelacion)
+    if args.json:
+        print(json.dumps(momentos, ensure_ascii=False))
+        return 0
+    if not momentos:
+        print(f"No quedan partidos con selecciones por chequear el {fecha}.")
+    zona = ZoneInfo(cfg.zona_horaria)
+    for m in momentos:
+        local = datetime.fromisoformat(m["chequeo_utc"]).astimezone(zona).strftime("%H:%M")
+        print(f"Chequeo a las {m['chequeo_utc'][11:16]} UTC ({local} hora local): {', '.join(m['partidos'])}")
     return 0
 
 
@@ -194,7 +244,17 @@ def cmd_backtest(args, cfg: Config, db: Database) -> int:
         return 1
     cfg.reportes_dir.mkdir(parents=True, exist_ok=True)
     md = cfg.reportes_dir / f"backtest-{hoy.isoformat()}.md"
-    md.write_text(render_backtest(resultados, desde, args.peso, args.valor), encoding="utf-8")
+    texto = render_backtest(resultados, desde, args.peso, args.valor)
+    if args.conteos:
+        conteos = []
+        for r in resultados:
+            c = backtest_conteos(partidos, r.liga, desde)
+            if any(c.filas.values()):
+                conteos.append(c)
+                resumen = "  ".join(f"{s} {m['modelo']:.3f}/{m['media_liga']:.3f}" for s, m in c.metricas().items())
+                print(f"{NOMBRES_LIGA[r.liga]:<26} conteos (modelo/media liga)  {resumen}")
+        texto += "\n" + render_conteos(conteos)
+    md.write_text(texto, encoding="utf-8")
     print(f"Informe completo (apuestas simuladas, CLV y calibración): {md}")
     return 0
 
@@ -202,11 +262,12 @@ def cmd_backtest(args, cfg: Config, db: Database) -> int:
 def cmd_predecir(args, cfg: Config, db: Database) -> int:
     hoy = _hoy(cfg)
     analyses, picks, combos = predecir(cfg, hoy, args.dias, _ligas_arg(args.ligas, cfg), args.incluir_sin_cuota)
+    combos["loteria"], builders = combinadas_extra(analyses, cfg)
     if not analyses:
         print("football-data.co.uk no publica partidos de esas ligas para los próximos días.")
         return 0
     md, js = write_reports(cfg.reportes_dir, hoy.isoformat(), analyses, picks, combos, prefijo="predicciones-",
-                           titulo="Predicciones del modelo histórico")
+                           titulo="Predicciones del modelo histórico", builders=builders)
     for a in analyses:
         fx = a.fixture
         sel = picks.get(fx["id"], [])
@@ -258,6 +319,19 @@ def build_parser() -> argparse.ArgumentParser:
     r = sub.add_parser("rendimiento", help="acierto real del modelo con las selecciones liquidadas")
     r.set_defaults(func=cmd_rendimiento)
 
+    ch = sub.add_parser("chequeo", help="alineaciones + cuotas actuales antes del partido -> apuestas finales")
+    ch.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
+    ch.add_argument("--ventana", type=int, default=60, help="minutos hacia delante (por defecto 60)")
+    ch.add_argument("--forzar", action="store_true", help="repetir partidos ya chequeados")
+    ch.add_argument("--sin-cuotas-api", action="store_true", help="no volver a pedir cuotas (ahorra peticiones)")
+    ch.set_defaults(func=cmd_chequeo)
+
+    ag = sub.add_parser("agenda", help="a qué horas ejecutar 'chequeo' hoy")
+    ag.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
+    ag.add_argument("--antelacion", type=int, default=35, help="minutos antes del primer partido de cada grupo")
+    ag.add_argument("--json", action="store_true")
+    ag.set_defaults(func=cmd_agenda)
+
     ayuda_ligas = "códigos de football-data.co.uk separados por comas (por defecto APUESTAS_LIGAS_HISTORICO)"
     h = sub.add_parser("historico", help="descarga/actualiza el historial de football-data.co.uk")
     h.add_argument("--ligas", help=ayuda_ligas)
@@ -269,6 +343,8 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--desde", default="2024-07-01", help="primer día de prueba (AAAA-MM-DD)")
     b.add_argument("--peso", type=float, default=None, help="peso del modelo en la mezcla con el mercado")
     b.add_argument("--valor", type=float, default=None, help="valor mínimo para apostar en la simulación")
+    b.add_argument("--conteos", action="store_true",
+                   help="evaluar también córners, tarjetas, remates y atajadas (más lento)")
     b.set_defaults(func=cmd_backtest)
 
     pr = sub.add_parser("predecir", help="predice los próximos partidos con el modelo histórico (sin API)")

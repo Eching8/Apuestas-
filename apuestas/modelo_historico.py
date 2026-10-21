@@ -19,6 +19,8 @@ mercados, el cruce con cuotas y las combinadas.
 from __future__ import annotations
 
 import math
+import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
@@ -33,7 +35,13 @@ RIDGE_DEFECTO = 2.0
 PESO_TIROS_DEFECTO = 0.0
 PESO_MERCADO_DEFECTO = 0.8
 VENTANA_DIAS = 4 * 365          # partidos más antiguos pesan < 0.1 %: no aportan y ralentizan
-STATS_CONTEO = ("corners", "cards", "shots_on", "shots_total")
+STATS_CONTEO = ("corners", "cards", "shots_on", "shots_total", "saves")
+# Tarjetas "virtuales" de media que se suman a cada árbitro: con pocos partidos su efecto se encoge.
+ARBITRO_K = 50.0
+# Las estadísticas de conteo tienen menos señal por equipo que los goles: más regularización.
+RIDGE_CONTEOS = 40.0
+# La dispersión estimada con el ajuste subestima la incertidumbre real de la predicción.
+INFLAR_DISPERSION = 1.3
 MIN_PARTIDOS_STAT = 150          # mínimo de partidos con la estadística para ajustarla
 
 
@@ -50,9 +58,14 @@ class Ajuste:
     partidos_equipo: dict[str, int]
     rho: float = 0.0
     dispersion: float = 1.0       # varianza / media por equipo y partido
+    # Multiplicador por árbitro (clave_arbitro -> factor), solo para tarjetas.
+    arbitros: dict[str, float] = field(default_factory=dict)
+
+    def factor_arbitro(self, arbitro: str | None) -> float | None:
+        return self.arbitros.get(clave_arbitro(arbitro)) if arbitro else None
 
     def esperado(self, local: str, visitante: str, nuevo_local: bool = False,
-                 nuevo_visitante: bool = False) -> tuple[float, float]:
+                 nuevo_visitante: bool = False, arbitro: str | None = None) -> tuple[float, float]:
         def fuerza(equipo: str, nuevo: bool) -> tuple[float, float]:
             i = self.equipos.get(equipo)
             # Un equipo sin historial en la liga se trata como recién ascendido.
@@ -63,8 +76,38 @@ class Ajuste:
 
         att_l, def_l = fuerza(local, nuevo_local)
         att_v, def_v = fuerza(visitante, nuevo_visitante)
-        return (float(np.exp(self.mu + self.local + att_l + def_v)),
-                float(np.exp(self.mu + att_v + def_l)))
+        f = self.factor_arbitro(arbitro) or 1.0
+        return (float(f * np.exp(self.mu + self.local + att_l + def_v)),
+                float(f * np.exp(self.mu + att_v + def_l)))
+
+
+def clave_arbitro(nombre: str | None) -> str:
+    """'Michael Oliver, England' (API-Football) y 'M Oliver' (football-data.co.uk) -> 'm oliver'."""
+    if not nombre:
+        return ""
+    texto = unicodedata.normalize("NFKD", nombre.split(",")[0]).encode("ascii", "ignore").decode().lower()
+    partes = re.sub(r"[^a-z ]+", " ", texto).split()
+    if not partes:
+        return ""
+    return f"{partes[0][0]} {partes[-1]}" if len(partes) > 1 else partes[0]
+
+
+def ajustar_arbitros(aj: Ajuste, partidos: list[Partido], hoy: date, nuevos: set[tuple[str, str]],
+                     xi: float = XI_DEFECTO) -> None:
+    """Efecto de cada árbitro en las tarjetas: tarjetas reales / esperadas por el modelo en sus partidos,
+    con contracción hacia 1 (ARBITRO_K) para los que han pitado poco."""
+    reales: dict[str, float] = {}
+    esperadas: dict[str, float] = {}
+    for p in partidos:
+        clave, v = clave_arbitro(p.arbitro), p.valor("cards")
+        if not clave or v is None or p.fecha >= hoy or (hoy - p.fecha).days > VENTANA_DIAS:
+            continue
+        w = math.exp(-xi * (hoy - p.fecha).days)
+        lh, la = aj.esperado(p.local, p.visitante, (p.temporada, p.local) in nuevos,
+                             (p.temporada, p.visitante) in nuevos)
+        reales[clave] = reales.get(clave, 0.0) + w * (v[0] + v[1])
+        esperadas[clave] = esperadas.get(clave, 0.0) + w * (lh + la)
+    aj.arbitros = {c: min(1.6, max(0.6, (reales[c] + ARBITRO_K) / (esperadas[c] + ARBITRO_K))) for c in reales}
 
 
 _REJILLA: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] | None = None
@@ -279,12 +322,12 @@ class ModeloLiga:
     def conoce(self, equipo: str) -> bool:
         return equipo in self.goles.equipos
 
-    def expectativa(self, local: str, visitante: str, temporada: str) -> MatchExpectation:
+    def expectativa(self, local: str, visitante: str, temporada: str, arbitro: str | None = None) -> MatchExpectation:
         nl = es_nuevo(self.por_temporada, temporada, local)
         nv = es_nuevo(self.por_temporada, temporada, visitante)
         home, away, disp = {}, {}, {}
         for stat, aj in {"goals": self.goles, **self.conteos}.items():
-            home[stat], away[stat] = aj.esperado(local, visitante, nl, nv)
+            home[stat], away[stat] = aj.esperado(local, visitante, nl, nv, arbitro if stat == "cards" else None)
             disp[stat] = aj.dispersion
         return MatchExpectation(home, away, disp, self.goles.partidos_equipo.get(local, 0),
                                 self.goles.partidos_equipo.get(visitante, 0), rho=self.goles.rho)
@@ -302,10 +345,21 @@ def entrenar_liga(partidos: list[Partido], liga: str, hoy: date, xi: float = XI_
     conteos = {}
     if con_conteos:
         for stat in STATS_CONTEO:
-            aj = ajustar(de_liga, stat, hoy, nuevos, xi, ridge)
+            aj = ajustar(de_liga, stat, hoy, nuevos, xi, RIDGE_CONTEOS)
             if aj is not None:
+                aj.dispersion *= INFLAR_DISPERSION
                 conteos[stat] = aj
+        if "cards" in conteos:
+            ajustar_arbitros(conteos["cards"], de_liga, hoy, nuevos, xi)
     return ModeloLiga(liga, hoy, goles, conteos, equipos_por_temporada(de_liga).get(liga, {}))
+
+
+def nota_arbitro(modelo: ModeloLiga, arbitro: str | None) -> str:
+    aj = modelo.conteos.get("cards")
+    f = aj.factor_arbitro(arbitro) if aj else None
+    if f is None:
+        return f"; árbitro {arbitro} sin historial (tarjetas sin ajustar)" if arbitro else ""
+    return f"; árbitro {arbitro}: tarjetas ×{f:.2f} respecto a lo esperado"
 
 
 def semana(d: date) -> date:

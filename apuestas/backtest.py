@@ -214,3 +214,84 @@ def render_backtest(resultados: list[ResultadoBacktest], desde: date, peso: floa
     out += [f"| {c['rango']} | {c['n']} | {c['prob_media']:.1%} | {c['frecuencia']:.1%} |"
             for c in todas.calibracion()]
     return "\n".join(out) + "\n"
+
+
+# --- Córners, tarjetas, remates y atajadas ------------------------------------------------
+
+# Línea de referencia por estadística (total del partido) para medir el acierto de "más de".
+LINEAS_CONTEO = {"corners": 9.5, "cards": 3.5, "shots_on": 8.5, "shots_total": 23.5, "saves": 5.5}
+
+
+@dataclass
+class ResultadoConteos:
+    """Por estadística: (prob. modelo, prob. modelo sin árbitro, prob. media de la liga, ocurrió)."""
+    liga: str
+    filas: dict[str, list[tuple[float, float, float, int]]] = field(default_factory=dict)
+
+    def metricas(self) -> dict[str, dict]:
+        out = {}
+        for stat, filas in self.filas.items():
+            if not filas:
+                continue
+            ll = [0.0, 0.0, 0.0]
+            for *ps, y in filas:
+                for i, p in enumerate(ps):
+                    p = min(max(p, 1e-6), 1 - 1e-6)
+                    ll[i] -= math.log(p if y else 1 - p)
+            n = len(filas)
+            out[stat] = {"n": n, "linea": LINEAS_CONTEO[stat], "frecuencia": sum(f[3] for f in filas) / n,
+                         "modelo": ll[0] / n, "sin_arbitro": ll[1] / n, "media_liga": ll[2] / n}
+        return out
+
+    def calibracion(self, stat: str, cubos: int = 5) -> list[dict]:
+        acum = [[0, 0.0, 0] for _ in range(cubos)]
+        for p, _, _, y in self.filas.get(stat, []):
+            b = min(cubos - 1, int(p * cubos))
+            acum[b][0] += 1
+            acum[b][1] += p
+            acum[b][2] += y
+        return [{"rango": f"{i / cubos:.0%}-{(i + 1) / cubos:.0%}", "n": n, "prob_media": s / n, "frecuencia": k / n}
+                for i, (n, s, k) in enumerate(acum) if n]
+
+
+def backtest_conteos(partidos: list[Partido], liga: str, desde: date) -> ResultadoConteos:
+    """Mismo esquema semana a semana que el 1X2, para las estadísticas de conteo (sin cuotas en los
+    datos: se compara con la referencia ingenua de "la media de la liga")."""
+    from .model import prob_over
+    de_liga = [p for p in partidos if p.liga == liga]
+    res = ResultadoConteos(liga, {s: [] for s in LINEAS_CONTEO})
+    por_semana: dict[date, list[Partido]] = {}
+    for p in de_liga:
+        if p.fecha >= desde:
+            por_semana.setdefault(semana(p.fecha), []).append(p)
+    for lunes in sorted(por_semana):
+        modelo = entrenar_liga(de_liga, liga, lunes)
+        if modelo is None:
+            continue
+        for p in por_semana[lunes]:
+            con = modelo.expectativa(p.local, p.visitante, p.temporada, p.arbitro or None)
+            sin = modelo.expectativa(p.local, p.visitante, p.temporada)
+            for stat, linea in LINEAS_CONTEO.items():
+                aj, real = modelo.conteos.get(stat), p.valor(stat)
+                if aj is None or real is None:
+                    continue
+                disp = aj.dispersion
+                mu_c, mu_s = con.total(stat), sin.total(stat)
+                media = 2 * math.exp(aj.mu + aj.local / 2)       # equipo medio, ventaja local repartida
+                res.filas[stat].append((prob_over(linea, mu_c, mu_c * disp), prob_over(linea, mu_s, mu_s * disp),
+                                        prob_over(linea, media, media * disp), int(real[0] + real[1] > linea)))
+    return res
+
+
+def render_conteos(resultados: list[ResultadoConteos]) -> str:
+    from .model import NOMBRES
+    out = ["## Córners, tarjetas, remates y atajadas", "",
+           "Log-loss de \"más de la línea\" en el total del partido (más bajo = mejor). Sin cuotas en los "
+           "datos, la referencia es usar siempre la media de la liga: el modelo solo aporta si la mejora.", "",
+           "| Liga | Mercado | Partidos | Frecuencia real | Modelo | Sin árbitro | Media de la liga |",
+           "|---|---|---|---|---|---|---|"]
+    for r in resultados:
+        for stat, m in r.metricas().items():
+            out.append(f"| {NOMBRES_LIGA.get(r.liga, r.liga)} | más de {m['linea']} {NOMBRES[stat]} | {m['n']} | "
+                       f"{m['frecuencia']:.1%} | {m['modelo']:.4f} | {m['sin_arbitro']:.4f} | {m['media_liga']:.4f} |")
+    return "\n".join(out) + "\n"

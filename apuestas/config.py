@@ -58,7 +58,9 @@ class Config:
     # Partidos recientes por equipo que se usan para el modelo.
     partidos_historial: int = field(default_factory=lambda: _int("APUESTAS_HISTORIAL", 6))
     # Tope de peticiones a la API por ejecución (plan gratuito: 100/día).
-    presupuesto_peticiones: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO", 90))
+    # Se reservan peticiones para los chequeos de alineación del día (2 por partido).
+    presupuesto_peticiones: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO", 60))
+    presupuesto_chequeo: int = field(default_factory=lambda: _int("APUESTAS_PRESUPUESTO_CHEQUEO", 30))
     # Máximo de partidos del día a analizar.
     max_partidos: int = field(default_factory=lambda: _int("APUESTAS_MAX_PARTIDOS", 15))
 
@@ -71,6 +73,11 @@ class Config:
     # Filtros de combinadas.
     prob_min_combinada: float = field(default_factory=lambda: _float("APUESTAS_PROB_MIN_COMBI", 0.35))
     max_selecciones_combinada: int = field(default_factory=lambda: _int("APUESTAS_MAX_SELECCIONES", 4))
+    # Combinada "lotería": cuota total mínima y máximo de selecciones (0 = no generarla).
+    cuota_loteria: float = field(default_factory=lambda: _float("APUESTAS_CUOTA_LOTERIA", 100.0))
+    max_selecciones_loteria: int = field(default_factory=lambda: _int("APUESTAS_MAX_SELECCIONES_LOTERIA", 12))
+    # "Crea tu apuesta" (mismo partido): cuota justa mínima (0 = no generarla).
+    cuota_crea_tu_apuesta: float = field(default_factory=lambda: _float("APUESTAS_CUOTA_CREA", 3.0))
     # Mínimo de partidos con datos para confiar en un equipo / jugador.
     min_partidos_equipo: int = 4
     min_partidos_jugador: int = 4

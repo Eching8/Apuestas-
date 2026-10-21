@@ -17,6 +17,8 @@ class FakeApi(ApiFootball):
         self.history: dict[int, dict] = {}
         self.today: list[dict] = []
         self.calls: list[str] = []
+        self.alineaciones_publicadas = True
+        self.ausentes: set[int] = set()
         base = datetime.fromisoformat(fecha).replace(hour=20, tzinfo=timezone.utc)
         fid = 1000
         # 10 jornadas previas: todos contra todos de forma rotativa.
@@ -86,6 +88,16 @@ class FakeApi(ApiFootball):
                                     "cards": {"yellow": 0, "red": 0}}],
                 } for k in range(14)]})
             return out
+        if path == "/fixtures/lineups":
+            fx = next((f for f in self.today if f["fixture"]["id"] == params["fixture"]), None)
+            if fx is None or not self.alineaciones_publicadas:
+                return []
+            return [{"team": fx["teams"][side], "formation": "4-3-3", "startXI": [
+                {"player": {"id": fx["teams"][side]["id"] * 100 + k, "name": f"Jugador {fx['teams'][side]['id']}-{k}",
+                            "pos": "F"}}
+                for k in range(14) if k < 11 and fx["teams"][side]["id"] * 100 + k not in self.ausentes
+            ] + ([{"player": {"id": fx["teams"][side]["id"] * 100 + 11, "name": "Suplente", "pos": "F"}}]
+                 if fx["teams"][side]["id"] * 100 in self.ausentes else [])} for side in ("home", "away")]
         if path == "/odds":
             return [{"bookmakers": [
                 {"id": b, "name": f"Casa {b}", "bets": [

@@ -70,6 +70,7 @@ class Partido:
     goles_local: int | None = None       # None = aún no se ha jugado
     goles_visitante: int | None = None
     hora: str = ""
+    arbitro: str = ""
     # stat -> (local, visitante); solo las que trae el archivo.
     stats: dict[str, tuple[float, float]] = field(default_factory=dict)
     cuotas: dict[str, float] = field(default_factory=dict)        # antes del partido
@@ -87,6 +88,12 @@ class Partido:
         if stat == "cards":
             y, r = self.stats.get("yellow"), self.stats.get("red")
             return (y[0] + r[0], y[1] + r[1]) if y and r else None
+        if stat == "saves":
+            # Atajadas del portero de cada equipo = tiros a puerta del rival que no fueron gol.
+            t = self.stats.get("shots_on")
+            if t is None or not self.jugado:
+                return None
+            return (max(0.0, t[1] - self.goles_visitante), max(0.0, t[0] - self.goles_local))
         return self.stats.get(stat)
 
 
@@ -157,7 +164,8 @@ def parse_csv(texto: str, liga: str | None = None) -> list[Partido]:
         out.append(Partido(
             fecha=fecha, liga=codigo, temporada=row.get("Season") or temporada_de(fecha), local=local,
             visitante=visitante, goles_local=None if gl is None else int(gl),
-            goles_visitante=None if gv is None else int(gv), hora=row.get("Time", ""), stats=stats,
+            goles_visitante=None if gv is None else int(gv), hora=row.get("Time", ""),
+            arbitro=row.get("Referee", ""), stats=stats,
             cuotas=_cuotas(row, CUOTAS_PREVIAS), cuotas_cierre=_cuotas(row, CUOTAS_CIERRE),
         ))
     return out

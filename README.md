@@ -43,6 +43,10 @@ python -m apuestas rendimiento                 # acierto real del modelo hasta a
 python -m apuestas historico                   # descarga/actualiza el historial
 python -m apuestas backtest                    # ¿le gana el modelo a las casas? (desde 2024-07-01)
 python -m apuestas predecir --dias 3           # próximos partidos con probabilidades y valor
+
+# Antes de los partidos
+python -m apuestas agenda                      # horas a las que conviene chequear
+python -m apuestas chequeo                     # alineaciones + cuotas actuales -> apuestas finales
 ```
 
 Opciones útiles de `analizar`:
@@ -121,6 +125,63 @@ Cómo leerlo, sin adornos:
   medir cualquier mejora futura (xG, alineaciones, lesiones…). Una mejora solo es real si baja el
   log-loss y deja el CLV en positivo en este backtest.
 - Las ligas extra (MEX…) no traen cuotas previas, solo de cierre, así que no entran en esta comparación.
+
+### Córners, tarjetas, remates, tiros a puerta y atajadas
+
+El modelo histórico ajusta las cinco estadísticas por equipo (atajadas = tiros a puerta del rival
+que no fueron gol), con más regularización que los goles y la sobredispersión inflada, porque así
+predicen mejor. Las tarjetas se corrigen además por el **árbitro** cuando se conoce (football-data
+lo trae en Inglaterra; API-Football en todas las ligas). `python -m apuestas backtest --conteos`
+lo mide frente a "usar siempre la media de la liga" (4 ligas, desde 2024-07-01, log-loss):
+
+| Total del partido | Modelo | Media de la liga |
+|---|---|---|
+| Más de 9.5 córners | 0.682 | 0.690 |
+| Más de 3.5 tarjetas | 0.661 | 0.675 |
+| Más de 8.5 tiros a puerta | 0.678 | 0.691 |
+| Más de 23.5 remates | 0.655 | 0.670 |
+| Más de 5.5 atajadas | 0.685 | 0.691 |
+
+Mejoran a la media, pero poco: sin cuotas de estos mercados en los datos no se puede saber si
+superan a las casas. El efecto del árbitro no mejoró el backtest de la Premier League, así que se
+aplica muy contraído (`ARBITRO_K`).
+
+## Combinadas de cuota alta y "crea tu apuesta"
+
+- **Lotería** (`APUESTAS_CUOTA_LOTERIA`, por defecto 100): la combinada de partidos distintos con
+  cuota real ≥ 100 y la **mayor probabilidad posible** (búsqueda exacta tipo mochila sobre todas las
+  selecciones con cuota). Suele acertar menos de 1 vez de cada 100 y su valor esperado es negativo,
+  porque el margen de la casa se multiplica en cada selección: se sugiere un stake simbólico (0.1 %).
+- **Crea tu apuesta** (`APUESTAS_CUOTA_CREA`, por defecto 3): varias selecciones del **mismo
+  partido**. Su probabilidad conjunta no se multiplica: se **simula el partido** 20.000 veces
+  (`simulacion.py`), respetando que tiros a puerta = goles + atajadas del rival. Se da la cuota
+  justa: solo hay valor si la de tu casa es mayor.
+
+## Chequeo de alineaciones antes del partido
+
+```bash
+python -m apuestas agenda            # a qué horas chequear hoy (35 min antes de cada grupo de partidos)
+python -m apuestas chequeo           # partidos con selecciones que empiezan en la próxima hora
+```
+
+Para cada partido descarga la alineación y las cuotas del momento (2 peticiones), rebaja el ataque
+esperado de un equipo según la parte de sus remates que aportaban los habituales que no juegan,
+re-analiza y marca cada selección como ✅ confirmada, ❌ anulada (con el motivo: no es titular,
+bajó la probabilidad, la cuota se movió y ya no hay valor) o 🆕 nueva. El informe es
+`reportes/AAAA-MM-DD-chequeo.md`. Con el plan gratuito la base empieza sin historial de jugadores:
+los primeros días solo se comprueba que la alineación está publicada, se anulan las apuestas de
+jugadores suplentes y se recalcula con las cuotas del momento.
+
+El presupuesto diario de 100 peticiones se reparte: `diario` usa hasta 60 y los chequeos hasta 30.
+
+## Rutina automática diaria
+
+Una tarea programada de Claude abre cada mañana un chat nuevo que sigue
+`.claude/skills/apuestas-diario/SKILL.md`: restaura la base (`scripts/datos.sh`, rama `datos` del
+repositorio), ejecuta `diario`, resume las apuestas provisionales en el chat, programa un aviso por
+cada grupo de partidos y, en cada aviso, ejecuta `chequeo` y escribe ahí las apuestas finales. Para
+que funcione, `API_FOOTBALL_KEY` tiene que estar en las variables (o secretos) del entorno en la
+nube; sin ella la rutina usa solo `predecir`.
 
 Ligas disponibles (`--ligas`): E0 Premier, E1 Championship, SP1 LaLiga, SP2 Segunda, I1 Serie A,
 I2 Serie B, D1 Bundesliga, D2 2. Bundesliga, F1 Ligue 1, F2 Ligue 2, N1 Eredivisie, P1 Portugal,

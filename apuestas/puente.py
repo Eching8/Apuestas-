@@ -13,7 +13,7 @@ from datetime import date
 from .football_data import _norm, _similar
 from .historico import Historico, Partido, temporada_de
 from .model import MatchExpectation
-from .modelo_historico import ModeloLiga, entrenar_liga
+from .modelo_historico import ModeloLiga, entrenar_liga, nota_arbitro
 
 log = logging.getLogger(__name__)
 
@@ -97,5 +97,7 @@ class ModeloHistorico:
             nombres.append(fd)
         if nombres[0] == nombres[1]:
             return None, "emparejamiento ambiguo de equipos"
-        e = modelo.expectativa(nombres[0], nombres[1], temporada)
-        return e, f"Modelo histórico Dixon-Coles ({nombres[0]} vs {nombres[1]} en football-data.co.uk)"
+        arbitro = fx.get("referee")
+        e = modelo.expectativa(nombres[0], nombres[1], temporada, arbitro)
+        nota = f"Modelo histórico Dixon-Coles ({nombres[0]} vs {nombres[1]} en football-data.co.uk)"
+        return e, nota + nota_arbitro(modelo, arbitro)
