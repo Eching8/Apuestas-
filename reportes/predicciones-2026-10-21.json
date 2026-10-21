@@ -1,0 +1,747 @@
+{
+  "fecha": "2026-10-21",
+  "partidos": [
+    {
+      "fixture_id": -1,
+      "partido": "Guadalajara Chivas vs Necaxa",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.9695504105554942
+        },
+        "visitante": {
+          "goals": 0.8206351645855837
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -2,
+      "partido": "Atl. San Luis vs Queretaro",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.4713610979260159
+        },
+        "visitante": {
+          "goals": 0.9922789866022277
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -3,
+      "partido": "Juarez vs Atlante",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2906500217930275
+        },
+        "visitante": {
+          "goals": 1.236023818580999
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -4,
+      "partido": "Tigres UANL vs Club Leon",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.7741103898449848
+        },
+        "visitante": {
+          "goals": 0.8477050892509187
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -5,
+      "partido": "Levante vs Ath Bilbao",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2089257604592167,
+          "corners": 4.429204829155249,
+          "cards": 1.9022867233488472,
+          "shots_on": 4.729295295893357,
+          "shots_total": 12.301038225795988,
+          "saves": 2.8204461376179535
+        },
+        "visitante": {
+          "goals": 1.3957816866088215,
+          "corners": 4.9527897899004705,
+          "cards": 2.525762658459188,
+          "shots_on": 3.974362460941447,
+          "shots_total": 13.216110527408901,
+          "saves": 3.1987108322404887
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -6,
+      "partido": "Atlas vs Club America",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 0.9614323683143647
+        },
+        "visitante": {
+          "goals": 1.4035075566758348
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -7,
+      "partido": "Puebla vs Monterrey",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.0473871486357302
+        },
+        "visitante": {
+          "goals": 1.4986660219761305
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -8,
+      "partido": "Toluca vs Club Tijuana",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 2.128651574205822
+        },
+        "visitante": {
+          "goals": 0.8779332016743715
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -9,
+      "partido": "Pachuca vs Cruz Azul",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2369062672875186
+        },
+        "visitante": {
+          "goals": 1.27346836199426
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": -10,
+      "partido": "Santos Laguna vs UNAM Pumas",
+      "notas": [],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2216313220819723
+        },
+        "visitante": {
+          "goals": 1.4926832719783074
+        }
+      },
+      "selecciones": []
+    }
+  ],
+  "combinadas": {
+    "alta_probabilidad": [],
+    "valor": [],
+    "loteria": [
+      {
+        "prob": 0.008180173506127033,
+        "cuota": 103.6965204,
+        "con_cuotas": true,
+        "ev": -0.15174447114635858,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": -1,
+            "partido": "Guadalajara Chivas vs Necaxa",
+            "key": "result:X",
+            "label": "Empate",
+            "prob": 0.23157984501525591,
+            "market_prob": 0.1881709675268387,
+            "final_prob": 0.19685274302452216,
+            "fair_odd": 4.3181650801006555,
+            "odd": 4.87,
+            "best_odd": 4.87,
+            "bookmakers": 1,
+            "edge": -0.04132714147057703
+          },
+          {
+            "fixture_id": -2,
+            "partido": "Atl. San Luis vs Queretaro",
+            "key": "result:1",
+            "label": "Gana Atl. San Luis",
+            "prob": 0.4680354454315818,
+            "market_prob": 0.41607310845316486,
+            "final_prob": 0.4264655758488483,
+            "fair_odd": 2.1365903154575965,
+            "odd": 2.2,
+            "best_odd": 2.2,
+            "bookmakers": 1,
+            "edge": -0.061775733132533595
+          },
+          {
+            "fixture_id": -5,
+            "partido": "Levante vs Ath Bilbao",
+            "key": "result:1",
+            "label": "Gana Levante",
+            "prob": 0.31957553761099117,
+            "market_prob": 0.2754660549958525,
+            "final_prob": 0.28428795151888026,
+            "fair_odd": 3.129150646121316,
+            "odd": 3.42,
+            "best_odd": 3.42,
+            "bookmakers": 1,
+            "edge": -0.02773520580542954
+          },
+          {
+            "fixture_id": -10,
+            "partido": "Santos Laguna vs UNAM Pumas",
+            "key": "result:2",
+            "label": "Gana UNAM Pumas",
+            "prob": 0.42090344236183935,
+            "market_prob": 0.32321277013834593,
+            "final_prob": 0.34275090458304464,
+            "fair_odd": 2.3758418187046493,
+            "odd": 2.83,
+            "best_odd": 2.83,
+            "bookmakers": 1,
+            "edge": -0.030014940029983617
+          }
+        ]
+      },
+      {
+        "prob": 0.008015869082562629,
+        "cuota": 104.595912,
+        "con_cuotas": true,
+        "ev": -0.16157286283675854,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": -1,
+            "partido": "Guadalajara Chivas vs Necaxa",
+            "key": "result:X",
+            "label": "Empate",
+            "prob": 0.23157984501525591,
+            "market_prob": 0.1881709675268387,
+            "final_prob": 0.19685274302452216,
+            "fair_odd": 4.3181650801006555,
+            "odd": 4.87,
+            "best_odd": 4.87,
+            "bookmakers": 1,
+            "edge": -0.04132714147057703
+          },
+          {
+            "fixture_id": -5,
+            "partido": "Levante vs Ath Bilbao",
+            "key": "result:1",
+            "label": "Gana Levante",
+            "prob": 0.31957553761099117,
+            "market_prob": 0.2754660549958525,
+            "final_prob": 0.28428795151888026,
+            "fair_odd": 3.129150646121316,
+            "odd": 3.42,
+            "best_odd": 3.42,
+            "bookmakers": 1,
+            "edge": -0.02773520580542954
+          },
+          {
+            "fixture_id": -8,
+            "partido": "Toluca vs Club Tijuana",
+            "key": "result:2",
+            "label": "Gana Club Tijuana",
+            "prob": 0.13307576362368598,
+            "market_prob": 0.14577544325128627,
+            "final_prob": 0.14323550732576623,
+            "fair_odd": 7.514516338435734,
+            "odd": 6.28,
+            "best_odd": 6.28,
+            "bookmakers": 1,
+            "edge": -0.10048101399418807
+          }
+        ]
+      },
+      {
+        "prob": 0.00796700597082065,
+        "cuota": 101.63609645,
+        "con_cuotas": true,
+        "ev": -0.1902646127319465,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": -1,
+            "partido": "Guadalajara Chivas vs Necaxa",
+            "key": "result:X",
+            "label": "Empate",
+            "prob": 0.23157984501525591,
+            "market_prob": 0.1881709675268387,
+            "final_prob": 0.19685274302452216,
+            "fair_odd": 4.3181650801006555,
+            "odd": 4.87,
+            "best_odd": 4.87,
+            "bookmakers": 1,
+            "edge": -0.04132714147057703
+          },
+          {
+            "fixture_id": -3,
+            "partido": "Juarez vs Atlante",
+            "key": "result:X",
+            "label": "Empate",
+            "prob": 0.2975729232153612,
+            "market_prob": 0.2673256063804239,
+            "final_prob": 0.2733750697474114,
+            "fair_odd": 3.3605208067814494,
+            "odd": 3.43,
+            "best_odd": 3.43,
+            "bookmakers": 1,
+            "edge": -0.062323510766378876
+          },
+          {
+            "fixture_id": -5,
+            "partido": "Levante vs Ath Bilbao",
+            "key": "result:2",
+            "label": "Gana Ath Bilbao",
+            "prob": 0.4069310020831592,
+            "market_prob": 0.4381832130631701,
+            "final_prob": 0.43193277086716797,
+            "fair_odd": 2.457419058466435,
+            "odd": 2.15,
+            "best_odd": 2.15,
+            "bookmakers": 1,
+            "edge": -0.07134454263558887
+          },
+          {
+            "fixture_id": -10,
+            "partido": "Santos Laguna vs UNAM Pumas",
+            "key": "result:2",
+            "label": "Gana UNAM Pumas",
+            "prob": 0.42090344236183935,
+            "market_prob": 0.32321277013834593,
+            "final_prob": 0.34275090458304464,
+            "fair_odd": 2.3758418187046493,
+            "odd": 2.83,
+            "best_odd": 2.83,
+            "bookmakers": 1,
+            "edge": -0.030014940029983617
+          }
+        ]
+      }
+    ]
+  },
+  "crea_tu_apuesta": [
+    {
+      "fixture_id": -1,
+      "partido": "Guadalajara Chivas vs Necaxa",
+      "prob": 0.329,
+      "cuota_justa": 3.03951367781155,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Necaxa menos de 1.5 goles",
+          "prob": 0.8013562030282111,
+          "market_prob": null,
+          "final_prob": 0.8013562030282111,
+          "fair_odd": 1.247884519045516,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:total:over:1.5",
+          "label": "Más de 1.5 goles",
+          "prob": 0.7786597925597641,
+          "market_prob": null,
+          "final_prob": 0.7786597925597641,
+          "fair_odd": 1.2842579128332832,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:under:2.5",
+          "label": "Guadalajara Chivas menos de 2.5 goles",
+          "prob": 0.6849175824226618,
+          "market_prob": null,
+          "final_prob": 0.6849175824226618,
+          "fair_odd": 1.4600296819112775,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -2,
+      "partido": "Atl. San Luis vs Queretaro",
+      "prob": 0.3314,
+      "cuota_justa": 3.0175015087507546,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:total:under:4.5",
+          "label": "Menos de 4.5 goles",
+          "prob": 0.895982488409918,
+          "market_prob": null,
+          "final_prob": 0.895982488409918,
+          "fair_odd": 1.1160932417046228,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Queretaro menos de 1.5 goles",
+          "prob": 0.7385992561064342,
+          "market_prob": null,
+          "final_prob": 0.7385992561064342,
+          "fair_odd": 1.3539141716328742,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.7085746476416347,
+          "market_prob": null,
+          "final_prob": 0.7085746476416347,
+          "fair_odd": 1.4112839110576747,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "btts:no",
+          "label": "Ambos marcan: no",
+          "prob": 0.5009266433120567,
+          "market_prob": null,
+          "final_prob": 0.5009266433120567,
+          "fair_odd": 1.9963002833870849,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -3,
+      "partido": "Juarez vs Atlante",
+      "prob": 0.33025,
+      "cuota_justa": 3.028009084027252,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "dc:1X",
+          "label": "Juarez o empate",
+          "prob": 0.6617432519327417,
+          "market_prob": null,
+          "final_prob": 0.6617432519327417,
+          "fair_odd": 1.511160101866272,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:under:1.5",
+          "label": "Juarez menos de 1.5 goles",
+          "prob": 0.6301392878596044,
+          "market_prob": null,
+          "final_prob": 0.6301392878596044,
+          "fair_odd": 1.5869507254446908,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -4,
+      "partido": "Tigres UANL vs Club Leon",
+      "prob": 0.33305,
+      "cuota_justa": 3.002552169343942,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Club Leon menos de 1.5 goles",
+          "prob": 0.7915512015400963,
+          "market_prob": null,
+          "final_prob": 0.7915512015400963,
+          "fair_odd": 1.2633421540569094,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:total:over:1.5",
+          "label": "Más de 1.5 goles",
+          "prob": 0.7493682280119661,
+          "market_prob": null,
+          "final_prob": 0.7493682280119661,
+          "fair_odd": 1.3344574304316938,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:under:2.5",
+          "label": "Tigres UANL menos de 2.5 goles",
+          "prob": 0.7375434720319082,
+          "market_prob": null,
+          "final_prob": 0.7375434720319082,
+          "fair_odd": 1.3558522825034742,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -6,
+      "partido": "Atlas vs Club America",
+      "prob": 0.32985,
+      "cuota_justa": 3.031681067151736,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:away:under:2.5",
+          "label": "Club America menos de 2.5 goles",
+          "prob": 0.8326494486955416,
+          "market_prob": null,
+          "final_prob": 0.8326494486955416,
+          "fair_odd": 1.200985602724695,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.7003525768269047,
+          "market_prob": null,
+          "final_prob": 0.7003525768269047,
+          "fair_odd": 1.4278522462653187,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:over:0.5",
+          "label": "Atlas más de 0.5 goles",
+          "prob": 0.6176551650633773,
+          "market_prob": null,
+          "final_prob": 0.6176551650633773,
+          "fair_odd": 1.6190263703168264,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -7,
+      "partido": "Puebla vs Monterrey",
+      "prob": 0.32765,
+      "cuota_justa": 3.0520372348542653,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.712671518881616,
+          "market_prob": null,
+          "final_prob": 0.712671518881616,
+          "fair_odd": 1.4031709890263104,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "btts:yes",
+          "label": "Ambos marcan: sí",
+          "prob": 0.5182597032974228,
+          "market_prob": null,
+          "final_prob": 0.5182597032974228,
+          "fair_odd": 1.9295345434682822,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -8,
+      "partido": "Toluca vs Club Tijuana",
+      "prob": 0.32995,
+      "cuota_justa": 3.0307622367025306,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:away:under:2.5",
+          "label": "Club Tijuana menos de 2.5 goles",
+          "prob": 0.9407273165246111,
+          "market_prob": null,
+          "final_prob": 0.9407273165246111,
+          "fair_odd": 1.0630072949240634,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.7835665964775743,
+          "market_prob": null,
+          "final_prob": 0.7835665964775743,
+          "fair_odd": 1.2762157096734024,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "btts:yes",
+          "label": "Ambos marcan: sí",
+          "prob": 0.5254512854523793,
+          "market_prob": null,
+          "final_prob": 0.5254512854523793,
+          "fair_odd": 1.9031259941424736,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -9,
+      "partido": "Pachuca vs Cruz Azul",
+      "prob": 0.33205,
+      "cuota_justa": 3.011594639361542,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:total:under:3.5",
+          "label": "Menos de 3.5 goles",
+          "prob": 0.7553561377755222,
+          "market_prob": null,
+          "final_prob": 0.7553561377755222,
+          "fair_odd": 1.3238788301170612,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:over:0.5",
+          "label": "Pachuca más de 0.5 goles",
+          "prob": 0.7097191183355332,
+          "market_prob": null,
+          "final_prob": 0.7097191183355332,
+          "fair_odd": 1.4090081190784984,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.701233122189042,
+          "market_prob": null,
+          "final_prob": 0.701233122189042,
+          "fair_odd": 1.426059278087573,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": -10,
+      "partido": "Santos Laguna vs UNAM Pumas",
+      "prob": 0.3303,
+      "cuota_justa": 3.0275507114744173,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:total:under:4.5",
+          "label": "Menos de 4.5 goles",
+          "prob": 0.8607703086429828,
+          "market_prob": null,
+          "final_prob": 0.8607703086429828,
+          "fair_odd": 1.161750109127852,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:over:0.5",
+          "label": "Santos Laguna más de 0.5 goles",
+          "prob": 0.7052510559449773,
+          "market_prob": null,
+          "final_prob": 0.7052510559449773,
+          "fair_odd": 1.4179347787860932,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "dc:X2",
+          "label": "UNAM Pumas o empate",
+          "prob": 0.7033493279301082,
+          "market_prob": null,
+          "final_prob": 0.7033493279301082,
+          "fair_odd": 1.42176861523833,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    }
+  ]
+}
