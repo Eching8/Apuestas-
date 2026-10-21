@@ -1,0 +1,3820 @@
+{
+  "fecha": "2026-10-21",
+  "partidos": [
+    {
+      "fixture_id": 401915394,
+      "partido": "Aston Villa vs Viking FK",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WWDWW",
+        "visitante": "WDWWW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.59,
+          "visitante": 1.38
+        },
+        "corners": {
+          "local": 5.5,
+          "visitante": 5.03
+        },
+        "cards": {
+          "local": 1.66,
+          "visitante": 2.37
+        },
+        "shots": {
+          "local": 17.56,
+          "visitante": 13.81
+        },
+        "shots_on": {
+          "local": 5.86,
+          "visitante": 4.74
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Johan Manzambi",
+          "remates_esp": 3.5,
+          "al_arco_esp": 1.24,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Nicolas Jackson",
+          "remates_esp": 3.44,
+          "al_arco_esp": 1.51,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Emiliano Buendía",
+          "remates_esp": 2.75,
+          "al_arco_esp": 0.55,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Ibrahim Mbaye",
+          "remates_esp": 2.27,
+          "al_arco_esp": 1.03,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "John McGinn",
+          "remates_esp": 1.86,
+          "al_arco_esp": 0.87,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Ross Barkley",
+          "remates_esp": 1.73,
+          "al_arco_esp": 0.74,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Peter Christiansen",
+          "remates_esp": 2.71,
+          "al_arco_esp": 1.12,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Erik Botheim",
+          "remates_esp": 2.67,
+          "al_arco_esp": 1.07,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Zlatko Tripic",
+          "remates_esp": 1.4,
+          "al_arco_esp": 0.37,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Henrik Rorvik Bjordal",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.67,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Kristoffer Askildsen",
+          "remates_esp": 1.04,
+          "al_arco_esp": 0.21,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Henrik Heggheim",
+          "remates_esp": 1.03,
+          "al_arco_esp": 0.56,
+          "p_titular": 0.9
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.9,
+        1.05
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Goles visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.838,
+          "model_prob": 0.838,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Remates totales",
+          "selection": "Más de 22.5",
+          "prob": 0.8342,
+          "model_prob": 0.8342,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Remates visitante",
+          "selection": "Más de 8.5",
+          "prob": 0.818,
+          "model_prob": 0.818,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Doble oportunidad",
+          "selection": "1X",
+          "prob": 0.8176,
+          "model_prob": 0.8176,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Córners local",
+          "selection": "Más de 2.5",
+          "prob": 0.8132,
+          "model_prob": 0.8132,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Tarjetas local",
+          "selection": "Más de 0.5",
+          "prob": 0.8093,
+          "model_prob": 0.8093,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Córners totales",
+          "selection": "Más de 6.5",
+          "prob": 0.8051,
+          "model_prob": 0.8051,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401915394,
+          "match": "Aston Villa vs Viking FK",
+          "market": "Remates local",
+          "selection": "Más de 11.5",
+          "prob": 0.7989,
+          "model_prob": 0.7989,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915312,
+      "partido": "Bayern Munich vs Arsenal",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WDDWW",
+        "visitante": "WWWLW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.06,
+          "visitante": 1.42
+        },
+        "corners": {
+          "local": 5.63,
+          "visitante": 4.17
+        },
+        "cards": {
+          "local": 1.49,
+          "visitante": 1.56
+        },
+        "shots": {
+          "local": 16.89,
+          "visitante": 10.54
+        },
+        "shots_on": {
+          "local": 6.73,
+          "visitante": 3.78
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Harry Kane",
+          "remates_esp": 3.61,
+          "al_arco_esp": 1.27,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Michael Olise",
+          "remates_esp": 3.32,
+          "al_arco_esp": 1.98,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Luis Díaz",
+          "remates_esp": 1.84,
+          "al_arco_esp": 0.99,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Ismael Saibari",
+          "remates_esp": 1.48,
+          "al_arco_esp": 0.57,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Jamal Musiala",
+          "remates_esp": 1.41,
+          "al_arco_esp": 0.53,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Aleksandar Pavlović",
+          "remates_esp": 0.86,
+          "al_arco_esp": 0.39,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Bukayo Saka",
+          "remates_esp": 1.99,
+          "al_arco_esp": 1.0,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Noni Madueke",
+          "remates_esp": 1.17,
+          "al_arco_esp": 0.32,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Kai Havertz",
+          "remates_esp": 1.16,
+          "al_arco_esp": 0.58,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Riccardo Calafiori",
+          "remates_esp": 0.96,
+          "al_arco_esp": 0.21,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Christos Tzolis",
+          "remates_esp": 0.96,
+          "al_arco_esp": 0.53,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Bruno Guimarães",
+          "remates_esp": 0.93,
+          "al_arco_esp": 0.37,
+          "p_titular": 0.4
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.65,
+        1.45
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Tiros al arco local",
+          "selection": "Más de 3.5",
+          "prob": 0.8376,
+          "model_prob": 0.8376,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Goles visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.8279,
+          "model_prob": 0.8279,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Remates local",
+          "selection": "Más de 10.5",
+          "prob": 0.8248,
+          "model_prob": 0.8248,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Córners local",
+          "selection": "Más de 2.5",
+          "prob": 0.8213,
+          "model_prob": 0.8213,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Córners visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8186,
+          "model_prob": 0.8186,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Tarjetas local",
+          "selection": "Menos de 2.5",
+          "prob": 0.8107,
+          "model_prob": 0.8107,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Tarjetas totales",
+          "selection": "Más de 1.5",
+          "prob": 0.808,
+          "model_prob": 0.808,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401915312,
+          "match": "Bayern Munich vs Arsenal",
+          "market": "Tarjetas visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.7946,
+          "model_prob": 0.7946,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.32
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915388,
+      "partido": "Club Brugge vs Lens",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WWWWL",
+        "visitante": "WLWLD"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.42,
+          "visitante": 1.42
+        },
+        "corners": {
+          "local": 5.48,
+          "visitante": 4.91
+        },
+        "cards": {
+          "local": 1.55,
+          "visitante": 2.14
+        },
+        "shots": {
+          "local": 17.03,
+          "visitante": 15.41
+        },
+        "shots_on": {
+          "local": 6.81,
+          "visitante": 4.8
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Nicolo Tresoldi",
+          "remates_esp": 3.33,
+          "al_arco_esp": 1.11,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Carlos Forbs",
+          "remates_esp": 2.16,
+          "al_arco_esp": 0.82,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Hugo Vetlesen",
+          "remates_esp": 2.13,
+          "al_arco_esp": 0.93,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Jan Virgili",
+          "remates_esp": 1.65,
+          "al_arco_esp": 0.62,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Mamadou Diakhon",
+          "remates_esp": 1.54,
+          "al_arco_esp": 0.51,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Romeo Vermant",
+          "remates_esp": 1.39,
+          "al_arco_esp": 0.65,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Florian Thauvin",
+          "remates_esp": 3.04,
+          "al_arco_esp": 1.67,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Matthieu Udol",
+          "remates_esp": 1.85,
+          "al_arco_esp": 0.44,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Andrija Bulatovic",
+          "remates_esp": 1.42,
+          "al_arco_esp": 0.33,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Abdallah Sima",
+          "remates_esp": 1.4,
+          "al_arco_esp": 0.56,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Florian Sotoca",
+          "remates_esp": 1.37,
+          "al_arco_esp": 0.59,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Odsonne Édouard",
+          "remates_esp": 1.35,
+          "al_arco_esp": 0.61,
+          "p_titular": 0.3
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.15,
+        1.45
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Tiros al arco totales",
+          "selection": "Más de 7.5",
+          "prob": 0.8327,
+          "model_prob": 0.8327,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Tarjetas totales",
+          "selection": "Menos de 5.5",
+          "prob": 0.8316,
+          "model_prob": 0.8316,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Tarjetas visitante",
+          "selection": "Menos de 3.5",
+          "prob": 0.8312,
+          "model_prob": 0.8312,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Remates local",
+          "selection": "Más de 10.5",
+          "prob": 0.8292,
+          "model_prob": 0.8292,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Goles visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.8285,
+          "model_prob": 0.8285,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Remates visitante",
+          "selection": "Más de 9.5",
+          "prob": 0.8237,
+          "model_prob": 0.8237,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Tiros al arco jugador: Florian Thauvin",
+          "selection": "Más de 0.5",
+          "prob": 0.8115,
+          "model_prob": 0.8115,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-156898",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915388,
+          "match": "Club Brugge vs Lens",
+          "market": "Córners local",
+          "selection": "Más de 2.5",
+          "prob": 0.8114,
+          "model_prob": 0.8114,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.29
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915390,
+      "partido": "Internazionale vs Shakhtar Donetsk",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WLWDW",
+        "visitante": "WDLLD"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.63,
+          "visitante": 1.22
+        },
+        "corners": {
+          "local": 4.47,
+          "visitante": 4.28
+        },
+        "cards": {
+          "local": 1.73,
+          "visitante": 2.25
+        },
+        "shots": {
+          "local": 16.18,
+          "visitante": 12.73
+        },
+        "shots_on": {
+          "local": 6.23,
+          "visitante": 4.26
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Lautaro Martínez",
+          "remates_esp": 3.79,
+          "al_arco_esp": 1.11,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Marcus Thuram",
+          "remates_esp": 2.31,
+          "al_arco_esp": 0.74,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Pio Esposito",
+          "remates_esp": 1.48,
+          "al_arco_esp": 0.66,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Henrikh Mkhitaryan",
+          "remates_esp": 1.48,
+          "al_arco_esp": 0.3,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Federico Dimarco",
+          "remates_esp": 1.4,
+          "al_arco_esp": 0.41,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Nicolò Barella",
+          "remates_esp": 1.15,
+          "al_arco_esp": 0.49,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Alisson Santana",
+          "remates_esp": 2.29,
+          "al_arco_esp": 0.6,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Eguinaldo",
+          "remates_esp": 2.2,
+          "al_arco_esp": 0.96,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Newertton",
+          "remates_esp": 1.39,
+          "al_arco_esp": 0.43,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Kauã Elias",
+          "remates_esp": 1.39,
+          "al_arco_esp": 0.32,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Pedrinho",
+          "remates_esp": 0.96,
+          "al_arco_esp": 0.36,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Yehor Nazaryna",
+          "remates_esp": 0.96,
+          "al_arco_esp": 0.48,
+          "p_titular": 0.4
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.85,
+        0.9
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Remates totales",
+          "selection": "Más de 20.5",
+          "prob": 0.8377,
+          "model_prob": 0.8377,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Córners totales",
+          "selection": "Menos de 12.5",
+          "prob": 0.8312,
+          "model_prob": 0.8312,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8289,
+          "model_prob": 0.8289,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Tarjetas local",
+          "selection": "Más de 0.5",
+          "prob": 0.8226,
+          "model_prob": 0.8226,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Doble oportunidad",
+          "selection": "12",
+          "prob": 0.8206,
+          "model_prob": 0.8206,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Tarjetas visitante",
+          "selection": "Menos de 3.5",
+          "prob": 0.8099,
+          "model_prob": 0.8099,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Córners visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8068,
+          "model_prob": 0.8068,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401915390,
+          "match": "Internazionale vs Shakhtar Donetsk",
+          "market": "Tiros al arco local",
+          "selection": "Más de 3.5",
+          "prob": 0.8013,
+          "model_prob": 0.8013,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915389,
+      "partido": "Real Betis vs Feyenoord Rotterdam",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "LWWDW",
+        "visitante": "WWWWW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.29,
+          "visitante": 1.74
+        },
+        "corners": {
+          "local": 4.38,
+          "visitante": 5.34
+        },
+        "cards": {
+          "local": 1.61,
+          "visitante": 1.97
+        },
+        "shots": {
+          "local": 15.47,
+          "visitante": 15.3
+        },
+        "shots_on": {
+          "local": 6.01,
+          "visitante": 5.78
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Antony",
+          "remates_esp": 3.81,
+          "al_arco_esp": 1.23,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Isco",
+          "remates_esp": 2.06,
+          "al_arco_esp": 0.72,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Abde Ezzalzouli",
+          "remates_esp": 1.85,
+          "al_arco_esp": 0.93,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Nelson Deossa",
+          "remates_esp": 1.76,
+          "al_arco_esp": 0.46,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Cucho Hernández",
+          "remates_esp": 1.54,
+          "al_arco_esp": 0.72,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Troy Parrott",
+          "remates_esp": 1.16,
+          "al_arco_esp": 0.46,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Ayase Ueda",
+          "remates_esp": 3.53,
+          "al_arco_esp": 1.36,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Anis Hadj Moussa",
+          "remates_esp": 2.62,
+          "al_arco_esp": 1.09,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Gaoussou Diarra",
+          "remates_esp": 2.04,
+          "al_arco_esp": 0.81,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Nacho Ferri",
+          "remates_esp": 1.9,
+          "al_arco_esp": 1.0,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Gjivai Zechiël",
+          "remates_esp": 1.71,
+          "al_arco_esp": 0.9,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Luciano Valente",
+          "remates_esp": 1.22,
+          "al_arco_esp": 0.49,
+          "p_titular": 0.9
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.3,
+        1.35
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Remates jugador: Anis Hadj Moussa",
+          "selection": "Más de 0.5",
+          "prob": 0.8347,
+          "model_prob": 0.8347,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-341711",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Remates local",
+          "selection": "Más de 9.5",
+          "prob": 0.8257,
+          "model_prob": 0.8257,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Goles visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.8248,
+          "model_prob": 0.8248,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Remates visitante",
+          "selection": "Más de 9.5",
+          "prob": 0.8199,
+          "model_prob": 0.8199,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Remates totales",
+          "selection": "Más de 22.5",
+          "prob": 0.8197,
+          "model_prob": 0.8197,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Remates jugador: Gjivai Zechiël",
+          "selection": "Más de 0.5",
+          "prob": 0.8191,
+          "model_prob": 0.8191,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-365021",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Córners visitante",
+          "selection": "Más de 2.5",
+          "prob": 0.8017,
+          "model_prob": 0.8017,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401915389,
+          "match": "Real Betis vs Feyenoord Rotterdam",
+          "market": "Tarjetas local",
+          "selection": "Más de 0.5",
+          "prob": 0.8005,
+          "model_prob": 0.8005,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915313,
+      "partido": "Real Madrid vs RB Leipzig",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WWWLW",
+        "visitante": "LWWLW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.99,
+          "visitante": 1.27
+        },
+        "corners": {
+          "local": 5.8,
+          "visitante": 4.54
+        },
+        "cards": {
+          "local": 1.57,
+          "visitante": 1.83
+        },
+        "shots": {
+          "local": 16.47,
+          "visitante": 14.21
+        },
+        "shots_on": {
+          "local": 7.16,
+          "visitante": 4.8
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Kylian Mbappé",
+          "remates_esp": 4.58,
+          "al_arco_esp": 3.12,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Vinícius Júnior",
+          "remates_esp": 2.6,
+          "al_arco_esp": 0.76,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Jude Bellingham",
+          "remates_esp": 2.05,
+          "al_arco_esp": 0.68,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Arda Güler",
+          "remates_esp": 1.41,
+          "al_arco_esp": 0.54,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Yan Diomande",
+          "remates_esp": 1.17,
+          "al_arco_esp": 0.39,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Federico Valverde",
+          "remates_esp": 0.88,
+          "al_arco_esp": 0.29,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Antonio Nusa",
+          "remates_esp": 2.0,
+          "al_arco_esp": 0.96,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Tidiam Gomis",
+          "remates_esp": 1.84,
+          "al_arco_esp": 0.48,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Brajan Gruda",
+          "remates_esp": 1.8,
+          "al_arco_esp": 0.8,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Ezechiel Banzuzi",
+          "remates_esp": 1.68,
+          "al_arco_esp": 0.4,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Johan Bakayoko",
+          "remates_esp": 1.6,
+          "al_arco_esp": 0.6,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Christopher Nkunku",
+          "remates_esp": 1.5,
+          "al_arco_esp": 0.7,
+          "p_titular": 0.6
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        3.3,
+        1.15
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Tarjetas visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.839,
+          "model_prob": 0.839,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Remates jugador: Kylian Mbappé",
+          "selection": "Más de 2.5",
+          "prob": 0.8354,
+          "model_prob": 0.8354,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-231388",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Remates visitante",
+          "selection": "Más de 8.5",
+          "prob": 0.8334,
+          "model_prob": 0.8334,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Córners local",
+          "selection": "Más de 2.5",
+          "prob": 0.832,
+          "model_prob": 0.832,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Tiros al arco jugador: Kylian Mbappé",
+          "selection": "Más de 1.5",
+          "prob": 0.818,
+          "model_prob": 0.818,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-231388",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Remates totales",
+          "selection": "Más de 22.5",
+          "prob": 0.817,
+          "model_prob": 0.817,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Remates local",
+          "selection": "Más de 10.5",
+          "prob": 0.8103,
+          "model_prob": 0.8103,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915313,
+          "match": "Real Madrid vs RB Leipzig",
+          "market": "Tiros al arco visitante",
+          "selection": "Más de 2.5",
+          "prob": 0.8024,
+          "model_prob": 0.8024,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 401915391,
+      "partido": "Sporting CP vs LASK Linz",
+      "liga": "UEFA Champions League",
+      "hora": "13:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WWDDW",
+        "visitante": "WLLDL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.76,
+          "visitante": 1.27
+        },
+        "corners": {
+          "local": 3.97,
+          "visitante": 3.94
+        },
+        "cards": {
+          "local": 1.64,
+          "visitante": 1.9
+        },
+        "shots": {
+          "local": 12.64,
+          "visitante": 11.91
+        },
+        "shots_on": {
+          "local": 5.07,
+          "visitante": 3.63
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Luis Suárez",
+          "remates_esp": 2.07,
+          "al_arco_esp": 1.35,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Geny Catamo",
+          "remates_esp": 1.87,
+          "al_arco_esp": 0.62,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Fotis Ioannidis",
+          "remates_esp": 1.73,
+          "al_arco_esp": 0.58,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Rodrigo Zalazar",
+          "remates_esp": 1.38,
+          "al_arco_esp": 0.58,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Flávio Gonçalves",
+          "remates_esp": 1.3,
+          "al_arco_esp": 0.78,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Issa Doumbia",
+          "remates_esp": 1.04,
+          "al_arco_esp": 0.1,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Samuel Adeniran",
+          "remates_esp": 3.9,
+          "al_arco_esp": 1.37,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Moses Usor",
+          "remates_esp": 1.95,
+          "al_arco_esp": 0.46,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Andrés Andrade",
+          "remates_esp": 1.53,
+          "al_arco_esp": 0.2,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Kasper Jørgensen",
+          "remates_esp": 1.49,
+          "al_arco_esp": 0.11,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Krystof Danek",
+          "remates_esp": 1.07,
+          "al_arco_esp": 0.61,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Alemão",
+          "remates_esp": 0.92,
+          "al_arco_esp": 0.09,
+          "p_titular": 1.0
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.7,
+        1.1
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Córners local",
+          "selection": "Menos de 6.5",
+          "prob": 0.8395,
+          "model_prob": 0.8395,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Córners totales",
+          "selection": "Menos de 11.5",
+          "prob": 0.837,
+          "model_prob": 0.837,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Doble oportunidad",
+          "selection": "12",
+          "prob": 0.8289,
+          "model_prob": 0.8289,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Tiros al arco local",
+          "selection": "Más de 2.5",
+          "prob": 0.826,
+          "model_prob": 0.826,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Tiros al arco totales",
+          "selection": "Más de 5.5",
+          "prob": 0.8158,
+          "model_prob": 0.8158,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.8137,
+          "model_prob": 0.8137,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Tarjetas local",
+          "selection": "Más de 0.5",
+          "prob": 0.8057,
+          "model_prob": 0.8057,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401915391,
+          "match": "Sporting CP vs LASK Linz",
+          "market": "Remates totales",
+          "selection": "Más de 18.5",
+          "prob": 0.7827,
+          "model_prob": 0.7827,
+          "fair_odds": 1.28,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.34
+        }
+      ]
+    },
+    {
+      "fixture_id": 401882870,
+      "partido": "Levante vs Athletic Club",
+      "liga": "La Liga",
+      "hora": "12:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "DDLLD",
+        "visitante": "DDDWW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 1.32,
+          "visitante": 1.36
+        },
+        "corners": {
+          "local": 4.43,
+          "visitante": 4.91
+        },
+        "cards": {
+          "local": 1.67,
+          "visitante": 2.0
+        },
+        "shots": {
+          "local": 12.09,
+          "visitante": 12.41
+        },
+        "shots_on": {
+          "local": 4.62,
+          "visitante": 3.84
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Roger Brugué",
+          "remates_esp": 2.3,
+          "al_arco_esp": 0.73,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Iván Romero",
+          "remates_esp": 1.93,
+          "al_arco_esp": 0.97,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Thiago Fernandez",
+          "remates_esp": 1.77,
+          "al_arco_esp": 0.16,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Adrián de la Fuente",
+          "remates_esp": 1.74,
+          "al_arco_esp": 0.68,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Jon Ander Olasagasti",
+          "remates_esp": 1.06,
+          "al_arco_esp": 0.39,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Dani Requena",
+          "remates_esp": 0.58,
+          "al_arco_esp": 0.39,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Oihan Sancet",
+          "remates_esp": 2.36,
+          "al_arco_esp": 0.69,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Unai Gómez",
+          "remates_esp": 2.22,
+          "al_arco_esp": 0.83,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Iñaki Williams",
+          "remates_esp": 2.0,
+          "al_arco_esp": 0.83,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Yuri Berchiche",
+          "remates_esp": 1.8,
+          "al_arco_esp": 0.14,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Nico Williams",
+          "remates_esp": 1.67,
+          "al_arco_esp": 0.28,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Gorka Guruzeta",
+          "remates_esp": 1.25,
+          "al_arco_esp": 0.21,
+          "p_titular": 0.4
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.15,
+        1.5
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Tarjetas totales",
+          "selection": "Menos de 5.5",
+          "prob": 0.8348,
+          "model_prob": 0.8348,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Remates jugador: Adrián de la Fuente",
+          "selection": "Más de 0.5",
+          "prob": 0.8246,
+          "model_prob": 0.8246,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-276841",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Tiros al arco totales",
+          "selection": "Menos de 11.5",
+          "prob": 0.8133,
+          "model_prob": 0.8133,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Tarjetas local",
+          "selection": "Más de 0.5",
+          "prob": 0.8108,
+          "model_prob": 0.8108,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Córners local",
+          "selection": "Menos de 6.5",
+          "prob": 0.7938,
+          "model_prob": 0.7938,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Córners totales",
+          "selection": "Menos de 12.5",
+          "prob": 0.7937,
+          "model_prob": 0.7937,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.7825,
+          "model_prob": 0.7825,
+          "fair_odds": 1.28,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.34
+        },
+        {
+          "fixture_id": 401882870,
+          "match": "Levante vs Athletic Club",
+          "market": "Tiros al arco local",
+          "selection": "Menos de 6.5",
+          "prob": 0.7822,
+          "model_prob": 0.7822,
+          "fair_odds": 1.28,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.34
+        }
+      ]
+    },
+    {
+      "fixture_id": 401876932,
+      "partido": "Atlas vs América",
+      "liga": "Liga MX",
+      "hora": "19:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WDWDL",
+        "visitante": "WDWDL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 1.53,
+          "visitante": 1.83
+        },
+        "corners": {
+          "local": 6.73,
+          "visitante": 5.66
+        },
+        "cards": {
+          "local": 2.25,
+          "visitante": 1.98
+        },
+        "shots": {
+          "local": 13.68,
+          "visitante": 14.97
+        },
+        "shots_on": {
+          "local": 5.07,
+          "visitante": 5.59
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Florián Monzón",
+          "remates_esp": 2.65,
+          "al_arco_esp": 0.95,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Luís Esteves",
+          "remates_esp": 2.01,
+          "al_arco_esp": 0.74,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Ryan Mmaee",
+          "remates_esp": 1.94,
+          "al_arco_esp": 1.06,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Duk",
+          "remates_esp": 1.41,
+          "al_arco_esp": 0.53,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Kevin Zenón",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.53,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Manuel Capasso",
+          "remates_esp": 1.19,
+          "al_arco_esp": 0.4,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Brian Rodríguez",
+          "remates_esp": 3.18,
+          "al_arco_esp": 1.59,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Raphael Veiga",
+          "remates_esp": 2.21,
+          "al_arco_esp": 0.53,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Henry Martín",
+          "remates_esp": 1.59,
+          "al_arco_esp": 1.22,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Carlos Álvarez",
+          "remates_esp": 1.47,
+          "al_arco_esp": 0.84,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Érick Sánchez",
+          "remates_esp": 1.43,
+          "al_arco_esp": 0.42,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Óscar Perea",
+          "remates_esp": 1.31,
+          "al_arco_esp": 0.65,
+          "p_titular": 0.2
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.3,
+        1.7
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Goles visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.8392,
+          "model_prob": 0.8392,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Remates jugador: Florián Monzón",
+          "selection": "Más de 0.5",
+          "prob": 0.8364,
+          "model_prob": 0.8364,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "player-309574",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Tarjetas visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.8338,
+          "model_prob": 0.8338,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Remates local",
+          "selection": "Más de 8.5",
+          "prob": 0.8301,
+          "model_prob": 0.8301,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Remates visitante",
+          "selection": "Más de 9.5",
+          "prob": 0.8257,
+          "model_prob": 0.8257,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Córners local",
+          "selection": "Más de 3.5",
+          "prob": 0.8055,
+          "model_prob": 0.8055,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Goles local",
+          "selection": "Menos de 2.5",
+          "prob": 0.8014,
+          "model_prob": 0.8014,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-home",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401876932,
+          "match": "Atlas vs América",
+          "market": "Tiros al arco totales",
+          "selection": "Más de 7.5",
+          "prob": 0.7985,
+          "model_prob": 0.7985,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 401876933,
+      "partido": "Puebla vs Monterrey",
+      "liga": "Liga MX",
+      "hora": "19:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "DDLDL",
+        "visitante": "WDLWD"
+      },
+      "esperado": {
+        "goals": {
+          "local": 1.2,
+          "visitante": 1.5
+        },
+        "corners": {
+          "local": 5.05,
+          "visitante": 6.68
+        },
+        "cards": {
+          "local": 1.71,
+          "visitante": 1.34
+        },
+        "shots": {
+          "local": 12.33,
+          "visitante": 14.37
+        },
+        "shots_on": {
+          "local": 4.22,
+          "visitante": 4.06
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Kevin Velasco",
+          "remates_esp": 2.82,
+          "al_arco_esp": 1.06,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Mathías Tomás",
+          "remates_esp": 2.64,
+          "al_arco_esp": 0.77,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Eduardo Mustre",
+          "remates_esp": 2.06,
+          "al_arco_esp": 0.88,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Brayan Garnica",
+          "remates_esp": 1.06,
+          "al_arco_esp": 0.18,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Carlos Baltazar",
+          "remates_esp": 1.01,
+          "al_arco_esp": 0.38,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Facundo Almada",
+          "remates_esp": 0.88,
+          "al_arco_esp": 0.18,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Lucas Ocampos",
+          "remates_esp": 3.26,
+          "al_arco_esp": 1.12,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Hugo Cuypers",
+          "remates_esp": 1.53,
+          "al_arco_esp": 0.72,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Jesús Corona",
+          "remates_esp": 1.5,
+          "al_arco_esp": 0.3,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Orbelín Pineda",
+          "remates_esp": 1.5,
+          "al_arco_esp": 0.4,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Luca Orellano",
+          "remates_esp": 1.5,
+          "al_arco_esp": 0.3,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Diego Rossi",
+          "remates_esp": 1.4,
+          "al_arco_esp": 0.6,
+          "p_titular": 0.7
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.2,
+        1.75
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Tarjetas visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.8388,
+          "model_prob": 0.8388,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Córners totales",
+          "selection": "Más de 7.5",
+          "prob": 0.8112,
+          "model_prob": 0.8112,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Goles visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.81,
+          "model_prob": 0.81,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Tiros al arco totales",
+          "selection": "Más de 5.5",
+          "prob": 0.8053,
+          "model_prob": 0.8053,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Córners visitante",
+          "selection": "Más de 3.5",
+          "prob": 0.8024,
+          "model_prob": 0.8024,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Remates visitante",
+          "selection": "Más de 9.5",
+          "prob": 0.8005,
+          "model_prob": 0.8005,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Córners local",
+          "selection": "Más de 2.5",
+          "prob": 0.797,
+          "model_prob": 0.797,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401876933,
+          "match": "Puebla vs Monterrey",
+          "market": "Tarjetas totales",
+          "selection": "Menos de 4.5",
+          "prob": 0.7957,
+          "model_prob": 0.7957,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.32
+        }
+      ]
+    },
+    {
+      "fixture_id": 401876931,
+      "partido": "Toluca vs Tijuana",
+      "liga": "Liga MX",
+      "hora": "19:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "DLDLW",
+        "visitante": "DDLDL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.24,
+          "visitante": 1.01
+        },
+        "corners": {
+          "local": 8.03,
+          "visitante": 4.8
+        },
+        "cards": {
+          "local": 2.24,
+          "visitante": 1.95
+        },
+        "shots": {
+          "local": 18.99,
+          "visitante": 12.88
+        },
+        "shots_on": {
+          "local": 6.85,
+          "visitante": 3.62
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Paulinho",
+          "remates_esp": 3.22,
+          "al_arco_esp": 1.12,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Federico Viñas",
+          "remates_esp": 3.15,
+          "al_arco_esp": 1.09,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Helinho",
+          "remates_esp": 3.05,
+          "al_arco_esp": 1.63,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Nicolás Castro",
+          "remates_esp": 2.15,
+          "al_arco_esp": 0.69,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Jorge Díaz",
+          "remates_esp": 1.63,
+          "al_arco_esp": 0.54,
+          "p_titular": 0.1
+        },
+        {
+          "nombre": "Alexis Vega",
+          "remates_esp": 1.63,
+          "al_arco_esp": 0.54,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Gilberto Mora",
+          "remates_esp": 2.28,
+          "al_arco_esp": 1.22,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Ignacio Rivero",
+          "remates_esp": 2.09,
+          "al_arco_esp": 0.65,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Mourad El Ghezouani",
+          "remates_esp": 1.71,
+          "al_arco_esp": 0.8,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Jackson Porozo",
+          "remates_esp": 1.12,
+          "al_arco_esp": 0.3,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Francisco González",
+          "remates_esp": 1.12,
+          "al_arco_esp": 0.3,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Diego Abreu",
+          "remates_esp": 1.03,
+          "al_arco_esp": 0.11,
+          "p_titular": 0.3
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.65,
+        1.0
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Tarjetas visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.8295,
+          "model_prob": 0.8295,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.8257,
+          "model_prob": 0.8257,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Remates local",
+          "selection": "Más de 12.5",
+          "prob": 0.82,
+          "model_prob": 0.82,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Tarjetas local",
+          "selection": "Menos de 3.5",
+          "prob": 0.7965,
+          "model_prob": 0.7965,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Doble oportunidad",
+          "selection": "12",
+          "prob": 0.7956,
+          "model_prob": 0.7956,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Córners totales",
+          "selection": "Más de 8.5",
+          "prob": 0.7956,
+          "model_prob": 0.7956,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Remates totales",
+          "selection": "Más de 24.5",
+          "prob": 0.7946,
+          "model_prob": 0.7946,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401876931,
+          "match": "Toluca vs Tijuana",
+          "market": "Remates visitante",
+          "selection": "Más de 8.5",
+          "prob": 0.7941,
+          "model_prob": 0.7941,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-away",
+          "min_odds": 1.32
+        }
+      ]
+    },
+    {
+      "fixture_id": 401876930,
+      "partido": "Pachuca vs Cruz Azul",
+      "liga": "Liga MX",
+      "hora": "21:10",
+      "arbitro": null,
+      "calidad_datos": 0.8,
+      "forma": {
+        "local": "LDLDW",
+        "visitante": "DDLWW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 1.71,
+          "visitante": 1.58
+        },
+        "corners": {
+          "local": 6.59,
+          "visitante": 4.09
+        },
+        "cards": {
+          "local": 2.01,
+          "visitante": 2.72
+        },
+        "shots": {
+          "local": 18.85,
+          "visitante": 15.62
+        },
+        "shots_on": {
+          "local": 6.15,
+          "visitante": 5.32
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Salomón Rondón",
+          "remates_esp": 4.79,
+          "al_arco_esp": 1.53,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Javier Vallejo",
+          "remates_esp": 2.07,
+          "al_arco_esp": 0.87,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Kenedy",
+          "remates_esp": 1.82,
+          "al_arco_esp": 0.54,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Oussama Idrissi",
+          "remates_esp": 1.42,
+          "al_arco_esp": 0.44,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Eduardo Bauermann",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.61,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Adrián Alcaraz",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.48,
+          "p_titular": 0.0
+        },
+        {
+          "nombre": "Agustín Palavecino",
+          "remates_esp": 2.88,
+          "al_arco_esp": 0.55,
+          "p_titular": 0.75
+        },
+        {
+          "nombre": "Gabriel Fernandez",
+          "remates_esp": 2.23,
+          "al_arco_esp": 0.87,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Nicolás Ibáñez",
+          "remates_esp": 1.75,
+          "al_arco_esp": 0.58,
+          "p_titular": 0.88
+        },
+        {
+          "nombre": "José Paradela",
+          "remates_esp": 1.44,
+          "al_arco_esp": 0.89,
+          "p_titular": 0.75
+        },
+        {
+          "nombre": "Ángel Márquez",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.44,
+          "p_titular": 0.88
+        },
+        {
+          "nombre": "Luka Romero",
+          "remates_esp": 1.33,
+          "al_arco_esp": 0.33,
+          "p_titular": 0.38
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.4,
+        1.65
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Doble oportunidad",
+          "selection": "1X",
+          "prob": 0.6496,
+          "model_prob": 0.6496,
+          "fair_odds": 1.54,
+          "odds": 1.645,
+          "ev": 0.0686,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": null
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Tarjetas local",
+          "selection": "Menos de 3.5",
+          "prob": 0.8393,
+          "model_prob": 0.8393,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Córners visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8347,
+          "model_prob": 0.8347,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Córners totales",
+          "selection": "Más de 6.5",
+          "prob": 0.8263,
+          "model_prob": 0.8263,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Tiros al arco local",
+          "selection": "Más de 3.5",
+          "prob": 0.8223,
+          "model_prob": 0.8223,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Goles local",
+          "selection": "Más de 0.5",
+          "prob": 0.8189,
+          "model_prob": 0.8189,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Tarjetas totales",
+          "selection": "Más de 2.5",
+          "prob": 0.8178,
+          "model_prob": 0.8178,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876930,
+          "match": "Pachuca vs Cruz Azul",
+          "market": "Remates local",
+          "selection": "Más de 12.5",
+          "prob": 0.8152,
+          "model_prob": 0.8152,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.29
+        }
+      ]
+    },
+    {
+      "fixture_id": 401876929,
+      "partido": "Santos vs Pumas UNAM",
+      "liga": "Liga MX",
+      "hora": "21:10",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WWWWW",
+        "visitante": "WDLDL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 1.75,
+          "visitante": 1.25
+        },
+        "corners": {
+          "local": 6.77,
+          "visitante": 4.38
+        },
+        "cards": {
+          "local": 1.4,
+          "visitante": 1.42
+        },
+        "shots": {
+          "local": 16.67,
+          "visitante": 12.35
+        },
+        "shots_on": {
+          "local": 5.34,
+          "visitante": 3.9
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Ezequiel Bullaude",
+          "remates_esp": 3.13,
+          "al_arco_esp": 1.34,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Tahiel Jiménez",
+          "remates_esp": 2.98,
+          "al_arco_esp": 2.24,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Diego González",
+          "remates_esp": 2.11,
+          "al_arco_esp": 0.62,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Francisco Villalba",
+          "remates_esp": 2.01,
+          "al_arco_esp": 0.45,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Ramiro Sordo",
+          "remates_esp": 1.54,
+          "al_arco_esp": 0.56,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Jonathan Pérez",
+          "remates_esp": 1.34,
+          "al_arco_esp": 0.0,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "César Huerta",
+          "remates_esp": 1.98,
+          "al_arco_esp": 0.99,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Luciano Herrera",
+          "remates_esp": 1.98,
+          "al_arco_esp": 0.88,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Robert Morales",
+          "remates_esp": 1.87,
+          "al_arco_esp": 0.55,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Uriel Antuna",
+          "remates_esp": 1.58,
+          "al_arco_esp": 0.3,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Juninho",
+          "remates_esp": 1.48,
+          "al_arco_esp": 0.69,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Victor Arteaga",
+          "remates_esp": 1.09,
+          "al_arco_esp": 0.2,
+          "p_titular": 0.8
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.55,
+        1.4
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Remates local",
+          "selection": "Más de 10.5",
+          "prob": 0.8362,
+          "model_prob": 0.8362,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Tarjetas totales",
+          "selection": "Menos de 4.5",
+          "prob": 0.8326,
+          "model_prob": 0.8326,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Goles local",
+          "selection": "Más de 0.5",
+          "prob": 0.8254,
+          "model_prob": 0.8254,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Tarjetas local",
+          "selection": "Menos de 2.5",
+          "prob": 0.8243,
+          "model_prob": 0.8243,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Tarjetas visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.8201,
+          "model_prob": 0.8201,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Goles totales",
+          "selection": "Menos de 4.5",
+          "prob": 0.8169,
+          "model_prob": 0.8169,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Córners local",
+          "selection": "Más de 3.5",
+          "prob": 0.8081,
+          "model_prob": 0.8081,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401876929,
+          "match": "Santos vs Pumas UNAM",
+          "market": "Córners visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8023,
+          "model_prob": 0.8023,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.31
+        }
+      ]
+    },
+    {
+      "fixture_id": 761773,
+      "partido": "FC Cincinnati vs D.C. United",
+      "liga": "MLS",
+      "hora": "17:00",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "LLWLD",
+        "visitante": "LWLDL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.24,
+          "visitante": 1.4
+        },
+        "corners": {
+          "local": 6.19,
+          "visitante": 4.56
+        },
+        "cards": {
+          "local": 1.58,
+          "visitante": 1.64
+        },
+        "shots": {
+          "local": 19.69,
+          "visitante": 11.72
+        },
+        "shots_on": {
+          "local": 7.48,
+          "visitante": 3.8
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Kévin Denkey",
+          "remates_esp": 3.58,
+          "al_arco_esp": 1.48,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Evander",
+          "remates_esp": 3.48,
+          "al_arco_esp": 1.11,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Kenji Mboma Dem",
+          "remates_esp": 2.78,
+          "al_arco_esp": 0.42,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Tom Barlow",
+          "remates_esp": 2.34,
+          "al_arco_esp": 1.34,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Ayoub Jabbari",
+          "remates_esp": 1.53,
+          "al_arco_esp": 0.83,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Bryan Ramirez",
+          "remates_esp": 1.43,
+          "al_arco_esp": 0.64,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Louis Munteanu",
+          "remates_esp": 2.81,
+          "al_arco_esp": 0.67,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Tai Baribo",
+          "remates_esp": 2.52,
+          "al_arco_esp": 0.8,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Kimito Nono",
+          "remates_esp": 1.53,
+          "al_arco_esp": 0.4,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "João Peglow",
+          "remates_esp": 1.4,
+          "al_arco_esp": 0.2,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Kye Rowles",
+          "remates_esp": 0.92,
+          "al_arco_esp": 0.11,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Lucas Bartlett",
+          "remates_esp": 0.8,
+          "al_arco_esp": 0.36,
+          "p_titular": 0.9
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.4,
+        1.4
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Goles visitante",
+          "selection": "Menos de 2.5",
+          "prob": 0.8335,
+          "model_prob": 0.8335,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals-away",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Tarjetas totales",
+          "selection": "Más de 1.5",
+          "prob": 0.8308,
+          "model_prob": 0.8308,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Remates totales",
+          "selection": "Más de 22.5",
+          "prob": 0.8294,
+          "model_prob": 0.8294,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Remates local",
+          "selection": "Más de 12.5",
+          "prob": 0.8201,
+          "model_prob": 0.8201,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Tiros al arco totales",
+          "selection": "Más de 7.5",
+          "prob": 0.8145,
+          "model_prob": 0.8145,
+          "fair_odds": 1.23,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on",
+          "min_odds": 1.29
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Córners local",
+          "selection": "Más de 3.5",
+          "prob": 0.8058,
+          "model_prob": 0.8058,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Tarjetas visitante",
+          "selection": "Más de 0.5",
+          "prob": 0.8058,
+          "model_prob": 0.8058,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-away",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 761773,
+          "match": "FC Cincinnati vs D.C. United",
+          "market": "Córners visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.7963,
+          "model_prob": 0.7963,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.32
+        }
+      ]
+    },
+    {
+      "fixture_id": 401878012,
+      "partido": "Llaneros FC vs Deportivo Cali",
+      "liga": "Liga BetPlay Colombia",
+      "hora": "17:15",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "WLLLW",
+        "visitante": "DDWWW"
+      },
+      "esperado": {
+        "goals": {
+          "local": 0.95,
+          "visitante": 1.18
+        },
+        "corners": {
+          "local": 4.45,
+          "visitante": 3.61
+        },
+        "cards": {
+          "local": 3.7,
+          "visitante": 2.47
+        },
+        "shots": {
+          "local": 12.69,
+          "visitante": 12.18
+        },
+        "shots_on": {
+          "local": 4.83,
+          "visitante": 4.48
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Carlos Cortés",
+          "remates_esp": 1.94,
+          "al_arco_esp": 0.65,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Néider Ospina",
+          "remates_esp": 1.64,
+          "al_arco_esp": 0.88,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Yorleys Mena",
+          "remates_esp": 1.59,
+          "al_arco_esp": 0.57,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Frank Castañeda",
+          "remates_esp": 1.25,
+          "al_arco_esp": 0.57,
+          "p_titular": 0.8
+        },
+        {
+          "nombre": "Juan Pertúz",
+          "remates_esp": 1.13,
+          "al_arco_esp": 0.23,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Luis Miranda",
+          "remates_esp": 1.13,
+          "al_arco_esp": 0.57,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Juan Dinenno",
+          "remates_esp": 1.86,
+          "al_arco_esp": 0.99,
+          "p_titular": 0.6
+        },
+        {
+          "nombre": "Eduard Bello",
+          "remates_esp": 1.78,
+          "al_arco_esp": 0.99,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Johan Andrés Martínez",
+          "remates_esp": 1.58,
+          "al_arco_esp": 0.79,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Steven Rodríguez",
+          "remates_esp": 1.58,
+          "al_arco_esp": 0.59,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Emanuel Reynoso",
+          "remates_esp": 1.24,
+          "al_arco_esp": 0.37,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Leyser Chaverra",
+          "remates_esp": 1.1,
+          "al_arco_esp": 0.44,
+          "p_titular": 0.8
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        1.1,
+        1.25
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Goles totales",
+          "selection": "Menos de 3.5",
+          "prob": 0.8333,
+          "model_prob": 0.8333,
+          "fair_odds": 1.2,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals",
+          "min_odds": 1.26
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Córners visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.8273,
+          "model_prob": 0.8273,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Córners local",
+          "selection": "Menos de 6.5",
+          "prob": 0.8186,
+          "model_prob": 0.8186,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-home",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Tiros al arco local",
+          "selection": "Más de 2.5",
+          "prob": 0.8053,
+          "model_prob": 0.8053,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 6.5",
+          "prob": 0.8026,
+          "model_prob": 0.8026,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Remates totales",
+          "selection": "Más de 18.5",
+          "prob": 0.7991,
+          "model_prob": 0.7991,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.31
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Córners totales",
+          "selection": "Menos de 10.5",
+          "prob": 0.7923,
+          "model_prob": 0.7923,
+          "fair_odds": 1.26,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners",
+          "min_odds": 1.32
+        },
+        {
+          "fixture_id": 401878012,
+          "match": "Llaneros FC vs Deportivo Cali",
+          "market": "Remates local",
+          "selection": "Más de 8.5",
+          "prob": 0.7726,
+          "model_prob": 0.7726,
+          "fair_odds": 1.29,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.35
+        }
+      ]
+    },
+    {
+      "fixture_id": 401877844,
+      "partido": "Independiente Santa Fe vs Jaguares de Córdoba",
+      "liga": "Liga BetPlay Colombia",
+      "hora": "19:20",
+      "arbitro": null,
+      "calidad_datos": 1.0,
+      "forma": {
+        "local": "LWWLW",
+        "visitante": "LWLLL"
+      },
+      "esperado": {
+        "goals": {
+          "local": 2.27,
+          "visitante": 0.84
+        },
+        "corners": {
+          "local": 6.86,
+          "visitante": 3.78
+        },
+        "cards": {
+          "local": 3.06,
+          "visitante": 3.71
+        },
+        "shots": {
+          "local": 18.17,
+          "visitante": 10.13
+        },
+        "shots_on": {
+          "local": 7.13,
+          "visitante": 3.44
+        }
+      },
+      "jugadores": [
+        {
+          "nombre": "Nahuel Bustos",
+          "remates_esp": 3.88,
+          "al_arco_esp": 1.71,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Hugo Rodallega",
+          "remates_esp": 3.22,
+          "al_arco_esp": 1.54,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Franco Fagúndez",
+          "remates_esp": 2.8,
+          "al_arco_esp": 0.98,
+          "p_titular": 0.9
+        },
+        {
+          "nombre": "Luis Palacios",
+          "remates_esp": 1.8,
+          "al_arco_esp": 0.8,
+          "p_titular": 0.4
+        },
+        {
+          "nombre": "Emerson Rodríguez",
+          "remates_esp": 1.63,
+          "al_arco_esp": 0.47,
+          "p_titular": 0.3
+        },
+        {
+          "nombre": "Alexis Zapata",
+          "remates_esp": 1.57,
+          "al_arco_esp": 0.7,
+          "p_titular": 0.5
+        },
+        {
+          "nombre": "Andrés Rentería",
+          "remates_esp": 2.09,
+          "al_arco_esp": 0.84,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Carlos Henao",
+          "remates_esp": 1.25,
+          "al_arco_esp": 0.42,
+          "p_titular": 1.0
+        },
+        {
+          "nombre": "Darwin López",
+          "remates_esp": 1.25,
+          "al_arco_esp": 0.52,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Cristian Alvarez",
+          "remates_esp": 1.15,
+          "al_arco_esp": 0.42,
+          "p_titular": 0.7
+        },
+        {
+          "nombre": "Santiago Cubides",
+          "remates_esp": 1.04,
+          "al_arco_esp": 0.45,
+          "p_titular": 0.2
+        },
+        {
+          "nombre": "Jáder Maza",
+          "remates_esp": 1.04,
+          "al_arco_esp": 0.35,
+          "p_titular": 0.2
+        }
+      ],
+      "cuotas_disponibles": true,
+      "goles_mercado": [
+        2.6,
+        0.85
+      ],
+      "mercados_optimos": [
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Tiros al arco visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.8387,
+          "model_prob": 0.8387,
+          "fair_odds": 1.19,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots_on-away",
+          "min_odds": 1.25
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Remates local",
+          "selection": "Más de 11.5",
+          "prob": 0.826,
+          "model_prob": 0.826,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots-home",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Goles totales",
+          "selection": "Más de 1.5",
+          "prob": 0.8241,
+          "model_prob": 0.8241,
+          "fair_odds": 1.21,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "goals",
+          "min_odds": 1.27
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Remates totales",
+          "selection": "Más de 20.5",
+          "prob": 0.8217,
+          "model_prob": 0.8217,
+          "fair_odds": 1.22,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "shots",
+          "min_odds": 1.28
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Tarjetas local",
+          "selection": "Más de 1.5",
+          "prob": 0.8093,
+          "model_prob": 0.8093,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards-home",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Doble oportunidad",
+          "selection": "12",
+          "prob": 0.8069,
+          "model_prob": 0.8069,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "resultado",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Tarjetas totales",
+          "selection": "Más de 4.5",
+          "prob": 0.8045,
+          "model_prob": 0.8045,
+          "fair_odds": 1.24,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "cards",
+          "min_odds": 1.3
+        },
+        {
+          "fixture_id": 401877844,
+          "match": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "market": "Córners visitante",
+          "selection": "Menos de 5.5",
+          "prob": 0.803,
+          "model_prob": 0.803,
+          "fair_odds": 1.25,
+          "odds": null,
+          "ev": null,
+          "confidence": "Alta",
+          "stat_group": "corners-away",
+          "min_odds": 1.31
+        }
+      ]
+    }
+  ],
+  "combinadas": [
+    {
+      "tipo": "Alta probabilidad",
+      "probabilidad": 0.5913,
+      "cuota": 1.95,
+      "cuota_real": false,
+      "ev": null,
+      "selecciones": [
+        {
+          "partido": "Sporting CP vs LASK Linz",
+          "mercado": "Córners local",
+          "seleccion": "Menos de 6.5",
+          "prob": 0.8395,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Pachuca vs Cruz Azul",
+          "mercado": "Tarjetas local",
+          "seleccion": "Menos de 3.5",
+          "prob": 0.8393,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Atlas vs América",
+          "mercado": "Goles visitante",
+          "seleccion": "Más de 0.5",
+          "prob": 0.8392,
+          "cuota": 1.25,
+          "cuota_real": false
+        }
+      ]
+    },
+    {
+      "tipo": "Alta probabilidad",
+      "probabilidad": 0.5912,
+      "cuota": 1.95,
+      "cuota_real": false,
+      "ev": null,
+      "selecciones": [
+        {
+          "partido": "Sporting CP vs LASK Linz",
+          "mercado": "Córners local",
+          "seleccion": "Menos de 6.5",
+          "prob": 0.8395,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Pachuca vs Cruz Azul",
+          "mercado": "Tarjetas local",
+          "seleccion": "Menos de 3.5",
+          "prob": 0.8393,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Real Madrid vs RB Leipzig",
+          "mercado": "Tarjetas visitante",
+          "seleccion": "Más de 0.5",
+          "prob": 0.839,
+          "cuota": 1.25,
+          "cuota_real": false
+        }
+      ]
+    },
+    {
+      "tipo": "Alta probabilidad",
+      "probabilidad": 0.5906,
+      "cuota": 1.95,
+      "cuota_real": false,
+      "ev": null,
+      "selecciones": [
+        {
+          "partido": "Atlas vs América",
+          "mercado": "Goles visitante",
+          "seleccion": "Más de 0.5",
+          "prob": 0.8392,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Real Madrid vs RB Leipzig",
+          "mercado": "Tarjetas visitante",
+          "seleccion": "Más de 0.5",
+          "prob": 0.839,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Puebla vs Monterrey",
+          "mercado": "Tarjetas visitante",
+          "seleccion": "Menos de 2.5",
+          "prob": 0.8388,
+          "cuota": 1.25,
+          "cuota_real": false
+        }
+      ]
+    },
+    {
+      "tipo": "Alta probabilidad",
+      "probabilidad": 0.5895,
+      "cuota": 1.95,
+      "cuota_real": false,
+      "ev": null,
+      "selecciones": [
+        {
+          "partido": "Puebla vs Monterrey",
+          "mercado": "Tarjetas visitante",
+          "seleccion": "Menos de 2.5",
+          "prob": 0.8388,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "mercado": "Tiros al arco visitante",
+          "seleccion": "Menos de 5.5",
+          "prob": 0.8387,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Aston Villa vs Viking FK",
+          "mercado": "Goles visitante",
+          "seleccion": "Menos de 2.5",
+          "prob": 0.838,
+          "cuota": 1.25,
+          "cuota_real": false
+        }
+      ]
+    },
+    {
+      "tipo": "Alta probabilidad",
+      "probabilidad": 0.5888,
+      "cuota": 1.95,
+      "cuota_real": false,
+      "ev": null,
+      "selecciones": [
+        {
+          "partido": "Independiente Santa Fe vs Jaguares de Córdoba",
+          "mercado": "Tiros al arco visitante",
+          "seleccion": "Menos de 5.5",
+          "prob": 0.8387,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Aston Villa vs Viking FK",
+          "mercado": "Goles visitante",
+          "seleccion": "Menos de 2.5",
+          "prob": 0.838,
+          "cuota": 1.25,
+          "cuota_real": false
+        },
+        {
+          "partido": "Internazionale vs Shakhtar Donetsk",
+          "mercado": "Remates totales",
+          "seleccion": "Más de 20.5",
+          "prob": 0.8377,
+          "cuota": 1.25,
+          "cuota_real": false
+        }
+      ]
+    }
+  ],
+  "validacion": {
+    "partidos_validados": 224,
+    "con_discrepancia": 5,
+    "sin_segunda_fuente": 223,
+    "estadisticas_comparadas": 1642,
+    "estadisticas_coinciden": 1636
+  },
+  "rendimiento": {
+    "picks": 0,
+    "aciertos": 0,
+    "roi_picks": null,
+    "brier": null,
+    "combinadas": 0,
+    "combinadas_ganadas": 0,
+    "roi_combinadas": null
+  }
+}
