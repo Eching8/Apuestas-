@@ -29,6 +29,11 @@ BETS = {
     ("shots_on", "home"): ["homeshotongoal", "homeshotsongoal"],
     ("shots_on", "away"): ["awayshotongoal", "awayshotsongoal"],
     ("shots_total", "total"): ["totalshots", "shotsoverunder"],
+    ("shots_total", "home"): ["hometotalshots"],
+    ("shots_total", "away"): ["awaytotalshots"],
+    ("saves", "total"): ["totalgoalkeepersaves"],
+    ("saves", "home"): ["homegoalkeepersaves"],
+    ("saves", "away"): ["awaygoalkeepersaves"],
 }
 RESULT_VALUES = {"1": "home", "X": "draw", "2": "away"}
 DC_VALUES = {"1X": "homedraw", "X2": "drawaway", "12": "homeaway"}
@@ -72,7 +77,7 @@ def _base_markets(home: str, away: str) -> list[Market]:
         Market("btts:no", "Ambos marcan: no", 0, "goals", "match", "no"),
     ]
     rangos = {"goals": range(0, 6), "corners": range(5, 15), "cards": range(1, 9), "shots_on": range(4, 16),
-              "shots_total": range(16, 34)}
+              "shots_total": range(16, 34), "saves": range(2, 13)}
     for (stat, scope), _ in BETS.items():
         quien = {"total": "", "home": f"{home} ", "away": f"{away} "}[scope]
         r = rangos[stat] if scope == "total" else range(0, max(1, rangos[stat].stop // 2 + 1))

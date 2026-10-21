@@ -135,6 +135,8 @@ def estado_fuentes(cfg: Config) -> list[tuple[str, bool, str]]:
             out.append((nombre, True, f"{cliente.disponible()}; registro propio: {uso} usadas en el periodo"))
         except ERRORES as e:
             out.append((nombre, False, str(e)))
+    if cfg.fuente != "api-football" and not cfg.api_football_key:
+        return out
     try:
         r = estado_api(api_key=cfg.api_football_key)
         req = r.get("requests") or {}

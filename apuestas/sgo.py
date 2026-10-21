@@ -1,16 +1,18 @@
 """Fuente SportsGameOdds (https://sportsgameodds.com): cuotas de córners, tarjetas, tiros y más.
 
 Plan gratuito "Amateur": 10 peticiones por minuto y **2.500 objetos al mes** (cada partido devuelto
-cuenta como un objeto). Es poco, así que se usa solo para lo que ninguna otra fuente gratuita da
-—cuotas de córners, tarjetas, tiros y atajadas— y una vez al día, para las ligas con partidos.
-El registro propio (por mes) corta en `SGO_MAX_MES` objetos, por debajo del límite.
+cuenta como un objeto). En fútbol solo incluye **Champions League** (y MLS): el resto de ligas
+responde 400. Se usa para lo que ninguna otra fuente gratuita da —cuotas de córners, tarjetas, tiros
+y atajadas de 8 casas— una vez al día y solo si hay partidos de esas ligas. Antes de pedir nada se
+consulta el consumo real en `/account/usage` (no gasta objetos) y se corta en `SGO_MAX_MES`.
 
 Clave en `SGO_API_KEY` o, en la nube, como *network secret* para `api.sportsgameodds.com` con la
 cabecera `x-api-key` (sin prefijo).
 
-Las cuotas se identifican por oddID = `{statID}-{entidad}-{periodo}-{tipo}-{lado}`. Los statID de
-fútbol no están en la documentación pública, así que se reconocen por su nombre (corner, card,
-shot...) y los desconocidos se registran en el log para poder añadirlos.
+Las cuotas se identifican por oddID = `{statID}-{entidad}-{periodo}-{tipo}-{lado}`. statID de fútbol
+vistos (octubre de 2026): points (goles), cornerKicks, weightedCards (tarjetas; la roja puede pesar
+más que la amarilla, así que es una aproximación a nuestro "amarillas + rojas"), shots, shots_onGoal,
+goalie_saves y bothTeamsScored. Los desconocidos se registran en el log.
 """
 from __future__ import annotations
 
@@ -40,7 +42,7 @@ LIGAS = {
 }
 # statID normalizado (solo letras) -> estadística del modelo. El orden importa: lo más específico antes.
 STATS = [
-    ("corner", "corners"), ("yellowcard", "cards"), ("card", "cards"), ("booking", "cards"),
+    ("bothteams", "btts"), ("corner", "corners"), ("yellowcard", "cards"), ("card", "cards"), ("booking", "cards"),
     ("shotsongoal", "shots_on"), ("shotsontarget", "shots_on"), ("ontarget", "shots_on"),
     ("save", "saves"), ("shot", "shots_total"),
 ]
@@ -52,6 +54,9 @@ APUESTAS = {
     ("cards", "home"): "Home Cards Over/Under", ("cards", "away"): "Away Cards Over/Under",
     ("shots_on", "total"): "Total ShotOnGoal", ("shots_on", "home"): "Home ShotOnGoal",
     ("shots_on", "away"): "Away ShotOnGoal", ("shots_total", "total"): "Total Shots",
+    ("shots_total", "home"): "Home Total Shots", ("shots_total", "away"): "Away Total Shots",
+    ("saves", "total"): "Total Goalkeeper Saves", ("saves", "home"): "Home Goalkeeper Saves",
+    ("saves", "away"): "Away Goalkeeper Saves",
 }
 ENTIDAD = {"all": "total", "home": "home", "away": "away"}
 
@@ -82,6 +87,8 @@ def cuotas_de_evento(ev: dict) -> list[tuple[str, str, str, float]]:
                 continue
             if stat == "goals" and tipo == "ml3way" and lado in ("home", "draw", "away"):
                 filas.append((casa, "Match Winner", {"home": "Home", "draw": "Draw", "away": "Away"}[lado], cuota))
+            elif stat == "btts" and tipo == "yn" and lado in ("yes", "no"):
+                filas.append((casa, "Both Teams Score", lado.capitalize(), cuota))
             elif stat and tipo == "ou" and lado in ("over", "under"):
                 apuesta = APUESTAS.get((stat, ENTIDAD.get(odd.get("statEntityID", ""), "")))
                 linea = b.get("overUnder") or odd.get("bookOverUnder")
@@ -113,6 +120,28 @@ class SportsGameOdds:
         self.peticiones = 0
         self._ultima = 0.0
 
+    def uso_servidor(self) -> int | None:
+        """Objetos usados este mes según SportsGameOdds (consultarlo no gasta objetos)."""
+        resp = self.session.get(f"{self.base_url}/account/usage", timeout=30)
+        if resp.status_code in (401, 403):
+            raise ApiError("SportsGameOdds rechaza la clave: falta SGO_API_KEY o el network secret")
+        resp.raise_for_status()
+        mes = (((resp.json().get("data") or {}).get("rateLimits") or {}).get("per-month") or {})
+        valor = mes.get("current-entities")
+        return int(valor) if isinstance(valor, (int, float)) or str(valor).isdigit() else None
+
+    def _sincronizar(self) -> int:
+        """Lo usado este mes: lo más alto entre el registro propio y el contador del servidor."""
+        propio = self.registro.usadas() if self.registro else 0
+        try:
+            servidor = self.uso_servidor()
+        except requests.RequestException:
+            servidor = None
+        if servidor is not None and servidor > propio and self.registro:
+            self.registro.sumar(servidor - propio)
+            propio = servidor
+        return propio
+
     def _get(self, path: str, coste: int = 1, **params) -> dict:
         usados = self.registro.usadas() if self.registro else 0
         if usados + coste > self.max_mes:
@@ -135,8 +164,8 @@ class SportsGameOdds:
         return data
 
     def disponible(self) -> str:
-        data = self._get("/account/usage")
-        return f"OK ({str(data.get('data', data))[:120]})"
+        usados = self._sincronizar()
+        return f"OK (plan gratuito: {usados} de 2500 objetos usados este mes; tope propio {self.max_mes})"
 
     def ligas(self) -> dict[int, str]:
         """id de liga de la configuración -> leagueID de SGO (por nombre)."""
@@ -151,6 +180,7 @@ class SportsGameOdds:
     def partidos(self, league_ids: list[str], desde: datetime, hasta: datetime, max_objetos: int = 60) -> list[dict]:
         if not league_ids:
             return []
+        self._sincronizar()
         out, cursor = [], None
         while len(out) < max_objetos:
             params = {"leagueID": ",".join(league_ids), "oddsAvailable": "true",

@@ -135,6 +135,11 @@ class SgoTest(unittest.TestCase):
         self.assertEqual(stat_de("shots"), "shots_total")
         self.assertEqual(stat_de("points"), "goals")
         self.assertIsNone(stat_de("possession"))
+        # Nombres reales de SportsGameOdds (octubre de 2026).
+        self.assertEqual(stat_de("weightedCards"), "cards")
+        self.assertEqual(stat_de("goalie_saves"), "saves")
+        self.assertEqual(stat_de("bothTeamsScored"), "btts")
+        self.assertEqual(stat_de("shots_onGoal"), "shots_on")
 
     def test_cuotas(self):
         ev = {"odds": {
@@ -156,6 +161,19 @@ class SgoTest(unittest.TestCase):
         self.assertIn(("pinnacle", "Home Cards Over/Under", "Under 2.5", 2.05), filas)
         self.assertIn(("pinnacle", "Match Winner", "Home", 2.2), filas)
         self.assertEqual(len(filas), 3)                       # la de la primera parte no cuenta
+        ev2 = {"odds": {
+            "goalie_saves-home-game-ou-over": {"statID": "goalie_saves", "statEntityID": "home", "periodID": "game",
+                                               "betTypeID": "ou", "sideID": "over",
+                                               "byBookmaker": {"fanduel": {"odds": "-125", "overUnder": "3.5"}}},
+            "bothTeamsScored-all-game-yn-yes": {"statID": "bothTeamsScored", "statEntityID": "all", "periodID": "game",
+                                                "betTypeID": "yn", "sideID": "yes",
+                                                "byBookmaker": {"fanduel": {"odds": "-150"}}}}}
+        filas2 = cuotas_de_evento(ev2)
+        self.assertIn(("fanduel", "Home Goalkeeper Saves", "Over 3.5", 1.8), filas2)
+        self.assertIn(("fanduel", "Both Teams Score", "Yes", 1.667), filas2)
+        book2 = OddsBook([{"bet": b, "value": v, "odd": o} for _, b, v, o in filas2])
+        m2 = Market("saves:home:over:3.5", "x", 0.5, "saves", "home", "over", 3.5)
+        self.assertEqual(_odds_for(book2, m2), [1.8])
         # Las filas llegan al modelo con los nombres que espera odds.py.
         book = OddsBook([{"bet": b, "value": v, "odd": o} for _, b, v, o in filas])
         m = Market("corners:total:over:9.5", "x", 0.5, "corners", "total", "over", 9.5)
