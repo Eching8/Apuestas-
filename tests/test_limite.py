@@ -69,6 +69,16 @@ class LimiteDiarioTest(unittest.TestCase):
             ApiFootball("clave", session=Rota(0), registro=None)
 
 
+class PrioridadTest(unittest.TestCase):
+    def test_orden_y_solo_tarjetas(self):
+        from apuestas.config import Config, ligas_filtro, prioridad
+        c = Config(ligas=[2, 39, 140], ligas_solo_tarjetas=[239])
+        self.assertEqual(ligas_filtro(c), [2, 39, 140, 239])
+        self.assertLess(prioridad(c, 2), prioridad(c, 140))
+        self.assertLess(prioridad(c, 140), prioridad(c, 239))
+        self.assertEqual(ligas_filtro(Config(ligas=[], ligas_solo_tarjetas=[239])), [])
+
+
 class RegistroTest(unittest.TestCase):
     def test_status_atrasado_no_engana(self):
         import tempfile

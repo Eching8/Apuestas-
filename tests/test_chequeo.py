@@ -152,6 +152,18 @@ class ChequeoTest(unittest.TestCase):
             self.assertEqual(momentos[0]["chequeo_utc"], (inicio - timedelta(minutes=35)).isoformat(timespec="minutes"))
             db.close()
 
+    def test_liga_solo_tarjetas(self):
+        with TemporaryDirectory() as tmp:
+            c = cfg(tmp, ligas_solo_tarjetas=[39])      # el simulador usa la liga 39
+            api = FakeApi(FECHA)
+            db = Database(c.db_path)
+            Collector(api, db, c).collect_day(FECHA)
+            self.assertNotIn("/fixtures/players", api.calls)   # sin jugadores: gasta menos
+            a = analyze_fixture(db, dict(db.fixtures_on(FECHA)[0]), c)
+            self.assertTrue(a.markets)
+            self.assertEqual({m.stat for m in a.markets}, {"cards"})
+            db.close()
+
     def test_aplicar_impacto(self):
         e = expectativa()
         aplicar_impacto(e, 0.8, 1.0)

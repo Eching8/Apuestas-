@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
 from .api_football import ApiError, ApiFootball, PresupuestoAgotado
-from .config import Config
+from .config import Config, ligas_filtro, prioridad
 from .db import Database
 
 log = logging.getLogger(__name__)
@@ -210,22 +210,27 @@ class Collector:
         """
         items = self.api.partidos_por_fecha(fecha, self.cfg.zona_horaria)
         fixtures = [parse_fixture(i, self.cfg.zona_horaria) for i in items]
-        if self.cfg.ligas:
-            fixtures = [f for f in fixtures if f["league_id"] in self.cfg.ligas]
+        filtro = ligas_filtro(self.cfg)
+        if filtro:
+            fixtures = [f for f in fixtures if f["league_id"] in filtro]
         fixtures = [f for f in fixtures if f["fecha_local"] == fecha]
         with self.db.tx():
             for fx in fixtures:
                 self._store_fixture(fx)
 
-        pendientes = [f for f in fixtures if f["status"] in POR_JUGAR][: self.cfg.max_partidos]
+        # Primero las ligas prioritarias (con el límite de peticiones, las últimas pueden quedar fuera).
+        pendientes = sorted((f for f in fixtures if f["status"] in POR_JUGAR),
+                            key=lambda f: (prioridad(self.cfg, f["league_id"]), f["date_utc"]))
+        pendientes = pendientes[: self.cfg.max_partidos]
         log.info("%d partidos el %s, se analizarán %d", len(fixtures), fecha, len(pendientes))
         listos: list[int] = []
         vistos: set[int] = set()
         try:
             for fx in pendientes:
+                jugadores = con_jugadores and fx["league_id"] not in self.cfg.ligas_solo_tarjetas
                 for team_id in (fx["home_id"], fx["away_id"]):
                     if team_id not in vistos:
-                        self.team_history(team_id, con_jugadores)
+                        self.team_history(team_id, jugadores)
                         vistos.add(team_id)
                 if con_cuotas:
                     rows = parse_odds(self.api.cuotas(fx["id"]))
@@ -242,17 +247,18 @@ class Collector:
         items = self.api.partidos_por_fecha(fecha, self.cfg.zona_horaria)
         fixtures = [parse_fixture(i, self.cfg.zona_horaria) for i in items]
         conocidos = {r["id"] for r in self.db.fixtures_on(fecha)}
-        fixtures = [f for f in fixtures if f["id"] in conocidos or (self.cfg.ligas and f["league_id"] in self.cfg.ligas)]
+        filtro = ligas_filtro(self.cfg)
+        fixtures = [f for f in fixtures if f["id"] in conocidos or (filtro and f["league_id"] in filtro)]
         with self.db.tx():
             for fx in fixtures:
                 self._store_fixture(fx)
-        # Primero los partidos que ya estaban en la base (los que tienen selecciones que liquidar).
-        fixtures.sort(key=lambda f: f["id"] not in conocidos)
+        # Primero los que ya estaban en la base (selecciones que liquidar), luego por prioridad de liga.
+        fixtures.sort(key=lambda f: (f["id"] not in conocidos, prioridad(self.cfg, f["league_id"])))
         n = 0
         try:
             for fx in fixtures:
                 if fx["status"] in TERMINADOS:
-                    self._fetch_match_data(fx, con_jugadores)
+                    self._fetch_match_data(fx, con_jugadores and fx["league_id"] not in self.cfg.ligas_solo_tarjetas)
                     n += 1
         except PresupuestoAgotado as e:
             log.warning("%s. Ejecuta 'actualizar' de nuevo mañana para completar.", e)

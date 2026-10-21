@@ -25,7 +25,7 @@ from .api_football import estado as estado_api
 from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
 from .collector import ANULADOS, Collector
 from .combinadas import Leg, build_combos
-from .config import FECHA_INICIO, Config, load_config
+from .config import FECHA_INICIO, Config, ligas_filtro, load_config
 from .db import Database
 from .chequeo import agenda, chequear, render_chequeo
 from .football_data import FootballData, validate_day
@@ -61,8 +61,9 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         log.info("Peticiones usadas: %d (quedan hoy según la API: %s)", api.peticiones, api.restantes_hoy)
 
     fixtures = [dict(r) for r in db.fixtures_on(fecha) if r["status"] not in ANULADOS]
-    if cfg.ligas:
-        fixtures = [f for f in fixtures if f["league_id"] in cfg.ligas]
+    filtro = ligas_filtro(cfg)
+    if filtro:
+        fixtures = [f for f in fixtures if f["league_id"] in filtro]
     historico = _modelo_historico(cfg, fecha)
     analyses = [analyze_fixture(db, fx, cfg, con_jugadores=not args.sin_jugadores, historico=historico)
                 for fx in fixtures]

@@ -35,13 +35,26 @@ def _int(name: str, default: int) -> int:
     return int(os.environ.get(name, default))
 
 
-def _ligas() -> list[int]:
-    raw = os.environ.get("APUESTAS_LIGAS", "").strip()
+# Ligas con más volumen de apuestas, EN ORDEN DE PRIORIDAD (ids de API-Football): con el límite de
+# peticiones, los partidos de las primeras se descargan antes.
+# Champions, Europa League, Premier, LaLiga, Bundesliga, Brasileirão, Libertadores, Conference League,
+# Sudamericana, Concacaf Champions Cup, Mundial de Clubes, Supercopa de Europa.
+LIGAS_PRIORIDAD = "2,3,39,140,78,71,13,848,11,16,15,531"
+# Ligas que solo se usan para tarjetas (al final de la cola). 239 = Liga BetPlay (Colombia).
+LIGAS_SOLO_TARJETAS = "239"
+
+
+def _ids(nombre: str, defecto: str) -> list[int]:
+    raw = os.environ.get(nombre, defecto).strip()
     return [int(x) for x in raw.split(",") if x.strip()]
 
 
+def _ligas() -> list[int]:
+    return _ids("APUESTAS_LIGAS", LIGAS_PRIORIDAD)
+
+
 def _ligas_historico() -> list[str]:
-    raw = os.environ.get("APUESTAS_LIGAS_HISTORICO", "E0,E1,SP1,I1,D1,F1,N1,P1,MEX")
+    raw = os.environ.get("APUESTAS_LIGAS_HISTORICO", "E0,SP1,D1,BRA")
     return [x.strip().upper() for x in raw.split(",") if x.strip()]
 
 
@@ -55,6 +68,8 @@ class Config:
 
     # Ligas a analizar (ids de API-Football). Vacío = todas las del día (gasta muchas peticiones).
     ligas: list[int] = field(default_factory=_ligas)
+    ligas_solo_tarjetas: list[int] = field(default_factory=lambda: _ids("APUESTAS_LIGAS_SOLO_TARJETAS",
+                                                                        LIGAS_SOLO_TARJETAS))
     # Partidos recientes por equipo que se usan para el modelo.
     partidos_historial: int = field(default_factory=lambda: _int("APUESTAS_HISTORIAL", 6))
     # Tope de peticiones a la API por ejecución (plan gratuito: 100/día).
@@ -90,6 +105,18 @@ class Config:
     temporadas_historico: int = field(default_factory=lambda: _int("APUESTAS_TEMPORADAS", 5))
     historico_dir: Path = field(default_factory=lambda: Path(os.environ.get("APUESTAS_HISTORICO_DIR",
                                                                             ROOT / "data" / "historico")))
+
+
+def ligas_filtro(cfg: Config) -> list[int]:
+    """Ligas a descargar en orden de prioridad (vacío = todas, sin prioridad)."""
+    if not cfg.ligas:
+        return []
+    return cfg.ligas + [l for l in cfg.ligas_solo_tarjetas if l not in cfg.ligas]
+
+
+def prioridad(cfg: Config, league_id: int | None) -> int:
+    orden = ligas_filtro(cfg)
+    return orden.index(league_id) if league_id in orden else len(orden)
 
 
 def load_config() -> Config:

@@ -36,6 +36,11 @@ ALIAS = {
     "Dortmund": "Borussia Dortmund", "Paris SG": "Paris Saint Germain", "St Etienne": "Saint Etienne",
     "Sp Lisbon": "Sporting CP", "Sp Braga": "SC Braga", "Milan": "AC Milan", "Inter": "Inter",
     "Club Brugge": "Club Brugge KV", "St Truiden": "Sint-Truiden", "Greuther Furth": "SpVgg Greuther Furth",
+    # Brasileirão
+    "Atletico-MG": "Atletico Mineiro", "Athletico-PR": "Athletico Paranaense", "Atletico-GO": "Atletico Goianiense",
+    "Botafogo RJ": "Botafogo", "Flamengo RJ": "Flamengo", "Bragantino": "RB Bragantino",
+    "Vasco": "Vasco DA Gama", "Chapecoense-SC": "Chapecoense", "America MG": "America Mineiro",
+    "Sport Recife": "Sport Recife", "Ceara": "Ceara",
 }
 SIMILITUD_MIN = 0.72
 

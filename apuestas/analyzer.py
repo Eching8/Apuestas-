@@ -30,6 +30,16 @@ class Analysis:
 def analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool = True,
                     historico: ModeloHistorico | None = None,
                     ajuste: Callable[[MatchExpectation], None] | None = None) -> Analysis:
+    a = _analyze_fixture(db, fx, cfg, con_jugadores, historico, ajuste)
+    if fx.get("league_id") in cfg.ligas_solo_tarjetas:
+        a.markets = [m for m in a.markets if m.stat == "cards" and m.scope != "player"]
+        a.notas.append("Liga solo para el modelo de tarjetas: el resto de mercados no se analiza")
+    return a
+
+
+def _analyze_fixture(db: Database, fx: dict, cfg: Config, con_jugadores: bool,
+                     historico: ModeloHistorico | None,
+                     ajuste: Callable[[MatchExpectation], None] | None) -> Analysis:
     """Modelo histórico (Dixon-Coles con años de datos) si cubre el partido; si no, el modelo de forma
     reciente con lo guardado en la base; y si tampoco hay historial, solo las cuotas de las casas.
 

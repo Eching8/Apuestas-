@@ -179,6 +179,20 @@ ayer) y cada `chequeo` hasta 30. Por encima de eso hay un **tope global de 90 al
 retraso; se queda con la cifra más pesimista. Las peticiones fallidas y los reintentos también
 cuentan. `python -m apuestas api` muestra el consumo sin gastar ninguna.
 
+### Ligas prioritarias
+
+Para no malgastar peticiones, solo se descargan las ligas con más volumen de apuestas, **en este
+orden** (`APUESTAS_LIGAS`): Champions, Europa League, Premier, LaLiga, Bundesliga, Brasileirão,
+Libertadores, Conference League, Sudamericana, Concacaf Champions Cup, Mundial de Clubes y
+Supercopa de Europa. Si el presupuesto no llega, quedan fuera los partidos del final de la cola.
+La Liga BetPlay colombiana (`APUESTAS_LIGAS_SOLO_TARJETAS`) va la última y solo se analizan sus
+tarjetas (sin estadísticas de jugadores, para gastar menos).
+
+El modelo histórico cubre Premier, LaLiga, Bundesliga y Brasileirão (`APUESTAS_LIGAS_HISTORICO`).
+Las copas (Champions, Libertadores...) y Colombia no están en football-data.co.uk: usan el modelo de
+forma reciente cuando la base tiene al menos 4 partidos de cada equipo y, mientras tanto, solo las
+cuotas de las casas.
+
 ## Rutina automática diaria
 
 Una tarea programada de Claude abre cada mañana un chat nuevo que sigue
