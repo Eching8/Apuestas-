@@ -6,6 +6,7 @@ tiros), estadísticas de jugadores y cuotas de casas de apuestas.
 from __future__ import annotations
 
 import logging
+import os
 import time
 from typing import Any
 
@@ -14,6 +15,8 @@ import requests
 log = logging.getLogger(__name__)
 
 BASE_URL = "https://v3.football.api-sports.io"
+# Pausa mínima entre consultas: el plan gratuito permite 10 por minuto.
+MIN_INTERVALO = float(os.environ.get("APUESTAS_INTERVALO", 7.0))
 
 
 class ApiError(RuntimeError):
@@ -38,6 +41,7 @@ class ApiFootball:
         self.presupuesto = presupuesto
         self.peticiones = 0
         self.restantes_hoy: int | None = None
+        self._ultima = 0.0
 
     def _get(self, path: str, **params: Any) -> list[dict]:
         if self.peticiones >= self.presupuesto:
@@ -46,6 +50,10 @@ class ApiFootball:
             raise PresupuestoAgotado("La API indica que no quedan peticiones hoy")
 
         for intento in range(3):
+            espera = MIN_INTERVALO - (time.monotonic() - self._ultima)
+            if espera > 0:
+                time.sleep(espera)
+            self._ultima = time.monotonic()
             resp = self.session.get(f"{self.base_url}{path}", params=params, timeout=30)
             self.peticiones += 1
             if resp.status_code == 429:
