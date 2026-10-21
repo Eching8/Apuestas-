@@ -1,0 +1,623 @@
+{
+  "fecha": "2026-10-21",
+  "partidos": [
+    {
+      "fixture_id": 1570389,
+      "partido": "Levante vs Athletic Club",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Levante vs Ath Bilbao en football-data.co.uk); árbitro Alejandro Quintero Gonzalez sin historial (tarjetas sin ajustar)",
+        "Sin cuotas disponibles: solo se muestra la cuota justa del modelo"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2089257604592167,
+          "corners": 4.429204829155249,
+          "cards": 1.9022867233488472,
+          "shots_on": 4.729295295893357,
+          "shots_total": 12.301038225795988,
+          "saves": 2.8204461376179535
+        },
+        "visitante": {
+          "goals": 1.3957816866088215,
+          "corners": 4.9527897899004705,
+          "cards": 2.525762658459188,
+          "shots_on": 3.974362460941447,
+          "shots_total": 13.216110527408901,
+          "saves": 3.1987108322404887
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1551006,
+      "partido": "Atlas vs Club America",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Atlas vs Club America en football-data.co.uk)"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 0.9614323683143647
+        },
+        "visitante": {
+          "goals": 1.4035075566758348
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1551007,
+      "partido": "Puebla vs Monterrey",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Puebla vs Monterrey en football-data.co.uk)"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.0473871486357302
+        },
+        "visitante": {
+          "goals": 1.4986660219761305
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1551008,
+      "partido": "Toluca vs Club Tijuana",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Toluca vs Club Tijuana en football-data.co.uk)"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 2.128651574205822
+        },
+        "visitante": {
+          "goals": 0.8779332016743715
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1551009,
+      "partido": "CF Pachuca vs Cruz Azul",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Pachuca vs Cruz Azul en football-data.co.uk)",
+        "Sin cuotas disponibles: solo se muestra la cuota justa del modelo"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2369062672875186
+        },
+        "visitante": {
+          "goals": 1.27346836199426
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1551010,
+      "partido": "Santos Laguna vs U.N.A.M. - Pumas",
+      "notas": [
+        "Modelo histórico Dixon-Coles (Santos Laguna vs UNAM Pumas en football-data.co.uk)",
+        "Sin cuotas disponibles: solo se muestra la cuota justa del modelo"
+      ],
+      "solo_mercado": false,
+      "esperado": {
+        "local": {
+          "goals": 1.2216313220819723
+        },
+        "visitante": {
+          "goals": 1.4926832719783074
+        }
+      },
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635647,
+      "partido": "Como vs Manchester United",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Como: solo 0 partidos con estadísticas (mínimo 4)",
+        "Manchester United: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635684,
+      "partido": "Lille vs Galatasaray",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Lille: solo 0 partidos con estadísticas (mínimo 4)",
+        "Galatasaray: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635621,
+      "partido": "Aston Villa vs Viking",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Aston Villa: solo 0 partidos con estadísticas (mínimo 4)",
+        "Viking: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635630,
+      "partido": "Bayern München vs Arsenal",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Bayern München: solo 0 partidos con estadísticas (mínimo 4)",
+        "Arsenal: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635636,
+      "partido": "Real Betis vs Feyenoord",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Real Betis: solo 0 partidos con estadísticas (mínimo 4)",
+        "Feyenoord: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635645,
+      "partido": "Club Brugge KV vs Lens",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Club Brugge KV: solo 0 partidos con estadísticas (mínimo 4)",
+        "Lens: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635672,
+      "partido": "Inter vs Shakhtar Donetsk",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Inter: solo 0 partidos con estadísticas (mínimo 4)",
+        "Shakhtar Donetsk: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635716,
+      "partido": "Real Madrid vs RB Leipzig",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Real Madrid: solo 0 partidos con estadísticas (mínimo 4)",
+        "RB Leipzig: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    },
+    {
+      "fixture_id": 1635737,
+      "partido": "Sporting CP vs Lask Linz",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Sporting CP: solo 0 partidos con estadísticas (mínimo 4)",
+        "Lask Linz: solo 0 partidos con estadísticas (mínimo 4)"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
+    }
+  ],
+  "combinadas": {
+    "alta_probabilidad": [],
+    "valor": [],
+    "loteria": [
+      {
+        "prob": 0.012376839457026988,
+        "cuota": 101.51152,
+        "con_cuotas": true,
+        "ev": 0.2563917860787843,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": 1551006,
+            "partido": "Atlas vs Club America",
+            "key": "goals:total:under:0.5",
+            "label": "Menos de 0.5 goles",
+            "prob": 0.10853472470160586,
+            "market_prob": 0.06866077498300477,
+            "final_prob": 0.07663556492672499,
+            "fair_odd": 9.213641097347384,
+            "odd": 13.7,
+            "best_odd": 15.0,
+            "bookmakers": 5,
+            "edge": 0.049907239496132405
+          },
+          {
+            "fixture_id": 1551007,
+            "partido": "Puebla vs Monterrey",
+            "key": "goals:total:under:2.5",
+            "label": "Menos de 2.5 goles",
+            "prob": 0.5320553106987995,
+            "market_prob": 0.4445910290237468,
+            "final_prob": 0.4620838853587574,
+            "fair_odd": 1.879503840844298,
+            "odd": 2.105,
+            "best_odd": 2.26,
+            "bookmakers": 8,
+            "edge": -0.027313421319815734
+          },
+          {
+            "fixture_id": 1551008,
+            "partido": "Toluca vs Club Tijuana",
+            "key": "dc:X2",
+            "label": "Club Tijuana o empate",
+            "prob": 0.3495091671461117,
+            "market_prob": null,
+            "final_prob": 0.3495091671461117,
+            "fair_odd": 2.8611552828940585,
+            "odd": 3.52,
+            "best_odd": 3.6,
+            "bookmakers": 8,
+            "edge": 0.23027226835431325
+          }
+        ]
+      },
+      {
+        "prob": 0.011807737824095107,
+        "cuota": 100.9536,
+        "con_cuotas": true,
+        "ev": 0.1920336411985677,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": 1551006,
+            "partido": "Atlas vs Club America",
+            "key": "btts:no",
+            "label": "Ambos marcan: no",
+            "prob": 0.5195436365137287,
+            "market_prob": 0.3903061224489796,
+            "final_prob": 0.41615362526192945,
+            "fair_odd": 1.9247661403578282,
+            "odd": 2.39,
+            "best_odd": 2.45,
+            "bookmakers": 7,
+            "edge": -0.005392835623988512
+          },
+          {
+            "fixture_id": 1551007,
+            "partido": "Puebla vs Monterrey",
+            "key": "goals:total:under:0.5",
+            "label": "Menos de 0.5 goles",
+            "prob": 0.09254099278425454,
+            "market_prob": 0.07834101382488479,
+            "final_prob": 0.08118100961675875,
+            "fair_odd": 10.806021957548587,
+            "odd": 12.0,
+            "best_odd": 13.0,
+            "bookmakers": 5,
+            "edge": -0.025827884598894957
+          },
+          {
+            "fixture_id": 1551008,
+            "partido": "Toluca vs Club Tijuana",
+            "key": "dc:X2",
+            "label": "Club Tijuana o empate",
+            "prob": 0.3495091671461117,
+            "market_prob": null,
+            "final_prob": 0.3495091671461117,
+            "fair_odd": 2.8611552828940585,
+            "odd": 3.52,
+            "best_odd": 3.6,
+            "bookmakers": 8,
+            "edge": 0.23027226835431325
+          }
+        ]
+      },
+      {
+        "prob": 0.011546536866136974,
+        "cuota": 106.57503999999999,
+        "con_cuotas": true,
+        "ev": 0.23057262837002246,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": 1551006,
+            "partido": "Atlas vs Club America",
+            "key": "goals:total:under:0.5",
+            "label": "Menos de 0.5 goles",
+            "prob": 0.10853472470160586,
+            "market_prob": 0.06866077498300477,
+            "final_prob": 0.07663556492672499,
+            "fair_odd": 9.213641097347384,
+            "odd": 13.7,
+            "best_odd": 15.0,
+            "bookmakers": 5,
+            "edge": 0.049907239496132405
+          },
+          {
+            "fixture_id": 1551007,
+            "partido": "Puebla vs Monterrey",
+            "key": "btts:no",
+            "label": "Ambos marcan: no",
+            "prob": 0.48174029670257723,
+            "market_prob": 0.4184210526315789,
+            "final_prob": 0.4310849014457786,
+            "fair_odd": 2.0758072489364374,
+            "odd": 2.21,
+            "best_odd": 2.3,
+            "bookmakers": 7,
+            "edge": -0.047302367804829326
+          },
+          {
+            "fixture_id": 1551008,
+            "partido": "Toluca vs Club Tijuana",
+            "key": "dc:X2",
+            "label": "Club Tijuana o empate",
+            "prob": 0.3495091671461117,
+            "market_prob": null,
+            "final_prob": 0.3495091671461117,
+            "fair_odd": 2.8611552828940585,
+            "odd": 3.52,
+            "best_odd": 3.6,
+            "bookmakers": 8,
+            "edge": 0.23027226835431325
+          }
+        ]
+      }
+    ]
+  },
+  "crea_tu_apuesta": [
+    {
+      "fixture_id": 1570389,
+      "partido": "Levante vs Athletic Club",
+      "prob": 0.3333,
+      "cuota_justa": 3.0003000300030003,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Athletic Club menos de 1.5 goles",
+          "prob": 0.5932899017880999,
+          "market_prob": null,
+          "final_prob": 0.5932899017880999,
+          "fair_odd": 1.6855166369529093,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "shots_on:total:under:9.5",
+          "label": "Menos de 9.5 tiros a puerta",
+          "prob": 0.621734904779254,
+          "market_prob": null,
+          "final_prob": 0.621734904779254,
+          "fair_odd": 1.6084025399137731,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "shots_total:away:under:15.5",
+          "label": "Athletic Club menos de 15.5 remates totales",
+          "prob": 0.6950959380454588,
+          "market_prob": null,
+          "final_prob": 0.6950959380454588,
+          "fair_odd": 1.4386503290637855,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": 1551006,
+      "partido": "Atlas vs Club America",
+      "prob": 0.33095,
+      "cuota_justa": 3.0216044719746185,
+      "cuota_producto": 2.0474880000000004,
+      "selecciones": [
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.7003525768269047,
+          "market_prob": null,
+          "final_prob": 0.7003525768269047,
+          "fair_odd": 1.4278522462653187,
+          "odd": 1.24,
+          "best_odd": 1.28,
+          "bookmakers": 8,
+          "edge": -0.13156280473463822
+        },
+        {
+          "key": "goals:home:over:0.5",
+          "label": "Atlas más de 0.5 goles",
+          "prob": 0.6176551650633773,
+          "market_prob": 0.7158590308370044,
+          "final_prob": 0.696218257682279,
+          "fair_odd": 1.6190263703168264,
+          "odd": 1.29,
+          "best_odd": 1.33,
+          "bookmakers": 7,
+          "edge": -0.10187844758986009
+        },
+        {
+          "key": "goals:away:under:2.5",
+          "label": "Club America menos de 2.5 goles",
+          "prob": 0.8326494486955416,
+          "market_prob": 0.7205240174672489,
+          "final_prob": 0.7429491037129075,
+          "fair_odd": 1.200985602724695,
+          "odd": 1.28,
+          "best_odd": 1.3,
+          "bookmakers": 7,
+          "edge": -0.04902514724747842
+        }
+      ]
+    },
+    {
+      "fixture_id": 1551007,
+      "partido": "Puebla vs Monterrey",
+      "prob": 0.3306,
+      "cuota_justa": 3.0248033877797944,
+      "cuota_producto": 2.49,
+      "selecciones": [
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.712671518881616,
+          "market_prob": null,
+          "final_prob": 0.712671518881616,
+          "fair_odd": 1.4031709890263104,
+          "odd": 1.245,
+          "best_odd": 1.28,
+          "bookmakers": 8,
+          "edge": -0.11272395899238807
+        },
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Monterrey menos de 1.5 goles",
+          "prob": 0.5582719756911567,
+          "market_prob": 0.4666666666666667,
+          "final_prob": 0.4849877284715647,
+          "fair_odd": 1.7912416233359578,
+          "odd": 2.0,
+          "best_odd": 2.1,
+          "bookmakers": 7,
+          "edge": -0.030024543056870634
+        }
+      ]
+    },
+    {
+      "fixture_id": 1551008,
+      "partido": "Toluca vs Club Tijuana",
+      "prob": 0.31565,
+      "cuota_justa": 3.1680658957706322,
+      "cuota_producto": 3.0855,
+      "selecciones": [
+        {
+          "key": "btts:yes",
+          "label": "Ambos marcan: sí",
+          "prob": 0.5254512854523793,
+          "market_prob": 0.56,
+          "final_prob": 0.5530902570904759,
+          "fair_odd": 1.9031259941424736,
+          "odd": 1.65,
+          "best_odd": 1.7,
+          "bookmakers": 7,
+          "edge": -0.08740107580071488
+        },
+        {
+          "key": "goals:home:under:2.5",
+          "label": "Toluca menos de 2.5 goles",
+          "prob": 0.6419007084991499,
+          "market_prob": 0.5052910052910053,
+          "final_prob": 0.5326129459326343,
+          "fair_odd": 1.5578733389127024,
+          "odd": 1.87,
+          "best_odd": 1.9,
+          "bookmakers": 7,
+          "edge": -0.004013791105973774
+        }
+      ]
+    },
+    {
+      "fixture_id": 1551009,
+      "partido": "CF Pachuca vs Cruz Azul",
+      "prob": 0.327,
+      "cuota_justa": 3.058103975535168,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "dc:X2",
+          "label": "Cruz Azul o empate",
+          "prob": 0.6580806170145056,
+          "market_prob": null,
+          "final_prob": 0.6580806170145056,
+          "fair_odd": 1.5195706637534314,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:away:under:1.5",
+          "label": "Cruz Azul menos de 1.5 goles",
+          "prob": 0.6362512262577983,
+          "market_prob": null,
+          "final_prob": 0.6362512262577983,
+          "fair_odd": 1.571706204609839,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    },
+    {
+      "fixture_id": 1551010,
+      "partido": "Santos Laguna vs U.N.A.M. - Pumas",
+      "prob": 0.31315,
+      "cuota_justa": 3.193357815743254,
+      "cuota_producto": null,
+      "selecciones": [
+        {
+          "key": "dc:12",
+          "label": "No hay empate",
+          "prob": 0.7175541144317312,
+          "market_prob": null,
+          "final_prob": 0.7175541144317312,
+          "fair_odd": 1.3936231148112814,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:home:under:1.5",
+          "label": "Santos Laguna menos de 1.5 goles",
+          "prob": 0.6548234862632254,
+          "market_prob": null,
+          "final_prob": 0.6548234862632254,
+          "fair_odd": 1.5271290981124352,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        },
+        {
+          "key": "goals:away:under:2.5",
+          "label": "U.N.A.M. - Pumas menos de 2.5 goles",
+          "prob": 0.810681233602126,
+          "market_prob": null,
+          "final_prob": 0.810681233602126,
+          "fair_odd": 1.2335304661693818,
+          "odd": null,
+          "best_odd": null,
+          "bookmakers": 0,
+          "edge": null
+        }
+      ]
+    }
+  ]
+}
