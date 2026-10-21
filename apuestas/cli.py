@@ -23,7 +23,7 @@ from .api_football import ApiError
 from .api_football import REGISTRO_USO, leer_registro
 from .api_football import estado as estado_api
 from .backtest import backtest_conteos, backtest_liga, render_backtest, render_conteos
-from .collector import ANULADOS, Collector
+from .collector import ANULADOS, POR_JUGAR, Collector
 from .combinadas import Leg, build_combos
 from .config import FECHA_INICIO, Config, ligas_filtro, load_config
 from .db import Database
@@ -74,10 +74,10 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
                 for fx in fixtures]
     analyses = [a for a in analyses if a.ok] + [a for a in analyses if not a.ok]
 
+    # Solo se recomiendan partidos que aún no han empezado (los demás quedan en el informe como referencia).
+    por_jugar = [a for a in analyses if a.ok and a.fixture["status"] in POR_JUGAR]
     picks, legs = {}, []
-    for a in analyses:
-        if not a.ok:
-            continue
+    for a in por_jugar:
         sel = candidates(a, cfg, sin_cuotas=args.incluir_sin_cuota)
         sel.sort(key=lambda m: ((m.edge or 0), m.final_prob or m.prob), reverse=True)
         picks[a.fixture["id"]] = sel[:SELECCIONES_POR_PARTIDO]
@@ -85,12 +85,12 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         legs += [Leg(a.fixture["id"], partido, m) for m in sel]
 
     combos = build_combos(legs, cfg.prob_min_combinada, cfg.max_selecciones_combinada)
-    combos["loteria"], builders = combinadas_extra(analyses, cfg)
+    combos["loteria"], builders = combinadas_extra(por_jugar, cfg)
     md, js = write_reports(cfg.reportes_dir, fecha, analyses, picks, combos, builders=builders)
     save_picks(db, fecha, picks, combos)
 
     analizados = sum(a.ok for a in analyses)
-    print(f"{analizados} de {len(analyses)} partidos analizados el {fecha}.")
+    print(f"{analizados} de {len(analyses)} partidos analizados el {fecha}; {len(por_jugar)} aún por jugar.")
     for perfil, lista in combos.items():
         for c in lista[:1]:
             legs_txt = " + ".join(f"{l.market.label}" for l in c.legs)
