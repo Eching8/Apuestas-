@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 
 from apuestas.collector import Collector
 from apuestas.db import Database
-from apuestas.remates import PickMixto, PickRemates, Proyeccion, combinada, combinada_mixta, picks, proyectar
+from apuestas.remates import FAMILIAS_MAX, PickMixto, PickRemates, Proyeccion, combinada, combinada_mixta, picks, proyectar
 
 from tests.fake_api import FakeApi
 from tests.test_apuestas import FECHA, cfg
@@ -63,7 +63,7 @@ class RematesTest(unittest.TestCase):
         self.assertGreaterEqual(math.prod(p.cuota for p in legs), 100)
         self.assertEqual(len({p.fixture["id"] for p in legs}), len(legs))
         familias = [p.familia for p in legs]
-        self.assertTrue(all(familias.count(f) <= 2 for f in familias), familias)
+        self.assertTrue(all(familias.count(f) <= FAMILIAS_MAX for f in familias), familias)
 
 
 if __name__ == "__main__":

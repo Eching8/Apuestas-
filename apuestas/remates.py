@@ -203,7 +203,7 @@ def render_combinadas_remates(titulo: str, grupos: dict[str, list[PickRemates]],
 
 # --- Combinada mixta: todos los mercados, un pick por partido ------------------------------------
 
-FAMILIAS_MAX = 2            # como mucho 2 selecciones del mismo tipo de mercado en la combinada
+FAMILIAS_MAX = 3            # como mucho 3 selecciones del mismo tipo de mercado en la combinada
 
 
 @dataclass
