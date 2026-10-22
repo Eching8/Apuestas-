@@ -1,6 +1,10 @@
 {
  "2026-10-21": {
-  "peticiones": 16,
-  "restantes": 7495
+  "peticiones": 21,
+  "restantes": 7499
+ },
+ "2026-10-22": {
+  "peticiones": 1,
+  "restantes": 7500
  }
 }
