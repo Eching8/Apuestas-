@@ -232,12 +232,41 @@ def cmd_remates(args, cfg: Config, db: Database) -> int:
     for hora in sorted({an.fixture["date_utc"][11:16] for an in analisis}):
         mejores = [ps[0] for an in analisis if an.fixture["date_utc"][11:16] == hora and (ps := picks(an))]
         grupos[hora] = combinada(mejores, args.objetivo, args.max_legs)
-    texto = render(fecha, analisis, grupos, args.objetivo)
+    extra = []
+    if args.alta_prob:
+        from .remates import PickMixto, render_combinadas_remates
+        grupos_ap = {}
+        for hora in grupos:
+            # Todas las líneas de ≥ 70 % de cada partido; la búsqueda exacta elige la combinación más probable
+            # que llega a la cuota objetivo (un pick por partido).
+            por_partido, origen = [], {}
+            for an in analisis:
+                if an.fixture["date_utc"][11:16] != hora:
+                    continue
+                candidatos = []
+                for pk in picks(an, rango=(0.60, 0.95), lineas=(0.5, 1.5, 2.5, 3.5), remates_min=0.8):
+                    for linea in (0.5, 1.5, 2.5, 3.5):
+                        prob = pk.jugador.prob(linea)
+                        historial = pk.jugador.historial
+                        # Además del modelo (≥ 70 %), que la línea se haya cumplido en al menos el 80 % de sus
+                        # últimos partidos: solo tiradores constantes.
+                        acierto = sum(h > linea for h in historial) / len(historial) if historial else 0
+                        if 0.70 <= prob <= 0.95 and acierto >= 0.80:
+                            otro = type(pk)(pk.fixture, pk.jugador, linea, prob)
+                            pm = PickMixto(pk.fixture, otro.etiqueta, f"jugador {pk.jugador.player_id}", prob,
+                                           otro.cuota_justa, False)
+                            origen[id(pm)] = otro
+                            candidatos.append(pm)
+                por_partido.append(candidatos)
+            grupos_ap[hora] = [origen[id(p)] for p in combinada_mixta(por_partido, args.objetivo_ap, 10)]
+        extra = render_combinadas_remates("Remates de ALTA PROBABILIDAD", grupos_ap, args.objetivo_ap)
+    texto = render(fecha, analisis, grupos, args.objetivo, extra)
     if args.mixta:
         # Todos los mercados: el análisis completo del partido (ajustado por la alineación si la hay)
         # más el mejor pick de remates de jugador.
         from .chequeo import aplicar_impacto, impacto_alineacion
         mixtos: dict[str, list[list]] = {}
+        mixtos_ap: dict[str, list[list]] = {}
         for an in analisis:
             fx = an.fixture
             factores = {}
@@ -249,8 +278,15 @@ def cmd_remates(args, cfg: Config, db: Database) -> int:
                                 ajuste=lambda e, f=factores, fx=fx: aplicar_impacto(e, f.get(fx["home_id"], 1.0),
                                                                                 f.get(fx["away_id"], 1.0)))
             mixtos.setdefault(fx["date_utc"][11:16], []).append(candidatos_mixtos(a, an))
+            if args.alta_prob:
+                mixtos_ap.setdefault(fx["date_utc"][11:16], []).append(
+                    candidatos_mixtos(a, an, rango_real=(0.70, 0.92), rango_justa=(0.70, 0.92)))
         grupos_mixtos = {h: combinada_mixta(c, args.objetivo, args.max_legs + 2) for h, c in sorted(mixtos.items())}
         texto += "\n\n" + render_mixta(fecha, grupos_mixtos, args.objetivo)
+        if args.alta_prob:
+            grupos_ap = {h: combinada_mixta(c, args.objetivo_ap, 10) for h, c in sorted(mixtos_ap.items())}
+            texto += "\n\n" + render_mixta(fecha, grupos_ap, args.objetivo_ap,
+                                            "Combinada mixta de ALTA PROBABILIDAD (todos los mercados)")
     cfg.reportes_dir.mkdir(parents=True, exist_ok=True)
     md = cfg.reportes_dir / f"remates-{fecha}.md"
     md.write_text(texto, encoding="utf-8")
@@ -441,6 +477,9 @@ def build_parser() -> argparse.ArgumentParser:
     re_.add_argument("--alineaciones", action="store_true",
                      help="usar alineaciones confirmadas (ESPN, con Bzzoiro de respaldo) de los partidos cercanos")
     re_.add_argument("--ventana", type=int, default=75, help="minutos antes del inicio para buscar alineación")
+    re_.add_argument("--alta-prob", action="store_true",
+                     help="añadir combinadas de alta probabilidad (picks de 70 %% o más) a cuota --objetivo-ap")
+    re_.add_argument("--objetivo-ap", type=float, default=5.0, help="cuota objetivo de las de alta probabilidad")
     re_.add_argument("--mixta", action="store_true",
                      help="añadir una combinada de cuota alta con todos los mercados (un pick por partido)")
     re_.set_defaults(func=cmd_remates)

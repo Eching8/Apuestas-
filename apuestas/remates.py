@@ -130,7 +130,7 @@ def proyectar(db: Database, cfg: Config, fx: dict, historico=None, alineaciones:
 
 
 def picks(an: AnalisisRemates, rango: tuple[float, float] = (0.30, 0.50), lineas=(1.5, 2.5, 3.5, 4.5),
-          remates_min: float = 1.2) -> list[PickRemates]:
+          remates_min: float = 1.2, linea_alta: bool = False) -> list[PickRemates]:
     """Picks del partido con probabilidad en `rango` (cuota justa ~2-3.3), del más fiable al menos.
 
     Solo jugadores que rematan de verdad (≥ `remates_min` esperados) y líneas de 2+ remates: son los
@@ -144,9 +144,11 @@ def picks(an: AnalisisRemates, rango: tuple[float, float] = (0.30, 0.50), lineas
             if rango[0] <= prob <= rango[1]:
                 out.append(PickRemates(an.fixture, p, linea, prob))
     # Entre las líneas de un mismo jugador, la más probable; luego por probabilidad × fiabilidad.
+    # (con linea_alta, la línea más alta que sigue dentro del rango: más cuota con la probabilidad mínima pedida)
     mejores: dict[int, PickRemates] = {}
     for pk in out:
-        if pk.jugador.player_id not in mejores or pk.prob > mejores[pk.jugador.player_id].prob:
+        actual = mejores.get(pk.jugador.player_id)
+        if actual is None or (pk.linea > actual.linea if linea_alta else pk.prob > actual.prob):
             mejores[pk.jugador.player_id] = pk
     return sorted(mejores.values(), key=lambda pk: pk.prob * pk.fiabilidad, reverse=True)
 
@@ -161,20 +163,13 @@ def combinada(mejores_por_partido: list[PickRemates], objetivo: float = 100.0, m
     return out
 
 
-def render(fecha: str, analisis: list[AnalisisRemates], grupos: dict[str, list[PickRemates]], objetivo: float) -> str:
+def render(fecha: str, analisis: list[AnalisisRemates], grupos: dict[str, list[PickRemates]], objetivo: float,
+           extra: list[str] | None = None) -> str:
     out = [f"# Remates por jugador — {fecha}", "",
            "> Cuotas **justas** (ninguna fuente gratuita da cuotas reales de remates por jugador): apuesta un "
            "pick solo si tu casa paga más. Las combinadas de cuota alta aciertan muy pocas veces: stake mínimo.", ""]
-    for hora, legs in grupos.items():
-        prob = math.prod(p.prob for p in legs) if legs else 0
-        cuota = math.prod(p.cuota_justa for p in legs) if legs else 0
-        confirmados = all(p.jugador.titular for p in legs)
-        out += [f"## Combinada de las {hora} UTC (objetivo {objetivo:g})",
-                f"Probabilidad {prob:.2%} · cuota justa {cuota:.1f} · "
-                + ("alineaciones confirmadas" if confirmados else "**provisional: alineaciones sin confirmar**"), ""]
-        out += [f"- {p.fixture['home_name']} vs {p.fixture['away_name']}: **{p.etiqueta}** — {p.prob:.0%}, "
-                f"cuota justa {p.cuota_justa:.2f} (remates en sus últimos partidos: {p.jugador.historial})" for p in legs]
-        out.append("")
+    out += render_combinadas_remates("Combinada", grupos, objetivo)
+    out += extra or []
     out += ["## Por partido", ""]
     for an in analisis:
         fx = an.fixture
@@ -187,6 +182,23 @@ def render(fecha: str, analisis: list[AnalisisRemates], grupos: dict[str, list[P
                 f"{p.jugador.remates:.1f} esperados en {p.jugador.minutos:.0f} min" for p in picks(an)[:4]]
         out.append("")
     return "\n".join(out)
+
+
+def render_combinadas_remates(titulo: str, grupos: dict[str, list[PickRemates]], objetivo: float) -> list[str]:
+    out = []
+    for hora, legs in grupos.items():
+        prob = math.prod(p.prob for p in legs) if legs else 0
+        cuota = math.prod(p.cuota_justa for p in legs) if legs else 0
+        confirmados = all(p.jugador.titular for p in legs)
+        out += [f"## {titulo} de las {hora} UTC (objetivo {objetivo:g})",
+                f"Probabilidad {prob:.2%} · cuota justa {cuota:.1f} · "
+                + ("alineaciones confirmadas" if confirmados else "**provisional: alineaciones sin confirmar**"), ""]
+        out += [f"- {p.fixture['home_name']} vs {p.fixture['away_name']}: **{p.etiqueta}** — {p.prob:.0%}, "
+                f"cuota justa {p.cuota_justa:.2f} (remates en sus últimos partidos: {p.jugador.historial}; "
+                f"cumplida en {sum(h > p.linea for h in p.jugador.historial)}/{len(p.jugador.historial)})"
+                for p in legs]
+        out.append("")
+    return out
 
 
 # --- Combinada mixta: todos los mercados, un pick por partido ------------------------------------
@@ -283,8 +295,9 @@ def combinada_mixta(por_partido: list[list[PickMixto]], objetivo: float = 100.0,
     return elegidos
 
 
-def render_mixta(fecha: str, grupos: dict[str, list[PickMixto]], objetivo: float) -> str:
-    out = [f"# Combinada mixta (todos los mercados) — {fecha}", "",
+def render_mixta(fecha: str, grupos: dict[str, list[PickMixto]], objetivo: float,
+                 titulo: str = "Combinada mixta (todos los mercados)") -> str:
+    out = [f"# {titulo} — {fecha}", "",
            "> Un pick por partido (independientes). Cuota real = de una casa (DraftKings, consenso de Bzzoiro...); "
            "cuota justa = del modelo, sin cuota real disponible: pide más que eso a tu casa. Stake mínimo.", ""]
     for hora, legs in grupos.items():
