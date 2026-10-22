@@ -194,6 +194,49 @@ def cmd_chequeo(args, cfg: Config, db: Database) -> int:
     return 0
 
 
+def cmd_remates(args, cfg: Config, db: Database) -> int:
+    """Mejor pick de remates por jugador en cada partido y combinada de cuota alta por tanda horaria."""
+    from .chequeo import alineaciones_bzzoiro, parse_alineaciones
+    from .remates import combinada, picks, proyectar, render
+    fecha = _fecha(args.fecha, cfg)
+    ligas = [int(x) for x in args.ligas.split(",")] if args.ligas else ligas_filtro(cfg)
+    fixtures = [dict(r) for r in db.fixtures_on(fecha)
+                if r["status"] in POR_JUGAR and (not ligas or r["league_id"] in ligas)]
+    if not fixtures:
+        print(f"No hay partidos pendientes de esas ligas el {fecha} en la base (ejecuta antes 'analizar').")
+        return 0
+    historico = _modelo_historico(cfg, fecha)
+    ahora = datetime.now(ZoneInfo("UTC"))
+    api = cliente_partidos(cfg, 60) if args.alineaciones else None
+    bz, eventos_bz = (cliente_bzzoiro(cfg), None) if args.alineaciones else (None, None)
+    analisis = []
+    for fx in fixtures:
+        al = None
+        inicio = datetime.fromisoformat(fx["date_utc"])
+        if api is not None and inicio - ahora <= timedelta(minutes=args.ventana):
+            try:
+                al = parse_alineaciones(api.alineaciones(fx["id"]))
+                if not (fx["home_id"] in al and fx["away_id"] in al) and bz is not None:
+                    if eventos_bz is None:
+                        eventos_bz = bz.partidos(inicio.date(), inicio.date())
+                    al_bz, _, _ = alineaciones_bzzoiro(bz, db, fx, eventos_bz)
+                    al = al_bz or al
+            except Exception as e:      # una fuente caída no debe tumbar el resto del análisis
+                log.warning("Alineación de %s vs %s no disponible: %s", fx["home_name"], fx["away_name"], e)
+        analisis.append(proyectar(db, cfg, fx, historico, al))
+    grupos: dict[str, list] = {}
+    for hora in sorted({an.fixture["date_utc"][11:16] for an in analisis}):
+        mejores = [ps[0] for an in analisis if an.fixture["date_utc"][11:16] == hora and (ps := picks(an))]
+        grupos[hora] = combinada(mejores, args.objetivo, args.max_legs)
+    texto = render(fecha, analisis, grupos, args.objetivo)
+    cfg.reportes_dir.mkdir(parents=True, exist_ok=True)
+    md = cfg.reportes_dir / f"remates-{fecha}.md"
+    md.write_text(texto, encoding="utf-8")
+    print(texto)
+    print(f"\nInforme: {md}")
+    return 0
+
+
 def cmd_fuentes(args, cfg: Config, db: Database) -> int:
     print(f"Fuente principal: {cfg.fuente}")
     todo_ok = True
@@ -367,6 +410,16 @@ def build_parser() -> argparse.ArgumentParser:
 
     ap = sub.add_parser("api", help="comprueba la clave y el consumo de API-Football (no gasta peticiones)")
     ap.set_defaults(func=cmd_api)
+
+    re_ = sub.add_parser("remates", help="mejores picks de remates por jugador y combinada de cuota alta")
+    re_.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
+    re_.add_argument("--ligas", help="ids de liga (API-Football) separados por comas; por defecto las prioritarias")
+    re_.add_argument("--objetivo", type=float, default=100.0, help="cuota total objetivo de cada combinada")
+    re_.add_argument("--max-legs", type=int, default=6, help="máximo de selecciones por combinada")
+    re_.add_argument("--alineaciones", action="store_true",
+                     help="usar alineaciones confirmadas (ESPN, con Bzzoiro de respaldo) de los partidos cercanos")
+    re_.add_argument("--ventana", type=int, default=75, help="minutos antes del inicio para buscar alineación")
+    re_.set_defaults(func=cmd_remates)
 
     fu = sub.add_parser("fuentes", help="estado y consumo de ESPN, Bzzoiro, SportsGameOdds y API-Football")
     fu.set_defaults(func=cmd_fuentes)
