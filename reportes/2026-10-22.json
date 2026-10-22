@@ -177,14 +177,14 @@
         {
           "key": "result:1",
           "label": "Gana Ferencvaros",
-          "prob": 0.7100280921104692,
-          "market_prob": 0.7100280921104692,
-          "final_prob": 0.7100280921104692,
-          "fair_odd": 1.4083949791727617,
-          "odd": 1.333,
-          "best_odd": 1.345,
+          "prob": 0.7260414108451254,
+          "market_prob": 0.7260414108451254,
+          "final_prob": 0.7260414108451254,
+          "fair_odd": 1.377331905677366,
+          "odd": 1.303,
+          "best_odd": 1.32,
           "bookmakers": 2,
-          "edge": -0.05353255321674455
+          "edge": -0.05396804166880165
         }
       ]
     },
@@ -484,6 +484,19 @@
         }
       },
       "selecciones": []
+    },
+    {
+      "fixture_id": 1401877877,
+      "partido": "Atlético Nacional vs Deportivo Pasto",
+      "notas": [
+        "Modelo histórico no disponible: liga sin cobertura en el modelo histórico",
+        "Atlético Nacional: solo 1 partidos con estadísticas (mínimo 4)",
+        "Deportivo Pasto: solo 0 partidos con estadísticas (mínimo 4)",
+        "Liga solo para el modelo de tarjetas: el resto de mercados no se analiza"
+      ],
+      "solo_mercado": false,
+      "esperado": null,
+      "selecciones": []
     }
   ],
   "combinadas": {
@@ -491,140 +504,10 @@
     "valor": [],
     "loteria": [
       {
-        "prob": 0.017913999771111445,
-        "cuota": 101.160917793,
+        "prob": 0.018018740165027435,
+        "cuota": 100.5630248025,
         "con_cuotas": true,
-        "ev": 0.8121966581892257,
-        "kelly": 0.001,
-        "selecciones": [
-          {
-            "fixture_id": 1401915546,
-            "partido": "Lech Poznan vs Sunderland",
-            "key": "result:1",
-            "label": "Gana Lech Poznan",
-            "prob": 0.6223619068048274,
-            "market_prob": 0.20259714624317132,
-            "final_prob": 0.28655009835550255,
-            "fair_odd": 1.6067821456713929,
-            "odd": 4.665,
-            "best_odd": 4.73,
-            "bookmakers": 2,
-            "edge": 0.3367562088284195
-          },
-          {
-            "fixture_id": 1401915547,
-            "partido": "Juventus vs Stade Rennais",
-            "key": "goals:total:over:2.5",
-            "label": "Más de 2.5 goles",
-            "prob": 0.683706811459926,
-            "market_prob": 0.5709142342805709,
-            "final_prob": 0.5934727497164419,
-            "fair_odd": 1.4626152368801038,
-            "odd": 1.668,
-            "best_odd": 1.67,
-            "bookmakers": 2,
-            "edge": -0.010087453472974905
-          },
-          {
-            "fixture_id": 1401915557,
-            "partido": "SK Sturm Graz vs Marseille",
-            "key": "goals:total:over:2.5",
-            "label": "Más de 2.5 goles",
-            "prob": 0.7361656032533226,
-            "market_prob": 0.5608808290155441,
-            "final_prob": 0.5959377838630999,
-            "fair_odd": 1.3583900084175613,
-            "odd": 1.695,
-            "best_odd": 1.7,
-            "bookmakers": 2,
-            "edge": 0.010114543647954388
-          },
-          {
-            "fixture_id": 1401915544,
-            "partido": "Omonia Nicosia vs Benfica",
-            "key": "result:1",
-            "label": "Gana Omonia Nicosia",
-            "prob": 0.3939071356331382,
-            "market_prob": 0.12247642412078188,
-            "final_prob": 0.17676256642325316,
-            "fair_odd": 2.5386694211382372,
-            "odd": 7.67,
-            "best_odd": 8.0,
-            "bookmakers": 2,
-            "edge": 0.3557688844663518
-          }
-        ]
-      },
-      {
-        "prob": 0.017895739465442047,
-        "cuota": 100.2571011,
-        "con_cuotas": true,
-        "ev": 0.7941749608460833,
-        "kelly": 0.001,
-        "selecciones": [
-          {
-            "fixture_id": 1401915546,
-            "partido": "Lech Poznan vs Sunderland",
-            "key": "result:1",
-            "label": "Gana Lech Poznan",
-            "prob": 0.6223619068048274,
-            "market_prob": 0.20259714624317132,
-            "final_prob": 0.28655009835550255,
-            "fair_odd": 1.6067821456713929,
-            "odd": 4.665,
-            "best_odd": 4.73,
-            "bookmakers": 2,
-            "edge": 0.3367562088284195
-          },
-          {
-            "fixture_id": 1401915557,
-            "partido": "SK Sturm Graz vs Marseille",
-            "key": "goals:total:over:1.5",
-            "label": "Más de 1.5 goles",
-            "prob": 0.8952736716353218,
-            "market_prob": 0.7802197802197802,
-            "final_prob": 0.8032305585028885,
-            "fair_odd": 1.1169768883892044,
-            "odd": 1.2,
-            "best_odd": 1.2,
-            "bookmakers": 1,
-            "edge": -0.036123329796533876
-          },
-          {
-            "fixture_id": 1401915541,
-            "partido": "NK Celje vs RB Salzburg",
-            "key": "goals:total:under:2.5",
-            "label": "Menos de 2.5 goles",
-            "prob": 0.5765159556661817,
-            "market_prob": 0.4057011962331382,
-            "final_prob": 0.43986414811974694,
-            "fair_odd": 1.734557370306377,
-            "odd": 2.335,
-            "best_odd": 2.35,
-            "bookmakers": 2,
-            "edge": 0.027082785859608993
-          },
-          {
-            "fixture_id": 1401915544,
-            "partido": "Omonia Nicosia vs Benfica",
-            "key": "result:1",
-            "label": "Gana Omonia Nicosia",
-            "prob": 0.3939071356331382,
-            "market_prob": 0.12247642412078188,
-            "final_prob": 0.17676256642325316,
-            "fair_odd": 2.5386694211382372,
-            "odd": 7.67,
-            "best_odd": 8.0,
-            "bookmakers": 2,
-            "edge": 0.3557688844663518
-          }
-        ]
-      },
-      {
-        "prob": 0.01788328116245461,
-        "cuota": 101.663276715,
-        "con_cuotas": true,
-        "ev": 0.8180729613907698,
+        "ev": 0.8120190141254569,
         "kelly": 0.001,
         "selecciones": [
           {
@@ -661,13 +544,13 @@
             "key": "goals:total:over:3.5",
             "label": "Más de 3.5 goles",
             "prob": 0.6194523860129247,
-            "market_prob": 0.4110898661567878,
-            "final_prob": 0.4527623701280152,
+            "market_prob": 0.4153767429960343,
+            "final_prob": 0.4561918715994124,
             "fair_odd": 1.614329079328359,
-            "odd": 2.31,
+            "odd": 2.285,
             "best_odd": 2.37,
             "bookmakers": 2,
-            "edge": 0.04588107499571503
+            "edge": 0.04239842660465731
           },
           {
             "fixture_id": 1401915555,
@@ -682,6 +565,122 @@
             "best_odd": 1.23,
             "bookmakers": 1,
             "edge": -0.04083984099486615
+          }
+        ]
+      },
+      {
+        "prob": 0.017962007190508035,
+        "cuota": 100.28350499999999,
+        "con_cuotas": true,
+        "ev": 0.8012930378993484,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": 1401915546,
+            "partido": "Lech Poznan vs Sunderland",
+            "key": "result:1",
+            "label": "Gana Lech Poznan",
+            "prob": 0.6223619068048274,
+            "market_prob": 0.20259714624317132,
+            "final_prob": 0.28655009835550255,
+            "fair_odd": 1.6067821456713929,
+            "odd": 4.665,
+            "best_odd": 4.73,
+            "bookmakers": 2,
+            "edge": 0.3367562088284195
+          },
+          {
+            "fixture_id": 1401915557,
+            "partido": "SK Sturm Graz vs Marseille",
+            "key": "result:1",
+            "label": "Gana SK Sturm Graz",
+            "prob": 0.4794252612173149,
+            "market_prob": 0.2565190893306403,
+            "final_prob": 0.30110032370797524,
+            "fair_odd": 2.085830849757243,
+            "odd": 3.7,
+            "best_odd": 4.0,
+            "bookmakers": 2,
+            "edge": 0.11407119771950835
+          },
+          {
+            "fixture_id": 1401915540,
+            "partido": "Lillestrom vs Real Sociedad",
+            "key": "result:1",
+            "label": "Gana Lillestrom",
+            "prob": 0.393445082119277,
+            "market_prob": 0.16186617263886144,
+            "final_prob": 0.20818195453494456,
+            "fair_odd": 2.5416507803669526,
+            "odd": 5.81,
+            "best_odd": 6.0,
+            "bookmakers": 2,
+            "edge": 0.2095371558480279
+          }
+        ]
+      },
+      {
+        "prob": 0.017780783713704014,
+        "cuota": 100.4642704845,
+        "con_cuotas": true,
+        "ev": 0.7863334644399527,
+        "kelly": 0.001,
+        "selecciones": [
+          {
+            "fixture_id": 1401915546,
+            "partido": "Lech Poznan vs Sunderland",
+            "key": "result:1",
+            "label": "Gana Lech Poznan",
+            "prob": 0.6223619068048274,
+            "market_prob": 0.20259714624317132,
+            "final_prob": 0.28655009835550255,
+            "fair_odd": 1.6067821456713929,
+            "odd": 4.665,
+            "best_odd": 4.73,
+            "bookmakers": 2,
+            "edge": 0.3367562088284195
+          },
+          {
+            "fixture_id": 1401915548,
+            "partido": "Ararat-Armenia vs AZ Alkmaar",
+            "key": "goals:total:under:3.5",
+            "label": "Menos de 3.5 goles",
+            "prob": 0.7334030006083287,
+            "market_prob": 0.5840912002049443,
+            "final_prob": 0.6139535602856212,
+            "fair_odd": 1.3635068293564925,
+            "odd": 1.623,
+            "best_odd": 1.667,
+            "bookmakers": 2,
+            "edge": -0.0035533716564367657
+          },
+          {
+            "fixture_id": 1401915540,
+            "partido": "Lillestrom vs Real Sociedad",
+            "key": "btts:yes",
+            "label": "Ambos marcan: sí",
+            "prob": 0.7042040818292213,
+            "market_prob": 0.5386666666666667,
+            "final_prob": 0.5717741496991777,
+            "fair_odd": 1.4200428906950202,
+            "odd": 1.73,
+            "best_odd": 1.73,
+            "bookmakers": 1,
+            "edge": -0.010830721020422596
+          },
+          {
+            "fixture_id": 1401915544,
+            "partido": "Omonia Nicosia vs Benfica",
+            "key": "result:1",
+            "label": "Gana Omonia Nicosia",
+            "prob": 0.3939071356331382,
+            "market_prob": 0.12247642412078188,
+            "final_prob": 0.17676256642325316,
+            "fair_odd": 2.5386694211382372,
+            "odd": 7.67,
+            "best_odd": 8.0,
+            "bookmakers": 2,
+            "edge": 0.3557688844663518
           }
         ]
       }
@@ -834,13 +833,13 @@
           "key": "goals:total:under:3.5",
           "label": "Menos de 3.5 goles",
           "prob": 0.7334030006083287,
-          "market_prob": 0.5978674790555978,
-          "final_prob": 0.624974583366144,
+          "market_prob": 0.5840912002049443,
+          "final_prob": 0.6139535602856212,
           "fair_odd": 1.3635068293564925,
-          "odd": 1.584,
-          "best_odd": 1.588,
+          "odd": 1.623,
+          "best_odd": 1.667,
           "bookmakers": 2,
-          "edge": -0.01004025994802793
+          "edge": -0.0035533716564367657
         },
         {
           "key": "cards:away:under:3.5",
@@ -891,13 +890,13 @@
           "key": "result:1",
           "label": "Gana Dinamo Zagreb",
           "prob": 0.6441735440111019,
-          "market_prob": 0.58289382734753,
-          "final_prob": 0.5951497706802444,
+          "market_prob": 0.6109564361774545,
+          "final_prob": 0.617599857744184,
           "fair_odd": 1.5523766992560093,
-          "odd": 1.627,
+          "odd": 1.553,
           "best_odd": 1.63,
           "bookmakers": 2,
-          "edge": -0.0316913231032423
+          "edge": -0.040867420923282216
         },
         {
           "key": "corners:total:under:10.5",
@@ -993,13 +992,13 @@
           "key": "result:2",
           "label": "Gana Bayer Leverkusen",
           "prob": 0.7037100140016948,
-          "market_prob": 0.7748855083737295,
-          "final_prob": 0.7606504094993226,
+          "market_prob": 0.7840854981217926,
+          "final_prob": 0.7680104012977731,
           "fair_odd": 1.421039888736885,
-          "odd": 1.228,
-          "best_odd": 1.235,
+          "odd": 1.21,
+          "best_odd": 1.22,
           "bookmakers": 2,
-          "edge": -0.06592129713483186
+          "edge": -0.07070741442969464
         },
         {
           "key": "goals:away:over:2.5",
@@ -1365,13 +1364,13 @@
           "key": "result:1",
           "label": "Gana Besiktas",
           "prob": 0.6189893906897069,
-          "market_prob": 0.4470974593825087,
-          "final_prob": 0.4814758456439484,
+          "market_prob": 0.43584130224562156,
+          "final_prob": 0.4724709199344387,
           "fair_odd": 1.6155365746830543,
-          "odd": 2.12,
-          "best_odd": 2.15,
+          "odd": 2.17,
+          "best_odd": 2.25,
           "bookmakers": 2,
-          "edge": 0.0207287927651707
+          "edge": 0.02526189625773201
         },
         {
           "key": "goals:away:under:1.5",
@@ -1410,13 +1409,13 @@
           "key": "result:1",
           "label": "Gana Olympiacos",
           "prob": 0.6285715207527498,
-          "market_prob": 0.625048056685968,
-          "final_prob": 0.6257527494993244,
+          "market_prob": 0.6270615833462395,
+          "final_prob": 0.6273635708275416,
           "fair_odd": 1.590908857598963,
-          "odd": 1.518,
-          "best_odd": 1.526,
+          "odd": 1.505,
+          "best_odd": 1.51,
           "bookmakers": 2,
-          "edge": -0.050107326260025564
+          "edge": -0.05581782590454998
         },
         {
           "key": "corners:home:over:2.5",
