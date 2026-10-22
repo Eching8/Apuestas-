@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 
 from apuestas.collector import Collector
 from apuestas.db import Database
-from apuestas.remates import PickRemates, Proyeccion, combinada, picks, proyectar
+from apuestas.remates import PickMixto, PickRemates, Proyeccion, combinada, combinada_mixta, picks, proyectar
 
 from tests.fake_api import FakeApi
 from tests.test_apuestas import FECHA, cfg
@@ -51,6 +51,19 @@ class RematesTest(unittest.TestCase):
         self.assertEqual(len(legs), 6)                   # 2.5^5 = 97.7 < 100 <= 2.5^6
         self.assertEqual(len({p.fixture["id"] for p in legs}), len(legs))
         self.assertEqual(len(combinada([pk(i, 0.4) for i in range(10)], objetivo=1000, max_legs=4)), 4)
+
+
+    def test_mixta_diversa_y_un_pick_por_partido(self):
+        def pm(fid, etiqueta, familia, prob, cuota, real):
+            return PickMixto({"id": fid, "home_name": "A", "away_name": "B"}, etiqueta, familia, prob, cuota, real)
+        por_partido = [[pm(i, f"goles {i}", "goles", 0.57, 1.82, True), pm(i, f"córners {i}", "córners", 0.5, 2.0, False),
+                        pm(i, f"tarjetas {i}", "tarjetas", 0.48, 2.08, False), pm(i, f"remates {i}", "remates", 0.47, 2.13, False)]
+                       for i in range(8)]
+        legs = combinada_mixta(por_partido, objetivo=100, max_legs=8)
+        self.assertGreaterEqual(math.prod(p.cuota for p in legs), 100)
+        self.assertEqual(len({p.fixture["id"] for p in legs}), len(legs))
+        familias = [p.familia for p in legs]
+        self.assertTrue(all(familias.count(f) <= 2 for f in familias), familias)
 
 
 if __name__ == "__main__":

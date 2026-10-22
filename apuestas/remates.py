@@ -187,3 +187,114 @@ def render(fecha: str, analisis: list[AnalisisRemates], grupos: dict[str, list[P
                 f"{p.jugador.remates:.1f} esperados en {p.jugador.minutos:.0f} min" for p in picks(an)[:4]]
         out.append("")
     return "\n".join(out)
+
+
+# --- Combinada mixta: todos los mercados, un pick por partido ------------------------------------
+
+FAMILIAS_MAX = 2            # como mucho 2 selecciones del mismo tipo de mercado en la combinada
+
+
+@dataclass
+class PickMixto:
+    fixture: dict
+    etiqueta: str
+    familia: str
+    prob: float
+    cuota: float
+    real: bool                  # cuota real de una casa (True) o cuota justa del modelo (False)
+
+    @property
+    def ev(self) -> float | None:
+        return self.prob * self.cuota - 1 if self.real else None
+
+
+def _familia(m) -> str:
+    tipo = m.key.split(":")[0]
+    if tipo in ("result", "dc"):
+        return "resultado"
+    if tipo == "btts":
+        return "ambos marcan"
+    return {"goals": "goles", "corners": "córners", "cards": "tarjetas", "shots_on": "tiros a puerta",
+            "shots_total": "remates", "saves": "atajadas"}.get(m.stat, m.stat)
+
+
+def candidatos_mixtos(analisis, remates: AnalisisRemates | None, rango_real=(0.40, 0.65), rango_justa=(0.40, 0.55),
+                      ev_min=-0.04) -> list[PickMixto]:
+    """Selecciones posibles de un partido, de todos los mercados.
+
+    Con cuota real se exige un valor esperado de al menos `ev_min` (el margen de la casa); sin cuota
+    real se usa la cuota justa del modelo, con la probabilidad rebajada un 5 % por la incertidumbre y en
+    un rango más bajo (cuota ~1.8-2.5) para llegar a la cuota objetivo con pocas selecciones."""
+    rango = rango_real
+    out = []
+    fx = analisis.fixture
+    if analisis.expectation is not None:
+        for m in analisis.markets:
+            if m.scope == "player":
+                continue
+            if m.odd:
+                p = m.final_prob if m.final_prob is not None else m.prob
+                if rango[0] <= p <= rango[1] and p * m.odd - 1 >= ev_min:
+                    out.append(PickMixto(fx, m.label, _familia(m), p, m.odd, True))
+            elif rango_justa[0] <= m.prob * 0.95 <= rango_justa[1]:
+                out.append(PickMixto(fx, m.label, _familia(m), m.prob * 0.95, m.fair_odd, False))
+    if remates is not None:
+        for pk in picks(remates, rango=rango_justa)[:2]:
+            out.append(PickMixto(fx, f"{pk.etiqueta} ({pk.jugador.equipo})", "remates de jugador", pk.prob * 0.95,
+                                 pk.cuota_justa, False))
+    return out
+
+
+def combinada_mixta(por_partido: list[list[PickMixto]], objetivo: float = 100.0, max_legs: int = 8) -> list[PickMixto]:
+    """Un pick por partido con la máxima probabilidad conjunta que alcanza la cuota objetivo.
+
+    Búsqueda exacta (la misma mochila que la combinada lotería): las selecciones con cuota real y valor
+    positivo rinden más probabilidad por unidad de cuota y salen elegidas antes; las de cuota justa ya
+    llevan su probabilidad rebajada un 5 %. Si no se llega al objetivo, la de mayor cuota posible."""
+    from .combinadas import Leg, build_loteria
+    from .model import Market
+    legs = []
+    for candidatos in por_partido:
+        for p in candidatos:
+            m = Market(f"{p.familia}:{p.etiqueta}", p.etiqueta, p.prob, "mixta", "match", "x", odd=p.cuota,
+                       final_prob=p.prob)
+            legs.append((Leg(p.fixture["id"], p.etiqueta, m), p))
+    por_leg = {id(l): p for l, p in legs}
+    vetados: set[tuple[int, str]] = set()          # (partido, familia) que ya no pueden entrar
+    for _ in range(20):
+        validos = [l for l, p in legs if (p.fixture["id"], p.familia) not in vetados]
+        sol = None
+        for objetivo_actual in (objetivo, objetivo / 2, objetivo / 4, objetivo / 8):
+            sol = build_loteria(validos, objetivo_actual, max_legs, n=1, cuota_min=1.2)
+            if sol:
+                break
+        if not sol:
+            return []
+        elegidos = [por_leg[id(l)] for l in sol[0].legs]
+        conteo: dict[str, list[PickMixto]] = {}
+        for p in elegidos:
+            conteo.setdefault(p.familia, []).append(p)
+        exceso = [ps for ps in conteo.values() if len(ps) > FAMILIAS_MAX]
+        if not exceso:
+            return elegidos
+        # Diversidad: se veta en su partido la selección menos eficiente de la familia repetida.
+        peor = max(exceso[0], key=lambda p: -math.log(p.prob) / math.log(p.cuota))
+        vetados.add((peor.fixture["id"], peor.familia))
+    return elegidos
+
+
+def render_mixta(fecha: str, grupos: dict[str, list[PickMixto]], objetivo: float) -> str:
+    out = [f"# Combinada mixta (todos los mercados) — {fecha}", "",
+           "> Un pick por partido (independientes). Cuota real = de una casa (DraftKings, consenso de Bzzoiro...); "
+           "cuota justa = del modelo, sin cuota real disponible: pide más que eso a tu casa. Stake mínimo.", ""]
+    for hora, legs in grupos.items():
+        prob = math.prod(p.prob for p in legs) if legs else 0
+        cuota = math.prod(p.cuota for p in legs) if legs else 0
+        out += [f"## Tanda de las {hora} UTC (objetivo {objetivo:g})",
+                f"Probabilidad {prob:.2%} · cuota {cuota:.1f} ({sum(p.real for p in legs)} con cuota real)", ""]
+        for p in legs:
+            ev = f", valor {p.ev * 100:+.1f}%" if p.real else ""
+            out.append(f"- {p.fixture['home_name']} vs {p.fixture['away_name']}: **{p.etiqueta}** [{p.familia}] — "
+                       f"{p.prob:.0%}, cuota {'real' if p.real else 'justa'} {p.cuota:.2f}{ev}")
+        out.append("")
+    return "\n".join(out)

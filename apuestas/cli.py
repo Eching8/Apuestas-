@@ -197,7 +197,8 @@ def cmd_chequeo(args, cfg: Config, db: Database) -> int:
 def cmd_remates(args, cfg: Config, db: Database) -> int:
     """Mejor pick de remates por jugador en cada partido y combinada de cuota alta por tanda horaria."""
     from .chequeo import alineaciones_bzzoiro, parse_alineaciones
-    from .remates import combinada, picks, proyectar, render
+    from .remates import (candidatos_mixtos, combinada, combinada_mixta, picks, proyectar, render,
+                          render_mixta)
     fecha = _fecha(args.fecha, cfg)
     ligas = [int(x) for x in args.ligas.split(",")] if args.ligas else ligas_filtro(cfg)
     fixtures = [dict(r) for r in db.fixtures_on(fecha)
@@ -210,6 +211,7 @@ def cmd_remates(args, cfg: Config, db: Database) -> int:
     api = cliente_partidos(cfg, 60) if args.alineaciones else None
     bz, eventos_bz = (cliente_bzzoiro(cfg), None) if args.alineaciones else (None, None)
     analisis = []
+    alineaciones_por_partido: dict[int, dict] = {}
     for fx in fixtures:
         al = None
         inicio = datetime.fromisoformat(fx["date_utc"])
@@ -223,12 +225,32 @@ def cmd_remates(args, cfg: Config, db: Database) -> int:
                     al = al_bz or al
             except Exception as e:      # una fuente caída no debe tumbar el resto del análisis
                 log.warning("Alineación de %s vs %s no disponible: %s", fx["home_name"], fx["away_name"], e)
+        if al and fx["home_id"] in al and fx["away_id"] in al:
+            alineaciones_por_partido[fx["id"]] = al
         analisis.append(proyectar(db, cfg, fx, historico, al))
     grupos: dict[str, list] = {}
     for hora in sorted({an.fixture["date_utc"][11:16] for an in analisis}):
         mejores = [ps[0] for an in analisis if an.fixture["date_utc"][11:16] == hora and (ps := picks(an))]
         grupos[hora] = combinada(mejores, args.objetivo, args.max_legs)
     texto = render(fecha, analisis, grupos, args.objetivo)
+    if args.mixta:
+        # Todos los mercados: el análisis completo del partido (ajustado por la alineación si la hay)
+        # más el mejor pick de remates de jugador.
+        from .chequeo import aplicar_impacto, impacto_alineacion
+        mixtos: dict[str, list[list]] = {}
+        for an in analisis:
+            fx = an.fixture
+            factores = {}
+            if an.con_alineacion and alineaciones_por_partido.get(fx["id"]):
+                al = alineaciones_por_partido[fx["id"]]
+                for tid, nombre in ((fx["home_id"], fx["home_name"]), (fx["away_id"], fx["away_name"])):
+                    factores[tid] = impacto_alineacion(db, tid, nombre, fx["date_utc"], al[tid]["titulares"]).factor
+            a = analyze_fixture(db, fx, cfg, con_jugadores=False, historico=historico,
+                                ajuste=lambda e, f=factores, fx=fx: aplicar_impacto(e, f.get(fx["home_id"], 1.0),
+                                                                                f.get(fx["away_id"], 1.0)))
+            mixtos.setdefault(fx["date_utc"][11:16], []).append(candidatos_mixtos(a, an))
+        grupos_mixtos = {h: combinada_mixta(c, args.objetivo, args.max_legs + 2) for h, c in sorted(mixtos.items())}
+        texto += "\n\n" + render_mixta(fecha, grupos_mixtos, args.objetivo)
     cfg.reportes_dir.mkdir(parents=True, exist_ok=True)
     md = cfg.reportes_dir / f"remates-{fecha}.md"
     md.write_text(texto, encoding="utf-8")
@@ -419,6 +441,8 @@ def build_parser() -> argparse.ArgumentParser:
     re_.add_argument("--alineaciones", action="store_true",
                      help="usar alineaciones confirmadas (ESPN, con Bzzoiro de respaldo) de los partidos cercanos")
     re_.add_argument("--ventana", type=int, default=75, help="minutos antes del inicio para buscar alineación")
+    re_.add_argument("--mixta", action="store_true",
+                     help="añadir una combinada de cuota alta con todos los mercados (un pick por partido)")
     re_.set_defaults(func=cmd_remates)
 
     fu = sub.add_parser("fuentes", help="estado y consumo de ESPN, Bzzoiro, SportsGameOdds y API-Football")
