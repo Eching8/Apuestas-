@@ -231,7 +231,7 @@ def cmd_remates(args, cfg: Config, db: Database) -> int:
                 log.warning("Alineación de %s vs %s no disponible: %s", fx["home_name"], fx["away_name"], e)
         if al and fx["home_id"] in al and fx["away_id"] in al:
             alineaciones_por_partido[fx["id"]] = al
-        analisis.append(proyectar(db, cfg, fx, historico, al))
+        analisis.append(proyectar(db, cfg, fx, historico, al, suplente_oro=not args.sin_suplente_oro))
     grupos: dict[str, list] = {}
     for hora in sorted({an.fixture["date_utc"][11:16] for an in analisis}):
         mejores = [ps[0] for an in analisis if an.fixture["date_utc"][11:16] == hora and (ps := picks(an))]
@@ -499,6 +499,8 @@ def build_parser() -> argparse.ArgumentParser:
     re_.add_argument("--alta-prob", action="store_true",
                      help="añadir combinadas de alta probabilidad (picks de 70 %% o más) a cuota --objetivo-ap")
     re_.add_argument("--objetivo-ap", type=float, default=10.0, help="cuota objetivo de las de alta probabilidad")
+    re_.add_argument("--sin-suplente-oro", action="store_true",
+                     help="la casa NO suma los remates del sustituto (por defecto se asume 'suplente de oro')")
     re_.add_argument("--mixta", action="store_true",
                      help="añadir una combinada de cuota alta con todos los mercados (un pick por partido)")
     re_.set_defaults(func=cmd_remates)

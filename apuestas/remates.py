@@ -77,7 +77,12 @@ class AnalisisRemates:
     con_alineacion: bool = False
 
 
-def proyectar(db: Database, cfg: Config, fx: dict, historico=None, alineaciones: dict | None = None) -> AnalisisRemates:
+def proyectar(db: Database, cfg: Config, fx: dict, historico=None, alineaciones: dict | None = None,
+              suplente_oro: bool = True) -> AnalisisRemates:
+    """`suplente_oro`: regla de la casa por la que, si el jugador es sustituido, los remates de quien entra
+    en su lugar también cuentan. La línea cubre entonces los 90 minutos: los minutos del titular a su
+    ritmo y el resto al ritmo de un sustituto (la media entre el suyo y el del jugador medio del
+    equipo). Si no es titular, la apuesta suele anularse: se proyecta como si jugara de inicio."""
     res = AnalisisRemates(fx)
     equipos = {fx["home_id"]: fx["home_name"], fx["away_id"]: fx["away_name"]}
     res.con_alineacion = bool(alineaciones) and all(t in alineaciones for t in equipos)
@@ -115,15 +120,21 @@ def proyectar(db: Database, cfg: Config, fx: dict, historico=None, alineaciones:
         for pid, j in jugadores.items():
             if j["min"] < MIN_MINUTOS:
                 continue
+            min_titular = sum(j["titular"]) / len(j["titular"]) if j["titular"] else 75
             if res.con_alineacion:
                 titular = pid in titulares
-                minutos = (sum(j["titular"]) / len(j["titular"]) if j["titular"] else 75) if titular else MINUTOS_SUPLENTE
+                minutos = min_titular if titular else MINUTOS_SUPLENTE
             else:
                 titular = None
-                minutos = j["min"] / len(partidos)
+                minutos = min_titular if suplente_oro else j["min"] / len(partidos)
             # (remates del jugador por minuto) / (remates del equipo por minuto) × remates del equipo hoy por minuto
             cuota_equipo = (j["rem"] / j["min"]) / (remates_equipo / (90 * len(partidos)))
             remates = cuota_equipo * esperado[tid] / 90 * minutos
+            if suplente_oro and titular is not False and minutos < 90:
+                # El sustituto: a medio camino entre su ritmo y el del jugador de campo medio (1/10 del equipo).
+                cuota_sustituto = (cuota_equipo + 0.1) / 2
+                remates += cuota_sustituto * esperado[tid] / 90 * (90 - minutos)
+                minutos = 90
             res.proyecciones.append(Proyeccion(pid, j["nombre"], nombre_equipo, titular, minutos, remates, j["min"],
                                                j["hist"]))
     return res
