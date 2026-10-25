@@ -44,6 +44,7 @@ NOMBRES = {
 BASICAS = ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "fgm", "ftm", "fta")
 
 PESO_TEMPORADA_ANTERIOR = 0.5
+K_TEMPORADA_ANTERIOR: float | None = None   # peso máximo de la temporada anterior, en partidos
 DECAY_TASA = 0.97          # peso del partido i-ésimo más reciente para las tasas
 DECAY_MINUTOS = 0.8        # ídem para los minutos (cambian rápido: rol, rotación)
 PARTIDOS_MINUTOS = 10
@@ -257,7 +258,15 @@ class Jugador:
 
 
 def _pesos(partidos: list[dict], temporada: int, decay: float) -> list[float]:
-    return [decay ** i * _peso_temporada(p["season"], temporada) for i, p in enumerate(partidos)]
+    w = [decay ** i * _peso_temporada(p["season"], temporada) for i, p in enumerate(partidos)]
+    # En cuanto hay partidos de esta temporada, la anterior vale como mucho K_TEMPORADA_ANTERIOR partidos:
+    # si cambió de rol (más asistencias, más tiros), sus partidos nuevos pesan desde el principio.
+    if K_TEMPORADA_ANTERIOR is not None and partidos and partidos[0]["season"] == temporada:
+        previos = sum(wi for wi, p in zip(w, partidos) if p["season"] != temporada)
+        if previos > K_TEMPORADA_ANTERIOR:
+            f = K_TEMPORADA_ANTERIOR / previos
+            w = [wi * f if p["season"] != temporada else wi for wi, p in zip(w, partidos)]
+    return w
 
 
 def valor(p: dict, stat: str) -> float:
