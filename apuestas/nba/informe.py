@@ -10,6 +10,7 @@ from .analizador import Partido
 from .modelo import NOMBRES, Contexto, Evaluacion, mejor_contra
 from .zonas import NOMBRES as ZONAS_NOMBRE
 
+MAX_POR_JUGADOR = 2
 GRUPOS = {"G": "bases/escoltas", "F": "aleros/ala-pívots", "C": "pívots"}
 COMPONENTE = {"pts": "Puntos", "reb": "Rebotes", "ast": "Asistencias", "tpm": "Triples", "stl": "Robos",
               "blk": "Tapones", "tov": "Pérdidas", "fgm": "Tiros de campo anotados", "ftm": "Tiros libres anotados",
@@ -114,8 +115,21 @@ def _ficha(ctx: Contexto, part: Partido, pid: str) -> list[str]:
     return out + [""]
 
 
+def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
+    out, por_jugador = [], {}
+    for e in part.evaluaciones:
+        if por_jugador.get(e.player_id, 0) >= MAX_POR_JUGADOR:
+            continue
+        por_jugador[e.player_id] = por_jugador.get(e.player_id, 0) + 1
+        out.append(e)
+        if len(out) == n:
+            break
+    return out
+
+
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
-             picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str]) -> tuple[Path, Path]:
+             picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
+             por_partido: int = 8) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -146,13 +160,10 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
         if not part.evaluaciones:
             md += ["Sin líneas de props para este partido (o sin historial suficiente de los jugadores).", ""]
             continue
-        md += [CABECERA, SEPARADOR] + [_fila(e) for e in part.evaluaciones[:15]] + [""]
-        destacados = []
-        for e in part.evaluaciones:
-            if e.player_id not in destacados:
-                destacados.append(e.player_id)
-            if len(destacados) == 5:
-                break
+        elegidas = mejores_del_partido(part, por_partido)
+        md += [f"Las {len(elegidas)} más probables (máximo {MAX_POR_JUGADOR} por jugador: las de un mismo jugador "
+               "suelen ganar o perder juntas).", "", CABECERA, SEPARADOR] + [_fila(e) for e in elegidas] + [""]
+        destacados = list(dict.fromkeys(e.player_id for e in elegidas))[:5]
         md += ["### Fichas de los jugadores destacados", ""]
         for pid in destacados:
             md += _ficha(ctx, part, pid)

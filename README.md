@@ -180,16 +180,15 @@ prop. Aún no está validado con backtest: hace falta descargar primero los dato
 se queda colgada). Funciona desde una conexión de casa, así que hay dos formas de ejecutarlo:
 
 1. En tu computadora: `python -m apuestas nba enfrentamientos` (la primera vez, unas 1.400 consultas, ~30 min).
-2. Desde GitHub, con un **runner autohospedado** (tu computadora hace de servidor de GitHub Actions):
-   - En GitHub: *Settings → Actions → Runners → New self-hosted runner*, elige tu sistema y ejecuta los
-     comandos que te muestra (descarga, `config` y `run`). Déjalo corriendo (o instálalo como servicio).
-   - Con Python 3.10+ instalado. En *Settings → Secrets and variables → Actions* añade `SPORTSGAMEODDS_KEY`.
-   - En *Actions → NBA (en tu computadora) → Run workflow* elige `diario` (historial + enfrentamientos +
-     props del día). También corre solo cada día a las 10:47 (hora de Ciudad de México) si la computadora
-     está encendida. La base queda en `apuestas-datos/` junto a la carpeta de trabajo del runner y el
-     informe se descarga como artefacto de la ejecución.
-   - El flujo solo se lanza a mano o por horario, nunca desde pull requests. Aun así, GitHub recomienda
-     no conectar runners autohospedados a repositorios **públicos**: mejor haz el repositorio privado.
+2. Con un proxy residencial o un runner autohospedado de GitHub Actions en una computadora de casa.
+
+### Automático cada día en GitHub (`.github/workflows/nba-diario.yml`)
+
+Corre en los servidores de GitHub a las 10:47 (Ciudad de México): guarda los resultados de ayer, liquida
+las props, baja lesiones y líneas de hoy y publica el informe en la rama `nba-informes`
+(`ultimo.md` y `nba/AAAA-MM-DD.md`). Necesita el secreto `SPORTSGAMEODDS_KEY` (*Settings → Secrets and
+variables → Actions*) y que el flujo esté en `main` para el horario y el botón *Run workflow*. La base se
+conserva con la caché de Actions; si se pierde, se reconstruye sola desde ESPN.
 
 ### ¿Está calibrado?
 

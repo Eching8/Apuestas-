@@ -105,7 +105,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     picks = mejores(partidos, cfg.nba_prob_min)
     guardar_picks(nba, fecha, picks)
     guardar_analisis(nba, fecha, partidos)
-    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar)
+    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido)
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")
     for p, e in picks[:args.top]:
@@ -180,6 +180,7 @@ def registrar(sub) -> None:
     a.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
     a.add_argument("--sin-descarga", action="store_true", help="usar solo lo que ya está en la base")
     a.add_argument("--top", type=int, default=15, help="cuántas props mostrar en pantalla")
+    a.add_argument("--por-partido", type=int, default=8, help="props por partido en el informe")
     a.set_defaults(func=cmd_analizar)
 
     u = s.add_parser("actualizar", help="guarda los resultados de un día y liquida las props")

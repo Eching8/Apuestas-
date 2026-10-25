@@ -63,6 +63,8 @@ CALIBRACION = 0.9
 # Peso de la probabilidad de la casa (sin margen) en la probabilidad final. La línea recoge lo que el
 # modelo no ve (rol, rotaciones, noticias de última hora).
 PESO_MERCADO = 0.4
+# Con menos de 3 partidos en su equipo actual (traspaso reciente), la casa sabe más de su nuevo rol.
+PESO_MERCADO_TRASPASO = 0.7
 # Los roles cambian entre temporadas: en cuanto hay partidos de la actual, los minutos de la anterior
 # casi no cuentan.
 PESO_MINUTOS_ANTERIOR = 0.15
@@ -247,6 +249,7 @@ class Jugador:
     zonas: dict[str, dict] = field(default_factory=dict)
     motores: dict[str, Motor] | None = None
     enfrentamiento: marcajes.Enfrentamiento | None = None
+    pocos_con_equipo: bool = False
 
     @property
     def n(self) -> int:
@@ -284,7 +287,9 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
             continue
         m_con = sum(p["minutes"] for p in con) / len(con)
         m_sin = sum(p["minutes"] for p in sin) / len(sin)
-        delta = (m_sin - m_con) * len(sin) / (len(sin) + 4)
+        # Solo se suman minutos: la baja de un compañero no quita minutos, y cuando los datos dicen lo
+        # contrario suele ser porque esos partidos fueron de descanso o ya decididos.
+        delta = min(4.0, max(0.0, (m_sin - m_con) * len(sin) / (len(sin) + 4)))
         delta_total += delta
         cambios = []
         for s in BASICAS:
@@ -299,7 +304,8 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
                 cambios.append(f"{s} {ratio - 1:+.0%}/min")
         j.notas.append(f"sin {comp_nombre} ({len(sin)} partidos): {m_sin:.1f} min vs {m_con:.1f} con él"
                        + (f"; {', '.join(cambios)}" if cambios else ""))
-    return min(10.0, max(-6.0, delta_total))
+    # Varias bajas del mismo puesto no se suman sin límite: los minutos se reparten entre varios.
+    return min(6.0, delta_total)
 
 
 def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, opp_id: str,
@@ -318,7 +324,17 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
                 max(3.0, math.sqrt(var_m)))
     if partidos[0]["team_id"] != team_id:
         j.notas.append("cambió de equipo hace poco: sus minutos pueden no reflejar su nuevo rol")
+    base = j.minutos
     j.minutos = max(0.0, j.minutos + _bajas(ctx, j, ausentes or []))
+    techo = max(p["minutes"] for p in recientes) + 2
+    if j.minutos > max(base, techo):
+        j.minutos = max(base, techo)
+        j.notas.append(f"minutos limitados a {j.minutos:.0f} (su máximo reciente + 2)")
+    con_equipo = [p for p in partidos if p["team_id"] == team_id and p["season"] == ctx.temporada]
+    j.pocos_con_equipo = len(con_equipo) < 3 and any(p["team_id"] != team_id for p in partidos[:15])
+    if j.pocos_con_equipo:
+        j.notas.append(f"solo {len(con_equipo)} partidos con su equipo actual: su rol puede haber cambiado, "
+                       "se da más peso a la línea de la casa")
     ayer = (date.fromisoformat(ctx.fecha) - timedelta(days=1)).isoformat()
     if ctx.ultimo_partido.get(team_id) == ayer and j.minutos > 28:
         j.minutos *= 0.97
@@ -468,6 +484,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
     pred = predecir(ctx, j, stat)
     lados = {}
     con_cuota = bool(over_odd or under_odd)
+    if j.pocos_con_equipo:
+        peso_mercado = max(peso_mercado, PESO_MERCADO_TRASPASO)
     for lado, p_mod, odd, p_casa in zip(("más", "menos"), prob_lados(line, pred.mu, pred.var),
                                         (over_odd, under_odd), prob_mercado(over_odd, under_odd)):
         if con_cuota and not odd:
