@@ -1,0 +1,462 @@
+"""Modelo de props por probabilidad.
+
+Para cada jugador y estadística:
+
+    media = minutos esperados × tasa por minuto × ajuste por bajas × defensa rival × tipo de defensa
+
+- Minutos esperados: últimos 10 partidos con más peso a los recientes; varianza propia de sus minutos.
+- Tasa por minuto: toda la historia con decaimiento (la temporada anterior pesa la mitad) y contracción
+  hacia la media de su posición cuando hay pocos partidos.
+- Bajas: si un compañero importante está fuera, se compara al jugador con y sin él (minutos y tasas).
+- Defensa rival por posición: lo que el rival concede por minuto a bases (G), aleros (F) o pívots (C).
+- Zonas de tiro: dónde tira el jugador (aro, pintura, media, triple de esquina y frontal) y qué
+  porcentaje concede el rival en cada zona. Ajusta puntos y triples.
+- Tipo de defensa: cómo le fue al jugador contra defensas del mismo nivel que la de hoy.
+
+La distribución es binomial negativa con la dispersión estimada del propio jugador más la
+incertidumbre de sus minutos. La probabilidad final mezcla el modelo con su tasa de acierto real
+sobre esa línea en los últimos partidos y, si hay cuotas, con la probabilidad de la casa sin margen.
+"""
+from __future__ import annotations
+
+import math
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import date, timedelta
+
+from ..model import negbin_pmf
+from .espn import grupo_posicion
+from .zonas import VALOR, ZONAS
+
+COMPONENTES = {
+    "points": ("pts",), "rebounds": ("reb",), "assists": ("ast",), "threes": ("tpm",), "steals": ("stl",),
+    "blocks": ("blk",), "turnovers": ("tov",), "pr": ("pts", "reb"), "pa": ("pts", "ast"), "ra": ("reb", "ast"),
+    "pra": ("pts", "reb", "ast"), "stocks": ("stl", "blk"), "fgm": ("fgm",), "ftm": ("ftm",), "fta": ("fta",),
+}
+NOMBRES = {
+    "points": "puntos", "rebounds": "rebotes", "assists": "asistencias", "threes": "triples",
+    "steals": "robos", "blocks": "tapones", "turnovers": "pérdidas", "pr": "pts+reb", "pa": "pts+ast",
+    "ra": "reb+ast", "pra": "pts+reb+ast", "stocks": "robos+tapones", "fgm": "tiros de campo anotados",
+    "ftm": "tiros libres anotados", "fta": "tiros libres intentados",
+}
+BASICAS = ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "fgm", "ftm", "fta")
+
+PESO_TEMPORADA_ANTERIOR = 0.5
+DECAY_TASA = 0.97          # peso del partido i-ésimo más reciente para las tasas
+DECAY_MINUTOS = 0.8        # ídem para los minutos (cambian rápido: rol, rotación)
+PARTIDOS_MINUTOS = 10
+K_DEFENSA_MIN = 600.0      # minutos "virtuales" de media de liga en la defensa por posición
+K_ZONA_TIROS = 120.0       # tiros "virtuales" de media de liga por zona (rival)
+K_ZONA_JUGADOR = 25.0      # ídem para el porcentaje del jugador en cada zona
+K_TIPO_MIN = 400.0         # minutos virtuales para el rendimiento contra un tipo de defensa
+PESO_MODELO = 0.75         # resto: tasa de acierto real sobre la línea (suavizada)
+# Contracción hacia 50 %: el backtest (feb-mar 2026, 19.700 props) mostró que sin ella el modelo era
+# ~3 puntos optimista por encima del 70 %. Con 0.9 queda calibrado (incluso algo conservador arriba).
+CALIBRACION = 0.9
+# Peso de la probabilidad de la casa (sin margen) en la probabilidad final. La línea recoge lo que el
+# modelo no ve (rol, rotaciones, noticias de última hora).
+PESO_MERCADO = 0.4
+# Los roles cambian entre temporadas: en cuanto hay partidos de la actual, los minutos de la anterior
+# casi no cuentan.
+PESO_MINUTOS_ANTERIOR = 0.15
+MIN_COMPANERO = 20.0       # minutos medios para considerar importante la baja de un compañero
+ESTADOS_FUERA = ("out", "doubtful")
+
+
+# --- Distribución ---------------------------------------------------------------------
+
+def cdf(k: int, mu: float, var: float) -> float:
+    if k < 0:
+        return 0.0
+    return min(1.0, sum(negbin_pmf(i, mu, var) for i in range(k + 1)))
+
+
+def prob_lados(line: float, mu: float, var: float) -> tuple[float, float]:
+    """P(más de la línea), P(menos de la línea). Con línea entera, el empate (devolución) no cuenta."""
+    if mu <= 0:
+        return 0.0, 1.0
+    over = 1.0 - cdf(math.floor(line), mu, var)
+    under = cdf(math.ceil(line) - 1, mu, var)
+    return max(0.0, over), max(0.0, under)
+
+
+def linea_segura(mu: float, var: float, prob: float = 0.8) -> tuple[float | None, float | None]:
+    """Línea .5 más alta con P(más) >= prob y la más baja con P(menos) >= prob."""
+    over_l = under_l = None
+    for k in range(0, int(mu * 3 + 20)):
+        line = k + 0.5
+        o, u = prob_lados(line, mu, var)
+        if o >= prob:
+            over_l = line
+        if u >= prob and under_l is None:
+            under_l = line
+    return over_l, under_l
+
+
+# --- Contexto de liga -----------------------------------------------------------------
+
+@dataclass
+class Contexto:
+    fecha: str
+    temporada: int
+    filas: list[dict]                       # partidos de jugador anteriores a la fecha
+    por_jugador: dict[str, list[dict]]      # ordenados del más reciente al más antiguo
+    grupo: dict[str, str]                   # jugador -> G / F / C
+    liga: dict[str, dict[str, float]]       # grupo -> stat -> por minuto
+    defensa: dict[str, dict[str, dict[str, float]]]   # equipo -> grupo -> stat -> factor (1 = media)
+    nivel: dict[str, dict[str, dict[str, str]]]       # grupo -> stat -> equipo -> fuerte/media/débil
+    zona_liga: dict[str, tuple[float, float]]          # zona -> (% acierto, frecuencia)
+    zona_rival: dict[str, dict[str, tuple[float, float]]]
+    zona_jugador: dict[str, dict[str, tuple[float, float]]]  # jugador -> zona -> (intentos, anotados)
+    ritmo: dict[str, float]                 # posesiones por partido de cada equipo
+    ritmo_liga: float
+    ultimo_partido: dict[str, str]          # equipo -> fecha de su último partido
+
+
+def _peso_temporada(season: int, actual: int) -> float:
+    return 1.0 if season == actual else PESO_TEMPORADA_ANTERIOR
+
+
+def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
+    desde = (date.fromisoformat(fecha) - timedelta(days=dias)).isoformat()
+    filas = [dict(r) for r in conn.execute(
+        """SELECT pg.*, g.fecha, g.season FROM nba_player_games pg JOIN nba_games g ON g.id = pg.game_id
+           WHERE g.fecha < ? AND g.fecha >= ? AND g.season_type IN (2, 3, 5) ORDER BY g.fecha DESC""",
+        (fecha, desde))]
+    temporada = max((f["season"] for f in filas), default=0)
+    por_jugador: dict[str, list[dict]] = defaultdict(list)
+    grupo: dict[str, str] = {}
+    for f in filas:
+        por_jugador[f["player_id"]].append(f)
+        grupo.setdefault(f["player_id"], grupo_posicion(f["position"]))
+
+    # Media de liga por grupo y defensa por posición (lo concedido por minuto).
+    tot = defaultdict(lambda: defaultdict(float))
+    conc = defaultdict(lambda: defaultdict(lambda: defaultdict(float)))
+    for f in filas:
+        w = _peso_temporada(f["season"], temporada)
+        g = grupo[f["player_id"]]
+        tot[g]["min"] += w * f["minutes"]
+        conc[f["opp_id"]][g]["min"] += w * f["minutes"]
+        for s in BASICAS:
+            tot[g][s] += w * f[s]
+            conc[f["opp_id"]][g][s] += w * f[s]
+    liga = {g: {s: (d[s] / d["min"] if d["min"] else 0.0) for s in BASICAS} for g, d in tot.items()}
+    defensa: dict = {}
+    for team, por_g in conc.items():
+        defensa[team] = {}
+        for g, d in por_g.items():
+            defensa[team][g] = {}
+            for s in BASICAS:
+                lg = liga.get(g, {}).get(s, 0.0)
+                tasa = (d[s] + K_DEFENSA_MIN * lg) / (d["min"] + K_DEFENSA_MIN)
+                defensa[team][g][s] = tasa / lg if lg else 1.0
+    nivel: dict = defaultdict(dict)
+    for g in liga:
+        for s in BASICAS:
+            orden = sorted((t for t in defensa if g in defensa[t]), key=lambda t: defensa[t][g][s])
+            n = len(orden)
+            nivel[g][s] = {t: ("fuerte" if i < n / 3 else "media" if i < 2 * n / 3 else "débil")
+                           for i, t in enumerate(orden)}
+
+    # Ritmo: posesiones por partido (FGA - OREB + TOV + 0.44 FTA).
+    pos = defaultdict(float)
+    ultimo: dict[str, str] = {}
+    for f in filas:
+        pos[(f["game_id"], f["team_id"])] += f["fga"] - f["oreb"] + f["tov"] + 0.44 * f["fta"]
+        ultimo.setdefault(f["team_id"], f["fecha"])
+    por_equipo = defaultdict(list)
+    temporada_de = {f["game_id"]: f["season"] for f in filas}
+    for (gid, team), p in pos.items():
+        if temporada_de[gid] == temporada:
+            por_equipo[team].append(p)
+    ritmo = {t: sum(v) / len(v) for t, v in por_equipo.items() if v}
+    ritmo_liga = sum(ritmo.values()) / len(ritmo) if ritmo else 100.0
+
+    # Zonas de tiro.
+    zl = defaultdict(lambda: [0.0, 0.0])
+    zr = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
+    zj = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
+    for r in conn.execute(
+        """SELECT s.player_id, s.opp_id, s.zone, g.season, COUNT(*) AS fga, SUM(s.made) AS fgm
+           FROM nba_shots s JOIN nba_games g ON g.id = s.game_id
+           WHERE g.fecha < ? AND g.fecha >= ? AND g.season_type IN (2, 3, 5)
+           GROUP BY s.player_id, s.opp_id, s.zone, g.season""", (fecha, desde)):
+        w = _peso_temporada(r["season"], temporada)
+        for acc in (zl[r["zone"]], zr[r["opp_id"]][r["zone"]], zj[r["player_id"]][r["zone"]]):
+            acc[0] += w * r["fga"]
+            acc[1] += w * r["fgm"]
+    total_liga = sum(v[0] for v in zl.values()) or 1.0
+    zona_liga = {z: (zl[z][1] / zl[z][0] if zl[z][0] else 0.0, zl[z][0] / total_liga) for z in ZONAS}
+    zona_rival = {}
+    for t, por_z in zr.items():
+        total = sum(v[0] for v in por_z.values()) or 1.0
+        zona_rival[t] = {}
+        for z in ZONAS:
+            fga, fgm = por_z[z]
+            pct_lg, frec_lg = zona_liga[z]
+            pct = (fgm + K_ZONA_TIROS * pct_lg) / (fga + K_ZONA_TIROS)
+            frec = (fga + K_ZONA_TIROS * frec_lg) / (total + K_ZONA_TIROS)
+            zona_rival[t][z] = (pct, frec)
+    zona_jugador = {p: {z: tuple(v) for z, v in por_z.items()} for p, por_z in zj.items()}
+
+    return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
+                    zona_jugador, ritmo, ritmo_liga, ultimo)
+
+
+# --- Jugador --------------------------------------------------------------------------
+
+@dataclass
+class Prediccion:
+    stat: str
+    mu: float
+    var: float
+    factores: dict[str, float] = field(default_factory=dict)
+
+
+@dataclass
+class Jugador:
+    player_id: str
+    nombre: str
+    team_id: str
+    opp_id: str
+    grupo: str
+    partidos: list[dict]
+    minutos: float
+    minutos_sd: float
+    notas: list[str] = field(default_factory=list)
+    ajuste_bajas: dict[str, float] = field(default_factory=dict)   # stat básica -> multiplicador
+    zonas: dict[str, dict] = field(default_factory=dict)
+
+    @property
+    def n(self) -> int:
+        return len(self.partidos)
+
+
+def _pesos(partidos: list[dict], temporada: int, decay: float) -> list[float]:
+    return [decay ** i * _peso_temporada(p["season"], temporada) for i, p in enumerate(partidos)]
+
+
+def valor(p: dict, stat: str) -> float:
+    return sum(p[c] for c in COMPONENTES[stat])
+
+
+def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
+    """Compara al jugador con y sin cada compañero ausente. Devuelve el cambio de minutos."""
+    delta_total = 0.0
+    for comp_id, comp_nombre in ausentes:
+        comp = ctx.por_jugador.get(comp_id, [])
+        recientes = [p for p in comp[:PARTIDOS_MINUTOS] if p["team_id"] == j.team_id]
+        if not recientes or sum(p["minutes"] for p in recientes) / len(recientes) < MIN_COMPANERO:
+            continue
+        temporadas = {p["season"] for p in comp if p["team_id"] == j.team_id}
+        juegos_comp = {p["game_id"] for p in comp}
+        mios = [p for p in j.partidos if p["team_id"] == j.team_id and p["season"] in temporadas]
+        con = [p for p in mios if p["game_id"] in juegos_comp]
+        sin = [p for p in mios if p["game_id"] not in juegos_comp]
+        if len(sin) < 3 or len(con) < 3:
+            j.notas.append(f"sin {comp_nombre}: muestra insuficiente ({len(sin)} partidos sin él)")
+            continue
+        m_con = sum(p["minutes"] for p in con) / len(con)
+        m_sin = sum(p["minutes"] for p in sin) / len(sin)
+        delta = (m_sin - m_con) * len(sin) / (len(sin) + 4)
+        delta_total += delta
+        cambios = []
+        for s in BASICAS:
+            t_con = sum(p[s] for p in con) / max(1.0, sum(p["minutes"] for p in con))
+            t_sin = sum(p[s] for p in sin) / max(1.0, sum(p["minutes"] for p in sin))
+            if t_con <= 0:
+                continue
+            ratio = 1 + (t_sin / t_con - 1) * len(sin) / (len(sin) + 8)
+            ratio = min(1.35, max(0.75, ratio))
+            j.ajuste_bajas[s] = j.ajuste_bajas.get(s, 1.0) * ratio
+            if s in ("pts", "reb", "ast") and abs(ratio - 1) >= 0.05:
+                cambios.append(f"{s} {ratio - 1:+.0%}/min")
+        j.notas.append(f"sin {comp_nombre} ({len(sin)} partidos): {m_sin:.1f} min vs {m_con:.1f} con él"
+                       + (f"; {', '.join(cambios)}" if cambios else ""))
+    return min(10.0, max(-6.0, delta_total))
+
+
+def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, opp_id: str,
+                     ausentes: list[tuple[str, str]] | None = None) -> Jugador | None:
+    partidos = ctx.por_jugador.get(player_id, [])[:120]
+    if not partidos:
+        return None
+    recientes = partidos[:PARTIDOS_MINUTOS]
+    hay_actual = partidos[0]["season"] == ctx.temporada
+    w = [DECAY_MINUTOS ** i * (1.0 if p["season"] == ctx.temporada or not hay_actual else PESO_MINUTOS_ANTERIOR)
+         for i, p in enumerate(recientes)]
+    m = sum(wi * p["minutes"] for wi, p in zip(w, recientes)) / sum(w)
+    var_m = sum(wi * (p["minutes"] - m) ** 2 for wi, p in zip(w, recientes)) / sum(w)
+    j = Jugador(player_id, nombre, team_id, opp_id, ctx.grupo.get(player_id, "G"), partidos, m,
+                max(3.0, math.sqrt(var_m)))
+    if partidos[0]["team_id"] != team_id:
+        j.notas.append("cambió de equipo hace poco: sus minutos pueden no reflejar su nuevo rol")
+    j.minutos = max(0.0, j.minutos + _bajas(ctx, j, ausentes or []))
+    ayer = (date.fromisoformat(ctx.fecha) - timedelta(days=1)).isoformat()
+    if ctx.ultimo_partido.get(team_id) == ayer and j.minutos > 28:
+        j.minutos *= 0.97
+        j.notas.append("segundo partido en dos noches: -3% de minutos")
+    j.zonas = perfil_zonas(ctx, player_id, opp_id)
+    return j
+
+
+def perfil_zonas(ctx: Contexto, player_id: str, opp_id: str) -> dict:
+    """Reparto de tiros del jugador por zona, su acierto (contraído a la liga) y lo que concede el rival."""
+    propias = ctx.zona_jugador.get(player_id, {})
+    total = sum(v[0] for v in propias.values())
+    out = {}
+    for z in ZONAS:
+        fga, fgm = propias.get(z, (0.0, 0.0))
+        pct_lg, frec_lg = ctx.zona_liga.get(z, (0.0, 0.0))
+        out[z] = {
+            "intentos": fga,
+            "reparto": (fga + 5 * frec_lg) / (total + 5) if total + 5 else frec_lg,
+            "pct": (fgm + K_ZONA_JUGADOR * pct_lg) / (fga + K_ZONA_JUGADOR),
+            "pct_liga": pct_lg,
+            "pct_rival": ctx.zona_rival.get(opp_id, {}).get(z, (pct_lg, frec_lg))[0],
+        }
+    return out
+
+
+def _factor_zonas(j: Jugador, solo_triples: bool) -> float:
+    num = den = 0.0
+    for z, d in j.zonas.items():
+        if solo_triples and VALOR[z] != 3:
+            continue
+        base = d["reparto"] * d["pct"] * (VALOR[z] if not solo_triples else 1)
+        den += base
+        num += base * (d["pct_rival"] / d["pct_liga"] if d["pct_liga"] else 1.0)
+    return num / den if den else 1.0
+
+
+def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
+    w = _pesos(j.partidos, ctx.temporada, DECAY_TASA)
+    sw_min = sum(wi * p["minutes"] for wi, p in zip(w, j.partidos))
+    m_media = sw_min / sum(w)
+    liga = ctx.liga.get(j.grupo, {})
+    defensa = ctx.defensa.get(j.opp_id, {}).get(j.grupo, {})
+    niveles = ctx.nivel.get(j.grupo, {})
+    mu_min = 0.0
+    fac_rival = fac_tipo = 0.0
+    tasa_total = tasa_base = 0.0
+    for c in COMPONENTES[stat]:
+        tasa = (sum(wi * p[c] for wi, p in zip(w, j.partidos)) + 2 * m_media * liga.get(c, 0.0)) / (sw_min + 2 * m_media)
+        tasa_base += tasa
+        tasa *= j.ajuste_bajas.get(c, 1.0)
+        f_def = defensa.get(c, 1.0)
+        if c == "pts":
+            f_zona = _factor_zonas(j, solo_triples=False)
+            fg_pts = sum(2 * p["fgm"] + p["tpm"] for p in j.partidos) / max(1, sum(p["pts"] for p in j.partidos))
+            f_def = math.sqrt(f_def * (1 + fg_pts * (f_zona - 1)))
+        elif c == "tpm":
+            f_def = math.sqrt(f_def * _factor_zonas(j, solo_triples=True))
+        # Cómo le fue contra defensas del mismo nivel que la de hoy.
+        nivel_hoy = niveles.get(c, {}).get(j.opp_id)
+        f_tipo = 1.0
+        if nivel_hoy:
+            mismos = [(wi, p) for wi, p in zip(w, j.partidos) if niveles[c].get(p["opp_id"]) == nivel_hoy]
+            m_t = sum(wi * p["minutes"] for wi, p in mismos)
+            if m_t and tasa:
+                t_t = sum(wi * p[c] for wi, p in mismos) / m_t
+                f_tipo = math.sqrt(1 + (t_t / tasa - 1) * m_t / (m_t + K_TIPO_MIN))
+                f_tipo = min(1.15, max(0.85, f_tipo))
+        mu_c = tasa * f_def * f_tipo
+        mu_min += mu_c
+        tasa_total += tasa
+        fac_rival += tasa * f_def
+        fac_tipo += tasa * f_tipo
+    mu = mu_min * j.minutos
+    # Dispersión del propio jugador: residuos frente a su tasa × minutos jugados.
+    num = den = 0.0
+    for wi, p in zip(w, j.partidos):
+        e = tasa_base * p["minutes"]
+        num += wi * (valor(p, stat) - e) ** 2
+        den += wi * e
+    phi = min(3.5, max(1.0, num / den)) if den else 1.0
+    var = phi * mu + mu_min ** 2 * j.minutos_sd ** 2
+    return Prediccion(stat, mu, var, {
+        "minutos": j.minutos, "tasa_min": tasa_total,
+        "rival": fac_rival / tasa_total if tasa_total else 1.0,
+        "tipo_defensa": fac_tipo / tasa_total if tasa_total else 1.0, "dispersion": phi,
+    })
+
+
+# --- Evaluación de una línea ----------------------------------------------------------
+
+@dataclass
+class Evaluacion:
+    player_id: str
+    nombre: str
+    stat: str
+    line: float
+    lado: str               # "más" o "menos"
+    prob: float
+    prob_modelo: float      # modelo + acierto real, antes de mezclar con la casa
+    prob_mercado: float | None
+    mu: float
+    sd: float
+    acierto_10: tuple[int, int]
+    acierto_temporada: tuple[int, int]
+    vs_rival: list[float]
+    media_10: float
+    odd: float | None
+    factores: dict
+    linea_80: tuple[float | None, float | None]
+
+
+def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
+    hits = sum((valor(p, stat) > line) if lado == "más" else (valor(p, stat) < line) for p in partidos)
+    return hits, len(partidos)
+
+
+MARGEN_UN_LADO = 1.05      # margen típico cuando la casa solo ofrece un lado y no se puede quitar exacto
+
+
+def prob_mercado(over_odd: float | None, under_odd: float | None) -> tuple[float | None, float | None]:
+    """Probabilidades de más/menos implícitas en las cuotas, sin el margen de la casa."""
+    if over_odd and under_odd:
+        o, u = 1 / over_odd, 1 / under_odd
+        return o / (o + u), u / (o + u)
+    return (1 / over_odd / MARGEN_UN_LADO if over_odd else None,
+            1 / under_odd / MARGEN_UN_LADO if under_odd else None)
+
+
+def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float | None = None,
+            under_odd: float | None = None, peso_mercado: float = PESO_MERCADO) -> Evaluacion:
+    pred = predecir(ctx, j, stat)
+    lados = {}
+    con_cuota = bool(over_odd or under_odd)
+    for lado, p_mod, odd, p_casa in zip(("más", "menos"), prob_lados(line, pred.mu, pred.var),
+                                        (over_odd, under_odd), prob_mercado(over_odd, under_odd)):
+        if con_cuota and not odd:
+            continue  # la casa no ofrece este lado: no se puede apostar
+        hits, n = _aciertos(j.partidos[:15], stat, line, lado)
+        p_emp = (hits + 5 * p_mod) / (n + 5)
+        p_jug = 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+        final = p_jug if p_casa is None else (1 - peso_mercado) * p_jug + peso_mercado * p_casa
+        lados[lado] = (final, p_jug, p_casa, odd)
+    lado = max(lados, key=lambda k: lados[k][0])
+    prob, p_jug, p_casa, odd = lados[lado]
+    temporada = [p for p in j.partidos if p["season"] == ctx.temporada]
+    vs = [valor(p, stat) for p in j.partidos if p["opp_id"] == j.opp_id][:5]
+    return Evaluacion(
+        j.player_id, j.nombre, stat, line, lado, prob, p_jug, p_casa, pred.mu, math.sqrt(pred.var),
+        _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
+        sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
+        linea_segura(pred.mu, pred.var),
+    )
+
+
+def mejor_contra(ctx: Contexto, j: Jugador, stat: str) -> dict[str, float]:
+    """Rendimiento por minuto del jugador contra defensas fuertes, medias y débiles (1 = su media)."""
+    # En las combinadas se usa el nivel de la defensa en la primera componente (puntos o rebotes).
+    niveles = ctx.nivel.get(j.grupo, {}).get(COMPONENTES[stat][0], {})
+    out = {}
+    total = sum(valor(p, stat) for p in j.partidos) / max(1.0, sum(p["minutes"] for p in j.partidos))
+    for nivel in ("fuerte", "media", "débil"):
+        ps = [p for p in j.partidos if niveles.get(p["opp_id"]) == nivel]
+        mins = sum(p["minutes"] for p in ps)
+        if mins >= 60 and total:
+            out[nivel] = (sum(valor(p, stat) for p in ps) / mins) / total
+    return out
