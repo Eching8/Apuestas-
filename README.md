@@ -161,6 +161,36 @@ minutos. El informe muestra, por partido, las props más probables y una ficha d
 destacados: minutos, notas de bajas, su prop más probable, la línea que pasaría con 80 % de
 probabilidad (útil para líneas alternativas), su rendimiento según el tipo de defensa y la tabla de zonas.
 
+### Quién lo defiende: stats.nba.com (`nba enfrentamientos`)
+
+`python -m apuestas nba enfrentamientos` descarga de stats.nba.com, partido a partido, **quién defendió a
+quién** (posesiones y puntos de cada atacante contra cada defensor) y estadísticas avanzadas de temporada
+(uso, % de rebotes y asistencias). Con eso, para cada jugador (`apuestas/nba/marcajes.py`):
+
+- qué defensores del rival suelen marcar a su posición y qué parte de las posesiones se lleva cada uno
+  (sin los que están fuera hoy);
+- qué tan buenos son: puntos que permiten por 100 posesiones (élite / medio / débil);
+- cómo le va a él contra cada nivel de defensor y contra cada defensor concreto.
+
+El ajuste se aplica a puntos, tiros anotados y triples (máximo ±12 %) y aparece en el "¿por qué?" de cada
+prop. Aún no está validado con backtest: hace falta descargar primero los datos; después,
+`nba backtest` lo incluye automáticamente.
+
+**stats.nba.com bloquea los servidores en la nube**, incluidos los de GitHub Actions (probado: la consulta
+se queda colgada). Funciona desde una conexión de casa, así que hay dos formas de ejecutarlo:
+
+1. En tu computadora: `python -m apuestas nba enfrentamientos` (la primera vez, unas 1.400 consultas, ~30 min).
+2. Desde GitHub, con un **runner autohospedado** (tu computadora hace de servidor de GitHub Actions):
+   - En GitHub: *Settings → Actions → Runners → New self-hosted runner*, elige tu sistema y ejecuta los
+     comandos que te muestra (descarga, `config` y `run`). Déjalo corriendo (o instálalo como servicio).
+   - Con Python 3.10+ instalado. En *Settings → Secrets and variables → Actions* añade `SPORTSGAMEODDS_KEY`.
+   - En *Actions → NBA (en tu computadora) → Run workflow* elige `diario` (historial + enfrentamientos +
+     props del día). También corre solo cada día a las 10:47 (hora de Ciudad de México) si la computadora
+     está encendida. La base queda en `apuestas-datos/` junto a la carpeta de trabajo del runner y el
+     informe se descarga como artefacto de la ejecución.
+   - El flujo solo se lanza a mano o por horario, nunca desde pull requests. Aun así, GitHub recomienda
+     no conectar runners autohospedados a repositorios **públicos**: mejor haz el repositorio privado.
+
 ### ¿Está calibrado?
 
 Backtest del 20 de febrero al 10 de marzo de 2026 (19.700 props, línea de referencia = mediana de los

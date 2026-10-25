@@ -88,6 +88,17 @@ def _ficha(ctx: Contexto, part: Partido, pid: str) -> list[str]:
                    f"respecto a la media; ajuste por su historial contra defensas similares: "
                    f"{_rel(ajuste['tipo_defensa'])}.")
         out += [""] + por_que(top)
+    if j.enfrentamiento:
+        e = j.enfrentamiento
+        out.append(f"- Marcaje (stats.nba.com): ajuste a sus puntos {_rel(e.factor)}. Defensores probables: "
+                   + "; ".join(f"{d['nombre']} ({_pct(d['reparto'])}, defensor {d['nivel']}, permite "
+                               f"{d['permite_100']:.0f} pts/100 vs {d['liga_100']:.0f} de media"
+                               + (f"; él le anota {d['vs_el_pts_100']:.0f}/100 en {d['vs_el_posesiones']:.0f} pos."
+                                  if d["vs_el_posesiones"] else "") + ")" for d in e.defensores) + ".")
+        niveles = [f"{k} {v['pts_100']:.0f} pts/100 en {v['posesiones']:.0f} pos." for k, v in e.por_nivel.items()
+                   if v["posesiones"]]
+        if niveles:
+            out.append("- Contra qué defensores le va mejor (sus puntos por 100 posesiones): " + "; ".join(niveles) + ".")
     tipos = []
     for stat in ("points", "rebounds", "assists", "threes"):
         m = mejor_contra(ctx, j, stat)

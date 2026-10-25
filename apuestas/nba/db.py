@@ -117,6 +117,50 @@ CREATE TABLE IF NOT EXISTS nba_analisis (
     PRIMARY KEY (fecha, game_id, player_id, stat)
 );
 
+-- stats.nba.com: quién defendió a quién. Una fila por atacante y defensor en cada partido, con los
+-- ids de la NBA y, emparejados por nombre, los de ESPN (player_id) que usa el resto de la base.
+CREATE TABLE IF NOT EXISTS nba_matchups (
+    nba_game_id TEXT NOT NULL,
+    game_id TEXT,
+    off_nba_id INTEGER NOT NULL,
+    def_nba_id INTEGER NOT NULL,
+    off_player_id TEXT,
+    def_player_id TEXT,
+    off_team_id TEXT,
+    def_team_id TEXT,
+    off_name TEXT,
+    def_name TEXT,
+    minutos REAL, posesiones REAL, pts REAL, fgm INTEGER, fga INTEGER, tpm INTEGER, tpa INTEGER, ftm INTEGER,
+    ast INTEGER, tov INTEGER, blk INTEGER,
+    PRIMARY KEY (nba_game_id, off_nba_id, def_nba_id)
+);
+CREATE INDEX IF NOT EXISTS ix_nba_matchups_off ON nba_matchups(off_player_id);
+CREATE INDEX IF NOT EXISTS ix_nba_matchups_def ON nba_matchups(def_player_id);
+
+-- Partidos de stats.nba.com ya descargados y su partido de ESPN.
+CREATE TABLE IF NOT EXISTS nba_stats_games (
+    nba_game_id TEXT PRIMARY KEY,
+    fecha TEXT NOT NULL,
+    season INTEGER,
+    season_type INTEGER,
+    game_id TEXT,
+    filas INTEGER NOT NULL DEFAULT 0,
+    updated_at TEXT
+);
+
+-- Estadísticas avanzadas de temporada (uso, % de rebotes y asistencias, true shooting...).
+CREATE TABLE IF NOT EXISTS nba_avanzadas (
+    season INTEGER NOT NULL,
+    season_type INTEGER NOT NULL,
+    nba_id INTEGER NOT NULL,
+    player_id TEXT,
+    name TEXT,
+    team_abbr TEXT,
+    gp INTEGER, minutos REAL, usg_pct REAL, ts_pct REAL, ast_pct REAL, oreb_pct REAL, dreb_pct REAL,
+    reb_pct REAL, tov_pct REAL, pace REAL, pie REAL,
+    PRIMARY KEY (season, season_type, nba_id)
+);
+
 CREATE TABLE IF NOT EXISTS nba_picks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fecha TEXT NOT NULL,

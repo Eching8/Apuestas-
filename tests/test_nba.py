@@ -230,3 +230,73 @@ class ModeloTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NbaStatsFalso:
+    """stats.nba.com simulado con la forma de leaguegamelog y boxscorematchupsv3 (datos sintéticos)."""
+
+    def __init__(self, db: NbaDB):
+        self.peticiones = 0
+        self.juegos = {}
+        for g in db.conn.execute("SELECT g.*, h.name AS hn, a.name AS an FROM nba_games g JOIN nba_teams h ON "
+                                 "h.id = g.home_id JOIN nba_teams a ON a.id = g.away_id WHERE g.box_ok = 1"):
+            self.juegos["00" + g["id"]] = (g["fecha"], g["hn"], g["an"], g["home_id"], g["away_id"])
+
+    def partidos(self, season, season_type):
+        return [{"GAME_ID": gid, "GAME_DATE": f, "TEAM_NAME": n}
+                for gid, (f, hn, an, _, _) in self.juegos.items() for n in (hn, an)]
+
+    def enfrentamientos(self, gid):
+        _, hn, an, h, a = self.juegos[gid]
+
+        def equipo(nombre, team, rival):
+            jugadores = []
+            for n in range(3):
+                pid = "a1" if (team, n) == ("1", 0) else f"p{team}{n}"
+                nom = ("Angel", "Perez Jr.") if pid == "a1" else ("Jugador", f"{team}{n}")
+                # Cada atacante lo marca sobre todo su par del rival; el base del equipo 2 defiende muy mal.
+                marcas = []
+                for k in range(3):
+                    d = "a1" if (rival, k) == ("1", 0) else f"p{rival}{k}"
+                    pos = 30.0 if k == n else 5.0
+                    pts = pos * (1.6 if d == "p20" else 1.0)
+                    marcas.append({"personId": hash(d) % 10 ** 6, "firstName": "Angel" if d == "a1" else "Jugador",
+                                   "familyName": "Perez Jr." if d == "a1" else d[1:],
+                                   "statistics": {"matchupMinutes": "6:30", "partialPossessions": pos,
+                                                  "playerPoints": pts, "matchupFieldGoalsMade": 3,
+                                                  "matchupFieldGoalsAttempted": 6}})
+                jugadores.append({"personId": hash(pid) % 10 ** 6, "firstName": nom[0], "familyName": nom[1],
+                                  "position": "G", "matchups": marcas})
+            return {"teamName": nombre.split()[1], "players": jugadores}
+
+        return {"boxScoreMatchups": {"gameId": gid, "homeTeam": equipo(hn, h, a), "awayTeam": equipo(an, a, h)}}
+
+
+class EnfrentamientosTest(unittest.TestCase):
+    def test_parse_y_marcaje(self):
+        from apuestas.nba.enfrentamientos import descargar_temporada
+        from apuestas.nba.nbastats import parse_enfrentamientos, temporada_nba
+        self.assertEqual(temporada_nba(2026), "2025-26")
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ns = NbaStatsFalso(db)
+            filas = parse_enfrentamientos(ns.enfrentamientos(next(iter(ns.juegos))))
+            self.assertEqual(len(filas), 18)  # 6 atacantes × 3 defensores
+            self.assertEqual(filas[0]["minutos"], 6.5)
+            n = descargar_temporada(ns, db, 2026, 2)
+            self.assertEqual((n["nuevos"], n["sin_espn"], n["jugadores_sin_emparejar"]), (60, 0, 0))
+            # Ya descargados: no se vuelven a pedir.
+            self.assertEqual(descargar_temporada(ns, db, 2026, 2)["nuevos"], 0)
+
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2")
+            e = j.enfrentamiento
+            self.assertEqual(e.defensores[0]["nombre"], "Jugador 20")  # su par habitual en el rival
+            self.assertGreater(e.factor, 1.0)  # Jugador 20 permite más puntos que la media
+            self.assertLessEqual(e.factor, 1.12)
+            pred = predecir(ctx, j, "points")
+            self.assertIn("marcaje", pred.componentes["pts"]["explicacion"])
+            # Si su defensor habitual está fuera hoy, deja de contar.
+            j2 = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2", fuera_rival=["p20"])
+            self.assertNotIn("Jugador 20", [d["nombre"] for d in j2.enfrentamiento.defensores])

@@ -96,7 +96,9 @@ def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 
                 opp = g["away_id"] if team == g["home_id"] else g["home_id"]
                 ausentes = [(l["player_id"], l["name"]) for l in part.lesiones
                             if l["team_id"] == team and l["status"].lower() in ESTADOS_FUERA]
-                j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes)
+                fuera_rival = [l["player_id"] for l in part.lesiones
+                               if l["team_id"] == opp and l["status"].lower() in ESTADOS_FUERA]
+                j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes, fuera_rival)
                 if estado.get(pid):
                     j.notas.insert(0, f"en el parte de lesiones: {estado[pid]}")
                 if j.n < min_partidos or j.minutos < min_minutos:

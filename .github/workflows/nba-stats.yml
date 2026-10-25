@@ -1,22 +1,56 @@
-name: NBA stats.nba.com
+name: NBA (en tu computadora)
 
-# Descarga de stats.nba.com (enfrentamientos defensor-atacante y estadísticas avanzadas).
+# Corre en un runner autohospedado: tu propia computadora con el agente de GitHub Actions instalado.
+# stats.nba.com no responde a los servidores de GitHub (probado: se queda colgado), pero sí a una
+# conexión de casa. Solo se lanza a mano o por horario, nunca desde pull requests.
 on:
-  push:
-    branches: [nba-props]
-    paths: [".github/workflows/nba-stats.yml"]
   workflow_dispatch:
+    inputs:
+      tarea:
+        description: "diario = historial + enfrentamientos + analizar; historial; enfrentamientos; analizar"
+        type: choice
+        options: [diario, historial, enfrentamientos, analizar]
+        default: diario
+  schedule:
+    - cron: "47 16 * * *"   # 10:47 en Ciudad de México (16:47 UTC); el runner debe estar encendido
+
+concurrency:
+  group: nba
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
-  conexion:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  nba:
+    runs-on: [self-hosted]
+    timeout-minutes: 180
+    env:
+      # La base vive fuera del checkout para que no se borre entre ejecuciones.
+      APUESTAS_DB: ${{ github.workspace }}/../apuestas-datos/apuestas.db
+      APUESTAS_REPORTES: ${{ github.workspace }}/../apuestas-datos/reportes
+      SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
+      PYTHONUTF8: "1"
     steps:
-      - name: Probar conexión con stats.nba.com
-        run: |
-          curl -sS -m 40 -o /tmp/r.json -w "HTTP %{http_code} en %{time_total}s\n" \
-            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36" \
-            -H "Referer: https://www.nba.com/" -H "Origin: https://www.nba.com" -H "Accept: application/json, text/plain, */*" \
-            -H "x-nba-stats-origin: stats" -H "x-nba-stats-token: true" \
-            "https://stats.nba.com/stats/boxscorematchupsv3?GameID=0022500001" || echo "SIN RESPUESTA"
-          head -c 400 /tmp/r.json || true
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Historial de ESPN (continúa desde el último día guardado)
+        if: inputs.tarea == 'diario' || inputs.tarea == 'historial' || github.event_name == 'schedule'
+        run: python -m apuestas nba historial
+      - name: Enfrentamientos de stats.nba.com
+        if: inputs.tarea == 'diario' || inputs.tarea == 'enfrentamientos' || github.event_name == 'schedule'
+        run: python -m apuestas nba enfrentamientos
+      - name: Props del día
+        if: inputs.tarea == 'diario' || inputs.tarea == 'analizar' || github.event_name == 'schedule'
+        run: python -m apuestas nba analizar --top 25
+      - name: Guardar informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-nba-${{ github.run_number }}
+          path: ${{ github.workspace }}/../apuestas-datos/reportes/nba/
+          if-no-files-found: ignore
+          retention-days: 30

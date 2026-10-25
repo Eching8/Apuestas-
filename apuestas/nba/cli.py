@@ -1,6 +1,7 @@
 """Subcomandos de la NBA.
 
     python -m apuestas nba historial --desde 2025-10-21   # descarga el historial de ESPN (una vez)
+    python -m apuestas nba enfrentamientos               # stats.nba.com: quién defendió a quién (desde casa)
     python -m apuestas nba analizar                      # props de hoy
     python -m apuestas nba actualizar                    # resultados de ayer + liquidación
     python -m apuestas nba rendimiento                   # calibración: ¿aciertan lo que dicen?
@@ -20,13 +21,16 @@ from .analizador import (analizar, emparejar_props, guardar_analisis, guardar_pi
                          rendimiento)
 from .backtest import backtest, resumen
 from .db import NbaDB
+from .enfrentamientos import descargar_avanzadas, descargar_temporada
 from .espn import Espn
 from .informe import escribir, etiqueta
 from .modelo import NOMBRES, construir_contexto
+from .nbastats import TIPOS, NbaStats, temporada_nba
 from .recolector import descargar_dia, descargar_rango
 from .sgo import SportsGameOdds, ventana_dia
 
 log = logging.getLogger("apuestas")
+HISTORIAL_INICIO = date(2025, 10, 21)
 
 
 def _hoy(cfg: Config) -> date:
@@ -40,9 +44,35 @@ def _fecha(value: str | None, cfg: Config, offset: int = 0) -> date:
 def cmd_historial(args, cfg: Config, db: Database) -> int:
     nba = NbaDB(db.conn)
     hasta = _fecha(args.hasta, cfg, offset=-1)
+    if args.desde:
+        desde = date.fromisoformat(args.desde)
+    else:
+        # Sin --desde: continúa desde el último día guardado (o la temporada 2025-26 si la base está vacía).
+        ultimo = nba.conn.execute("SELECT MAX(fecha) FROM nba_games WHERE box_ok = 1").fetchone()[0]
+        desde = date.fromisoformat(ultimo) - timedelta(days=1) if ultimo else HISTORIAL_INICIO
     espn = Espn()
-    n = descargar_rango(espn, nba, date.fromisoformat(args.desde), hasta)
+    n = descargar_rango(espn, nba, desde, hasta)
     print(f"{n} partidos nuevos guardados ({espn.peticiones} consultas a ESPN).")
+    return 0
+
+
+def cmd_enfrentamientos(args, cfg: Config, db: Database) -> int:
+    nba = NbaDB(db.conn)
+    temporadas = [args.temporada] if args.temporada else [
+        r[0] for r in nba.conn.execute("SELECT DISTINCT season FROM nba_games WHERE box_ok = 1 ORDER BY season")]
+    if not temporadas:
+        print("La base no tiene partidos de ESPN: ejecuta antes 'nba historial'.")
+        return 2
+    ns = NbaStats()
+    for season in temporadas:
+        for tipo in args.tipos:
+            n = descargar_temporada(ns, nba, season, tipo, maximo=args.maximo)
+            print(f"Temporada {temporada_nba(season)} ({TIPOS[tipo]}): {n['partidos']} partidos en stats.nba.com, "
+                  f"{n['nuevos']} nuevos con enfrentamientos, {n['sin_espn']} sin partido de ESPN, "
+                  f"{n['sin_datos']} sin datos, {n['jugadores_sin_emparejar']} filas sin emparejar.")
+            if not args.sin_avanzadas:
+                print(f"  Estadísticas avanzadas: {descargar_avanzadas(ns, nba, season, tipo)} jugadores.")
+    print(f"{ns.peticiones} consultas a stats.nba.com.")
     return 0
 
 
@@ -134,9 +164,17 @@ def registrar(sub) -> None:
     s = nba.add_subparsers(dest="nba_cmd", required=True)
 
     h = s.add_parser("historial", help="descarga partidos jugados de ESPN a la base")
-    h.add_argument("--desde", required=True, help="AAAA-MM-DD, p. ej. 2025-10-21 (temporada pasada completa)")
+    h.add_argument("--desde", help="AAAA-MM-DD, p. ej. 2025-10-21 (por defecto, desde el último día guardado)")
     h.add_argument("--hasta", help="AAAA-MM-DD (por defecto, ayer)")
     h.set_defaults(func=cmd_historial)
+
+    e = s.add_parser("enfrentamientos",
+                     help="descarga de stats.nba.com quién defendió a quién (solo desde una conexión de casa)")
+    e.add_argument("--temporada", type=int, help="año de ESPN: 2026 = 2025-26 (por defecto, las de la base)")
+    e.add_argument("--tipos", type=int, nargs="+", default=[2, 3], help="2 = temporada regular, 3 = playoffs")
+    e.add_argument("--maximo", type=int, help="máximo de partidos nuevos por temporada (para probar)")
+    e.add_argument("--sin-avanzadas", action="store_true", help="no descargar uso, %% de rebotes, etc.")
+    e.set_defaults(func=cmd_enfrentamientos)
 
     a = s.add_parser("analizar", help="evalúa las props del día")
     a.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")

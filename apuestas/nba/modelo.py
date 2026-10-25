@@ -26,6 +26,7 @@ from datetime import date, timedelta
 
 from ..model import negbin_pmf
 from .desglose import Motor, motores, promedios_equipo, tabla_metricas, tasas_liga, totales_por_partido
+from . import marcajes
 from .espn import grupo_posicion
 from .zonas import VALOR, ZONAS
 
@@ -121,6 +122,7 @@ class Contexto:
     equipo_prom: dict = field(default_factory=dict)     # equipo -> ataque/defensa por 48'
     liga_equipo: dict = field(default_factory=dict)     # media de liga por equipo y 48'
     liga_motor: dict = field(default_factory=dict)      # grupo -> tasa de liga de cada componente
+    marcajes: marcajes.Marcajes | None = None           # stats.nba.com, si se descargó
 
 
 def _peso_temporada(season: int, actual: int) -> float:
@@ -214,7 +216,8 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
     equipo_prom, liga_equipo = promedios_equipo(equipo_partido, temporada_de, temporada, PESO_TEMPORADA_ANTERIOR)
     liga_motor = tasas_liga(filas, grupo, equipo_partido, temporada, PESO_TEMPORADA_ANTERIOR)
     return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
-                    zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor)
+                    zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor,
+                    marcajes.construir(conn, fecha, desde, grupo))
 
 
 # --- Jugador --------------------------------------------------------------------------
@@ -243,6 +246,7 @@ class Jugador:
     ajuste_bajas: dict[str, float] = field(default_factory=dict)   # stat básica -> multiplicador
     zonas: dict[str, dict] = field(default_factory=dict)
     motores: dict[str, Motor] | None = None
+    enfrentamiento: marcajes.Enfrentamiento | None = None
 
     @property
     def n(self) -> int:
@@ -299,7 +303,8 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
 
 
 def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, opp_id: str,
-                     ausentes: list[tuple[str, str]] | None = None) -> Jugador | None:
+                     ausentes: list[tuple[str, str]] | None = None,
+                     fuera_rival: list[str] | None = None) -> Jugador | None:
     partidos = ctx.por_jugador.get(player_id, [])[:120]
     if not partidos:
         return None
@@ -319,6 +324,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
+    j.enfrentamiento = marcajes.evaluar(ctx.marcajes, player_id, j.grupo, opp_id, set(fuera_rival or ()))
     return j
 
 
@@ -390,6 +396,10 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
         mu_final = PESO_MOTORES * motor.mu + (1 - PESO_MOTORES) * mu_c * j.minutos
         componentes[c] = {"por_tasa": mu_c * j.minutos, "por_motores": motor.mu, "final": mu_final,
                           "explicacion": motor.explicacion, "datos": motor.datos}
+        if j.enfrentamiento and c in ("pts", "fgm", "tpm"):
+            mu_final *= j.enfrentamiento.factor
+            componentes[c]["final"] = mu_final
+            componentes[c]["explicacion"] += "; " + marcajes.explicar(j.enfrentamiento)
         mu_c = mu_final / j.minutos if j.minutos else 0.0
         mu_min += mu_c
         tasa_total += tasa
