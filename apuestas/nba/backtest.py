@@ -36,7 +36,7 @@ def backtest(conn, desde: date, hasta: date, min_partidos: int = 10, min_minutos
                     continue
                 for stat in stats:
                     line = linea_referencia(j.partidos, stat)
-                    e = evaluar(ctx, j, stat, line)
+                    e = evaluar(ctx, j, stat, line, detalle=False)
                     real = valor(dict(r), stat)
                     filas.append({"fecha": fecha, "stat": stat, "prob": e.prob, "prob_modelo": e.prob_modelo,
                                   "acierto": int((real > line) if e.lado == "más" else (real < line))})

@@ -11,6 +11,11 @@ from .modelo import NOMBRES, Contexto, Evaluacion, mejor_contra
 from .zonas import NOMBRES as ZONAS_NOMBRE
 
 GRUPOS = {"G": "bases/escoltas", "F": "aleros/ala-pívots", "C": "pívots"}
+COMPONENTE = {"pts": "Puntos", "reb": "Rebotes", "ast": "Asistencias", "tpm": "Triples", "stl": "Robos",
+              "blk": "Tapones", "tov": "Pérdidas", "fgm": "Tiros de campo anotados", "ftm": "Tiros libres anotados",
+              "fta": "Tiros libres intentados"}
+CORTES = (("ult5", "Últ. 5"), ("ult10", "Últ. 10"), ("temporada", "Temporada"), ("anterior", "Temp. anterior"),
+          ("vs_rival", "vs este rival"))
 
 
 def _pct(x: float) -> str:
@@ -45,6 +50,26 @@ CABECERA = ("| Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Tempor
 SEPARADOR = "|---|---|---|---|---|---|---|---|---|"
 
 
+def _metrica(v: float | None, tipo: str) -> str:
+    if v is None:
+        return "-"
+    return f"{v * 100:.1f}%" if tipo == "tasa" else f"{v:.1f}"
+
+
+def por_que(e: Evaluacion) -> list[str]:
+    """De dónde sale la media de la prop y las estadísticas relacionadas en que se basa."""
+    out = [f"**¿Por qué {e.mu:.1f} {NOMBRES[e.stat]}?** (línea {e.line:g}; {e.factores['minutos']:.1f} minutos esperados)", ""]
+    for c, d in e.componentes.items():
+        out.append(f"- {COMPONENTE[c]} **{d['final']:.1f}** (por componentes {d['por_motores']:.1f} · por tasa por "
+                   f"minuto y defensa rival {d['por_tasa']:.1f}): {d['explicacion']}.")
+    if e.metricas:
+        out += ["", "| Estadística | " + " | ".join(n for _, n in CORTES) + " |",
+                "|---" * (len(CORTES) + 1) + "|"]
+        for m in e.metricas:
+            out.append(f"| {m['metrica']} | " + " | ".join(_metrica(m[k], m["tipo"]) for k, _ in CORTES) + " |")
+    return out + [""]
+
+
 def _ficha(ctx: Contexto, part: Partido, pid: str) -> list[str]:
     j = part.jugadores[pid]
     evs = [e for e in part.evaluaciones if e.player_id == pid]
@@ -62,6 +87,7 @@ def _ficha(ctx: Contexto, part: Partido, pid: str) -> list[str]:
         out.append(f"- Defensa de {rival} contra {GRUPOS[j.grupo]} en {NOMBRES[top.stat]}: {_rel(ajuste['rival'])} "
                    f"respecto a la media; ajuste por su historial contra defensas similares: "
                    f"{_rel(ajuste['tipo_defensa'])}.")
+        out += [""] + por_que(top)
     tipos = []
     for stat in ("points", "rebounds", "assists", "threes"):
         m = mejor_contra(ctx, j, stat)
@@ -85,11 +111,18 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
           "**Modelo** = minutos, tasa por minuto, bajas, defensa rival por posición, zonas de tiro y tipo de "
           "defensa, mezclado con el acierto real del jugador sobre esa línea. **Casa** = probabilidad implícita "
           "en las cuotas sin el margen. **Prob. final** = mezcla de ambas. Si modelo y casa discrepan mucho, "
-          "la casa suele saber algo (rol, rotación, una baja): revísalo antes de apostar.", ""]
+          "la casa suele saber algo (rol, rotación, una baja): revísalo antes de apostar.", "",
+          "Cada media se construye desde las estadísticas que la producen (tiros × acierto por zona, % de los "
+          "rebotes disponibles que captura, % de las canastas de sus compañeros que asiste...) y se muestra con "
+          "esas estadísticas en sus últimos 5 y 10 partidos, la temporada y contra este rival. Todo queda "
+          "guardado en la tabla `nba_analisis` de la base.", ""]
     md += ["## Las más probables del día", ""]
     if picks:
         md += ["| Partido " + CABECERA, "|---" + SEPARADOR]
         md += [_fila(e, p.titulo) for p, e in picks[:30]]
+        md += ["", "### En qué se basan las 10 más probables", ""]
+        for p, e in picks[:10]:
+            md += [f"#### {etiqueta(e)} ({_pct(e.prob)}) — {p.titulo}", ""] + por_que(e)
     else:
         md.append("Ninguna prop supera el umbral de probabilidad hoy.")
     md.append("")

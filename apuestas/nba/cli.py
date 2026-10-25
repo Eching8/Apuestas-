@@ -16,7 +16,8 @@ from zoneinfo import ZoneInfo
 from ..config import Config
 from ..db import Database
 from ..report import AVISO
-from .analizador import analizar, emparejar_props, guardar_picks, liquidar, mejores, rendimiento
+from .analizador import (analizar, emparejar_props, guardar_analisis, guardar_picks, liquidar, mejores,
+                         rendimiento)
 from .backtest import backtest, resumen
 from .db import NbaDB
 from .espn import Espn
@@ -73,6 +74,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado)
     picks = mejores(partidos, cfg.nba_prob_min)
     guardar_picks(nba, fecha, picks)
+    guardar_analisis(nba, fecha, partidos)
     md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar)
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")

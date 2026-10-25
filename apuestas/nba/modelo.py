@@ -25,6 +25,7 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 
 from ..model import negbin_pmf
+from .desglose import Motor, motores, promedios_equipo, tabla_metricas, tasas_liga, totales_por_partido
 from .espn import grupo_posicion
 from .zonas import VALOR, ZONAS
 
@@ -50,6 +51,11 @@ K_ZONA_TIROS = 120.0       # tiros "virtuales" de media de liga por zona (rival)
 K_ZONA_JUGADOR = 25.0      # ídem para el porcentaje del jugador en cada zona
 K_TIPO_MIN = 400.0         # minutos virtuales para el rendimiento contra un tipo de defensa
 PESO_MODELO = 0.75         # resto: tasa de acierto real sobre la línea (suavizada)
+# Peso de la proyección por componentes (desglose.py: tiros × acierto, % de rebotes disponibles, % de
+# canastas asistidas...) frente a la de tasa por minuto × defensa rival por posición. En el backtest
+# (feb-mar 2026) ambas aciertan casi igual (Brier 0.2270 con 0, 0.2271 con 0.3, 0.2282 con 1); 0.3 mejora
+# un poco la calibración por encima del 70 % y deja cada media explicada por sus componentes.
+PESO_MOTORES = 0.3
 # Contracción hacia 50 %: el backtest (feb-mar 2026, 19.700 props) mostró que sin ella el modelo era
 # ~3 puntos optimista por encima del 70 %. Con 0.9 queda calibrado (incluso algo conservador arriba).
 CALIBRACION = 0.9
@@ -111,6 +117,10 @@ class Contexto:
     ritmo: dict[str, float]                 # posesiones por partido de cada equipo
     ritmo_liga: float
     ultimo_partido: dict[str, str]          # equipo -> fecha de su último partido
+    equipo_partido: dict = field(default_factory=dict)  # (partido, equipo) -> totales
+    equipo_prom: dict = field(default_factory=dict)     # equipo -> ataque/defensa por 48'
+    liga_equipo: dict = field(default_factory=dict)     # media de liga por equipo y 48'
+    liga_motor: dict = field(default_factory=dict)      # grupo -> tasa de liga de cada componente
 
 
 def _peso_temporada(season: int, actual: int) -> float:
@@ -200,8 +210,11 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
             zona_rival[t][z] = (pct, frec)
     zona_jugador = {p: {z: tuple(v) for z, v in por_z.items()} for p, por_z in zj.items()}
 
+    equipo_partido = totales_por_partido(filas)
+    equipo_prom, liga_equipo = promedios_equipo(equipo_partido, temporada_de, temporada, PESO_TEMPORADA_ANTERIOR)
+    liga_motor = tasas_liga(filas, grupo, equipo_partido, temporada, PESO_TEMPORADA_ANTERIOR)
     return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
-                    zona_jugador, ritmo, ritmo_liga, ultimo)
+                    zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor)
 
 
 # --- Jugador --------------------------------------------------------------------------
@@ -212,6 +225,8 @@ class Prediccion:
     mu: float
     var: float
     factores: dict[str, float] = field(default_factory=dict)
+    # Por componente (pts, reb, ast...): proyección por tasa, por motores y la final, con la explicación.
+    componentes: dict[str, dict] = field(default_factory=dict)
 
 
 @dataclass
@@ -227,6 +242,7 @@ class Jugador:
     notas: list[str] = field(default_factory=list)
     ajuste_bajas: dict[str, float] = field(default_factory=dict)   # stat básica -> multiplicador
     zonas: dict[str, dict] = field(default_factory=dict)
+    motores: dict[str, Motor] | None = None
 
     @property
     def n(self) -> int:
@@ -248,6 +264,11 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
         comp = ctx.por_jugador.get(comp_id, [])
         recientes = [p for p in comp[:PARTIDOS_MINUTOS] if p["team_id"] == j.team_id]
         if not recientes or sum(p["minutes"] for p in recientes) / len(recientes) < MIN_COMPANERO:
+            continue
+        # Si ya faltaba en los últimos partidos, sus minutos recientes ya reflejan la baja: no se suma dos veces.
+        ultimos = [p["game_id"] for p in j.partidos if p["team_id"] == j.team_id][:3]
+        if ultimos and not {p["game_id"] for p in comp} & set(ultimos):
+            j.notas.append(f"{comp_nombre} ya no jugó en sus últimos partidos: la baja ya está en sus minutos")
             continue
         temporadas = {p["season"] for p in comp if p["team_id"] == j.team_id}
         juegos_comp = {p["game_id"] for p in comp}
@@ -340,6 +361,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
     mu_min = 0.0
     fac_rival = fac_tipo = 0.0
     tasa_total = tasa_base = 0.0
+    componentes: dict[str, dict] = {}
+    if j.motores is None:
+        j.motores = motores(ctx, j, w)
     for c in COMPONENTES[stat]:
         tasa = (sum(wi * p[c] for wi, p in zip(w, j.partidos)) + 2 * m_media * liga.get(c, 0.0)) / (sw_min + 2 * m_media)
         tasa_base += tasa
@@ -362,6 +386,11 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
                 f_tipo = math.sqrt(1 + (t_t / tasa - 1) * m_t / (m_t + K_TIPO_MIN))
                 f_tipo = min(1.15, max(0.85, f_tipo))
         mu_c = tasa * f_def * f_tipo
+        motor = j.motores[c]
+        mu_final = PESO_MOTORES * motor.mu + (1 - PESO_MOTORES) * mu_c * j.minutos
+        componentes[c] = {"por_tasa": mu_c * j.minutos, "por_motores": motor.mu, "final": mu_final,
+                          "explicacion": motor.explicacion, "datos": motor.datos}
+        mu_c = mu_final / j.minutos if j.minutos else 0.0
         mu_min += mu_c
         tasa_total += tasa
         fac_rival += tasa * f_def
@@ -379,7 +408,7 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
         "minutos": j.minutos, "tasa_min": tasa_total,
         "rival": fac_rival / tasa_total if tasa_total else 1.0,
         "tipo_defensa": fac_tipo / tasa_total if tasa_total else 1.0, "dispersion": phi,
-    })
+    }, componentes)
 
 
 # --- Evaluación de una línea ----------------------------------------------------------
@@ -403,6 +432,8 @@ class Evaluacion:
     odd: float | None
     factores: dict
     linea_80: tuple[float | None, float | None]
+    componentes: dict = field(default_factory=dict)   # de dónde sale la media: ver Prediccion
+    metricas: list = field(default_factory=list)      # estadísticas relacionadas: últ. 5/10, temporada, rival
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -423,7 +454,7 @@ def prob_mercado(over_odd: float | None, under_odd: float | None) -> tuple[float
 
 
 def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float | None = None,
-            under_odd: float | None = None, peso_mercado: float = PESO_MERCADO) -> Evaluacion:
+            under_odd: float | None = None, peso_mercado: float = PESO_MERCADO, detalle: bool = True) -> Evaluacion:
     pred = predecir(ctx, j, stat)
     lados = {}
     con_cuota = bool(over_odd or under_odd)
@@ -444,7 +475,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         j.player_id, j.nombre, stat, line, lado, prob, p_jug, p_casa, pred.mu, math.sqrt(pred.var),
         _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
         sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
-        linea_segura(pred.mu, pred.var),
+        linea_segura(pred.mu, pred.var), pred.componentes,
+        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [],
     )
 
 

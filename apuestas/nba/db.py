@@ -88,6 +88,35 @@ CREATE TABLE IF NOT EXISTS nba_props (
     PRIMARY KEY (fecha, game_id, player_id, stat)
 );
 
+-- Totales de cada equipo por partido (suma de sus jugadores): base de los fallos, canastas y pérdidas
+-- esperados de cada partido.
+CREATE VIEW IF NOT EXISTS nba_team_games AS
+SELECT game_id, team_id, opp_id, is_home, SUM(minutes) AS minutes, SUM(pts) AS pts, SUM(fgm) AS fgm,
+       SUM(fga) AS fga, SUM(tpm) AS tpm, SUM(tpa) AS tpa, SUM(ftm) AS ftm, SUM(fta) AS fta, SUM(oreb) AS oreb,
+       SUM(dreb) AS dreb, SUM(reb) AS reb, SUM(ast) AS ast, SUM(stl) AS stl, SUM(blk) AS blk, SUM(tov) AS tov
+FROM nba_player_games GROUP BY game_id, team_id;
+
+-- Cada prop evaluada con todo su análisis: de dónde sale la media (componentes) y las estadísticas
+-- relacionadas en sus últimos 5 y 10 partidos, la temporada, la anterior y contra este rival (JSON).
+CREATE TABLE IF NOT EXISTS nba_analisis (
+    fecha TEXT NOT NULL,
+    game_id TEXT NOT NULL,
+    player_id TEXT NOT NULL,
+    name TEXT,
+    stat TEXT NOT NULL,
+    line REAL NOT NULL,
+    side TEXT NOT NULL,
+    prob REAL NOT NULL,
+    prob_modelo REAL,
+    prob_mercado REAL,
+    mu REAL,
+    sd REAL,
+    odd REAL,
+    detalle TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (fecha, game_id, player_id, stat)
+);
+
 CREATE TABLE IF NOT EXISTS nba_picks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fecha TEXT NOT NULL,

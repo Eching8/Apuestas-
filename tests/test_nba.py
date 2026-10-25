@@ -5,7 +5,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from apuestas.db import Database
-from apuestas.nba.analizador import analizar, emparejar_props, guardar_picks, liquidar, mejores, rendimiento
+import json
+
+from apuestas.nba.analizador import (analizar, emparejar_props, guardar_analisis, guardar_picks, liquidar, mejores,
+                                     rendimiento)
+from apuestas.nba.desglose import oportunidades
 from apuestas.nba.db import NbaDB
 from apuestas.nba.espn import grupo_posicion, parse_box, parse_shots
 from apuestas.nba.informe import escribir
@@ -154,6 +158,22 @@ class ModeloTest(unittest.TestCase):
             self.assertGreater(pred.var, pred.mu)  # incluye la incertidumbre de los minutos
             pra = predecir(ctx, j, "pra")
             self.assertGreater(pra.mu, pred.mu)
+            # La media de PRA es la suma de sus componentes, cada uno con su explicación.
+            self.assertEqual(set(pra.componentes), {"pts", "reb", "ast"})
+            self.assertAlmostEqual(sum(c["final"] for c in pra.componentes.values()), pra.mu, places=6)
+            self.assertIn("tiros de campo", pra.componentes["pts"]["explicacion"])
+            self.assertIn("fallos del rival", pra.componentes["reb"]["explicacion"])
+
+    def test_oportunidades(self):
+        p = {"minutes": 24, "fga": 10, "fgm": 5, "tpa": 4, "tpm": 2, "fta": 4, "ftm": 3, "tov": 2, "oreb": 1,
+             "dreb": 5, "ast": 6, "stl": 1, "blk": 1}
+        mio = {"min": 240, "fga": 90, "fgm": 41, "tpa": 35, "tov": 12}
+        rival = {"min": 240, "fga": 88, "fgm": 40, "tpa": 30, "tov": 15}
+        o = oportunidades(p, mio, rival)
+        # Medio partido en pista: la mitad de los 48 fallos del rival y de las 36 canastas de sus compañeros.
+        self.assertEqual(o["dreb"], (5, 24.0))
+        self.assertEqual(o["ast"], (6, 18.0))
+        self.assertEqual(o["blk"], (1, 29.0))
 
     def test_flujo_completo(self):
         with TemporaryDirectory() as tmp:
@@ -187,8 +207,15 @@ class ModeloTest(unittest.TestCase):
             self.assertAlmostEqual(evs[0].prob, 0.6 * evs[0].prob_modelo + 0.4 * 0.5)
             picks = mejores(partidos, 0.65)
             guardar_picks(db, FECHA, picks)
+            guardar_analisis(db, FECHA, partidos)
+            fila = db.conn.execute("SELECT * FROM nba_analisis WHERE player_id = 'a1'").fetchone()
+            detalle = json.loads(fila["detalle"])
+            self.assertIn("pts", detalle["componentes"])
+            self.assertIn("Tiros de campo intentados", [m["metrica"] for m in detalle["metricas"]])
             md, js = escribir(Path(tmp), FECHA, ctx, partidos, picks, [])
-            self.assertIn("Ángel Pérez Jr.: más de 14.5 puntos", md.read_text(encoding="utf-8"))
+            texto = md.read_text(encoding="utf-8")
+            self.assertIn("Ángel Pérez Jr.: más de 14.5 puntos", texto)
+            self.assertIn("¿Por qué", texto)
 
             # Liquidación: el partido termina con 30 puntos de a1.
             db.save_box("hoy", "1", [{"player_id": "a1", "team_id": "1", "opp_id": "2", "name": "a", "position": "G",

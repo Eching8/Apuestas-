@@ -1,6 +1,7 @@
 """Une calendario, lesiones, líneas y modelo: evalúa cada prop del día y liquida las de días anteriores."""
 from __future__ import annotations
 
+import json
 import logging
 from dataclasses import dataclass, field
 
@@ -109,6 +110,25 @@ def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 
         part.evaluaciones.sort(key=lambda e: e.prob, reverse=True)
         partidos.append(part)
     return partidos, ctx
+
+
+def guardar_analisis(db: NbaDB, fecha: str, partidos: list[Partido]) -> None:
+    """Guarda cada prop evaluada con su desglose completo (tabla nba_analisis)."""
+    db.conn.execute("DELETE FROM nba_analisis WHERE fecha = ?", (fecha,))
+    filas = []
+    for p in partidos:
+        for e in p.evaluaciones:
+            detalle = {"componentes": e.componentes, "metricas": e.metricas, "factores": e.factores,
+                       "acierto_10": e.acierto_10, "acierto_temporada": e.acierto_temporada,
+                       "vs_rival": e.vs_rival, "linea_80": e.linea_80,
+                       "notas": p.jugadores[e.player_id].notas if e.player_id in p.jugadores else []}
+            filas.append((fecha, p.game["id"], e.player_id, e.nombre, e.stat, e.line, e.lado, e.prob, e.prob_modelo,
+                          e.prob_mercado, e.mu, e.sd, e.odd, json.dumps(detalle, ensure_ascii=False), now_iso()))
+    db.conn.executemany(
+        """INSERT OR REPLACE INTO nba_analisis(fecha, game_id, player_id, name, stat, line, side, prob, prob_modelo,
+               prob_mercado, mu, sd, odd, detalle, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        filas)
+    db.commit()
 
 
 def mejores(partidos: list[Partido], prob_min: float) -> list[tuple[Partido, Evaluacion]]:
