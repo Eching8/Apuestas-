@@ -44,7 +44,14 @@ NOMBRES = {
 BASICAS = ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "fgm", "ftm", "fta")
 
 PESO_TEMPORADA_ANTERIOR = 0.5
-K_TEMPORADA_ANTERIOR: float | None = None   # peso máximo de la temporada anterior, en partidos
+# Peso máximo de la temporada anterior, en partidos, en cuanto hay partidos de la actual. Backtest del
+# arranque de 2025-26 (22 oct-25 nov, con 2024-25 como anterior): en jugadores con cambio de rol (tasa
+# ±30 % y ≤8 partidos) el Brier baja de 0.2274 (sin límite) a 0.2256 con 4; en el resto, igual.
+K_TEMPORADA_ANTERIOR: float | None = 4.0
+# Cambio de rol: tasa por minuto de esta temporada ±30 % frente a la anterior con menos de 10 partidos.
+# Entonces la casa (que conoce el rol nuevo) pesa más en la probabilidad final.
+CAMBIO_ROL = 0.3
+PESO_MERCADO_CAMBIO_ROL = 0.6
 DECAY_TASA = 0.97          # peso del partido i-ésimo más reciente para las tasas
 DECAY_MINUTOS = 0.8        # ídem para los minutos (cambian rápido: rol, rotación)
 PARTIDOS_MINUTOS = 10
@@ -251,6 +258,7 @@ class Jugador:
     motores: dict[str, Motor] | None = None
     enfrentamiento: marcajes.Enfrentamiento | None = None
     pocos_con_equipo: bool = False
+    cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
 
     @property
     def n(self) -> int:
@@ -317,6 +325,25 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
     return min(6.0, delta_total)
 
 
+def _cambio_rol(ctx: Contexto, partidos: list[dict]) -> dict[str, float]:
+    actual = [p for p in partidos if p["season"] == ctx.temporada]
+    anterior = [p for p in partidos if p["season"] != ctx.temporada]
+    if not 2 <= len(actual) < 10 or len(anterior) < 10:
+        return {}
+    m_act = sum(p["minutes"] for p in actual)
+    m_ant = sum(p["minutes"] for p in anterior)
+    out = {}
+    for c in ("pts", "reb", "ast", "tpm"):
+        t_ant = sum(p[c] for p in anterior) / m_ant if m_ant else 0
+        # Solo estadísticas con volumen (al menos ~1 por partido): en robos o tapones el ruido manda.
+        if not m_act or t_ant * m_ant / len(anterior) < 1:
+            continue
+        r = (sum(p[c] for p in actual) / m_act) / t_ant
+        if abs(r - 1) >= CAMBIO_ROL:
+            out[c] = r
+    return out
+
+
 def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, opp_id: str,
                      ausentes: list[tuple[str, str]] | None = None,
                      fuera_rival: list[str] | None = None) -> Jugador | None:
@@ -341,6 +368,10 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         j.notas.append(f"minutos limitados a {j.minutos:.0f} (su máximo reciente + 2)")
     con_equipo = [p for p in partidos if p["team_id"] == team_id and p["season"] == ctx.temporada]
     j.pocos_con_equipo = len(con_equipo) < 3 and any(p["team_id"] != team_id for p in partidos[:15])
+    j.cambio_rol = _cambio_rol(ctx, partidos)
+    if j.cambio_rol:
+        j.notas.append("cambio de rol esta temporada (por minuto): " + ", ".join(
+            f"{c} {r - 1:+.0%}" for c, r in j.cambio_rol.items()) + "; se da más peso a la línea de la casa")
     if j.pocos_con_equipo:
         j.notas.append(f"solo {len(con_equipo)} partidos con su equipo actual: su rol puede haber cambiado, "
                        "se da más peso a la línea de la casa")
@@ -495,6 +526,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
     con_cuota = bool(over_odd or under_odd)
     if j.pocos_con_equipo:
         peso_mercado = max(peso_mercado, PESO_MERCADO_TRASPASO)
+    if set(COMPONENTES[stat]) & set(j.cambio_rol):
+        peso_mercado = max(peso_mercado, PESO_MERCADO_CAMBIO_ROL)
     for lado, p_mod, odd, p_casa in zip(("más", "menos"), prob_lados(line, pred.mu, pred.var),
                                         (over_odd, under_odd), prob_mercado(over_odd, under_odd)):
         if con_cuota and not odd:

@@ -120,7 +120,9 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
 
 - **Minutos esperados**: últimos 10 partidos con más peso a los recientes; en cuanto empieza la
   temporada, los minutos de la anterior casi no cuentan (los roles cambian). Back-to-back: -3 %.
-- **Tasa por minuto** de cada estadística, con toda su historia (la temporada anterior pesa la mitad).
+- **Tasa por minuto** de cada estadística, con toda su historia (la temporada anterior pesa la mitad y,
+  en cuanto hay partidos de la nueva, como mucho lo que 4 partidos). Si un jugador cambia de rol (tasa
+  ±30 % con menos de 10 partidos), la línea de la casa pesa más (60 %): conoce el rol nuevo.
 - **Bajas**: si un compañero importante está fuera, compara al jugador con y sin él (minutos y tasas).
   Si ese compañero ya faltaba en los últimos partidos, la baja ya está en sus minutos y no se suma.
 - **Defensa rival por posición**: lo que concede el rival por minuto a bases, aleros o pívots.
@@ -202,6 +204,10 @@ Backtest del 20 de febrero al 10 de marzo de 2026 (19.700 props, línea de refer
 | 75-80 % (media 77.2 %) | 78.8 % |
 | 80-85 % (media 82.2 %) | 85.4 % |
 | 85 %+ (media 88.4 %) | 91.0 % |
+
+Arranque de temporada (22 oct-25 nov de 2025, con 2024-25 como temporada anterior): en jugadores con
+cambio de rol, limitar la temporada anterior a 4 partidos baja el Brier de 0.2274 a 0.2256; en el resto
+no cambia.
 
 Qué aporta cada factor (Brier, menor es mejor; base 0.2270): sin defensa por posición 0.2277, sin el
 acierto real 0.2279. Las zonas de tiro y el tipo de defensa apenas cambian el resultado global (±0.0001):
