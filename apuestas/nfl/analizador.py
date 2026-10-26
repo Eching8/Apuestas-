@@ -400,9 +400,10 @@ def analizar_partido(ctx: Contexto, game: dict, mercado: Mercado | None = None,
 
 
 def _precio_caducado(e: Evaluacion) -> bool:
-    """La mejor cuota paga más de 1.5 veces la de referencia (consenso o, si no hay, la justa sin margen)."""
-    ref = e.consenso or (e.oferta.justa if e.oferta else None)
-    return bool(ref and e.odd and e.odd > 1.5 * ref)
+    """La mejor cuota paga más de 1.5 veces la de referencia: la menor entre el consenso y la cuota justa sin
+    margen (cuando una sola casa ofrece la apuesta, su precio ES el consenso y solo la justa lo delata)."""
+    refs = [x for x in (e.consenso, e.oferta.justa if e.oferta else None) if x]
+    return bool(refs and e.odd and e.odd > 1.5 * min(refs))
 
 
 def con_valor(partidos: list[AnalisisPartido], valor_min: float = 0.04, edge_min: float = 0.03,
