@@ -200,6 +200,15 @@ CREATE TABLE IF NOT EXISTS proj_puntos (
     PRIMARY KEY (fecha, game_id, player_id)
 );
 
+-- Resultado del backtest de cada mercado y su estado (validado / desactivado / sin validar).
+CREATE TABLE IF NOT EXISTS market_validation (
+    market VARCHAR, period VARCHAR, estrategia VARCHAR, desde DATE, hasta DATE, apuestas INTEGER,
+    roi_apertura DOUBLE, roi_ic_inf DOUBLE, roi_ic_sup DOUBLE, clv_ajustado DOUBLE, bate_cierre DOUBLE,
+    max_drawdown_u DOUBLE, apuestas_cierre INTEGER, roi_cierre DOUBLE, roi_cierre_ic_inf DOUBLE,
+    roi_cierre_ic_sup DOUBLE, estado VARCHAR, motivo VARCHAR, evaluado_at TIMESTAMP,
+    PRIMARY KEY (market, period, estrategia)
+);
+
 -- Registro de descargas (qué se pidió, cuándo y si falló).
 CREATE TABLE IF NOT EXISTS ingest_log (
     source VARCHAR, key VARCHAR, status VARCHAR, detail VARCHAR, logged_at TIMESTAMP,

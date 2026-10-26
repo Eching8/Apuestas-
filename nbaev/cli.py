@@ -184,6 +184,24 @@ def cmd_puntos_proyectar(cfg, args) -> None:
               [["name", "line", "p_over", "p_under"]].round(3).to_string(index=False))
 
 
+def cmd_backtest_puntos(cfg, args) -> None:
+    """Fase 4: backtest con cuotas reales del mercado de puntos y estado del mercado en el catálogo."""
+    import pandas as pd
+    from .backtest import fase4
+    cache = config.RAIZ / "data" / "cache"
+    lin = pd.read_parquet(cache / "puntos_lineas_oos.parquet")
+    pred = pd.read_parquet(cache / "puntos_oos.parquet")[["game_id", "player_id", "libres"]]
+    lin = lin.merge(pred.drop_duplicates(["game_id", "player_id"]), on=["game_id", "player_id"], how="left")
+    con = _con(cfg)
+    r = fase4.ejecutar(con, lin)
+    fase4.guardar_validacion(con, r)
+    texto = fase4.informe(r)
+    for carpeta in (config.RAIZ / "reportes", config.RAIZ / "docs" / "resultados"):
+        carpeta.mkdir(parents=True, exist_ok=True)
+        (carpeta / "fase4_backtest_puntos.md").write_text(texto, encoding="utf-8")
+    print(texto)
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="nbaev", description="Props NBA con valor esperado")
     ap.add_argument("--config", help="ruta a un YAML de configuración")
@@ -235,6 +253,9 @@ def main(argv: list[str] | None = None) -> int:
     p = pu.add_parser("proyectar", help="distribución de puntos de los partidos de una fecha")
     p.add_argument("--fecha")
     p.set_defaults(f=cmd_puntos_proyectar)
+
+    bt = grupos.add_parser("backtest", help="fase 4: backtest con cuotas reales").add_subparsers(dest="cmd", required=True)
+    bt.add_parser("puntos", help="mercado de puntos (necesita `puntos validar`)").set_defaults(f=cmd_backtest_puntos)
 
     args = ap.parse_args(argv)
     cfg = config.cargar(args.config)

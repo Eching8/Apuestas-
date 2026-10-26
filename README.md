@@ -20,7 +20,7 @@ Este repositorio contiene dos cosas:
 | 1 | Datos: box scores, jugada a jugada, cuartos, quintetos, primer anotador, contexto, lesiones, cuotas | **hecha** |
 | 2 | Proyección de minutos | **hecha** |
 | 3 | Modelo de puntos (distribución completa + Monte Carlo) | **hecha** |
-| 4 | Validación walk-forward y backtest con cuotas reales | pendiente |
+| 4 | Validación walk-forward y backtest con cuotas reales | **hecha** (puntos: desactivado) |
 | 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
 | 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
 
@@ -107,6 +107,34 @@ python -m nbaev puntos proyectar    # distribución de puntos de hoy (10.000 sim
     mercados y jugadores.
 - **Calidad de datos**: los "cierres" de SportsGameOdds de oct-2025 a mediados de enero de 2026 tienen ~10 % de líneas
   tomadas con el partido empezado. Solo se usa un cierre si hay apertura y no se aleja más de 3 puntos.
+
+### Fase 4: backtest con cuotas reales (`nbaev/backtest/apuestas.py`, `nbaev/betting/`)
+
+```bash
+python -m nbaev backtest puntos     # -> reportes/fase4_backtest_puntos.md y estado del mercado en el catálogo
+```
+
+- Motor genérico para mercados de dos lados: elige el lado con más EV si edge ≥ umbral; máx. 1 apuesta por
+  jugador y 3 por partido; liquida con el resultado real; ROI, drawdown, CLV (por precio y **ajustado por línea**:
+  la probabilidad justa del cierre trasladada a la línea apostada), % de veces que se bate el cierre, bootstrap por
+  partido y p-valores de Holm por probar varias estrategias. Banca simulada con 1/4 Kelly, tope 2 % por apuesta y
+  10 % por día. Quitar margen: multiplicativo, power y Shin (`nbaev/betting/margen.py`).
+- **Resultado del mercado de puntos (feb-jun 2026, 8.040 líneas de apertura): DESACTIVADO.** Informe completo en
+  `docs/resultados/fase4_backtest_puntos.md`.
+  - A la cuota de apertura parecía haber ventaja: 1.694 apuestas, ROI +8,9 % (IC 95 % [+4,3 %, +13,5 %]), CLV
+    ajustado +3,5 %, bate el cierre el 73 % de las veces.
+  - Pero el diagnóstico muestra de dónde sale: ROI +20,7 % cuando la línea se movió después hacia la apuesta,
+    −3,9 % (el margen) cuando no se movió; +11,9 % con bajas de compañeros, +1,2 % sin ellas. El modelo usa
+    información que solo se conoce cerca del salto (quién se viste, spread y total de cierre) y que la apertura no
+    tenía. No es una ventaja alcanzable: quien tiene esa información ve ya cuotas cercanas al cierre.
+  - Prueba realista, apostando a la cuota de cierre: ROI **−13,4 %** (IC 95 % [−22,9 %, −3,7 %]). El modelo no
+    supera al mercado cuando ambos saben lo mismo.
+- Regla de validación (aplicada a cada mercado): ≥ 300 apuestas, CLV ajustado > 0, batir el cierre > 50 % y ROI con
+  IC 95 % > 0 apostando cuando se conoce la información que usa el modelo. Se guarda en `market_validation` y en el
+  estado del `market_catalog`.
+- Qué haría falta para medir la ventaja real a la apertura: partes de lesiones y cuotas con hora, para ejecutar el
+  modelo con lo que se sabía en cada momento. Las capturas diarias (`datos diario` + `datos cuotas`) ya los guardan;
+  con 2-3 meses de capturas se podrá repetir este backtest "en el momento".
 
 ### Instalación
 
