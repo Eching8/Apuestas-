@@ -1,4 +1,130 @@
-# Apuestas: analizador diario de partidos, combinadas y props de la NBA
+# Apuestas
+
+Este repositorio contiene dos cosas:
+
+1. **`nbaev/` — sistema de props NBA con valor esperado** (en construcción por fases, ver abajo). Estima la
+   probabilidad de cada prop de jugador con una simulación del partido, la compara con las cuotas sin margen y
+   solo señala apuestas con EV positivo en mercados que hayan superado el backtest.
+2. **`apuestas/` — analizador anterior** de fútbol y props NBA (documentado más abajo, en "Sistema anterior").
+
+> Las apuestas implican riesgo de perder dinero. Ningún modelo garantiza ganancias: las casas tienen margen,
+> información y límites. Este sistema está pensado para medir con honestidad si existe ventaja y desactivar
+> lo que no la tenga.
+
+## nbaev: props NBA con valor esperado
+
+### Plan por fases
+
+| Fase | Contenido | Estado |
+|---|---|---|
+| 1 | Datos: box scores, jugada a jugada, cuartos, quintetos, primer anotador, contexto, lesiones, cuotas | **hecha** |
+| 2 | Proyección de minutos | pendiente |
+| 3 | Modelo de puntos (distribución completa + Monte Carlo) | pendiente |
+| 4 | Validación walk-forward y backtest con cuotas reales | pendiente |
+| 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
+| 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
+
+### Instalación
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # Python 3.11 o superior
+pip install -r requirements.txt
+```
+
+Configuración en `config/config.yaml`. Para cambios propios crea `config/local.yaml` (no se versiona) con solo
+las claves que quieras sobrescribir. Para SportsGameOdds exporta `SPORTSGAMEODDS_KEY` (gratis en
+sportsgameodds.com; en el entorno de Claude Code el proxy ya la inyecta).
+
+### Paso a paso (fase 1: datos)
+
+```bash
+# 1. Histórico desde 2021-22 (una vez; ~7.000 partidos, 1-2 horas). Se puede cortar y reanudar.
+python -m nbaev datos historial
+
+# 2. Cuotas históricas reales (apertura y cierre de consenso) para el backtest. Cada partido gasta
+#    una "entidad" del plan de SportsGameOdds (2.500/mes en el plan amateur); se respeta una reserva.
+python -m nbaev datos cuotas-historicas --desde 2025-10-21 --hasta 2026-06-30
+
+# 3. Cada día (antes de los partidos): partidos de ayer, lesiones, cierres de ayer, cuotas de hoy.
+python -m nbaev datos diario
+
+# 4. Cuotas de bet365 cargadas a mano (ver plantillas/cuotas_manual.csv).
+python -m nbaev datos importar-csv mis_cuotas_bet365.csv
+
+# 5. Cobertura y calidad de la base.
+python -m nbaev datos estado
+```
+
+Programarlo cada día (Linux/macOS, `crontab -e`), por ejemplo a las 11:00 y a las 17:30 para tener dos capturas
+de cuotas (la diferencia entre ambas y el cierre es lo que mide el CLV):
+
+```
+0 11 * * *  cd /ruta/al/repo && .venv/bin/python -m nbaev datos diario >> logs/cron.log 2>&1
+30 17 * * * cd /ruta/al/repo && .venv/bin/python -m nbaev datos cuotas >> logs/cron.log 2>&1
+```
+
+### Fuentes de datos
+
+| Fuente | Qué aporta | Notas |
+|---|---|---|
+| ESPN (API pública) | Calendario, box score, jugada a jugada con coordenadas, líneas de cierre (spread/total), parte de lesiones | Fuente principal: responde desde cualquier red |
+| stats.nba.com (`nba_api`) | Métricas avanzadas y tracking: potential assists, rebound chances, touches | **Bloquea servidores en la nube**. Funciona desde casa: `python -m nbaev datos nba-api --temporada 2025` |
+| SportsGameOdds | Props de ~8 casas de EE. UU. (FanDuel, DraftKings, Caesars, BetMGM...), apertura y cierre de consenso, resultados | No incluye bet365. Plan amateur: 10 peticiones/min, 2.500 partidos/mes |
+| CSV manual | Cuotas de bet365 (o cualquier casa) | Plantilla en `plantillas/cuotas_manual.csv` |
+
+`nba_api` es la librería pedida para los box scores, pero stats.nba.com no responde desde servidores en la nube
+(probado: la conexión se queda colgada; cdn.nba.com devuelve 403). Por eso los box scores y el jugada a jugada
+salen de ESPN, que trae lo mismo (y además coordenadas de tiro y líneas de cierre), y `nba_api` queda para lo
+que solo tiene la NBA (tracking). En modo `auto` se prueba una vez y, si no responde, se sigue sin esos datos.
+
+### Base de datos (`data/nbaev.duckdb`)
+
+| Tabla | Contenido |
+|---|---|
+| `games`, `teams` | Partidos (regular, play-in y playoffs) y equipos. `season` = año de inicio (2021 = 2021-22) |
+| `player_games` | Box score por jugador y partido |
+| `player_absences` | Convocados que no jugaron y motivo (lesión / decisión técnica): parte de bajas histórico |
+| `team_games` | Totales de equipo y puntos por cuarto |
+| `plays` | Jugada a jugada normalizado |
+| `player_periods` | Producción y segundos en pista de cada jugador por cuarto (props de 1.er cuarto y 1.ª mitad) |
+| `stints` | Tramos con el mismo quinteto en pista |
+| `shots` | Tiros de campo con zona (aro, pintura, media, triple de esquina, triple frontal) |
+| `game_starts` | Salto inicial (quién saltó y quién ganó), titulares, primera canasta y primeros puntos del partido y de cada equipo |
+| `game_lines` | Spread, total y moneyline (cierre de ESPN; apertura, cierre y capturas de SportsGameOdds) |
+| `team_context` | Local/visitante, días de descanso, back-to-back, partidos en 4 y 7 días, km de viaje, cambio de huso, total implícito de cada equipo |
+| `injuries`, `lineups` | Parte de lesiones y titulares con la hora de cada captura |
+| `prop_odds` | Cuotas de props: fuente, tipo (apertura/cierre/captura), hora, casa, jugador, mercado, periodo, línea, lado, cuota y resultado |
+| `market_catalog` | Cada mercado visto en las fuentes. Los nuevos entran como **sin validar** |
+| `player_map`, `event_map` | Correspondencia de ids de otras fuentes con los de ESPN |
+| `nba_stats` | Métricas de stats.nba.com acumuladas hasta `date_to` |
+| `pbp_quality` | Control de cada partido: cuánto cuadra el jugada a jugada con el box score |
+| Vistas `v_team_adv`, `v_player_adv` | Posesiones, pace, rating ofensivo/defensivo, usage y true shooting |
+
+Las respuestas originales de ESPN se guardan comprimidas en `data/crudos/`: si se mejora un parser,
+`python -m nbaev datos reprocesar` reconstruye las tablas sin volver a descargar.
+
+### Cero fuga de información (`nbaev/data/asof.py`)
+
+Toda feature y toda evaluación deben leer los datos a través de `asof`, que aplica estas reglas:
+
+- Las estadísticas de un partido solo existen desde su inicio + 3,5 h.
+- Lesiones, alineaciones y cuotas solo desde la hora de su captura (`snapshot_at`).
+- Las cuotas de **cierre** y el **resultado** de las props nunca son entrada del modelo: solo sirven para medir CLV y aciertos.
+- stats.nba.com: solo fotos acumuladas hasta el día anterior al partido.
+
+Limitaciones conocidas: para partidos pasados no existe el parte de lesiones de esa hora, así que las bajas se
+toman de quién no jugó según el box score (incluye bajas de última hora que quizá no se sabían al apostar). Y las
+líneas de spread/total históricas son de cierre (en directo se usará la captura disponible a la hora de la predicción).
+
+### Pruebas
+
+```bash
+python -m pytest tests/nbaev -q
+```
+
+---
+
+# Sistema anterior (`apuestas/`)
 
 Busca los partidos de fútbol del día (desde el 21 de octubre de 2026 en adelante), descarga
 estadísticas reales de cada equipo y jugador, las guarda en una base de datos local que crece

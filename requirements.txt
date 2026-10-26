@@ -1,1 +1,13 @@
 requests>=2.31
+# Sistema nbaev (props NBA con valor esperado)
+pandas>=2.1
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+lightgbm>=4.3
+shap>=0.45
+nba_api>=1.4
+duckdb>=1.0
+PyYAML>=6.0
+tabulate>=0.9
+pytest>=8.0

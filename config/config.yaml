@@ -1,0 +1,40 @@
+# Configuración del sistema de props NBA con valor esperado (paquete nbaev).
+# Las rutas son relativas a la raíz del proyecto.
+
+general:
+  zona_horaria: America/Mexico_City   # para decidir qué es "hoy" en el comando diario
+  db: data/nbaev.duckdb
+  crudos: data/crudos                  # respuestas JSON originales comprimidas (permite reprocesar sin descargar)
+  logs: logs
+  nivel_log: INFO
+
+temporadas:
+  desde: 2021            # año de inicio de la primera temporada (2021 = 2021-22)
+  tipos: [2, 3, 5]       # tipos de ESPN: 2 regular, 3 playoffs, 5 play-in (se excluye pretemporada y All-Star)
+
+fuentes:
+  espn:
+    url: https://site.api.espn.com/apis/site/v2/sports/basketball/nba
+    min_intervalo_s: 0.35      # pausa mínima entre peticiones (API pública sin clave)
+    reintentos: 4
+    timeout_s: 30
+  nba_api:
+    # stats.nba.com bloquea servidores en la nube; en "auto" se prueba una vez y, si no responde,
+    # se omite el resto de la ejecución (métricas avanzadas y tracking quedan vacías).
+    modo: auto                 # auto | si | no
+    timeout_s: 20
+    min_intervalo_s: 0.8
+  sportsgameodds:
+    url: https://api.sportsgameodds.com/v2
+    max_peticiones_minuto: 10  # límite del plan amateur
+    reserva_entidades: 300     # entidades (partidos) del mes que nunca se gastan en el histórico
+    libros: [bet365, fanduel, draftkings, caesars, betmgm, espnbet, bovada]
+
+cuotas:
+  # Casa principal con la que se compara. Si la fuente no la trae se usa el consenso.
+  casa_principal: bet365
+  csv_manual: data/cuotas_manual   # carpeta con CSV de cuotas cargadas a mano (ver plantilla)
+
+datos:
+  # Margen tras el inicio del partido a partir del cual sus estadísticas cuentan como disponibles.
+  horas_hasta_disponible: 3.5

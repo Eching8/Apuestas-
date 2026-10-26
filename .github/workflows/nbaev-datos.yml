@@ -1,0 +1,51 @@
+name: nbaev datos diarios
+
+# Actualización diaria de la base del sistema nbaev: partidos de ayer, lesiones, cierres de ayer y cuotas de hoy.
+# La base y las respuestas crudas se conservan entre ejecuciones con la caché de Actions; si se pierden,
+# la primera ejecución reconstruye el histórico desde ESPN (1-2 horas).
+on:
+  schedule:
+    - cron: "13 16 * * *"   # 10:13 en Ciudad de México
+  workflow_dispatch:
+
+concurrency:
+  group: nbaev-datos
+  cancel-in-progress: false
+
+jobs:
+  datos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Recuperar la base
+        uses: actions/cache/restore@v4
+        with:
+          path: data/
+          key: nbaev-data-${{ github.run_id }}
+          restore-keys: nbaev-data-
+      - name: Histórico (solo descarga lo que falte)
+        run: python -m nbaev datos historial
+      - name: Actualización diaria
+        run: python -m nbaev datos diario
+      - name: Estado
+        run: python -m nbaev datos estado | tee estado.md
+      - name: Guardar la base
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/
+          key: nbaev-data-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nbaev-estado-${{ github.run_number }}
+          path: |
+            estado.md
+            logs/
+          retention-days: 14
