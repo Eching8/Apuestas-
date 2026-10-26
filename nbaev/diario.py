@@ -102,6 +102,9 @@ def ejecutar(con, cfg: dict, fecha: str, max_razones: int = 400) -> dict:
     registro.guardar_predicciones(con, tabla, ahora, pd.to_datetime(fecha).date())
     nuevas = registro.registrar_sugeridas(con, tabla, pd.to_datetime(fecha).date(), partidos)
     exportar(tabla, fecha, banca, maximos, partidos, salida["primer"], filas)
+    # Copia de lo evaluado para el seguimiento posterior (docs/seguimiento/), aunque la base se pierda.
+    from . import seguimiento
+    seguimiento.exportar(con, fecha)
     return {"tabla": tabla, "liquidadas": liquidadas, "banca": banca, "sugeridas_nuevas": nuevas}
 
 

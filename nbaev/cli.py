@@ -351,6 +351,32 @@ def cmd_props(cfg, args) -> None:
             print(f"   razones: {r['razones (SHAP)']}")
 
 
+def cmd_seguimiento(cfg, args) -> None:
+    """Exporta lo evaluado en un día (antes de los partidos) o evalúa cómo salió (después)."""
+    from . import seguimiento
+    from .data import cuotas_sgo, recolector
+    fecha = args.fecha or recolector.hoy_et().isoformat()
+    if args.cmd == "exportar":
+        print(seguimiento.exportar(_con(cfg, solo_lectura=True), fecha))
+        return
+    con, cli = _con(cfg), _espn(cfg)
+    hoy = recolector.hoy_et()
+    # Resultados del día y cierres de sus props (si aún no están).
+    recolector.actualizar_calendario(con, cli, recolector.temporada_de(hoy), hoy, tuple(cfg["temporadas"]["tipos"]))
+    recolector.descargar_partidos(con, cli)
+    if not args.sin_cierres:
+        from datetime import date
+        try:
+            log.info("Cierres: %s", cuotas_sgo.descargar_historico(con, cfg, date.fromisoformat(fecha),
+                                                                   date.fromisoformat(fecha), respetar_reserva=False))
+        except Exception as e:
+            log.error("Sin cierres: %s", e)
+    r = seguimiento.evaluar(con, fecha)
+    ruta = seguimiento.guardar(r)
+    print(seguimiento.informe(r))
+    log.info("Informe: %s", ruta)
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="nbaev", description="Props NBA con valor esperado")
     ap.add_argument("--config", help="ruta a un YAML de configuración")
@@ -431,6 +457,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--sims", type=int, default=2000)
     p.set_defaults(f=cmd_mercados_validar)
 
+    sg = grupos.add_parser("seguimiento", help="cómo salieron las props de un día").add_subparsers(dest="cmd",
+                                                                                                  required=True)
+    p = sg.add_parser("exportar", help="guarda lo evaluado (antes de los partidos)")
+    p.add_argument("--fecha")
+    p.set_defaults(f=cmd_seguimiento)
+    p = sg.add_parser("evaluar", help="resultados, calibración y errores (después de los partidos)")
+    p.add_argument("--fecha")
+    p.add_argument("--sin-cierres", action="store_true", help="no descarga los cierres (ahorra entidades)")
+    p.set_defaults(f=cmd_seguimiento)
     p = grupos.add_parser("props", help="las N mejores props del día (de la tabla de `diario`)")
     p.add_argument("--n", type=int, default=8)
     p.add_argument("--max-partido", type=int, default=2)
