@@ -14,16 +14,14 @@ Cada media se construye desde las estadísticas que la producen (tiros × aciert
 | Indiana Pacers @ Milwaukee Bucks | **Jaime Jaquez Jr.: más de 0.5 triples** | **69%** | 74% | 65% | 1.3 ± 1.2 | 9/10 | 3/3 | 2, 0, 1 | 1.43 (70%) |
 | Washington Wizards @ Charlotte Hornets | **Kyshawn George: menos de 1.5 robos** | **68%** | 74% | 65% | 1.0 ± 1.0 | 9/10 | 2/3 | 1, 2, 0, 0 | 1.41 (71%) |
 | Minnesota Timberwolves @ Cleveland Cavaliers | **Ayo Dosunmu: más de 0.5 triples** | **68%** | 75% | 63% | 1.5 ± 1.2 | 8/10 | 3/3 | 2, 1 | 1.48 (68%) |
+| Dallas Mavericks @ Miami Heat | **Giannis Antetokounmpo: más de 0.5 robos** | **67%** | 66% | 68% | 1.1 ± 1.0 | 7/10 | 3/3 | 1 | 1.40 (71%) |
+| Memphis Grizzlies @ Utah Jazz | **Keyonte George: más de 0.5 robos** | **67%** | 67% | 67% | 1.1 ± 1.1 | 7/10 | 3/3 | 1, 1, 2 | 1.43 (70%) |
+| Golden State Warriors @ Denver Nuggets | **Brandin Podziemski: más de 0.5 robos** | **67%** | 72% | 64% | 1.4 ± 1.2 | 7/10 | 1/1 | 2, 1, 0, 1 | 1.49 (67%) |
 | Phoenix Suns @ Oklahoma City Thunder | **Ajay Mitchell: menos de 1.5 triples** | **66%** | 70% | 65% | 1.1 ± 1.1 | 9/10 | 3/3 | 4, 1, 1, 3, 1 | 1.44 (69%) |
-| Chicago Bulls @ Boston Celtics | **Baylor Scheierman: menos de 9.5 puntos** | **66%** | 82% | 58% | 5.4 ± 3.9 | 9/10 | 2/2 | 10, 2, 3 | 2.00 (50%) |
-| Dallas Mavericks @ Miami Heat | **Giannis Antetokounmpo: más de 0.5 robos** | **66%** | 66% | 66% | 1.1 ± 1.0 | 7/10 | 3/3 | 1 | 1.40 (71%) |
+| Chicago Bulls @ Boston Celtics | **Derrick White: más de 0.5 robos** | **66%** | 67% | 66% | 1.2 ± 1.1 | 7/10 | 2/2 | 2, 1, 3 | 1.44 (69%) |
 | Minnesota Timberwolves @ Cleveland Cavaliers | **Peyton Watson: más de 1.5 asistencias** | **66%** | 74% | 62% | 2.7 ± 1.7 | 9/10 | 2/2 | 0, 0, 1 | 1.48 (68%) |
-| Chicago Bulls @ Boston Celtics | **Payton Pritchard: menos de 1.5 robos+tapones** | **66%** | 80% | 58% | 0.8 ± 0.9 | 10/10 | 2/2 | 2, 0, 1 | 2.00 (50%) |
 | Washington Wizards @ Charlotte Hornets | **Anthony Davis: menos de 1.5 robos** | **66%** | 68% | 64% | 1.1 ± 1.1 | 8/10 | 2/3 | - | 1.44 (69%) |
-| Golden State Warriors @ Denver Nuggets | **Gui Santos: más de 1.5 asistencias** | **66%** | 68% | 64% | 2.5 ± 1.8 | 8/10 | 2/3 | 3, 7, 0 | 1.44 (69%) |
 | Minnesota Timberwolves @ Cleveland Cavaliers | **Evan Mobley: menos de 1.5 triples** | **66%** | 66% | 65% | 1.1 ± 1.0 | 5/10 | 1/2 | 0, 3 | 1.44 (70%) |
-| Memphis Grizzlies @ Utah Jazz | **Keyonte George: más de 0.5 robos** | **65%** | 67% | 65% | 1.1 ± 1.1 | 7/10 | 3/3 | 1, 1, 2 | 1.43 (70%) |
-| Golden State Warriors @ Denver Nuggets | **Gui Santos: más de 0.5 triples** | **65%** | 67% | 64% | 1.1 ± 1.1 | 8/10 | 3/3 | 1, 2, 0 | 1.45 (69%) |
 
 **Si haces combinada:** cada selección que añades multiplica el riesgo. Probabilidad de acertar todas con las más probables de partidos distintos:
 
@@ -87,6 +85,42 @@ Dentro de un mismo partido (bet builder) las selecciones no son independientes y
 | Triples intentados | 2.4 | 3.5 | 2.3 | 4.1 | 3.5 |
 | % triples | 33.3% | 45.7% | 42.9% | 43.8% | 42.9% |
 
+#### Giannis Antetokounmpo: más de 0.5 robos (67%) — Dallas Mavericks @ Miami Heat
+
+**¿Por qué 1.1 robos?** (línea 0.5; 28.7 minutos esperados)
+
+- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.0): roba el 12.9% de las pérdidas del rival en pista × 14.6 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 28.0 | 28.2 | 29.3 | 28.9 | 37.0 |
+| Robos | 1.0 | 1.1 | 1.3 | 0.9 | 1.0 |
+| % de las pérdidas del rival que roba | 11.0% | 14.7% | 13.3% | 12.8% | 9.3% |
+
+#### Keyonte George: más de 0.5 robos (67%) — Memphis Grizzlies @ Utah Jazz
+
+**¿Por qué 1.1 robos?** (línea 0.5; 29.9 minutos esperados)
+
+- Robos **1.1** (por componentes 1.2 · por tasa por minuto y defensa rival 1.1): roba el 12.9% de las pérdidas del rival en pista × 14.7 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 27.6 | 26.3 | 31.3 | 33.1 | 32.3 |
+| Robos | 0.8 | 1.0 | 1.0 | 1.1 | 1.3 |
+| % de las pérdidas del rival que roba | 12.0% | 14.1% | 12.1% | 12.2% | 15.7% |
+
+#### Brandin Podziemski: más de 0.5 robos (67%) — Golden State Warriors @ Denver Nuggets
+
+**¿Por qué 1.4 robos?** (línea 0.5; 32.9 minutos esperados)
+
+- Robos **1.4** (por componentes 1.3 · por tasa por minuto y defensa rival 1.5): roba el 13.0% de las pérdidas del rival en pista × 13.6 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 33.2 | 30.9 | 33.0 | 28.7 | 32.0 |
+| Robos | 1.2 | 1.0 | 3.0 | 1.1 | 1.0 |
+| % de las pérdidas del rival que roba | 10.6% | 10.0% | 17.3% | 11.7% | 12.2% |
+
 #### Ajay Mitchell: menos de 1.5 triples (66%) — Phoenix Suns @ Oklahoma City Thunder
 
 **¿Por qué 1.1 triples?** (línea 1.5; 27.4 minutos esperados)
@@ -100,35 +134,17 @@ Dentro de un mismo partido (bet builder) las selecciones no son independientes y
 | Triples intentados | 2.0 | 2.7 | 2.3 | 3.2 | 4.6 |
 | % triples | 10.0% | 18.5% | 14.3% | 34.3% | 43.5% |
 
-#### Baylor Scheierman: menos de 9.5 puntos (66%) — Chicago Bulls @ Boston Celtics
+#### Derrick White: más de 0.5 robos (66%) — Chicago Bulls @ Boston Celtics
 
-**¿Por qué 5.4 puntos?** (línea 9.5; 14.5 minutos esperados)
+**¿Por qué 1.2 robos?** (línea 0.5; 34.6 minutos esperados)
 
-- Puntos **5.4** (por componentes 5.8 · por tasa por minuto y defensa rival 5.3): 4.6 tiros de campo (su ritmo 9.3 por 36'; el rival concede +6% de tiros) × 1.15 puntos por tiro [triple frontal 48% de sus tiros al 36% (rival concede 37%, liga 35%); triple de esquina 24% de sus tiros al 44% (rival concede 37%, liga 38%); pintura 13% de sus tiros al 49% (rival concede 43%, liga 45%)] + 0.6 tiros libres × 79%.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 15.0 | 16.6 | 14.5 | 18.2 | 13.7 |
-| Puntos | 3.6 | 7.0 | 5.0 | 5.4 | 5.0 |
-| Tiros de campo intentados | 3.6 | 5.4 | 4.0 | 4.3 | 4.0 |
-| % tiros de campo | 38.9% | 42.6% | 50.0% | 45.1% | 50.0% |
-| Triples intentados | 2.4 | 3.9 | 2.0 | 3.1 | 2.7 |
-| % triples | 33.3% | 41.0% | 50.0% | 39.8% | 37.5% |
-| Tiros libres intentados | 0.0 | 0.8 | 0.0 | 0.4 | 0.0 |
-| % tiros libres | - | 100.0% | - | 90.3% | - |
-| Jugadas que usa por 36 min | 10.6 | 14.0 | 12.4 | 9.9 | 10.5 |
-
-#### Giannis Antetokounmpo: más de 0.5 robos (66%) — Dallas Mavericks @ Miami Heat
-
-**¿Por qué 1.1 robos?** (línea 0.5; 28.7 minutos esperados)
-
-- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.0): roba el 12.9% de las pérdidas del rival en pista × 14.6 pérdidas esperadas del rival.
+- Robos **1.2** (por componentes 1.1 · por tasa por minuto y defensa rival 1.2): roba el 11.8% de las pérdidas del rival en pista × 12.7 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 28.0 | 28.2 | 29.3 | 28.9 | 37.0 |
-| Robos | 1.0 | 1.1 | 1.3 | 0.9 | 1.0 |
-| % de las pérdidas del rival que roba | 11.0% | 14.7% | 13.3% | 12.8% | 9.3% |
+| Minutos | 36.4 | 33.7 | 34.5 | 34.2 | 35.3 |
+| Robos | 1.0 | 0.9 | 1.0 | 1.1 | 2.0 |
+| % de las pérdidas del rival que roba | 11.0% | 11.5% | 8.4% | 13.7% | 20.9% |
 
 #### Peyton Watson: más de 1.5 asistencias (66%) — Minnesota Timberwolves @ Cleveland Cavaliers
 
@@ -143,33 +159,6 @@ Dentro de un mismo partido (bet builder) las selecciones no son independientes y
 | % de las canastas de compañeros que asiste | 16.4% | 13.9% | 12.9% | 9.1% | 1.2% |
 | Pérdidas por jugada | 22.3% | 15.1% | 25.3% | 12.3% | 13.6% |
 
-#### Payton Pritchard: menos de 1.5 robos+tapones (66%) — Chicago Bulls @ Boston Celtics
-
-**¿Por qué 0.8 robos+tapones?** (línea 1.5; 29.9 minutos esperados)
-
-- Robos **0.6** (por componentes 0.6 · por tasa por minuto y defensa rival 0.6): roba el 7.9% de las pérdidas del rival en pista × 12.7 pérdidas esperadas del rival.
-- Tapones **0.2** (por componentes 0.2 · por tasa por minuto y defensa rival 0.1): tapona el 0.6% de los tiros de 2 del rival en pista × 46.3 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 31.8 | 31.8 | 29.0 | 32.5 | 31.7 |
-| Robos | 0.2 | 0.4 | 0.0 | 0.7 | 1.0 |
-| % de las pérdidas del rival que roba | 2.5% | 5.3% | 0.0% | 9.0% | 11.7% |
-| Tapones | 0.0 | 0.0 | 0.0 | 0.1 | 0.0 |
-| % de los tiros de 2 del rival que tapona | 0.0% | 0.0% | 0.0% | 0.4% | 0.0% |
-
-#### Anthony Davis: menos de 1.5 robos (66%) — Washington Wizards @ Charlotte Hornets
-
-**¿Por qué 1.1 robos?** (línea 1.5; 32.3 minutos esperados)
-
-- Robos **1.1** (por componentes 1.2 · por tasa por minuto y defensa rival 1.1): roba el 13.0% de las pérdidas del rival en pista × 14.0 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 33.6 | 32.6 | 32.3 | 31.2 | - |
-| Robos | 1.0 | 1.1 | 1.3 | 1.1 | - |
-| % de las pérdidas del rival que roba | 11.1% | 13.2% | 13.5% | 14.2% | - |
-
 
 ## Washington Wizards @ Charlotte Hornets
 
@@ -181,9 +170,9 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 |---|---|---|---|---|---|---|---|---|
 | **Kyshawn George: menos de 1.5 robos** | **68%** | 74% | 65% | 1.0 ± 1.0 | 9/10 | 2/3 | 1, 2, 0, 0 | 1.41 (71%) |
 | **Anthony Davis: menos de 1.5 robos** | **66%** | 68% | 64% | 1.1 ± 1.1 | 8/10 | 2/3 | - | 1.44 (69%) |
+| **Moussa Diabate: más de 0.5 robos** | **65%** | 64% | 66% | 1.5 ± 1.6 | 6/10 | 3/3 | 1, 0, 0 | 1.45 (69%) |
 | **Alex Sarr: menos de 1.5 tapones** | **64%** | 66% | 64% | 1.2 ± 1.5 | 6/10 | 2/3 | 1, 4, 3 | 1.45 (69%) |
 | **Bilal Coulibaly: más de 0.5 triples** | **64%** | 64% | 64% | 1.1 ± 1.1 | 5/10 | 2/3 | 3, 3 | 1.45 (69%) |
-| **Moussa Diabate: más de 0.5 robos** | **64%** | 64% | 64% | 1.5 ± 1.6 | 6/10 | 3/3 | 1, 0, 0 | 1.45 (69%) |
 | **Naz Reid: menos de 3.5 asistencias** | **63%** | 70% | 60% | 2.7 ± 2.4 | 7/10 | 2/3 | 3, 1 | 1.56 (64%) |
 | **Justin Champagnie: más de 0.5 triples** | **62%** | 62% | 62% | 1.0 ± 1.0 | 8/10 | 2/3 | 1, 0, 0 | 1.50 (67%) |
 | **Anthony Davis: menos de 1.5 tapones** | **62%** | 67% | 59% | 1.1 ± 1.1 | 6/10 | 2/3 | - | 1.58 (63%) |
@@ -245,6 +234,34 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | triple frontal | 10% | 30% | 35% | 35% |
 | triple de esquina | 2% | 37% | 38% | 39% |
 
+#### Moussa Diabate (aleros/ala-pívots) vs Washington Wizards
+
+- Minutos esperados: **25.0** (± 5.6); 78 partidos en la base.
+- Grant Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Kon Knueppel ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Su prop más probable hoy: **Moussa Diabate: más de 0.5 robos** (65%). Con 80% de probabilidad: más de - / menos de 3.5.
+- Defensa de Washington Wizards contra aleros/ala-pívots en robos: +14% respecto a la media; ajuste por su historial contra defensas similares: +5%.
+
+**¿Por qué 1.5 robos?** (línea 0.5; 25.0 minutos esperados)
+
+- Robos **1.5** (por componentes 1.2 · por tasa por minuto y defensa rival 1.6): roba el 17.7% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 26.2 | 26.4 | 25.7 | 26.1 | 30.3 |
+| Robos | 1.6 | 1.1 | 2.7 | 0.7 | 0.3 |
+| % de las pérdidas del rival que roba | 21.8% | 15.3% | 30.0% | 11.4% | 4.9% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -19%, vs defensa media +19%, vs defensa débil +3%; rebotes: vs defensa fuerte -14%, vs defensa media +1%, vs defensa débil +14%; asistencias: vs defensa fuerte +34%, vs defensa media -18%, vs defensa débil -22%; triples: vs defensa fuerte -100%, vs defensa media +181%, vs defensa débil -100%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 72% | 72% | 68% | 70% |
+| pintura | 24% | 40% | 45% | 42% |
+| media distancia | 2% | 41% | 41% | 41% |
+| triple frontal | 1% | 34% | 35% | 35% |
+| triple de esquina | 0% | 39% | 38% | 40% |
+
 #### Alex Sarr (pívots) vs Charlotte Hornets
 
 - Minutos esperados: **23.7** (± 3.0); 51 partidos en la base.
@@ -302,34 +319,6 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | triple de esquina | 14% | 39% | 38% | 39% |
 | media distancia | 7% | 39% | 41% | 39% |
 
-#### Moussa Diabate (aleros/ala-pívots) vs Washington Wizards
-
-- Minutos esperados: **25.0** (± 5.6); 78 partidos en la base.
-- Grant Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Kon Knueppel ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Moussa Diabate: más de 0.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 3.5.
-- Defensa de Washington Wizards contra aleros/ala-pívots en robos: +14% respecto a la media; ajuste por su historial contra defensas similares: +5%.
-
-**¿Por qué 1.5 robos?** (línea 0.5; 25.0 minutos esperados)
-
-- Robos **1.5** (por componentes 1.2 · por tasa por minuto y defensa rival 1.6): roba el 17.7% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 26.2 | 26.4 | 25.7 | 26.1 | 30.3 |
-| Robos | 1.6 | 1.1 | 2.7 | 0.7 | 0.3 |
-| % de las pérdidas del rival que roba | 21.8% | 15.3% | 30.0% | 11.4% | 4.9% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -19%, vs defensa media +19%, vs defensa débil +3%; rebotes: vs defensa fuerte -14%, vs defensa media +1%, vs defensa débil +14%; asistencias: vs defensa fuerte +34%, vs defensa media -18%, vs defensa débil -22%; triples: vs defensa fuerte -100%, vs defensa media +181%, vs defensa débil -100%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 72% | 72% | 68% | 70% |
-| pintura | 24% | 40% | 45% | 42% |
-| media distancia | 2% | 41% | 41% | 41% |
-| triple frontal | 1% | 34% | 35% | 35% |
-| triple de esquina | 0% | 39% | 38% | 40% |
-
 ## Minnesota Timberwolves @ Cleveland Cavaliers
 
 Parte de lesiones: Donte DiVincenzo (Out).
@@ -342,7 +331,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Peyton Watson: más de 1.5 asistencias** | **66%** | 74% | 62% | 2.7 ± 1.7 | 9/10 | 2/2 | 0, 0, 1 | 1.48 (68%) |
 | **Evan Mobley: menos de 1.5 triples** | **66%** | 66% | 65% | 1.1 ± 1.0 | 5/10 | 1/2 | 0, 3 | 1.44 (70%) |
 | **Donovan Mitchell: menos de 1.5 robos** | **64%** | 64% | 64% | 1.4 ± 1.2 | 8/10 | 1/2 | 1, 1 | 1.44 (69%) |
-| **Anthony Edwards: menos de 1.5 robos** | **63%** | 65% | 62% | 1.3 ± 1.4 | 7/10 | 1/3 | 0, 1 | 1.48 (68%) |
+| **Rudy Gobert: más de 0.5 tapones** | **64%** | 55% | 69% | 0.9 ± 1.1 | 5/10 | 1/3 | 3, 0 | 1.39 (72%) |
 | **Jaylon Tyson: menos de 1.5 triples** | **62%** | 65% | 61% | 1.3 ± 1.3 | 9/10 | 1/2 | 4, 0 | 1.53 (65%) |
 | **Jarrett Allen: menos de 1.5 asistencias** | **62%** | 63% | 62% | 1.4 ± 1.2 | 9/10 | 2/2 | 4, 1 | 1.51 (66%) |
 | **Jarrett Allen: menos de 1.5 tapones** | **62%** | 56% | 65% | 1.3 ± 1.1 | 4/10 | 0/2 | 1, 0 | 1.45 (69%) |
@@ -462,34 +451,34 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | media distancia | 11% | 47% | 41% | 40% |
 | triple de esquina | 5% | 36% | 38% | 38% |
 
-#### Anthony Edwards (bases/escoltas) vs Cleveland Cavaliers
+#### Rudy Gobert (pívots) vs Cleveland Cavaliers
 
-- Minutos esperados: **30.4** (± 3.5); 77 partidos en la base.
+- Minutos esperados: **29.7** (± 3.0); 90 partidos en la base.
 - Donte DiVincenzo ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- cambio de rol esta temporada (por minuto): tpm +49%; se da más peso a la línea de la casa
+- cambio de rol esta temporada (por minuto): ast -61%; se da más peso a la línea de la casa
 - segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Anthony Edwards: menos de 1.5 robos** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Cleveland Cavaliers contra bases/escoltas en robos: -1% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+- Su prop más probable hoy: **Rudy Gobert: más de 0.5 tapones** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Cleveland Cavaliers contra pívots en tapones: -9% respecto a la media; ajuste por su historial contra defensas similares: -3%.
 
-**¿Por qué 1.3 robos?** (línea 1.5; 30.4 minutos esperados)
+**¿Por qué 0.9 tapones?** (línea 0.5; 29.7 minutos esperados)
 
-- Robos **1.3** (por componentes 1.3 · por tasa por minuto y defensa rival 1.3): roba el 14.4% de las pérdidas del rival en pista × 14.2 pérdidas esperadas del rival.
+- Tapones **0.9** (por componentes 1.0 · por tasa por minuto y defensa rival 0.9): tapona el 3.3% de los tiros de 2 del rival en pista × 51.7 tiros de 2 esperados del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 33.8 | 31.7 | 31.3 | 33.6 | 36.0 |
-| Robos | 1.8 | 1.0 | 2.0 | 1.2 | 0.5 |
-| % de las pérdidas del rival que roba | 16.0% | 10.7% | 18.4% | 12.7% | 6.3% |
+| Minutos | 27.8 | 28.7 | 31.3 | 31.1 | 34.0 |
+| Tapones | 0.4 | 0.7 | 0.3 | 1.6 | 1.5 |
+| % de los tiros de 2 del rival que tapona | 1.4% | 2.3% | 1.1% | 4.4% | 3.6% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media -6%, vs defensa débil +14%; rebotes: vs defensa fuerte -9%, vs defensa media -1%, vs defensa débil +10%; asistencias: vs defensa fuerte -9%, vs defensa media +12%, vs defensa débil +0%; triples: vs defensa fuerte -2%, vs defensa media -15%, vs defensa débil +13%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media -18%, vs defensa débil +21%; rebotes: vs defensa fuerte -7%, vs defensa media -4%, vs defensa débil +10%; asistencias: vs defensa fuerte -1%, vs defensa media +0%, vs defensa débil +1%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 37% | 39% | 35% | 36% |
-| bajo el aro | 22% | 70% | 68% | 64% |
-| media distancia | 19% | 43% | 41% | 42% |
-| pintura | 18% | 45% | 45% | 44% |
-| triple de esquina | 4% | 41% | 38% | 39% |
+| bajo el aro | 83% | 71% | 68% | 64% |
+| pintura | 14% | 45% | 45% | 44% |
+| media distancia | 2% | 37% | 41% | 42% |
+| triple frontal | 1% | 32% | 35% | 36% |
+| triple de esquina | 1% | 37% | 38% | 39% |
 
 ## Chicago Bulls @ Boston Celtics
 
@@ -499,114 +488,22 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Baylor Scheierman: menos de 9.5 puntos** | **66%** | 82% | 58% | 5.4 ± 3.9 | 9/10 | 2/2 | 10, 2, 3 | 2.00 (50%) |
-| **Payton Pritchard: menos de 1.5 robos+tapones** | **66%** | 80% | 58% | 0.8 ± 0.9 | 10/10 | 2/2 | 2, 0, 1 | 2.00 (50%) |
-| **Tre Jones: menos de 1.5 robos+tapones** | **65%** | 77% | 58% | 0.7 ± 0.9 | 8/10 | 2/3 | 0 | 2.00 (50%) |
-| **Derrick White: más de 0.5 robos** | **64%** | 67% | 63% | 1.2 ± 1.1 | 7/10 | 2/2 | 2, 1, 3 | 1.44 (69%) |
-| **Leonard Miller: menos de 1.5 robos+tapones** | **63%** | 74% | 58% | 0.9 ± 1.0 | 7/10 | 3/3 | 0 | 2.00 (50%) |
+| **Derrick White: más de 0.5 robos** | **66%** | 67% | 66% | 1.2 ± 1.1 | 7/10 | 2/2 | 2, 1, 3 | 1.44 (69%) |
 | **Leonard Miller: menos de 1.5 triples** | **63%** | 60% | 65% | 1.3 ± 1.1 | 5/10 | 2/3 | 0 | 1.43 (70%) |
 | **Paul George: menos de 0.5 tapones** | **63%** | 66% | 61% | 0.4 ± 0.6 | 7/10 | 2/2 | 1, 0 | 1.48 (68%) |
-| **Jayson Tatum: menos de 1.5 robos** | **62%** | 59% | 63% | 1.4 ± 1.3 | 7/10 | 1/2 | - | 1.44 (70%) |
+| **Mitchell Robinson: menos de 1.5 tapones** | **61%** | 65% | 59% | 1.3 ± 1.2 | 8/10 | 1/2 | 1, 2, 0 | 1.56 (64%) |
+| **Paul George: más de 1.5 robos+tapones** | **60%** | 62% | 60% | 2.3 ± 1.7 | 7/10 | 2/2 | 5, 0 | 1.55 (65%) |
+| **Matas Buzelis: más de 0.5 tapones** | **60%** | 55% | 63% | 0.9 ± 1.2 | 7/10 | 2/3 | 2, 1, 1 | 1.51 (66%) |
+| **Jalen Smith: menos de 9.5 reb+ast** | **60%** | 71% | 54% | 7.5 ± 3.9 | 8/10 | 2/3 | 9 | 1.73 (58%) |
+| **Josh Giddey: menos de 1.5 triples** | **60%** | 59% | 60% | 1.4 ± 1.3 | 7/10 | 3/3 | 0 | 1.56 (64%) |
 
 ### Fichas de los jugadores destacados
-
-#### Baylor Scheierman (bases/escoltas) vs Chicago Bulls
-
-- Minutos esperados: **14.5** (± 4.4); 86 partidos en la base.
-- cambio de rol esta temporada (por minuto): reb -45%, ast -100%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Baylor Scheierman: menos de 9.5 puntos** (66%). Con 80% de probabilidad: más de 1.5 / menos de 8.5.
-- Defensa de Chicago Bulls contra bases/escoltas en puntos: +1% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 5.4 puntos?** (línea 9.5; 14.5 minutos esperados)
-
-- Puntos **5.4** (por componentes 5.8 · por tasa por minuto y defensa rival 5.3): 4.6 tiros de campo (su ritmo 9.3 por 36'; el rival concede +6% de tiros) × 1.15 puntos por tiro [triple frontal 48% de sus tiros al 36% (rival concede 37%, liga 35%); triple de esquina 24% de sus tiros al 44% (rival concede 37%, liga 38%); pintura 13% de sus tiros al 49% (rival concede 43%, liga 45%)] + 0.6 tiros libres × 79%.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 15.0 | 16.6 | 14.5 | 18.2 | 13.7 |
-| Puntos | 3.6 | 7.0 | 5.0 | 5.4 | 5.0 |
-| Tiros de campo intentados | 3.6 | 5.4 | 4.0 | 4.3 | 4.0 |
-| % tiros de campo | 38.9% | 42.6% | 50.0% | 45.1% | 50.0% |
-| Triples intentados | 2.4 | 3.9 | 2.0 | 3.1 | 2.7 |
-| % triples | 33.3% | 41.0% | 50.0% | 39.8% | 37.5% |
-| Tiros libres intentados | 0.0 | 0.8 | 0.0 | 0.4 | 0.0 |
-| % tiros libres | - | 100.0% | - | 90.3% | - |
-| Jugadas que usa por 36 min | 10.6 | 14.0 | 12.4 | 9.9 | 10.5 |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +17%, vs defensa media -15%, vs defensa débil -9%; rebotes: vs defensa fuerte -5%, vs defensa media +2%, vs defensa débil +3%; asistencias: vs defensa fuerte -0%, vs defensa media -8%, vs defensa débil +8%; triples: vs defensa fuerte -14%, vs defensa media +13%, vs defensa débil +5%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 48% | 36% | 35% | 37% |
-| triple de esquina | 24% | 44% | 38% | 37% |
-| pintura | 13% | 49% | 45% | 43% |
-| bajo el aro | 8% | 70% | 68% | 67% |
-| media distancia | 7% | 45% | 41% | 43% |
-
-#### Payton Pritchard (bases/escoltas) vs Chicago Bulls
-
-- Minutos esperados: **29.9** (± 3.0); 88 partidos en la base.
-- cambio de rol esta temporada (por minuto): pts -30%, ast -46%, tpm -37%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Payton Pritchard: menos de 1.5 robos+tapones** (66%). Con 80% de probabilidad: más de - / menos de 1.5.
-- Defensa de Chicago Bulls contra bases/escoltas en robos+tapones: +8% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 0.8 robos+tapones?** (línea 1.5; 29.9 minutos esperados)
-
-- Robos **0.6** (por componentes 0.6 · por tasa por minuto y defensa rival 0.6): roba el 7.9% de las pérdidas del rival en pista × 12.7 pérdidas esperadas del rival.
-- Tapones **0.2** (por componentes 0.2 · por tasa por minuto y defensa rival 0.1): tapona el 0.6% de los tiros de 2 del rival en pista × 46.3 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 31.8 | 31.8 | 29.0 | 32.5 | 31.7 |
-| Robos | 0.2 | 0.4 | 0.0 | 0.7 | 1.0 |
-| % de las pérdidas del rival que roba | 2.5% | 5.3% | 0.0% | 9.0% | 11.7% |
-| Tapones | 0.0 | 0.0 | 0.0 | 0.1 | 0.0 |
-| % de los tiros de 2 del rival que tapona | 0.0% | 0.0% | 0.0% | 0.4% | 0.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -2%, vs defensa media -4%, vs defensa débil +6%; rebotes: vs defensa fuerte -7%, vs defensa media +6%, vs defensa débil +3%; asistencias: vs defensa fuerte -11%, vs defensa media -9%, vs defensa débil +20%; triples: vs defensa fuerte -6%, vs defensa media -9%, vs defensa débil +22%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 47% | 37% | 35% | 37% |
-| pintura | 23% | 54% | 45% | 43% |
-| bajo el aro | 12% | 69% | 68% | 67% |
-| media distancia | 12% | 41% | 41% | 43% |
-| triple de esquina | 5% | 40% | 38% | 37% |
-
-#### Tre Jones (bases/escoltas) vs Boston Celtics
-
-- Minutos esperados: **19.4** (± 4.7); 68 partidos en la base.
-- Su prop más probable hoy: **Tre Jones: menos de 1.5 robos+tapones** (65%). Con 80% de probabilidad: más de - / menos de 1.5.
-- Defensa de Boston Celtics contra bases/escoltas en robos+tapones: -22% respecto a la media; ajuste por su historial contra defensas similares: -2%.
-
-**¿Por qué 0.7 robos+tapones?** (línea 1.5; 19.4 minutos esperados)
-
-- Robos **0.6** (por componentes 0.6 · por tasa por minuto y defensa rival 0.6): roba el 15.0% de las pérdidas del rival en pista × 10.3 pérdidas esperadas del rival.
-- Tapones **0.1** (por componentes 0.1 · por tasa por minuto y defensa rival 0.1): tapona el 0.6% de los tiros de 2 del rival en pista × 50.9 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 20.0 | 23.9 | 18.3 | 27.0 | 23.0 |
-| Robos | 0.8 | 0.8 | 1.0 | 1.2 | 0.0 |
-| % de las pérdidas del rival que roba | 12.6% | 10.7% | 17.6% | 16.8% | 0.0% |
-| Tapones | 0.0 | 0.0 | 0.0 | 0.2 | 0.0 |
-| % de los tiros de 2 del rival que tapona | 0.0% | 0.0% | 0.0% | 0.5% | 0.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -6%, vs defensa media +9%, vs defensa débil +1%; rebotes: vs defensa fuerte -15%, vs defensa media +10%, vs defensa débil +10%; asistencias: vs defensa fuerte +1%, vs defensa media -12%, vs defensa débil +10%; triples: vs defensa fuerte -12%, vs defensa media +1%, vs defensa débil +15%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 51% | 69% | 68% | 66% |
-| pintura | 24% | 44% | 45% | 43% |
-| triple frontal | 14% | 31% | 35% | 36% |
-| triple de esquina | 7% | 37% | 38% | 37% |
-| media distancia | 4% | 44% | 41% | 42% |
 
 #### Derrick White (bases/escoltas) vs Chicago Bulls
 
 - Minutos esperados: **34.6** (± 3.2); 86 partidos en la base.
 - cambio de rol esta temporada (por minuto): reb -42%, ast +34%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Derrick White: más de 0.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Derrick White: más de 0.5 robos** (66%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Chicago Bulls contra bases/escoltas en robos: +10% respecto a la media; ajuste por su historial contra defensas similares: +2%.
 
 **¿Por qué 1.2 robos?** (línea 0.5; 34.6 minutos esperados)
@@ -632,21 +529,19 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 #### Leonard Miller (aleros/ala-pívots) vs Boston Celtics
 
 - Minutos esperados: **24.4** (± 4.2); 49 partidos en la base.
-- Su prop más probable hoy: **Leonard Miller: menos de 1.5 robos+tapones** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Boston Celtics contra aleros/ala-pívots en robos+tapones: -23% respecto a la media; ajuste por su historial contra defensas similares: +1%.
+- Su prop más probable hoy: **Leonard Miller: menos de 1.5 triples** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Boston Celtics contra aleros/ala-pívots en triples: +5% respecto a la media; ajuste por su historial contra defensas similares: +3%.
 
-**¿Por qué 0.9 robos+tapones?** (línea 1.5; 24.4 minutos esperados)
+**¿Por qué 1.3 triples?** (línea 1.5; 24.4 minutos esperados)
 
-- Robos **0.5** (por componentes 0.5 · por tasa por minuto y defensa rival 0.5): roba el 9.6% de las pérdidas del rival en pista × 10.3 pérdidas esperadas del rival.
-- Tapones **0.4** (por componentes 0.4 · por tasa por minuto y defensa rival 0.4): tapona el 1.7% de los tiros de 2 del rival en pista × 50.9 tiros de 2 esperados del rival.
+- Triples **1.3** (por componentes 1.3 · por tasa por minuto y defensa rival 1.2): 4.0 triples intentados (su ritmo 5.6 por 36'; el rival concede +8% de triples en su reparto) × 33% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
 | Minutos | 29.0 | 29.2 | 23.7 | 15.7 | 7.0 |
-| Robos | 1.0 | 0.6 | 0.7 | 0.4 | 0.0 |
-| % de las pérdidas del rival que roba | 11.1% | 6.6% | 9.7% | 8.3% | 0.0% |
-| Tapones | 0.6 | 0.7 | 0.3 | 0.3 | 0.0 |
-| % de los tiros de 2 del rival que tapona | 1.8% | 2.1% | 1.2% | 1.8% | 0.0% |
+| Triples anotados | 1.2 | 1.4 | 1.0 | 0.7 | 0.0 |
+| Triples intentados | 4.2 | 4.0 | 4.3 | 2.2 | 0.0 |
+| % triples | 28.6% | 35.0% | 23.1% | 32.3% | - |
 
 - Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media +11%, vs defensa débil +3%; rebotes: vs defensa fuerte +10%, vs defensa media -20%, vs defensa débil +10%; asistencias: vs defensa fuerte +9%, vs defensa media -13%, vs defensa débil +2%; triples: vs defensa fuerte -12%, vs defensa media -14%, vs defensa débil +39%.
 
@@ -658,6 +553,89 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | pintura | 8% | 42% | 45% | 43% |
 | media distancia | 2% | 41% | 41% | 42% |
 
+#### Paul George (aleros/ala-pívots) vs Chicago Bulls
+
+- Minutos esperados: **33.1** (± 3.4); 51 partidos en la base.
+- cambio de rol esta temporada (por minuto): pts +52%, tpm +77%; se da más peso a la línea de la casa
+- solo 2 partidos con su equipo actual: su rol puede haber cambiado, se da más peso a la línea de la casa
+- Su prop más probable hoy: **Paul George: menos de 0.5 tapones** (63%). Con 80% de probabilidad: más de - / menos de 1.5.
+- Defensa de Chicago Bulls contra aleros/ala-pívots en tapones: +10% respecto a la media; ajuste por su historial contra defensas similares: -3%.
+
+**¿Por qué 0.4 tapones?** (línea 0.5; 33.1 minutos esperados)
+
+- Tapones **0.4** (por componentes 0.4 · por tasa por minuto y defensa rival 0.4): tapona el 1.2% de los tiros de 2 del rival en pista × 46.3 tiros de 2 esperados del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 34.6 | 35.5 | 32.5 | 31.9 | 30.5 |
+| Tapones | 0.4 | 0.4 | 0.0 | 0.4 | 0.5 |
+| % de los tiros de 2 del rival que tapona | 1.2% | 1.2% | 0.0% | 1.3% | 1.7% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -22%, vs defensa media +25%, vs defensa débil +15%; rebotes: vs defensa fuerte -2%, vs defensa media -1%, vs defensa débil +6%; asistencias: vs defensa fuerte -5%, vs defensa media -5%, vs defensa débil +16%; triples: vs defensa fuerte -32%, vs defensa media +19%, vs defensa débil +5%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 39% | 38% | 35% | 37% |
+| media distancia | 25% | 41% | 41% | 43% |
+| pintura | 13% | 47% | 45% | 43% |
+| bajo el aro | 13% | 62% | 68% | 67% |
+| triple de esquina | 11% | 48% | 38% | 37% |
+
+#### Mitchell Robinson (pívots) vs Chicago Bulls
+
+- Minutos esperados: **19.1** (± 3.4); 80 partidos en la base.
+- cambio de rol esta temporada (por minuto): pts -33%, reb -60%; se da más peso a la línea de la casa
+- solo 2 partidos con su equipo actual: su rol puede haber cambiado, se da más peso a la línea de la casa
+- Su prop más probable hoy: **Mitchell Robinson: menos de 1.5 tapones** (61%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Chicago Bulls contra pívots en tapones: +24% respecto a la media; ajuste por su historial contra defensas similares: +2%.
+
+**¿Por qué 1.3 tapones?** (línea 1.5; 19.1 minutos esperados)
+
+- Tapones **1.3** (por componentes 1.1 · por tasa por minuto y defensa rival 1.4): tapona el 5.7% de los tiros de 2 del rival en pista × 46.3 tiros de 2 esperados del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 16.0 | 15.1 | 20.0 | 18.4 | 18.7 |
+| Tapones | 1.0 | 0.7 | 1.5 | 1.1 | 1.0 |
+| % de los tiros de 2 del rival que tapona | 6.7% | 5.1% | 8.4% | 5.9% | 5.4% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -15%, vs defensa media -8%, vs defensa débil +23%; rebotes: vs defensa fuerte -24%, vs defensa media +9%, vs defensa débil +14%; asistencias: vs defensa fuerte -6%, vs defensa media -17%, vs defensa débil +18%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 95% | 70% | 68% | 67% |
+| pintura | 3% | 46% | 45% | 43% |
+| triple frontal | 1% | 35% | 35% | 37% |
+| media distancia | 1% | 41% | 41% | 43% |
+| triple de esquina | 0% | 38% | 38% | 37% |
+
+#### Matas Buzelis (aleros/ala-pívots) vs Boston Celtics
+
+- Minutos esperados: **26.7** (± 7.5); 80 partidos en la base.
+- cambio de rol esta temporada (por minuto): tpm -66%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Matas Buzelis: más de 0.5 tapones** (60%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Boston Celtics contra aleros/ala-pívots en tapones: -16% respecto a la media; ajuste por su historial contra defensas similares: +2%.
+
+**¿Por qué 0.9 tapones?** (línea 0.5; 26.7 minutos esperados)
+
+- Tapones **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): tapona el 3.3% de los tiros de 2 del rival en pista × 50.9 tiros de 2 esperados del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 25.4 | 28.7 | 25.7 | 29.2 | 30.7 |
+| Tapones | 1.2 | 1.4 | 1.0 | 1.5 | 1.3 |
+| % de los tiros de 2 del rival que tapona | 3.9% | 4.0% | 3.1% | 4.4% | 4.0% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +1%, vs defensa media -1%, vs defensa débil -0%; rebotes: vs defensa fuerte -4%, vs defensa media -12%, vs defensa débil +21%; asistencias: vs defensa fuerte +13%, vs defensa media -21%, vs defensa débil +3%; triples: vs defensa fuerte -8%, vs defensa media +9%, vs defensa débil +0%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 37% | 33% | 35% | 36% |
+| bajo el aro | 35% | 65% | 68% | 66% |
+| triple de esquina | 15% | 36% | 38% | 37% |
+| pintura | 12% | 45% | 45% | 43% |
+| media distancia | 3% | 41% | 41% | 42% |
+
 ## Dallas Mavericks @ Miami Heat
 
 Parte de lesiones: Caleb Martin (Out); Naji Marshall (Out); Santi Aldama (Out); Cooper Flagg (Out); Tarik Biberovic (Out).
@@ -666,14 +644,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Giannis Antetokounmpo: más de 0.5 robos** | **66%** | 66% | 66% | 1.1 ± 1.0 | 7/10 | 3/3 | 1 | 1.40 (71%) |
-| **Daniel Gafford: más de 0.5 tapones** | **63%** | 64% | 62% | 1.0 ± 1.0 | 9/10 | 3/3 | 0, 2 | 1.49 (67%) |
-| **Tim Hardaway Jr.: más de 1.5 rebotes** | **62%** | 67% | 60% | 2.6 ± 1.8 | 7/10 | 2/3 | 1, 3, 2, 1 | 1.56 (64%) |
+| **Giannis Antetokounmpo: más de 0.5 robos** | **67%** | 66% | 68% | 1.1 ± 1.0 | 7/10 | 3/3 | 1 | 1.40 (71%) |
+| **Daniel Gafford: más de 0.5 tapones** | **64%** | 64% | 64% | 1.0 ± 1.0 | 9/10 | 3/3 | 0, 2 | 1.49 (67%) |
+| **Davion Mitchell: más de 0.5 robos** | **63%** | 57% | 66% | 0.9 ± 1.0 | 3/10 | 1/3 | 0, 2 | 1.44 (70%) |
 | **Giannis Antetokounmpo: menos de 37.5 pts+ast** | **62%** | 80% | 52% | 29.1 ± 8.4 | 8/10 | 2/3 | 36 | 1.80 (56%) |
 | **Pelle Larsson: más de 0.5 triples** | **62%** | 60% | 63% | 1.0 ± 1.0 | 6/10 | 2/3 | 0, 1 | 1.50 (67%) |
-| **Davion Mitchell: más de 0.5 robos** | **61%** | 57% | 64% | 0.9 ± 1.0 | 3/10 | 1/3 | 0, 2 | 1.44 (70%) |
 | **Davion Mitchell: más de 10.5 puntos** | **61%** | 77% | 52% | 15.2 ± 5.1 | 8/10 | 3/3 | 4, 8 | 1.80 (56%) |
-| **P.J. Washington: más de 1.5 asistencias** | **61%** | 61% | 61% | 2.3 ± 1.5 | 4/10 | 2/3 | 1 | 1.53 (66%) |
+| **Andrew Wiggins: más de 0.5 robos** | **60%** | 54% | 63% | 0.8 ± 0.9 | 5/10 | 2/3 | 1 | 1.50 (67%) |
+| **Bam Adebayo: menos de 1.5 triples** | **59%** | 62% | 57% | 1.3 ± 1.3 | 5/10 | 2/3 | 1, 0 | 1.65 (61%) |
 
 ### Fichas de los jugadores destacados
 
@@ -681,7 +659,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 - Minutos esperados: **28.7** (± 3.5); 39 partidos en la base.
 - cambio de rol esta temporada (por minuto): ast -46%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Giannis Antetokounmpo: más de 0.5 robos** (66%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Giannis Antetokounmpo: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Dallas Mavericks contra aleros/ala-pívots en robos: -3% respecto a la media; ajuste por su historial contra defensas similares: -1%.
 
 **¿Por qué 1.1 robos?** (línea 0.5; 28.7 minutos esperados)
@@ -710,7 +688,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 - sin Naji Marshall (5 partidos): 20.8 min vs 21.7 con él; pts +6%/min, ast +29%/min
 - sin Cooper Flagg (10 partidos): 22.4 min vs 21.4 con él; reb -8%/min, ast +7%/min
 - cambio de rol esta temporada (por minuto): pts -32%, ast +174%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Daniel Gafford: más de 0.5 tapones** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Daniel Gafford: más de 0.5 tapones** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Miami Heat contra aleros/ala-pívots en tapones: -1% respecto a la media; ajuste por su historial contra defensas similares: +5%.
 
 **¿Por qué 1.0 tapones?** (línea 0.5; 20.9 minutos esperados)
@@ -733,33 +711,32 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | triple frontal | 1% | 35% | 35% | 35% |
 | triple de esquina | 0% | 38% | 38% | 39% |
 
-#### Tim Hardaway Jr. (bases/escoltas) vs Dallas Mavericks
+#### Davion Mitchell (bases/escoltas) vs Dallas Mavericks
 
-- Minutos esperados: **20.5** (± 3.0); 88 partidos en la base.
-- cambio de rol esta temporada (por minuto): pts -47%, reb +35%, ast -32%, tpm -51%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Tim Hardaway Jr.: más de 1.5 rebotes** (62%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
-- Defensa de Dallas Mavericks contra bases/escoltas en rebotes: +9% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+- Minutos esperados: **34.6** (± 3.7); 74 partidos en la base.
+- cambio de rol esta temporada (por minuto): pts +49%, reb -69%, tpm +48%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Davion Mitchell: más de 0.5 robos** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Dallas Mavericks contra bases/escoltas en robos: +8% respecto a la media; ajuste por su historial contra defensas similares: +2%.
 
-**¿Por qué 2.6 rebotes?** (línea 1.5; 20.5 minutos esperados)
+**¿Por qué 0.9 robos?** (línea 0.5; 34.6 minutos esperados)
 
-- Rebotes **2.6** (por componentes 2.6 · por tasa por minuto y defensa rival 2.6): defensivos 2.2 = captura el 10.3% de los fallos del rival en pista × 49.8 fallos esperados del rival (liga 47.0) × 43% del partido; ofensivos 0.4 = 1.9% de los fallos de su equipo × 51.2.
+- Robos **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): roba el 8.8% de las pérdidas del rival en pista × 14.6 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 20.0 | 22.6 | 20.0 | 26.5 | 30.8 |
-| Rebotes | 2.6 | 2.9 | 2.7 | 2.6 | 1.8 |
-| % de los fallos del rival que captura | 10.1% | 10.4% | 11.7% | 9.0% | 5.9% |
-| % de los fallos de su equipo que captura | 2.9% | 2.2% | 1.5% | 1.0% | 0.0% |
+| Minutos | 35.4 | 33.3 | 34.3 | 28.8 | 31.0 |
+| Robos | 0.8 | 0.4 | 0.3 | 1.0 | 1.0 |
+| % de las pérdidas del rival que roba | 8.2% | 5.4% | 2.9% | 11.8% | 10.6% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media +1%, vs defensa débil +5%; rebotes: vs defensa fuerte -11%, vs defensa media +14%, vs defensa débil -3%; asistencias: vs defensa fuerte -13%, vs defensa media +18%, vs defensa débil +8%; triples: vs defensa fuerte -8%, vs defensa media +5%, vs defensa débil +8%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +5%, vs defensa media -0%, vs defensa débil -9%; rebotes: vs defensa fuerte -9%, vs defensa media -19%, vs defensa débil +34%; asistencias: vs defensa fuerte +5%, vs defensa media -4%, vs defensa débil -2%; triples: vs defensa fuerte -19%, vs defensa media +11%, vs defensa débil +22%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 56% | 38% | 35% | 35% |
-| triple de esquina | 14% | 40% | 38% | 37% |
-| media distancia | 11% | 48% | 41% | 42% |
-| pintura | 9% | 45% | 45% | 45% |
-| bajo el aro | 9% | 65% | 68% | 69% |
+| triple frontal | 37% | 40% | 35% | 35% |
+| pintura | 26% | 49% | 45% | 45% |
+| bajo el aro | 25% | 66% | 68% | 69% |
+| media distancia | 6% | 40% | 41% | 42% |
+| triple de esquina | 5% | 37% | 38% | 37% |
 
 #### Pelle Larsson (bases/escoltas) vs Dallas Mavericks
 
@@ -789,32 +766,32 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | triple de esquina | 10% | 38% | 38% | 37% |
 | media distancia | 3% | 35% | 41% | 42% |
 
-#### Davion Mitchell (bases/escoltas) vs Dallas Mavericks
+#### Andrew Wiggins (aleros/ala-pívots) vs Dallas Mavericks
 
-- Minutos esperados: **34.6** (± 3.7); 74 partidos en la base.
-- cambio de rol esta temporada (por minuto): pts +49%, reb -69%, tpm +48%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Davion Mitchell: más de 0.5 robos** (61%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Dallas Mavericks contra bases/escoltas en robos: +8% respecto a la media; ajuste por su historial contra defensas similares: +2%.
+- Minutos esperados: **23.8** (± 5.2); 72 partidos en la base.
+- cambio de rol esta temporada (por minuto): pts -36%, ast -36%, tpm -58%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Andrew Wiggins: más de 0.5 robos** (60%). Con 80% de probabilidad: más de - / menos de 1.5.
+- Defensa de Dallas Mavericks contra aleros/ala-pívots en robos: -3% respecto a la media; ajuste por su historial contra defensas similares: +1%.
 
-**¿Por qué 0.9 robos?** (línea 0.5; 34.6 minutos esperados)
+**¿Por qué 0.8 robos?** (línea 0.5; 23.8 minutos esperados)
 
-- Robos **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): roba el 8.8% de las pérdidas del rival en pista × 14.6 pérdidas esperadas del rival.
+- Robos **0.8** (por componentes 0.8 · por tasa por minuto y defensa rival 0.8): roba el 11.1% de las pérdidas del rival en pista × 14.6 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 35.4 | 33.3 | 34.3 | 28.8 | 31.0 |
-| Robos | 0.8 | 0.4 | 0.3 | 1.0 | 1.0 |
-| % de las pérdidas del rival que roba | 8.2% | 5.4% | 2.9% | 11.8% | 10.6% |
+| Minutos | 27.8 | 27.5 | 23.7 | 30.5 | 33.0 |
+| Robos | 0.6 | 0.5 | 0.7 | 1.1 | 1.0 |
+| % de las pérdidas del rival que roba | 8.0% | 7.9% | 8.3% | 12.3% | 11.1% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +5%, vs defensa media -0%, vs defensa débil -9%; rebotes: vs defensa fuerte -9%, vs defensa media -19%, vs defensa débil +34%; asistencias: vs defensa fuerte +5%, vs defensa media -4%, vs defensa débil -2%; triples: vs defensa fuerte -19%, vs defensa media +11%, vs defensa débil +22%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -6%, vs defensa media +2%, vs defensa débil +7%; rebotes: vs defensa fuerte +6%, vs defensa media -9%, vs defensa débil +2%; asistencias: vs defensa fuerte -19%, vs defensa media +11%, vs defensa débil +14%; triples: vs defensa fuerte -15%, vs defensa media -7%, vs defensa débil +20%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 37% | 40% | 35% | 35% |
-| pintura | 26% | 49% | 45% | 45% |
-| bajo el aro | 25% | 66% | 68% | 69% |
-| media distancia | 6% | 40% | 41% | 42% |
-| triple de esquina | 5% | 37% | 38% | 37% |
+| triple frontal | 30% | 38% | 35% | 35% |
+| bajo el aro | 25% | 69% | 68% | 69% |
+| pintura | 22% | 39% | 45% | 45% |
+| media distancia | 12% | 41% | 41% | 42% |
+| triple de esquina | 11% | 42% | 38% | 37% |
 
 ## Indiana Pacers @ Milwaukee Bucks
 
@@ -826,12 +803,12 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 |---|---|---|---|---|---|---|---|---|
 | **Jaime Jaquez Jr.: más de 0.5 triples** | **69%** | 74% | 65% | 1.3 ± 1.2 | 9/10 | 3/3 | 2, 0, 1 | 1.43 (70%) |
 | **Kasparas Jakucionis: menos de 1.5 triples** | **65%** | 64% | 65% | 1.2 ± 1.2 | 6/10 | 3/3 | 1, 0, 0 | 1.44 (70%) |
-| **Ryan Rollins: menos de 1.5 robos** | **65%** | 69% | 63% | 1.0 ± 1.0 | 6/10 | 3/3 | 3, 0, 1, 1 | 1.43 (70%) |
 | **Kyle Kuzma: menos de 1.5 triples** | **63%** | 61% | 64% | 1.4 ± 1.3 | 7/10 | 2/3 | 2, 1, 1 | 1.46 (68%) |
 | **Kel'el Ware: más de 0.5 triples** | **63%** | 65% | 62% | 1.0 ± 1.1 | 9/10 | 2/3 | 1, 0, 1 | 1.50 (67%) |
-| **Andrew Nembhard: menos de 1.5 robos** | **62%** | 73% | 55% | 1.0 ± 1.0 | 9/10 | 3/3 | 1, 1 | 2.00 (50%) |
-| **Jaime Jaquez Jr.: menos de 1.5 robos+tapones** | **61%** | 81% | 50% | 0.8 ± 1.0 | 10/10 | 3/3 | 0, 1, 1 | 2.00 (50%) |
-| **Aaron Nesmith: menos de 1.5 robos+tapones** | **61%** | 82% | 50% | 0.7 ± 0.8 | 10/10 | 2/2 | 1, 2, 1 | 2.00 (50%) |
+| **Kasparas Jakucionis: menos de 3.5 rebotes** | **61%** | 64% | 59% | 3.2 ± 1.8 | 9/10 | 3/3 | 0, 1, 3 | 1.58 (63%) |
+| **Pascal Siakam: menos de 10.5 reb+ast** | **60%** | 70% | 54% | 8.7 ± 3.2 | 8/10 | 2/3 | 10, 11, 13 | 1.74 (57%) |
+| **Pascal Siakam: menos de 3.5 asistencias** | **59%** | 63% | 58% | 3.1 ± 2.0 | 6/10 | 2/3 | 4, 2, 8 | 1.62 (62%) |
+| **Jaime Jaquez Jr.: menos de 4.5 asistencias** | **59%** | 61% | 57% | 3.9 ± 2.0 | 6/10 | 2/3 | 2, 2, 3 | 1.63 (61%) |
 
 ### Fichas de los jugadores destacados
 
@@ -891,33 +868,6 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | pintura | 11% | 41% | 45% | 47% |
 | media distancia | 2% | 38% | 41% | 44% |
 
-#### Ryan Rollins (bases/escoltas) vs Indiana Pacers
-
-- Minutos esperados: **28.1** (± 4.5); 77 partidos en la base.
-- cambio de rol esta temporada (por minuto): reb +44%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Ryan Rollins: menos de 1.5 robos** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Indiana Pacers contra bases/escoltas en robos: +1% respecto a la media; ajuste por su historial contra defensas similares: +0%.
-
-**¿Por qué 1.0 robos?** (línea 1.5; 28.1 minutos esperados)
-
-- Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.1): roba el 14.2% de las pérdidas del rival en pista × 12.3 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.6 | 30.0 | 27.7 | 32.1 | 33.0 |
-| Robos | 1.0 | 1.4 | 0.7 | 1.5 | 1.2 |
-| % de las pérdidas del rival que roba | 12.9% | 17.2% | 9.4% | 18.1% | 14.3% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -3%, vs defensa media +1%, vs defensa débil +3%; rebotes: vs defensa fuerte -10%, vs defensa media +6%, vs defensa débil +6%; asistencias: vs defensa fuerte -5%, vs defensa media +5%, vs defensa débil -0%; triples: vs defensa fuerte -4%, vs defensa media +2%, vs defensa débil +4%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 34% | 40% | 35% | 34% |
-| bajo el aro | 22% | 68% | 68% | 68% |
-| pintura | 20% | 38% | 45% | 47% |
-| media distancia | 14% | 45% | 41% | 44% |
-| triple de esquina | 10% | 38% | 38% | 40% |
-
 #### Kyle Kuzma (aleros/ala-pívots) vs Indiana Pacers
 
 - Minutos esperados: **30.2** (± 4.3); 72 partidos en la base.
@@ -972,6 +922,40 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | pintura | 15% | 39% | 45% | 47% |
 | triple de esquina | 10% | 42% | 38% | 40% |
 | media distancia | 2% | 38% | 41% | 44% |
+
+#### Pascal Siakam (aleros/ala-pívots) vs Milwaukee Bucks
+
+- Minutos esperados: **28.6** (± 3.7); 67 partidos en la base.
+- Johnny Furphy ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- cambio de rol esta temporada (por minuto): tpm +54%; se da más peso a la línea de la casa
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Pascal Siakam: menos de 10.5 reb+ast** (60%). Con 80% de probabilidad: más de 5.5 / menos de 11.5.
+- Defensa de Milwaukee Bucks contra aleros/ala-pívots en reb+ast: +3% respecto a la media; ajuste por su historial contra defensas similares: +0%.
+
+**¿Por qué 8.7 reb+ast?** (línea 10.5; 28.6 minutos esperados)
+
+- Rebotes **5.6** (por componentes 5.4 · por tasa por minuto y defensa rival 5.7): defensivos 4.3 = captura el 16.4% de los fallos del rival en pista × 44.2 fallos esperados del rival (liga 47.0) × 59% del partido; ofensivos 1.1 = 4.0% de los fallos de su equipo × 47.1.
+- Asistencias **3.1** (por componentes 2.5 · por tasa por minuto y defensa rival 3.3): asiste el 14.6% de las canastas de sus compañeros en pista × 17.3 canastas de compañeros esperadas (su equipo 41.0 por 48' contra esta defensa).
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 29.2 | 30.3 | 30.0 | 32.4 | 34.7 |
+| Rebotes | 5.8 | 6.2 | 6.0 | 6.5 | 6.7 |
+| % de los fallos del rival que captura | 16.7% | 17.4% | 17.6% | 16.4% | 14.2% |
+| % de los fallos de su equipo que captura | 2.9% | 3.4% | 2.5% | 4.3% | 5.8% |
+| Asistencias | 3.4 | 3.3 | 3.3 | 3.7 | 4.7 |
+| % de las canastas de compañeros que asiste | 15.6% | 14.1% | 15.1% | 17.2% | 23.4% |
+| Pérdidas por jugada | 8.9% | 11.0% | 11.7% | 9.5% | 7.1% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -2%, vs defensa media -0%, vs defensa débil +2%; rebotes: vs defensa fuerte -5%, vs defensa media -2%, vs defensa débil +10%; asistencias: vs defensa fuerte -8%, vs defensa media -2%, vs defensa débil +11%; triples: vs defensa fuerte -10%, vs defensa media +7%, vs defensa débil +1%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| pintura | 32% | 49% | 45% | 41% |
+| bajo el aro | 27% | 68% | 68% | 70% |
+| triple frontal | 21% | 36% | 35% | 36% |
+| media distancia | 15% | 35% | 41% | 42% |
+| triple de esquina | 5% | 40% | 38% | 40% |
 
 ## Phoenix Suns @ Oklahoma City Thunder
 
@@ -1142,16 +1126,43 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
+| **Alperen Sengun: más de 0.5 tapones** | **63%** | 67% | 61% | 1.2 ± 1.1 | 8/10 | 1/3 | 0, 0, 3 | 1.56 (64%) |
 | **CJ McCollum: menos de 3.5 asistencias** | **63%** | 67% | 60% | 2.7 ± 1.8 | 8/10 | 3/3 | 1, 2, 2, 3 | 1.54 (65%) |
 | **Jabari Smith Jr.: más de 1.5 triples** | **63%** | 68% | 60% | 2.3 ± 1.5 | 8/10 | 2/3 | 2, 3, 2 | 1.56 (64%) |
 | **Kevin Durant: más de 1.5 triples** | **63%** | 71% | 58% | 2.5 ± 1.6 | 8/10 | 3/3 | 3, 3, 3 | 1.62 (62%) |
 | **Kevin Durant: más de 8.5 reb+ast** | **62%** | 75% | 55% | 10.9 ± 3.4 | 8/10 | 2/3 | 6, 9, 9 | 1.69 (59%) |
-| **Alperen Sengun: más de 0.5 tapones** | **62%** | 67% | 59% | 1.2 ± 1.1 | 8/10 | 1/3 | 0, 0, 3 | 1.56 (64%) |
 | **Onyeka Okongwu: menos de 6.5 rebotes** | **60%** | 69% | 55% | 5.0 ± 2.3 | 7/10 | 3/3 | 6, 8 | 1.70 (59%) |
-| **Jalen Johnson: menos de 1.5 robos** | **60%** | 62% | 58% | 1.4 ± 1.2 | 6/10 | 1/3 | 2, 1 | 1.69 (59%) |
 | **Luguentz Dort: menos de 1.5 triples** | **60%** | 62% | 58% | 1.4 ± 1.2 | 9/10 | 2/3 | 1, 0, 3, 0 | 1.61 (62%) |
+| **Nickeil Alexander-Walker: menos de 3.5 asistencias** | **59%** | 59% | 59% | 3.3 ± 1.8 | 6/10 | 1/3 | 4, 4, 1 | 1.57 (64%) |
 
 ### Fichas de los jugadores destacados
+
+#### Alperen Sengun (pívots) vs Atlanta Hawks
+
+- Minutos esperados: **33.8** (± 3.2); 83 partidos en la base.
+- sin Steven Adams (54 partidos): 33.0 min vs 35.2 con él; pts -5%/min
+- Su prop más probable hoy: **Alperen Sengun: más de 0.5 tapones** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Atlanta Hawks contra pívots en tapones: -9% respecto a la media; ajuste por su historial contra defensas similares: -4%.
+
+**¿Por qué 1.2 tapones?** (línea 0.5; 33.8 minutos esperados)
+
+- Tapones **1.2** (por componentes 1.4 · por tasa por minuto y defensa rival 1.1): tapona el 2.8% de los tiros de 2 del rival en pista × 51.7 tiros de 2 esperados del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 36.0 | 36.0 | 33.0 | 33.0 | 31.0 |
+| Tapones | 0.8 | 1.0 | 0.3 | 1.1 | 1.0 |
+| % de los tiros de 2 del rival que tapona | 2.1% | 2.7% | 1.0% | 3.0% | 3.1% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -14%, vs defensa media -6%, vs defensa débil +17%; rebotes: vs defensa fuerte -6%, vs defensa media -9%, vs defensa débil +14%; asistencias: vs defensa fuerte -0%, vs defensa media -10%, vs defensa débil +8%; triples: vs defensa fuerte -42%, vs defensa media +14%, vs defensa débil +30%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| pintura | 44% | 44% | 45% | 44% |
+| bajo el aro | 36% | 70% | 68% | 67% |
+| triple frontal | 11% | 33% | 35% | 35% |
+| media distancia | 9% | 37% | 41% | 42% |
+| triple de esquina | 1% | 39% | 38% | 37% |
 
 #### CJ McCollum (bases/escoltas) vs Houston Rockets
 
@@ -1237,33 +1248,6 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | bajo el aro | 9% | 77% | 68% | 67% |
 | triple de esquina | 4% | 43% | 38% | 37% |
 
-#### Alperen Sengun (pívots) vs Atlanta Hawks
-
-- Minutos esperados: **33.8** (± 3.2); 83 partidos en la base.
-- sin Steven Adams (54 partidos): 33.0 min vs 35.2 con él; pts -5%/min
-- Su prop más probable hoy: **Alperen Sengun: más de 0.5 tapones** (62%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Atlanta Hawks contra pívots en tapones: -9% respecto a la media; ajuste por su historial contra defensas similares: -4%.
-
-**¿Por qué 1.2 tapones?** (línea 0.5; 33.8 minutos esperados)
-
-- Tapones **1.2** (por componentes 1.4 · por tasa por minuto y defensa rival 1.1): tapona el 2.8% de los tiros de 2 del rival en pista × 51.7 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 36.0 | 36.0 | 33.0 | 33.0 | 31.0 |
-| Tapones | 0.8 | 1.0 | 0.3 | 1.1 | 1.0 |
-| % de los tiros de 2 del rival que tapona | 2.1% | 2.7% | 1.0% | 3.0% | 3.1% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -14%, vs defensa media -6%, vs defensa débil +17%; rebotes: vs defensa fuerte -6%, vs defensa media -9%, vs defensa débil +14%; asistencias: vs defensa fuerte -0%, vs defensa media -10%, vs defensa débil +8%; triples: vs defensa fuerte -42%, vs defensa media +14%, vs defensa débil +30%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| pintura | 44% | 44% | 45% | 44% |
-| bajo el aro | 36% | 70% | 68% | 67% |
-| triple frontal | 11% | 33% | 35% | 35% |
-| media distancia | 9% | 37% | 41% | 42% |
-| triple de esquina | 1% | 39% | 38% | 37% |
-
 #### Onyeka Okongwu (aleros/ala-pívots) vs Houston Rockets
 
 - Minutos esperados: **26.2** (± 3.5); 83 partidos en la base.
@@ -1300,14 +1284,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Keyonte George: más de 0.5 robos** | **65%** | 67% | 65% | 1.1 ± 1.1 | 7/10 | 3/3 | 1, 1, 2 | 1.43 (70%) |
-| **Jaren Jackson Jr.: menos de 1.5 robos** | **65%** | 72% | 61% | 0.9 ± 1.2 | 6/10 | 3/3 | 1 | 1.64 (61%) |
+| **Keyonte George: más de 0.5 robos** | **67%** | 67% | 67% | 1.1 ± 1.1 | 7/10 | 3/3 | 1, 1, 2 | 1.43 (70%) |
 | **Zach Edey: más de 0.5 asistencias** | **64%** | 65% | 64% | 1.3 ± 1.3 | 6/10 | 1/2 | 0 | 1.43 (70%) |
-| **Ty Jerome: más de 0.5 robos+tapones** | **63%** | 76% | 56% | 1.6 ± 1.3 | 7/10 | 3/3 | 1 | 1.57 (64%) |
 | **Jaylen Wells: más de 2.5 rebotes** | **62%** | 73% | 56% | 4.3 ± 2.2 | 6/10 | 3/3 | 5, 3, 1, 5 | 1.66 (60%) |
 | **Keyonte George: menos de 7.5 asistencias** | **62%** | 73% | 56% | 6.1 ± 2.6 | 8/10 | 1/3 | 5, 4, 8 | 1.67 (60%) |
 | **Jaren Jackson Jr.: menos de 2.5 asistencias** | **62%** | 63% | 61% | 2.2 ± 1.5 | 6/10 | 2/3 | 2 | 1.51 (66%) |
 | **Lauri Markkanen: menos de 2.5 asistencias** | **60%** | 58% | 61% | 2.4 ± 1.6 | 7/10 | 1/3 | 3, 2 | 1.52 (66%) |
+| **Ty Jerome: menos de 3.5 triples** | **60%** | 60% | 59% | 3.3 ± 1.8 | 7/10 | 2/3 | 5 | 1.57 (64%) |
+| **Cedric Coward: más de 4.5 rebotes** | **59%** | 67% | 55% | 6.8 ± 3.5 | 5/10 | 2/2 | 7, 12 | 1.69 (59%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1317,7 +1301,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 - Jusuf Nurkic ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - cambio de rol esta temporada (por minuto): ast +43%; se da más peso a la línea de la casa
 - segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Keyonte George: más de 0.5 robos** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Keyonte George: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Memphis Grizzlies contra bases/escoltas en robos: +9% respecto a la media; ajuste por su historial contra defensas similares: -1%.
 
 **¿Por qué 1.1 robos?** (línea 0.5; 29.9 minutos esperados)
@@ -1339,34 +1323,6 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | media distancia | 16% | 44% | 41% | 43% |
 | bajo el aro | 14% | 70% | 68% | 70% |
 | triple de esquina | 5% | 40% | 38% | 39% |
-
-#### Jaren Jackson Jr. (aleros/ala-pívots) vs Memphis Grizzlies
-
-- Minutos esperados: **30.2** (± 3.0); 51 partidos en la base.
-- Jusuf Nurkic ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Jaren Jackson Jr.: menos de 1.5 robos** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Memphis Grizzlies contra aleros/ala-pívots en robos: +0% respecto a la media; ajuste por su historial contra defensas similares: +1%.
-
-**¿Por qué 0.9 robos?** (línea 1.5; 30.2 minutos esperados)
-
-- Robos **0.9** (por componentes 1.0 · por tasa por minuto y defensa rival 0.9): roba el 10.6% de las pérdidas del rival en pista × 14.7 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 28.2 | 29.6 | 31.3 | 30.3 | 28.0 |
-| Robos | 0.8 | 1.6 | 0.3 | 1.1 | 1.0 |
-| % de las pérdidas del rival que roba | 10.6% | 19.1% | 4.0% | 12.5% | 13.2% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media +3%, vs defensa débil +7%; rebotes: vs defensa fuerte -23%, vs defensa media +16%, vs defensa débil +21%; asistencias: vs defensa fuerte -16%, vs defensa media +8%, vs defensa débil +15%; triples: vs defensa fuerte -5%, vs defensa media +6%, vs defensa débil -2%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| pintura | 42% | 51% | 45% | 46% |
-| triple frontal | 24% | 35% | 35% | 35% |
-| bajo el aro | 18% | 64% | 68% | 70% |
-| triple de esquina | 8% | 39% | 38% | 39% |
-| media distancia | 7% | 41% | 41% | 43% |
 
 #### Zach Edey (pívots) vs Utah Jazz
 
@@ -1397,36 +1353,6 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | media distancia | 2% | 41% | 41% | 43% |
 | triple de esquina | 1% | 38% | 38% | 39% |
 
-#### Ty Jerome (bases/escoltas) vs Utah Jazz
-
-- Minutos esperados: **30.3** (± 3.0); 18 partidos en la base.
-- segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Ty Jerome: más de 0.5 robos+tapones** (63%). Con 80% de probabilidad: más de - / menos de 3.5.
-- Defensa de Utah Jazz contra bases/escoltas en robos+tapones: +14% respecto a la media; ajuste por su historial contra defensas similares: +2%.
-
-**¿Por qué 1.6 robos+tapones?** (línea 0.5; 30.3 minutos esperados)
-
-- Robos **1.2** (por componentes 1.1 · por tasa por minuto y defensa rival 1.2): roba el 11.0% de las pérdidas del rival en pista × 16.4 pérdidas esperadas del rival.
-- Tapones **0.4** (por componentes 0.4 · por tasa por minuto y defensa rival 0.4): tapona el 1.1% de los tiros de 2 del rival en pista × 54.0 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.0 | 26.9 | 32.0 | 22.7 | 32.0 |
-| Robos | 0.8 | 0.8 | 0.7 | 1.1 | 0.0 |
-| % de las pérdidas del rival que roba | 8.7% | 9.3% | 5.9% | 15.2% | 0.0% |
-| Tapones | 0.4 | 0.3 | 0.3 | 0.3 | 1.0 |
-| % de los tiros de 2 del rival que tapona | 1.4% | 1.0% | 1.0% | 1.1% | 3.5% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -14%, vs defensa media -6%, vs defensa débil +14%; rebotes: vs defensa fuerte -11%, vs defensa media -12%, vs defensa débil +51%; asistencias: vs defensa fuerte -14%, vs defensa media +14%, vs defensa débil -8%; triples: vs defensa fuerte -10%, vs defensa media +15%, vs defensa débil -9%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 37% | 40% | 35% | 37% |
-| pintura | 36% | 53% | 45% | 50% |
-| bajo el aro | 12% | 67% | 68% | 73% |
-| media distancia | 11% | 44% | 41% | 43% |
-| triple de esquina | 4% | 41% | 38% | 39% |
-
 #### Jaylen Wells (aleros/ala-pívots) vs Utah Jazz
 
 - Minutos esperados: **27.6** (± 3.9); 72 partidos en la base.
@@ -1456,6 +1382,64 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | pintura | 16% | 48% | 45% | 50% |
 | media distancia | 13% | 45% | 41% | 43% |
 
+#### Jaren Jackson Jr. (aleros/ala-pívots) vs Memphis Grizzlies
+
+- Minutos esperados: **30.2** (± 3.0); 51 partidos en la base.
+- Jusuf Nurkic ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Jaren Jackson Jr.: menos de 2.5 asistencias** (62%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
+- Defensa de Memphis Grizzlies contra aleros/ala-pívots en asistencias: +2% respecto a la media; ajuste por su historial contra defensas similares: +0%.
+
+**¿Por qué 2.2 asistencias?** (línea 2.5; 30.2 minutos esperados)
+
+- Asistencias **2.2** (por componentes 2.1 · por tasa por minuto y defensa rival 2.2): asiste el 9.9% de las canastas de sus compañeros en pista × 21.2 canastas de compañeros esperadas (su equipo 44.2 por 48' contra esta defensa).
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 28.2 | 29.6 | 31.3 | 30.3 | 28.0 |
+| Asistencias | 2.2 | 2.3 | 2.0 | 2.0 | 2.0 |
+| % de las canastas de compañeros que asiste | 10.8% | 11.1% | 8.9% | 9.1% | 11.8% |
+| Pérdidas por jugada | 15.8% | 12.0% | 20.4% | 11.7% | 31.5% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media +3%, vs defensa débil +7%; rebotes: vs defensa fuerte -23%, vs defensa media +16%, vs defensa débil +21%; asistencias: vs defensa fuerte -16%, vs defensa media +8%, vs defensa débil +15%; triples: vs defensa fuerte -5%, vs defensa media +6%, vs defensa débil -2%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| pintura | 42% | 51% | 45% | 46% |
+| triple frontal | 24% | 35% | 35% | 35% |
+| bajo el aro | 18% | 64% | 68% | 70% |
+| triple de esquina | 8% | 39% | 38% | 39% |
+| media distancia | 7% | 41% | 41% | 43% |
+
+#### Lauri Markkanen (aleros/ala-pívots) vs Memphis Grizzlies
+
+- Minutos esperados: **34.1** (± 3.7); 45 partidos en la base.
+- Jusuf Nurkic ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Lauri Markkanen: menos de 2.5 asistencias** (60%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
+- Defensa de Memphis Grizzlies contra aleros/ala-pívots en asistencias: +2% respecto a la media; ajuste por su historial contra defensas similares: +1%.
+
+**¿Por qué 2.4 asistencias?** (línea 2.5; 34.1 minutos esperados)
+
+- Asistencias **2.4** (por componentes 2.3 · por tasa por minuto y defensa rival 2.4): asiste el 9.9% de las canastas de sus compañeros en pista × 23.7 canastas de compañeros esperadas (su equipo 44.2 por 48' contra esta defensa).
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 32.2 | 30.2 | 36.0 | 34.4 | 36.0 |
+| Asistencias | 2.4 | 1.9 | 2.3 | 2.1 | 2.5 |
+| % de las canastas de compañeros que asiste | 10.7% | 9.1% | 9.0% | 9.1% | 9.5% |
+| Pérdidas por jugada | 6.8% | 6.3% | 8.6% | 6.4% | 15.8% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -4%, vs defensa media -4%, vs defensa débil +12%; rebotes: vs defensa fuerte -3%, vs defensa media +4%, vs defensa débil +0%; asistencias: vs defensa fuerte -13%, vs defensa media +26%, vs defensa débil -9%; triples: vs defensa fuerte -2%, vs defensa media +6%, vs defensa débil -5%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 34% | 34% | 35% | 35% |
+| bajo el aro | 25% | 70% | 68% | 70% |
+| pintura | 24% | 49% | 45% | 46% |
+| triple de esquina | 9% | 42% | 38% | 39% |
+| media distancia | 8% | 32% | 41% | 43% |
+
 ## Golden State Warriors @ Denver Nuggets
 
 Parte de lesiones: Kristaps Porzingis (Out); Cameron Johnson (Day-To-Day); Alpha Diallo (Day-To-Day); Brandon Williams (Day-To-Day); Charles Bassey (Day-To-Day); Moses Moody (Out); Julian Strawther (Out); Spencer Jones (Out); Gui Santos (Day-To-Day).
@@ -1464,81 +1448,23 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Gui Santos: más de 1.5 asistencias** | **66%** | 68% | 64% | 2.5 ± 1.8 | 8/10 | 2/3 | 3, 7, 0 | 1.44 (69%) |
-| **Gui Santos: más de 0.5 triples** | **65%** | 67% | 64% | 1.1 ± 1.1 | 8/10 | 3/3 | 1, 2, 0 | 1.45 (69%) |
-| **Jamal Murray: menos de 1.5 robos** | **64%** | 70% | 61% | 1.1 ± 1.1 | 9/10 | 2/2 | 2, 1, 2, 3 | 1.62 (62%) |
-| **Brandin Podziemski: más de 0.5 robos** | **63%** | 72% | 59% | 1.4 ± 1.2 | 7/10 | 1/1 | 2, 1, 0, 1 | 1.49 (67%) |
+| **Brandin Podziemski: más de 0.5 robos** | **67%** | 72% | 64% | 1.4 ± 1.2 | 7/10 | 1/1 | 2, 1, 0, 1 | 1.49 (67%) |
 | **Draymond Green: menos de 1.5 triples** | **63%** | 62% | 64% | 1.4 ± 1.3 | 8/10 | 2/2 | 2, 5, 2 | 1.47 (68%) |
-| **Christian Braun: menos de 1.5 robos** | **62%** | 66% | 61% | 1.2 ± 1.1 | 6/10 | 1/2 | 0, 2, 1, 0 | 1.65 (61%) |
-| **Brandin Podziemski: más de 0.5 robos+tapones** | **62%** | 76% | 56% | 1.8 ± 1.4 | 7/10 | 1/1 | 3, 1, 1, 1 | 1.59 (63%) |
-| **Christian Braun: más de 1.5 asistencias** | **60%** | 69% | 55% | 3.0 ± 1.8 | 4/10 | 1/2 | 0, 2, 4, 2 | 1.68 (60%) |
+| **Brandin Podziemski: más de 1.5 triples** | **61%** | 61% | 60% | 1.9 ± 1.4 | 9/10 | 1/1 | 5, 3, 1, 2 | 1.53 (65%) |
+| **Nikola Jokic: más de 0.5 tapones** | **60%** | 66% | 57% | 1.2 ± 1.1 | 7/10 | 2/2 | 0, 2, 1, 1 | 1.68 (60%) |
+| **Jamal Murray: menos de 3.5 triples** | **59%** | 60% | 59% | 3.4 ± 3.0 | 7/10 | 1/2 | 2, 1, 5, 1 | 1.57 (64%) |
+| **Christian Braun: menos de 1.5 triples** | **59%** | 64% | 57% | 1.4 ± 1.2 | 8/10 | 2/2 | 0, 1, 1, 0 | 1.64 (61%) |
+| **Draymond Green: más de 0.5 robos** | **58%** | 52% | 61% | 0.6 ± 0.8 | 9/10 | 1/2 | 1, 1, 0 | 1.57 (64%) |
+| **Gui Santos: más de 12.5 pts+reb** | **57%** | 67% | 51% | 14.9 ± 4.8 | 7/10 | 1/3 | 19, 22, 5 | 1.81 (55%) |
 
 ### Fichas de los jugadores destacados
-
-#### Gui Santos (aleros/ala-pívots) vs Denver Nuggets
-
-- Minutos esperados: **23.2** (± 3.1); 73 partidos en la base.
-- en el parte de lesiones: day-to-day
-- Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- cambio de rol esta temporada (por minuto): ast -36%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Gui Santos: más de 1.5 asistencias** (66%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
-- Defensa de Denver Nuggets contra aleros/ala-pívots en asistencias: +15% respecto a la media; ajuste por su historial contra defensas similares: +1%.
-
-**¿Por qué 2.5 asistencias?** (línea 1.5; 23.2 minutos esperados)
-
-- Asistencias **2.5** (por componentes 2.1 · por tasa por minuto y defensa rival 2.7): asiste el 13.4% de las canastas de sus compañeros en pista × 15.9 canastas de compañeros esperadas (su equipo 41.0 por 48' contra esta defensa).
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 26.0 | 27.0 | 22.7 | 20.9 | 22.3 |
-| Asistencias | 2.8 | 3.0 | 1.7 | 2.4 | 3.3 |
-| % de las canastas de compañeros que asiste | 14.9% | 15.6% | 9.9% | 15.5% | 19.5% |
-| Pérdidas por jugada | 15.3% | 15.4% | 4.3% | 16.9% | 22.6% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -10%, vs defensa media +9%, vs defensa débil +3%; rebotes: vs defensa fuerte -4%, vs defensa media -6%, vs defensa débil +10%; asistencias: vs defensa fuerte -13%, vs defensa media +12%, vs defensa débil +2%; triples: vs defensa fuerte -5%, vs defensa media -1%, vs defensa débil +6%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 35% | 71% | 68% | 70% |
-| triple frontal | 33% | 32% | 35% | 34% |
-| pintura | 17% | 44% | 45% | 45% |
-| triple de esquina | 14% | 43% | 38% | 36% |
-| media distancia | 1% | 41% | 41% | 40% |
-
-#### Jamal Murray (bases/escoltas) vs Golden State Warriors
-
-- Minutos esperados: **40.2** (± 3.0); 84 partidos en la base.
-- cambio de rol esta temporada (por minuto): reb +30%, ast -44%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Jamal Murray: menos de 1.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Golden State Warriors contra bases/escoltas en robos: +7% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 1.1 robos?** (línea 1.5; 40.2 minutos esperados)
-
-- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.2): roba el 10.5% de las pérdidas del rival en pista × 12.4 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 39.2 | 39.7 | 40.0 | 35.0 | 34.5 |
-| Robos | 1.2 | 0.8 | 1.0 | 0.9 | 2.0 |
-| % de las pérdidas del rival que roba | 9.7% | 7.5% | 8.4% | 10.7% | 24.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -4%, vs defensa media -2%, vs defensa débil +6%; rebotes: vs defensa fuerte -9%, vs defensa media -10%, vs defensa débil +23%; asistencias: vs defensa fuerte -11%, vs defensa media +3%, vs defensa débil +13%; triples: vs defensa fuerte +5%, vs defensa media -21%, vs defensa débil +9%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 36% | 41% | 35% | 35% |
-| pintura | 23% | 44% | 45% | 48% |
-| media distancia | 20% | 43% | 41% | 44% |
-| bajo el aro | 17% | 65% | 68% | 71% |
-| triple de esquina | 4% | 48% | 38% | 41% |
 
 #### Brandin Podziemski (bases/escoltas) vs Denver Nuggets
 
 - Minutos esperados: **32.9** (± 4.6); 85 partidos en la base.
 - sin Kristaps Porzingis (67 partidos): 27.7 min vs 32.9 con él; pts -13%/min, ast +13%/min
 - Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Brandin Podziemski: más de 0.5 robos** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Brandin Podziemski: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Denver Nuggets contra bases/escoltas en robos: -7% respecto a la media; ajuste por su historial contra defensas similares: -1%.
 
 **¿Por qué 1.4 robos?** (línea 0.5; 32.9 minutos esperados)
@@ -1591,22 +1517,78 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | pintura | 11% | 44% | 45% | 45% |
 | media distancia | 3% | 37% | 41% | 40% |
 
+#### Nikola Jokic (pívots) vs Golden State Warriors
+
+- Minutos esperados: **39.4** (± 5.0); 73 partidos en la base.
+- cambio de rol esta temporada (por minuto): ast -37%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Nikola Jokic: más de 0.5 tapones** (60%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Golden State Warriors contra pívots en tapones: -10% respecto a la media; ajuste por su historial contra defensas similares: -3%.
+
+**¿Por qué 1.2 tapones?** (línea 0.5; 39.4 minutos esperados)
+
+- Tapones **1.2** (por componentes 1.2 · por tasa por minuto y defensa rival 1.2): tapona el 3.4% de los tiros de 2 del rival en pista × 44.8 tiros de 2 esperados del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 38.6 | 36.5 | 39.5 | 34.7 | 35.2 |
+| Tapones | 1.4 | 1.1 | 2.0 | 0.8 | 1.0 |
+| % de los tiros de 2 del rival que tapona | 3.1% | 2.8% | 4.5% | 2.2% | 3.0% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media +4%, vs defensa débil +2%; rebotes: vs defensa fuerte -6%, vs defensa media +1%, vs defensa débil +4%; asistencias: vs defensa fuerte -13%, vs defensa media +2%, vs defensa débil +4%; triples: vs defensa fuerte -5%, vs defensa media -4%, vs defensa débil +11%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| pintura | 37% | 55% | 45% | 48% |
+| bajo el aro | 26% | 73% | 68% | 71% |
+| triple frontal | 25% | 34% | 35% | 35% |
+| media distancia | 10% | 50% | 41% | 44% |
+| triple de esquina | 2% | 40% | 38% | 41% |
+
+#### Jamal Murray (bases/escoltas) vs Golden State Warriors
+
+- Minutos esperados: **40.2** (± 3.0); 84 partidos en la base.
+- cambio de rol esta temporada (por minuto): reb +30%, ast -44%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Jamal Murray: menos de 3.5 triples** (59%). Con 80% de probabilidad: más de 0.5 / menos de 5.5.
+- Defensa de Golden State Warriors contra bases/escoltas en triples: -0% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+
+**¿Por qué 3.4 triples?** (línea 3.5; 40.2 minutos esperados)
+
+- Triples **3.4** (por componentes 3.3 · por tasa por minuto y defensa rival 3.4): 7.9 triples intentados (su ritmo 7.3 por 36'; el rival concede -2% de triples en su reparto) × 41% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 39.2 | 39.7 | 40.0 | 35.0 | 34.5 |
+| Triples anotados | 2.6 | 3.0 | 4.0 | 3.1 | 2.2 |
+| Triples intentados | 7.0 | 8.1 | 8.5 | 7.4 | 5.2 |
+| % triples | 37.1% | 37.0% | 47.1% | 42.5% | 42.9% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -4%, vs defensa media -2%, vs defensa débil +6%; rebotes: vs defensa fuerte -9%, vs defensa media -10%, vs defensa débil +23%; asistencias: vs defensa fuerte -11%, vs defensa media +3%, vs defensa débil +13%; triples: vs defensa fuerte +5%, vs defensa media -21%, vs defensa débil +9%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 36% | 41% | 35% | 35% |
+| pintura | 23% | 44% | 45% | 48% |
+| media distancia | 20% | 43% | 41% | 44% |
+| bajo el aro | 17% | 65% | 68% | 71% |
+| triple de esquina | 4% | 48% | 38% | 41% |
+
 #### Christian Braun (bases/escoltas) vs Golden State Warriors
 
 - Minutos esperados: **36.0** (± 4.2); 51 partidos en la base.
 - cambio de rol esta temporada (por minuto): ast -51%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Christian Braun: menos de 1.5 robos** (62%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Golden State Warriors contra bases/escoltas en robos: +7% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+- Su prop más probable hoy: **Christian Braun: menos de 1.5 triples** (59%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Golden State Warriors contra bases/escoltas en triples: +1% respecto a la media; ajuste por su historial contra defensas similares: -0%.
 
-**¿Por qué 1.2 robos?** (línea 1.5; 36.0 minutos esperados)
+**¿Por qué 1.4 triples?** (línea 1.5; 36.0 minutos esperados)
 
-- Robos **1.2** (por componentes 1.1 · por tasa por minuto y defensa rival 1.2): roba el 12.3% de las pérdidas del rival en pista × 12.4 pérdidas esperadas del rival.
+- Triples **1.4** (por componentes 1.5 · por tasa por minuto y defensa rival 1.3): 4.6 triples intentados (su ritmo 4.7 por 36'; el rival concede -2% de triples en su reparto) × 33% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
 | Minutos | 32.4 | 33.9 | 36.5 | 31.8 | 34.5 |
-| Robos | 1.4 | 1.3 | 1.5 | 0.7 | 0.8 |
-| % de las pérdidas del rival que roba | 13.6% | 14.1% | 13.7% | 9.7% | 8.9% |
+| Triples anotados | 0.6 | 1.1 | 0.5 | 1.0 | 0.5 |
+| Triples intentados | 2.6 | 3.5 | 4.5 | 3.1 | 3.0 |
+| % triples | 23.1% | 31.4% | 11.1% | 31.4% | 16.7% |
 
 - Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -17%, vs defensa media -1%, vs defensa débil +17%; rebotes: vs defensa fuerte -15%, vs defensa media +1%, vs defensa débil +17%; asistencias: vs defensa fuerte -9%, vs defensa media -10%, vs defensa débil +21%; triples: vs defensa fuerte -0%, vs defensa media -3%, vs defensa débil +2%.
 
