@@ -110,6 +110,31 @@ def descargar_partidos(con: duckdb.DuckDBPyConnection, cli: espn.Espn, limite: i
     return {"ok": ok, "errores": fallos, "peticiones": cli.http.peticiones}
 
 
+def rellenar_lineas(con: duckdb.DuckDBPyConnection, cli: espn.Espn) -> dict:
+    """Spread y total de los partidos terminados que no tienen ninguna línea (ESPN no trae pickcenter
+    en 2023-24 ni 2024-25): se piden a la API core de ESPN."""
+    pendientes = con.execute("""
+        SELECT g.game_id, h.abbr, a.abbr FROM games g
+        JOIN teams h ON h.team_id = g.home_id JOIN teams a ON a.team_id = g.away_id
+        WHERE g.status = 'STATUS_FINAL' AND g.game_id NOT IN (SELECT game_id FROM game_lines)
+          AND g.game_id NOT IN (SELECT replace(key, 'odds_core:', '') FROM ingest_log
+                                WHERE source = 'espn' AND key LIKE 'odds_core:%')
+        ORDER BY g.start_utc""").fetchall()
+    log.info("Partidos sin línea: %d", len(pendientes))
+    ok = 0
+    for gid, h, a in pendientes:
+        try:
+            fila = espn.parse_odds_core(cli.odds_core(gid), gid, h, a)
+        except Exception as e:
+            db.registrar(con, "espn", f"odds_core:{gid}", "error", str(e))
+            continue
+        if fila:
+            db.upsert(con, "game_lines", [fila])
+            ok += 1
+        db.registrar(con, "espn", f"odds_core:{gid}", "ok" if fila else "vacio")
+    return {"pendientes": len(pendientes), "con_linea": ok}
+
+
 def guardar_lesiones(con: duckdb.DuckDBPyConnection, cli: espn.Espn) -> int:
     """Captura el parte de lesiones actual con la hora (UTC) de la captura."""
     filas = espn.parse_lesiones(cli.lesiones(), db.ahora_utc())

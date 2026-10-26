@@ -191,12 +191,33 @@ def completar_ids(con: duckdb.DuckDBPyConnection, filas: list[dict], game_id: st
             f["game_id"] = None
             f["player_id"] = None
         return
-    equipos = con.execute("SELECT home_id, away_id FROM games WHERE game_id = ?", [game_id]).fetchone()
+    home, away, inicio = con.execute("SELECT home_id, away_id, start_utc FROM games WHERE game_id = ?",
+                                     [game_id]).fetchone()
     nombres = {f["source_player_id"]: f["player_name"] for f in filas}
-    mapa = emparejar_jugadores(con, "sgo", nombres, list(equipos))
+    mapa = emparejar_jugadores(con, "sgo", nombres, [home, away], inicio)
     for f in filas:
         f["game_id"] = game_id
         f["player_id"], f["team_id"] = mapa.get(f["source_player_id"], (None, None))
+
+
+def reemparejar_pendientes(con: duckdb.DuckDBPyConnection) -> int:
+    """Vuelve a emparejar los jugadores sin player_id de las cuotas ya guardadas (tras mejorar el emparejamiento)."""
+    pendientes = con.execute("""SELECT DISTINCT game_id FROM prop_odds
+                                WHERE player_id IS NULL AND game_id IS NOT NULL""").fetchall()
+    for (gid,) in pendientes:
+        filas = con.execute("""SELECT DISTINCT source, source_player_id, player_name FROM prop_odds
+                               WHERE game_id = ? AND player_id IS NULL""", [gid]).df().to_dict("records")
+        for fuente in {f["source"] for f in filas}:
+            de_fuente = [f for f in filas if f["source"] == fuente]
+            home, away, inicio = con.execute("SELECT home_id, away_id, start_utc FROM games WHERE game_id = ?",
+                                             [gid]).fetchone()
+            mapa = emparejar_jugadores(con, fuente, {f["source_player_id"]: f["player_name"] for f in de_fuente},
+                                       [home, away], inicio)
+            for sid, (pid, team) in mapa.items():
+                if pid:
+                    con.execute("""UPDATE prop_odds SET player_id = ?, team_id = ? WHERE game_id = ? AND source = ?
+                                   AND source_player_id = ? AND player_id IS NULL""", [pid, team, gid, fuente, sid])
+    return con.execute("SELECT count(*) FROM prop_odds WHERE player_id IS NULL").fetchone()[0]
 
 
 # --- Catálogo de mercados -----------------------------------------------------------------------

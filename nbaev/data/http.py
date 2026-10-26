@@ -55,7 +55,7 @@ class ClienteHttp:
         self.peticiones = 0
 
     def get_json(self, path: str, **params: Any) -> Any:
-        url = f"{self.base_url}/{path.lstrip('/')}"
+        url = path if path.startswith("http") else f"{self.base_url}/{path.lstrip('/')}"
         ultimo_error = ""
         for intento in range(self.reintentos):
             self.limitador.esperar()

@@ -27,7 +27,7 @@ ARENAS = {
 }
 # Preferencia de fuente para spread/total previos: cierre de consenso de SportsGameOdds y, si no hay,
 # la línea del pickcenter de ESPN.
-PRIORIDAD_LINEAS = ["sgo|cierre", "espn:%|cierre", "sgo|apertura"]
+PRIORIDAD_LINEAS = ["sgo|cierre", "espn:%|cierre", "espn_core:%|cierre", "sgo|apertura"]
 
 
 def km(a: tuple, b: tuple) -> float:

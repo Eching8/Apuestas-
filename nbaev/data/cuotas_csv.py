@@ -97,7 +97,7 @@ def importar(con: duckdb.DuckDBPyConnection, archivo: str, kind: str = "captura"
     for gid in {f["game_id"] for f in filas}:
         del_partido = [f for f in filas if f["game_id"] == gid]
         mapa = emparejar_jugadores(con, "csv", {f["source_player_id"]: f["player_name"] for f in del_partido},
-                                   del_partido[0]["_equipos"])
+                                   del_partido[0]["_equipos"], del_partido[0]["start_utc"])
         for f in del_partido:
             f["player_id"], f["team_id"] = mapa.get(f["source_player_id"], (None, None))
             if f["player_id"] is None:

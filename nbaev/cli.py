@@ -31,6 +31,7 @@ def cmd_historial(cfg, args) -> None:
     log.info("Partidos en calendario actualizados: %d", n)
     r = recolector.descargar_partidos(con, cli, limite=args.limite)
     log.info("Partidos descargados: %s", r)
+    log.info("Líneas rellenadas: %s", recolector.rellenar_lineas(con, cli))
     _contexto(con)
 
 
@@ -90,6 +91,7 @@ def cmd_diario(cfg, args) -> None:
     hoy = recolector.hoy_et()
     recolector.actualizar_calendario(con, cli, recolector.temporada_de(hoy), hoy, tuple(cfg["temporadas"]["tipos"]))
     log.info("Partidos: %s", recolector.descargar_partidos(con, cli))
+    log.info("Líneas rellenadas: %s", recolector.rellenar_lineas(con, cli))
     log.info("Lesiones: %d", recolector.guardar_lesiones(con, cli))
     if not args.sin_cuotas:
         try:

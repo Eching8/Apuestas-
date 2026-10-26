@@ -297,6 +297,16 @@ def test_importar_csv(con, tmp_path):
     assert ("csv", "pts_q3", "3q", "ou") in r["mercados_nuevos"]
 
 
+def test_emparejar_apodo(con):
+    from nbaev.data.nombres import emparejar_jugadores
+    db.upsert(con, "games", [_partido("g1", datetime(2026, 1, 10), CASA, FUERA)])
+    db.insertar(con, "player_games", [{"game_id": "g1", "player_id": "77", "team_id": CASA, "name": "Ronald Holland II",
+                                       "minutes": 20}, {"game_id": "g1", "player_id": "78", "team_id": FUERA,
+                                                        "name": "Jalen Holland", "minutes": 20}])
+    r = emparejar_jugadores(con, "sgo", {"RH": "Ron Holland", "XX": "Ron Smith"}, [CASA, FUERA], datetime(2026, 1, 11))
+    assert r["RH"] == ("77", CASA) and r["XX"] == (None, None)
+
+
 def test_nombres():
     assert clave_nombre("Nikola Jokić") == "NIKOLA_JOKIC"
     assert sin_sufijo(clave_nombre("Jaren Jackson Jr.")) == "JAREN_JACKSON"
@@ -305,3 +315,12 @@ def test_nombres():
 def test_upsert_actualiza_solo_lo_que_viene(con):
     db.upsert(con, "teams", [{"team_id": CASA, "abbr": "XXX"}])
     assert con.execute("SELECT abbr, name FROM teams WHERE team_id = ?", [CASA]).fetchone() == ("XXX", "Equipo Aaa")
+
+
+def test_odds_core_descarta_en_vivo():
+    data = {"items": [{"provider": {"name": "ESPN Bet - Live Odds"}, "details": "BOS -2.5", "overUnder": 206.5},
+                      {"provider": {"name": "ESPN BET"}, "details": "CLE -1.5", "overUnder": 229.5,
+                       "homeTeamOdds": {"moneyLine": -125}, "awayTeamOdds": {"moneyLine": 105}}]}
+    l = espn.parse_odds_core(data, "g1", "BOS", "CLE")
+    assert l["source"] == "espn_core:ESPN BET" and l["spread_home"] == 1.5 and l["total"] == 229.5
+    assert espn.spread_local("EVEN", "A", "B") == 0.0 and espn.spread_local("BOS -2.5", "BOS", "CLE") == -2.5

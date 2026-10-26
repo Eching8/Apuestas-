@@ -50,6 +50,10 @@ class Espn:
                 json.dump(data, f, separators=(",", ":"))
         return data
 
+    def odds_core(self, game_id: str) -> dict:
+        url = f"https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{game_id}/competitions/{game_id}/odds"
+        return self.http.get_json(url)
+
     def lesiones(self) -> dict:
         return self.http.get_json("/injuries")
 
@@ -264,19 +268,36 @@ def parse_lineas(summary: dict) -> dict | None:
     p = sorted(picks, key=lambda x: (x.get("provider") or {}).get("priority", 99))[0]
     comp = summary["header"]["competitions"][0]
     abbr = {c["homeAway"]: c["team"].get("abbreviation") for c in comp["competitors"]}
-    spread = None
-    m = re.match(r"([A-Z]+)\s+(-?\d+(?:\.\d+)?)", str(p.get("details") or ""))
-    if m:
-        valor = float(m.group(2))
-        spread = valor if m.group(1) == abbr["home"] else -valor if m.group(1) == abbr["away"] else None
-    elif str(p.get("details") or "").upper().startswith("EVEN"):
-        spread = 0.0
     return {
         "game_id": str(summary["header"]["id"]), "source": f"espn:{(p.get('provider') or {}).get('name', '?')}",
-        "kind": "cierre", "snapshot_at": None, "spread_home": spread, "total": p.get("overUnder"),
+        "kind": "cierre", "snapshot_at": None, "spread_home": spread_local(p.get("details"), abbr["home"], abbr["away"]),
+        "total": p.get("overUnder"),
         "ml_home": _americana((p.get("homeTeamOdds") or {}).get("moneyLine")),
         "ml_away": _americana((p.get("awayTeamOdds") or {}).get("moneyLine")),
     }
+
+
+def spread_local(details, home_abbr: str, away_abbr: str) -> float | None:
+    """'BKN -9.5' -> spread del local (negativo = local favorito)."""
+    m = re.match(r"([A-Z]+)\s+(-?\d+(?:\.\d+)?)", str(details or ""))
+    if m:
+        valor = float(m.group(2))
+        return valor if m.group(1) == home_abbr else -valor if m.group(1) == away_abbr else None
+    return 0.0 if str(details or "").upper().startswith("EVEN") else None
+
+
+def parse_odds_core(data: dict, game_id: str, home_abbr: str, away_abbr: str) -> dict | None:
+    """Línea previa de la API core de ESPN (sirve para temporadas sin pickcenter). Se descartan los
+    proveedores de cuotas en vivo y se toma el primero con total."""
+    for i in data.get("items", []):
+        nombre = (i.get("provider") or {}).get("name") or "?"
+        if "live" in nombre.lower() or i.get("overUnder") is None:
+            continue
+        return {"game_id": game_id, "source": f"espn_core:{nombre}", "kind": "cierre", "snapshot_at": None,
+                "spread_home": spread_local(i.get("details"), home_abbr, away_abbr), "total": i.get("overUnder"),
+                "ml_home": _americana((i.get("homeTeamOdds") or {}).get("moneyLine")),
+                "ml_away": _americana((i.get("awayTeamOdds") or {}).get("moneyLine"))}
+    return None
 
 
 # --- Lesiones -----------------------------------------------------------------------------------
