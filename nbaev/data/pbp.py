@@ -110,6 +110,12 @@ def normalizar(summary: dict) -> list[dict]:
             "value": valor, "p1": _pid(p, 0), "p2": _pid(p, 1), "p3": _pid(p, 2),
             "home_score": p.get("homeScore"), "away_score": p.get("awayScore"), "x": x, "y": y,
         })
+    # ESPN repite a veces un sequenceNumber: se renumera el duplicado al final (el orden real lo da el reloj).
+    vistos, siguiente = set(), max((f["seq"] for f in filas), default=0) + 1
+    for f in filas:
+        if f["seq"] in vistos:
+            f["seq"], siguiente = siguiente, siguiente + 1
+        vistos.add(f["seq"])
     filas.sort(key=lambda r: (r["period"], -r["clock_s"], r["seq"]))
     return filas
 
