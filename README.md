@@ -19,7 +19,7 @@ Este repositorio contiene dos cosas:
 |---|---|---|
 | 1 | Datos: box scores, jugada a jugada, cuartos, quintetos, primer anotador, contexto, lesiones, cuotas | **hecha** |
 | 2 | Proyección de minutos | **hecha** |
-| 3 | Modelo de puntos (distribución completa + Monte Carlo) | pendiente |
+| 3 | Modelo de puntos (distribución completa + Monte Carlo) | **hecha** |
 | 4 | Validación walk-forward y backtest con cuotas reales | pendiente |
 | 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
 | 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
@@ -74,6 +74,39 @@ python -m nbaev minutos proyectar    # minutos de los partidos de hoy (tabla pro
 - **Limitaciones**: en jugadores con prop y proyección baja (< 15 min) el modelo se queda 3 min corto: la casa saca
   prop cuando espera más rol (sabe de bajas o cambios que el modelo no ve). No se usa el quinteto titular confirmado
   (no hay histórico fiable antes del salto); usarlo cuando se publique mejoraría la proyección.
+
+### Fase 3: modelo de puntos (`nbaev/features/produccion.py`, `nbaev/models/simulacion.py`, `nbaev/models/puntos.py`)
+
+```bash
+python -m nbaev puntos validar      # walk-forward con minutos fuera de muestra y líneas reales -> reportes/fase3_puntos.md
+python -m nbaev puntos proyectar    # distribución de puntos de hoy (10.000 simulaciones; tabla proj_puntos)
+```
+
+- **Tasas** por minuto de cada jugador (media exponencial con regresión bayesiana hacia su posición) y porcentajes
+  de 2, 3 y libres encogidos; defensa rival por posición, rating defensivo, ritmo esperado y total implícito.
+- **LightGBM** predice los puntos por minuto con ese contexto; la simulación escala los volúmenes de tiro del
+  jugador para reproducir esa media sin cambiar su perfil (reparto 2/3, libres, acierto).
+- **Simulación Monte Carlo** por componentes: minutos (fase 2, con efecto paliza según el margen sorteado) ->
+  intentos (binomial negativa) -> aciertos (beta-binomial), con ritmo del partido y acierto de cada equipo
+  compartidos. Puntos, triples, tiros de campo y libres salen de la misma simulación: todas las líneas son
+  coherentes (P(25+) ≤ P(20+) siempre). La varianza de cada componente se estima con datos (método de momentos).
+- **Resultados** (walk-forward mensual oct-2023 a oct-2026, 85.732 actuaciones con minutos también fuera de
+  muestra; informe completo en `docs/resultados/fase3_puntos.md`):
+  - Error medio de la media: **4,40 puntos** frente a 4,57 del baseline (estable en las 3 temporadas). En jugadores
+    con prop: 4,90 frente a **4,78 de la línea de cierre de la casa**: la casa estima mejor la media.
+  - Distribución calibrada: PIT aleatorizado casi uniforme (deciles 0,095-0,12).
+  - Contra las líneas reales (consenso de casas de EE. UU., 2025-26), **el modelo solo no supera al mercado**:
+    log loss 0,6964 frente a 0,6921 en apertura y 0,7067 frente a 0,6921 en cierre. Cuando discrepa mucho de la
+    línea suele equivocarse él.
+  - Pero **sí aporta información nueva frente a la apertura**: mezclado con el mercado (pesos ajustados solo con
+    meses anteriores) mejora el log loss en 0,0030 (IC 95 % [−0,0053, −0,0008]; peso del modelo ≈ 0,45). Frente al
+    cierre no aporta nada (el cierre ya incorpora lo que sabe el modelo). Conclusión: si hay valor, está en apostar
+    pronto y debería verse como CLV positivo. Muestra pequeña (5 meses): la fase 4 lo pone a prueba con apuestas.
+  - El modelo cuantílico directo es marginalmente mejor en P(over) (−0,002 de log loss) y el promedio de ambos no
+    mejora al cuantílico: se mantiene la simulación como fuente única porque garantiza la coherencia entre líneas,
+    mercados y jugadores.
+- **Calidad de datos**: los "cierres" de SportsGameOdds de oct-2025 a mediados de enero de 2026 tienen ~10 % de líneas
+  tomadas con el partido empezado. Solo se usa un cierre si hay apertura y no se aleja más de 3 puntos.
 
 ### Instalación
 

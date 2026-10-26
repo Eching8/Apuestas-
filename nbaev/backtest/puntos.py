@@ -192,6 +192,40 @@ def bootstrap_logloss(lin: pd.DataFrame, a: str, b: str, n: int = 1000, semilla:
     return {"diferencia": s.sum() / c.sum(), "ic95": (float(np.quantile(difs, 0.025)), float(np.quantile(difs, 0.975)))}
 
 
+def mezcla_walk_forward(lin: pd.DataFrame, col: str = "p_lgb") -> pd.DataFrame:
+    """¿Aporta el modelo información que la línea no tiene? Regresión logística y ~ logit(mercado) +
+    logit(modelo), ajustada cada mes solo con los meses anteriores. Si la mezcla mejora el log loss del
+    mercado fuera de muestra, el modelo sabe algo que la casa no ha incorporado en esa línea."""
+    from sklearn.linear_model import LogisticRegression
+
+    def logit(p):
+        p = np.clip(p, 1e-3, 1 - 1e-3)
+        return np.log(p / (1 - p))
+
+    filas = []
+    for kind in ("apertura", "cierre"):
+        d = lin[lin["kind"] == kind].copy()
+        d["p_mezcla"], coefs = np.nan, []
+        for b in sorted(d["bloque"].unique()):
+            tr, te = d[d["bloque"] < b], d["bloque"] == b
+            if len(tr) < 1500:
+                continue
+            m = LogisticRegression(C=1e3).fit(np.column_stack([logit(tr["p_mercado"]), logit(tr[col])]), tr["y"])
+            coefs.append(m.coef_[0])
+            d.loc[te, "p_mezcla"] = m.predict_proba(
+                np.column_stack([logit(d.loc[te, "p_mercado"]), logit(d.loc[te, col])]))[:, 1]
+        e = d.dropna(subset=["p_mezcla"])
+        if e.empty:
+            continue
+        b = bootstrap_logloss(e, "p_mezcla", "p_mercado")
+        c = np.mean(coefs, axis=0)
+        filas.append({"líneas": kind, "n": len(e), "meses": e["bloque"].nunique(),
+                      "log loss mercado": _logloss(e["p_mercado"], e["y"]), "log loss mezcla": _logloss(e["p_mezcla"], e["y"]),
+                      "diferencia": b["diferencia"], "IC 95 % inf": b["ic95"][0], "IC 95 % sup": b["ic95"][1],
+                      "peso mercado": c[0], "peso modelo": c[1]})
+    return pd.DataFrame(filas)
+
+
 def informe(r: dict) -> str:
     f = lambda t: t.to_markdown(index=False, floatfmt=".4f")  # noqa: E731
     pred, lin = r["pred"], r["lineas"]
@@ -215,6 +249,10 @@ def informe(r: dict) -> str:
                 bb = bootstrap_logloss(cierre, a, b)
                 partes.append(f"- Log loss {txt} (cierre): {bb['diferencia']:+.4f}, IC 95 % "
                               f"[{bb['ic95'][0]:+.4f}, {bb['ic95'][1]:+.4f}]")
+        partes += ["## ¿Aporta el modelo algo que la línea no tenga? Mezcla modelo + mercado (walk-forward)",
+                   "Regresión logística sobre logit(mercado) y logit(modelo), reentrenada cada mes con los meses "
+                   "anteriores. Diferencia negativa = la mezcla predice mejor que el mercado solo.",
+                   f(mezcla_walk_forward(lin))]
     partes += ["## Importancia de las variables (tasa de puntos por minuto)", f(r["importancia"].head(15))]
     return "\n\n".join(partes)
 
