@@ -1,5 +1,7 @@
 .env
-data/
-reportes/
+/data/
+/reportes/
+/logs/
+config/local.yaml
 __pycache__/
 *.pyc

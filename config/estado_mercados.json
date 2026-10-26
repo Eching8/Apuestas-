@@ -1,0 +1,162 @@
+[
+ {
+  "market":"pts",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1529,
+  "roi_cierre":-0.0718592138,
+  "roi_cierre_ic_inf":-0.1594987373,
+  "clv_ajustado":0.0174969024,
+  "evaluado_at":"2026-10-26 22:02:34"
+ },
+ {
+  "market":"ast",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1396,
+  "roi_cierre":-0.0229430427,
+  "roi_cierre_ic_inf":-0.0924735055,
+  "clv_ajustado":0.0093385267,
+  "evaluado_at":"2026-10-26 22:01:25"
+ },
+ {
+  "market":"blk",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1162,
+  "roi_cierre":-0.0452693069,
+  "roi_cierre_ic_inf":-0.1175896725,
+  "clv_ajustado":-0.0273495557,
+  "evaluado_at":"2026-10-26 22:01:26"
+ },
+ {
+  "market":"doble_doble",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":566,
+  "roi_cierre":-0.0165452756,
+  "roi_cierre_ic_inf":-0.0843704111,
+  "clv_ajustado":-0.0368516581,
+  "evaluado_at":"2026-10-26 22:01:26"
+ },
+ {
+  "market":"fg3m",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":965,
+  "roi_cierre":-0.10673125,
+  "roi_cierre_ic_inf":-0.2730606845,
+  "clv_ajustado":-0.0135880839,
+  "evaluado_at":"2026-10-26 22:01:27"
+ },
+ {
+  "market":"fgm",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1593,
+  "roi_cierre":-0.0445570039,
+  "roi_cierre_ic_inf":-0.0999223456,
+  "clv_ajustado":-0.0365055846,
+  "evaluado_at":"2026-10-26 22:01:28"
+ },
+ {
+  "market":"ftm",
+  "period":"game",
+  "estado":"sin validar",
+  "apuestas":262,
+  "roi_cierre":0.0417019531,
+  "roi_cierre_ic_inf":-0.0810828442,
+  "clv_ajustado":-0.047926527,
+  "evaluado_at":"2026-10-26 22:01:28"
+ },
+ {
+  "market":"pa",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1488,
+  "roi_cierre":-0.0424574859,
+  "roi_cierre_ic_inf":-0.1092587625,
+  "clv_ajustado":-0.0089139969,
+  "evaluado_at":"2026-10-26 22:01:29"
+ },
+ {
+  "market":"pr",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1595,
+  "roi_cierre":-0.0550791667,
+  "roi_cierre_ic_inf":-0.1395251073,
+  "clv_ajustado":-0.0086860576,
+  "evaluado_at":"2026-10-26 22:01:30"
+ },
+ {
+  "market":"pra",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1390,
+  "roi_cierre":-0.0542219888,
+  "roi_cierre_ic_inf":-0.1170684942,
+  "clv_ajustado":0.0004427029,
+  "evaluado_at":"2026-10-26 22:01:31"
+ },
+ {
+  "market":"ra",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1571,
+  "roi_cierre":0.0198069388,
+  "roi_cierre_ic_inf":-0.0454583004,
+  "clv_ajustado":-0.0033278403,
+  "evaluado_at":"2026-10-26 22:01:33"
+ },
+ {
+  "market":"reb",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1507,
+  "roi_cierre":0.0351100342,
+  "roi_cierre_ic_inf":-0.0309633895,
+  "clv_ajustado":0.0126485589,
+  "evaluado_at":"2026-10-26 22:01:34"
+ },
+ {
+  "market":"stl",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1489,
+  "roi_cierre":0.0760756913,
+  "roi_cierre_ic_inf":0.0220827459,
+  "clv_ajustado":-0.0326342352,
+  "evaluado_at":"2026-10-26 22:01:35"
+ },
+ {
+  "market":"stocks",
+  "period":"game",
+  "estado":"desactivado",
+  "apuestas":1458,
+  "roi_cierre":0.0575143256,
+  "roi_cierre_ic_inf":0.0042783234,
+  "clv_ajustado":-0.0385700333,
+  "evaluado_at":"2026-10-26 22:01:36"
+ },
+ {
+  "market":"tov",
+  "period":"game",
+  "estado":"sin validar",
+  "apuestas":1593,
+  "roi_cierre":0.1924521208,
+  "roi_cierre_ic_inf":0.1446917005,
+  "clv_ajustado":0.016849762,
+  "evaluado_at":"2026-10-26 22:00:18"
+ },
+ {
+  "market":"triple_doble",
+  "period":"game",
+  "estado":"sin validar",
+  "apuestas":3,
+  "roi_cierre":null,
+  "roi_cierre_ic_inf":null,
+  "clv_ajustado":-0.0384275212,
+  "evaluado_at":"2026-10-26 22:01:36"
+ }
+]
