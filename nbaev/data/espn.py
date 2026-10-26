@@ -158,20 +158,14 @@ def parse_scoreboard(data: dict, tipos: tuple[int, ...] = (2, 3, 5)) -> tuple[li
 
 # --- Box score ----------------------------------------------------------------------------------
 
-LESION = re.compile(r"INJUR|SPRAIN|STRAIN|SORE|SURGERY|FRACTURE|ILLNESS|CONCUSSION|CONTUSION|TEAR|"
-                    r"KNEE|ANKLE|FOOT|BACK|HAMSTRING|HIP|WRIST|HAND|SHOULDER|CALF|GROIN|PROTOCOL|"
-                    r"BRUISE|SURGICAL|ACHILLES|RECOVERY|REST|PERSONAL|SUSPEN", re.I)
-
-
 def tipo_ausencia(reason: str) -> str:
-    """Clasifica el motivo de no jugar: 'tecnica' (decisión del entrenador) frente a 'lesion' (o
-    cualquier ausencia ajena al rendimiento: descanso, suspensión, motivo personal)."""
-    r = (reason or "").upper()
+    """Motivo de no jugar: 'tecnica' (decisión del entrenador: estaba disponible) o 'lesion' (cualquier
+    otro motivo que se conoce antes del partido: lesión, enfermedad, descanso, suspensión, personal).
+    'otra' si ESPN no da motivo."""
+    r = (reason or "").strip().upper()
     if "COACH" in r:
         return "tecnica"
-    if LESION.search(r) or "NOT WITH TEAM" in r or "G LEAGUE" in r or "INACTIVE" in r:
-        return "lesion"
-    return "otra"
+    return "lesion" if r else "otra"
 
 
 def parse_box(summary: dict) -> tuple[list[dict], list[dict]]:

@@ -269,7 +269,7 @@ def test_contexto_descanso_viaje_total(con):
     d = datetime(2026, 1, 10, 0)
     db.upsert(con, "games", [_partido("g1", d, "1", "2"), _partido("g2", d + timedelta(days=1), "3", "2"),
                              _partido("g3", d + timedelta(days=4), "2", "1")])
-    db.upsert(con, "game_lines", [{"game_id": "g2", "source": "sgo", "kind": "cierre", "spread_home": -6.0,
+    db.upsert(con, "game_lines", [{"game_id": "g2", "source": "espn:consensus", "kind": "cierre", "spread_home": -6.0,
                                    "total": 220.0}])
     ctx = contexto.calcular(con).set_index(["game_id", "team_id"])
     lal_g2 = ctx.loc[("g2", "2")]

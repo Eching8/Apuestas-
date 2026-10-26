@@ -93,6 +93,7 @@ def cmd_diario(cfg, args) -> None:
     log.info("Partidos: %s", recolector.descargar_partidos(con, cli))
     log.info("Líneas rellenadas: %s", recolector.rellenar_lineas(con, cli))
     log.info("Lesiones: %d", recolector.guardar_lesiones(con, cli))
+    log.info("Líneas de hoy (ESPN): %d", recolector.capturar_lineas_dia(con, cli, hoy.isoformat()))
     if not args.sin_cuotas:
         try:
             # Cierre y resultado de las props de ayer (para CLV y liquidación) y captura de las de hoy.
@@ -111,6 +112,38 @@ def cmd_estado(cfg, args) -> None:
     from .data import calidad
     con = _con(cfg, solo_lectura=True)
     print(calidad.informe(con))
+
+
+def cmd_minutos_validar(cfg, args) -> None:
+    """Walk-forward mensual del modelo de minutos e informe en reportes/fase2_minutos.md."""
+    from .backtest import minutos as bm
+    con = _con(cfg, solo_lectura=True)
+    r = bm.validar(con, desde=args.desde)
+    ruta = config.RAIZ / "reportes" / "fase2_minutos.md"
+    bm.guardar_informe(r, ruta)
+    print(bm.informe(r))
+    log.info("Informe guardado en %s", ruta)
+
+
+def cmd_minutos_entrenar(cfg, args) -> None:
+    from .models import minutos as mm
+    con = _con(cfg, solo_lectura=True)
+    m = mm.modelo_vigente(con, cfg, config.RAIZ / cfg["minutos"]["modelo"], forzar=True)
+    print(mm.importancia(m).head(10).to_string(index=False))
+
+
+def cmd_minutos_proyectar(cfg, args) -> None:
+    from .data import recolector
+    from .models import minutos as mm
+    con = _con(cfg)
+    fecha = args.fecha or recolector.hoy_et().isoformat()
+    out = mm.proyectar(con, cfg, fecha, config.RAIZ / cfg["minutos"]["modelo"])
+    if out.empty:
+        return
+    cols = ["name", "team_id", "estado_lesion", "min_pred", "min_si_juega", "min_q10", "min_q90", "p_dnp", "libres"]
+    for gid, g in out.groupby("game_id"):
+        print(f"\n== Partido {gid}")
+        print(g.sort_values(["team_id", "min_pred"], ascending=[True, False])[cols].round(1).to_string(index=False))
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -146,6 +179,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--sin-cuotas", action="store_true")
     p.set_defaults(f=cmd_diario)
     d.add_parser("estado", help="cobertura y calidad de los datos").set_defaults(f=cmd_estado)
+
+    mi = grupos.add_parser("minutos", help="fase 2: proyección de minutos").add_subparsers(dest="cmd", required=True)
+    p = mi.add_parser("validar", help="validación walk-forward mensual")
+    p.add_argument("--desde", default="2023-10-01")
+    p.set_defaults(f=cmd_minutos_validar)
+    mi.add_parser("entrenar", help="entrena con todo el histórico y guarda el modelo").set_defaults(f=cmd_minutos_entrenar)
+    p = mi.add_parser("proyectar", help="minutos de los partidos de una fecha")
+    p.add_argument("--fecha", help="AAAA-MM-DD (por defecto hoy, hora del este)")
+    p.set_defaults(f=cmd_minutos_proyectar)
 
     args = ap.parse_args(argv)
     cfg = config.cargar(args.config)

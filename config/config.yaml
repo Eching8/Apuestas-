@@ -38,3 +38,17 @@ cuotas:
 datos:
   # Margen tras el inicio del partido a partir del cual sus estadísticas cuentan como disponibles.
   horas_hasta_disponible: 3.5
+
+minutos:
+  modelo: data/modelos/minutos.joblib
+  reentrenar_cada_dias: 7
+  # Probabilidad de jugar según el estado del parte de lesiones de ESPN. Heurística: no hay partes de
+  # lesiones históricos con los que calibrarla (se revisará con las capturas diarias que se acumulen).
+  prob_juega:
+    Out: 0.0
+    Suspension: 0.0
+    Doubtful: 0.25
+    Questionable: 0.5
+    Day-To-Day: 0.65
+    Probable: 0.9
+    otro: 0.5

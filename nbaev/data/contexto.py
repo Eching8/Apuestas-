@@ -25,9 +25,11 @@ ARENAS = {
     "POR": (45.532, -122.667, -8), "SAC": (38.580, -121.500, -8), "SA": (29.427, -98.438, -6),
     "TOR": (43.643, -79.379, -5), "UTAH": (40.768, -111.901, -7), "WSH": (38.898, -77.021, -5),
 }
-# Preferencia de fuente para spread/total previos: cierre de consenso de SportsGameOdds y, si no hay,
-# la línea del pickcenter de ESPN.
-PRIORIDAD_LINEAS = ["sgo|cierre", "espn:%|cierre", "espn_core:%|cierre", "sgo|apertura"]
+# Preferencia de fuente para spread/total previos. El "cierre" de partido de SportsGameOdds no se usa:
+# frente a DraftKings (ESPN) tiene correlación 0,71 en el spread y diferencias de >3 puntos en 1 de cada 4
+# partidos (parece capturado ya en juego); su apertura sí cuadra (0,96) y queda como último recurso.
+PRIORIDAD_LINEAS = ["espn:%|cierre", "espn_core:%|cierre", "espn:%|captura%", "sgo|captura%", "sgo|apertura"]
+SPREAD_MAX, TOTAL_MIN, TOTAL_MAX = 25.0, 185.0, 265.0
 
 
 def km(a: tuple, b: tuple) -> float:
@@ -39,16 +41,19 @@ def km(a: tuple, b: tuple) -> float:
 
 def lineas_previas(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     """Una línea por partido (spread del local y total), según PRIORIDAD_LINEAS."""
-    df = con.execute("SELECT game_id, source, kind, spread_home, total FROM game_lines "
-                     "WHERE kind IN ('cierre', 'apertura')").df()
+    # Para partidos futuros solo hay capturas (la más reciente gana: kind = "captura AAAA-MM-DDTHH:MM").
+    df = con.execute("SELECT game_id, source, kind, spread_home, total FROM game_lines ORDER BY kind DESC").df()
     if df.empty:
         return pd.DataFrame(columns=["game_id", "spread_home", "total", "linea_fuente"])
+    plausible = df["total"].between(TOTAL_MIN, TOTAL_MAX) & (df["spread_home"].abs() <= SPREAD_MAX)
+    df = df[plausible].copy()
     df["rango"] = 99
     for i, regla in enumerate(PRIORIDAD_LINEAS):
         fuente, kind = regla.split("|")
-        coincide = df["source"].str.match(fuente.replace("%", ".*") + "$") & (df["kind"] == kind)
+        coincide = (df["source"].str.match(fuente.replace("%", ".*") + "$")
+                    & df["kind"].str.match(kind.replace("%", ".*") + "$"))
         df.loc[coincide & (df["rango"] == 99), "rango"] = i
-    df = df[df["rango"] < 99].dropna(subset=["total"]).sort_values("rango").drop_duplicates("game_id")
+    df = df[df["rango"] < 99].dropna(subset=["total"]).sort_values("rango", kind="stable").drop_duplicates("game_id")
     df["linea_fuente"] = df["source"] + "|" + df["kind"]
     return df[["game_id", "spread_home", "total", "linea_fuente"]]
 

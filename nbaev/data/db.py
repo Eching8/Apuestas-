@@ -184,6 +184,14 @@ CREATE TABLE IF NOT EXISTS pbp_quality (
     ok_oreb DOUBLE, ok_dreb DOUBLE, ok_ast DOUBLE, ok_stl DOUBLE, ok_blk DOUBLE, ok_tov DOUBLE, ok_pf DOUBLE
 );
 
+-- Proyección de minutos de cada jugador probable (fase 2). Se reescribe en cada ejecución del día.
+CREATE TABLE IF NOT EXISTS proj_minutos (
+    fecha DATE, game_id VARCHAR, player_id VARCHAR, team_id VARCHAR, name VARCHAR, estado_lesion VARCHAR,
+    prob_juega DOUBLE, min_base DOUBLE, min_norm DOUBLE, libres DOUBLE, min_pred DOUBLE, min_si_juega DOUBLE,
+    min_q10 DOUBLE, min_q50 DOUBLE, min_q90 DOUBLE, p_dnp DOUBLE, modelo_hasta TIMESTAMP, created_at TIMESTAMP,
+    PRIMARY KEY (fecha, game_id, player_id)
+);
+
 -- Registro de descargas (qué se pidió, cuándo y si falló).
 CREATE TABLE IF NOT EXISTS ingest_log (
     source VARCHAR, key VARCHAR, status VARCHAR, detail VARCHAR, logged_at TIMESTAMP,

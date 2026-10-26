@@ -11,6 +11,7 @@ from datetime import date, datetime, timedelta
 import duckdb
 
 from . import db, espn
+from .http import ErrorFuente
 from .procesar import procesar
 
 log = logging.getLogger(__name__)
@@ -91,6 +92,9 @@ def descargar_partidos(con: duckdb.DuckDBPyConnection, cli: espn.Espn, limite: i
                        reprocesar: bool = False) -> dict:
     """Descarga y procesa los partidos terminados que faltan (o todos con reprocesar=True, desde crudos/)."""
     filtro = "status = 'STATUS_FINAL'" + ("" if reprocesar else " AND NOT box_ok")
+    # Partidos que ESPN no tiene (404): no se reintentan cada día.
+    filtro += (" AND game_id NOT IN (SELECT replace(key, 'summary:', '') FROM ingest_log "
+               "WHERE source = 'espn' AND status = 'no_existe')")
     ids = [r[0] for r in con.execute(f"SELECT game_id FROM games WHERE {filtro} ORDER BY start_utc").fetchall()]
     if limite:
         ids = ids[:limite]
@@ -101,6 +105,11 @@ def descargar_partidos(con: duckdb.DuckDBPyConnection, cli: espn.Espn, limite: i
             guardar_partido(con, cli.summary(gid))
             db.registrar(con, "espn", f"summary:{gid}", "ok")
             ok += 1
+        except ErrorFuente as e:
+            fallos += 1
+            estado = "no_existe" if "HTTP 404" in str(e) else "error"
+            log.warning("Partido %s: %s", gid, str(e)[:120])
+            db.registrar(con, "espn", f"summary:{gid}", estado, str(e))
         except Exception as e:  # un partido roto no debe parar la descarga
             fallos += 1
             log.exception("Partido %s: %s", gid, e)
@@ -111,12 +120,13 @@ def descargar_partidos(con: duckdb.DuckDBPyConnection, cli: espn.Espn, limite: i
 
 
 def rellenar_lineas(con: duckdb.DuckDBPyConnection, cli: espn.Espn) -> dict:
-    """Spread y total de los partidos terminados que no tienen ninguna línea (ESPN no trae pickcenter
-    en 2023-24 ni 2024-25): se piden a la API core de ESPN."""
+    """Spread y total de los partidos terminados sin línea de ESPN (no trae pickcenter en 2023-24 ni
+    2024-25 ni en parte de 2025-26): se piden a la API core de ESPN."""
     pendientes = con.execute("""
         SELECT g.game_id, h.abbr, a.abbr FROM games g
         JOIN teams h ON h.team_id = g.home_id JOIN teams a ON a.team_id = g.away_id
-        WHERE g.status = 'STATUS_FINAL' AND g.game_id NOT IN (SELECT game_id FROM game_lines)
+        WHERE g.status = 'STATUS_FINAL'
+          AND g.game_id NOT IN (SELECT game_id FROM game_lines WHERE source LIKE 'espn%')
           AND g.game_id NOT IN (SELECT replace(key, 'odds_core:', '') FROM ingest_log
                                 WHERE source = 'espn' AND key LIKE 'odds_core:%')
         ORDER BY g.start_utc""").fetchall()
@@ -133,6 +143,18 @@ def rellenar_lineas(con: duckdb.DuckDBPyConnection, cli: espn.Espn) -> dict:
             ok += 1
         db.registrar(con, "espn", f"odds_core:{gid}", "ok" if fila else "vacio")
     return {"pendientes": len(pendientes), "con_linea": ok}
+
+
+def capturar_lineas_dia(con: duckdb.DuckDBPyConnection, cli: espn.Espn, fecha: str) -> int:
+    """Spread y total actuales de ESPN de los partidos aún no empezados de `fecha`, con hora de captura."""
+    ahora = db.ahora_utc()
+    filas = []
+    for (gid,) in con.execute("SELECT game_id FROM games WHERE fecha = ? AND status = 'STATUS_SCHEDULED'",
+                              [fecha]).fetchall():
+        linea = espn.parse_lineas(cli.summary(gid, cache=False))
+        if linea:
+            filas.append({**linea, "kind": f"captura {ahora:%Y-%m-%dT%H:%M}", "snapshot_at": ahora})
+    return db.upsert(con, "game_lines", filas)
 
 
 def guardar_lesiones(con: duckdb.DuckDBPyConnection, cli: espn.Espn) -> int:
