@@ -6,7 +6,9 @@ name: NBA diario
 # sola desde ESPN (~15 min). stats.nba.com no responde a estos servidores, así que no se usa aquí.
 on:
   schedule:
-    - cron: "47 16 * * *"   # 10:47 en Ciudad de México
+    # 8:43 en Bogotá (13:43 UTC): GitHub suele retrasar unos minutos los horarios, así el informe está
+    # listo hacia las 9:00.
+    - cron: "43 13 * * *"
   workflow_dispatch:
   push:
     branches: [nba-props]
@@ -25,7 +27,7 @@ jobs:
     timeout-minutes: 60
     env:
       SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
-      APUESTAS_TZ: America/Mexico_City
+      APUESTAS_TZ: America/Bogota
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
