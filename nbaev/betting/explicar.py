@@ -1,0 +1,73 @@
+"""Las 3 razones principales de cada pick, con valores SHAP de los modelos de minutos y de tasa.
+
+Las contribuciones se pasan a puntos para poder compararlas: puntos = tasa x minutos, así que una
+contribución SHAP a la tasa vale (contribución x minutos proyectados) puntos y una a los minutos vale
+(contribución x tasa proyectada) puntos.
+"""
+from __future__ import annotations
+
+import numpy as np
+import pandas as pd
+
+NOMBRES = {
+    "r_pts": "anotación por minuto reciente", "r_pts_comp": "anotación por minuto (tiros y acierto)",
+    "r_pts_temp": "anotación por minuto en la temporada", "r_fga": "tiros por minuto", "r_fg3a": "triples intentados por minuto",
+    "r_fta": "tiros libres por minuto", "p_fg2": "% de 2", "p_fg3": "% de 3", "p_ft": "% de libres",
+    "usg_ewm": "uso (usage) reciente", "ts_ewm": "true shooting reciente", "n_hist": "partidos de historial",
+    "min_base": "minutos habituales", "titular_ewm": "frecuencia como titular", "libres": "minutos libres en el equipo (bajas)",
+    "libres_pos": "minutos libres en su posición", "fga_libres": "tiros libres de compañeros ausentes",
+    "def_pos": "defensa rival frente a su posición", "def_drtg": "rating defensivo del rival", "ritmo_esp": "ritmo esperado",
+    "total": "total del partido", "total_implicito": "puntos esperados de su equipo", "spread_equipo": "spread",
+    "is_home": "local", "b2b": "back-to-back", "dias_descanso": "días de descanso", "playoffs": "playoffs",
+    "pos_g": "posición base/escolta", "pos_f": "posición alero", "pos_c": "posición pívot",
+    "min_ewm3": "minutos últimos partidos", "min_ewm10": "minutos últimos 10", "min_temp": "minutos en la temporada",
+    "min_temp_ant": "minutos temporada anterior", "min_ult": "minutos del último partido", "min_max10": "máximo de minutos reciente",
+    "min_std10": "variabilidad de minutos", "n_temp": "partidos en la temporada", "n_equipo": "partidos con su equipo",
+    "titular_ult": "titular en el último partido", "dnp_ewm": "frecuencia sin jugar", "pf36_ewm": "faltas por 36 min",
+    "dias_desde": "días desde su último partido", "cambio_equipo": "cambio de equipo", "min_norm": "minutos normalizados del equipo",
+    "rango_equipo": "jerarquía en la rotación", "n_disponibles": "jugadores disponibles", "suma_base": "minutos habituales disponibles",
+    "partidos_4d": "partidos en 4 días", "km_viaje": "km de viaje", "spread_abs": "riesgo de paliza", "partido_temp": "jornada",
+}
+
+
+def _shap(booster, X: pd.DataFrame) -> np.ndarray:
+    """Valores SHAP (TreeSHAP exacto). Usa la librería shap y, si no está, la implementación de LightGBM."""
+    try:
+        import shap
+        return np.asarray(shap.TreeExplainer(booster).shap_values(X))
+    except Exception:
+        return booster.predict(X, pred_contrib=True)[:, :-1]
+
+
+def contribuciones(m_puntos, m_minutos, filas: pd.DataFrame) -> pd.DataFrame:
+    """Contribución en puntos de cada variable (columnas) para cada jugador (filas)."""
+    from ..features.minutos import FEATURES as F_MIN
+    from ..features.minutos import a_matriz
+    from ..models.puntos import _X
+    from ..features.produccion import FEATURES_PTS
+    Xp = _X(filas)
+    tasa = np.clip(m_puntos.tasa.predict(Xp), 0.02, 2.0)
+    c_tasa = _shap(m_puntos.tasa, Xp) * filas["min_si_juega"].to_numpy()[:, None]
+    c_min = _shap(m_minutos.media_juega, a_matriz(filas)) * tasa[:, None]
+    a = pd.DataFrame(c_tasa, columns=FEATURES_PTS, index=filas.index)
+    b = pd.DataFrame(c_min, columns=F_MIN, index=filas.index)
+    # Variables presentes en ambos modelos (libres, b2b...): se suman sus efectos.
+    return a.add(b, fill_value=0.0)
+
+
+def razones(contrib: pd.DataFrame, filas: pd.DataFrame, lado: pd.Series, n: int = 3) -> pd.Series:
+    """Texto con las `n` variables que más empujan hacia el lado apostado (over: positivas; under: negativas)."""
+    out = {}
+    for i in contrib.index:
+        signo = 1.0 if lado.get(i, "over") in ("over", "yes") else -1.0
+        c = contrib.loc[i] * signo
+        top = c[c > 0].sort_values(ascending=False).head(n)
+        if len(top) < n:
+            top = pd.concat([top, c.drop(top.index).abs().sort_values(ascending=False).head(n - len(top))])
+        partes = []
+        for f in top.index:
+            v = filas.at[i, f] if f in filas.columns else np.nan
+            valor = "" if pd.isna(v) else f" ({v:.2f})" if abs(v) < 10 else f" ({v:.0f})"
+            partes.append(f"{NOMBRES.get(f, f)}{valor}: {contrib.at[i, f]:+.1f} pts")
+        out[i] = "; ".join(partes)
+    return pd.Series(out)

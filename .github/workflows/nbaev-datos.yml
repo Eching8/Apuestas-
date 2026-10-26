@@ -32,8 +32,8 @@ jobs:
           restore-keys: nbaev-data-
       - name: Histórico (solo descarga lo que falte)
         run: python -m nbaev datos historial
-      - name: Actualización diaria
-        run: python -m nbaev datos diario
+      - name: Flujo diario (datos, proyección, comparación con cuotas, picks)
+        run: python -m nbaev diario
       - name: Estado
         run: python -m nbaev datos estado | tee estado.md
       - name: Guardar la base
@@ -47,5 +47,6 @@ jobs:
           name: nbaev-estado-${{ github.run_number }}
           path: |
             estado.md
+            reportes/diario/
             logs/
           retention-days: 14

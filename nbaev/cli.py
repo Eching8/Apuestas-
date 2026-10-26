@@ -84,7 +84,7 @@ def cmd_nba_api(cfg, args) -> None:
     log.info("stats.nba.com: %s", nba_stats.descargar(con, cfg, args.temporada, args.hasta))
 
 
-def cmd_diario(cfg, args) -> None:
+def cmd_diario_datos(cfg, args) -> None:
     """Actualización diaria: partidos de ayer, lesiones, cuotas de hoy y emparejamiento de ids."""
     from .data import cuotas_sgo, recolector
     con, cli = _con(cfg), _espn(cfg)
@@ -202,6 +202,42 @@ def cmd_backtest_puntos(cfg, args) -> None:
     print(texto)
 
 
+def cmd_diario(cfg, args) -> None:
+    """Todo el flujo del día: datos, proyección, comparación con cuotas, picks, registro y banca."""
+    from . import diario
+    from .data import recolector
+    if not args.sin_actualizar:
+        cmd_diario_datos(cfg, args)
+    con = _con(cfg)
+    fecha = args.fecha or recolector.hoy_et().isoformat()
+    r = diario.ejecutar(con, cfg, fecha)
+    t = r["tabla"]
+    log.info("Apuestas liquidadas: %s. Banca: %s", r.get("liquidadas"), r.get("banca"))
+    if t.empty:
+        return
+    picks = t[t["pick"]]
+    print(f"\nLíneas evaluadas: {len(t)}; picks: {len(picks)}; con monto: {(picks['monto'] > 0).sum()}")
+    cols = ["name", "partido", "market", "line", "lado", "proyeccion", "cuota", "book", "p_justa", "p_final", "edge",
+            "ev", "monto", "estado_mercado"]
+    print(t.sort_values("ev", ascending=False)[cols].head(15).round(3).to_string(index=False))
+    print(f"\nInforme: reportes/diario/{fecha}.md (también .csv y .json)")
+
+
+def cmd_apuestas(cfg, args) -> None:
+    from .betting import registro
+    con = _con(cfg)
+    if args.cmd == "confirmar":
+        registro.confirmar(con, args.id, args.cuota, args.monto)
+    elif args.cmd == "descartar":
+        registro.descartar(con, args.id)
+    elif args.cmd == "liquidar":
+        log.info("Liquidadas: %d", registro.liquidar(con))
+    print(con.execute("SELECT id, fecha, jugador, market, line, lado, book, cuota, monto, estado, resultado, ganancia, clv "
+                      "FROM apuestas ORDER BY id DESC LIMIT 20").df().to_string(index=False))
+    print(registro.resumen(con).to_string(index=False))
+    print(f"Banca: {registro.banca_actual(con, cfg['apuestas']['banca_inicial']):,.2f}")
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="nbaev", description="Props NBA con valor esperado")
     ap.add_argument("--config", help="ruta a un YAML de configuración")
@@ -231,9 +267,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--temporada", type=int, required=True)
     p.add_argument("--hasta", help="AAAA-MM-DD: datos acumulados hasta esa fecha (sin fuga)")
     p.set_defaults(f=cmd_nba_api)
-    p = d.add_parser("diario", help="actualización diaria completa")
+    p = d.add_parser("diario", help="actualización diaria de datos (sin proyectar)")
     p.add_argument("--sin-cuotas", action="store_true")
-    p.set_defaults(f=cmd_diario)
+    p.set_defaults(f=cmd_diario_datos)
     d.add_parser("estado", help="cobertura y calidad de los datos").set_defaults(f=cmd_estado)
 
     mi = grupos.add_parser("minutos", help="fase 2: proyección de minutos").add_subparsers(dest="cmd", required=True)
@@ -256,6 +292,23 @@ def main(argv: list[str] | None = None) -> int:
 
     bt = grupos.add_parser("backtest", help="fase 4: backtest con cuotas reales").add_subparsers(dest="cmd", required=True)
     bt.add_parser("puntos", help="mercado de puntos (necesita `puntos validar`)").set_defaults(f=cmd_backtest_puntos)
+
+    p = grupos.add_parser("diario", help="flujo completo del día: datos, proyección, picks y banca")
+    p.add_argument("--fecha")
+    p.add_argument("--sin-actualizar", action="store_true", help="no descarga datos ni cuotas")
+    p.add_argument("--sin-cuotas", action="store_true", help="actualiza datos pero no captura cuotas")
+    p.set_defaults(f=cmd_diario)
+    ap_ = grupos.add_parser("apuestas", help="registro de apuestas").add_subparsers(dest="cmd", required=True)
+    p = ap_.add_parser("confirmar", help="marcar como hecha una apuesta sugerida")
+    p.add_argument("id", type=int)
+    p.add_argument("--cuota", type=float)
+    p.add_argument("--monto", type=float)
+    p.set_defaults(f=cmd_apuestas)
+    p = ap_.add_parser("descartar")
+    p.add_argument("id", type=int)
+    p.set_defaults(f=cmd_apuestas)
+    ap_.add_parser("liquidar", help="liquidar con los resultados reales").set_defaults(f=cmd_apuestas)
+    ap_.add_parser("ver", help="últimas apuestas y rendimiento").set_defaults(f=cmd_apuestas)
 
     args = ap.parse_args(argv)
     cfg = config.cargar(args.config)

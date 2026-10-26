@@ -57,3 +57,25 @@ puntos:
   modelo: data/modelos/puntos.joblib
   reentrenar_cada_dias: 7
   simulaciones: 10000       # por partido (mínimo pedido: 10.000)
+
+apuestas:
+  banca_inicial: 1000.0
+  fraccion_kelly: 0.25        # 1/4 Kelly
+  tope_apuesta: 0.02          # máximo 2 % de la banca por apuesta
+  tope_diario: 0.10           # máximo 10 % de la banca arriesgado en un día
+  edge_min: 0.04              # edge mínimo general (probabilidad final - probabilidad justa)
+  edge_min_por_mercado:       # más exigente en mercados con mucho margen o pocos datos
+    primera_canasta: 0.10
+    primera_canasta_equipo: 0.08
+    triple_doble: 0.08
+    doble_doble: 0.06
+    periodo_1q: 0.07
+    periodo_1h: 0.06
+  fdr: 0.10                   # Benjamini-Hochberg: tasa de falsos descubrimientos entre las líneas del día
+  min_minutos: 15             # minutos proyectados mínimos
+  excluir_en_duda: true       # excluir jugadores Questionable / Doubtful / Day-To-Day sin confirmar
+  max_por_jugador: 1
+  max_por_partido: 3
+  metodo_margen: multiplicativo
+  mezcla: data/modelos/mezcla_pts.json
+  mezcla_con: cierre          # líneas con las que se ajusta la mezcla modelo + mercado

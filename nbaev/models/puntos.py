@@ -129,8 +129,10 @@ def proyectar(con, cfg: dict, fecha: str, n_sims: int = 10_000, semilla: int = 2
     minutos = pd.concat([fm.dataset(con), proj], ignore_index=True)
     df = fp.construir(con, pd.concat([hist, fut[hist.columns]], ignore_index=True), minutos=minutos)
     df = df[df["minutes"].isna() & df["game_id"].isin(proj["game_id"])].reset_index(drop=True)
+    # Proyección de minutos y sus variables (las usan las explicaciones SHAP del modelo de minutos).
+    extra = [c for c in fm.FEATURES if c not in df.columns]
     df = df.merge(proj[["game_id", "player_id", "min_si_juega", "min_q10", "min_q90", "p_dnp", "prob_juega",
-                        "estado_lesion", "min_pred"]], on=["game_id", "player_id"], how="left")
+                        "estado_lesion", "min_pred"] + extra], on=["game_id", "player_id"], how="left")
     m = modelo_vigente(con, cfg, RAIZ / cfg.get("puntos", {}).get("modelo", "data/modelos/puntos.joblib"))
     entrada = entrada_simulacion(m, df)
     sims = simular(entrada, m.disp, n_sims=n_sims, semilla=semilla)

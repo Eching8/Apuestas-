@@ -209,6 +209,28 @@ CREATE TABLE IF NOT EXISTS market_validation (
     PRIMARY KEY (market, period, estrategia)
 );
 
+-- Cada línea evaluada por el flujo diario, con la hora: permite medir más adelante el CLV real de lo que
+-- el modelo habría apostado con la información de ese momento.
+CREATE TABLE IF NOT EXISTS predicciones (
+    snapshot_at TIMESTAMP, fecha DATE, game_id VARCHAR, player_id VARCHAR, jugador VARCHAR, market VARCHAR,
+    period VARCHAR, line DOUBLE, lado VARCHAR, book VARCHAR, cuota DOUBLE, proyeccion DOUBLE, p_modelo DOUBLE,
+    p_justa DOUBLE, p_final DOUBLE, p_empate DOUBLE, edge DOUBLE, ev DOUBLE, p_valor DOUBLE, pasa_bh BOOLEAN,
+    estado_mercado VARCHAR, pick BOOLEAN, monto DOUBLE, motivo_descarte VARCHAR,
+    PRIMARY KEY (snapshot_at, game_id, player_id, market, period, line)
+);
+
+CREATE SEQUENCE IF NOT EXISTS seq_apuestas START 1;
+-- Registro de apuestas: las sugeridas por el sistema y las que el usuario confirma que hizo.
+CREATE TABLE IF NOT EXISTS apuestas (
+    id INTEGER PRIMARY KEY DEFAULT nextval('seq_apuestas'),
+    creada_at TIMESTAMP, fecha DATE, game_id VARCHAR, player_id VARCHAR, jugador VARCHAR, partido VARCHAR,
+    market VARCHAR, period VARCHAR, line DOUBLE, lado VARCHAR, book VARCHAR, cuota DOUBLE, p_modelo DOUBLE,
+    p_final DOUBLE, edge DOUBLE, ev DOUBLE, monto DOUBLE,
+    estado VARCHAR,          -- sugerida | confirmada | descartada
+    resultado VARCHAR,       -- pendiente | ganada | perdida | nula
+    valor_real DOUBLE, ganancia DOUBLE, cuota_cierre DOUBLE, p_justa_cierre DOUBLE, clv DOUBLE, liquidada_at TIMESTAMP
+);
+
 -- Registro de descargas (qué se pidió, cuándo y si falló).
 CREATE TABLE IF NOT EXISTS ingest_log (
     source VARCHAR, key VARCHAR, status VARCHAR, detail VARCHAR, logged_at TIMESTAMP,

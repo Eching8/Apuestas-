@@ -21,7 +21,7 @@ Este repositorio contiene dos cosas:
 | 2 | Proyección de minutos | **hecha** |
 | 3 | Modelo de puntos (distribución completa + Monte Carlo) | **hecha** |
 | 4 | Validación walk-forward y backtest con cuotas reales | **hecha** (puntos: desactivado) |
-| 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
+| 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | **hecha** |
 | 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
 
 ### Resultados de la fase 1 (26/10/2026)
@@ -135,6 +135,37 @@ python -m nbaev backtest puntos     # -> reportes/fase4_backtest_puntos.md y est
 - Qué haría falta para medir la ventaja real a la apertura: partes de lesiones y cuotas con hora, para ejecutar el
   modelo con lo que se sabía en cada momento. Las capturas diarias (`datos diario` + `datos cuotas`) ya los guardan;
   con 2-3 meses de capturas se podrá repetir este backtest "en el momento".
+
+### Fase 5: comparación con cuotas, picks y banca (`nbaev/diario.py`, `nbaev/betting/`)
+
+```bash
+python -m nbaev diario                       # datos + lesiones + cuotas + proyección + picks -> reportes/diario/AAAA-MM-DD.{md,csv,json}
+python -m nbaev diario --sin-actualizar      # solo proyecta y compara con lo ya descargado
+python -m nbaev apuestas ver                 # registro de apuestas, rendimiento y banca
+python -m nbaev apuestas confirmar 12 --cuota 1.87 --monto 20   # la hice (con mi cuota y monto reales)
+python -m nbaev apuestas descartar 13
+streamlit run nbaev/app/dashboard.py         # dashboard con filtros por mercado, partido y jugador
+```
+
+Para cada línea capturada (cada casa y cada línea alternativa) el flujo diario:
+
+1. Simula el partido (10.000 veces) y calcula P(over), P(under) y P(empate) del jugador.
+2. Quita el margen de la casa (multiplicativo, power o Shin; si la casa solo da un lado, se usa el consenso).
+3. Probabilidad final = **mezcla modelo + mercado** (regresión logística ajustada con las líneas reales fuera de muestra
+   de la validación; con el cierre, el modelo pesa poco, que es lo honesto según la fase 4).
+4. EV = p_gana × cuota + p_empate − 1; edge = p_final − p_justa. Ordena por EV, no por probabilidad.
+5. Filtros: EV > 0; edge ≥ 4 % (más en mercados exóticos: primera canasta 10 %, triple-doble 8 %, 1.er cuarto 7 %...);
+   ≥ 15 minutos proyectados; fuera Questionable/Doubtful/Day-To-Day; **Benjamini-Hochberg** sobre todas las líneas del
+   día (10 % de falsos descubrimientos) para que no pasen EV+ por azar; máximo 1 apuesta por jugador y 3 por partido.
+6. Monto con 1/4 Kelly, tope 2 % por apuesta y 10 % por día, **solo en mercados validados**; en mercados sin validar o
+   desactivados el pick aparece con monto 0.
+7. Exporta la tabla (jugador, partido, mercado, línea, proyección, P(over), P(under), cuota y casa, prob. justa,
+   prob. final, edge, EV, monto, estado del mercado y las 3 razones SHAP en puntos), registra **cada línea evaluada con
+   la hora** (`predicciones`: permite medir el CLV real a futuro) y las apuestas sugeridas (`apuestas`), y liquida las
+   pendientes con el resultado real y la cuota de cierre (CLV).
+
+bet365: si se cargan sus cuotas por CSV (`datos importar-csv`), es la casa preferida aunque otra pague más.
+Las demás casas vienen de SportsGameOdds.
 
 ### Instalación
 
