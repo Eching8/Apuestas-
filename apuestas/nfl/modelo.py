@@ -35,12 +35,21 @@ NOMBRES = {
     "rush_rec_yds": "yardas de carrera + recepción", "pass_rush_yds": "yardas de pase + carrera",
     "tds": "touchdowns", "rush_tds": "TD por tierra", "rec_tds": "TD por recepción",
     "long_rec": "recepción más larga", "long_rush": "carrera más larga", "first_td": "primer TD del partido",
+    "last_td": "último TD del partido", "long_pass": "pase completo más largo", "ypc": "yardas por acarreo",
+    "fantasy": "puntos de fantasy", "sacks": "sacks", "tackles": "tacleadas (solo + asistidas)",
+    "solo": "tacleadas en solitario", "asist": "tacleadas asistidas", "def_ints": "intercepciones (defensor)",
+    "fg": "goles de campo", "xp": "puntos extra", "kick_pts": "puntos del pateador",
 }
-STATS_CONTEO = ("pass_tds", "ints", "tds", "rush_tds", "rec_tds")
+STATS_CONTEO = ("pass_tds", "ints", "tds", "rush_tds", "rec_tds", "sacks", "def_ints")
+# Fantasy (puntuación de PrizePicks/Underdog, la de las líneas de las casas): yardas de pase /25, TD de pase 4,
+# intercepción -1, yardas de carrera y recepción /10, recepción 1, TD 6, balón perdido -1.
+FANTASY = {"passing_yards": 0.04, "passing_tds": 4, "passing_interceptions": -1, "rushing_yards": 0.1,
+           "receiving_yards": 0.1, "receptions": 1, "rushing_tds": 6, "receiving_tds": 6, "special_teams_tds": 6,
+           "rushing_fumbles_lost": -1, "receiving_fumbles_lost": -1}
 # Dispersión típica (coeficiente de variación) de cada estadística entre partidos.
 CV_DEFECTO = {"pass_yds": 0.30, "pass_att": 0.20, "comp": 0.23, "rush_yds": 0.55, "rush_att": 0.35, "rec": 0.50,
               "rec_yds": 0.65, "targets": 0.42, "rush_rec_yds": 0.45, "pass_rush_yds": 0.28, "long_rec": 0.60,
-              "long_rush": 0.65}
+              "long_rush": 0.65, "long_pass": 0.35, "fantasy": 0.45, "tackles": 0.45, "solo": 0.5, "asist": 0.7}
 STATS_POR_POSICION = {
     "QB": ("pass_yds", "pass_tds", "pass_att", "comp", "ints", "rush_yds", "rush_att", "pass_rush_yds", "tds"),
     "RB": ("rush_yds", "rush_att", "rec", "rec_yds", "rush_rec_yds", "tds", "long_rush", "targets"),
@@ -143,6 +152,28 @@ def valor(p: dict, stat: str) -> float:
         return _v(p, "long_rec")
     if stat == "long_rush":
         return _v(p, "long_rush")
+    if stat == "long_pass":
+        return _v(p, "long_pass")
+    if stat == "ypc":
+        return _v(p, "rushing_yards") / _v(p, "carries") if _v(p, "carries") else 0.0
+    if stat == "fantasy":
+        return sum(peso * _v(p, col) for col, peso in FANTASY.items())
+    if stat == "sacks":
+        return _v(p, "def_sacks")
+    if stat == "tackles":
+        return _v(p, "def_tackles_solo") + _v(p, "def_tackle_assists")
+    if stat == "solo":
+        return _v(p, "def_tackles_solo")
+    if stat == "asist":
+        return _v(p, "def_tackle_assists")
+    if stat == "def_ints":
+        return _v(p, "def_interceptions")
+    if stat == "fg":
+        return _v(p, "fg_made")
+    if stat == "xp":
+        return _v(p, "pat_made")
+    if stat == "kick_pts":
+        return 3 * _v(p, "fg_made") + _v(p, "pat_made")
     raise KeyError(stat)
 
 
@@ -182,6 +213,8 @@ METRICAS_EQUIPO = {
     "sack_rate": ("sacks", "dropbacks"), "turnovers": ("turnovers", None), "third_pct": ("third_conv", "third_att"),
     "proe": ("proe", None), "qb_rush_yds": ("qb_rush_yds", None), "pass_rate": ("dropbacks", "plays"),
     "targets_por_db": ("targets", "dropbacks"), "att_por_db": ("pass_att", "dropbacks"),
+    "drives": ("drives", None), "fgm": ("fgm", None), "fga": ("fga", None), "punts": ("punts", None),
+    "sacks": ("sacks", None),
 }
 # Contracción hacia la liga de las métricas que son razón: unidades "virtuales" del denominador.
 K_RAZON = {"ypp": 120, "epa_play": 150, "pass_epa": 100, "rush_epa": 80, "success": 150, "ypc": 80, "ypa": 100,
@@ -242,6 +275,7 @@ class Contexto:
     perfiles: dict[str, Perfil] = field(default_factory=dict)
     rangos: dict = field(default_factory=dict)
     bajas: dict[str, list[dict]] = field(default_factory=dict)   # team -> jugadores importantes fuera
+    periodos: dict = field(default_factory=dict)  # reparto por cuarto de puntos, TD y estadísticas (ver _periodos)
 
 
 def _temporada(conn, fecha: str) -> int:
@@ -264,8 +298,7 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
             "FROM nfl_player_games pg JOIN nfl_games g ON g.game_id = pg.game_id "
             "LEFT JOIN nfl_player_pbp pp ON pp.game_id = pg.game_id AND pp.player_id = pg.player_id "
             "LEFT JOIN nfl_snaps s ON s.game_id = pg.game_id AND s.player_id = pg.player_id "
-            "WHERE g.gameday < ? AND pg.season >= ? AND pg.position IN ('QB', 'RB', 'FB', 'WR', 'TE') "
-            "ORDER BY g.gameday DESC", (fecha, desde)):
+            "WHERE g.gameday < ? AND pg.season >= ? ORDER BY g.gameday DESC", (fecha, desde)):
         p = dict(r)
         p["is_home"] = int(p["home_team"] == p["team"])
         # spread_line es la ventaja esperada del local: desde el punto de vista del jugador.
@@ -330,7 +363,74 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
     ctx = Contexto(fecha, temporada, dict(jugadores), equipo_partido, dict(ofensiva), dict(defensa), pos_concedido,
                    dict(equipo_pbp), roster, lesiones, dict(movimientos), titular_qb)
     _preparar_liga(ctx)
+    ctx.periodos = _periodos(conn, fecha, desde)
     return ctx
+
+
+# Reparto por cuarto si la base aún no tiene jugada a jugada (medias aproximadas de la NFL).
+REPARTO_DEFECTO = {1: 0.22, 2: 0.30, 3: 0.21, 4: 0.27}
+COLUMNAS_CUARTO = {"pass_yds": "passing_yards", "pass_att": "attempts", "comp": "completions",
+                   "pass_tds": "passing_tds", "ints": "passing_interceptions", "rush_yds": "rushing_yards",
+                   "rush_att": "carries", "rec": "receptions", "rec_yds": "receiving_yards", "targets": "targets"}
+
+
+def _periodos(conn, fecha: str, desde: int) -> dict:
+    """Qué parte de cada cosa pasa en cada cuarto (liga): puntos, TD, FG y cada estadística de jugador.
+
+    También guarda las distancias de los FG anotados, y por posesión los safeties y los TD de defensa o
+    equipos especiales, para el simulador de partidos.
+    """
+    out: dict = {"puntos": dict(REPARTO_DEFECTO), "TD": dict(REPARTO_DEFECTO), "FG": dict(REPARTO_DEFECTO),
+                 "distancias_fg": [], "safety_por_drive": 0.003, "td_def_por_drive": 0.007, "partidos": 0}
+    filas = conn.execute(
+        "SELECT a.qtr, a.tipo, a.puntos, a.distancia, a.team, a.player_id, a.game_id FROM nfl_anotaciones a "
+        "JOIN nfl_games g ON g.game_id = a.game_id WHERE g.gameday < ? AND g.season >= ?", (fecha, desde)).fetchall()
+    if filas:
+        for clave, filtro in (("puntos", lambda r: True), ("TD", lambda r: r["tipo"] == "TD"),
+                              ("FG", lambda r: r["tipo"] == "FG")):
+            por_q = defaultdict(float)
+            for r in filas:
+                if filtro(r) and 1 <= (r["qtr"] or 0) <= 4:
+                    por_q[r["qtr"]] += r["puntos"] if clave == "puntos" else 1
+            total = sum(por_q.values())
+            if total:
+                out[clave] = {q: por_q[q] / total for q in (1, 2, 3, 4)}
+        out["distancias_fg"] = [r["distancia"] for r in filas if r["tipo"] == "FG" and r["distancia"]]
+        drives = conn.execute(
+            "SELECT SUM(t.drives), COUNT(DISTINCT t.game_id) FROM nfl_team_games t JOIN nfl_games g "
+            "ON g.game_id = t.game_id WHERE g.gameday < ? AND g.season >= ?", (fecha, desde)).fetchone()
+        if drives and drives[0]:
+            out["partidos"] = drives[1]
+            out["safety_por_drive"] = max(0.001, sum(r["tipo"] == "SAF" for r in filas) / drives[0])
+            # TD que no son del ataque: el anotador no figura como corredor/receptor del equipo que anota.
+            td_def = conn.execute(
+                "SELECT COUNT(*) FROM nfl_anotaciones a JOIN nfl_games g ON g.game_id = a.game_id "
+                "WHERE a.tipo = 'TD' AND g.gameday < ? AND g.season >= ? AND NOT EXISTS (SELECT 1 FROM "
+                "nfl_player_quarter q WHERE q.game_id = a.game_id AND q.player_id = a.player_id AND "
+                "(q.rushing_tds > 0 OR q.receiving_tds > 0))", (fecha, desde)).fetchone()[0]
+            out["td_def_por_drive"] = max(0.002, td_def / drives[0])
+    sumas = {}
+    for stat, col in COLUMNAS_CUARTO.items():
+        por_q = {r[0]: r[1] or 0 for r in conn.execute(
+            f"SELECT q.qtr, SUM(q.{col}) FROM nfl_player_quarter q JOIN nfl_games g ON g.game_id = q.game_id "
+            f"WHERE g.gameday < ? AND g.season >= ? AND q.qtr BETWEEN 1 AND 4 GROUP BY q.qtr", (fecha, desde))}
+        total = sum(por_q.values())
+        sumas[stat] = {q: por_q.get(q, 0) / total for q in (1, 2, 3, 4)} if total else dict(REPARTO_DEFECTO)
+    out["stats"] = sumas
+    return out
+
+
+PERIODOS = {"game": (1, 2, 3, 4), "1h": (1, 2), "2h": (3, 4), "1q": (1,), "2q": (2,), "3q": (3,), "4q": (4,)}
+NOMBRE_PERIODO = {"game": "", "1h": "1.ª mitad", "2h": "2.ª mitad", "1q": "1.er cuarto", "2q": "2.º cuarto",
+                  "3q": "3.er cuarto", "4q": "4.º cuarto"}
+
+
+def fraccion(ctx: Contexto, clave: str, periodo: str) -> float:
+    """Parte del partido que corresponde a un periodo para puntos, TD o una estadística de jugador."""
+    if periodo == "game":
+        return 1.0
+    reparto = ctx.periodos.get("stats", {}).get(clave) or ctx.periodos.get(clave) or REPARTO_DEFECTO
+    return sum(reparto.get(q, 0.25) for q in PERIODOS[periodo])
 
 
 def _preparar_liga(ctx: Contexto) -> None:
@@ -501,12 +601,38 @@ class Proyeccion:
     volumen: dict[str, float]          # acarreos, envíos, pases esperados
 
     def prob(self, stat: str, line: float) -> tuple[float, float]:
-        if stat == "first_td":
-            raise ValueError("first_td se calcula por partido (ver analizador.primer_td)")
+        if stat in ("first_td", "last_td"):
+            raise ValueError("el primer y el último TD se calculan por partido (ver analizador.primer_td)")
+        if stat == "ypc":
+            z = (line - self.medias[stat]) / math.sqrt(self.varianzas[stat])
+            mas = 0.5 * math.erfc(z / math.sqrt(2))
+            return calibrar(mas), calibrar(1 - mas)
         mas, menos = prob_lados(line, self.medias[stat], self.varianzas[stat])
         if stat in STATS_CONTEO:
             return mas, menos
         return calibrar(mas), calibrar(menos)
+
+    def prob_periodo(self, ctx: "Contexto", stat: str, periodo: str, line: float) -> tuple[float, float] | None:
+        """Prop de un cuarto o una mitad: la media del partido × la parte que suele pasar en ese periodo.
+
+        La dispersión crece al acortar el periodo (la varianza relativa va como 1/fracción)."""
+        if periodo == "game":
+            return self.prob(stat, line)
+        if stat not in self.medias or stat in ("ypc", "long_rec", "long_rush", "long_pass", "fantasy"):
+            return None
+        if stat in ("tds", "rush_tds", "rec_tds"):
+            mu = self.medias[stat] * fraccion(ctx, "TD", periodo)
+            return prob_lados(line, mu, mu + 0.05 * mu * mu)
+        claves = {"rush_rec_yds": ("rush_yds", "rec_yds"), "pass_rush_yds": ("pass_yds", "rush_yds")}.get(stat, (stat,))
+        f = sum(fraccion(ctx, c, periodo) for c in claves) / len(claves)
+        mu = self.medias[stat] * f
+        if stat in STATS_CONTEO:
+            var = mu + 0.08 * mu * mu
+        else:
+            cv2 = self.varianzas[stat] / max(self.medias[stat], 1e-9) ** 2
+            var = max(mu * 1.05, cv2 / max(f, 0.05) * mu * mu)
+        mas, menos = prob_lados(line, mu, var)
+        return (mas, menos) if stat in STATS_CONTEO else (calibrar(mas), calibrar(menos))
 
 
 def calibrar(p: float) -> float:
@@ -880,7 +1006,8 @@ def proyectar(ctx: Contexto, j: Jugador, ent: Entorno) -> Proyeccion:
 
     # Jugada más larga: su media histórica escalada por el volumen esperado.
     for stat, col_vol, vol_esp in (("long_rec", "receptions", medias.get("rec", 0)),
-                                   ("long_rush", "carries", carries)):
+                                   ("long_rush", "carries", carries),
+                                   ("long_pass", "completions", medias.get("comp", 0))):
         hist = [p for p in j.partidos[:16] if (p.get(col_vol) or 0) > 0 and p.get(stat) is not None]
         if len(hist) >= 3 and vol_esp > 0.3:
             m = sum(p[stat] for p in hist) / len(hist)
@@ -888,6 +1015,12 @@ def proyectar(ctx: Contexto, j: Jugador, ent: Entorno) -> Proyeccion:
             # Media condicionada a tocar el balón al menos una vez × probabilidad de tocarlo.
             medias[stat] = (m * (vol_esp / v_med) ** 0.3 if v_med else m) * (1 - math.exp(-vol_esp))
 
+    # Fantasy: suma de sus componentes con la puntuación de las casas.
+    medias["fantasy"] = (0.04 * medias.get("pass_yds", 0) + 4 * medias.get("pass_tds", 0) - medias.get("ints", 0)
+                         + 0.1 * (medias.get("rush_yds", 0) + medias.get("rec_yds", 0)) + medias.get("rec", 0)
+                         + 6 * lam["tds"])
+    fac["fantasy"] = [Factor("puntuación: yardas de pase /25, TD de pase 4, intercepción -1, yardas de carrera y "
+                             "recepción /10, recepción 1, TD 6", None, "volumen")]
     for stat, mu in medias.items():
         if stat in STATS_CONTEO:
             var[stat] = mu + 0.08 * mu * mu
@@ -898,6 +1031,14 @@ def proyectar(ctx: Contexto, j: Jugador, ent: Entorno) -> Proyeccion:
         var["rush_rec_yds"] = var["rush_yds"] + var["rec_yds"]
     if "pass_rush_yds" in medias and "rush_yds" in var:
         var["pass_rush_yds"] = var["pass_yds"] + var["rush_yds"]
+    # Yardas por acarreo: media del partido con su desviación (menos acarreos = más variable).
+    if carries >= 3 and "rush_yds" in medias:
+        ypcs = [valor(p, "ypc") for p in j.partidos[:16] if (p.get("carries") or 0) >= 5]
+        sd_emp = (sum((y - sum(ypcs) / len(ypcs)) ** 2 for y in ypcs) / (len(ypcs) - 1)) ** 0.5 \
+            if len(ypcs) >= 4 else 2.4
+        sd = math.sqrt((len(ypcs) * sd_emp ** 2 + 6 * 2.4 ** 2) / (len(ypcs) + 6)) * math.sqrt(14 / max(carries, 3))
+        medias["ypc"], var["ypc"] = medias["rush_yds"] / carries, sd * sd
+        fac["ypc"] = fac.get("rush_yds", [])[:3]
     for stat in ("rush_rec_yds", "pass_rush_yds"):
         if stat in medias:
             fac[stat] = fac.get("rush_yds", [])[:2] + fac.get("rec_yds" if stat == "rush_rec_yds" else "pass_yds", [])[:2]

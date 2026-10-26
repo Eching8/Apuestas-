@@ -29,8 +29,24 @@ STATS_SGO = {
     "receiving_targets": "targets", "rushing+receiving_yards": "rush_rec_yds",
     "passing+rushing_yards": "pass_rush_yds", "touchdowns": "tds", "rushing_touchdowns": "rush_tds",
     "receiving_touchdowns": "rec_tds", "receiving_longestReception": "long_rec",
-    "rushing_longestRush": "long_rush", "firstTouchdown": "first_td",
+    "rushing_longestRush": "long_rush", "firstTouchdown": "first_td", "lastTouchdown": "last_td",
+    "passing_longestCompletion": "long_pass", "rushing_yardsPerAttempt": "ypc", "fantasyScore": "fantasy",
+    # Defensa y equipos especiales.
+    "defense_sacks": "sacks", "defense_combinedTackles": "tackles", "defense_soloTackles": "solo",
+    "defense_assistedTackles": "asist", "defense_interceptions": "def_ints", "fieldGoals_made": "fg",
+    "extraPoints_kicksMade": "xp", "kicking_totalPoints": "kick_pts", "punting_numPunts": "punts",
 }
+# Mercados de partido y de equipo (statEntityID 'home', 'away' o 'all').
+STATS_EQUIPO = {
+    "points": "pts", "touchdowns": "tds", "fieldGoals_made": "fg", "fieldGoals_longestMade": "fg_largo",
+    "firstToScore": "primero", "lastToScore": "ultimo", "bothTeamsScored": "ambos", "largestLead": "ventaja",
+    "turnovers": "perdidas", "punting_numPunts": "punts", "defense_safeties": "safety", "defense_sacks": "sacks",
+}
+# Mercados de jugador sí/no que equivalen a "más de 0.5".
+YN_JUGADOR = ("tds", "first_td", "last_td", "pass_tds", "rush_tds", "rec_tds", "ints", "rec", "sacks",
+              "def_ints", "fg", "xp")
+LADOS = {"over": "más", "under": "menos", "yes": "sí", "no": "no", "home": "home", "away": "away",
+         "draw": "draw", "even": "par", "odd": "impar"}
 MARGEN_UN_LADO = 1.07      # margen típico de un mercado de un solo lado (anotar sí/no, primer TD)
 MARGEN_ALTERNATIVA = 1.045  # línea alternativa de over/under de una casa (sin el otro lado para quitarlo exacto)
 MARGEN_MULTIPLES = 1.12     # 2+ TD y primer TD: las casas cobran más en los mercados de premio grande
@@ -72,12 +88,15 @@ def ventana(desde: str, dias: int) -> tuple[datetime, datetime]:
 @dataclass
 class Oferta:
     """Una apuesta concreta (jugador, estadística, lado, línea) con el precio de cada casa."""
-    sgo_player_id: str
+    sgo_player_id: str         # id del jugador en SGO, o 'home' / 'away' / 'all' en mercados de equipo
     nombre: str
     sgo_team: str | None
     stat: str
-    lado: str                  # 'más' / 'menos'
-    line: float
+    lado: str                  # 'más'/'menos'; equipo: 'home'/'away'/'draw', 'sí'/'no', 'par'/'impar'
+    line: float                # línea (spread en 'sp'; 0 en moneyline, sí/no y par/impar)
+    tipo: str = "jugador"      # 'jugador' o 'equipo'
+    periodo: str = "game"      # 'game', '1h', '2h', '1q'...'4q'
+    bet: str = "ou"            # ou, yn, ml, sp, ml3way, eo
     libros: dict[str, float] = field(default_factory=dict)   # casa -> cuota decimal
     consenso: float | None = None
     justa: float | None = None                                # cuota justa de consenso (sin margen)
@@ -85,6 +104,14 @@ class Oferta:
     open_odd: float | None = None
     contraria: float | None = None                            # cuota de consenso del otro lado
     player_id: str | None = None                              # id de nflverse tras emparejar
+
+    @property
+    def codigo(self) -> str:
+        """Estadística con periodo y tipo de apuesta cuando no es la prop normal del partido: 'rec_yds@1q',
+        'pts@1h/sp'."""
+        if self.tipo == "jugador":
+            return self.stat if self.periodo == "game" else f"{self.stat}@{self.periodo}"
+        return f"{self.stat}@{self.periodo}/{self.bet}"
 
     @property
     def mejor(self) -> tuple[str | None, float | None]:
@@ -105,7 +132,8 @@ class Oferta:
             # Línea alternativa sin consenso: mediana de las casas que la ofrecen, con su margen típico.
             odds = sorted(self.libros.values())
             mediana = odds[len(odds) // 2]
-            margen = MARGEN_MULTIPLES if self.stat in ("tds", "first_td") else MARGEN_ALTERNATIVA
+            margen = MARGEN_MULTIPLES if self.stat in ("tds", "first_td", "last_td") or self.bet == "ml3way" \
+                else MARGEN_ALTERNATIVA
             return 1 / mediana / margen
         return None
 
@@ -151,61 +179,60 @@ def _f(v) -> float | None:
 
 
 def parse_evento(evento: dict) -> Mercado:
+    """Todas las apuestas del evento: props de jugador (partido y periodos) y mercados de partido y equipo."""
     teams = evento.get("teams", {})
     home = equipos.por_nombre_largo((teams.get("home", {}).get("names") or {}).get("long", ""))
     away = equipos.por_nombre_largo((teams.get("away", {}).get("names") or {}).get("long", ""))
     m = Mercado(evento.get("eventID", ""), home, away, (evento.get("status") or {}).get("startsAt"),
                 jugadores=evento.get("players", {}))
     odds = evento.get("odds", {})
+    nombres_equipo = {"home": equipos.nombre(home) if home else "Local",
+                      "away": equipos.nombre(away) if away else "Visitante", "all": "Partido"}
     for o in odds.values():
-        if o.get("periodID") != "game" or o.get("cancelled") or not o.get("bookOddsAvailable"):
+        if o.get("cancelled") or not o.get("bookOddsAvailable"):
             continue
         stat_id, bet, side, ent = o.get("statID"), o.get("betTypeID"), o.get("sideID"), o.get("statEntityID")
-        if not o.get("playerID") and stat_id == "points":
-            # La línea "justa" de SGO es la central; la de consenso a veces es una alternativa (30.5 a +235).
-            if bet == "ou" and ent == "all" and side == "over":
-                m.total = _f(o.get("fairOverUnder")) or _f(o.get("bookOverUnder"))
-                ab, cd = _f(o.get("openBookOverUnder")), m.total
-                if ab is not None and cd is not None and abs(ab - cd) >= 1:
-                    m.movimientos.append(f"total del partido: de {ab:g} a {cd:g}")
-            elif bet == "sp" and ent == "home" and side == "home":
-                sp = _f(o.get("bookSpread"))
-                if sp is not None:
-                    m.spread_home = -sp
-                    op = _f(o.get("openBookSpread"))
-                    if op is not None and abs(op - sp) >= 1:
-                        m.movimientos.append(f"spread de {home}: de {op:+g} a {sp:+g}")
-            elif bet == "ou" and ent in ("home", "away") and side == "over":
-                t = home if ent == "home" else away
-                v = _f(o.get("fairOverUnder")) or _f(o.get("bookOverUnder"))
-                if t and v is not None:
-                    m.team_total[t] = v
+        periodo = o.get("periodID") or "game"
+        if not o.get("playerID") and stat_id == "points" and periodo == "game":
+            _lineas_partido(m, o, home)
+        lado = LADOS.get(side)
+        if lado is None or bet not in ("ou", "yn", "ml", "sp", "ml3way", "eo"):
             continue
-        stat = STATS_SGO.get(stat_id)
-        if not stat or not o.get("playerID") or bet not in ("ou", "yn"):
-            continue
-        if bet == "yn":
-            if side != "yes" or stat not in ("tds", "first_td", "pass_tds", "rush_tds", "rec_tds", "ints"):
+        if o.get("playerID"):
+            stat = STATS_SGO.get(stat_id)
+            if not stat or bet not in ("ou", "yn"):
                 continue
-            lado, linea = "más", 0.5
+            tipo, entidad = "jugador", o["playerID"]
+            info = m.jugadores.get(entidad, {})
+            nombre, sgo_team = info.get("name") or entidad, info.get("teamID")
+            if bet == "yn":
+                if stat not in YN_JUGADOR:
+                    continue
+                lado, linea = ("más" if lado == "sí" else "menos"), 0.5
+            else:
+                linea = _f(o.get("bookOverUnder"))
         else:
-            lado = {"over": "más", "under": "menos"}.get(side)
-            linea = _f(o.get("bookOverUnder"))
-            if not lado or linea is None:
+            stat = STATS_EQUIPO.get(stat_id)
+            if not stat or ent not in ("home", "away", "all"):
                 continue
-        info = m.jugadores.get(o["playerID"], {})
+            tipo, entidad, nombre, sgo_team = "equipo", ent, nombres_equipo[ent], None
+            linea = _f(o.get("bookSpread")) if bet == "sp" else _f(o.get("bookOverUnder")) if bet == "ou" else 0.0
+        if linea is None:
+            continue
+        campo_linea = {"sp": "Spread", "ou": "OverUnder"}.get(bet)
         contraria = odds.get(o.get("opposingOddID") or "", {})
-        consenso = americana_a_decimal(o.get("bookOdds"))
-        # La cuota justa y la de apertura pueden ser de otra línea (fairOverUnder / openBookOverUnder):
-        # solo valen como precio de esta línea si coinciden.
-        misma = (lambda campo: bet == "yn" or _f(o.get(campo)) in (None, linea))
-        open_line = _f(o.get("openBookOverUnder")) if bet == "ou" else None
-        base = Oferta(o["playerID"], info.get("name") or o["playerID"], info.get("teamID"), stat, lado, linea,
-                      consenso=consenso, justa=americana_a_decimal(o.get("fairOdds")) if misma("fairOverUnder") else None,
-                      open_line=open_line,
-                      open_odd=americana_a_decimal(o.get("openBookOdds")) if misma("openBookOverUnder") else None,
+        # La cuota justa y la de apertura pueden ser de otra línea: solo valen si coinciden con esta.
+        misma = (lambda pref: campo_linea is None or _f(o.get(f"{pref}{campo_linea}")) in (None, linea))
+        base = Oferta(entidad, nombre, sgo_team, stat, lado, linea, tipo=tipo, periodo=periodo, bet=bet,
+                      consenso=americana_a_decimal(o.get("bookOdds")),
+                      justa=americana_a_decimal(o.get("fairOdds")) if misma("fair") else None,
+                      open_line=_f(o.get(f"openBook{campo_linea}")) if campo_linea else None,
+                      open_odd=americana_a_decimal(o.get("openBookOdds")) if misma("openBook") else None,
                       contraria=americana_a_decimal(contraria.get("bookOdds"))
-                      if _f(contraria.get("bookOverUnder")) in (None, linea) else None)
+                      if campo_linea is None or _f(contraria.get(f"book{campo_linea}")) in
+                      (None, -linea if bet == "sp" else linea) else None)
+        if bet == "ml3way":
+            base.contraria = None     # tres resultados: el "otro lado" no es uno solo
         por_linea: dict[float, Oferta] = {linea: base}
         libros = o.get("byBookmaker") or {}
         disponibles = {k: v for k, v in libros.items() if v.get("available")} or libros
@@ -213,11 +240,12 @@ def parse_evento(evento: dict) -> Mercado:
             odd = americana_a_decimal(b.get("odds"))
             if not odd:
                 continue
-            bl = _f(b.get("overUnder")) if bet == "ou" else linea
+            bl = _f(b.get("spread")) if bet == "sp" else _f(b.get("overUnder")) if bet == "ou" else linea
             bl = linea if bl is None else bl
             if bl not in por_linea:
                 # Línea alternativa de esa casa (p. ej. 2+ TD = más de 1.5): sin consenso ni apertura.
-                por_linea[bl] = Oferta(o["playerID"], base.nombre, base.sgo_team, stat, lado, bl)
+                por_linea[bl] = Oferta(entidad, nombre, sgo_team, stat, lado, bl, tipo=tipo, periodo=periodo,
+                                       bet=bet)
             por_linea[bl].libros[book] = odd
         for of in por_linea.values():
             # Sin ninguna casa detrás es un relleno de SportsGameOdds (+100/+100): no se puede apostar.
@@ -226,7 +254,7 @@ def parse_evento(evento: dict) -> Mercado:
     # Las ofertas de 'yn' y 'ou' de la misma apuesta (anotar = más de 0.5) se juntan.
     juntas: dict[tuple, Oferta] = {}
     for of in m.ofertas:
-        k = (of.sgo_player_id, of.stat, of.lado, of.line)
+        k = (of.tipo, of.sgo_player_id, of.stat, of.periodo, of.bet if of.tipo == "equipo" else "", of.lado, of.line)
         if k in juntas:
             prev = juntas[k]
             for book, odd in of.libros.items():
@@ -240,6 +268,29 @@ def parse_evento(evento: dict) -> Mercado:
     return m
 
 
+def _lineas_partido(m: Mercado, o: dict, home: str | None) -> None:
+    """Total, spread y totales por equipo del partido completo (entorno de las props y movimiento)."""
+    bet, side, ent = o.get("betTypeID"), o.get("sideID"), o.get("statEntityID")
+    # La línea "justa" de SGO es la central; la de consenso a veces es una alternativa (30.5 a +235).
+    if bet == "ou" and ent == "all" and side == "over":
+        m.total = _f(o.get("fairOverUnder")) or _f(o.get("bookOverUnder"))
+        ab, cd = _f(o.get("openBookOverUnder")), m.total
+        if ab is not None and cd is not None and abs(ab - cd) >= 1:
+            m.movimientos.append(f"total del partido: de {ab:g} a {cd:g}")
+    elif bet == "sp" and ent == "home" and side == "home":
+        sp = _f(o.get("bookSpread"))
+        if sp is not None:
+            m.spread_home = -sp
+            op = _f(o.get("openBookSpread"))
+            if op is not None and abs(op - sp) >= 1:
+                m.movimientos.append(f"spread de {home}: de {op:+g} a {sp:+g}")
+    elif bet == "ou" and ent in ("home", "away") and side == "over":
+        t = m.home if ent == "home" else m.away
+        v = _f(o.get("fairOverUnder")) or _f(o.get("bookOverUnder"))
+        if t and v is not None:
+            m.team_total[t] = v
+
+
 def emparejar(m: Mercado, roster: list[dict]) -> int:
     """Asigna el id de nflverse a cada oferta por nombre y equipo. Devuelve cuántas quedaron emparejadas."""
     por_nombre: dict[str, list[dict]] = {}
@@ -248,6 +299,8 @@ def emparejar(m: Mercado, roster: list[dict]) -> int:
     equipos_partido = {m.home, m.away}
     n = 0
     for of in m.ofertas:
+        if of.tipo != "jugador":
+            continue
         team = equipos.por_nombre_largo(of.sgo_team or "")
         k = clave_nombre(of.nombre)
         cands = [r for r in por_nombre.get(k, []) if r["team"] in equipos_partido]
@@ -268,7 +321,7 @@ def filas_lineas(m: Mercado, game_id: str | None, capturado: str) -> list[dict]:
     filas = []
     for of in m.ofertas:
         comun = {"captured_at": capturado, "event_id": m.event_id, "game_id": game_id, "player_id": of.player_id,
-                 "sgo_player_id": of.sgo_player_id, "entidad": of.sgo_player_id, "stat": of.stat, "lado": of.lado,
+                 "sgo_player_id": of.sgo_player_id, "entidad": of.sgo_player_id, "stat": of.codigo, "lado": of.lado,
                  "line": of.line}
         if of.consenso:
             filas.append({**comun, "book": "consenso", "odd": of.consenso, "open_line": of.open_line,

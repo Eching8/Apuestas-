@@ -14,6 +14,7 @@ import logging
 import re
 import time
 from collections import defaultdict
+from dataclasses import dataclass, field
 from typing import Iterator
 
 import requests
@@ -141,9 +142,31 @@ def parse_stats_jugador(filas: Iterator[dict], columnas: tuple[str, ...]) -> lis
 
 # --- Jugada a jugada ---------------------------------------------------------------------
 
-def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str, str]]:
-    """Resume el jugada a jugada: una fila por jugador y partido, otra por equipo y partido, y el autor del
-    primer TD de cada partido."""
+@dataclass
+class ResumenPbp:
+    jugadores: list[dict]                 # una fila por jugador y partido (zona roja, jugada más larga...)
+    equipos: list[dict]                   # una fila por equipo y partido (ataque)
+    primeros: dict[str, str]              # game_id -> autor del primer TD
+    anotaciones: list[dict] = field(default_factory=list)   # cada cambio en el marcador
+    cuartos: list[dict] = field(default_factory=list)       # jugador × partido × cuarto
+
+
+def _tipo_anotacion(f: dict) -> str:
+    if num(f.get("touchdown")) == 1:
+        return "TD"
+    if f.get("field_goal_result") == "made":
+        return "FG"
+    if f.get("extra_point_result") == "good":
+        return "XP"
+    if f.get("two_point_conv_result") == "success" or num(f.get("defensive_two_point_conv")) == 1:
+        return "2PT"
+    if num(f.get("safety")) == 1:
+        return "SAF"
+    return "OTRO"
+
+
+def agregar_pbp(filas: Iterator[dict]) -> ResumenPbp:
+    """Resume el jugada a jugada: jugadores, equipos, primer TD, anotaciones y estadísticas por cuarto."""
     jug: dict[tuple[str, str], dict] = defaultdict(lambda: {
         "rz_carries": 0, "i10_carries": 0, "i5_carries": 0, "rz_targets": 0, "i10_targets": 0, "ez_targets": 0,
         "designed_runs": 0, "scrambles": 0, "long_rush": 0.0, "long_rec": 0.0, "long_pass": 0.0,
@@ -155,6 +178,10 @@ def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str
     carreras: dict[tuple[str, str, str], list[float]] = defaultdict(lambda: [0, 0.0])
     proe: dict[tuple[str, str], list[float]] = defaultdict(lambda: [0.0, 0])
     primeros: dict[str, tuple[float, str]] = {}
+    marcador: dict[str, tuple[int, int]] = {}
+    anotaciones: list[dict] = []
+    especiales: dict[tuple[str, str], dict] = defaultdict(lambda: {"drives": set(), "punts": 0, "fga": 0, "fgm": 0})
+    cuartos: dict[tuple[str, str, int], dict] = defaultdict(lambda: defaultdict(float))
     for f in filas:
         tipo = f.get("play_type")
         game, pos, de = f.get("game_id"), f.get("posteam"), f.get("defteam")
@@ -162,6 +189,30 @@ def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str
             orden = num(f.get("play_id")) or 0
             if game not in primeros or orden < primeros[game][0]:
                 primeros[game] = (orden, f["td_player_id"])
+        if game:
+            h, a = _int(f.get("total_home_score")), _int(f.get("total_away_score"))
+            if h is not None and a is not None:
+                ph, pa = marcador.get(game, (0, 0))
+                if (h, a) != (ph, pa) and h >= ph and a >= pa:
+                    local = equipos.normalizar(f.get("home_team")) or f.get("home_team")
+                    visitante = equipos.normalizar(f.get("away_team")) or f.get("away_team")
+                    anotaciones.append({
+                        "game_id": game, "play_id": num(f.get("play_id")) or 0, "qtr": _int(f.get("qtr")) or 0,
+                        "team": local if h > ph else visitante, "puntos": (h - ph) + (a - pa),
+                        "tipo": _tipo_anotacion(f), "home_score": h, "away_score": a,
+                        "player_id": f.get("td_player_id") or f.get("kicker_player_id") or None,
+                        "distancia": num(f.get("kick_distance")) if f.get("field_goal_result") == "made" else None})
+                marcador[game] = (h, a)
+            if pos:
+                esp = especiales[(game, equipos.normalizar(pos) or pos)]
+                drive = f.get("fixed_drive")
+                if drive and tipo in ("pass", "run", "punt", "field_goal"):
+                    esp["drives"].add(drive)
+                if tipo == "punt":
+                    esp["punts"] += 1
+                if tipo == "field_goal":
+                    esp["fga"] += 1
+                    esp["fgm"] += int(f.get("field_goal_result") == "made")
         if not game or not pos or not de or tipo not in ("pass", "run"):
             continue
         if num(f.get("two_point_attempt")) == 1 or num(f.get("aborted_play")) == 1:
@@ -215,6 +266,23 @@ def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str
             if td_propio and num(f.get("pass_touchdown")) == 1:
                 e["pass_tds"] += 1
             passer, rec = f.get("passer_player_id"), f.get("receiver_player_id")
+            q = _int(f.get("qtr")) or 0
+            completo = num(f.get("complete_pass")) == 1
+            td_pase = int(td_propio and num(f.get("pass_touchdown")) == 1)
+            if passer:
+                c = cuartos[(game, passer, q)]
+                if num(f.get("pass_attempt")) == 1 and num(f.get("sack")) != 1:
+                    c["attempts"] += 1
+                c["completions"] += int(completo)
+                c["passing_yards"] += yds if completo else 0
+                c["passing_tds"] += td_pase
+                c["passing_interceptions"] += int(num(f.get("interception")) == 1)
+            if rec:
+                c = cuartos[(game, rec, q)]
+                c["targets"] += 1
+                c["receptions"] += int(completo)
+                c["receiving_yards"] += yds if completo else 0
+                c["receiving_tds"] += td_pase
             if passer:
                 qb_ids.add(passer)
                 if num(f.get("complete_pass")) == 1:
@@ -243,6 +311,10 @@ def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str
                 e["rush_tds"] += 1
             rusher = f.get("rusher_player_id")
             if rusher:
+                c = cuartos[(game, rusher, _int(f.get("qtr")) or 0)]
+                c["carries"] += 1
+                c["rushing_yards"] += yds
+                c["rushing_tds"] += int(td_propio and num(f.get("rush_touchdown")) == 1)
                 j = jug[(game, rusher)]
                 if yl is not None:
                     j["rz_carries"] += int(yl <= 20)
@@ -264,11 +336,18 @@ def agregar_pbp(filas: Iterator[dict]) -> tuple[list[dict], list[dict], dict[str
             eq[(game, team)]["qb_rush_yds"] += yds
     jugadores = [{"game_id": g, "player_id": p, **v} for (g, p), v in jug.items()]
     for clave, e in eq.items():
+        esp = especiales.get(clave)
+        e["drives"] = len(esp["drives"]) if esp else None
+        e["punts"] = esp["punts"] if esp else 0
+        e["fga"] = esp["fga"] if esp else 0
+        e["fgm"] = esp["fgm"] if esp else 0
         e["rz_trips"] = len(rz_drives[clave])
         e["rz_tds"] = len(rz_td_drives[clave])
         suma, n_oe = proe[clave]
         e["proe"] = round(suma / n_oe, 4) if n_oe else None
-    return jugadores, list(eq.values()), {g: pid for g, (_, pid) in primeros.items()}
+    filas_cuartos = [{"game_id": g, "player_id": p, "qtr": q, **v} for (g, p, q), v in cuartos.items() if q]
+    return ResumenPbp(jugadores, list(eq.values()), {g: pid for g, (_, pid) in primeros.items()}, anotaciones,
+                      filas_cuartos)
 
 
 # --- Plantillas, snaps y lesiones ----------------------------------------------------------

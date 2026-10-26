@@ -104,6 +104,31 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
             if claves:
                 L += [f"**Ataque de {equipos.apodo(team)} contra la defensa de "
                       f"{equipos.apodo(a.entornos[team].opp)}:**", ""] + [f"- {c}" for c in claves] + [""]
+        principales = [e for e in a.evaluaciones if e.tipo == "equipo" and e.stat == "pts"
+                       and e.periodo in ("game", "1h") and e.bet in ("ml", "sp", "ou") and e.consenso]
+        if principales:
+            orden = {"ml": 0, "sp": 1, "ou": 2}
+            principales.sort(key=lambda e: (e.periodo != "game", orden[e.bet], e.player_id == "ALL", e.etiqueta()))
+            L += ["**Mercados del partido** (simulación propia sin la casa; en la probabilidad final la casa pesa "
+                  "60 % en el ganador y 85 % en spread y totales, donde el modelo no ha demostrado ventaja):", "",
+                  "| Mercado | Modelo | Casa | Prob. | Mejor cuota | EV |", "|---|---|---|---|---|---|"]
+            for e in principales:
+                L.append(f"| {e.etiqueta()} | {_pct(e.prob_modelo)} | {_pct(e.prob_casa)} | {_pct(e.prob)} | "
+                         f"{_odd(e.odd)} {e.book or ''} | {_ev(e.ev)} |")
+            L.append("")
+        otros = sorted([e for e in a.evaluaciones if e.ev is not None and e not in principales
+                        and (e.tipo == "equipo" or e.pos in ("K", "DL", "LB", "DB") or e.periodo != "game")],
+                       key=lambda e: -(e.ev or 0))[:8]
+        if otros:
+            L += ["**Otros mercados con mejor valor esperado** (cuartos, mitades, TD y FG del partido, quién anota "
+                  "primero, defensores y pateadores):", ""]
+            L += [f"- {e.etiqueta()}: prob. {_pct(e.prob)} (modelo {_pct(e.prob_modelo)}, casa {_pct(e.prob_casa)}), "
+                  f"{_odd(e.odd)} en {e.book or '-'}, EV {_ev(e.ev)}" for e in otros] + [""]
+        defensa = sorted(a.defensores, key=lambda d: -d.medias.get("tackles", 0))[:6]
+        if defensa:
+            L += ["**Defensores a seguir:** " + "; ".join(
+                f"{d.jugador.nombre} ({d.jugador.pos}, {d.jugador.team}) {d.medias['tackles']:.1f} tacleadas, "
+                f"{d.medias['sacks']:.2f} sacks" for d in defensa), ""]
         L += ["| Jugador | Proyección |", "|---|---|"]
         for p in sorted(a.proyecciones, key=lambda p: (p.jugador.team, -sum(p.volumen.values()))):
             if sum(p.volumen.values()) < 2.5:
@@ -130,7 +155,8 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
 
 def _eval_json(e: Evaluacion) -> dict:
     return {"game_id": e.game_id, "player_id": e.player_id, "jugador": e.nombre, "pos": e.pos, "equipo": e.team,
-            "rival": e.opp, "stat": e.stat, "linea": e.line, "lado": e.lado, "prob": round(e.prob, 4),
+            "rival": e.opp, "stat": e.stat, "codigo": e.codigo, "periodo": e.periodo, "tipo": e.tipo,
+            "mercado": e.etiqueta(), "linea": e.line, "lado": e.lado, "prob": round(e.prob, 4),
             "prob_modelo": round(e.prob_modelo, 4), "prob_casa": e.prob_casa and round(e.prob_casa, 4),
             "media": round(e.mu, 2), "cuota": e.odd, "casa": e.book, "consenso": e.consenso,
             "ev": e.ev and round(e.ev, 4), "a_favor": e.razones.a_favor, "en_contra": e.razones.en_contra,
@@ -160,6 +186,7 @@ def escribir(directorio: Path, desde: str, hasta: str, partidos: list[AnalisisPa
                               "equipo": p.jugador.team, "medias": {k: round(v, 2) for k, v in p.medias.items()},
                               "notas": p.jugador.notas} for p in a.proyecciones],
             "evaluaciones": [_eval_json(e) for e in a.evaluaciones],
+            "simulacion": a.simulacion.medias if a.simulacion else None,
         } for a in partidos],
     }
     js.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")

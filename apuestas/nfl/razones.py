@@ -105,7 +105,7 @@ def razones(ctx: Contexto, proy: Proyeccion, stat: str, line: float, lado: str, 
             prob_modelo: float | None = None, prob_casa: float | None = None) -> Razones:
     j, ent = proy.jugador, proy.entorno
     favor, contra, contexto = [], [], []
-    stat_m = "tds" if stat == "first_td" else stat
+    stat_m = "tds" if stat in ("first_td", "last_td") else stat
     signo = 1 if lado == "más" else -1
     nombre_opp = equipos.apodo(ent.opp)
     # 1. Ajustes del modelo: los multiplicadores a favor o en contra; los datos, como contexto.
@@ -118,8 +118,8 @@ def razones(ctx: Contexto, proy: Proyeccion, stat: str, line: float, lado: str, 
         else:
             contra.append(f"{f.texto} ({(f.efecto - 1) * 100:+.0f}%)")
     # 2. Tendencias del jugador sobre esta misma línea.
-    stat_t = "tds" if stat == "first_td" else stat
-    line_t = 0.5 if stat == "first_td" else line
+    stat_t = "tds" if stat in ("first_td", "last_td") else stat
+    line_t = 0.5 if stat in ("first_td", "last_td") else line
     t = tendencias(ctx, j.partidos, stat_t, line_t, lado, ent.opp)
     nombre = NOMBRES.get(stat_t, stat_t)
     k5, n5 = t.aciertos_5

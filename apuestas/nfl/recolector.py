@@ -15,11 +15,18 @@ from .fuentes import (EspnNfl, Nflverse, agregar_pbp, cambios_semanales, parse_c
 log = logging.getLogger(__name__)
 
 
+# Sube cuando cambia lo que se extrae de los archivos: obliga a procesarlos de nuevo aunque no hayan cambiado.
+VERSION_PROCESO = "2"
+
+
 def _archivo(db: NflDB, nv: Nflverse, ruta: str, forzar: bool = False) -> list[dict] | None:
     url = nv.url(ruta)
-    filas, etag = nv.descargar(ruta, None if forzar else db.etag(url))
+    guardado = db.etag(url) or ""
+    etag_previo, _, version = guardado.rpartition("#v")
+    previo = etag_previo if version == VERSION_PROCESO and not forzar else None
+    filas, etag = nv.descargar(ruta, previo)
     if filas is not None:
-        db.guardar_etag(url, etag)
+        db.guardar_etag(url, f"{etag or ''}#v{VERSION_PROCESO}")
     return filas
 
 
@@ -40,8 +47,7 @@ def actualizar(db: NflDB, nv: Nflverse, temporadas: list[int], espn: EspnNfl | N
             db.commit()
         filas = _archivo(db, nv, f"pbp/play_by_play_{season}.csv.gz", forzar)
         if filas is not None:
-            jugadores, equipos_, primeros = agregar_pbp(filas)
-            db.reemplazar_pbp(season, jugadores, equipos_, primeros)
+            db.reemplazar_pbp(season, agregar_pbp(filas))
             r["pbp"].append(season)
             db.commit()
         filas = _archivo(db, nv, f"weekly_rosters/roster_weekly_{season}.csv", forzar)

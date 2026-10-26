@@ -6,7 +6,8 @@ from tempfile import TemporaryDirectory
 
 from apuestas.db import Database
 from apuestas.nfl import equipos
-from apuestas.nfl.analizador import analizar_partido, con_valor, guardar_picks, liquidar, rendimiento
+from apuestas.nfl.analizador import (Evaluacion, analizar_partido, con_valor, evaluar_equipo, guardar_picks, liquidar,
+                                     rendimiento)
 from apuestas.nfl.backtest import backtest, resumen
 from apuestas.nfl.db import STATS_JUGADOR, NflDB, estado_duda, estado_fuera
 from apuestas.nfl.fuentes import (agregar_pbp, cambios_semanales, parse_calendario, parse_lesiones_espn,
@@ -15,7 +16,10 @@ from apuestas.nfl.informe import escribir
 from apuestas.nfl.mercado import emparejar, parse_evento
 from apuestas.nfl.modelo import (Linea, construir_contexto, entorno, p_al_menos, preparar_equipo, prob_lados,
                                  proyectar)
-from apuestas.nfl.validar import buscar_jugador, interpretar, texto_veredicto, validar
+from apuestas.nfl.modelo_partido import prob_partido, simular
+from apuestas.nfl.razones import Razones
+from apuestas.nfl.validar import (buscar_jugador, interpretar, interpretar_equipo, oferta_equipo, texto_veredicto,
+                                  validar)
 
 EQUIPOS = ("BUF", "LAC", "KC", "DEN")
 INICIO = date(2026, 9, 10)
@@ -32,6 +36,10 @@ PLANTILLA = [
     ("qb_den", "Bo Nix", "QB", "DEN", 5, 0, 0.3), ("rb_den", "RJ Harvey", "RB", "DEN", 14, 3, 0.6),
     ("wr_den", "Courtland Sutton", "WR", "DEN", 0, 8, 0.0), ("te_den", "Evan Engram", "TE", "DEN", 0, 4, 0.0),
 ]
+
+# Defensores: (id, nombre, posición, equipo, tacleadas por partido, probabilidad de sack por partido)
+DEFENSORES = [(f"lb_{t.lower()}", f"Linebacker {t}", "LB", t, 8, 0.2) for t in EQUIPOS] + \
+             [(f"de_{t.lower()}", f"Ala {t}", "DE", t, 3, 0.6) for t in EQUIPOS]
 
 
 def _jornadas() -> list[tuple[int, str, str, str]]:
@@ -99,6 +107,22 @@ def _filas_sinteticas(seed: int = 7) -> tuple[list[dict], list[dict], list[dict]
                                 "td_team": team if k < retd else "", "td_player_id": pid if k < retd else "",
                                 "pass_touchdown": "1" if k < retd else "0"})
             puntos[team] = 7 * tds + rng.choice((3, 6, 9))
+            for pid, nombre, pos, eq, tackles, sacks in DEFENSORES:
+                if eq != opp:
+                    continue      # el defensor de 'opp' defiende contra 'team'
+                fila = {k: "0" for k in STATS_JUGADOR}
+                fila.update({"player_id": pid, "player_display_name": nombre, "position": pos, "season": "2026",
+                             "week": str(w), "season_type": "REG", "game_id": gid, "team": opp, "opponent_team": team,
+                             "def_tackles_solo": str(max(0, int(rng.gauss(tackles * 0.6, 1.5)))),
+                             "def_tackle_assists": str(max(0, int(rng.gauss(tackles * 0.4, 1)))),
+                             "def_sacks": str(int(rng.random() < sacks))})
+                stats.append(fila)
+            fila = {k: "0" for k in STATS_JUGADOR}
+            fila.update({"player_id": f"k_{team.lower()}", "player_display_name": f"Pateador {team}", "position": "K",
+                         "season": "2026", "week": str(w), "season_type": "REG", "game_id": gid, "team": team,
+                         "opponent_team": opp, "fg_made": str(rng.choice((1, 2, 2, 3))), "fg_att": "3",
+                         "pat_made": str(tds)})
+            stats.append(fila)
         calendario.append({"game_id": gid, "season": "2026", "game_type": "REG", "week": str(w), "gameday": fecha,
                            "gametime": "13:00", "home_team": h, "away_team": a, "home_score": str(puntos[h]),
                            "away_score": str(puntos[a]), "spread_line": "3.0", "total_line": "45.5",
@@ -114,10 +138,11 @@ def _llenar(db: NflDB) -> None:
     calendario, stats, pbp = _filas_sinteticas()
     db.upsert_games(parse_calendario(calendario, {2026}))
     db.reemplazar_player_games(2026, parse_stats_jugador(stats, STATS_JUGADOR))
-    jug, eq, primeros = agregar_pbp(pbp)
-    db.reemplazar_pbp(2026, jug, eq, primeros)
+    db.reemplazar_pbp(2026, agregar_pbp(pbp))
     db.actualizar_roster([{"player_id": pid, "name": n, "position": pos, "team": t, "status": "ACT", "season": 2026,
-                           "week": 8} for pid, n, pos, t, *_ in PLANTILLA])
+                           "week": 8} for pid, n, pos, t, *_ in PLANTILLA + DEFENSORES]
+                         + [{"player_id": f"k_{t.lower()}", "name": f"Pateador {t}", "position": "K", "team": t,
+                             "status": "ACT", "season": 2026, "week": 8} for t in EQUIPOS])
     db.commit()
 
 
@@ -222,7 +247,8 @@ class PbpTest(unittest.TestCase):
             {"play_id": "4", "game_id": "g", "season": "2026", "week": "1", "home_team": "BUF", "posteam": "LAC",
              "defteam": "BUF", "play_type": "run", "two_point_attempt": "1", "rusher_player_id": "q"},
         ]
-        jug, eq, primeros = agregar_pbp(filas)
+        r = agregar_pbp(filas)
+        jug, eq, primeros = r.jugadores, r.equipos, r.primeros
         j = {x["player_id"]: x for x in jug}
         self.assertEqual((j["a"]["rz_carries"], j["a"]["i10_carries"], j["a"]["i5_carries"]), (1, 1, 1))
         self.assertEqual((j["b"]["rz_targets"], j["b"]["ez_targets"]), (1, 1))
@@ -231,6 +257,22 @@ class PbpTest(unittest.TestCase):
         self.assertEqual((e["BUF"]["rush_tds"], e["BUF"]["rz_trips"], e["BUF"]["rz_tds"]), (1, 1, 1))
         self.assertEqual((e["LAC"]["dropbacks"], e["LAC"]["carries"], e["LAC"]["qb_rush_yds"]), (1, 1, 12))
         self.assertEqual(primeros, {"g": "a"})
+
+    def test_anotaciones(self):
+        base = {"game_id": "g", "home_team": "BUF", "away_team": "LAC", "season": "2026", "week": "1"}
+        filas = [
+            {**base, "play_id": "1", "qtr": "1", "total_home_score": "0", "total_away_score": "0"},
+            {**base, "play_id": "2", "qtr": "1", "posteam": "BUF", "defteam": "LAC", "play_type": "run",
+             "touchdown": "1", "td_team": "BUF", "td_player_id": "a", "total_home_score": "6", "total_away_score": "0"},
+            {**base, "play_id": "3", "qtr": "1", "posteam": "BUF", "play_type": "extra_point",
+             "extra_point_result": "good", "total_home_score": "7", "total_away_score": "0"},
+            {**base, "play_id": "4", "qtr": "2", "posteam": "LAC", "play_type": "field_goal",
+             "field_goal_result": "made", "kick_distance": "52", "total_home_score": "7", "total_away_score": "3"},
+        ]
+        r = agregar_pbp(filas)
+        self.assertEqual([(a["tipo"], a["team"], a["puntos"]) for a in r.anotaciones],
+                         [("TD", "BUF", 6), ("XP", "BUF", 1), ("FG", "LAC", 3)])
+        self.assertEqual(r.anotaciones[-1]["distancia"], 52.0)
 
 
 class MercadoTest(unittest.TestCase):
@@ -344,6 +386,134 @@ class ModeloTest(unittest.TestCase):
         r = resumen(filas)
         self.assertIn("tds_1", r["stats"])
         self.assertTrue(all(0 <= f["prob"] <= 1 for f in filas))
+
+
+
+def _evento_completo() -> dict:
+    """Evento con mercados de partido, de periodo, defensivos y de pateador."""
+    def o(oid, stat, ent, bet, side, periodo="game", line=None, spread=None, odds="-110", books=None, pid=None):
+        return oid, {"oddID": oid, "statID": stat, "statEntityID": pid or ent, "playerID": pid, "periodID": periodo,
+                     "betTypeID": bet, "sideID": side, "bookOddsAvailable": True, "bookOverUnder": line,
+                     "bookSpread": spread, "bookOdds": odds,
+                     "byBookmaker": books or {"fanduel": {"odds": odds, "overUnder": line, "spread": spread,
+                                                         "available": True}}}
+    odds = dict([
+        o("ml-h", "points", "home", "ml", "home", odds="-200"), o("ml-a", "points", "away", "ml", "away", odds="+170"),
+        o("sp-h", "points", "home", "sp", "home", spread="-4.5"), o("sp-a", "points", "away", "sp", "away", spread="+4.5"),
+        o("tot-o", "points", "all", "ou", "over", line="48.5"), o("tot-u", "points", "all", "ou", "under", line="48.5"),
+        o("tt-h", "points", "home", "ou", "over", line="26.5"),
+        o("1h-o", "points", "all", "ou", "over", "1h", line="24.5"),
+        o("3w-d", "points", "all", "ml3way", "draw", "1q", odds="+300"),
+        o("eo", "points", "all", "eo", "even", odds="-105"),
+        o("pri", "firstToScore", "home", "ml", "home", odds="-130"),
+        o("amb", "bothTeamsScored", "all", "yn", "yes", "1q", odds="+130"),
+        o("lead", "largestLead", "all", "ou", "over", line="14.5"),
+        o("tds", "touchdowns", "all", "ou", "over", line="5.5"),
+        o("perd", "turnovers", "all", "ou", "under", line="2.5"),
+        o("sack", "defense_sacks", None, "ou", "over", line="0.5", odds="+150", pid="ALA_BUF_1_NFL"),
+        o("tack", "defense_combinedTackles", None, "ou", "over", line="6.5", pid="LINEBACKER_BUF_1_NFL"),
+        o("fg", "fieldGoals_made", None, "ou", "over", line="1.5", pid="PATEADOR_BUF_1_NFL"),
+        o("ry1q", "rushing_yards", None, "ou", "over", "1q", line="20.5", pid="JAMES_COOK_1_NFL"),
+        o("fan", "fantasyScore", None, "ou", "over", line="15.5", pid="JAMES_COOK_1_NFL"),
+    ])
+    for a, b in (("ml-h", "ml-a"), ("sp-h", "sp-a"), ("tot-o", "tot-u")):
+        odds[a]["opposingOddID"], odds[b]["opposingOddID"] = b, a
+    jugadores = {"ALA_BUF_1_NFL": "Ala BUF", "LINEBACKER_BUF_1_NFL": "Linebacker BUF",
+                 "PATEADOR_BUF_1_NFL": "Pateador BUF", "JAMES_COOK_1_NFL": "James Cook"}
+    return {"eventID": "EV2", "teams": {"home": {"names": {"long": "Buffalo Bills"}},
+                                        "away": {"names": {"long": "Los Angeles Chargers"}}},
+            "status": {}, "odds": odds,
+            "players": {k: {"name": v, "teamID": "BUFFALO_BILLS_NFL"} for k, v in jugadores.items()}}
+
+
+class TodosLosMercadosTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = TemporaryDirectory()
+        self.db = Database(Path(self.tmp.name) / "t.db")
+        self.nfl = NflDB(self.db.conn)
+        _llenar(self.nfl)
+        self.ctx = construir_contexto(self.db.conn, HOY)
+        self.g = dict(self.db.conn.execute("SELECT * FROM nfl_games WHERE game_id = '2026_09_LAC_BUF'").fetchone())
+
+    def tearDown(self):
+        self.db.close()
+        self.tmp.cleanup()
+
+    def test_parse_mercados_de_partido(self):
+        m = parse_evento(_evento_completo())
+        cod = {(o.codigo, o.sgo_player_id, o.lado, o.line) for o in m.ofertas}
+        self.assertIn(("pts@game/sp", "home", "home", -4.5), cod)
+        self.assertIn(("pts@game/ml", "away", "away", 0.0), cod)
+        self.assertIn(("pts@1h/ou", "all", "más", 24.5), cod)
+        self.assertIn(("pts@1q/ml3way", "all", "draw", 0.0), cod)
+        self.assertIn(("ambos@1q/yn", "all", "sí", 0.0), cod)
+        self.assertIn(("rush_yds@1q", "JAMES_COOK_1_NFL", "más", 20.5), cod)
+        self.assertIn(("sacks", "ALA_BUF_1_NFL", "más", 0.5), cod)
+        self.assertEqual(m.spread_home, 4.5)
+        sp = next(o for o in m.ofertas if o.codigo == "pts@game/sp" and o.lado == "home")
+        self.assertAlmostEqual(sp.prob_casa(), 0.5, places=3)          # -110 / -110 sin margen
+
+    def test_simulacion_coherente(self):
+        sim = simular(self.ctx, "BUF", "LAC", n=1500)
+        ph, _ = prob_partido(sim, "pts", "ml", "game", "home", "home", None)
+        pa, _ = prob_partido(sim, "pts", "ml", "game", "away", "away", None)
+        self.assertAlmostEqual(ph + pa, 1.0, places=6)
+        o1, media = prob_partido(sim, "pts", "ou", "game", "all", "más", 40.5)
+        o2, _ = prob_partido(sim, "pts", "ou", "game", "all", "más", 50.5)
+        self.assertGreater(o1, o2)
+        self.assertGreater(media, 20)
+        f1, _ = prob_partido(sim, "primero", "ml", "game", "home", "home", None)
+        f2, _ = prob_partido(sim, "primero", "ml", "game", "away", "away", None)
+        self.assertAlmostEqual(f1 + f2, 1.0, places=6)
+        d3, _ = prob_partido(sim, "pts", "ml3way", "1q", "all", "draw", None)
+        self.assertTrue(0.05 < d3 < 0.6)
+        h1, _ = prob_partido(sim, "pts", "ou", "1h", "all", "más", 0.5)
+        self.assertGreater(h1, 0.9)
+
+    def test_analisis_cubre_todo(self):
+        m = parse_evento(_evento_completo())
+        emparejar(m, [dict(r) for r in self.db.conn.execute("SELECT player_id, name, team FROM nfl_rosters")])
+        a = analizar_partido(self.ctx, self.g, m)
+        evaluadas = {e.codigo for e in a.evaluaciones}
+        for c in ("pts@game/sp", "pts@game/ml", "pts@1h/ou", "pts@1q/ml3way", "pts@game/eo", "primero@game/ml",
+                  "ambos@1q/yn", "ventaja@game/ou", "tds@game/ou", "perdidas@game/ou", "sacks", "tackles", "fg",
+                  "rush_yds@1q", "fantasy"):
+            self.assertIn(c, evaluadas, c)
+        self.assertTrue(a.defensores)
+        self.assertTrue(all(0 <= e.prob <= 1 for e in a.evaluaciones))
+
+    def test_validar_equipo_y_liquidar(self):
+        ap = interpretar_equipo("Bills -4.5")
+        self.assertEqual((ap.bet, ap.entidad, ap.line), ("sp", "BUF", -4.5))
+        ap2 = interpretar_equipo("más de 48.5 puntos Bills Chargers 1.ª mitad")
+        self.assertEqual((ap2.bet, ap2.entidad, ap2.periodo, ap2.lado), ("ou", "ALL", "1h", "más"))
+        m = parse_evento(_evento_completo())
+        a = analizar_partido(self.ctx, self.g, m)
+        of = oferta_equipo(ap, "BUF", "LAC", m)
+        self.assertEqual(of.libros, {"fanduel": 1.909})
+        e = evaluar_equipo(self.ctx, self.g, a.simulacion, of, a.claves)
+        self.assertEqual(e.codigo, "pts@game/sp")
+        primero = evaluar_equipo(self.ctx, self.g, a.simulacion,
+                                 oferta_equipo(interpretar_equipo("Bills anota primero"), "BUF", "LAC", m), a.claves)
+        guardar_picks(self.nfl, HOY, [e, primero], origen="validar")
+        # Partido jugado: BUF 24 - LAC 17, LAC anota primero.
+        c = self.db.conn
+        c.execute("UPDATE nfl_games SET home_score = 24, away_score = 17 WHERE game_id = ?", (self.g["game_id"],))
+        for k, (q, team, pts, h, aw) in enumerate([(1, "LAC", 7, 0, 7), (2, "BUF", 7, 7, 7), (3, "BUF", 10, 17, 7),
+                                                    (4, "LAC", 10, 17, 17), (4, "BUF", 7, 24, 17)]):
+            c.execute("INSERT INTO nfl_anotaciones(game_id, play_id, qtr, team, puntos, tipo, home_score, away_score) "
+                      "VALUES (?, ?, ?, ?, ?, 'TD', ?, ?)", (self.g["game_id"], k, q, team, pts, h, aw))
+        c.execute("INSERT INTO nfl_player_games(game_id, player_id, season, week, team, opp) "
+                  "VALUES (?, 'rb_buf', 2026, 9, 'BUF', 'LAC')", (self.g["game_id"],))
+        self.assertEqual(liquidar(self.nfl), 2)
+        res = {r["stat"]: (r["resultado"], r["acierto"]) for r in c.execute("SELECT * FROM nfl_picks")}
+        self.assertEqual(res["pts@game/sp"], (7.0, 1))         # ganó por 7 > 4.5
+        self.assertEqual(res["primero@game/ml"], (0.0, 0))     # anotó primero LAC
+
+    def test_razones_vacias_no_rompen_etiquetas(self):
+        e = Evaluacion("g", "ALL", "Partido", "-", "ALL", "-", "pts", 44.5, "más", 0.5, 0.5, 0.5, 44, 1.9, "fd",
+                       1.9, -0.05, Razones([], [], []), None, "1h", "equipo", "ou")
+        self.assertEqual(e.etiqueta(), "Total más de 44.5 puntos (1.ª mitad)")
 
 
 if __name__ == "__main__":

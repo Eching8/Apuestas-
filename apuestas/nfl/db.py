@@ -109,7 +109,34 @@ CREATE TABLE IF NOT EXISTS nfl_team_games (
     third_att INTEGER, third_conv INTEGER,
     proe REAL,
     qb_rush_yds REAL, qb_rush_att INTEGER,
+    drives INTEGER, punts INTEGER, fga INTEGER, fgm INTEGER,
     PRIMARY KEY (game_id, team)
+);
+
+-- Cada cambio en el marcador (TD, FG, extra, 2 puntos, safety), en orden: liquida los mercados de partido.
+CREATE TABLE IF NOT EXISTS nfl_anotaciones (
+    game_id TEXT NOT NULL,
+    play_id REAL NOT NULL,
+    qtr INTEGER,
+    team TEXT,
+    puntos INTEGER,
+    tipo TEXT,
+    home_score INTEGER,
+    away_score INTEGER,
+    player_id TEXT,
+    distancia REAL,
+    PRIMARY KEY (game_id, play_id)
+);
+
+-- Estadísticas de cada jugador por cuarto (props de 1.er cuarto, 1.ª mitad...).
+CREATE TABLE IF NOT EXISTS nfl_player_quarter (
+    game_id TEXT NOT NULL,
+    player_id TEXT NOT NULL,
+    qtr INTEGER NOT NULL,
+    attempts REAL, completions REAL, passing_yards REAL, passing_tds REAL, passing_interceptions REAL,
+    carries REAL, rushing_yards REAL, rushing_tds REAL,
+    targets REAL, receptions REAL, receiving_yards REAL, receiving_tds REAL,
+    PRIMARY KEY (game_id, player_id, qtr)
 );
 
 CREATE TABLE IF NOT EXISTS nfl_rosters (
@@ -246,6 +273,16 @@ class NflDB:
     def __init__(self, conn: sqlite3.Connection):
         self.conn = conn
         self.conn.executescript(SCHEMA)
+        self._migrar()
+
+    def _migrar(self) -> None:
+        """Columnas añadidas después de crear la base (las bases viejas no las tienen)."""
+        nuevas = {"nfl_team_games": ("drives INTEGER", "punts INTEGER", "fga INTEGER", "fgm INTEGER")}
+        for tabla, columnas in nuevas.items():
+            existentes = {r[1] for r in self.conn.execute(f"PRAGMA table_info({tabla})")}
+            for col in columnas:
+                if col.split()[0] not in existentes:
+                    self.conn.execute(f"ALTER TABLE {tabla} ADD COLUMN {col}")
 
     def commit(self) -> None:
         self.conn.commit()
@@ -282,11 +319,18 @@ class NflDB:
             [tuple(f.get(c) for c in cols) for f in filas])
         return len(filas)
 
-    def reemplazar_pbp(self, season: int, jugadores: list[dict], equipos: list[dict],
-                       primeros: dict[str, str] | None = None) -> None:
+    def reemplazar_pbp(self, season: int, resumen) -> None:
+        """Guarda un ResumenPbp (ver fuentes.agregar_pbp) de una temporada."""
         like = f"{season}_%"
+        jugadores, equipos = resumen.jugadores, resumen.equipos
         self.conn.executemany("INSERT OR REPLACE INTO nfl_primer_td(game_id, player_id) VALUES (?, ?)",
-                              list((primeros or {}).items()))
+                              list(resumen.primeros.items()))
+        for tabla, filas in (("nfl_anotaciones", resumen.anotaciones), ("nfl_player_quarter", resumen.cuartos)):
+            self.conn.execute(f"DELETE FROM {tabla} WHERE game_id LIKE ?", (like,))
+            for f in filas:
+                cols = list(f)
+                self.conn.execute(f"INSERT OR REPLACE INTO {tabla}({', '.join(cols)}) "
+                                  f"VALUES ({', '.join('?' * len(cols))})", tuple(f[c] for c in cols))
         self.conn.execute("DELETE FROM nfl_player_pbp WHERE game_id LIKE ?", (like,))
         self.conn.execute("DELETE FROM nfl_team_games WHERE game_id LIKE ?", (like,))
         if jugadores:

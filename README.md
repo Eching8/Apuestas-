@@ -218,10 +218,18 @@ stats.nba.com); el "tipo de jugador" se aproxima con la defensa del rival por po
 
 ## NFL: props, touchdowns y enfrentamientos (`apuestas/nfl/`)
 
-Proyecta las props de cada jugador (yardas de pase, por tierra y por recepción, recepciones, envíos, acarreos,
-pases completos e intentados, TD de pase, intercepciones, combinadas y jugada más larga), calcula quién tiene
-más probabilidad de **anotar un TD**, de **anotar 2 o más** y de anotar el **primer TD**, lee el enfrentamiento
-métrica a métrica y cruza todo con las líneas de las casas para encontrar las mejores.
+Evalúa **todos los mercados** que publican las casas para cada partido (unos 150-500 por partido), calcula quién
+tiene más probabilidad de **anotar un TD**, de **anotar 2 o más** y de anotar el **primer TD**, lee el
+enfrentamiento métrica a métrica y cruza todo con las líneas de las casas para encontrar las mejores:
+
+| Familia | Mercados |
+|---|---|
+| Props de jugador | yardas de pase, por tierra y por recepción; recepciones, envíos, acarreos, pases completos e intentados; TD de pase, intercepciones; combinadas (carrera + recepción, pase + carrera); recepción, carrera y pase completo más largos; yardas por acarreo; puntos de fantasy |
+| Touchdowns | anota (sí/no), 2+ y 3+ TD, primer y último TD del partido, primer TD de la 2.ª mitad, anota en la 1.ª/2.ª mitad o en un cuarto |
+| Props por periodo | las mismas props de jugador en el 1.er, 2.º, 3.er y 4.º cuarto y en cada mitad |
+| Defensa | sacks, tacleadas (combinadas, en solitario y asistidas), intercepciones del defensor |
+| Pateador | goles de campo, puntos extra, puntos del pateador |
+| Partido y equipo | moneyline, spread, total y total por equipo (partido, mitades y cada cuarto); par/impar; resultado a 3 vías; si un equipo anota en el periodo; quién anota primero y último; si anotan los dos en un cuarto; número de TD y de goles de campo (total, por equipo y por periodo); gol de campo más largo; mayor ventaja; safety; pérdidas de balón; punts; sacks de equipo |
 
 | Fuente | Para qué | Clave |
 |---|---|---|
@@ -233,6 +241,11 @@ métrica a métrica y cruza todo con las líneas de las casas para encontrar las
 python -m apuestas nfl actualizar                      # la primera vez descarga 3 temporadas (~1 min); luego solo lo que cambió
 python -m apuestas nfl analizar                        # próximos 7 días -> reportes/nfl/AAAA-MM-DD.md y .json
 python -m apuestas nfl td --multiples                  # ranking de TD (ordenado por 2+ TD)
+python -m apuestas nfl mercados --tipo partido         # todos los mercados evaluados (jugador, periodos, td,
+python -m apuestas nfl mercados --texto "1.er cuarto"  #   defensa, pateador, partido), ordenados por valor
+python -m apuestas nfl validar "Bills -3.5"            # también spread, ML, totales, periodos, quién anota primero
+python -m apuestas nfl validar "más de 47.5 puntos Packers Panthers 1.ª mitad"
+python -m apuestas nfl validar "Zack Baun más de 7.5 tacleadas"
 python -m apuestas nfl matchup bills ravens            # ataque contra defensa, métrica a métrica
 python -m apuestas nfl validar "Derrick Henry +2 TD"   # ¿es buena? ¿por qué la juega la gente?
 python -m apuestas nfl validar "Josh Allen 2 touchdowns contra los Chargers"
@@ -278,6 +291,27 @@ lo descarga, así que se puede ejecutar varias veces al día. Guarda:
    anotación, ajustado por el % de TD que el rival concede a su posición. P(1+), P(2+) y P(3+) con binomial negativa;
    el primer TD reparte la probabilidad de que haya alguno según los TD esperados de cada jugador.
 
+### Mercados de partido: un simulador posesión a posesión (`apuestas/nfl/modelo_partido.py`)
+
+Cada partido se simula 4.000 veces. Las posesiones de cada equipo (ritmo propio y del rival) se reparten por cuartos;
+cada posesión termina en TD, gol de campo o nada (y, rara vez, en safety o TD de la defensa), con probabilidades que
+salen del **modelo propio, sin la línea de la casa** (TD esperados de ataque × defensa rival, goles de campo
+esperados) y con más anotación en el 2.º y 4.º cuarto, como en los datos. Cada equipo lleva un factor de forma
+aleatorio en cada simulación y los empates van a prórroga. De las mismas simulaciones salen, de forma coherente
+entre sí, moneyline, spread, totales, periodos, par/impar, 3 vías, quién anota primero y último, ambos anotan, TD y
+FG, FG más largo (con las distancias reales de la liga), mayor ventaja, safety y las props de los pateadores.
+
+Las props por periodo de cada jugador usan la parte del partido que suele pasar en ese periodo (calculada de las
+estadísticas por cuarto de toda la liga) con más dispersión cuanto más corto es el periodo. Las defensivas, la media
+del defensor × las jugadas esperadas del rival y su tipo (más carreras: más tacleadas de LB y línea) × lo que su ataque
+deja capturar a su QB o pierde el balón. Todo se liquida solo con el resultado real (`nfl_anotaciones` guarda cada
+cambio del marcador; `nfl_player_quarter`, las estadísticas por cuarto).
+
+Medido en el backtest de 2025 (semanas 5-18, `nfl backtest --partidos`): el simulador acierta al **ganador** mejor que
+el azar (Brier 0.222 frente a 0.250), pero **no le gana al spread ni al total de cierre** (0.257 y 0.262): esas líneas
+son muy eficientes. Por eso en spread y totales la casa pesa 85 % en la probabilidad final, en el resto de mercados
+de partido 60 %, y conviene tratarlos como referencia, no como fuente de valor.
+
 ### Pensar como un tipster (`analizador.py`, `mercado.py`, `razones.py`, `validar.py`)
 
 - **Mejor línea**: para cada apuesta se busca la casa que mejor paga (o la línea alternativa más barata).
@@ -285,7 +319,8 @@ lo descarga, así que se puede ejecutar varias veces al día. Guarda:
   llegar, tiene poca muestra o está en duda, la casa pesa 60 %; si modelo y casa discrepan más de 15 puntos, 60 %, y
   más de 25, 75 %: casi siempre la casa sabe algo (un rol nuevo, quién vuelve de lesión).
 - **Con valor** = EV ≥ 4 % (`APUESTAS_NFL_VALOR_MIN`), el modelo ve al menos 3 puntos más que la casa, y no es un
-  "chollo imposible" (el modelo no ve más de 1.6 veces lo que ve la casa ni difiere en más de 25 puntos).
+  "chollo imposible" (el modelo no ve más de 1.6 veces lo que ve la casa ni difiere en más de 25 puntos, y la cuota
+  no es más de 1.5 veces la de consenso, que suele ser una línea caducada).
 - **Movimiento de línea**: de la apertura a ahora. Si la cuota baja o la línea sube en un lado, entra dinero ahí; se
   marca como razón a favor o en contra.
 - **"¿Por qué la gente apuesta esto?"**: el validador busca la narrativa en los datos (el último partido, la racha,
@@ -323,6 +358,10 @@ en todas las estadísticas (p. ej. yardas de pase 0.2227 frente a 0.2546, acarre
 encima del 70 % es optimista (dice 74-86 %, pasa 61-77 %): por eso la casa pesa en la probabilidad final y las
 selecciones exigen valor, no solo probabilidad. La calibración (logit × 0.75 en yardas y conteos; TD esperados
 comprimidos con exponente 0.85) sale de este mismo backtest. `nfl rendimiento` es la medida honesta con líneas reales.
+
+La puntuación de fantasy es la de las líneas de las casas tipo PrizePicks (yardas de pase /25, TD de pase 4,
+intercepción -1, yardas /10, recepción 1, TD 6, balón perdido -1); si tu casa puntúa distinto, la línea no es
+comparable.
 
 Limitaciones: nflverse publica las estadísticas la noche del partido (los datos de la jornada en curso llegan al día
 siguiente); no hay porcentajes de apuestas del público (se usa el movimiento de la línea como señal de dónde entra el

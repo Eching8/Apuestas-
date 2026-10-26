@@ -3,6 +3,7 @@
     python -m apuestas nfl actualizar                     # nflverse + ESPN: partidos, stats, lesiones, traspasos
     python -m apuestas nfl analizar                       # los próximos 7 días: props, TD, valor -> informe
     python -m apuestas nfl td                             # quién tiene más probabilidad de anotar (1+ y 2+)
+    python -m apuestas nfl mercados --tipo partido        # todos los mercados: jugador, periodos, defensa, partido
     python -m apuestas nfl matchup BUF LAC                # el enfrentamiento: ataque contra defensa, métrica a métrica
     python -m apuestas nfl validar "Derrick Henry +2 TD"  # ¿es buena esta apuesta? ¿por qué la juega la gente?
     python -m apuestas nfl jugador "Josh Allen"           # ficha: rol, tendencias, rivales, próxima proyección
@@ -19,8 +20,8 @@ from ..config import Config
 from ..db import Database, now_iso
 from ..report import AVISO
 from . import equipos
-from .analizador import (AnalisisPartido, analizar_partido, con_valor, guardar_picks, liquidar, mas_probables,
-                         rendimiento)
+from .analizador import (AnalisisPartido, analizar_partido, con_valor, evaluar_equipo, guardar_picks, liquidar,
+                         mas_probables, rendimiento)
 from .backtest import backtest, resumen
 from .db import NflDB
 from .fuentes import EspnNfl, Nflverse
@@ -29,7 +30,8 @@ from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, parse_
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
 from .razones import tendencias
 from .recolector import actualizar
-from .validar import buscar_jugador, interpretar, texto_veredicto, validar
+from .validar import (buscar_jugador, interpretar, interpretar_equipo, oferta_equipo, texto_veredicto,
+                      texto_veredicto_equipo, validar)
 
 log = logging.getLogger("apuestas")
 
@@ -156,10 +158,11 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     n_ofertas = sum(len(a.evaluaciones) for a in partidos)
     print(f"{len(partidos)} partidos entre {desde} y {hasta}; {n_ofertas} líneas de las casas evaluadas.")
     if valor_:
+        titulos = {a.game["game_id"]: f"{a.game['away_team']} @ {a.game['home_team']}" for a in partidos}
         print("Con valor:")
         for e in valor_[:args.top]:
             print(f"  EV {e.ev * 100:+4.0f}%  {e.prob * 100:4.0f}%  {e.etiqueta():<48} {e.odd:.2f} {e.book or '':<11}"
-                  f" ({e.team} vs {e.opp})")
+                  f" ({titulos.get(e.game_id, '')})")
     tds = sorted((t for a in partidos for t in a.tds), key=lambda t: -t.p1)[:10]
     print("Más probables de anotar:")
     for t in tds:
@@ -185,6 +188,37 @@ def cmd_td(args, cfg: Config, db: Database) -> int:
               f"{americana(cuota_justa(t.p2)):>8}{americana(o2.odd) if o2 else '-':>8}{t.p_first * 100:6.1f}%")
     print("\n'justa' = cuota americana que corresponde a la probabilidad; 'casa' = mejor cuota encontrada.")
     print("Si la casa paga más que la justa, hay valor.")
+    return 0
+
+
+FAMILIAS = {
+    "jugador": lambda e: e.tipo == "jugador" and e.pos in ("QB", "RB", "WR", "TE") and e.periodo == "game",
+    "periodos": lambda e: e.tipo == "jugador" and e.periodo != "game",
+    "td": lambda e: e.stat in ("tds", "first_td", "last_td", "rush_tds", "rec_tds") and e.tipo == "jugador",
+    "defensa": lambda e: e.pos in ("DL", "LB", "DB"),
+    "pateador": lambda e: e.pos == "K",
+    "partido": lambda e: e.tipo == "equipo",
+}
+
+
+def cmd_mercados(args, cfg: Config, db: Database) -> int:
+    nfl = NflDB(db.conn)
+    ctx, partidos, desde, hasta = _analizar(args, cfg, nfl)
+    evals = [e for a in partidos for e in a.evaluaciones if e.ev is not None]
+    if args.tipo:
+        evals = [e for e in evals if FAMILIAS[args.tipo](e)]
+    if args.texto:
+        t = args.texto.lower()
+        evals = [e for e in evals if t in e.etiqueta().lower()]
+    evals = [e for e in evals if (e.ev or 0) >= args.min_ev]
+    evals.sort(key=lambda e: -(e.prob if args.orden == "prob" else e.ev or 0))
+    titulos = {a.game["game_id"]: f"{a.game['away_team']}@{a.game['home_team']}" for a in partidos}
+    print(f"{len(evals)} mercados ({sum(len(a.evaluaciones) for a in partidos)} evaluados en {len(partidos)} partidos).")
+    print(f"{'EV':>6} {'Prob':>5} {'Mod':>5} {'Casa':>5} {'Cuota':>6}  {'Casa de apuestas':<12} Mercado")
+    for e in evals[:args.top]:
+        casa = f"{e.prob_casa * 100:4.0f}%" if e.prob_casa is not None else "    -"
+        print(f"{e.ev * 100:+5.0f}% {e.prob * 100:4.0f}% {e.prob_modelo * 100:4.0f}% {casa} {e.odd:6.2f}  "
+              f"{(e.book or '')[:12]:<12} {e.etiqueta()} ({titulos.get(e.game_id, '')})")
     return 0
 
 
@@ -252,22 +286,60 @@ def cmd_matchup(args, cfg: Config, db: Database) -> int:
     return 0
 
 
-def cmd_validar(args, cfg: Config, db: Database) -> int:
-    nfl = NflDB(db.conn)
+def _validar_equipo(args, cfg: Config, nfl: NflDB, ctx: Contexto, desde: str) -> int:
     try:
-        ap = interpretar(args.apuesta)
+        ap = interpretar_equipo(args.apuesta)
     except ValueError as e:
         print(f"No entendí la apuesta: {e}.\nEjemplos: \"Derrick Henry +2 TD\", \"Josh Allen 2 touchdowns vs "
-              f"Chargers\", \"Saquon más de 69.5 yardas por tierra @ -110\".")
+              f"Chargers\", \"Saquon más de 69.5 yardas por tierra @ -110\", \"Bills -3.5\", \"Eagles ML\", "
+              f"\"más de 47.5 puntos Packers Panthers\", \"Bills anota primero 1.ª mitad\".")
         return 2
-    if args.cuota:
-        ap.cuota = args.cuota
+    cuota = args.cuota or ap.cuota
+    hasta = (date.fromisoformat(desde) + timedelta(days=args.dias or 10)).isoformat()
+    juegos = [dict(g) for g in nfl.proximos_partidos(desde, hasta)
+              if all(t in (g["home_team"], g["away_team"]) for t in ap.equipos[:2])]
+    if not juegos:
+        print(f"No hay partido de {' y '.join(ap.equipos[:2])} entre {desde} y {hasta}.")
+        return 2
+    g = juegos[0]
+    mercado = None
+    if not args.sin_lineas:
+        try:
+            mercado = _mercados(cfg, nfl, desde, (date.fromisoformat(g["gameday"]) - date.fromisoformat(desde)).days + 1,
+                                [g]).get(g["game_id"])
+        except Exception as e:
+            log.warning("Sin líneas: %s", e)
+    a = analizar_partido(ctx, g, mercado, cfg.nfl_peso_mercado)
+    if a.simulacion is None:
+        print("No hay datos suficientes de alguno de los dos equipos.")
+        return 2
+    of = oferta_equipo(ap, g["home_team"], g["away_team"], mercado)
+    e = evaluar_equipo(ctx, g, a.simulacion, of, a.claves)
+    if e is None:
+        print("El modelo no cubre ese mercado.")
+        return 2
+    if cuota:
+        e.odd, e.book, e.ev = cuota, "tu cuota", e.prob * cuota - 1
+    print(texto_veredicto_equipo(e, a, cuota))
+    guardar_picks(nfl, desde, [e], origen="validar")
+    print("\n" + AVISO.replace("> ", "").replace("**", ""))
+    return 0
+
+
+def cmd_validar(args, cfg: Config, db: Database) -> int:
+    nfl = NflDB(db.conn)
     desde = args.desde or _hoy(cfg).isoformat()
     ctx = construir_contexto(nfl.conn, desde)
-    ids = buscar_jugador(ctx, ap.jugador)
+    try:
+        ap = interpretar(args.apuesta)
+        ids = buscar_jugador(ctx, ap.jugador)
+    except ValueError:
+        ids = []
     if not ids:
-        print(f"No encuentro a '{ap.jugador}' en la base (¿ejecutaste 'nfl actualizar'?).")
-        return 2
+        # No es una prop de jugador: spread, moneyline, totales, quién anota primero...
+        return _validar_equipo(args, cfg, nfl, ctx, desde)
+    if args.cuota:
+        ap.cuota = args.cuota
     pid = ids[0]
     team = (ctx.roster.get(pid) or {}).get("team") or ctx.jugadores[pid][0]["team"]
     hasta = (date.fromisoformat(desde) + timedelta(days=args.dias or 10)).isoformat()
@@ -381,12 +453,13 @@ def cmd_rendimiento(args, cfg: Config, db: Database) -> int:
 
 def cmd_backtest(args, cfg: Config, db: Database) -> int:
     filas = backtest(db.conn, args.desde, args.hasta,
-                     progreso=lambda d, n: log.info("%s: %d predicciones", d, n))
+                     progreso=lambda d, n: log.info("%s: %d predicciones", d, n), partidos=args.partidos)
     if not filas:
         print("Sin partidos en ese rango (descárgalos antes con 'nfl actualizar --temporadas ...').")
         return 0
     r = resumen(filas)
-    print("Brier (menor es mejor) del modelo frente a una referencia ingenua (su propia frecuencia histórica):")
+    print("Brier (menor es mejor) del modelo frente a una referencia ingenua (su propia frecuencia histórica; en los "
+          "mercados de partido g_*, 50 %):")
     for s, x in sorted(r["stats"].items()):
         ing = f"{x['brier_ingenua']:.4f}" if x["brier_ingenua"] is not None else "-"
         print(f"  {s:<14} n={x['n']:<6} acierto {x['acierto'] * 100:5.1f}%  prob. media {x['prob_media'] * 100:5.1f}%  "
@@ -429,6 +502,17 @@ def registrar(sub) -> None:
     t.add_argument("--top", type=int, default=25)
     t.set_defaults(func=cmd_td)
 
+    mk = s.add_parser("mercados", help="todos los mercados de las casas evaluados (jugador, periodos, defensa, "
+                                       "pateador y partido)")
+    ventana(mk)
+    mk.add_argument("--equipo", help="solo los partidos de este equipo")
+    mk.add_argument("--tipo", choices=sorted(FAMILIAS), help="familia de mercados")
+    mk.add_argument("--texto", help="filtra por texto en el mercado (p. ej. 'Kelce', 'total', '1.er cuarto')")
+    mk.add_argument("--min-ev", type=float, default=-1.0, help="valor esperado mínimo (0.05 = +5%%)")
+    mk.add_argument("--orden", choices=("ev", "prob"), default="ev")
+    mk.add_argument("--top", type=int, default=40)
+    mk.set_defaults(func=cmd_mercados)
+
     m = s.add_parser("matchup", help="el enfrentamiento de dos equipos, métrica a métrica")
     m.add_argument("equipo")
     m.add_argument("rival", nargs="?")
@@ -455,4 +539,6 @@ def registrar(sub) -> None:
     b = s.add_parser("backtest", help="calibración sobre partidos ya jugados")
     b.add_argument("--desde", required=True)
     b.add_argument("--hasta", required=True)
+    b.add_argument("--partidos", action="store_true",
+                   help="simular también cada partido contra el spread, el total y el ganador (más lento)")
     b.set_defaults(func=cmd_backtest)
