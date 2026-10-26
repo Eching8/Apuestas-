@@ -1,4 +1,4 @@
-# Apuestas: analizador diario de partidos, combinadas y props de la NBA
+# Apuestas: analizador diario de partidos, combinadas y props de la NBA y la NFL
 
 Busca los partidos de fútbol del día (desde el 21 de octubre de 2026 en adelante), descarga
 estadísticas reales de cada equipo y jugador, las guarda en una base de datos local que crece
@@ -215,6 +215,124 @@ se quedan sobre todo como explicación en las fichas. Limitaciones: el backtest 
 históricos ni líneas reales de las casas, que son más difíciles de batir que la mediana. `nba rendimiento`
 es la medida honesta con apuestas reales. No hay datos de quién defendió a quién (eso solo está en
 stats.nba.com); el "tipo de jugador" se aproxima con la defensa del rival por posición y por zona.
+
+## NFL: props, touchdowns y enfrentamientos (`apuestas/nfl/`)
+
+Proyecta las props de cada jugador (yardas de pase, por tierra y por recepción, recepciones, envíos, acarreos,
+pases completos e intentados, TD de pase, intercepciones, combinadas y jugada más larga), calcula quién tiene
+más probabilidad de **anotar un TD**, de **anotar 2 o más** y de anotar el **primer TD**, lee el enfrentamiento
+métrica a métrica y cruza todo con las líneas de las casas para encontrar las mejores.
+
+| Fuente | Para qué | Clave |
+|---|---|---|
+| [nflverse](https://github.com/nflverse/nflverse-data) | Estadísticas por jugador y partido (150 columnas: EPA, CPOE, air yards, target share, WOPR...), **jugada a jugada** (zona roja, dentro de la 10 y la 5, envíos a la zona de anotación, scrambles frente a carreras diseñadas), calendario con líneas de cierre y clima, plantillas semana a semana, parte oficial de lesiones y snaps | No necesita. Se actualiza cada noche |
+| ESPN (API pública) | Parte de lesiones al momento (con comentarios) y movimientos de plantilla (traspasos) | No necesita |
+| [SportsGameOdds](https://sportsgameodds.com) | Línea de cada casa (FanDuel, DraftKings, Caesars, BetMGM, ESPN BET, Bovada...), consenso, cuota justa sin margen y línea de apertura | `SPORTSGAMEODDS_KEY` (la misma de la NBA) |
+
+```bash
+python -m apuestas nfl actualizar                      # la primera vez descarga 3 temporadas (~1 min); luego solo lo que cambió
+python -m apuestas nfl analizar                        # próximos 7 días -> reportes/nfl/AAAA-MM-DD.md y .json
+python -m apuestas nfl td --multiples                  # ranking de TD (ordenado por 2+ TD)
+python -m apuestas nfl matchup bills ravens            # ataque contra defensa, métrica a métrica
+python -m apuestas nfl validar "Derrick Henry +2 TD"   # ¿es buena? ¿por qué la juega la gente?
+python -m apuestas nfl validar "Josh Allen 2 touchdowns contra los Chargers"
+python -m apuestas nfl validar "Saquon más de 69.5 yardas por tierra @ -110"
+python -m apuestas nfl jugador "Josh Allen"            # ficha: rol, últimos partidos, tendencias, contra quién anota
+python -m apuestas nfl rendimiento                     # acierto real de lo recomendado y lo validado
+python -m apuestas nfl backtest --desde 2025-10-01 --hasta 2026-01-05
+```
+
+### La base de datos se mantiene sola
+
+`nfl actualizar` (y `nfl analizar`, que lo llama antes) pide cada archivo de nflverse con su ETag: si no cambió, no
+lo descarga, así que se puede ejecutar varias veces al día. Guarda:
+
+- `nfl_games`: calendario, marcador, spread y total de cierre, techo, superficie, temperatura, viento, QB titular.
+- `nfl_player_games` + `nfl_player_pbp` + `nfl_snaps`: todo lo que hizo cada jugador en cada partido.
+- `nfl_team_games`: cada partido de cada equipo (jugadas, dropbacks, EPA por jugada / pase / carrera, % de éxito,
+  jugadas explosivas, visitas y TD en zona roja, terceras, sacks, pérdidas, pase sobre lo esperado, carreras del QB).
+  Lo que concede una defensa es la fila de su rival; la vista `nfl_def_pos` lo desglosa por posición.
+- `nfl_rosters` y `nfl_movimientos`: equipo actual de cada jugador y **traspasos** (semana a semana de nflverse y,
+  más rápido, los "Traded ... to ..." de ESPN).
+- `nfl_injuries`: parte oficial de la semana y el de ESPN al momento (manda el más reciente).
+- `nfl_lineas`: cada línea de cada casa cada vez que se descarga (histórico para ver cómo se mueve el mercado).
+- `nfl_picks`: lo recomendado y lo validado, con sus razones, liquidado con el resultado real.
+
+### Cómo proyecta (`apuestas/nfl/modelo.py`)
+
+1. **Entorno del partido**: puntos esperados del equipo (el total del equipo de las casas; si no hay, total y spread;
+   si no, ataque × defensa rival), dropbacks y carreras (ritmo propio, del rival y **guion**: el favorito corre más),
+   TD de ataque = puntos × TD por punto, repartidos entre pase y carrera según el equipo y lo que concede el rival.
+   Viento fuerte (15+ mph) recorta el juego aéreo.
+2. **Reparto**: cuota de acarreos, envíos y pases de cada jugador con más peso a lo reciente, sin contar los partidos
+   que dejó a medias (menos de la mitad de sus snaps habituales). **Bajas**: quien está fuera (Out, IR, Doubtful,
+   suspendido, cortado) no se proyecta y su volumen se reparte entre el resto; si el QB titular no juega, el suplente
+   pasa a lanzar. "Questionable": volumen ×0.92. **Traspasos**: tras un cambio de equipo cuentan los partidos con el
+   equipo nuevo (si hay pocos, la casa pesa más).
+3. **Eficiencia contra el rival por posición**: yardas por acarreo, por envío, % de recepción, yardas por pase,
+   intercepciones; las del jugador contraídas hacia su posición y ajustadas por lo que el rival concede **a esa
+   posición** (no es lo mismo una defensa que sufre contra los TE que contra los WR). Los QB corredores se miden contra
+   las yardas y TD por tierra que la defensa concede a los QB.
+4. **Touchdowns**: TD por tierra del equipo × su cuota de oportunidades cerca de la meta (dentro de la 10 pesa más que
+   la zona roja y que los acarreos totales) + TD por aire del equipo × su cuota de envíos en zona roja y a la zona de
+   anotación, ajustado por el % de TD que el rival concede a su posición. P(1+), P(2+) y P(3+) con binomial negativa;
+   el primer TD reparte la probabilidad de que haya alguno según los TD esperados de cada jugador.
+
+### Pensar como un tipster (`analizador.py`, `mercado.py`, `razones.py`, `validar.py`)
+
+- **Mejor línea**: para cada apuesta se busca la casa que mejor paga (o la línea alternativa más barata).
+- **Probabilidad final** = 65 % modelo + 35 % casa sin margen (`APUESTAS_NFL_PESO_MERCADO`). Si el jugador acaba de
+  llegar, tiene poca muestra o está en duda, la casa pesa 60 %; si modelo y casa discrepan más de 15 puntos, 60 %, y
+  más de 25, 75 %: casi siempre la casa sabe algo (un rol nuevo, quién vuelve de lesión).
+- **Con valor** = EV ≥ 4 % (`APUESTAS_NFL_VALOR_MIN`), el modelo ve al menos 3 puntos más que la casa, y no es un
+  "chollo imposible" (el modelo no ve más de 1.6 veces lo que ve la casa ni difiere en más de 25 puntos).
+- **Movimiento de línea**: de la apertura a ahora. Si la cuota baja o la línea sube en un lado, entra dinero ahí; se
+  marca como razón a favor o en contra.
+- **"¿Por qué la gente apuesta esto?"**: el validador busca la narrativa en los datos (el último partido, la racha,
+  su volumen de TD, su historial contra el rival, el movimiento de la línea, el atractivo de las cuotas altas) y
+  después la contrasta con el modelo: veredicto, cuota justa y cuota mínima a la que vale la pena.
+- **El "¿por qué?" de cada apuesta**: volumen esperado, entorno del partido, lo que concede el rival a su posición
+  (con su puesto en la liga), su acierto sobre esa misma línea (últimos 5, 10 y temporada), rachas, contra este rival,
+  contra defensas fuertes / medias / débiles en lo que mide la apuesta, local o visitante, bajas y traspasos.
+- **El enfrentamiento** (`nfl matchup` y cada partido del informe): EPA por jugada, por acarreo y por dropback, yardas
+  por acarreo y por pase, explosivas, zona roja, TD por partido, terceras, sacks, QB corredor, identidad del ataque
+  (pase sobre lo esperado) y lo que la defensa concede a RB, WR y TE, con veredicto: ventaja del ataque, de la defensa,
+  fuerza contra fuerza o debilidad contra debilidad.
+
+Ejemplo con los datos del 26 de octubre de 2026 (`nfl validar "Josh Allen 2 touchdowns contra los Chargers"`): *"LAC concede 0.25 TD por tierra por partido a los QB (liga
+0.19; 8º que más de 32) (+29%)"*, *"Zona roja: Bills 68% (3º de 32) contra Chargers que concede 50%"*, y la
+advertencia de que las apuestas de múltiples TD atraen por el premio y las casas cobran más margen en ellas.
+
+### ¿Está calibrado?
+
+Backtest de la temporada 2025, semanas 5 a 18 (cada partido predicho solo con datos anteriores; líneas de cierre de
+nflverse para el entorno; los jugadores que no jugaron cuentan como bajas conocidas):
+
+| Anotar 1+ TD: el modelo dice | Pasó |
+|---|---|
+| 0-10 % (media 6.2 %) | 6.7 % |
+| 10-20 % (media 14.9 %) | 15.2 % |
+| 20-30 % (media 24.7 %) | 26.0 % |
+| 30-40 % (media 34.2 %) | 34.4 % |
+| 40-50 % (media 44.4 %) | 42.5 % |
+| 50-60 % (media 53.7 %) | 55.4 % |
+
+Brier de anotar 1+ TD 0.1466 frente a 0.1532 de su propia frecuencia histórica; 2+ TD: dice 3.3 % de media y pasó
+3.8 %. En yardas y conteos (línea de referencia = mediana de sus últimos 8 partidos) el modelo gana a la referencia
+en todas las estadísticas (p. ej. yardas de pase 0.2227 frente a 0.2546, acarreos 0.2155 frente a 0.2358), pero por
+encima del 70 % es optimista (dice 74-86 %, pasa 61-77 %): por eso la casa pesa en la probabilidad final y las
+selecciones exigen valor, no solo probabilidad. La calibración (logit × 0.75 en yardas y conteos; TD esperados
+comprimidos con exponente 0.85) sale de este mismo backtest. `nfl rendimiento` es la medida honesta con líneas reales.
+
+Limitaciones: nflverse publica las estadísticas la noche del partido (los datos de la jornada en curso llegan al día
+siguiente); no hay porcentajes de apuestas del público (se usa el movimiento de la línea como señal de dónde entra el
+dinero); no hay datos de coberturas (hombre/zona) ni de presión por jugada; las líneas históricas de las casas no
+están en el backtest.
+
+### Automático cada día en GitHub (`.github/workflows/nfl-diario.yml`)
+
+Igual que el de la NBA: actualiza la base, analiza los próximos 7 días y publica el informe en la rama `nfl-informes`
+(`ultimo.md` y `nfl/AAAA-MM-DD.md`). Usa el mismo secreto `SPORTSGAMEODDS_KEY` y necesita estar en `main`.
 
 ## Pruebas
 

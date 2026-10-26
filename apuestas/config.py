@@ -77,6 +77,11 @@ class Config:
     # Peso de la probabilidad de la casa (sin margen) en la probabilidad final de cada prop.
     nba_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NBA_PESO_MERCADO", 0.4))
 
+    # NFL: peso de la casa en la probabilidad final, valor mínimo para recomendar y días por delante a analizar.
+    nfl_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NFL_PESO_MERCADO", 0.35))
+    nfl_valor_min: float = field(default_factory=lambda: _float("APUESTAS_NFL_VALOR_MIN", 0.04))
+    nfl_dias: int = field(default_factory=lambda: _int("APUESTAS_NFL_DIAS", 7))
+
 
 def load_config() -> Config:
     return Config()
