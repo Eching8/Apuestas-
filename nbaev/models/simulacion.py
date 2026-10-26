@@ -16,7 +16,7 @@ Distribuciones:
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
@@ -38,6 +38,7 @@ class Dispersion:
     sd_margen: float = 12.5      # desviación del margen final respecto al spread
     paliza_titular: float = -0.30  # minutos por punto de margen anómalo (titulares: min_base >= 28)
     paliza_banquillo: float = 0.15  # ... (suplentes: min_base < 20)
+    tam_stats: dict = field(default_factory=dict)  # binomial negativa de rebotes, asistencias, robos, tapones, pérdidas
 
 
 def _beta_binomial(rng, n, p, conc):
@@ -97,8 +98,14 @@ def simular(jug: pd.DataFrame, disp: Dispersion, n_sims: int = 10_000, semilla: 
     fg3m = _beta_binomial(rng, fg3a, p3, disp.conc_fg3)
     fta = _negbin(rng, col("r_fta") * mins * ritmo, disp.tam_fta)
     ftm = _beta_binomial(rng, fta, np.broadcast_to(np.clip(col("p_ft"), 0.05, 0.99), fta.shape), disp.conc_ft)
-    return {"min": mins, "pts": 2 * fg2m + 3 * fg3m + ftm, "fgm": fg2m + fg3m, "fg3m": fg3m, "ftm": ftm,
-            "fga": fga, "fg3a": fg3a, "fta": fta}
+    out = {"min": mins, "pts": 2 * fg2m + 3 * fg3m + ftm, "fgm": fg2m + fg3m, "fg3m": fg3m, "ftm": ftm,
+           "fga": fga, "fg3a": fg3a, "fta": fta}
+    # Resto de estadísticas (si hay tasas): binomial negativa con los mismos minutos y el mismo ritmo, así que
+    # están correlacionadas con los puntos del jugador y entre jugadores del mismo partido.
+    for st, tam in disp.tam_stats.items():
+        if f"r_{st}" in jug:
+            out[st] = _negbin(rng, col(f"r_{st}") * mins * ritmo, tam)
+    return out
 
 
 def prob_over(sims: np.ndarray, lineas: np.ndarray) -> tuple[np.ndarray, np.ndarray]:

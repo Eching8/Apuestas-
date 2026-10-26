@@ -22,6 +22,7 @@ COLS_PRED = ["snapshot_at", "fecha", "game_id", "player_id", "jugador", "market"
 
 def guardar_predicciones(con: duckdb.DuckDBPyConnection, tabla: pd.DataFrame, snapshot_at, fecha) -> int:
     t = tabla.rename(columns={"name": "jugador"}).assign(snapshot_at=snapshot_at, fecha=fecha)
+    t["line"] = t["line"].fillna(-1.0)       # mercados sí/no (sin línea): -1 en la clave
     return db.upsert(con, "predicciones", t[[c for c in COLS_PRED if c in t.columns]])
 
 

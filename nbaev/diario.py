@@ -30,18 +30,28 @@ COLUMNAS = {
 }
 
 
-def mezcla_vigente(cfg: dict) -> Mezcla:
-    """Coeficientes de la mezcla (se ajustan con las líneas fuera de muestra de la validación si faltan)."""
-    ruta = RAIZ / cfg.get("apuestas", {}).get("mezcla", "data/modelos/mezcla_pts.json")
+def mezclas_vigentes(cfg: dict) -> dict[str, Mezcla]:
+    """Mezcla modelo + mercado de cada mercado, ajustada con las líneas reales fuera de muestra de la
+    validación (puntos: fase 3; resto: fase 6). Mercados sin validación usan una mezcla por defecto
+    conservadora (70 % mercado) y en cualquier caso no reciben monto hasta validarse."""
+    import json
+    ruta = RAIZ / cfg.get("apuestas", {}).get("mezclas", "data/modelos/mezclas.json")
     if ruta.exists():
-        return Mezcla.cargar(ruta)
-    cache = RAIZ / "data" / "cache" / "puntos_lineas_oos.parquet"
-    if not cache.exists():
-        log.warning("Sin validación de puntos: se usa la probabilidad del mercado (peso del modelo 0)")
-        return Mezcla()
-    m = ajustar(pd.read_parquet(cache), kind=cfg.get("apuestas", {}).get("mezcla_con", "cierre"))
-    m.guardar(ruta)
-    return m
+        return {k: Mezcla(**v) for k, v in json.loads(ruta.read_text(encoding="utf-8")).items()}
+    kind = cfg.get("apuestas", {}).get("mezcla_con", "cierre")
+    out = {"_defecto": Mezcla(mercado="_defecto", peso_mercado=0.7, peso_modelo=0.3, sd_edge=0.04)}
+    cache = RAIZ / "data" / "cache"
+    if (cache / "mercados_lineas_oos.parquet").exists():
+        lin = pd.read_parquet(cache / "mercados_lineas_oos.parquet")
+        for mk, d in lin.groupby("market"):
+            if (d["kind"] == kind).sum() >= 300:
+                out[mk] = ajustar(d, kind=kind, mercado=mk)
+    elif (cache / "puntos_lineas_oos.parquet").exists():
+        out["pts"] = ajustar(pd.read_parquet(cache / "puntos_lineas_oos.parquet"), kind=kind)
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    from dataclasses import asdict
+    ruta.write_text(json.dumps({k: asdict(v) for k, v in out.items()}, indent=1), encoding="utf-8")
+    return out
 
 
 def nombres_partidos(con, ids) -> dict:
@@ -51,50 +61,59 @@ def nombres_partidos(con, ids) -> dict:
     return dict(filas)
 
 
-def ejecutar(con, cfg: dict, fecha: str, max_razones: int = 300) -> dict:
+def ejecutar(con, cfg: dict, fecha: str, max_razones: int = 400) -> dict:
+    from .betting import combinadas
     from .models import minutos as mm
-    from .models import puntos as mp
+    from .models import proyeccion
     liquidadas = registro.liquidar(con)
-    out, sim = mp.proyectar(con, cfg, fecha, n_sims=cfg["puntos"]["simulaciones"])
-    if out.empty:
+    salida = proyeccion.proyectar(con, cfg, fecha, n_sims=cfg["puntos"]["simulaciones"])
+    if not salida:
         return {"tabla": pd.DataFrame(), "liquidadas": liquidadas}
-    filas, sims = sim["filas"], sim["sims"]
+    filas, sims = salida["filas"], salida["sims"]
+    proyeccion.guardar_sims(salida, fecha)
     ahora = db.ahora_utc()
     cuotas = asof.cuotas_en(con, ahora, list(filas["game_id"].unique()))
     lineas = seleccion.lineas_con_lados(cuotas)
     cfg_ap = cfg.get("apuestas", {})
     banca = registro.banca_actual(con, cfg_ap.get("banca_inicial", 1000.0))
-    tabla = seleccion.evaluar(lineas, filas, sims, mezcla_vigente(cfg), cfg, seleccion.estado_mercados(con), banca)
+    tabla = seleccion.evaluar(lineas, filas, sims, mezclas_vigentes(cfg), cfg, seleccion.estado_mercados(con), banca,
+                              primer=salida["primer"])
+    partidos = nombres_partidos(con, filas["game_id"].unique())
+    maximos = {gid: combinadas.maximo(filas, sims, gid).head(5) for gid in filas["game_id"].unique()}
     if tabla.empty:
         log.warning("No hay cuotas capturadas para los partidos del %s", fecha)
+        exportar(tabla, fecha, banca, maximos, partidos, salida["primer"], filas)
         return {"tabla": tabla, "liquidadas": liquidadas, "banca": banca}
-    partidos = nombres_partidos(con, tabla["game_id"].unique())
     tabla["partido"] = tabla["game_id"].map(partidos)
     tabla["p_over_modelo"] = tabla["p_modelo_over"]
     tabla["p_under_modelo"] = 1 - tabla["p_modelo_over"]
 
-    # Razones SHAP de las líneas con EV > 0 (las demás no se van a apostar).
-    m_pts = mp.modelo_vigente(con, cfg, RAIZ / cfg["puntos"]["modelo"])
+    # Razones SHAP de las líneas con EV > 0 (las demás no se van a apostar), con el modelo de cada mercado.
     m_min = mm.modelo_vigente(con, cfg, RAIZ / cfg["minutos"]["modelo"])
-    con_ev = tabla.index[tabla["ev"] > 0][:max_razones]
     tabla["razones"] = ""
-    if len(con_ev):
-        idx = tabla.loc[con_ev, "index"].to_numpy()
-        f_sel = filas.loc[idx].reset_index(drop=True)
-        contrib = explicar.contribuciones(m_pts, m_min, f_sel)
-        txt = explicar.razones(contrib, f_sel, pd.Series(tabla.loc[con_ev, "lado"].to_numpy()))
-        tabla.loc[con_ev, "razones"] = txt.to_numpy()
+    con_ev = tabla.index[(tabla["ev"] > 0) & (tabla["market"] != "primera_canasta")][:max_razones]
+    for mk, idx in tabla.loc[con_ev].groupby("market").groups.items():
+        f_sel = filas.loc[tabla.loc[idx, "index"].to_numpy()].reset_index(drop=True)
+        contrib = explicar.contribuciones(salida["modelo"], m_min, f_sel, mk)
+        txt = explicar.razones(contrib, f_sel, pd.Series(tabla.loc[idx, "lado"].to_numpy()))
+        tabla.loc[idx, "razones"] = txt.to_numpy()
+    tabla.loc[tabla["market"] == "primera_canasta", "razones"] = "salto inicial, quinteto titular y reparto de primeras canastas"
 
     registro.guardar_predicciones(con, tabla, ahora, pd.to_datetime(fecha).date())
     nuevas = registro.registrar_sugeridas(con, tabla, pd.to_datetime(fecha).date(), partidos)
-    exportar(tabla, fecha, banca)
+    exportar(tabla, fecha, banca, maximos, partidos, salida["primer"], filas)
     return {"tabla": tabla, "liquidadas": liquidadas, "banca": banca, "sugeridas_nuevas": nuevas}
 
 
-def exportar(tabla: pd.DataFrame, fecha: str, banca: float) -> Path:
+def exportar(tabla: pd.DataFrame, fecha: str, banca: float, maximos: dict | None = None, partidos: dict | None = None,
+             primer: pd.DataFrame | None = None, filas: pd.DataFrame | None = None) -> Path:
     carpeta = RAIZ / "reportes" / "diario"
     carpeta.mkdir(parents=True, exist_ok=True)
+    if tabla.empty:
+        tabla = pd.DataFrame(columns=list(COLUMNAS) + ["EV"])
     t = tabla[[c for c in COLUMNAS if c in tabla.columns]].rename(columns=COLUMNAS)
+    if "pick" not in t:
+        t["pick"] = pd.Series(dtype=bool)
     t.to_csv(carpeta / f"{fecha}.csv", index=False)
     (carpeta / f"{fecha}.json").write_text(json.dumps(t.to_dict("records"), ensure_ascii=False, default=str, indent=1),
                                            encoding="utf-8")
@@ -114,6 +133,20 @@ def exportar(tabla: pd.DataFrame, fecha: str, banca: float) -> Path:
         md += ["## Mayor EV descartadas (y por qué)", "",
                top[["jugador", "mercado", "línea", "lado", "cuota", "prob. final", "edge", "EV", "motivo"]]
                .to_markdown(index=False, floatfmt=".3f"), ""]
+    # Mercados sin cuotas en la fuente: probabilidades y cuotas justas para comparar a mano (p. ej. con bet365).
+    if maximos:
+        md += ["## Máximo anotador del partido (cuota justa, sin validar)", ""]
+        for gid, t_max in maximos.items():
+            md += [f"**{(partidos or {}).get(gid, gid)}**: " + ", ".join(
+                f"{r.jugador} {r.p:.0%} ({r.cuota_justa:.1f})" for r in t_max.itertuples()), ""]
+    if primer is not None and not primer.empty and filas is not None:
+        nombres = dict(zip(filas["player_id"], filas["name"]))
+        md += ["## Primera canasta del partido (cuota justa, sin validar)", ""]
+        for gid, g in primer[primer["player_id"] != "SUPLENTE"].groupby("game_id"):
+            top = g.sort_values("p_partido", ascending=False).head(4)
+            md += [f"**{(partidos or {}).get(gid, gid)}**: " + ", ".join(
+                f"{nombres.get(r.player_id, r.player_id)} {r.p_partido:.1%} ({1 / r.p_partido:.1f})"
+                for r in top.itertuples()), ""]
     ruta = carpeta / f"{fecha}.md"
     ruta.write_text("\n".join(md), encoding="utf-8")
     return ruta

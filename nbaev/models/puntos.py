@@ -105,19 +105,16 @@ def modelo_vigente(con, cfg: dict, ruta, forzar: bool = False) -> ModeloPuntos:
     return m
 
 
-def proyectar(con, cfg: dict, fecha: str, n_sims: int = 10_000, semilla: int = 2026) -> tuple[pd.DataFrame, dict]:
-    """Distribución de puntos de cada jugador probable de `fecha` (usa la proyección de minutos del día).
-    Devuelve (resumen por jugador, simulaciones por estadística)."""
+def filas_dia(con, cfg: dict, fecha: str) -> pd.DataFrame:
+    """Jugadores probables de `fecha` con todas sus features de producción y su proyección de minutos."""
     from ..config import RAIZ
-    from ..data import db
     from ..features import minutos as fm
     from ..features import produccion as fp
     from . import minutos as mm
-    from .simulacion import resumen, simular
 
     proj = mm.proyectar(con, cfg, fecha, RAIZ / cfg["minutos"]["modelo"])
     if proj.empty:
-        return pd.DataFrame(), {}
+        return pd.DataFrame()
     ctx = con.execute("SELECT game_id, team_id, total_implicito FROM team_context").df()
     fut = proj[["game_id", "player_id", "team_id", "opp_id", "name", "position", "start_utc", "season",
                 "season_type", "is_home", "b2b", "dias_descanso", "spread_equipo", "total"]].copy()
@@ -131,17 +128,34 @@ def proyectar(con, cfg: dict, fecha: str, n_sims: int = 10_000, semilla: int = 2
     df = df[df["minutes"].isna() & df["game_id"].isin(proj["game_id"])].reset_index(drop=True)
     # Proyección de minutos y sus variables (las usan las explicaciones SHAP del modelo de minutos).
     extra = [c for c in fm.FEATURES if c not in df.columns]
-    df = df.merge(proj[["game_id", "player_id", "min_si_juega", "min_q10", "min_q90", "p_dnp", "prob_juega",
-                        "estado_lesion", "min_pred"] + extra], on=["game_id", "player_id"], how="left")
-    m = modelo_vigente(con, cfg, RAIZ / cfg.get("puntos", {}).get("modelo", "data/modelos/puntos.joblib"))
-    entrada = entrada_simulacion(m, df)
-    sims = simular(entrada, m.disp, n_sims=n_sims, semilla=semilla)
+    return df.merge(proj[["game_id", "player_id", "min_si_juega", "min_q10", "min_q90", "p_dnp", "prob_juega",
+                          "estado_lesion", "min_pred"] + extra], on=["game_id", "player_id"], how="left")
+
+
+def guardar_resumen(con, df: pd.DataFrame, sims_pts: np.ndarray, fecha: str) -> pd.DataFrame:
+    from ..data import db
+    from .simulacion import resumen
     out = pd.concat([df[["game_id", "player_id", "team_id", "name", "estado_lesion", "prob_juega", "p_dnp",
-                         "min_si_juega"]], resumen(sims["pts"]).add_prefix("pts_")], axis=1)
+                         "min_si_juega"]], resumen(sims_pts).add_prefix("pts_")], axis=1)
     out["fecha"] = pd.to_datetime(fecha).date()
     out["created_at"] = db.ahora_utc()
     con.execute("DELETE FROM proj_puntos WHERE game_id IN (SELECT unnest(?))", [list(df["game_id"].unique())])
     db.upsert(con, "proj_puntos", out)
+    return out
+
+
+def proyectar(con, cfg: dict, fecha: str, n_sims: int = 10_000, semilla: int = 2026) -> tuple[pd.DataFrame, dict]:
+    """Distribución de puntos de cada jugador probable de `fecha` (usa la proyección de minutos del día).
+    Devuelve (resumen por jugador, simulaciones por estadística)."""
+    from ..config import RAIZ
+    from .simulacion import simular
+
+    df = filas_dia(con, cfg, fecha)
+    if df.empty:
+        return pd.DataFrame(), {}
+    m = modelo_vigente(con, cfg, RAIZ / cfg.get("puntos", {}).get("modelo", "data/modelos/puntos.joblib"))
+    sims = simular(entrada_simulacion(m, df), m.disp, n_sims=n_sims, semilla=semilla)
+    out = guardar_resumen(con, df, sims["pts"], fecha)
     return out, {"filas": df, "sims": sims}
 
 

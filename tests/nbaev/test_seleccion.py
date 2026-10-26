@@ -37,7 +37,7 @@ def escenario():
 def test_evaluar_elige_principal_y_filtra():
     filas, sims, cuotas = escenario()
     lineas = seleccion.lineas_con_lados(cuotas)
-    m = mezcla.Mezcla(peso_mercado=0.5, peso_modelo=0.5, sd_edge=0.03)
+    m = {"pts": mezcla.Mezcla(peso_mercado=0.5, peso_modelo=0.5, sd_edge=0.03)}
     t = seleccion.evaluar(lineas, filas, sims, m, CFG, {("pts", "game"): "validado"}, 1000.0).set_index("player_id")
     assert t.loc["p1", "lado"] == "over" and t.loc["p1", "book"] == "bet365"     # casa principal aunque pague menos
     assert t.loc["p1", "pick"] and t.loc["p1", "monto"] == pytest.approx(20.0)   # tope del 2 % de 1.000
@@ -47,7 +47,7 @@ def test_evaluar_elige_principal_y_filtra():
 def test_sin_validar_no_recibe_monto():
     filas, sims, cuotas = escenario()
     lineas = seleccion.lineas_con_lados(cuotas)
-    t = seleccion.evaluar(lineas, filas, sims, mezcla.Mezcla(peso_mercado=0.5, peso_modelo=0.5), CFG, {}, 1000.0)
+    t = seleccion.evaluar(lineas, filas, sims, {"pts": mezcla.Mezcla(peso_mercado=0.5, peso_modelo=0.5)}, CFG, {}, 1000.0)
     assert (t["monto"] == 0).all() and (t["estado_mercado"] == "sin validar").all()
 
 

@@ -190,6 +190,7 @@ def cmd_backtest_puntos(cfg, args) -> None:
     from .backtest import fase4
     cache = config.RAIZ / "data" / "cache"
     lin = pd.read_parquet(cache / "puntos_lineas_oos.parquet")
+    lin = lin[lin["margen"] >= 0.01]          # sin margen = cuota de relleno de la fuente
     pred = pd.read_parquet(cache / "puntos_oos.parquet")[["game_id", "player_id", "libres"]]
     lin = lin.merge(pred.drop_duplicates(["game_id", "player_id"]), on=["game_id", "player_id"], how="left")
     con = _con(cfg)
@@ -217,7 +218,7 @@ def cmd_diario(cfg, args) -> None:
         return
     picks = t[t["pick"]]
     print(f"\nLíneas evaluadas: {len(t)}; picks: {len(picks)}; con monto: {(picks['monto'] > 0).sum()}")
-    cols = ["name", "partido", "market", "line", "lado", "proyeccion", "cuota", "book", "p_justa", "p_final", "edge",
+    cols = ["name", "partido", "market", "period", "line", "lado", "proyeccion", "cuota", "book", "p_justa", "p_final", "edge",
             "ev", "monto", "estado_mercado"]
     print(t.sort_values("ev", ascending=False)[cols].head(15).round(3).to_string(index=False))
     print(f"\nInforme: reportes/diario/{fecha}.md (también .csv y .json)")
@@ -236,6 +237,79 @@ def cmd_apuestas(cfg, args) -> None:
                       "FROM apuestas ORDER BY id DESC LIMIT 20").df().to_string(index=False))
     print(registro.resumen(con).to_string(index=False))
     print(f"Banca: {registro.banca_actual(con, cfg['apuestas']['banca_inicial']):,.2f}")
+
+
+def cmd_mercados_validar(cfg, args) -> None:
+    """Fase 6: walk-forward de todos los mercados (simulación completa) con minutos fuera de muestra."""
+    import pandas as pd
+    from .backtest import mercados as bm
+    cache = config.RAIZ / "data" / "cache"
+    con = _con(cfg, solo_lectura=True)
+    r = bm.validar(con, pd.read_parquet(cache / "minutos_oos.parquet"), desde=args.desde, n_sims=args.sims)
+    for k in ("pit", "lineas", "maximo"):
+        r[k].to_parquet(cache / f"mercados_{k}_oos.parquet")
+    print(bm.tabla_pit(r["pit"]).round(3).to_string(index=False))
+
+
+def cmd_backtest_mercados(cfg, args) -> None:
+    """Fase 6: backtest e informe de todos los mercados (necesita `mercados validar`)."""
+    import pandas as pd
+    from .backtest import fase6
+    from .models import primer_anotador as pa
+    cache = config.RAIZ / "data" / "cache"
+    lin = pd.read_parquet(cache / "mercados_lineas_oos.parquet")
+    con = _con(cfg)
+    r = fase6.ejecutar(con, lin)
+    primer = pa.validar(con, "2024-10-01")["pred"]
+    texto = fase6.informe(r, pd.read_parquet(cache / "mercados_pit_oos.parquet"), lin,
+                          pd.read_parquet(cache / "mercados_maximo_oos.parquet"), primer)
+    for carpeta in (config.RAIZ / "reportes", config.RAIZ / "docs" / "resultados"):
+        carpeta.mkdir(parents=True, exist_ok=True)
+        (carpeta / "fase6_mercados.md").write_text(texto, encoding="utf-8")
+    # Las mezclas modelo + mercado de cada mercado se regeneran con estas líneas.
+    (config.RAIZ / cfg["apuestas"]["mezclas"]).unlink(missing_ok=True)
+    print(texto)
+
+
+def _sims_del_dia(cfg, fecha):
+    from .data import recolector
+    from .models import proyeccion
+    fecha = fecha or recolector.hoy_et().isoformat()
+    try:
+        return proyeccion.cargar_sims(fecha)
+    except FileNotFoundError:
+        raise SystemExit(f"No hay simulaciones guardadas del {fecha}: ejecuta antes `python -m nbaev diario`")
+
+
+def cmd_combinada(cfg, args) -> None:
+    """Probabilidad conjunta de una combinada con las simulaciones del día.
+    Cada --sel es "jugador|mercado|línea|lado|cuota[|prob_justa][|periodo]" (línea vacía en sí/no)."""
+    from .betting import combinadas as cb
+    filas, sims = _sims_del_dia(cfg, args.fecha)
+    sel = []
+    for txt in args.sel:
+        p = txt.split("|") + [""] * 7
+        sel.append(cb.Seleccion(p[0], p[1], float(p[2]) if p[2] else None, p[3], periodo=p[6] or "game",
+                                cuota=float(p[4]) if p[4] else None, p_justa=float(p[5]) if p[5] else None))
+    r = cb.combinada(filas, sims, sel)
+    for k, v in r.items():
+        print(f"{k}: {v}")
+    if "ev_combinada" in r:
+        print("\nLa combinada acumula el margen de cada selección: solo tiene sentido si su EV supera al de las "
+              "simples y el mercado está validado.")
+
+
+def cmd_comparar(cfg, args) -> None:
+    from .betting import combinadas as cb
+    filas, sims = _sims_del_dia(cfg, args.fecha)
+    if args.cmd == "duelo":
+        print(cb.duelo(filas, sims, args.a, args.b, args.mercado))
+    else:
+        gid = filas.loc[filas["name"].str.contains(args.jugador_de_partido, case=False), "game_id"].iloc[0]
+        team = None
+        if args.equipo:
+            team = filas.loc[filas["name"].str.contains(args.jugador_de_partido, case=False), "team_id"].iloc[0]
+        print(cb.maximo(filas, sims, gid, args.mercado, team).round(3).to_string(index=False))
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -292,6 +366,8 @@ def main(argv: list[str] | None = None) -> int:
 
     bt = grupos.add_parser("backtest", help="fase 4: backtest con cuotas reales").add_subparsers(dest="cmd", required=True)
     bt.add_parser("puntos", help="mercado de puntos (necesita `puntos validar`)").set_defaults(f=cmd_backtest_puntos)
+    bt.add_parser("mercados", help="todos los mercados (necesita `mercados validar`)").set_defaults(
+        f=cmd_backtest_mercados)
 
     p = grupos.add_parser("diario", help="flujo completo del día: datos, proyección, picks y banca")
     p.add_argument("--fecha")
@@ -309,6 +385,31 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(f=cmd_apuestas)
     ap_.add_parser("liquidar", help="liquidar con los resultados reales").set_defaults(f=cmd_apuestas)
     ap_.add_parser("ver", help="últimas apuestas y rendimiento").set_defaults(f=cmd_apuestas)
+
+    me_ = grupos.add_parser("mercados", help="fase 6: todos los mercados").add_subparsers(dest="cmd", required=True)
+    p = me_.add_parser("validar", help="walk-forward de todos los mercados con líneas reales")
+    p.add_argument("--desde", default="2025-10-01")
+    p.add_argument("--sims", type=int, default=2000)
+    p.set_defaults(f=cmd_mercados_validar)
+
+    p = grupos.add_parser("combinada", help="probabilidad conjunta de una combinada (simulaciones del día)")
+    p.add_argument("--fecha")
+    p.add_argument("--sel", action="append", required=True,
+                   help='"jugador|mercado|línea|lado|cuota[|prob_justa][|periodo]"; repetir por selección')
+    p.set_defaults(f=cmd_combinada)
+    co = grupos.add_parser("comparar", help="duelos y máximo anotador").add_subparsers(dest="cmd", required=True)
+    p = co.add_parser("duelo")
+    p.add_argument("a")
+    p.add_argument("b")
+    p.add_argument("--mercado", default="pts")
+    p.add_argument("--fecha")
+    p.set_defaults(f=cmd_comparar)
+    p = co.add_parser("maximo", help="máximo del partido (o de su equipo con --equipo) de un jugador dado")
+    p.add_argument("jugador_de_partido")
+    p.add_argument("--mercado", default="pts")
+    p.add_argument("--equipo", action="store_true")
+    p.add_argument("--fecha")
+    p.set_defaults(f=cmd_comparar)
 
     args = ap.parse_args(argv)
     cfg = config.cargar(args.config)

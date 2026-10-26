@@ -77,5 +77,5 @@ apuestas:
   max_por_jugador: 1
   max_por_partido: 3
   metodo_margen: multiplicativo
-  mezcla: data/modelos/mezcla_pts.json
+  mezclas: data/modelos/mezclas.json   # mezcla modelo + mercado de cada mercado (se regenera si se borra)
   mezcla_con: cierre          # líneas con las que se ajusta la mezcla modelo + mercado

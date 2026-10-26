@@ -50,7 +50,7 @@ def lineas_pts(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     io, iu = 1 / df["cuota_over"], 1 / df["cuota_under"]
     df["margen"] = io + iu - 1
     df["p_mercado"] = io / (io + iu)
-    return df[(df["margen"] > -0.02) & (df["margen"] < 0.25)]
+    return df[(df["margen"] >= 0.01) & (df["margen"] < 0.25)]
 
 
 def ajustar_paliza(train: pd.DataFrame, disp: sim.Dispersion) -> None:

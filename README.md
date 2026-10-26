@@ -22,7 +22,7 @@ Este repositorio contiene dos cosas:
 | 3 | Modelo de puntos (distribución completa + Monte Carlo) | **hecha** |
 | 4 | Validación walk-forward y backtest con cuotas reales | **hecha** (puntos: desactivado) |
 | 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | **hecha** |
-| 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
+| 6 | Resto de mercados, validados uno a uno, y combinadas | **hecha** (ninguno validado) |
 
 ### Resultados de la fase 1 (26/10/2026)
 
@@ -96,12 +96,13 @@ python -m nbaev puntos proyectar    # distribución de puntos de hoy (10.000 sim
     con prop: 4,90 frente a **4,78 de la línea de cierre de la casa**: la casa estima mejor la media.
   - Distribución calibrada: PIT aleatorizado casi uniforme (deciles 0,095-0,12).
   - Contra las líneas reales (consenso de casas de EE. UU., 2025-26), **el modelo solo no supera al mercado**:
-    log loss 0,6964 frente a 0,6921 en apertura y 0,7067 frente a 0,6921 en cierre. Cuando discrepa mucho de la
+    log loss 0,6966 frente a 0,6918 en apertura y 0,7060 frente a 0,6921 en cierre. Cuando discrepa mucho de la
     línea suele equivocarse él.
-  - Pero **sí aporta información nueva frente a la apertura**: mezclado con el mercado (pesos ajustados solo con
-    meses anteriores) mejora el log loss en 0,0030 (IC 95 % [−0,0053, −0,0008]; peso del modelo ≈ 0,45). Frente al
-    cierre no aporta nada (el cierre ya incorpora lo que sabe el modelo). Conclusión: si hay valor, está en apostar
-    pronto y debería verse como CLV positivo. Muestra pequeña (5 meses): la fase 4 lo pone a prueba con apuestas.
+  - Mezclado con el mercado (pesos ajustados solo con meses anteriores) mejora un poco el log loss de la apertura
+    (−0,0027, IC 95 % [−0,0057, +0,0001]: en el límite de la significación) y nada el del cierre. La fase 4 explica
+    de dónde sale esa mejora a la apertura (información que llega tarde).
+  - Valores recalculados tras descartar las cuotas sin margen (ver fase 6); la primera versión, con ellas, daba
+    −0,0030 (IC [−0,0053, −0,0008]).
   - El modelo cuantílico directo es marginalmente mejor en P(over) (−0,002 de log loss) y el promedio de ambos no
     mejora al cuantílico: se mantiene la simulación como fuente única porque garantiza la coherencia entre líneas,
     mercados y jugadores.
@@ -119,16 +120,16 @@ python -m nbaev backtest puntos     # -> reportes/fase4_backtest_puntos.md y est
   la probabilidad justa del cierre trasladada a la línea apostada), % de veces que se bate el cierre, bootstrap por
   partido y p-valores de Holm por probar varias estrategias. Banca simulada con 1/4 Kelly, tope 2 % por apuesta y
   10 % por día. Quitar margen: multiplicativo, power y Shin (`nbaev/betting/margen.py`).
-- **Resultado del mercado de puntos (feb-jun 2026, 8.040 líneas de apertura): DESACTIVADO.** Informe completo en
-  `docs/resultados/fase4_backtest_puntos.md`.
-  - A la cuota de apertura parecía haber ventaja: 1.694 apuestas, ROI +8,9 % (IC 95 % [+4,3 %, +13,5 %]), CLV
-    ajustado +3,5 %, bate el cierre el 73 % de las veces.
+- **Resultado del mercado de puntos (feb-jun 2026): DESACTIVADO.** Informe completo en
+  `docs/resultados/fase4_backtest_puntos.md` (recalculado sin las cuotas de relleno; primera versión entre paréntesis).
+  - A la cuota de apertura parecía haber ventaja: 1.529 apuestas, ROI +6,2 % (IC 95 % [+1,6 %, +10,8 %]), CLV
+    ajustado +1,8 %, bate el cierre el 75 % de las veces (antes: 1.694 apuestas, ROI +8,9 %).
   - Pero el diagnóstico muestra de dónde sale: ROI +20,7 % cuando la línea se movió después hacia la apuesta,
     −3,9 % (el margen) cuando no se movió; +11,9 % con bajas de compañeros, +1,2 % sin ellas. El modelo usa
     información que solo se conoce cerca del salto (quién se viste, spread y total de cierre) y que la apertura no
     tenía. No es una ventaja alcanzable: quien tiene esa información ve ya cuotas cercanas al cierre.
-  - Prueba realista, apostando a la cuota de cierre: ROI **−13,4 %** (IC 95 % [−22,9 %, −3,7 %]). El modelo no
-    supera al mercado cuando ambos saben lo mismo.
+  - Prueba realista, apostando a la cuota de cierre: ROI **−7,2 %** (IC 95 % [−16,0 %, +1,6 %]; antes −13,4 %). El
+    modelo no supera al mercado cuando ambos saben lo mismo.
 - Regla de validación (aplicada a cada mercado): ≥ 300 apuestas, CLV ajustado > 0, batir el cierre > 50 % y ROI con
   IC 95 % > 0 apostando cuando se conoce la información que usa el modelo. Se guarda en `market_validation` y en el
   estado del `market_catalog`.
@@ -166,6 +167,56 @@ Para cada línea capturada (cada casa y cada línea alternativa) el flujo diario
 
 bet365: si se cargan sus cuotas por CSV (`datos importar-csv`), es la casa preferida aunque otra pague más.
 Las demás casas vienen de SportsGameOdds.
+
+### Fase 6: todos los mercados (`nbaev/models/estadisticas.py`, `proyeccion.py`, `primer_anotador.py`, `betting/combinadas.py`)
+
+```bash
+python -m nbaev mercados validar          # walk-forward de todos los mercados (temporada 2025-26)
+python -m nbaev backtest mercados         # backtest por mercado, estados y docs/resultados/fase6_mercados.md
+python -m nbaev combinada --sel "Jayson Tatum|pts|24.5|over|1.87|0.5" --sel "Jayson Tatum|pra|38.5|over|1.87|0.5"
+python -m nbaev comparar duelo "Jayson Tatum" "Paul George" --mercado pts
+python -m nbaev comparar maximo "Jayson Tatum" [--equipo]
+```
+
+- **Una sola simulación por partido** para todo: minutos -> tiros (puntos, triples, tiros de campo, libres) y rebotes
+  ofensivos/defensivos, asistencias, robos, tapones y pérdidas (cada uno con su LightGBM de tasa, su defensa rival por
+  posición y su binomial negativa con varianza estimada). Combinados (PR, PA, RA, PRA, robos+tapones), doble-doble y
+  triple-doble salen de esas simulaciones; las líneas alternativas son simplemente otras líneas sobre la misma
+  distribución (coherencia garantizada). Periodos: reparto beta-binomial con la fracción de cada jugador en el 1.er
+  cuarto y la 1.ª mitad (1.er cuarto ≤ 1.ª mitad ≤ partido). Primer anotador: salto inicial (Bradley-Terry con el
+  historial de cada saltador), probabilidad de anotar primero tras ganar el salto (63 %) y reparto entre titulares.
+  Duelos y máximo anotador: comparaciones dentro de cada simulación (empates repartidos).
+- **Combinadas**: probabilidad conjunta contando simulaciones (las selecciones del mismo partido están correlacionadas)
+  y margen acumulado frente a las simples. Ojo: las casas ponen precio propio a las combinadas del mismo partido
+  (no multiplican cuotas) precisamente por esa correlación.
+- **Calibración** (PIT, temporada 2025-26, ~29.500 actuaciones): todas las estadísticas con desviación máxima por decil
+  ≤ 0,02; 1.er cuarto y 1.ª mitad ≤ 0,024. Máximo anotador: log loss 0,121 frente a 0,187 del uniforme, bien calibrado.
+  Primera canasta (2.680 partidos): log loss 2,291 frente a 2,381 (volumen de tiro) y 2,398 (uniforme).
+- **Datos**: una parte de las cuotas de consenso de SportsGameOdds son valores de relleno (2,00 / 2,00, sin margen):
+  casi todas las de pérdidas, todas las de 1.ª mitad capturadas hoy y un 15-25 % del resto. Se descartan siempre
+  (margen < 1 %), también en el flujo diario. Los mercados "sí/no" por estadística (p. ej. "anota un triple") no traen
+  el umbral en la fuente y no se modelan.
+- **Resultado del backtest por mercado** (feb-jun 2026; informe en `docs/resultados/fase6_mercados.md`): **ningún
+  mercado queda validado.** Todos parecen rentables a la apertura por la misma razón que puntos (información tardía);
+  apostando al cierre ninguno tiene ROI con IC 95 % > 0 **y** CLV positivo. Candidatos a seguir en tiempo real:
+  **robos** (ROI al cierre +7,6 %, IC [+2,2 %, +13,1 %]; aporta ~5 puntos sobre "todo al under") y **robos + tapones**
+  (+5,8 %, IC [+0,4 %, +11,0 %]), pero con CLV ajustado negativo a la apertura, así que no cumplen la regla.
+  Pérdidas: sin cuotas reales suficientes. Triple-doble, 1.er cuarto, 1.ª mitad, primera canasta, duelos y máximo
+  anotador: sin cuotas históricas → "sin validar" hasta acumular capturas.
+
+### Limitaciones (léelas antes de apostar)
+
+- **No hay evidencia de ventaja explotable** en ningún mercado con los datos disponibles. El sistema no sugiere montos
+  mientras ningún mercado esté validado. Apostar con él hoy es apostar contra el margen de la casa.
+- La aparente ventaja a la apertura es un artefacto: el modelo usa información que se conoce cerca del salto. Para
+  medir la ventaja real hacen falta partes de lesiones y cuotas con hora; el flujo diario ya los guarda
+  (`predicciones`, `injuries`, `prop_odds`). Con 2-3 meses de capturas (dos al día) se puede repetir el backtest con
+  la información de cada momento.
+- Solo hay una temporada parcial de cuotas reales (feb-jun 2026) y de consenso de casas de EE. UU.; **no hay cuotas
+  de bet365** (se cargan a mano por CSV). Las cuotas de una casa concreta y sus límites pueden ser peores.
+- stats.nba.com (tracking) no responde desde la nube; ESPN no da partes de lesiones históricos; los minutos a
+  principio de temporada y los cambios de rol son la mayor fuente de error.
+- Las probabilidades de jugar según el parte (Questionable, Day-To-Day...) son heurísticas sin calibrar.
 
 ### Instalación
 

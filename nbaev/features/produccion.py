@@ -22,6 +22,8 @@ VIDA_MEDIA = 12        # partidos: vida media de la media exponencial de tasas
 K_MIN = 250.0          # minutos equivalentes del prior de posición
 K_INTENTOS = {"fg2": 150.0, "fg3": 250.0, "ft": 80.0}
 VIDA_MEDIA_EQUIPO = 15  # partidos: defensa y ritmo de cada equipo
+# Estadísticas con factor de defensa rival por posición.
+STATS_DEF = ["pts", "oreb", "dreb", "ast", "stl", "blk", "tov", "fg3m"]
 
 FEATURES_PTS = [
     "r_pts", "r_fga", "r_fg3a", "r_fta", "p_fg2", "p_fg3", "p_ft", "r_pts_comp", "usg_ewm", "ts_ewm",
@@ -115,22 +117,25 @@ def defensa_y_ritmo(con: duckdb.DuckDBPyConnection, df: pd.DataFrame) -> pd.Data
     liga_prev = liga.shift(1).fillna(liga)   # media de la temporada anterior (la primera usa la suya)
     eq = eq.merge(liga_prev, left_on="season", right_index=True, how="left")
 
-    # Puntos por minuto concedidos a cada grupo de posición (sumando a los rivales que jugaron contra él).
-    conc = (df.groupby(["game_id", "opp_id", "pos_grupo"])[["pts", "minutes"]].sum(min_count=1).reset_index()
+    # Lo que concede cada equipo por minuto a cada grupo de posición, en cada estadística, relativo a la liga
+    # (sumando a los rivales que jugaron contra él). def_pos (puntos) se mantiene por compatibilidad.
+    conc = (df.groupby(["game_id", "opp_id", "pos_grupo"])[STATS_DEF + ["minutes"]].sum(min_count=1).reset_index()
             .rename(columns={"opp_id": "def_team"}))
     conc = conc.merge(eq[["game_id", "team_id", "start_utc", "season"]].rename(columns={"team_id": "def_team"}),
                       on=["game_id", "def_team"])
-    conc = conc.sort_values(["def_team", "pos_grupo", "start_utc"])
-    clave = conc["def_team"] + "|" + conc["pos_grupo"]
-    conc["pts_ewm"] = _ewm_prev(conc["pts"].astype(float), clave, VIDA_MEDIA_EQUIPO)
-    conc["min_ewm"] = _ewm_prev(conc["minutes"], clave, VIDA_MEDIA_EQUIPO)
-    liga_pos = conc.groupby(["season", "pos_grupo"]).apply(lambda d: d["pts"].sum() / d["minutes"].sum(),
-                                                           include_groups=False).rename("liga_pos").reset_index()
-    liga_pos["season"] += 1
-    conc = conc.merge(liga_pos, on=["season", "pos_grupo"], how="left")
-    conc["def_pos"] = (conc["pts_ewm"] / conc["min_ewm"]) / conc["liga_pos"]
-
-    out = df.merge(conc[["game_id", "def_team", "pos_grupo", "def_pos"]].rename(columns={"def_team": "opp_id"}),
+    conc = conc.sort_values(["def_team", "pos_grupo", "start_utc"]).reset_index(drop=True)
+    conc["min_ewm"] = _ewm_prev(conc["minutes"], conc["def_team"] + "|" + conc["pos_grupo"], VIDA_MEDIA_EQUIPO)
+    sumas = conc.groupby(["season", "pos_grupo"])[STATS_DEF + ["minutes"]].sum()
+    for st in STATS_DEF:
+        liga = (sumas[st] / sumas["minutes"]).rename("liga").reset_index()
+        liga["season"] += 1
+        conc = conc.merge(liga, on=["season", "pos_grupo"], how="left")
+        ewm = _ewm_prev(conc[st].astype(float), conc["def_team"] + "|" + conc["pos_grupo"], VIDA_MEDIA_EQUIPO)
+        conc[f"def_pos_{st}"] = (ewm / conc["min_ewm"]) / conc["liga"]
+        conc = conc.drop(columns="liga")
+    conc["def_pos"] = conc["def_pos_pts"]
+    cols_def = ["def_pos"] + [f"def_pos_{st}" for st in STATS_DEF]
+    out = df.merge(conc[["game_id", "def_team", "pos_grupo"] + cols_def].rename(columns={"def_team": "opp_id"}),
                    on=["game_id", "opp_id", "pos_grupo"], how="left")
     rival = eq[["game_id", "team_id", "pace_ewm", "drtg_ewm", "liga_pace", "liga_drtg"]].rename(
         columns={"team_id": "opp_id", "pace_ewm": "opp_pace", "drtg_ewm": "opp_drtg"})

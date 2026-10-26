@@ -24,7 +24,7 @@ def diagnostico_origen(x: pd.DataFrame, lineas_oos: pd.DataFrame) -> dict[str, p
           .groupby("movimiento").agg(apuestas=("ganancia", "size"), acierto=("resultado", "mean"),
                                      roi=("ganancia", "mean")).reset_index())
     t2 = pd.DataFrame()
-    if "libres" in x:
+    if "libres" in x and x["libres"].notna().any():
         y = x.copy()
         y["minutos_liberados_equipo"] = pd.cut(y["libres"].abs(), [-1, 5, 15, 500], labels=["<= 5", "5-15", "> 15"])
         t2 = (y.groupby("minutos_liberados_equipo", observed=True)
@@ -49,10 +49,12 @@ def estrategias() -> list[ap.Estrategia]:
 def ejecutar(con: duckdb.DuckDBPyConnection, lineas_oos: pd.DataFrame, mercado: str = "pts") -> dict:
     fechas = con.execute("SELECT game_id, fecha FROM games").df()
     lin = lineas_oos.merge(fechas, on="game_id", how="left")
-    d = ap.preparar(lin, ["p_lgb", "p_base", "p_cuant"])
+    cols = [c for c in ("p_lgb", "p_base", "p_cuant") if c in lin.columns]
+    d = ap.preparar(lin, cols)
     # Solo se evalúan las aperturas donde ya existe la mezcla (hace falta historial previo para ajustarla).
     d = d[d["p_lgb_mezcla"].notna()].copy()
-    tabla, apuestas = ap.evaluar(d, estrategias())
+    tabla, apuestas = ap.evaluar(d, [e for e in estrategias() if e.col_p.replace("_mezcla", "") in d.columns
+                                     or e.lado_fijo])
     principal = apuestas[PRINCIPAL]
     m = tabla.set_index("estrategia").loc[PRINCIPAL].to_dict()
     # Mismo modelo apostando a la cuota de CIERRE: es el momento en que de verdad se conoce lo que usa el

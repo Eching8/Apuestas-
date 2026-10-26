@@ -40,7 +40,7 @@ def _logit(p):
     return np.log(p / (1 - p))
 
 
-def mezclar_oos(d: pd.DataFrame, col: str, min_train: int = 1500) -> pd.Series:
+def mezclar_oos(d: pd.DataFrame, col: str, min_train: int = 800) -> pd.Series:
     """Probabilidad mezcla de mercado y modelo: regresión logística sobre logit(p_mercado) y logit(modelo),
     reentrenada en cada bloque con los bloques anteriores. NaN donde aún no hay datos suficientes."""
     from sklearn.linear_model import LogisticRegression
@@ -92,27 +92,32 @@ def sd_puntos(linea):
 
 
 def liquidar(x: pd.DataFrame, sd_linea=sd_puntos) -> pd.DataFrame:
+    """Resultado, ganancia y CLV de cada apuesta. 'over' equivale a 'sí' en los mercados sí/no (sin línea).
+    Para el CLV ajustado se usa la desviación de la simulación del jugador (`sd_sim`) si está disponible."""
     from scipy.stats import norm
     x = x.copy()
     gana = np.where(x["lado"] == "over", x["y"] == 1, x["y"] == 0)
     x["resultado"] = gana.astype(float)
     x["ganancia"] = np.where(gana, x["cuota"] - 1, -1.0)
     # CLV frente al cierre.
-    misma = x["linea_cierre"].notna() & (x["linea_cierre"] == x["line"])
+    hay_cierre = x["p_mercado_cierre"].notna()
+    sin_linea = x["line"].isna()
+    misma = hay_cierre & ((x["linea_cierre"] == x["line"]) | sin_linea)
     p_cierre_lado = np.where(x["lado"] == "over", x["p_mercado_cierre"], 1 - x["p_mercado_cierre"])
     x["clv"] = np.where(misma, x["cuota"] * p_cierre_lado - 1, np.nan)
     a_favor = np.where(x["lado"] == "over", x["linea_cierre"] > x["line"], x["linea_cierre"] < x["line"])
     en_contra = np.where(x["lado"] == "over", x["linea_cierre"] < x["line"], x["linea_cierre"] > x["line"])
     precio_a_favor = misma & (p_cierre_lado > x["p_justa"])
-    x["bate_cierre"] = np.where(x["linea_cierre"].isna(), np.nan,
+    x["bate_cierre"] = np.where(~hay_cierre, np.nan,
                                 np.where(a_favor | precio_a_favor, 1.0, np.where(en_contra | misma, 0.0, np.nan)))
     # CLV ajustado por línea: la probabilidad justa del cierre trasladada a NUESTRA línea con una normal
     # centrada en la media que implica el cierre (permite medir CLV aunque la línea se haya movido).
-    sd = sd_linea(x["linea_cierre"])
+    sd = x["sd_sim"].where(x["sd_sim"] > 0) if "sd_sim" in x else pd.Series(np.nan, index=x.index)
+    sd = sd.fillna(sd_linea(x["linea_cierre"].fillna(x["line"]).fillna(1.0)))
     media_cierre = x["linea_cierre"] + norm.ppf(np.clip(x["p_mercado_cierre"], 0.01, 0.99)) * sd
     p_over_nuestra = 1 - norm.cdf((x["line"] - media_cierre) / sd)
     p_lado = np.where(x["lado"] == "over", p_over_nuestra, 1 - p_over_nuestra)
-    x["clv_ajustado"] = np.where(x["linea_cierre"].notna(), x["cuota"] * p_lado - 1, np.nan)
+    x["clv_ajustado"] = np.where(sin_linea, x["clv"], np.where(hay_cierre, x["cuota"] * p_lado - 1, np.nan))
     return x
 
 
