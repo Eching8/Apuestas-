@@ -399,6 +399,12 @@ def analizar_partido(ctx: Contexto, game: dict, mercado: Mercado | None = None,
     return AnalisisPartido(dict(game), entornos, proys, evaluaciones, tds, claves, mercado, sim, defensores)
 
 
+def _precio_caducado(e: Evaluacion) -> bool:
+    """La mejor cuota paga más de 1.5 veces la de referencia (consenso o, si no hay, la justa sin margen)."""
+    ref = e.consenso or (e.oferta.justa if e.oferta else None)
+    return bool(ref and e.odd and e.odd > 1.5 * ref)
+
+
 def con_valor(partidos: list[AnalisisPartido], valor_min: float = 0.04, edge_min: float = 0.03,
               prob_min: float = 0.12, ratio_max: float = 1.6, discrepancia_max: float = 0.25) -> list[Evaluacion]:
     """Selecciones donde la probabilidad final paga más que la cuota (EV) y el modelo ve más que la casa.
@@ -412,7 +418,7 @@ def con_valor(partidos: list[AnalisisPartido], valor_min: float = 0.04, edge_min
            if e.ev is not None and e.ev >= valor_min and (e.edge or 0) >= edge_min and e.prob >= prob_min
            and e.prob_casa and e.prob_modelo / e.prob_casa <= ratio_max
            and abs(e.prob_modelo - e.prob_casa) <= discrepancia_max
-           and not (e.consenso and e.odd and e.odd > 1.5 * e.consenso)]
+           and not _precio_caducado(e)]
     return sorted(out, key=lambda e: -(e.ev or 0))
 
 
