@@ -24,6 +24,28 @@ Este repositorio contiene dos cosas:
 | 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
 | 6 | Resto de mercados, validados uno a uno, y combinadas | pendiente |
 
+### Resultados de la fase 1 (26/10/2026)
+
+- **Partidos**: 6.676 terminados, de 2021-22 a la temporada actual (regular, play-in y playoffs), con box score y
+  jugada a jugada. Faltan 4 de playoffs de 2026 que ESPN no tiene (devuelve 404).
+- **Jugada a jugada frente al box score** (fracción de jugadores cuya suma por cuartos cuadra exactamente):
+  puntos 99,9 %, triples 100 %, libres 100 %, asistencias 99,7 %, rebotes 99,5-99,8 %, tapones 99,7 %,
+  robos 99,5 %, pérdidas 98,2 %. Minutos reconstruidos con los cambios: error medio de 0,25 min (el box de ESPN
+  redondea al entero).
+- **Primer anotador**: salto inicial identificado en el 99,7 % de los partidos, titulares en el 99,9 %, primera
+  canasta en el 100 %. El equipo que gana el salto anota primero el 63-65 % de las veces.
+- **Spread y total previos**: 100 % de los partidos (pickcenter de ESPN, API core de ESPN y cierre de SportsGameOdds).
+  Control: el total implícito de cada equipo tiene correlación 0,55 con sus puntos reales y sesgo de +0,2 puntos.
+- **Cuotas históricas reales** (SportsGameOdds, consenso de casas de EE. UU.), 2025-26: 1.320 partidos con cierre
+  (desde octubre de 2025) y 710 con apertura (desde el 17/01/2026); 1,24 millones de cuotas. Jugador emparejado
+  con ESPN en el 99,95 %. El resultado que guarda la fuente coincide con el box de ESPN en el 96-99,9 % de los casos;
+  para liquidar se usará siempre el box de ESPN.
+- **Margen de la casa en el cierre** (overround medio over+under): ~6,5 % en puntos, 6,7-7,3 % en rebotes,
+  asistencias y combinados, ~7 % en triples, robos y tapones. Es el listón que el modelo tiene que superar.
+- **Catálogo de mercados**: 40 combinaciones vistas, todas "sin validar". En el histórico solo hay mercados de
+  partido completo: SportsGameOdds no conserva apertura/cierre de 1.er cuarto, 1.ª mitad ni primera canasta, así
+  que esos mercados solo se podrán validar con las capturas diarias que se acumulen desde ahora.
+
 ### Instalación
 
 ```bash
