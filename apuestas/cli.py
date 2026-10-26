@@ -5,6 +5,7 @@
     python -m apuestas diario                # actualizar (ayer) + analizar (hoy), para programarlo
     python -m apuestas validar --fecha 2026-10-21
     python -m apuestas rendimiento
+    python -m apuestas nba analizar          # props de la NBA (ver apuestas/nba/cli.py)
 """
 from __future__ import annotations
 
@@ -21,6 +22,7 @@ from .combinadas import Leg, build_combos
 from .config import FECHA_INICIO, Config, load_config
 from .db import Database
 from .football_data import FootballData, validate_day
+from .nba.cli import registrar as registrar_nba
 from .report import AVISO, save_picks, write_reports
 from .settle import settle_pending, summary
 
@@ -167,6 +169,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     r = sub.add_parser("rendimiento", help="acierto real del modelo con las selecciones liquidadas")
     r.set_defaults(func=cmd_rendimiento)
+
+    registrar_nba(sub)
     return p
 
 

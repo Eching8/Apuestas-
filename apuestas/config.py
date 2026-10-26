@@ -70,6 +70,13 @@ class Config:
     min_partidos_equipo: int = 4
     min_partidos_jugador: int = 4
 
+    # NBA: clave de SportsGameOdds (líneas de props) y filtros.
+    sgo_key: str = field(default_factory=lambda: os.environ.get("SPORTSGAMEODDS_KEY", ""))
+    nba_prob_min: float = field(default_factory=lambda: _float("APUESTAS_NBA_PROB_MIN", 0.65))
+    nba_min_partidos: int = field(default_factory=lambda: _int("APUESTAS_NBA_MIN_PARTIDOS", 8))
+    # Peso de la probabilidad de la casa (sin margen) en la probabilidad final de cada prop.
+    nba_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NBA_PESO_MERCADO", 0.4))
+
 
 def load_config() -> Config:
     return Config()

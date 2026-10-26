@@ -1,4 +1,4 @@
-# Apuestas: analizador diario de partidos y combinadas
+# Apuestas: analizador diario de partidos, combinadas y props de la NBA
 
 Busca los partidos de fútbol del día (desde el 21 de octubre de 2026 en adelante), descarga
 estadísticas reales de cada equipo y jugador, las guarda en una base de datos local que crece
@@ -97,6 +97,124 @@ Windows: Programador de tareas → acción `python -m apuestas diario` con "Inic
 - Las casas no siempre publican cuotas de córners, tarjetas o tiros en la API; sin cuota no
   hay forma de medir el valor, solo la cuota justa.
 - El modelo no conoce lesiones, rotaciones ni alineaciones. Revísalas antes de apostar.
+
+## NBA: player props por probabilidad
+
+Calcula la probabilidad de que cada prop del día pase (puntos, rebotes, asistencias, triples, robos,
+tapones, pérdidas, PRA y sus combinaciones, tiros de campo y tiros libres) y ordena las más probables.
+
+| Fuente | Para qué | Clave |
+|---|---|---|
+| ESPN (API pública) | Calendario, box score de cada jugador, **cada tiro con sus coordenadas** (zonas), posiciones y parte de lesiones | No necesita |
+| [SportsGameOdds](https://sportsgameodds.com) | Líneas y cuotas de props de varias casas (FanDuel, DraftKings, Caesars, BetMGM...) | `SPORTSGAMEODDS_KEY`. Plan gratuito: 2.500 partidos/mes, se piden solo los del día |
+
+```bash
+python -m apuestas nba historial --desde 2025-10-21     # una vez: temporada pasada + actual (~1.400 partidos, ~15 min)
+python -m apuestas nba analizar                         # props de hoy -> reportes/nba/AAAA-MM-DD.md y .json
+python -m apuestas nba actualizar                       # resultados de ayer + liquidación (analizar ya lo hace)
+python -m apuestas nba rendimiento                      # acierto real por tramo de probabilidad y estadística
+python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
+```
+
+### Qué tiene en cuenta (`apuestas/nba/modelo.py`)
+
+- **Minutos esperados**: últimos 10 partidos con más peso a los recientes; en cuanto empieza la
+  temporada, los minutos de la anterior casi no cuentan (los roles cambian). Back-to-back: -3 %.
+- **Tasa por minuto** de cada estadística, con toda su historia (la temporada anterior pesa la mitad y,
+  en cuanto hay partidos de la nueva, como mucho lo que 4 partidos). Si un jugador cambia de rol (tasa
+  ±30 % con menos de 10 partidos), la línea de la casa pesa más (60 %): conoce el rol nuevo.
+- **Bajas**: si un compañero importante está fuera, compara al jugador con y sin él (minutos y tasas).
+  Si ese compañero ya faltaba en los últimos partidos, la baja ya está en sus minutos y no se suma.
+- **Defensa rival por posición**: lo que concede el rival por minuto a bases, aleros o pívots.
+- **Zonas de tiro**: dónde tira el jugador (aro, pintura, media distancia, triple de esquina y frontal),
+  su acierto en cada zona y lo que concede el rival ahí. Ajusta puntos y triples.
+- **Tipo de defensa**: cómo le fue contra defensas fuertes, medias y débiles en esa estadística.
+- **Acierto real** sobre esa misma línea en sus últimos 15 partidos.
+- **La casa**: su probabilidad sin margen se mezcla con la del modelo (`APUESTAS_NBA_PESO_MERCADO`,
+  0.4 por defecto). Cuando modelo y casa discrepan mucho, la casa suele saber algo (rol, rotación, una baja).
+
+### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
+
+La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.
+Por ejemplo, "¿por qué 30 PRA?":
+
+- **Puntos** = tiros de campo esperados (su ritmo × minutos × cuántos tiros concede el rival) × puntos
+  por tiro (su reparto por zonas × su acierto en cada zona, ajustado por lo que concede el rival ahí)
+  + tiros libres × su % de libres.
+- **Rebotes** = % de los fallos del rival que captura mientras está en pista × fallos esperados del
+  rival + % de los fallos de su equipo que captura en ataque × fallos esperados de su equipo.
+- **Asistencias** = % de las canastas de sus compañeros que asiste con él en pista × canastas esperadas.
+- **Triples** = triples intentados × % esperado (esquina y frontal). **Robos** = % de las pérdidas del
+  rival que roba × pérdidas esperadas. **Tapones** = % de los tiros de 2 del rival que tapona × tiros de
+  2 esperados. **Pérdidas** = pérdidas por jugada × jugadas que usa × presión del rival.
+
+Lo "esperado" del partido cruza el ataque de un equipo con la defensa del otro (por 48 minutos). Junto a
+cada prop se muestran sus estadísticas relacionadas (minutos, tiros, porcentajes, % de rebotes...) en
+los últimos 5 y 10 partidos, la temporada, la anterior y contra este rival. Todo queda guardado en la
+base: la tabla `nba_analisis` tiene cada prop evaluada con su desglose y sus métricas (JSON), y la vista
+`nba_team_games` los totales de cada equipo por partido.
+
+La proyección final mezcla 30 % de este desglose y 70 % de tasa por minuto × defensa rival por posición:
+en el backtest ambas aciertan casi igual (Brier 0.2270 frente a 0.2282 usando solo el desglose), así que
+el desglose sirve sobre todo para explicar cada número y detectar cuándo algo no cuadra.
+
+La distribución es binomial negativa con la dispersión propia del jugador más la incertidumbre de sus
+minutos. El informe muestra, por partido, las props más probables y una ficha de los jugadores
+destacados: minutos, notas de bajas, su prop más probable, la línea que pasaría con 80 % de
+probabilidad (útil para líneas alternativas), su rendimiento según el tipo de defensa y la tabla de zonas.
+
+### Quién lo defiende: stats.nba.com (`nba enfrentamientos`)
+
+`python -m apuestas nba enfrentamientos` descarga de stats.nba.com, partido a partido, **quién defendió a
+quién** (posesiones y puntos de cada atacante contra cada defensor) y estadísticas avanzadas de temporada
+(uso, % de rebotes y asistencias). Con eso, para cada jugador (`apuestas/nba/marcajes.py`):
+
+- qué defensores del rival suelen marcar a su posición y qué parte de las posesiones se lleva cada uno
+  (sin los que están fuera hoy);
+- qué tan buenos son: puntos que permiten por 100 posesiones (élite / medio / débil);
+- cómo le va a él contra cada nivel de defensor y contra cada defensor concreto.
+
+El ajuste se aplica a puntos, tiros anotados y triples (máximo ±12 %) y aparece en el "¿por qué?" de cada
+prop. Aún no está validado con backtest: hace falta descargar primero los datos; después,
+`nba backtest` lo incluye automáticamente.
+
+**stats.nba.com bloquea los servidores en la nube**, incluidos los de GitHub Actions (probado: la consulta
+se queda colgada). Funciona desde una conexión de casa, así que hay dos formas de ejecutarlo:
+
+1. En tu computadora: `python -m apuestas nba enfrentamientos` (la primera vez, unas 1.400 consultas, ~30 min).
+2. Con un proxy residencial o un runner autohospedado de GitHub Actions en una computadora de casa.
+
+### Automático cada día en GitHub (`.github/workflows/nba-diario.yml`)
+
+Corre en los servidores de GitHub a las 10:47 (Ciudad de México): guarda los resultados de ayer, liquida
+las props, baja lesiones y líneas de hoy y publica el informe en la rama `nba-informes`
+(`ultimo.md` y `nba/AAAA-MM-DD.md`). Necesita el secreto `SPORTSGAMEODDS_KEY` (*Settings → Secrets and
+variables → Actions*) y que el flujo esté en `main` para el horario y el botón *Run workflow*. La base se
+conserva con la caché de Actions; si se pierde, se reconstruye sola desde ESPN.
+
+### ¿Está calibrado?
+
+Backtest del 20 de febrero al 10 de marzo de 2026 (19.700 props, línea de referencia = mediana de los
+últimos 10 partidos del jugador, sin cuotas):
+
+| El modelo dice | Pasó |
+|---|---|
+| 65-70 % (media 67.4 %) | 67.3 % |
+| 70-75 % (media 72.2 %) | 71.6 % |
+| 75-80 % (media 77.2 %) | 78.8 % |
+| 80-85 % (media 82.2 %) | 85.4 % |
+| 85 %+ (media 88.4 %) | 91.0 % |
+
+Arranque de temporada (22 oct-25 nov de 2025, con 2024-25 como temporada anterior): en jugadores con
+cambio de rol, limitar la temporada anterior a 4 partidos baja el Brier de 0.2274 a 0.2256; en el resto
+no cambia.
+
+Qué aporta cada factor (Brier, menor es mejor; base 0.2270): sin defensa por posición 0.2277, sin el
+acierto real 0.2279. Las zonas de tiro y el tipo de defensa apenas cambian el resultado global (±0.0001):
+se quedan sobre todo como explicación en las fichas. Limitaciones: el backtest no tiene partes de lesiones
+históricos ni líneas reales de las casas, que son más difíciles de batir que la mediana. `nba rendimiento`
+es la medida honesta con apuestas reales. No hay datos de quién defendió a quién (eso solo está en
+stats.nba.com); el "tipo de jugador" se aproxima con la defensa del rival por posición y por zona.
 
 ## Pruebas
 
