@@ -119,6 +119,10 @@ def cmd_minutos_validar(cfg, args) -> None:
     from .backtest import minutos as bm
     con = _con(cfg, solo_lectura=True)
     r = bm.validar(con, desde=args.desde)
+    # Predicciones fuera de muestra: entrada de la validación de la fase 3 (puntos).
+    cache = config.RAIZ / "data" / "cache" / "minutos_oos.parquet"
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    r["predicciones"].to_parquet(cache)
     ruta = config.RAIZ / "reportes" / "fase2_minutos.md"
     bm.guardar_informe(r, ruta)
     print(bm.informe(r))
@@ -144,6 +148,40 @@ def cmd_minutos_proyectar(cfg, args) -> None:
     for gid, g in out.groupby("game_id"):
         print(f"\n== Partido {gid}")
         print(g.sort_values(["team_id", "min_pred"], ascending=[True, False])[cols].round(1).to_string(index=False))
+
+
+def cmd_puntos_validar(cfg, args) -> None:
+    """Walk-forward del modelo de puntos con minutos fuera de muestra -> reportes/fase3_puntos.md."""
+    import pandas as pd
+    from .backtest import puntos as bp
+    cache = config.RAIZ / "data" / "cache" / "minutos_oos.parquet"
+    if not cache.exists():
+        raise SystemExit("Falta data/cache/minutos_oos.parquet: ejecuta antes `minutos validar --desde 2022-10-01`")
+    con = _con(cfg, solo_lectura=True)
+    r = bp.validar(con, pd.read_parquet(cache), desde=args.desde, n_sims=args.sims)
+    r["pred"].to_parquet(config.RAIZ / "data" / "cache" / "puntos_oos.parquet")
+    r["lineas"].to_parquet(config.RAIZ / "data" / "cache" / "puntos_lineas_oos.parquet")
+    bp.guardar(r, config.RAIZ / "reportes")
+    print(bp.informe(r))
+
+
+def cmd_puntos_proyectar(cfg, args) -> None:
+    from .data import recolector
+    from .models import puntos as mp
+    con = _con(cfg)
+    fecha = args.fecha or recolector.hoy_et().isoformat()
+    out, sim = mp.proyectar(con, cfg, fecha, n_sims=cfg["puntos"]["simulaciones"])
+    if out.empty:
+        return
+    cols = ["name", "estado_lesion", "min_si_juega", "pts_media", "pts_q10", "pts_q50", "pts_q90"]
+    for gid, g in out.groupby("game_id"):
+        print(f"\n== Partido {gid}")
+        print(g.sort_values("pts_media", ascending=False)[cols].head(12).round(1).to_string(index=False))
+    lin = mp.probabilidades_lineas(con, sim["filas"], sim["sims"])
+    if not lin.empty:
+        print("\nLíneas capturadas:")
+        print(lin.merge(out[["game_id", "player_id", "name"]], on=["game_id", "player_id"])
+              [["name", "line", "p_over", "p_under"]].round(3).to_string(index=False))
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -188,6 +226,15 @@ def main(argv: list[str] | None = None) -> int:
     p = mi.add_parser("proyectar", help="minutos de los partidos de una fecha")
     p.add_argument("--fecha", help="AAAA-MM-DD (por defecto hoy, hora del este)")
     p.set_defaults(f=cmd_minutos_proyectar)
+
+    pu = grupos.add_parser("puntos", help="fase 3: modelo de puntos").add_subparsers(dest="cmd", required=True)
+    p = pu.add_parser("validar", help="validación walk-forward mensual con líneas reales")
+    p.add_argument("--desde", default="2023-10-01")
+    p.add_argument("--sims", type=int, default=2000, help="simulaciones por jugador en la validación")
+    p.set_defaults(f=cmd_puntos_validar)
+    p = pu.add_parser("proyectar", help="distribución de puntos de los partidos de una fecha")
+    p.add_argument("--fecha")
+    p.set_defaults(f=cmd_puntos_proyectar)
 
     args = ap.parse_args(argv)
     cfg = config.cargar(args.config)

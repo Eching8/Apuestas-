@@ -52,3 +52,8 @@ minutos:
     Day-To-Day: 0.65
     Probable: 0.9
     otro: 0.5
+
+puntos:
+  modelo: data/modelos/puntos.joblib
+  reentrenar_cada_dias: 7
+  simulaciones: 10000       # por partido (mínimo pedido: 10.000)

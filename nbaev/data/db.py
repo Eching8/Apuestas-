@@ -192,6 +192,14 @@ CREATE TABLE IF NOT EXISTS proj_minutos (
     PRIMARY KEY (fecha, game_id, player_id)
 );
 
+-- Distribución de puntos simulada de cada jugador probable (fase 3).
+CREATE TABLE IF NOT EXISTS proj_puntos (
+    fecha DATE, game_id VARCHAR, player_id VARCHAR, team_id VARCHAR, name VARCHAR, estado_lesion VARCHAR,
+    prob_juega DOUBLE, p_dnp DOUBLE, min_si_juega DOUBLE, pts_media DOUBLE, pts_q10 DOUBLE, pts_q25 DOUBLE,
+    pts_q50 DOUBLE, pts_q75 DOUBLE, pts_q90 DOUBLE, created_at TIMESTAMP,
+    PRIMARY KEY (fecha, game_id, player_id)
+);
+
 -- Registro de descargas (qué se pidió, cuándo y si falló).
 CREATE TABLE IF NOT EXISTS ingest_log (
     source VARCHAR, key VARCHAR, status VARCHAR, detail VARCHAR, logged_at TIMESTAMP,
