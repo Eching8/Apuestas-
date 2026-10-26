@@ -18,7 +18,7 @@ Este repositorio contiene dos cosas:
 | Fase | Contenido | Estado |
 |---|---|---|
 | 1 | Datos: box scores, jugada a jugada, cuartos, quintetos, primer anotador, contexto, lesiones, cuotas | **hecha** |
-| 2 | Proyección de minutos | pendiente |
+| 2 | Proyección de minutos | **hecha** |
 | 3 | Modelo de puntos (distribución completa + Monte Carlo) | pendiente |
 | 4 | Validación walk-forward y backtest con cuotas reales | pendiente |
 | 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | pendiente |
@@ -45,6 +45,35 @@ Este repositorio contiene dos cosas:
 - **Catálogo de mercados**: 40 combinaciones vistas, todas "sin validar". En el histórico solo hay mercados de
   partido completo: SportsGameOdds no conserva apertura/cierre de 1.er cuarto, 1.ª mitad ni primera canasta, así
   que esos mercados solo se podrán validar con las capturas diarias que se acumulen desde ahora.
+
+### Fase 2: proyección de minutos (`nbaev/features/minutos.py`, `nbaev/models/minutos.py`)
+
+```bash
+python -m nbaev minutos validar      # walk-forward mensual -> reportes/fase2_minutos.md
+python -m nbaev minutos entrenar     # entrena con todo el histórico (data/modelos/minutos.joblib)
+python -m nbaev minutos proyectar    # minutos de los partidos de hoy (tabla proj_minutos)
+```
+
+- **Población**: jugadores vestidos (jugaron o DNP técnico). Los lesionados no se proyectan: el parte de lesiones
+  dice antes del partido que no juegan. En partidos futuros la plantilla probable son los que aparecieron en los
+  últimos 5 partidos del equipo esta temporada (sin traspasados) más los del parte de lesiones, cada uno con una
+  probabilidad de jugar según su estado (`minutos.prob_juega` en la configuración: Out 0, Doubtful 0,25,
+  Questionable 0,5, Day-To-Day 0,65; es una heurística sin calibrar porque no hay partes históricos).
+- **Bajas de compañeros**: ESPN casi nunca lista a los lesionados, así que no se cuentan uno a uno. Se mide cuántos
+  minutos habituales hay disponibles en el equipo frente a lo normal (`libres`, también por posición) y se reparte
+  la base de cada jugador para que el equipo sume 240 (`min_norm`).
+- **Modelo**: LightGBM con 34 variables (historial del jugador, rol, minutos liberados, descanso, viaje, spread y
+  total). Da la media con riesgo de no jugar, la media y los cuantiles 10/50/90 **si juega** (las props se anulan si
+  no juega) y la P(DNP técnico). Las medias de cada equipo se reparten para sumar los minutos de un partido.
+- **Resultado** (walk-forward mensual, oct-2023 a oct-2026, 102.378 filas fuera de muestra; informe completo en
+  `docs/resultados/fase2_minutos.md`): error medio de **4,49 min** frente a 5,24 del mejor baseline (−14 %; bootstrap
+  por partido: −0,75 min, IC 95 % [−0,78, −0,71]). En jugadores con prop: 4,53 frente a 5,10. Mejora en todos los
+  segmentos (bajas de compañeros 5,15 frente a 6,26; vuelta de lesión 5,06 frente a 6,03; playoffs 4,04 frente a
+  5,11). Cuantiles si juega: cobertura real 9,7 / 49,6 / 89,0 % (nominal 10 / 50 / 90). P(DNP) calibrada: Brier
+  0,079 frente a 0,093 de la tasa reciente del jugador.
+- **Limitaciones**: en jugadores con prop y proyección baja (< 15 min) el modelo se queda 3 min corto: la casa saca
+  prop cuando espera más rol (sabe de bajas o cambios que el modelo no ve). No se usa el quinteto titular confirmado
+  (no hay histórico fiable antes del salto); usarlo cuando se publique mejoraría la proyección.
 
 ### Instalación
 
