@@ -236,6 +236,8 @@ class NbaDB:
         )
 
     def save_props(self, fecha: str, rows: list[dict]) -> None:
+        # Cada descarga reemplaza las líneas del día: las que ya no ofrece ninguna casa no deben quedar.
+        self.conn.execute("DELETE FROM nba_props WHERE fecha = ?", (fecha,))
         self.conn.executemany(
             """INSERT OR REPLACE INTO nba_props(fecha, game_id, player_id, stat, line, over_odd, under_odd, books,
                    fetched_at)

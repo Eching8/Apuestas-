@@ -133,7 +133,14 @@ class ParsersTest(unittest.TestCase):
         }}
         props = parse_props(ev)
         self.assertEqual(len(props), 1)
+        # Una línea sin ninguna casa detrás no es apostable: se descarta.
+        del ev["odds"]["a"]["byBookmaker"]
+        self.assertEqual(parse_props(ev), [])
+        ev["odds"]["a"]["byBookmaker"] = {"fd": {}}
+        props = parse_props(ev)
         self.assertEqual((props[0]["stat"], props[0]["line"], props[0]["books"]), ("points", 20.5, 1))
+        # El lado "menos" no lo ofrece ninguna casa: sin cuota, no se puede apostar.
+        self.assertEqual((props[0]["over_odd"], props[0]["under_odd"]), (americana_a_decimal("-110"), None))
 
 
 class ModeloTest(unittest.TestCase):
@@ -196,7 +203,8 @@ class ModeloTest(unittest.TestCase):
                                   "JUGADOR_11_1_NBA": {"name": "Jugador 11"}},
                       "odds": {f"{lado}{pid}": {"statID": "points", "playerID": pid, "periodID": "game",
                                                 "betTypeID": "ou", "sideID": lado, "bookOddsAvailable": True,
-                                                "bookOverUnder": "14.5", "bookOdds": "-110"}
+                                                "bookOverUnder": "14.5", "bookOdds": "-110",
+                                                "byBookmaker": {"fanduel": {}}}
                                for lado in ("over", "under") for pid in ("ANGEL_PEREZ_JR_1_NBA", "JUGADOR_11_1_NBA")}}
             ctx = construir_contexto(db.conn, FECHA)
             n, sin = emparejar_props(db, FECHA, [evento], ctx)
