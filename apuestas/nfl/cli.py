@@ -72,7 +72,8 @@ def _mercados(cfg: Config, nfl: NflDB, desde: str, dias: int, juegos: list[dict]
     """Líneas de SportsGameOdds para los partidos de la ventana, emparejadas con nflverse y guardadas."""
     sgo = SportsGameOddsNfl(cfg.sgo_key)
     ini = datetime.now(timezone.utc) - timedelta(hours=4)
-    fin = datetime.fromisoformat(desde).replace(tzinfo=timezone.utc) + timedelta(days=dias + 1)
+    # Los partidos nocturnos de EE. UU. empiezan después de medianoche UTC: la ventana llega hasta el mediodía siguiente.
+    fin = datetime.fromisoformat(desde).replace(tzinfo=timezone.utc) + timedelta(days=dias + 1, hours=12)
     eventos = sgo.eventos(max(ini, datetime.fromisoformat(desde).replace(tzinfo=timezone.utc) - timedelta(hours=12)), fin)
     roster = [dict(r) for r in nfl.conn.execute("SELECT player_id, name, team FROM nfl_rosters")]
     out, capturado = {}, now_iso()
