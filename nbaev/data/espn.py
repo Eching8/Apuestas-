@@ -184,7 +184,9 @@ def parse_box(summary: dict) -> tuple[list[dict], list[dict]]:
         for bloque in t.get("statistics", []):
             labels = bloque.get("labels") or bloque.get("names") or []
             for a in bloque.get("athletes", []):
-                ath = a["athlete"]
+                ath = a.get("athlete") or {}
+                if not ath.get("id"):
+                    continue  # ESPN a veces lista un jugador sin id (p. ej. en convocatorias de los Bulls 2025-26)
                 pos = (ath.get("position") or {}).get("abbreviation")
                 s = dict(zip(labels, a.get("stats") or []))
                 mins = minutos(s.get("MIN"))
