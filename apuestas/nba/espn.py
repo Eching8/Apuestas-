@@ -98,12 +98,14 @@ def _int(v) -> int | None:
 
 
 def _minutos(v: str) -> float:
-    if not v or v in ("--", "DNP"):
+    """'34', '34:12' o marcas de no jugó ('-', '--', 'DNP')."""
+    try:
+        if v and ":" in v:
+            m, s = v.split(":", 1)
+            return int(m) + int(s) / 60
+        return float(v)
+    except (TypeError, ValueError):
         return 0.0
-    if ":" in v:
-        m, s = v.split(":", 1)
-        return int(m) + int(s) / 60
-    return float(v)
 
 
 def _hecho_intentado(v: str) -> tuple[int, int]:

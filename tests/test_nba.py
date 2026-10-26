@@ -106,6 +106,10 @@ class ParsersTest(unittest.TestCase):
         self.assertEqual(len(tiros), 1)  # el tiro libre no cuenta como tiro de campo
         self.assertEqual((tiros[0]["zone"], tiros[0]["assisted"], tiros[0]["opp_id"]), ("aro", 1, "2"))
 
+    def test_minutos(self):
+        from apuestas.nba.espn import _minutos
+        self.assertEqual([_minutos(v) for v in ("34", "34:30", "-", "--", "DNP", None)], [34, 34.5, 0, 0, 0, 0])
+
     def test_posiciones(self):
         self.assertEqual([grupo_posicion(p) for p in ("PG", "SG", "G", "SF", "PF", "F", "C", None)],
                          ["G", "G", "G", "F", "F", "F", "C", "G"])

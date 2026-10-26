@@ -115,6 +115,26 @@ def _ficha(ctx: Contexto, part: Partido, pid: str) -> list[str]:
     return out + [""]
 
 
+def combinadas(picks: list[tuple[Partido, Evaluacion]]) -> list[str]:
+    """Probabilidad de acertar todas: las más probables de partidos distintos, multiplicadas."""
+    elegidas, partidos = [], set()
+    for p, e in picks:
+        if p.game["id"] not in partidos:
+            partidos.add(p.game["id"])
+            elegidas.append(e)
+    if len(elegidas) < 2:
+        return []
+    out = ["**Si haces combinada:** cada selección que añades multiplica el riesgo. Probabilidad de acertar "
+           "todas con las más probables de partidos distintos:", ""]
+    prob = elegidas[0].prob
+    for n, e in enumerate(elegidas[1:6], 2):
+        prob *= e.prob
+        out.append(f"- {n} selecciones: **{_pct(prob)}**")
+    return out + ["", "Dentro de un mismo partido (bet builder) las selecciones no son independientes y el "
+                  "cálculo es aún menos fiable. Con 12 selecciones al 65 % la probabilidad de acertar todas es "
+                  "menor del 1 %.", ""]
+
+
 def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
     out, por_jugador = [], {}
     for e in part.evaluaciones:
@@ -145,7 +165,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
     if picks:
         md += ["| Partido " + CABECERA, "|---" + SEPARADOR]
         md += [_fila(e, p.titulo) for p, e in picks[:30]]
-        md += ["", "### En qué se basan las 10 más probables", ""]
+        md += [""] + combinadas(picks) + ["### En qué se basan las 10 más probables", ""]
         for p, e in picks[:10]:
             md += [f"#### {etiqueta(e)} ({_pct(e.prob)}) — {p.titulo}", ""] + por_que(e)
     else:

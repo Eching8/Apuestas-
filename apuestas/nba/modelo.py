@@ -52,6 +52,11 @@ K_TEMPORADA_ANTERIOR: float | None = 4.0
 # Entonces la casa (que conoce el rol nuevo) pesa más en la probabilidad final.
 CAMBIO_ROL = 0.3
 PESO_MERCADO_CAMBIO_ROL = 0.6
+# Al empezar la temporada la casa conoce roles y rotaciones nuevas mejor que unos pocos partidos: su peso
+# baja de 0.7 (0 partidos de esta temporada) al normal (PESO_MERCADO) a los 15 partidos. El 25 oct 2026
+# (769 props con resultado) la casa sola tuvo Brier 0.2449, el modelo solo 0.2500 y la mezcla 0.2456.
+PESO_MERCADO_INICIO = 0.7
+PARTIDOS_INICIO = 15
 DECAY_TASA = 0.97          # peso del partido i-ésimo más reciente para las tasas
 DECAY_MINUTOS = 0.8        # ídem para los minutos (cambian rápido: rol, rotación)
 PARTIDOS_MINUTOS = 10
@@ -524,6 +529,9 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
     pred = predecir(ctx, j, stat)
     lados = {}
     con_cuota = bool(over_odd or under_odd)
+    n_actual = sum(1 for p in j.partidos if p["season"] == ctx.temporada)
+    peso_mercado = max(peso_mercado, peso_mercado + (PESO_MERCADO_INICIO - peso_mercado)
+                       * max(0.0, 1 - n_actual / PARTIDOS_INICIO))
     if j.pocos_con_equipo:
         peso_mercado = max(peso_mercado, PESO_MERCADO_TRASPASO)
     if set(COMPONENTES[stat]) & set(j.cambio_rol):
