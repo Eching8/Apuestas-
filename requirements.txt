@@ -11,3 +11,4 @@ duckdb>=1.0
 PyYAML>=6.0
 tabulate>=0.9
 pytest>=8.0
+streamlit>=1.30   # opcional: dashboard (nbaev/app/dashboard.py)

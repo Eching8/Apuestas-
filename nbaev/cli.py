@@ -266,8 +266,15 @@ def cmd_backtest_mercados(cfg, args) -> None:
     for carpeta in (config.RAIZ / "reportes", config.RAIZ / "docs" / "resultados"):
         carpeta.mkdir(parents=True, exist_ok=True)
         (carpeta / "fase6_mercados.md").write_text(texto, encoding="utf-8")
-    # Las mezclas modelo + mercado de cada mercado se regeneran con estas líneas.
+    # Las mezclas modelo + mercado de cada mercado se regeneran con estas líneas, y el estado de los mercados se
+    # versiona en config/ para que un clon nuevo (o GitHub Actions) lo tenga sin repetir la validación.
+    from . import diario
     (config.RAIZ / cfg["apuestas"]["mezclas"]).unlink(missing_ok=True)
+    diario.mezclas_vigentes(cfg)
+    estados = con.execute("SELECT market, period, estado, apuestas, roi_cierre, roi_cierre_ic_inf, clv_ajustado, "
+                          "CAST(evaluado_at AS VARCHAR) AS evaluado_at FROM market_validation").df()
+    (config.RAIZ / "config" / "estado_mercados.json").write_text(
+        estados.to_json(orient="records", force_ascii=False, indent=1), encoding="utf-8")
     print(texto)
 
 
@@ -310,6 +317,38 @@ def cmd_comparar(cfg, args) -> None:
         if args.equipo:
             team = filas.loc[filas["name"].str.contains(args.jugador_de_partido, case=False), "team_id"].iloc[0]
         print(cb.maximo(filas, sims, gid, args.mercado, team).round(3).to_string(index=False))
+
+
+def cmd_props(cfg, args) -> None:
+    """Las N mejores props del día (tabla de `diario`): mayor EV entre las que pasan todos los filtros,
+    máximo 1 por jugador y `--max-partido` por partido. Indica siempre si el mercado está validado."""
+    import pandas as pd
+    from .data import recolector
+    fecha = args.fecha or recolector.hoy_et().isoformat()
+    ruta = config.RAIZ / "reportes" / "diario" / f"{fecha}.csv"
+    if not ruta.exists():
+        raise SystemExit(f"No hay tabla del {fecha}: ejecuta antes `python -m nbaev diario`")
+    t = pd.read_csv(ruta)
+    p = t[t["pick"]].sort_values("EV", ascending=False)
+    p = p.drop_duplicates("jugador").groupby("partido", group_keys=False).head(args.max_partido).head(args.n)
+    if p.empty:
+        print("Ninguna línea pasa todos los filtros hoy.")
+        return
+    validados = (p["estado del mercado"] == "validado").sum()
+    print(f"Props del {fecha} ({len(p)}; en mercados validados: {validados}).")
+    if validados < len(p):
+        print("AVISO: las props de mercados no validados son informativas (monto 0): el backtest no demostró "
+              "ventaja en esos mercados.")
+    for i, (_, r) in enumerate(p.iterrows(), 1):
+        linea = "" if pd.isna(r["línea"]) else f" {r['línea']:g}"
+        periodo = "" if r["periodo"] == "game" else f" ({r['periodo']})"
+        print(f"\n{i}. {r['jugador']} ({r['partido']}) — {r['mercado']}{periodo} {r['lado']}{linea} @ {r['cuota']:.2f} "
+              f"({r['casa']})")
+        print(f"   proyección {r['proyección']:.2f} · minutos {r['minutos proyectados']:.0f} · prob. final "
+              f"{r['prob. final']:.1%} vs justa {r['prob. justa']:.1%} · edge {r['edge']:+.1%} · EV {r['EV']:+.1%} · "
+              f"monto {r['monto sugerido']:.2f} · mercado {r['estado del mercado']}")
+        if isinstance(r["razones (SHAP)"], str) and r["razones (SHAP)"]:
+            print(f"   razones: {r['razones (SHAP)']}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -392,6 +431,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--sims", type=int, default=2000)
     p.set_defaults(f=cmd_mercados_validar)
 
+    p = grupos.add_parser("props", help="las N mejores props del día (de la tabla de `diario`)")
+    p.add_argument("--n", type=int, default=8)
+    p.add_argument("--max-partido", type=int, default=2)
+    p.add_argument("--fecha")
+    p.set_defaults(f=cmd_props)
     p = grupos.add_parser("combinada", help="probabilidad conjunta de una combinada (simulaciones del día)")
     p.add_argument("--fecha")
     p.add_argument("--sel", action="append", required=True,

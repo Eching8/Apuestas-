@@ -29,11 +29,19 @@ CLAVE = ["game_id", "player_id", "market", "period", "line"]
 
 
 def estado_mercados(con) -> dict[tuple[str, str], str]:
-    """(mercado, periodo) -> estado. Sin validación registrada: 'sin validar'."""
+    """(mercado, periodo) -> estado. Si la base no tiene validaciones (clon nuevo, GitHub Actions) se usa el
+    resultado versionado en config/estado_mercados.json. Sin validación registrada: 'sin validar'."""
     try:
         filas = con.execute("SELECT market, period, estado FROM market_validation").fetchall()
     except Exception:
         filas = []
+    if not filas:
+        import json
+
+        from ..config import RAIZ
+        ruta = RAIZ / "config" / "estado_mercados.json"
+        if ruta.exists():
+            filas = [(d["market"], d["period"], d["estado"]) for d in json.loads(ruta.read_text(encoding="utf-8"))]
     return {(m, p): e for m, p, e in filas}
 
 

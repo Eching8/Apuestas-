@@ -15,7 +15,7 @@ NOMBRES = {
     "r_fta": "tiros libres por minuto", "p_fg2": "% de 2", "p_fg3": "% de 3", "p_ft": "% de libres",
     "usg_ewm": "uso (usage) reciente", "ts_ewm": "true shooting reciente", "n_hist": "partidos de historial",
     "min_base": "minutos habituales", "titular_ewm": "frecuencia como titular", "libres": "minutos libres en el equipo (bajas)",
-    "libres_pos": "minutos libres en su posición", "fga_libres": "tiros libres de compañeros ausentes",
+    "libres_pos": "minutos libres en su posición", "fga_libres": "tiros que dejan compañeros ausentes",
     "def_pos": "defensa rival frente a su posición", "def_drtg": "rating defensivo del rival", "ritmo_esp": "ritmo esperado",
     "total": "total del partido", "total_implicito": "puntos esperados de su equipo", "spread_equipo": "spread",
     "is_home": "local", "b2b": "back-to-back", "dias_descanso": "días de descanso", "playoffs": "playoffs",
@@ -26,6 +26,12 @@ NOMBRES = {
     "titular_ult": "titular en el último partido", "dnp_ewm": "frecuencia sin jugar", "pf36_ewm": "faltas por 36 min",
     "dias_desde": "días desde su último partido", "cambio_equipo": "cambio de equipo", "min_norm": "minutos normalizados del equipo",
     "rango_equipo": "jerarquía en la rotación", "n_disponibles": "jugadores disponibles", "suma_base": "minutos habituales disponibles",
+    "r_oreb": "rebotes ofensivos por minuto", "r_dreb": "rebotes defensivos por minuto", "r_ast": "asistencias por minuto",
+    "r_stl": "robos por minuto", "r_blk": "tapones por minuto", "r_tov": "pérdidas por minuto",
+    "def_pos_pts": "defensa rival en puntos (su posición)", "def_pos_oreb": "rival concede rebotes ofensivos",
+    "def_pos_dreb": "rival concede rebotes defensivos", "def_pos_ast": "rival concede asistencias",
+    "def_pos_stl": "rival pierde balones (robos)", "def_pos_blk": "rival concede tapones",
+    "def_pos_tov": "rival fuerza pérdidas", "def_pos_fg3m": "rival concede triples",
     "partidos_4d": "partidos en 4 días", "km_viaje": "km de viaje", "spread_abs": "riesgo de paliza", "partido_temp": "jornada",
 }
 

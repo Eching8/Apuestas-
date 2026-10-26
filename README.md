@@ -13,6 +13,20 @@ Este repositorio contiene dos cosas:
 
 ## nbaev: props NBA con valor esperado
 
+### Uso rápido (cada día)
+
+```bash
+pip install -r requirements.txt
+python -m nbaev datos historial            # solo la primera vez (~40 min): histórico desde 2021-22
+python -m nbaev diario                     # datos, lesiones, cuotas, simulación y picks de hoy
+python -m nbaev props --n 8                # las 8 mejores props del día, con su estado de validación
+python -m nbaev datos importar-csv b365.csv && python -m nbaev diario --sin-actualizar   # con cuotas de bet365
+streamlit run nbaev/app/dashboard.py       # tabla completa con filtros
+```
+
+Repite `python -m nbaev diario` cerca del inicio de los partidos (lesiones y cuotas más recientes). **Estado actual:
+ningún mercado está validado** (ver fases 4 y 6): las props salen con monto 0 y son informativas.
+
 ### Plan por fases
 
 | Fase | Contenido | Estado |

@@ -5,7 +5,8 @@ name: nbaev datos diarios
 # la primera ejecución reconstruye el histórico desde ESPN (1-2 horas).
 on:
   schedule:
-    - cron: "13 16 * * *"   # 10:13 en Ciudad de México
+    - cron: "13 16 * * *"   # 10:13 en Ciudad de México: datos, lesiones y primera captura de cuotas
+    - cron: "17 22 * * *"   # 16:17 en Ciudad de México: segunda captura antes de los partidos (CLV y picks)
   workflow_dispatch:
 
 concurrency:

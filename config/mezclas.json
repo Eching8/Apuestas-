@@ -1,0 +1,155 @@
+{
+ "_defecto": {
+  "mercado": "_defecto",
+  "intercepto": 0.0,
+  "peso_mercado": 0.7,
+  "peso_modelo": 0.3,
+  "sd_edge": 0.04,
+  "n": 0,
+  "ajustada_con": "cierre"
+ },
+ "ast": {
+  "mercado": "ast",
+  "intercepto": -0.07005991235944509,
+  "peso_mercado": 0.912171782834494,
+  "peso_modelo": 0.1817417908022552,
+  "sd_edge": 0.017749742480229702,
+  "n": 7776,
+  "ajustada_con": "cierre"
+ },
+ "blk": {
+  "mercado": "blk",
+  "intercepto": -0.04423418763117485,
+  "peso_mercado": 0.7012909207539683,
+  "peso_modelo": 0.3827063343529231,
+  "sd_edge": 0.024597422023101802,
+  "n": 9891,
+  "ajustada_con": "cierre"
+ },
+ "doble_doble": {
+  "mercado": "doble_doble",
+  "intercepto": -0.0960173386753709,
+  "peso_mercado": 1.0767458281508995,
+  "peso_modelo": 0.06675814037079027,
+  "sd_edge": 0.012018214376430119,
+  "n": 7088,
+  "ajustada_con": "cierre"
+ },
+ "fg3m": {
+  "mercado": "fg3m",
+  "intercepto": -0.09667402919094265,
+  "peso_mercado": 1.0975805723386116,
+  "peso_modelo": -0.009664676037625566,
+  "sd_edge": 0.006608588029101014,
+  "n": 9497,
+  "ajustada_con": "cierre"
+ },
+ "fgm": {
+  "mercado": "fgm",
+  "intercepto": -0.011923954861114555,
+  "peso_mercado": 0.6197516993418715,
+  "peso_modelo": 0.3269157074151201,
+  "sd_edge": 0.029752740185023552,
+  "n": 9516,
+  "ajustada_con": "cierre"
+ },
+ "ftm": {
+  "mercado": "ftm",
+  "intercepto": -0.019393551107346117,
+  "peso_mercado": 0.747031079917079,
+  "peso_modelo": 0.1687195792493998,
+  "sd_edge": 0.020326753307200702,
+  "n": 3335,
+  "ajustada_con": "cierre"
+ },
+ "pa": {
+  "mercado": "pa",
+  "intercepto": -0.022918394432288845,
+  "peso_mercado": 1.2727058020701019,
+  "peso_modelo": 0.17983514679653997,
+  "sd_edge": 0.02008068174013245,
+  "n": 9487,
+  "ajustada_con": "cierre"
+ },
+ "pr": {
+  "mercado": "pr",
+  "intercepto": -0.054084571905138976,
+  "peso_mercado": 0.832530197353006,
+  "peso_modelo": 0.0896345053351454,
+  "sd_edge": 0.00959736560061052,
+  "n": 9468,
+  "ajustada_con": "cierre"
+ },
+ "pra": {
+  "mercado": "pra",
+  "intercepto": -0.05362728996678056,
+  "peso_mercado": 1.2390952720159978,
+  "peso_modelo": 0.08142070797110657,
+  "sd_edge": 0.010087398233065792,
+  "n": 9785,
+  "ajustada_con": "cierre"
+ },
+ "pts": {
+  "mercado": "pts",
+  "intercepto": -0.03760503475065111,
+  "peso_mercado": 1.2249552931658547,
+  "peso_modelo": 0.10087098399271364,
+  "sd_edge": 0.011235575458582408,
+  "n": 8933,
+  "ajustada_con": "cierre"
+ },
+ "ra": {
+  "mercado": "ra",
+  "intercepto": -0.08368854267489952,
+  "peso_mercado": 1.1157502114131266,
+  "peso_modelo": 0.1472758731759996,
+  "sd_edge": 0.017559907975173483,
+  "n": 9946,
+  "ajustada_con": "cierre"
+ },
+ "reb": {
+  "mercado": "reb",
+  "intercepto": -0.06817463460028705,
+  "peso_mercado": 0.8339981034681183,
+  "peso_modelo": 0.1905316711237864,
+  "sd_edge": 0.017654075584206858,
+  "n": 9801,
+  "ajustada_con": "cierre"
+ },
+ "stl": {
+  "mercado": "stl",
+  "intercepto": -0.09701389629751796,
+  "peso_mercado": 0.5796983719849896,
+  "peso_modelo": 0.42325176527778063,
+  "sd_edge": 0.024591561491282554,
+  "n": 9706,
+  "ajustada_con": "cierre"
+ },
+ "stocks": {
+  "mercado": "stocks",
+  "intercepto": -0.0850553215947279,
+  "peso_mercado": 0.5457073505351673,
+  "peso_modelo": 0.4080334757442181,
+  "sd_edge": 0.026405081953162855,
+  "n": 9451,
+  "ajustada_con": "cierre"
+ },
+ "tov": {
+  "mercado": "tov",
+  "intercepto": -0.03962034968684819,
+  "peso_mercado": 0.39508769083161505,
+  "peso_modelo": 0.6231713459225933,
+  "sd_edge": 0.06019013269376239,
+  "n": 4529,
+  "ajustada_con": "cierre"
+ },
+ "triple_doble": {
+  "mercado": "triple_doble",
+  "intercepto": 0.22201386135170328,
+  "peso_mercado": 0.9271729064961195,
+  "peso_modelo": 0.26545290738308186,
+  "sd_edge": 0.013877978806725172,
+  "n": 1112,
+  "ajustada_con": "cierre"
+ }
+}
