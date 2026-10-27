@@ -4,6 +4,7 @@
     python -m apuestas nfl analizar                       # los próximos 7 días: props, TD, valor -> informe
     python -m apuestas nfl td                             # quién tiene más probabilidad de anotar (1+ y 2+)
     python -m apuestas nfl mercados --tipo partido        # todos los mercados: jugador, periodos, defensa, partido
+    python -m apuestas nfl hoja --equipo BUF              # hoja de picks del partido: los dos lados, listos para elegir
     python -m apuestas nfl matchup BUF LAC                # el enfrentamiento: ataque contra defensa, métrica a métrica
     python -m apuestas nfl validar "Derrick Henry +2 TD"  # ¿es buena esta apuesta? ¿por qué la juega la gente?
     python -m apuestas nfl jugador "Josh Allen"           # ficha: rol, tendencias, rivales, próxima proyección
@@ -25,6 +26,7 @@ from .analizador import (AnalisisPartido, analizar_partido, con_valor, evaluar_e
 from .backtest import backtest, resumen
 from .db import NflDB
 from .fuentes import EspnNfl, Nflverse
+from .hoja import hoja
 from .informe import escribir
 from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, parse_evento
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
@@ -231,6 +233,18 @@ def cmd_mercados(args, cfg: Config, db: Database) -> int:
         casa = f"{e.prob_casa * 100:4.0f}%" if e.prob_casa is not None else "    -"
         print(f"{e.ev * 100:+5.0f}% {e.prob * 100:4.0f}% {e.prob_modelo * 100:4.0f}% {casa} {e.odd:6.2f}  "
               f"{(e.book or '')[:12]:<12} {e.etiqueta()} ({titulos.get(e.game_id, '')})")
+    return 0
+
+
+def cmd_hoja(args, cfg: Config, db: Database) -> int:
+    nfl = NflDB(db.conn)
+    ctx, partidos, desde, hasta = _analizar(args, cfg, nfl)
+    if not partidos:
+        print(f"No hay partidos entre {desde} y {hasta}.")
+        return 0
+    for a in partidos:
+        print("\n".join(hoja(ctx, a)))
+    print(AVISO.replace("> ", "").replace("**", ""))
     return 0
 
 
@@ -530,6 +544,11 @@ def registrar(sub) -> None:
     mk.add_argument("--orden", choices=("ev", "prob"), default="ev")
     mk.add_argument("--top", type=int, default=40)
     mk.set_defaults(func=cmd_mercados)
+
+    hj = s.add_parser("hoja", help="hoja de picks de cada partido: los dos lados, TD, props, defensa y picks")
+    ventana(hj)
+    hj.add_argument("--equipo", help="solo los partidos de este equipo")
+    hj.set_defaults(func=cmd_hoja)
 
     m = s.add_parser("matchup", help="el enfrentamiento de dos equipos, métrica a métrica")
     m.add_argument("equipo")

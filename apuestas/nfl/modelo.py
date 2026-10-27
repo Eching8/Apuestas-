@@ -815,6 +815,7 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
         if j.llegada and len(j.con_equipo) < 2:
             j.notas.append(f"llegó a {team} en la semana {j.llegada['week']} desde {j.llegada['from_team']}: "
                            f"{len(j.con_equipo)} partido(s) con su equipo nuevo")
+    _ponderar_conversion(ctx, activos)
     _corregir_regresos(ctx, team, activos)
     # QB suplente: queda anotado en el RB1 como razonamiento (ver el comentario de DUDA).
     titular, principal, suplente = qb_del_partido(ctx, team)
@@ -862,6 +863,48 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
         if f > 1.06 and nombres_fuera:
             j.notas.append(f"más volumen por las bajas de {nombres_fuera} (×{f:.2f})")
     return activos
+
+
+K_CONVERSION = 20.0        # oportunidades "virtuales" en la zona roja con la conversión de su posición
+PESO_CONVERSION = 1.0      # 0 = repartir los TD solo por oportunidades; 1 = ponderar por su conversión
+# Backtest de 2025 (Brier de anotar, total / QB / RB): sin ponderar 0.14643 / 0.1355 / 0.1636; todas las posiciones
+# 0.14706 / 0.1338 / 0.1652; solo QB 0.14646 / 0.1338 / 0.1646 (y 2+ TD mejora de 0.03472 a 0.03462). En los RB la
+# conversión individual es sobre todo ruido; en los QB (sneaks, carreras diseñadas) es señal.
+POSICIONES_CONVERSION = ("QB",)
+
+
+def _conversion_pos(ctx: Contexto, pos: str, td: str, op: str) -> float:
+    n, d = ctx.liga_pos.get(f"{pos}.{td}", 0), ctx.liga_pos.get(f"{pos}.{op}", 0)
+    return n / d if d else 0.0
+
+
+def _ponderar_conversion(ctx: Contexto, activos: list[Jugador]) -> None:
+    """Los TD no se reparten como las oportunidades: un acarreo de QB en la zona roja termina en TD más a menudo
+    que uno de RB (sneaks, carreras diseñadas), y un envío a un TE más que uno a un WR. La cuota de TD de cada
+    jugador se pondera por su conversión en la zona roja (su historial contraído hacia la de su posición) frente a
+    la media de la liga; el reparto posterior vuelve a cuadrar el total del equipo."""
+    if PESO_CONVERSION <= 0:
+        return
+    lg = ctx.liga_pos
+    for tipo, td, op, clave in (("rush", "rz_rush_tds", "rz_carries", "td_rush"),
+                                ("rec", "rz_rec_tds", "rz_targets", "td_rec")):
+        tot_td = sum(lg.get(f"{p}.{td}", 0) for p in POSICIONES)
+        tot_op = sum(lg.get(f"{p}.{op}", 0) for p in POSICIONES)
+        ref = tot_td / tot_op if tot_op else 0
+        if not ref:
+            continue
+        for j in activos:
+            if j.pos not in POSICIONES_CONVERSION:
+                continue
+            previo = _conversion_pos(ctx, j.pos, td, op) or ref
+            partidos = j.partidos[:16]
+            hechos = sum(p.get(td) or 0 for p in partidos)
+            intentos = sum(p.get(op) or 0 for p in partidos)
+            conv = (hechos + K_CONVERSION * previo) / (intentos + K_CONVERSION)
+            f = max(0.5, min(2.0, conv / ref)) ** PESO_CONVERSION
+            j.shares[clave] = j.shares.get(clave, 0) * f
+            j.conversion = getattr(j, "conversion", {})
+            j.conversion[tipo] = (conv, ref, intentos)
 
 
 CLAVES_REPARTO = ("carries", "targets", "rz_carries", "i10_carries", "i5_carries", "rz_targets", "i10_targets",

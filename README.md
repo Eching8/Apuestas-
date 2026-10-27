@@ -242,6 +242,7 @@ python -m apuestas nfl actualizar                      # la primera vez descarga
 python -m apuestas nfl analizar                        # próximos 7 días -> reportes/nfl/AAAA-MM-DD.md y .json
 python -m apuestas nfl td --multiples                  # ranking de TD (ordenado por 2+ TD)
 python -m apuestas nfl td --razonar 5                  # y el razonamiento paso a paso de los 5 primeros
+python -m apuestas nfl hoja --equipo BUF               # hoja de picks del partido: los dos lados, listos para elegir
 python -m apuestas nfl mercados --tipo partido         # todos los mercados evaluados (jugador, periodos, td,
 python -m apuestas nfl mercados --texto "1.er cuarto"  #   defensa, pateador, partido), ordenados por valor
 python -m apuestas nfl validar "Bills -3.5"            # también spread, ML, totales, periodos, quién anota primero
@@ -291,6 +292,20 @@ lo descarga, así que se puede ejecutar varias veces al día. Guarda:
    la zona roja y que los acarreos totales) + TD por aire del equipo × su cuota de envíos en zona roja y a la zona de
    anotación, ajustado por el % de TD que el rival concede a su posición. P(1+), P(2+) y P(3+) con binomial negativa;
    el primer TD reparte la probabilidad de que haya alguno según los TD esperados de cada jugador.
+
+### La hoja de picks de cada partido (`nfl hoja`, y al principio del informe)
+
+Los dos lados de cada partido, ya analizados para elegir: por cada equipo, sus ventajas sobre la defensa rival
+(métrica a métrica, el punto débil del rival en la zona roja y si juega un QB suplente), sus candidatos a TD de
+cualquier posición (anota y 2+ con probabilidad, mejor cuota, valor y qué apuesta tiene sentido o desde qué cuota),
+sus props con valor y las más probables, y sus defensores (tacleadas y sacks). Al final, los picks recomendados del
+partido de los dos lados, por valor esperado.
+
+**Conversión de los QB.** Un acarreo de QB en la zona roja termina en TD el 25 % de las veces (sneaks, carreras
+diseñadas) y uno de RB el 16 %: repartir los TD por tierra solo por acarreos subestimaba a los QB corredores. Su
+cuota de TD por tierra se pondera por su conversión en la zona roja (contraída hacia la de los QB). Backtest de
+2025: los QB mejoran (Brier 0.1355 → 0.1338) y el total queda igual; hacerlo con todas las posiciones empeora (en
+los RB la conversión individual es ruido), así que solo se aplica a los QB.
 
 ### La lectura del tipster (`razones.lectura_td`, `nfl td --razonar N`, `nfl validar`)
 

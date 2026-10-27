@@ -8,6 +8,7 @@ from ..report import AVISO
 from . import equipos
 from .analizador import AnalisisPartido, Evaluacion
 from .modelo import NOMBRES, Contexto, americana, cuota_justa, p_al_menos, texto_rango
+from .hoja import hoja
 from .razones import lectura_td
 from .zona_roja import cruces
 
@@ -120,6 +121,12 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
         L.append(f"- **{t.nombre}** ({t.team} vs {t.opp}, {fechas.get(t.game_id, '')}): P(2+) {_pct(t.p2, 1)}, cuota justa "
                  f"{_odd(cuota_justa(t.p2))}{precio}. {t.rush:.2f} TD esperados por tierra y {t.rec:.2f} por aire.")
     L.append("")
+    # La hoja de picks de cada partido (los dos lados), antes del detalle.
+    if ctx is not None:
+        L += ["# Hojas de picks por partido", ""]
+        for a in partidos:
+            L += hoja(ctx, a)
+        L += ["# Detalle de cada partido", ""]
     # Partido a partido.
     for a in partidos:
         g = a.game

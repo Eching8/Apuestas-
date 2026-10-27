@@ -222,7 +222,10 @@ def parse_evento(evento: dict) -> Mercado:
         campo_linea = {"sp": "Spread", "ou": "OverUnder"}.get(bet)
         contraria = odds.get(o.get("opposingOddID") or "", {})
         # La cuota justa y la de apertura pueden ser de otra línea: solo valen si coinciden con esta.
-        misma = (lambda pref: campo_linea is None or _f(o.get(f"{pref}{campo_linea}")) in (None, linea))
+        # En over/under la línea tiene que venir confirmada: sin ella, SGO puede estar dando la justa de otra línea
+        # (p. ej. la de "anota", 0.5, en la oferta de 2+ TD, 1.5).
+        misma = (lambda pref: campo_linea is None or _f(o.get(f"{pref}{campo_linea}")) == linea
+                 or (_f(o.get(f"{pref}{campo_linea}")) is None and bet == "sp"))
         base = Oferta(entidad, nombre, sgo_team, stat, lado, linea, tipo=tipo, periodo=periodo, bet=bet,
                       consenso=americana_a_decimal(o.get("bookOdds")),
                       justa=americana_a_decimal(o.get("fairOdds")) if misma("fair") else None,
