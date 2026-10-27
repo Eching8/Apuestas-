@@ -586,7 +586,7 @@ se queda colgada). Funciona desde una conexión de casa, así que hay dos formas
 
 ### Automático cada día en GitHub (`.github/workflows/nba-diario.yml`)
 
-Corre en los servidores de GitHub cada día hacia las 9:00 de Bogotá (8:43, por los retrasos de GitHub): guarda los resultados de ayer, liquida
+Corre en los servidores de GitHub cada día hacia las 9:00 de Bogotá (programado a las 8:13: GitHub retrasa los horarios hasta casi una hora): guarda los resultados de ayer, liquida
 las props, baja lesiones y líneas de hoy y publica el informe en la rama `nba-informes`
 (`ultimo.md` y `nba/AAAA-MM-DD.md`). Necesita el secreto `SPORTSGAMEODDS_KEY` (*Settings → Secrets and
 variables → Actions*) y que el flujo esté en `main` para el horario y el botón *Run workflow*. La base se

@@ -6,9 +6,9 @@ name: NBA diario
 # sola desde ESPN (~15 min). stats.nba.com no responde a estos servidores, así que no se usa aquí.
 on:
   schedule:
-    # 8:43 en Bogotá (13:43 UTC): GitHub suele retrasar unos minutos los horarios, así el informe está
-    # listo hacia las 9:00.
-    - cron: "43 13 * * *"
+    # 8:13 en Bogotá (13:13 UTC): GitHub retrasa los horarios hasta casi una hora (el 27 oct, 48 min), así el
+    # informe está listo hacia las 9:00. Las casas ya suelen tener las props publicadas a esa hora.
+    - cron: "13 13 * * *"
   workflow_dispatch:
     inputs:
       fecha:
