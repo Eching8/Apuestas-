@@ -4,11 +4,12 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 
 from ..db import now_iso
 from .db import NbaDB
-from .modelo import (ESTADOS_FUERA, PESO_MERCADO, PROB_SEGURA, Segura, seguras, Contexto, Evaluacion, Jugador, construir_contexto, evaluar, mejor_contra,
-                     preparar_jugador, valor)
+from .modelo import (ESTADOS_FUERA, PESO_MERCADO, PROB_SEGURA, Contexto, Evaluacion, Jugador, Segura,
+                     construir_contexto, evaluar, mejor_contra, preparar_jugador, seguras, valor)
 from .sgo import clave_nombre, equipos_evento, parse_props
 
 log = logging.getLogger(__name__)
@@ -78,38 +79,48 @@ def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 
     for r in db.props(fecha):
         props_por_juego.setdefault(r["game_id"], []).append(dict(r))
     partidos = []
+    hace_3_semanas = (date.fromisoformat(fecha) - timedelta(days=21)).isoformat()
     for g in db.games_on(fecha):
         g = dict(g)
         part = Partido(g, [l for l in lesiones if l["team_id"] in (g["home_id"], g["away_id"])])
         estado = {l["player_id"]: l["status"].lower() for l in part.lesiones}
+
+        def jugador(pid: str) -> Jugador | None:
+            """Prepara al jugador una sola vez por partido; None si está fuera o le faltan datos."""
+            if pid in part.jugadores:
+                return part.jugadores[pid]
+            if pid in part.sin_datos or estado.get(pid, "") in ESTADOS_FUERA:
+                return None
+            hist = ctx.por_jugador.get(pid, [])
+            if not hist:
+                part.sin_datos.append(pid)
+                return None
+            team = hist[0]["team_id"] if hist[0]["team_id"] in (g["home_id"], g["away_id"]) else g["home_id"]
+            opp = g["away_id"] if team == g["home_id"] else g["home_id"]
+            ausentes = [(l["player_id"], l["name"]) for l in part.lesiones
+                        if l["team_id"] == team and l["status"].lower() in ESTADOS_FUERA]
+            fuera_rival = [l["player_id"] for l in part.lesiones
+                           if l["team_id"] == opp and l["status"].lower() in ESTADOS_FUERA]
+            j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes, fuera_rival)
+            if estado.get(pid):
+                j.notas.insert(0, f"en el parte de lesiones: {estado[pid]}")
+            if j.n < min_partidos or j.minutos < min_minutos:
+                part.sin_datos.append(pid)
+                return None
+            part.jugadores[pid] = j
+            return j
+
         for prop in props_por_juego.get(g["id"], []):
-            pid = prop["player_id"]
-            if estado.get(pid, "") in ESTADOS_FUERA:
-                continue
-            j = part.jugadores.get(pid)
-            if j is None and pid not in part.sin_datos:
-                hist = ctx.por_jugador.get(pid, [])
-                if not hist:
-                    part.sin_datos.append(pid)
-                    continue
-                team = hist[0]["team_id"] if hist[0]["team_id"] in (g["home_id"], g["away_id"]) else None
-                team = team or g["home_id"]
-                opp = g["away_id"] if team == g["home_id"] else g["home_id"]
-                ausentes = [(l["player_id"], l["name"]) for l in part.lesiones
-                            if l["team_id"] == team and l["status"].lower() in ESTADOS_FUERA]
-                fuera_rival = [l["player_id"] for l in part.lesiones
-                               if l["team_id"] == opp and l["status"].lower() in ESTADOS_FUERA]
-                j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes, fuera_rival)
-                if estado.get(pid):
-                    j.notas.insert(0, f"en el parte de lesiones: {estado[pid]}")
-                if j.n < min_partidos or j.minutos < min_minutos:
-                    part.sin_datos.append(pid)
-                    continue
-                part.jugadores[pid] = j
-            if j is None:
-                continue
-            part.evaluaciones.append(evaluar(ctx, j, prop["stat"], prop["line"], prop["over_odd"],
-                                                   prop["under_odd"], peso_mercado))
+            j = jugador(prop["player_id"])
+            if j is not None:
+                part.evaluaciones.append(evaluar(ctx, j, prop["stat"], prop["line"], prop["over_odd"],
+                                                 prop["under_odd"], peso_mercado))
+        # También los habituales de los dos equipos sin línea publicada: los picks seguros y los bet builders
+        # no necesitan la línea de la casa (las casas suelen publicar las props la misma mañana).
+        for pid, hist in ctx.por_jugador.items():
+            if (hist[0]["team_id"] in (g["home_id"], g["away_id"]) and hist[0]["season"] == ctx.temporada
+                    and hist[0]["fecha"] >= hace_3_semanas):
+                jugador(pid)
         part.evaluaciones.sort(key=lambda e: e.prob, reverse=True)
         for j in part.jugadores.values():
             part.seguras += seguras(ctx, j, prob_segura)
