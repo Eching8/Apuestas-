@@ -378,3 +378,16 @@ class CombinadasTest(unittest.TestCase):
             self.assertEqual([(f["result"], f["cuota_final"]) for f in filas], [(1, 1.5), (0, 1.5)])
             criterios = combinadas.listo(db)
             self.assertFalse(all(ok for _, ok, _ in criterios))
+
+
+class BuilderTest(unittest.TestCase):
+    def test_prob_conjunta(self):
+        from apuestas.nba.builder import Pierna, prob_conjunta
+        piernas = [Pierna(f"p{i}", f"p{i}", "1" if i < 2 else "2", "points", 10.5, 0.75, 14.0, (8, 10))
+                   for i in range(4)]
+        p = prob_conjunta(piernas, sims=40000)
+        # Con correlación positiva acierta algo más que multiplicando, pero no mucho más.
+        self.assertGreater(p, 0.75 ** 4)
+        self.assertLess(p, 0.75 ** 4 + 0.06)
+        sola = prob_conjunta(piernas[:1], sims=40000)
+        self.assertAlmostEqual(sola, 0.75, delta=0.01)

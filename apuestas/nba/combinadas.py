@@ -30,9 +30,12 @@ CANDIDATAS_MAX = 18
 class Combinada:
     tipo: str
     patas: list[dict] = field(default_factory=list)   # game_id, partido, player_id, nombre, stat, line, side, prob, odd
+    prob_fija: float | None = None                    # bet builders: probabilidad con la correlación del partido
 
     @property
     def prob(self) -> float:
+        if self.prob_fija is not None:
+            return self.prob_fija
         p = 1.0
         for x in self.patas:
             p *= x["prob"]
@@ -121,6 +124,18 @@ def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]
     out = [alternas(partidos), principales(candidatas)] + [con_cuota(candidatas, o) for o in OBJETIVOS]
     out += [con_cuota(valor, o, "valor") for o in OBJETIVOS_VALOR]
     return [c for c in out if c]
+
+
+def de_builders(builders: list, doble) -> list[Combinada]:
+    """Bet builders del día (uno por partido) y la doble de los dos más probables."""
+    def patas(b) -> list[dict]:
+        return [{"game_id": b.partido.game["id"], "partido": b.partido.titulo, "player_id": x.player_id,
+                 "nombre": x.nombre, "stat": x.stat, "line": x.line, "side": "más", "prob": x.prob, "odd": None}
+                for x in b.piernas]
+    out = [Combinada("builder", patas(b), b.prob) for b in builders]
+    if doble:
+        out.append(Combinada("doble_builder", patas(doble[0]) + patas(doble[1]), doble[0].prob * doble[1].prob))
+    return out
 
 
 # --- Registro y liquidación ----------------------------------------------------------
