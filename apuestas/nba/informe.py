@@ -65,7 +65,12 @@ def _metrica(v: float | None, tipo: str) -> str:
 def por_que(e: Evaluacion) -> list[str]:
     """De dónde sale la media de la prop y las estadísticas relacionadas en que se basa."""
     out = [f"**¿Por qué {e.mu:.1f} {NOMBRES[e.stat]}?** (línea {e.line:g}; {e.factores['minutos']:.1f} minutos esperados)", ""]
-    if e.defensa:
+    if e.razones:
+        a_favor = sum(r.startswith("✅") for r in e.razones)
+        en_contra = sum(r.startswith("❌") for r in e.razones)
+        out += [f"Razonamiento ({a_favor} factores a favor, {en_contra} en contra):", ""]
+        out += [f"- {r}" for r in e.razones] + [""]
+    elif e.defensa:
         out += [f"- Rival: {e.defensa}."]
     if e.alertas:
         out += [f"- ⚠️ Alertas: {', '.join(e.alertas)}."]
@@ -237,9 +242,36 @@ def seccion_cuotadas(combis: list) -> list[str]:
         out += [f"**{nombre}, cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
                 f"**{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f}); valor {valor * 100:+.0f}% {aviso}", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
-                f"{x['odd']:.2f}) — {x['partido']}" + (f"\n  - {x['defensa']}" if x.get("defensa") else "")
+                f"{x['odd']:.2f}) — {x['partido']}"
+                + (f" — {x['a_favor']} factores a favor, {x['en_contra']} en contra" if "a_favor" in x else "")
+                + (f"\n  - {x['defensa']}" if x.get("defensa") else "")
                 for x in c.patas] + [""]
     return out
+
+
+def ventajas(ctx: Contexto, part: Partido, n: int = 5) -> list[str]:
+    """Los dos lados del partido: quién llega con ventaja sobre la defensa rival en puntos y rebotes."""
+    from .modelo import predecir
+    filas = []
+    for j in sorted(part.jugadores.values(), key=lambda x: -x.minutos):
+        equipo = part.game["home_abbr"] if j.team_id == part.game["home_id"] else part.game["away_abbr"]
+        pts, reb = predecir(ctx, j, "points"), predecir(ctx, j, "rebounds")
+        media = sum(p["pts"] for p in j.partidos[:10]) / min(10, j.n)
+        altura = f"{j.diferencia_altura:+.1f}\"" if j.diferencia_altura is not None else "-"
+        filas.append((equipo, j.nombre, pts.mu, media, pts.factores.get("rival", 1), reb.mu, altura))
+    if not filas:
+        return []
+    out = ["Ventajas del partido (los dos lados): puntos esperados frente a su media de los últimos 10, "
+           "ajuste por la defensa rival y diferencia de estatura con los rivales de su posición.", "",
+           "| Equipo | Jugador | Puntos esperados | Su media (últ. 10) | Defensa rival en puntos | Rebotes esperados | Altura vs rival |",
+           "|---|---|---|---|---|---|---|"]
+    por_equipo: dict[str, int] = {}
+    for equipo, nombre, mu, media, rival, reb, altura in filas:
+        if por_equipo.get(equipo, 0) >= n:
+            continue
+        por_equipo[equipo] = por_equipo.get(equipo, 0) + 1
+        out.append(f"| {equipo} | {nombre} | {mu:.1f} | {media:.1f} | {_rel(rival)} | {reb:.1f} | {altura} |")
+    return out + [""]
 
 
 def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
@@ -299,6 +331,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
             md += ["Sin líneas de props para este partido (o sin historial suficiente de los jugadores).", ""]
             continue
         elegidas = mejores_del_partido(part, por_partido)
+        md += ventajas(ctx, part)
         if part.seguras:
             md += ["Picks seguros de titulares estables:", "", CABECERA_SEGURAS, SEPARADOR_SEGURAS]
             md += [_fila_segura(s) for s in part.seguras[:6]] + [""]

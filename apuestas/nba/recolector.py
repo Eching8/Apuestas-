@@ -51,3 +51,18 @@ def descargar_rango(espn: Espn, db: NbaDB, desde: date, hasta: date) -> int:
         nuevos += n["nuevos"]
         dia += timedelta(days=1)
     return nuevos
+
+
+def descargar_alturas(espn: Espn, db: NbaDB) -> int:
+    """Estaturas de las plantillas actuales de los 30 equipos (una consulta por equipo)."""
+    n = 0
+    for (team_id,) in db.conn.execute("SELECT id FROM nba_teams").fetchall():
+        try:
+            filas = espn.plantilla(team_id)
+        except ApiError as e:
+            log.warning("plantilla de %s: %s", team_id, e)
+            continue
+        db.save_alturas(filas)
+        n += len(filas)
+    db.commit()
+    return n

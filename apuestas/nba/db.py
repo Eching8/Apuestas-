@@ -175,6 +175,17 @@ CREATE TABLE IF NOT EXISTS nba_combinadas (
     created_at TEXT NOT NULL
 );
 
+-- Estatura (pulgadas) y peso (libras) de cada jugador, de las plantillas de ESPN.
+CREATE TABLE IF NOT EXISTS nba_alturas (
+    player_id TEXT PRIMARY KEY,
+    team_id TEXT,
+    name TEXT,
+    position TEXT,
+    altura REAL,
+    peso REAL,
+    updated_at TEXT
+);
+
 CREATE TABLE IF NOT EXISTS nba_picks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fecha TEXT NOT NULL,
@@ -246,6 +257,12 @@ class NbaDB:
             [{**s, "game_id": game_id} for s in shots],
         )
         self.conn.execute("UPDATE nba_games SET box_ok = 1 WHERE id = ?", (game_id,))
+
+    def save_alturas(self, rows: list[dict]) -> None:
+        self.conn.executemany(
+            """INSERT OR REPLACE INTO nba_alturas(player_id, team_id, name, position, altura, peso, updated_at)
+               VALUES (:player_id, :team_id, :name, :position, :altura, :peso, :updated_at)""",
+            [{**r, "updated_at": now_iso()} for r in rows])
 
     def save_injuries(self, fecha: str, rows: list[dict]) -> None:
         self.conn.executemany(

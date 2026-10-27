@@ -28,7 +28,7 @@ from .espn import Espn
 from .informe import escribir, etiqueta
 from .modelo import NOMBRES, construir_contexto
 from .nbastats import TIPOS, NbaStats, temporada_nba
-from .recolector import descargar_dia, descargar_rango
+from .recolector import descargar_alturas, descargar_dia, descargar_rango
 from .sgo import SportsGameOdds, ventana_dia
 
 log = logging.getLogger("apuestas")
@@ -101,6 +101,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         liquidar(nba)
         combinadas.liquidar(nba)
         n = descargar_dia(espn, nba, fecha, lesiones=True)
+        print(f"{descargar_alturas(espn, nba)} jugadores con estatura (plantillas de ESPN).")
         print(f"{n['partidos']} partidos el {fecha}; {n['lesiones']} jugadores en el parte de lesiones.")
         eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana_dia(fecha, cfg.zona_horaria))
         ctx = construir_contexto(nba.conn, fecha)

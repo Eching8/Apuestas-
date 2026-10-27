@@ -60,6 +60,13 @@ class Espn:
     def resumen(self, game_id: str) -> dict:
         return self._get("/summary", event=game_id)
 
+    def plantilla(self, team_id: str) -> list[dict]:
+        """Jugadores del equipo con estatura (pulgadas) y peso (libras)."""
+        data = self._get(f"/teams/{team_id}/roster")
+        return [{"player_id": str(a["id"]), "team_id": str(team_id), "name": a.get("displayName"),
+                 "position": (a.get("position") or {}).get("abbreviation"), "altura": a.get("height"),
+                 "peso": a.get("weight")} for a in data.get("athletes", []) if a.get("id")]
+
 
 # --- Parsers --------------------------------------------------------------------------
 
