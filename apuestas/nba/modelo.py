@@ -73,6 +73,12 @@ PESO_MOTORES = 0.3
 # Contracción hacia 50 %: el backtest (feb-mar 2026, 19.700 props) mostró que sin ella el modelo era
 # ~3 puntos optimista por encima del 70 %. Con 0.9 queda calibrado (incluso algo conservador arriba).
 CALIBRACION = 0.9
+# Picks seguros: una línea más baja (p. ej. "15+ puntos") de un titular estable en vez de la línea normal.
+# Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026), titulares con 30+ minutos: eligiendo la línea al
+# 85 % acertaron el 89-96 % según la estadística; al 90 %, el 93-99 %.
+PROB_SEGURA = 0.85
+MIN_SEGURA = 30.0
+MEDIAS_SEGURA = {"points": 15, "rebounds": 7, "assists": 5, "pra": 25}   # media mínima en sus últimos 10
 # Peso de la probabilidad de la casa (sin margen) en la probabilidad final. La línea recoge lo que el
 # modelo no ve (rol, rotaciones, noticias de última hora).
 PESO_MERCADO = 0.4
@@ -505,6 +511,8 @@ class Evaluacion:
     linea_80: tuple[float | None, float | None]
     componentes: dict = field(default_factory=dict)   # de dónde sale la media: ver Prediccion
     metricas: list = field(default_factory=list)      # estadísticas relacionadas: últ. 5/10, temporada, rival
+    titular: bool = True                              # suplente = riesgo de que el técnico le dé pocos minutos
+    alertas: list = field(default_factory=list)       # motivos para no tomarla como pick "seguro"
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -524,6 +532,72 @@ def prob_mercado(over_odd: float | None, under_odd: float | None) -> tuple[float
             1 / under_odd / MARGEN_UN_LADO if under_odd else None)
 
 
+def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -> float:
+    """Modelo mezclado con su acierto real sobre la línea en los últimos 15 y calibrado."""
+    hits, n = _aciertos(j.partidos[:15], stat, line, lado)
+    p_emp = (hits + 5 * p_mod) / (n + 5)
+    return 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+
+
+MINUTOS_SD_ESTABLE = 6.0
+
+
+def alertas(j: Jugador, stat: str) -> list[str]:
+    """Lo que hace dudosa una prop aunque su probabilidad sea alta."""
+    out = []
+    if not es_titular(j):
+        out.append("suplente")
+    if j.minutos_sd > MINUTOS_SD_ESTABLE:
+        out.append("minutos inestables")
+    if set(COMPONENTES[stat]) & set(j.cambio_rol):
+        out.append("cambio de rol")
+    if j.pocos_con_equipo:
+        out.append("traspaso reciente")
+    if any(n.startswith("en el parte de lesiones") for n in j.notas):
+        out.append("en el parte de lesiones")
+    return out
+
+
+def es_titular(j: Jugador) -> bool:
+    return sum(p["starter"] for p in j.partidos[:5]) >= 3
+
+
+@dataclass
+class Segura:
+    player_id: str
+    nombre: str
+    stat: str
+    line: float
+    prob: float
+    mu: float
+    media_10: float
+    acierto_10: tuple[int, int]
+
+    @property
+    def cuota_minima(self) -> float:
+        return 1 / self.prob
+
+
+def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA) -> list[Segura]:
+    """Para titulares estables, la línea de "más de" más alta que pasa con al menos esa probabilidad."""
+    if j.minutos < MIN_SEGURA or not es_titular(j):
+        return []
+    out = []
+    ult = j.partidos[:10]
+    for stat, minimo in MEDIAS_SEGURA.items():
+        media = sum(valor(p, stat) for p in ult) / len(ult)
+        if media < minimo:
+            continue
+        pred = predecir(ctx, j, stat)
+        for k in range(int(pred.mu), -1, -1):
+            p = _prob_jugador(j, stat, k + 0.5, "más", prob_lados(k + 0.5, pred.mu, pred.var)[0])
+            if p >= objetivo:
+                out.append(Segura(j.player_id, j.nombre, stat, k + 0.5, p, pred.mu, media,
+                                  _aciertos(ult, stat, k + 0.5, "más")))
+                break
+    return out
+
+
 def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float | None = None,
             under_odd: float | None = None, peso_mercado: float = PESO_MERCADO, detalle: bool = True) -> Evaluacion:
     pred = predecir(ctx, j, stat)
@@ -540,9 +614,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
                                         (over_odd, under_odd), prob_mercado(over_odd, under_odd)):
         if con_cuota and not odd:
             continue  # la casa no ofrece este lado: no se puede apostar
-        hits, n = _aciertos(j.partidos[:15], stat, line, lado)
-        p_emp = (hits + 5 * p_mod) / (n + 5)
-        p_jug = 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+        p_jug = _prob_jugador(j, stat, line, lado, p_mod)
         final = p_jug if p_casa is None else (1 - peso_mercado) * p_jug + peso_mercado * p_casa
         lados[lado] = (final, p_jug, p_casa, odd)
     lado = max(lados, key=lambda k: lados[k][0])
@@ -554,7 +626,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
         sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
         linea_segura(pred.mu, pred.var), pred.componentes,
-        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [],
+        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j), alertas(j, stat),
     )
 
 

@@ -175,6 +175,31 @@ class ModeloTest(unittest.TestCase):
             self.assertIn("tiros de campo", pra.componentes["pts"]["explicacion"])
             self.assertIn("fallos del rival", pra.componentes["reb"]["explicacion"])
 
+    def test_seguras(self):
+        from apuestas.nba.modelo import es_titular, seguras
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2")
+            self.assertTrue(es_titular(j))
+            s = {x.stat: x for x in seguras(ctx, j, 0.85)}
+            # Titular con ~25 puntos: línea de puntos bastante por debajo de su media, al 85 % o más.
+            self.assertIn("points", s)
+            self.assertGreaterEqual(s["points"].prob, 0.85)
+            self.assertLess(s["points"].line, s["points"].mu)
+            self.assertAlmostEqual(s["points"].cuota_minima, 1 / s["points"].prob)
+            # Con menos de 30 minutos esperados no hay picks seguros.
+            j.minutos = 25
+            self.assertEqual(seguras(ctx, j, 0.85), [])
+
+    def test_columna_tipo_en_bases_viejas(self):
+        import sqlite3
+        conn = sqlite3.connect(":memory:")
+        conn.execute("CREATE TABLE nba_picks (id INTEGER PRIMARY KEY, fecha TEXT)")
+        NbaDB(conn)
+        self.assertIn("tipo", {r[1] for r in conn.execute("PRAGMA table_info(nba_picks)")})
+
     def test_oportunidades(self):
         p = {"minutes": 24, "fga": 10, "fgm": 5, "tpa": 4, "tpm": 2, "fta": 4, "ftm": 3, "tov": 2, "oreb": 1,
              "dreb": 5, "ast": 6, "stl": 1, "blk": 1}
@@ -312,3 +337,40 @@ class EnfrentamientosTest(unittest.TestCase):
             # Si su defensor habitual está fuera hoy, deja de contar.
             j2 = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2", fuera_rival=["p20"])
             self.assertNotIn("Jugador 20", [d["nombre"] for d in j2.enfrentamiento.defensores])
+
+
+class CombinadasTest(unittest.TestCase):
+    def _cand(self, gid, prob, odd, pid):
+        from types import SimpleNamespace
+        p = SimpleNamespace(game={"id": gid}, titulo=f"partido {gid}")
+        e = SimpleNamespace(player_id=pid, nombre=pid, stat="steals", line=0.5, lado="más", prob=prob, odd=odd)
+        return p, e
+
+    def test_con_cuota(self):
+        from apuestas.nba.combinadas import con_cuota
+        cands = [self._cand("g1", 0.70, 1.40, "a"), self._cand("g1", 0.69, 1.45, "b"),
+                 self._cand("g2", 0.68, 1.45, "c"), self._cand("g3", 0.62, 1.70, "d")]
+        c = con_cuota(cands, 2.0)
+        self.assertGreaterEqual(c.cuota, 2.0)
+        self.assertEqual(len({x["game_id"] for x in c.patas}), len(c.patas))  # partidos distintos
+        self.assertAlmostEqual(c.prob, 0.70 * 0.68)  # la más probable que llega a cuota 2
+        self.assertIsNone(con_cuota(cands, 50.0))
+
+    def test_liquidar(self):
+        import json as _json
+        from apuestas.nba import combinadas
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            fila = db.conn.execute("SELECT * FROM nba_player_games WHERE player_id = 'a1' LIMIT 1").fetchone()
+            pata = {"game_id": fila["game_id"], "player_id": "a1", "stat": "points", "side": "más", "odd": 1.5,
+                    "prob": 0.8, "partido": "x", "nombre": "a1"}
+            gana = combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] - 0.5),
+                                                   dict(pata, player_id="nadie", line=1.5)])  # no jugó: anulada
+            pierde = combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] + 0.5)])
+            combinadas.guardar(db, FECHA, [gana, pierde])
+            self.assertEqual(combinadas.liquidar(db), 2)
+            filas = db.conn.execute("SELECT result, cuota_final FROM nba_combinadas ORDER BY id").fetchall()
+            self.assertEqual([(f["result"], f["cuota_final"]) for f in filas], [(1, 1.5), (0, 1.5)])
+            criterios = combinadas.listo(db)
+            self.assertFalse(all(ok for _, ok, _ in criterios))

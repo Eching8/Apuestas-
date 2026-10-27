@@ -17,8 +17,10 @@ from zoneinfo import ZoneInfo
 from ..config import Config
 from ..db import Database
 from ..report import AVISO
-from .analizador import (analizar, emparejar_props, guardar_analisis, guardar_picks, liquidar, mejores,
+from .analizador import (analizar, candidatas_seguras, combinada_segura, emparejar_props, guardar_analisis,
+                         guardar_picks, liquidar, mejores,
                          rendimiento)
+from . import combinadas
 from .backtest import backtest, resumen
 from .db import NbaDB
 from .enfrentamientos import descargar_avanzadas, descargar_temporada
@@ -82,7 +84,9 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
     espn = Espn()
     n = descargar_dia(espn, nba, fecha.isoformat())
     liquidadas = liquidar(nba)
-    print(f"{fecha}: {n['nuevos']} partidos terminados guardados; {liquidadas} props liquidadas.")
+    combis = combinadas.liquidar(nba)
+    print(f"{fecha}: {n['nuevos']} partidos terminados guardados; {liquidadas} props y {combis} combinadas "
+          "liquidadas.")
     return 0
 
 
@@ -95,29 +99,53 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         ayer = (date.fromisoformat(fecha) - timedelta(days=1)).isoformat()
         descargar_dia(espn, nba, ayer)
         liquidar(nba)
+        combinadas.liquidar(nba)
         n = descargar_dia(espn, nba, fecha, lesiones=True)
         print(f"{n['partidos']} partidos el {fecha}; {n['lesiones']} jugadores en el parte de lesiones.")
         eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana_dia(fecha, cfg.zona_horaria))
         ctx = construir_contexto(nba.conn, fecha)
         props, sin_emparejar = emparejar_props(nba, fecha, eventos, ctx)
         print(f"{len(eventos)} partidos con líneas en SportsGameOdds; {props} props emparejadas.")
-    partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado)
+    partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado,
+                             prob_segura=cfg.nba_prob_segura)
     picks = mejores(partidos, cfg.nba_prob_min)
-    guardar_picks(nba, fecha, picks)
+    guardar_picks(nba, fecha, picks, partidos)
     guardar_analisis(nba, fecha, partidos)
-    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido)
+    candidatas = candidatas_seguras(partidos, cfg.nba_cuota_min)
+    combis = combinadas.del_dia(partidos, candidatas)
+    combinadas.guardar(nba, fecha, combis)
+    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido, candidatas,
+                      combis, combinadas.listo(nba))
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")
     for p, e in picks[:args.top]:
         print(f"  {e.prob * 100:4.0f}%  {etiqueta(e):<55} esperado {e.mu:5.1f}  últ.10 {e.acierto_10[0]}/{e.acierto_10[1]}"
               f"  ({p.titulo})")
+    combi = combinada_segura(candidatas)
+    if combi:
+        prob = cuota = 1.0
+        print("Combinada segura del día (la más probable de cada partido, jugadores constantes):")
+        for p, e in combi:
+            prob *= e.prob
+            cuota *= e.odd
+            print(f"  {e.prob * 100:4.0f}%  {etiqueta(e):<55} cuota {e.odd:.2f}  últ.10 "
+                  f"{e.acierto_10[0]}/{e.acierto_10[1]}  ({p.titulo})")
+        print(f"  Todas: {prob * 100:.0f}% de probabilidad, cuota {cuota:.2f}")
+    seguras = sorted(((p, s) for p in partidos for s in p.seguras), key=lambda x: -x[1].prob)
+    if seguras:
+        print(f"{len(seguras)} picks seguros de titulares estables (línea baja al {cfg.nba_prob_segura * 100:.0f}%+):")
+        for p, s in seguras[:args.top]:
+            print(f"  {s.prob * 100:4.0f}%  {s.nombre}: más de {s.line:g} {NOMBRES[s.stat]:<14} "
+                  f"cuota mínima {s.cuota_minima:.2f}  ({p.titulo})")
     print(f"Informe: {md}\nDatos: {js}\n")
     print(AVISO.replace("> ", "").replace("**", ""))
     return 0
 
 
 def cmd_rendimiento(args, cfg: Config, db: Database) -> int:
-    r = rendimiento(NbaDB(db.conn))
+    nba = NbaDB(db.conn)
+    r = rendimiento(nba)
+    imprimir_listo(nba)
     if not r["total"]:
         print("Aún no hay props liquidadas. Ejecuta 'nba actualizar' después de los partidos.")
         return 0
@@ -128,13 +156,32 @@ def cmd_rendimiento(args, cfg: Config, db: Database) -> int:
                 f"prob. media {x['prob_media'] * 100:5.1f}%{ben}")
 
     print(linea("Total", r["total"]))
+    for t in r["tipos"]:
+        print(linea({"prop": "Props (línea normal)", "segura": "Seguras (titulares)"}.get(t["tipo"], t["tipo"]), t))
     print("Por tramo de probabilidad (si el acierto queda por debajo del tramo, el modelo es optimista):")
     for t in r["tramos"]:
         print(linea(t["tramo"], t))
     print("Por estadística:")
     for s in r["stats"]:
         print(linea(NOMBRES.get(s["stat"], s["stat"]), s))
+    combis = combinadas.resumen(nba)
+    if combis:
+        print("Combinadas (de prueba):")
+        for c in combis:
+            ben = "" if c["beneficio"] is None else f"  {c['beneficio']:+.2f} u en {c['con_cuota']} con cuota"
+            print(f"  {c['tipo']:<22} n={c['n']:<5} ganadas {c['ganadas']} ({c['ganadas'] / c['n'] * 100:.0f}%)  "
+                  f"prob. media {c['prob_media'] * 100:5.1f}%{ben}")
     return 0
+
+
+def imprimir_listo(nba: NbaDB) -> None:
+    criterios = combinadas.listo(nba)
+    cumplidos = sum(ok for _, ok, _ in criterios)
+    estado = "LISTO para dinero real" if cumplidos == len(criterios) else "en calibración: picks de prueba"
+    print(f"¿Listo para apostar dinero real? {estado} ({cumplidos}/{len(criterios)} criterios)")
+    for nombre, ok, detalle in criterios:
+        print(f"  [{'x' if ok else ' '}] {nombre}: {detalle}")
+    print()
 
 
 def cmd_backtest(args, cfg: Config, db: Database) -> int:

@@ -467,6 +467,35 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
 - **La casa**: su probabilidad sin margen se mezcla con la del modelo (`APUESTAS_NBA_PESO_MERCADO`,
   0.4 por defecto). Cuando modelo y casa discrepan mucho, la casa suele saber algo (rol, rotación, una baja).
 
+### Picks seguros de titulares estables
+
+Para titulares con 30+ minutos esperados (titular en al menos 3 de sus últimos 5), el informe busca la
+línea de "más de" más alta que pasa con al menos 85 % (`APUESTAS_NBA_PROB_SEGURA`) en puntos, rebotes,
+asistencias y PRA: un "15+ puntos" casi seguro de una estrella en lugar de la línea normal de un suplente.
+Se muestra con su **cuota mínima** (1 / probabilidad) para buscarla en las líneas alternativas de la casa.
+Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026): elegidas al 85 % acertaron el 89-96 %; al 90 %, el
+93-99 %. Las props de suplentes llevan la marca "⚠️ suplente": dependen de los minutos que les dé el técnico.
+
+### Combinada segura del día
+
+Elige por **probabilidad**, no por valor:
+
+- **Opción A, líneas alternativas:** el pick seguro más probable de cada partido (ver arriba), con la
+  probabilidad de acertar 2, 3 y 4 juntos (con 4 picks al ~90 %, ~65 %).
+- **Opción B, líneas principales con cuota real:** la más probable de cada partido entre jugadores
+  constantes: titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado
+  en 7+ de sus últimos 10 y en el 60 %+ de esta temporada, con cuota de al menos 1.30
+  (`APUESTAS_NBA_CUOTA_MIN`). Si la casa no ofrece una línea, se usa la siguiente de la lista.
+
+### Combinadas con cuota objetivo y calibración
+
+Cada día se arman y registran (tabla `nba_combinadas`) la combinada de alternas, la de principales y las
+de cuota objetivo 2, 3 y 5: la combinación de jugadores constantes, en partidos distintos, con más
+probabilidad de acertar todas cuya cuota llega al objetivo. Son picks de prueba: se liquidan solos con
+los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
+dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
+prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.
