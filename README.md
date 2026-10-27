@@ -517,7 +517,9 @@ La probabilidad de acertar todas usa la correlación entre jugadores del mismo p
 media, 2025-26: puntos +0.08 entre compañeros y +0.04 entre rivales; asistencias, rebotes y triples casi
 nada), con una simulación de cópula normal. Se da la cuota justa para compararla con la del bet builder de
 la casa. Backtest (22 oct-25 nov 2025 y 1 feb-10 mar 2026, 461 bet builders): prometían ~32 % y acertaron
-38-40 %; las piernas, 75 % y 78-79 %. Se registran como prueba (tipos `builder` y `doble_builder`).
+38-40 %; las piernas, 75 % y 78-79 %. Se registran como prueba (tipos `builder` y `doble_builder`). Cuando la casa tiene línea principal de esa
+estadística, solo se usan líneas que suele ofrecer como alternativa: la principal menos ~10 % (al menos 1),
+como las mínimas de Betano el 27 oct (Cade 8.5 asistencias → 8+, Brunson 25.5 puntos → 24+).
 
 ### Razonamiento de cada pick, altura y ventajas del partido
 

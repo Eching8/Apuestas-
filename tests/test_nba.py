@@ -399,5 +399,7 @@ class BuilderTest(unittest.TestCase):
         # Con correlación positiva acierta algo más que multiplicando, pero no mucho más.
         self.assertGreater(p, 0.75 ** 4)
         self.assertLess(p, 0.75 ** 4 + 0.06)
+        from apuestas.nba.builder import linea_minima_casa
+        self.assertEqual([linea_minima_casa(x) for x in (5.5, 8.5, 25.5, 32.5)], [4.5, 7.5, 23.5, 29.5])
         sola = prob_conjunta(piernas[:1], sims=40000)
         self.assertAlmostEqual(sola, 0.75, delta=0.01)
