@@ -341,6 +341,21 @@ class ModeloTest(unittest.TestCase):
         self.assertTrue(any("bajas" in n for n in despues["rb2_buf"].jugador.notas))
         self.assertEqual([b["player_id"] for b in ctx.bajas["BUF"]], ["rb_buf"])
 
+    def test_regreso_de_titular(self):
+        # James Cook faltó las semanas 7 y 8: Ray Davis jugó esos partidos sin él. Si Cook vuelve, a Davis se le
+        # descuenta lo que ganó en su ausencia; si Cook sigue fuera, no.
+        self.db.conn.execute("DELETE FROM nfl_player_games WHERE player_id = 'rb_buf' AND week >= 7")
+        ctx = construir_contexto(self.db.conn, HOY)
+        ent = entorno(ctx, "BUF", "LAC", True)
+        con = {j.player_id: j for j in preparar_equipo(ctx, "BUF")}
+        self.assertTrue(any("sin James Cook" in n for n in con["rb2_buf"].notas))
+        self.assertFalse(any("sin Ray Davis" in n for n in con["rb_buf"].notas))
+        ctx.lesiones["rb_buf"] = {"status": "Out", "detail": ""}
+        sin = {j.player_id: j for j in preparar_equipo(ctx, "BUF")}
+        self.assertFalse(any("sin James Cook" in n for n in sin["rb2_buf"].notas))
+        self.assertGreater(proyectar(ctx, sin["rb2_buf"], ent).medias["rush_att"],
+                           proyectar(ctx, con["rb2_buf"], ent).medias["rush_att"])
+
     def test_analisis_validar_informe_y_liquidacion(self):
         ctx = construir_contexto(self.db.conn, HOY)
         g = dict(self.db.conn.execute("SELECT * FROM nfl_games WHERE game_id = '2026_09_LAC_BUF'").fetchone())

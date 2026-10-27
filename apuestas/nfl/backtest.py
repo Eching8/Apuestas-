@@ -57,8 +57,8 @@ def backtest(conn, desde: str, hasta: str, progreso=None, partidos: bool = False
                 if team not in ctx.perfiles or opp not in ctx.perfiles:
                     continue
                 # Los que no jugaron cuentan como bajas conocidas.
-                for pid, partidos in ctx.jugadores.items():
-                    if partidos[0]["team"] == team and pid not in reales:
+                for pid, historial in ctx.jugadores.items():
+                    if historial[0]["team"] == team and pid not in reales:
                         ctx.lesiones[pid] = {"status": "Out", "detail": ""}
                 ent = entorno(ctx, team, opp, local, linea, g["wind"], g["roof"])
                 for j in preparar_equipo(ctx, team):

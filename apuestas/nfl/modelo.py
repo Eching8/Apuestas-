@@ -711,7 +711,8 @@ def _shares(ctx: Contexto, j: Jugador) -> dict:
         if len(completos) >= 2:
             partidos = completos
     pesos = _pesos(partidos, ctx.temporada, DECAY_JUGADOR)
-    out = {"_n": sum(1 for p in partidos if p["season"] == ctx.temporada), "_peso": sum(pesos)}
+    out = {"_n": sum(1 for p in partidos if p["season"] == ctx.temporada), "_peso": sum(pesos),
+           "_juegos": {p["game_id"]: w for p, w in zip(partidos, pesos)}}
     for nombre, (col_j, col_t, fuente) in SHARES.items():
         num = den = 0.0
         for p, w in zip(partidos, pesos):
@@ -759,9 +760,11 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
             base["att_hist"], base["att"] = base["att"], 0.0
         j.shares_base = base
         j.shares = dict(base)
+        j.juegos = sh["_juegos"]
         if j.llegada and len(j.con_equipo) < 2:
             j.notas.append(f"llegó a {team} en la semana {j.llegada['week']} desde {j.llegada['from_team']}: "
                            f"{len(j.con_equipo)} partido(s) con su equipo nuevo")
+    _corregir_regresos(ctx, team, activos)
     # QB: el titular (el de su último partido si está disponible; si no, el QB disponible con más pases).
     qbs = [j for j in activos if j.pos == "QB"]
     if qbs:
@@ -779,8 +782,7 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
     # Reparto: los activos se quedan con lo que dejan los de fuera (proporcional a su cuota), con tope.
     nombres_fuera = ", ".join(j.nombre for j in fuera
                               if max(j.shares_base.get("carries", 0), j.shares_base.get("targets", 0)) >= 0.12)
-    for clave in ("carries", "targets", "rz_carries", "i10_carries", "i5_carries", "rz_targets", "i10_targets",
-                  "ez_targets", "td_rush", "td_rec"):
+    for clave in CLAVES_REPARTO:
         total = sum(j.shares.get(clave, 0) for j in activos)
         if total <= 0:
             continue
@@ -802,6 +804,51 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
         if f > 1.06 and nombres_fuera:
             j.notas.append(f"más volumen por las bajas de {nombres_fuera} (×{f:.2f})")
     return activos
+
+
+CLAVES_REPARTO = ("carries", "targets", "rz_carries", "i10_carries", "i5_carries", "rz_targets", "i10_targets",
+                  "ez_targets", "td_rush", "td_rec")
+CUOTA_REGRESO = 0.15       # cuota mínima del que vuelve para corregir a sus compañeros
+PARTIDOS_REGRESO = 6       # últimos partidos del equipo en los que se mira quién faltó
+FUERZA_REGRESO = 0.5       # parte de la corrección que se aplica (el que vuelve suele tener carga limitada)
+
+
+def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None:
+    """Corrige el volumen de quienes jugaron sin un compañero que hoy sí juega (vuelve de lesión o acaba de llegar).
+
+    En los partidos sin él, sus compañeros absorbieron su parte; si hoy juega, esa parte vuelve a él. Si ya jugaba
+    en el equipo antes de empezar a faltar, a cada compañero se le descuenta, en la fracción de sus partidos que
+    fueron sin él, la cuota del que vuelve: cuota × (1 − fracción_sin × cuota_del_que_vuelve). Es la lección de Saquon Barkley contra Dallas: el modelo le
+    daba el puesto a Dameon Pierce, que había sido titular solo mientras Saquon estaba lesionado.
+    """
+    recientes = [f["game_id"] for f in ctx.ofensiva.get(team, [])[:PARTIDOS_REGRESO]
+                 if f["season"] == ctx.temporada]
+    for j in activos:
+        if j.pos == "QB" or max(j.shares_base.get("carries", 0), j.shares_base.get("targets", 0)) < CUOTA_REGRESO:
+            continue
+        jugados = {p["game_id"] for p in j.partidos if p["team"] == team}
+        sin_el = [g for g in recientes if g not in getattr(j, "juegos", {}) and g not in jugados] + \
+                 [g for g in recientes if g in jugados and g not in getattr(j, "juegos", {})]   # los que dejó a medias
+        if not sin_el:
+            continue
+        # Solo corrige quien ya jugaba en el equipo antes de empezar a faltar (el titular que vuelve); el que llegó
+        # mientras él no estaba es el sustituto, no al revés.
+        inicio = min(ctx.equipo_partido[(g, team)]["gameday"] for g in sin_el)
+        if not any(p["team"] == team and p["gameday"] < inicio for p in j.partidos):
+            continue
+        for k in activos:
+            if k is j or k.pos == "QB" or not getattr(k, "juegos", None):
+                continue
+            total = sum(k.juegos.values())
+            frac = sum(w for g, w in k.juegos.items() if g in sin_el) / total if total else 0
+            if frac <= 0:
+                continue
+            for clave in CLAVES_REPARTO:
+                cuota_j = min(0.8, j.shares_base.get(clave, 0))
+                k.shares[clave] = k.shares.get(clave, 0) * (1 - FUERZA_REGRESO * frac * cuota_j)
+            efecto = 1 - FUERZA_REGRESO * frac * min(0.8, j.shares_base.get("carries" if k.pos == "RB" else "targets", 0))
+            if efecto < 0.93:
+                k.notas.append(f"parte de su volumen fue sin {j.nombre}, que hoy juega (×{efecto:.2f})")
 
 
 def _eficiencia(ctx: Contexto, j: Jugador, num: str, den: str, previo: float, k: float) -> tuple[float, float]:
