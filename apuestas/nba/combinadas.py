@@ -6,7 +6,7 @@ Tipos que se guardan cada día (todas "fantasma" hasta que el sistema esté cali
 - principales: la línea principal más probable de cada partido entre jugadores constantes.
 - cuota_2 / cuota_3 / cuota_5 / cuota_10 / cuota_15: la combinación de líneas principales de jugadores constantes con mayor
   probabilidad de acertar todas cuya cuota llega al objetivo.
-- valor_5 / valor_10 / valor_15: lo mismo, pero solo con props donde el modelo ve más probabilidad de la
+- valor_5 / valor_10 / valor_15 / valor_30: lo mismo, pero solo con props donde el modelo ve más probabilidad de la
   que paga la casa (valor > +2 %). Las más seguras suelen tener valor negativo (la casa también las ve
   seguras y paga poco); se registran ambas para ver con resultados reales cuál gana dinero.
 """
@@ -108,7 +108,7 @@ def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float, tip
     return Combinada(f"{tipo}_{objetivo:g}", [_pata_prop(p, e) for p, e in mejor[1]])
 
 
-OBJETIVOS_VALOR = (5.0, 10.0, 15.0)
+OBJETIVOS_VALOR = (5.0, 10.0, 15.0, 30.0)
 
 
 def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]]) -> list[Combinada]:

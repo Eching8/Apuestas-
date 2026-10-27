@@ -242,6 +242,8 @@ class ModeloTest(unittest.TestCase):
             # Cuotas -110 / -110: la casa dice 50%, y la probabilidad final queda entre ambas.
             self.assertAlmostEqual(evs[0].prob_mercado, 0.5)
             self.assertAlmostEqual(evs[0].prob, 0.6 * evs[0].prob_modelo + 0.4 * 0.5)
+            # El modelo ve la prop mucho más probable que la casa (50 %): la casa suele saber algo.
+            self.assertIn("muy lejos de la casa", evs[0].alertas)
             picks = mejores(partidos, 0.65)
             guardar_picks(db, FECHA, picks)
             guardar_analisis(db, FECHA, partidos)
