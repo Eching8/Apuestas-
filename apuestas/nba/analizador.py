@@ -137,6 +137,38 @@ def guardar_analisis(db: NbaDB, fecha: str, partidos: list[Partido]) -> None:
     db.commit()
 
 
+def candidatas_seguras(partidos: list[Partido], cuota_min: float = 1.30, prob_min: float = 0.62,
+                       min_aciertos: int = 7) -> list[tuple[Partido, Evaluacion]]:
+    """Props con cuota real ordenadas por probabilidad (no por valor), solo de jugadores constantes:
+    titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado en al
+    menos 7 de sus últimos 10 partidos y en al menos el 60 % de esta temporada."""
+    out = []
+    for p in partidos:
+        for e in p.evaluaciones:
+            if e.alertas or not e.odd or e.odd < cuota_min or e.prob < prob_min:
+                continue
+            hits, n = e.acierto_10
+            if n < 8 or hits < min_aciertos:
+                continue
+            hits_t, n_t = e.acierto_temporada
+            if n_t >= 2 and hits_t / n_t < 0.6:
+                continue
+            out.append((p, e))
+    return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)
+
+
+def combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], n: int = 4) -> list[tuple[Partido, Evaluacion]]:
+    """La más probable de cada partido, hasta n partidos distintos."""
+    elegidas, usados = [], set()
+    for p, e in candidatas:
+        if p.game["id"] not in usados:
+            usados.add(p.game["id"])
+            elegidas.append((p, e))
+            if len(elegidas) == n:
+                break
+    return elegidas
+
+
 def mejores(partidos: list[Partido], prob_min: float) -> list[tuple[Partido, Evaluacion]]:
     out = [(p, e) for p in partidos for e in p.evaluaciones if e.prob >= prob_min]
     return sorted(out, key=lambda x: x[1].prob, reverse=True)

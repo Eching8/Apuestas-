@@ -512,6 +512,7 @@ class Evaluacion:
     componentes: dict = field(default_factory=dict)   # de dónde sale la media: ver Prediccion
     metricas: list = field(default_factory=list)      # estadísticas relacionadas: últ. 5/10, temporada, rival
     titular: bool = True                              # suplente = riesgo de que el técnico le dé pocos minutos
+    alertas: list = field(default_factory=list)       # motivos para no tomarla como pick "seguro"
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -536,6 +537,25 @@ def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -
     hits, n = _aciertos(j.partidos[:15], stat, line, lado)
     p_emp = (hits + 5 * p_mod) / (n + 5)
     return 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+
+
+MINUTOS_SD_ESTABLE = 6.0
+
+
+def alertas(j: Jugador, stat: str) -> list[str]:
+    """Lo que hace dudosa una prop aunque su probabilidad sea alta."""
+    out = []
+    if not es_titular(j):
+        out.append("suplente")
+    if j.minutos_sd > MINUTOS_SD_ESTABLE:
+        out.append("minutos inestables")
+    if set(COMPONENTES[stat]) & set(j.cambio_rol):
+        out.append("cambio de rol")
+    if j.pocos_con_equipo:
+        out.append("traspaso reciente")
+    if any(n.startswith("en el parte de lesiones") for n in j.notas):
+        out.append("en el parte de lesiones")
+    return out
 
 
 def es_titular(j: Jugador) -> bool:
@@ -606,7 +626,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
         sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
         linea_segura(pred.mu, pred.var), pred.componentes,
-        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j),
+        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j), alertas(j, stat),
     )
 
 

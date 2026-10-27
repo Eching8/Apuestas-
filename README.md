@@ -476,6 +476,17 @@ Se muestra con su **cuota mínima** (1 / probabilidad) para buscarla en las lín
 Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026): elegidas al 85 % acertaron el 89-96 %; al 90 %, el
 93-99 %. Las props de suplentes llevan la marca "⚠️ suplente": dependen de los minutos que les dé el técnico.
 
+### Combinada segura del día
+
+Elige por **probabilidad**, no por valor:
+
+- **Opción A, líneas alternativas:** el pick seguro más probable de cada partido (ver arriba), con la
+  probabilidad de acertar 2, 3 y 4 juntos (con 4 picks al ~90 %, ~65 %).
+- **Opción B, líneas principales con cuota real:** la más probable de cada partido entre jugadores
+  constantes: titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado
+  en 7+ de sus últimos 10 y en el 60 %+ de esta temporada, con cuota de al menos 1.30
+  (`APUESTAS_NBA_CUOTA_MIN`). Si la casa no ofrece una línea, se usa la siguiente de la lista.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.

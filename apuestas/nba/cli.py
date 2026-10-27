@@ -17,7 +17,8 @@ from zoneinfo import ZoneInfo
 from ..config import Config
 from ..db import Database
 from ..report import AVISO
-from .analizador import (analizar, emparejar_props, guardar_analisis, guardar_picks, liquidar, mejores,
+from .analizador import (analizar, candidatas_seguras, combinada_segura, emparejar_props, guardar_analisis,
+                         guardar_picks, liquidar, mejores,
                          rendimiento)
 from .backtest import backtest, resumen
 from .db import NbaDB
@@ -106,12 +107,23 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     picks = mejores(partidos, cfg.nba_prob_min)
     guardar_picks(nba, fecha, picks, partidos)
     guardar_analisis(nba, fecha, partidos)
-    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido)
+    candidatas = candidatas_seguras(partidos, cfg.nba_cuota_min)
+    md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido, candidatas)
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")
     for p, e in picks[:args.top]:
         print(f"  {e.prob * 100:4.0f}%  {etiqueta(e):<55} esperado {e.mu:5.1f}  últ.10 {e.acierto_10[0]}/{e.acierto_10[1]}"
               f"  ({p.titulo})")
+    combi = combinada_segura(candidatas)
+    if combi:
+        prob = cuota = 1.0
+        print("Combinada segura del día (la más probable de cada partido, jugadores constantes):")
+        for p, e in combi:
+            prob *= e.prob
+            cuota *= e.odd
+            print(f"  {e.prob * 100:4.0f}%  {etiqueta(e):<55} cuota {e.odd:.2f}  últ.10 "
+                  f"{e.acierto_10[0]}/{e.acierto_10[1]}  ({p.titulo})")
+        print(f"  Todas: {prob * 100:.0f}% de probabilidad, cuota {cuota:.2f}")
     seguras = sorted(((p, s) for p in partidos for s in p.seguras), key=lambda x: -x[1].prob)
     if seguras:
         print(f"{len(seguras)} picks seguros de titulares estables (línea baja al {cfg.nba_prob_segura * 100:.0f}%+):")

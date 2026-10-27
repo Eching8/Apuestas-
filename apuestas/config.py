@@ -78,6 +78,8 @@ class Config:
     nba_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NBA_PESO_MERCADO", 0.4))
     # Probabilidad objetivo de los picks seguros (líneas bajas de titulares estables).
     nba_prob_segura: float = field(default_factory=lambda: _float("APUESTAS_NBA_PROB_SEGURA", 0.85))
+    # Combinada segura: cuota mínima de cada selección (con cuota real de la casa).
+    nba_cuota_min: float = field(default_factory=lambda: _float("APUESTAS_NBA_CUOTA_MIN", 1.30))
 
 
 def load_config() -> Config:

@@ -6,7 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from ..report import AVISO
-from .analizador import Partido
+from .analizador import Partido, combinada_segura
 from .modelo import NOMBRES, Contexto, Evaluacion, Segura, mejor_contra
 from .zonas import NOMBRES as ZONAS_NOMBRE
 
@@ -164,6 +164,54 @@ def seccion_seguras(partidos: list[Partido], n: int = 15) -> list[str]:
         [_fila_segura(s, p.titulo) for p, s in todas[:n]] + [""]
 
 
+def combinada_alternas(partidos: list[Partido], n: int = 4) -> list[tuple[Partido, Segura]]:
+    """El pick seguro más probable de cada partido (líneas alternativas de titulares estables)."""
+    mejores = [(p, p.seguras[0]) for p in partidos if p.seguras]
+    return sorted(mejores, key=lambda x: -x[1].prob)[:n]
+
+
+def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], partidos: list[Partido] = (),
+                             n: int = 4) -> list[str]:
+    out = ["## Combinada segura del día", ""]
+    alternas = combinada_alternas(list(partidos), n)
+    if len(alternas) >= 2:
+        out += ["**Opción A, líneas alternativas (la más segura):** el pick seguro más probable de cada partido, "
+                "de titulares estables. Búscalas en las líneas alternativas de tu casa (\"15+\", \"20+\"...): "
+                "cada una vale la pena si paga al menos su cuota mínima.", "",
+                "| Partido | Selección | Prob. | Cuota mínima | Esperado | Últ. 10 |", "|---|---|---|---|---|---|"]
+        prob = 1.0
+        filas = []
+        for k, (p, s_) in enumerate(alternas, 1):
+            out.append(f"| {p.titulo} | **{s_.nombre}: más de {s_.line:g} {NOMBRES[s_.stat]}** | **{_pct(s_.prob)}** | "
+                       f"{s_.cuota_minima:.2f} | {s_.mu:.1f} | {s_.acierto_10[0]}/{s_.acierto_10[1]} |")
+            prob *= s_.prob
+            if k >= 2:
+                filas.append(f"| {k} | **{_pct(prob)}** |")
+        out += ["", "| Selecciones | Probabilidad de acertar todas |", "|---|---|"] + filas + [""]
+    combi = combinada_segura(candidatas, n)
+    if not combi:
+        return out + ["Hoy ninguna línea principal cumple los filtros de jugador constante.", ""]
+    out += [f"**Opción {'B' if len(alternas) >= 2 else 'A'}, líneas principales con cuota real:**", "",
+           "Se elige por **probabilidad**, no por valor: la más probable de cada partido entre jugadores "
+           "constantes (titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían "
+           "pasado en 7+ de sus últimos 10 y en el 60 %+ de esta temporada) y con cuota real de la casa. Si tu "
+           "casa no ofrece esa línea, usa la siguiente de la lista \"Las más seguras con cuota\".", "",
+           "| Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |", "|---|---|---|---|---|---|"]
+    for p, e in combi:
+        out.append(f"| {p.titulo} | **{etiqueta(e)}** | **{_pct(e.prob)}** | {e.odd:.2f} | "
+                   f"{e.acierto_10[0]}/{e.acierto_10[1]} | {e.acierto_temporada[0]}/{e.acierto_temporada[1]} |")
+    out += ["", "| Selecciones | Probabilidad de acertar todas | Cuota |", "|---|---|---|"]
+    prob = cuota = 1.0
+    for k, (_, e) in enumerate(combi, 1):
+        prob *= e.prob
+        cuota *= e.odd
+        if k >= 2:
+            out.append(f"| {k} | **{_pct(prob)}** | {cuota:.2f} |")
+    out += ["", "### Las más seguras con cuota", "", "| Partido " + CABECERA, "|---" + SEPARADOR]
+    out += [_fila(e, p.titulo) for p, e in candidatas[:12]] + [""]
+    return out
+
+
 def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
     out, por_jugador = [], {}
     for e in part.evaluaciones:
@@ -178,7 +226,7 @@ def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
 
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
              picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
-             por_partido: int = 8) -> tuple[Path, Path]:
+             por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = ()) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -190,6 +238,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
           "rebotes disponibles que captura, % de las canastas de sus compañeros que asiste...) y se muestra con "
           "esas estadísticas en sus últimos 5 y 10 partidos, la temporada y contra este rival. Todo queda "
           "guardado en la tabla `nba_analisis` de la base.", ""]
+    md += seccion_combinada_segura(list(candidatas), partidos)
     md += seccion_seguras(partidos)
     md += ["## Las más probables del día", ""]
     if picks:
