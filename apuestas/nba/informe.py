@@ -213,16 +213,25 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
 
 
 def seccion_cuotadas(combis: list) -> list[str]:
-    cuotadas = [c for c in combis if c.tipo.startswith("cuota_")]
+    cuotadas = [c for c in combis if c.tipo.startswith(("cuota_", "valor_"))]
     if not cuotadas:
         return []
     out = ["## Combinadas con cuota objetivo", "",
            "La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más "
            "probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se "
-           "liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real.", ""]
+           "liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota "
+           "alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse "
+           "o superar esa probabilidad; si no llega (valor negativo), esa combinada no conviene ese día. "
+           "**Segura** = solo los picks más probables de jugadores constantes. **De valor** = solo picks donde "
+           "el modelo ve más de lo que paga la casa. Se registran las dos para ver cuál gana con resultados reales.",
+           ""]
     for c in cuotadas:
-        out += [f"**Cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
-                f"**{_pct(c.prob)}**", ""]
+        valor = c.prob * c.cuota - 1
+        aviso = ("✅ con valor" if valor > 0 else
+                 "⚠️ sin valor: la cuota paga menos de lo que vale el riesgo, mejor no jugarla hoy")
+        nombre = "Segura" if c.tipo.startswith("cuota_") else "De valor"
+        out += [f"**{nombre}, cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
+                f"**{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f}); valor {valor * 100:+.0f}% {aviso}", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
                 f"{x['odd']:.2f}) — {x['partido']}" for x in c.patas] + [""]
     return out

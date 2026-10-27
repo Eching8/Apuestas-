@@ -490,8 +490,10 @@ Elige por **probabilidad**, no por valor:
 ### Combinadas con cuota objetivo y calibración
 
 Cada día se arman y registran (tabla `nba_combinadas`) la combinada de alternas, la de principales y las
-de cuota objetivo 2, 3 y 5: la combinación de jugadores constantes, en partidos distintos, con más
-probabilidad de acertar todas cuya cuota llega al objetivo. Son picks de prueba: se liquidan solos con
+de cuota objetivo 2, 3, 5, 10 y 15: la combinación de jugadores constantes, en partidos distintos, con más
+probabilidad de acertar todas cuya cuota llega al objetivo, con su valor (probabilidad × cuota − 1): una
+cuota alta nunca es segura (cuota 15 justa = 1 de cada 15) y si el valor es negativo no conviene ese día.
+Son picks de prueba: se liquidan solos con
 los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.

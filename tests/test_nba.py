@@ -355,6 +355,7 @@ class CombinadasTest(unittest.TestCase):
         self.assertEqual(len({x["game_id"] for x in c.patas}), len(c.patas))  # partidos distintos
         self.assertAlmostEqual(c.prob, 0.70 * 0.68)  # la más probable que llega a cuota 2
         self.assertIsNone(con_cuota(cands, 50.0))
+        self.assertTrue(con_cuota(cands, 2.0, "valor").tipo.startswith("valor_"))
 
     def test_liquidar(self):
         import json as _json

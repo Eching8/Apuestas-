@@ -4,8 +4,11 @@ Tipos que se guardan cada día (todas "fantasma" hasta que el sistema esté cali
 
 - alternas: el pick seguro más probable de cada partido (líneas alternativas de titulares estables).
 - principales: la línea principal más probable de cada partido entre jugadores constantes.
-- cuota_2 / cuota_3 / cuota_5: la combinación de líneas principales de jugadores constantes con mayor
+- cuota_2 / cuota_3 / cuota_5 / cuota_10 / cuota_15: la combinación de líneas principales de jugadores constantes con mayor
   probabilidad de acertar todas cuya cuota llega al objetivo.
+- valor_5 / valor_10 / valor_15: lo mismo, pero solo con props donde el modelo ve más probabilidad de la
+  que paga la casa (valor > +2 %). Las más seguras suelen tener valor negativo (la casa también las ve
+  seguras y paga poco); se registran ambas para ver con resultados reales cuál gana dinero.
 """
 from __future__ import annotations
 
@@ -18,9 +21,9 @@ from .analizador import Partido, combinada_segura
 from .db import NbaDB
 from .modelo import Evaluacion, Segura, valor
 
-OBJETIVOS = (2.0, 3.0, 5.0)
-MAX_SELECCIONES = 5
-CANDIDATAS_MAX = 16
+OBJETIVOS = (2.0, 3.0, 5.0, 10.0, 15.0)
+MAX_SELECCIONES = 8
+CANDIDATAS_MAX = 18
 
 
 @dataclass
@@ -65,7 +68,22 @@ def principales(candidatas: list[tuple[Partido, Evaluacion]], n: int = 4) -> Com
     return Combinada("principales", [_pata_prop(p, e) for p, e in elegidas]) if len(elegidas) >= 2 else None
 
 
-def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float) -> Combinada | None:
+def candidatas_valor(partidos: list[Partido], valor_min: float = 0.02, prob_min: float = 0.55,
+                     min_aciertos: int = 6) -> list[tuple[Partido, Evaluacion]]:
+    """Props donde el modelo ve más probabilidad que la que paga la casa, sin alertas y que la habrían
+    pasado en al menos 6 de sus últimos 10."""
+    out = []
+    for p in partidos:
+        for e in p.evaluaciones:
+            if e.alertas or not e.odd or e.prob < prob_min or e.prob * e.odd - 1 < valor_min:
+                continue
+            if e.acierto_10[1] < 8 or e.acierto_10[0] < min_aciertos:
+                continue
+            out.append((p, e))
+    return sorted(out, key=lambda x: x[1].prob, reverse=True)
+
+
+def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float, tipo: str = "cuota") -> Combinada | None:
     """La combinación de partidos distintos con más probabilidad de acertar todas y cuota >= objetivo."""
     # La mejor candidata de cada partido y, como alternativa, la segunda: así hay donde elegir sin repetir partido.
     por_partido: dict[str, list] = {}
@@ -87,11 +105,18 @@ def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float) -> 
                 mejor = (prob, comb)
     if mejor is None:
         return None
-    return Combinada(f"cuota_{objetivo:g}", [_pata_prop(p, e) for p, e in mejor[1]])
+    return Combinada(f"{tipo}_{objetivo:g}", [_pata_prop(p, e) for p, e in mejor[1]])
+
+
+OBJETIVOS_VALOR = (5.0, 10.0, 15.0)
 
 
 def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]]) -> list[Combinada]:
+    """Seguras (las más probables) y de valor (cuota mejor que su riesgo): se registran las dos para
+    comparar con resultados reales cuál conviene jugar."""
+    valor = candidatas_valor(partidos)
     out = [alternas(partidos), principales(candidatas)] + [con_cuota(candidatas, o) for o in OBJETIVOS]
+    out += [con_cuota(valor, o, "valor") for o in OBJETIVOS_VALOR]
     return [c for c in out if c]
 
 
