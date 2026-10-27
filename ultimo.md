@@ -23,30 +23,23 @@ Cada media se construye desde las estadísticas que la producen (tiros × aciert
 
 Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad: si tu casa paga más por el bet builder, tiene valor. Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).
 
-### Doble: Detroit Pistons @ New York Knicks + Portland Trail Blazers @ Los Angeles Lakers
+### Doble: Detroit Pistons @ New York Knicks + Sacramento Kings @ San Antonio Spurs
 
-Probabilidad de acertar los dos bet builders: **11%** (1 de cada 9); cuota justa **8.89**.
+Probabilidad de acertar los dos bet builders: **15%** (1 de cada 6); cuota justa **6.46**.
 
-**Detroit Pistons @ New York Knicks** — acertar las 4: **34%**, cuota justa 2.97
+**Detroit Pistons @ New York Knicks** — acertar las 4: **46%**, cuota justa 2.17
 
-- Jalen Brunson 18+ puntos (73%; esperado 21.8; últ. 10: 9/10)
-- Cade Cunningham 17+ puntos (75%; esperado 21.2; últ. 10: 8/10)
-- Karl-Anthony Towns 13+ puntos (76%; esperado 17.1; últ. 10: 8/10)
-- OG Anunoby 13+ puntos (76%; esperado 17.4; últ. 10: 8/10)
+- OG Anunoby 4+ rebotes (76%; esperado 5.9; últ. 10: 8/10)
+- Josh Hart 1+ triples (81%; esperado 2.0; últ. 10: 8/10)
+- Jalen Brunson 1+ triples (84%; esperado 1.9; últ. 10: 10/10)
+- Cade Cunningham 1+ triples (88%; esperado 2.5; últ. 10: 9/10)
 
-**Portland Trail Blazers @ Los Angeles Lakers** — acertar las 4: **33%**, cuota justa 3.00
+**Sacramento Kings @ San Antonio Spurs** — acertar las 4: **34%**, cuota justa 2.98
 
-- Austin Reaves 18+ puntos (73%; esperado 22.5; últ. 10: 6/10)
-- Luka Doncic 23+ puntos (75%; esperado 30.0; últ. 10: 9/10)
-- Walker Kessler 9+ puntos (75%; esperado 15.0; últ. 10: 5/8)
-- Donovan Clingan 6+ rebotes (76%; esperado 8.0; últ. 10: 9/10)
-
-**Sacramento Kings @ San Antonio Spurs** — acertar las 4: **31%**, cuota justa 3.26
-
-- Domantas Sabonis 13+ puntos (73%; esperado 17.2; últ. 10: 6/10)
 - Precious Achiuwa 12+ puntos (74%; esperado 15.9; últ. 10: 8/10)
-- Victor Wembanyama 18+ puntos (74%; esperado 23.4; últ. 10: 9/10)
-- Stephon Castle 4+ asistencias (74%; esperado 5.6; últ. 10: 8/10)
+- Dylan Harper 4+ rebotes (74%; esperado 5.2; últ. 10: 9/10)
+- Zach LaVine 2+ triples (75%; esperado 2.9; últ. 10: 7/10)
+- Victor Wembanyama 1+ triples (80%; esperado 1.8; últ. 10: 9/10)
 
 ## Combinada segura del día
 
@@ -73,12 +66,12 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 |---|---|---|---|---|---|
 | Sacramento Kings @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos**<br>el rival concede -9% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -9% | **69%** | 1.37 | 7/10 | 3/3 |
 | Brooklyn Nets @ Boston Celtics | **Jordan Walsh: menos de 1.5 robos**<br>el rival concede +5% de robos por minuto a bases/escoltas (defensa débil); ajuste aplicado +5% | **69%** | 1.41 | 7/10 | 2/3 |
-| Detroit Pistons @ New York Knicks | **OG Anunoby: menos de 1.5 robos**<br>el rival concede +6% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +6% | **64%** | 1.48 | 7/10 | 3/3 |
+| Detroit Pistons @ New York Knicks | **Cade Cunningham: más de 1.5 triples**<br>el rival concede -2% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%) | **64%** | 1.55 | 8/10 | 2/3 |
 
 | Selecciones | Probabilidad de acertar todas | Cuota |
 |---|---|---|
 | 2 | **48%** | 1.93 |
-| 3 | **31%** | 2.86 |
+| 3 | **31%** | 2.99 |
 
 ### Las más seguras con cuota
 
@@ -86,41 +79,50 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 |---|---|---|---|---|---|---|---|---|---|
 | Sacramento Kings @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **69%** | 74% | 67% | 0.9 ± 0.9 | 7/10 | 3/3 | 0, 1 | 1.37 (73%) |
 | Brooklyn Nets @ Boston Celtics | **Jordan Walsh: menos de 1.5 robos** | **69%** | 75% | 65% | 0.9 ± 1.1 | 7/10 | 2/3 | 0, 0, 1, 0 | 1.41 (71%) |
-| Sacramento Kings @ San Antonio Spurs | **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 68% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
-| Detroit Pistons @ New York Knicks | **OG Anunoby: menos de 1.5 robos** | **64%** | 66% | 63% | 1.1 ± 1.2 | 7/10 | 3/3 | 0, 3 | 1.48 (68%) |
+| Sacramento Kings @ San Antonio Spurs | **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 67% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
+| Detroit Pistons @ New York Knicks | **Cade Cunningham: más de 1.5 triples** | **64%** | 70% | 61% | 2.5 ± 1.6 | 8/10 | 2/3 | 5, 1, 3 | 1.55 (65%) |
+| Detroit Pistons @ New York Knicks | **OG Anunoby: menos de 1.5 robos** | **64%** | 66% | 62% | 1.1 ± 1.2 | 7/10 | 3/3 | 0, 3 | 1.51 (66%) |
 | Brooklyn Nets @ Boston Celtics | **Jayson Tatum: menos de 1.5 robos** | **64%** | 62% | 65% | 1.2 ± 1.1 | 7/10 | 2/3 | - | 1.44 (69%) |
-| Brooklyn Nets @ Boston Celtics | **Paul George: menos de 3.5 asistencias** | **62%** | 68% | 59% | 2.8 ± 1.7 | 8/10 | 3/3 | 2, 2 | 1.59 (63%) |
 
 ## Combinadas con cuota objetivo
 
 La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse o superar esa probabilidad; si no llega (valor negativo), esa combinada no conviene ese día. **Segura** = solo los picks más probables de jugadores constantes. **De valor** = solo picks donde el modelo ve más de lo que paga la casa. Se registran las dos para ver cuál gana con resultados reales.
 
-**Segura, cuota 2+:** cuota 2.02, probabilidad de acertar todas **45%** (1 de cada 2); valor -10% ⚠️ sin valor: la cuota paga menos de lo que vale el riesgo, mejor no jugarla hoy
+**Segura, cuota 2+:** cuota 2.12, probabilidad de acertar todas **45%** (1 de cada 2); valor -6% ⚠️ sin valor: la cuota paga menos de lo que vale el riesgo, mejor no jugarla hoy
 
 - Victor Wembanyama: menos de 1.5 robos (69%, cuota 1.37) — Sacramento Kings @ San Antonio Spurs — 5 factores a favor, 0 en contra
   - el rival concede -9% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -9%
-- OG Anunoby: menos de 1.5 robos (64%, cuota 1.48) — Detroit Pistons @ New York Knicks — 4 factores a favor, 1 en contra
-  - el rival concede +6% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +6%
+- Cade Cunningham: más de 1.5 triples (64%, cuota 1.55) — Detroit Pistons @ New York Knicks — 5 factores a favor, 1 en contra
+  - el rival concede -2% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%)
 
-**De valor, cuota 5+:** cuota 5.85, probabilidad de acertar todas **21%** (1 de cada 5); valor +22% ✅ con valor
+**Segura, cuota 3+:** cuota 3.03, probabilidad de acertar todas **30%** (1 de cada 3); valor -9% ⚠️ sin valor: la cuota paga menos de lo que vale el riesgo, mejor no jugarla hoy
 
-- Ziaire Williams: más de 11.5 pts+reb (61%, cuota 1.80) — Portland Trail Blazers @ Los Angeles Lakers — 4 factores a favor, 0 en contra
+- Jordan Walsh: menos de 1.5 robos (69%, cuota 1.41) — Brooklyn Nets @ Boston Celtics — 4 factores a favor, 1 en contra
+  - el rival concede +5% de robos por minuto a bases/escoltas (defensa débil); ajuste aplicado +5%
+- Stephon Castle: menos de 1.5 robos (68%, cuota 1.39) — Sacramento Kings @ San Antonio Spurs — 4 factores a favor, 1 en contra
+  - el rival concede +6% de robos por minuto a bases/escoltas (defensa débil); ajuste aplicado +6%
+- Cade Cunningham: más de 1.5 triples (64%, cuota 1.55) — Detroit Pistons @ New York Knicks — 5 factores a favor, 1 en contra
+  - el rival concede -2% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%)
+
+**De valor, cuota 5+:** cuota 6.02, probabilidad de acertar todas **21%** (1 de cada 5); valor +27% ✅ con valor
+
+- Ziaire Williams: más de 11.5 pts+reb (60%, cuota 1.82) — Portland Trail Blazers @ Los Angeles Lakers — 4 factores a favor, 0 en contra
   - el rival concede -3% de puntos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%)
-- Precious Achiuwa: más de 18.5 pts+reb (60%, cuota 1.82) — Sacramento Kings @ San Antonio Spurs — 3 factores a favor, 3 en contra
+- Precious Achiuwa: más de 18.5 pts+reb (60%, cuota 1.81) — Sacramento Kings @ San Antonio Spurs — 3 factores a favor, 3 en contra
   - el rival concede -5% de puntos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5%; en su zona principal (aro) el rival concede 63% (liga 68%)
-- Day'Ron Sharpe: menos de 18.5 pts+reb (58%, cuota 1.79) — Brooklyn Nets @ Boston Celtics — 4 factores a favor, 0 en contra
-  - el rival concede -3% de puntos por minuto a pívots (defensa fuerte); ajuste aplicado -4%; en su zona principal (aro) el rival concede 66% (liga 68%)
+- Karl-Anthony Towns: menos de 35.5 pts+reb+ast (58%, cuota 1.83) — Detroit Pistons @ New York Knicks — 5 factores a favor, 1 en contra
+  - el rival concede -13% de puntos por minuto a pívots (defensa fuerte); ajuste aplicado -8%; en su zona principal (aro) el rival concede 64% (liga 68%)
 
-**De valor, cuota 10+:** cuota 10.73, probabilidad de acertar todas **12%** (1 de cada 8); valor +29% ✅ con valor
+**De valor, cuota 10+:** cuota 10.69, probabilidad de acertar todas **12%** (1 de cada 8); valor +29% ✅ con valor
 
-- Ziaire Williams: más de 11.5 pts+reb (61%, cuota 1.80) — Portland Trail Blazers @ Los Angeles Lakers — 4 factores a favor, 0 en contra
+- Ziaire Williams: más de 11.5 pts+reb (60%, cuota 1.82) — Portland Trail Blazers @ Los Angeles Lakers — 4 factores a favor, 0 en contra
   - el rival concede -3% de puntos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%)
-- Precious Achiuwa: más de 18.5 pts+reb (60%, cuota 1.82) — Sacramento Kings @ San Antonio Spurs — 3 factores a favor, 3 en contra
+- Precious Achiuwa: más de 18.5 pts+reb (60%, cuota 1.81) — Sacramento Kings @ San Antonio Spurs — 3 factores a favor, 3 en contra
   - el rival concede -5% de puntos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5%; en su zona principal (aro) el rival concede 63% (liga 68%)
-- Day'Ron Sharpe: menos de 18.5 pts+reb (58%, cuota 1.79) — Brooklyn Nets @ Boston Celtics — 4 factores a favor, 0 en contra
+- Karl-Anthony Towns: menos de 35.5 pts+reb+ast (58%, cuota 1.83) — Detroit Pistons @ New York Knicks — 5 factores a favor, 1 en contra
+  - el rival concede -13% de puntos por minuto a pívots (defensa fuerte); ajuste aplicado -8%; en su zona principal (aro) el rival concede 64% (liga 68%)
+- Day'Ron Sharpe: menos de 18.5 pts+reb (58%, cuota 1.77) — Brooklyn Nets @ Boston Celtics — 4 factores a favor, 0 en contra
   - el rival concede -3% de puntos por minuto a pívots (defensa fuerte); ajuste aplicado -4%; en su zona principal (aro) el rival concede 66% (liga 68%)
-- Cade Cunningham: menos de 14.5 reb+ast (58%, cuota 1.83) — Detroit Pistons @ New York Knicks — 5 factores a favor, 2 en contra
-  - el rival concede -6% de rebotes por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -7%
 
 ## Picks seguros de titulares estables
 
@@ -151,8 +153,8 @@ Líneas bajas (alternativas) de titulares con 30+ minutos: mejor un "15+ puntos"
 | Detroit Pistons @ New York Knicks | **Ausar Thompson: menos de 0.5 triples** | **78%** | 71% | 82% | 0.4 ± 0.6 | 9/10 | 2/2 | 0, 0, 0 | 1.13 (88%) |
 | Sacramento Kings @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **69%** | 74% | 67% | 0.9 ± 0.9 | 7/10 | 3/3 | 0, 1 | 1.37 (73%) |
 | Brooklyn Nets @ Boston Celtics | **Jordan Walsh: menos de 1.5 robos** | **69%** | 75% | 65% | 0.9 ± 1.1 | 7/10 | 2/3 | 0, 0, 1, 0 | 1.41 (71%) |
-| Sacramento Kings @ San Antonio Spurs | **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 68% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
-| Brooklyn Nets @ Boston Celtics | **Derrick White: menos de 1.5 robos** | **66%** | 69% | 64% | 1.2 ± 1.2 | 8/10 | 2/3 | 1, 1, 2 | 1.45 (69%) |
+| Sacramento Kings @ San Antonio Spurs | **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 67% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
+| Brooklyn Nets @ Boston Celtics | **Derrick White: menos de 1.5 robos** | **66%** | 69% | 64% | 1.2 ± 1.2 | 8/10 | 2/3 | 1, 1, 2 | 1.44 (69%) |
 | Portland Trail Blazers @ Los Angeles Lakers | **Robert Williams III: más de 0.5 tapones** ⚠️ suplente | **65%** | 60% | 68% | 0.9 ± 1.0 | 8/10 | 2/2 | 1, 0 | 1.41 (71%) |
 
 **Si haces combinada:** cada selección que añades multiplica el riesgo. Probabilidad de acertar todas con las más probables de partidos distintos:
@@ -348,12 +350,12 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Jordan Walsh: menos de 1.5 robos** | **69%** | 75% | 65% | 0.9 ± 1.1 | 7/10 | 2/3 | 0, 0, 1, 0 | 1.41 (71%) |
-| **Derrick White: menos de 1.5 robos** | **66%** | 69% | 64% | 1.2 ± 1.2 | 8/10 | 2/3 | 1, 1, 2 | 1.45 (69%) |
-| **Noah Clowney: menos de 1.5 triples** ⚠️ suplente | **64%** | 65% | 64% | 1.3 ± 1.1 | 8/10 | 3/3 | 2, 3, 3, 3 | 1.46 (69%) |
+| **Derrick White: menos de 1.5 robos** | **66%** | 69% | 64% | 1.2 ± 1.2 | 8/10 | 2/3 | 1, 1, 2 | 1.44 (69%) |
+| **Noah Clowney: menos de 1.5 triples** ⚠️ suplente | **64%** | 65% | 64% | 1.3 ± 1.1 | 8/10 | 3/3 | 2, 3, 3, 3 | 1.47 (68%) |
+| **Keon Ellis: menos de 2.5 asistencias** | **64%** | 71% | 60% | 1.9 ± 1.5 | 8/10 | 1/3 | 0, 2, 1 | 1.55 (65%) |
 | **Jayson Tatum: menos de 1.5 robos** | **64%** | 62% | 65% | 1.2 ± 1.1 | 7/10 | 2/3 | - | 1.44 (69%) |
-| **Keon Ellis: menos de 1.5 triples** | **63%** | 67% | 62% | 1.3 ± 1.2 | 9/10 | 2/3 | 0, 2, 3 | 1.51 (66%) |
+| **Keon Ellis: menos de 1.5 triples** | **63%** | 67% | 61% | 1.3 ± 1.2 | 9/10 | 2/3 | 0, 2, 3 | 1.53 (66%) |
 | **Julius Randle: menos de 5.5 asistencias** | **63%** | 75% | 56% | 3.8 ± 2.3 | 7/10 | 1/3 | 4, 6 | 1.68 (60%) |
-| **Paul George: menos de 3.5 asistencias** | **62%** | 68% | 59% | 2.8 ± 1.7 | 8/10 | 3/3 | 2, 2 | 1.59 (63%) |
 | **Paul George: menos de 3.5 triples** | **62%** | 67% | 59% | 2.7 ± 1.9 | 5/10 | 2/3 | 2, 2 | 1.59 (63%) |
 
 ### Fichas de los jugadores destacados
@@ -478,6 +480,46 @@ Razonamiento (2 factores a favor, 4 en contra):
 | bajo el aro | 16% | 62% | 68% | 66% |
 | media distancia | 3% | 38% | 41% | 43% |
 
+#### Keon Ellis (bases/escoltas) vs Boston Celtics
+
+- Minutos esperados: **23.5** (± 7.8); 85 partidos en la base.
+- cambio de rol esta temporada (por minuto): reb -34%; se da más peso a la línea de la casa
+- Su prop más probable hoy: **Keon Ellis: menos de 2.5 asistencias** (64%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
+- Defensa de Boston Celtics contra bases/escoltas en asistencias: -5% respecto a la media; ajuste por su historial contra defensas similares: -2%.
+
+**¿Por qué 1.9 asistencias?** (línea 2.5; 23.5 minutos esperados)
+
+Razonamiento (4 factores a favor, 1 en contra):
+
+- ❌ Minutos: 23.5 esperados (titular, ±7.8).
+- ✅ Forma: 1.8 en sus últimos 5, 2.7 esta temporada (3 partidos), 1.1 la temporada pasada (línea 2.5).
+- ➖ Cómo produce asistencias: asiste el 12.4% de las canastas de sus compañeros en pista × 14.0 canastas de compañeros esperadas (su equipo 34.2 por 48' contra esta defensa).
+- ✅ Defensa: el rival concede -5% de asistencias por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -5%.
+- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 0, 2, 1 (3 de 3 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
+- ⚠️ cambio de rol esta temporada (por minuto): reb -34%; se da más peso a la línea de la casa.
+
+- ⚠️ Alertas: minutos inestables.
+- Asistencias **1.9** (por componentes 1.7 · por tasa por minuto y defensa rival 2.0): asiste el 12.4% de las canastas de sus compañeros en pista × 14.0 canastas de compañeros esperadas (su equipo 34.2 por 48' contra esta defensa).
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 19.2 | 12.2 | 26.3 | 19.0 | 23.7 |
+| Asistencias | 1.8 | 1.1 | 2.7 | 0.9 | 1.0 |
+| % de las canastas de compañeros que asiste | 13.6% | 13.0% | 14.5% | 6.0% | 6.2% |
+| Pérdidas por jugada | 12.1% | 19.6% | 14.3% | 9.8% | 11.2% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -12%, vs defensa media +6%, vs defensa débil +9%; rebotes: vs defensa fuerte +2%, vs defensa media +0%, vs defensa débil -2%; asistencias: vs defensa fuerte -31%, vs defensa media +7%, vs defensa débil +25%; triples: vs defensa fuerte +16%, vs defensa media -20%, vs defensa débil -2%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 41% | 36% | 35% | 36% |
+| triple de esquina | 24% | 37% | 38% | 36% |
+| bajo el aro | 16% | 77% | 68% | 66% |
+| pintura | 12% | 46% | 45% | 43% |
+| media distancia | 6% | 33% | 41% | 43% |
+
 #### Jayson Tatum (aleros/ala-pívots) vs Brooklyn Nets
 
 - Minutos esperados: **32.8** (± 4.8); 25 partidos en la base.
@@ -517,46 +559,6 @@ Razonamiento (3 factores a favor, 1 en contra):
 | media distancia | 15% | 40% | 41% | 41% |
 | triple de esquina | 4% | 39% | 38% | 41% |
 
-#### Keon Ellis (bases/escoltas) vs Boston Celtics
-
-- Minutos esperados: **23.5** (± 7.8); 85 partidos en la base.
-- cambio de rol esta temporada (por minuto): reb -34%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Keon Ellis: menos de 1.5 triples** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Boston Celtics contra bases/escoltas en triples: -0% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 1.3 triples?** (línea 1.5; 23.5 minutos esperados)
-
-Razonamiento (2 factores a favor, 2 en contra):
-
-- ❌ Minutos: 23.5 esperados (titular, ±7.8).
-- ✅ Forma: 1.0 en sus últimos 5, 1.3 esta temporada (3 partidos), 1.1 la temporada pasada (línea 1.5).
-- ➖ Cómo produce triples: 3.8 triples intentados (su ritmo 5.5 por 36'; el rival concede +8% de triples en su reparto) × 36% esperado.
-- ➖ Defensa: el rival concede +0% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado -0%; en su zona principal (triple) el rival concede 36% (liga 35%).
-- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ❌ Contra este rival: 0, 2, 3 (1 de 3 a favor).
-- ✅ Últimos 10: la habría pasado 9 de 10.
-- ⚠️ cambio de rol esta temporada (por minuto): reb -34%; se da más peso a la línea de la casa.
-
-- ⚠️ Alertas: minutos inestables.
-- Triples **1.3** (por componentes 1.4 · por tasa por minuto y defensa rival 1.3): 3.8 triples intentados (su ritmo 5.5 por 36'; el rival concede +8% de triples en su reparto) × 36% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 19.2 | 12.2 | 26.3 | 19.0 | 23.7 |
-| Triples anotados | 1.0 | 0.7 | 1.3 | 1.2 | 1.7 |
-| Triples intentados | 2.6 | 1.8 | 3.3 | 3.2 | 3.3 |
-| % triples | 38.5% | 38.9% | 40.0% | 36.0% | 50.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -12%, vs defensa media +6%, vs defensa débil +9%; rebotes: vs defensa fuerte +2%, vs defensa media +0%, vs defensa débil -2%; asistencias: vs defensa fuerte -31%, vs defensa media +7%, vs defensa débil +25%; triples: vs defensa fuerte +16%, vs defensa media -20%, vs defensa débil -2%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 41% | 36% | 35% | 36% |
-| triple de esquina | 24% | 37% | 38% | 36% |
-| bajo el aro | 16% | 77% | 68% | 66% |
-| pintura | 12% | 46% | 45% | 43% |
-| media distancia | 6% | 33% | 41% | 43% |
-
 ## Detroit Pistons @ New York Knicks
 
 Parte de lesiones: Jose Alvarado (Out); Isaiah Joe (Day-To-Day); Jalen Duren (Out); Ausar Thompson (Day-To-Day).
@@ -592,12 +594,12 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Ausar Thompson: menos de 0.5 triples** | **78%** | 71% | 82% | 0.4 ± 0.6 | 9/10 | 2/2 | 0, 0, 0 | 1.13 (88%) |
-| **Cade Cunningham: menos de 1.5 robos** | **64%** | 65% | 64% | 1.2 ± 1.1 | 6/10 | 2/3 | 1, 0, 1 | 1.47 (68%) |
-| **OG Anunoby: menos de 1.5 robos** | **64%** | 66% | 63% | 1.1 ± 1.2 | 7/10 | 3/3 | 0, 3 | 1.48 (68%) |
-| **Ausar Thompson: más de 0.5 tapones** | **63%** | 57% | 66% | 0.9 ± 1.1 | 8/10 | 1/2 | 0, 3, 0 | 1.43 (70%) |
-| **John Collins: menos de 1.5 asistencias** | **63%** | 67% | 61% | 1.2 ± 1.1 | 8/10 | 3/3 | 0 | 1.50 (66%) |
-| **Duncan Robinson: más de 2.5 triples** | **62%** | 72% | 56% | 3.9 ± 2.0 | 8/10 | 3/3 | 3, 3, 2 | 1.67 (60%) |
-| **Cade Cunningham: más de 0.5 tapones** | **62%** | 64% | 61% | 1.3 ± 1.3 | 5/10 | 3/3 | 2, 0, 2 | 1.57 (64%) |
+| **Cade Cunningham: más de 1.5 triples** | **64%** | 70% | 61% | 2.5 ± 1.6 | 8/10 | 2/3 | 5, 1, 3 | 1.55 (65%) |
+| **Cade Cunningham: menos de 1.5 robos** | **64%** | 65% | 64% | 1.2 ± 1.1 | 6/10 | 2/3 | 1, 0, 1 | 1.50 (67%) |
+| **OG Anunoby: menos de 1.5 robos** | **64%** | 66% | 62% | 1.1 ± 1.2 | 7/10 | 3/3 | 0, 3 | 1.51 (66%) |
+| **John Collins: menos de 1.5 asistencias** | **63%** | 67% | 61% | 1.2 ± 1.1 | 8/10 | 3/3 | 0 | 1.50 (67%) |
+| **Ausar Thompson: más de 0.5 tapones** | **63%** | 57% | 66% | 0.9 ± 1.1 | 8/10 | 1/2 | 0, 3, 0 | 1.44 (70%) |
+| **Duncan Robinson: más de 2.5 triples** | **62%** | 72% | 57% | 3.9 ± 2.0 | 8/10 | 3/3 | 3, 3, 2 | 1.65 (60%) |
 | **Jalen Brunson: más de 0.5 robos** | **61%** | 56% | 64% | 1.0 ± 1.1 | 4/10 | 1/3 | 2, 2, 0 | 1.49 (67%) |
 
 ### Fichas de los jugadores destacados
@@ -651,29 +653,31 @@ Razonamiento (4 factores a favor, 2 en contra):
 
 - Minutos esperados: **33.3** (± 3.0); 82 partidos en la base.
 - sin Jalen Duren (8 partidos): 31.1 min vs 35.2 con él; pts +8%/min, reb +14%/min, ast +10%/min
-- Su prop más probable hoy: **Cade Cunningham: menos de 1.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de New York Knicks contra bases/escoltas en robos: -14% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+- Su prop más probable hoy: **Cade Cunningham: más de 1.5 triples** (64%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
+- Defensa de New York Knicks contra bases/escoltas en triples: -2% respecto a la media; ajuste por su historial contra defensas similares: -2%.
 
-**¿Por qué 1.2 robos?** (línea 1.5; 33.3 minutos esperados)
+**¿Por qué 2.5 triples?** (línea 1.5; 33.3 minutos esperados)
 
-Razonamiento (5 factores a favor, 0 en contra):
+Razonamiento (5 factores a favor, 1 en contra):
 
 - ✅ Minutos: 33.3 esperados (titular, ±3.0).
-- ✅ Forma: 1.2 en sus últimos 5, 1.3 esta temporada (3 partidos), 1.3 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 13.5% de las pérdidas del rival en pista × 14.2 pérdidas esperadas del rival.
-- ✅ Defensa: el rival concede -14% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -14%.
-- ✅ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 0, 1 (3 de 3 a favor).
-- ➖ Últimos 10: la habría pasado 6 de 10.
+- ✅ Forma: 2.2 en sus últimos 5, 2.0 esta temporada (3 partidos), 2.0 la temporada pasada (línea 1.5).
+- ➖ Cómo produce triples: 6.5 triples intentados (su ritmo 6.3 por 36'; el rival concede +8% de triples en su reparto) × 35% esperado.
+- ➖ Defensa: el rival concede -2% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%).
+- ✅ Altura: mide 6'6", 2.2 pulgadas más que los bases/escoltas del rival (+0.8% en esta estadística).
+- ❌ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 5, 1, 3 (2 de 3 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
 - ⚠️ sin Jalen Duren (8 partidos): 31.1 min vs 35.2 con él; pts +8%/min, reb +14%/min, ast +10%/min.
 
-- Robos **1.2** (por componentes 1.4 · por tasa por minuto y defensa rival 1.2): roba el 13.5% de las pérdidas del rival en pista × 14.2 pérdidas esperadas del rival.
+- Triples **2.5** (por componentes 2.2 · por tasa por minuto y defensa rival 2.6): 6.5 triples intentados (su ritmo 6.3 por 36'; el rival concede +8% de triples en su reparto) × 35% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
 | Minutos | 35.4 | 37.8 | 32.7 | 33.9 | 29.7 |
-| Robos | 1.2 | 1.4 | 1.3 | 1.4 | 0.7 |
-| % de las pérdidas del rival que roba | 11.8% | 13.0% | 16.2% | 12.6% | 7.3% |
+| Triples anotados | 2.2 | 2.3 | 2.0 | 2.0 | 3.0 |
+| Triples intentados | 6.8 | 6.0 | 5.7 | 5.8 | 6.0 |
+| % triples | 32.4% | 38.3% | 35.3% | 34.6% | 50.0% |
 
 - Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media -5%, vs defensa débil +10%; rebotes: vs defensa fuerte -10%, vs defensa media -16%, vs defensa débil +15%; asistencias: vs defensa fuerte -8%, vs defensa media -8%, vs defensa débil +19%; triples: vs defensa fuerte -10%, vs defensa media +6%, vs defensa débil +4%.
 
@@ -842,13 +846,13 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Victor Wembanyama: menos de 1.5 robos** | **69%** | 74% | 67% | 0.9 ± 0.9 | 7/10 | 3/3 | 0, 1 | 1.37 (73%) |
-| **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 68% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
-| **Domantas Sabonis: más de 0.5 robos** | **61%** | 61% | 62% | 1.0 ± 1.0 | 5/10 | 2/3 | 3 | 1.54 (65%) |
+| **Stephon Castle: menos de 1.5 robos** | **68%** | 69% | 67% | 1.2 ± 1.1 | 9/10 | 2/3 | 0, 0, 1 | 1.39 (72%) |
+| **Domantas Sabonis: menos de 6.5 asistencias** | **61%** | 72% | 56% | 5.0 ± 2.7 | 6/10 | 1/3 | 5 | 1.67 (60%) |
 | **Devin Vassell: menos de 2.5 triples** | **61%** | 59% | 62% | 2.2 ± 1.5 | 6/10 | 3/3 | 2, 0 | 1.51 (66%) |
-| **Precious Achiuwa: más de 10.5 puntos** | **60%** | 78% | 50% | 15.9 ± 5.9 | 8/10 | 3/3 | 10, 14, 1 | 1.86 (54%) |
-| **Precious Achiuwa: más de 18.5 pts+reb** | **60%** | 75% | 52% | 24.4 ± 7.7 | 8/10 | 3/3 | 17, 17, 2 | 1.82 (55%) |
-| **Julian Champagnie: menos de 2.5 triples** ⚠️ suplente | **60%** | 58% | 61% | 2.3 ± 1.5 | 5/10 | 2/3 | 5, 2, 3 | 1.53 (65%) |
-| **Zach LaVine: más de 0.5 robos** | **60%** | 59% | 60% | 0.9 ± 0.9 | 8/10 | 2/3 | 1 | 1.58 (63%) |
+| **Domantas Sabonis: más de 0.5 robos** | **61%** | 61% | 61% | 1.0 ± 1.0 | 5/10 | 2/3 | 3 | 1.57 (64%) |
+| **Precious Achiuwa: más de 10.5 puntos** | **60%** | 78% | 50% | 15.9 ± 5.9 | 8/10 | 3/3 | 10, 14, 1 | 1.85 (54%) |
+| **Precious Achiuwa: más de 18.5 pts+reb** | **60%** | 75% | 52% | 24.4 ± 7.7 | 8/10 | 3/3 | 17, 17, 2 | 1.81 (55%) |
+| **Devin Vassell: más de 3.5 rebotes** | **59%** | 67% | 55% | 4.4 ± 2.1 | 8/10 | 2/3 | 3, 3 | 1.70 (59%) |
 
 ### Fichas de los jugadores destacados
 
@@ -935,32 +939,34 @@ Razonamiento (4 factores a favor, 1 en contra):
 - sin Keegan Murray: muestra insuficiente (20 partidos sin él)
 - Maxime Raynaud ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - cambio de rol esta temporada (por minuto): ast +41%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Domantas Sabonis: más de 0.5 robos** (61%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de San Antonio Spurs contra aleros/ala-pívots en robos: -2% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+- Su prop más probable hoy: **Domantas Sabonis: menos de 6.5 asistencias** (61%). Con 80% de probabilidad: más de 2.5 / menos de 7.5.
+- Defensa de San Antonio Spurs contra aleros/ala-pívots en asistencias: -3% respecto a la media; ajuste por su historial contra defensas similares: +2%.
 
-**¿Por qué 1.0 robos?** (línea 0.5; 35.0 minutos esperados)
+**¿Por qué 5.0 asistencias?** (línea 6.5; 35.0 minutos esperados)
 
-Razonamiento (3 factores a favor, 0 en contra):
+Razonamiento (4 factores a favor, 0 en contra):
 
 - ✅ Minutos: 35.0 esperados (titular, ±4.0).
-- ✅ Forma: 0.8 en sus últimos 5, 1.0 esta temporada (3 partidos), 0.9 la temporada pasada (línea 0.5).
-- ➖ Cómo produce robos: roba el 11.2% de las pérdidas del rival en pista × 12.2 pérdidas esperadas del rival.
-- ➖ Defensa: el rival concede -2% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -2%.
+- ✅ Forma: 5.4 en sus últimos 5, 7.0 esta temporada (3 partidos), 4.1 la temporada pasada (línea 6.5).
+- ➖ Cómo produce asistencias: asiste el 19.8% de las canastas de sus compañeros en pista × 22.7 canastas de compañeros esperadas (su equipo 40.1 por 48' contra esta defensa).
+- ✅ Defensa: el rival concede -3% de asistencias por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -3%.
 - ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 3 (1 de 1 a favor).
-- ➖ Últimos 10: la habría pasado 5 de 10.
+- ✅ Contra este rival: 5 (1 de 1 a favor).
+- ➖ Últimos 10: la habría pasado 6 de 10.
 - ⚠️ Dylan Cardwell ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
 - ⚠️ sin Keegan Murray: muestra insuficiente (20 partidos sin él).
 - ⚠️ Maxime Raynaud ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
 - ⚠️ cambio de rol esta temporada (por minuto): ast +41%; se da más peso a la línea de la casa.
 
-- Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.0): roba el 11.2% de las pérdidas del rival en pista × 12.2 pérdidas esperadas del rival.
+- ⚠️ Alertas: cambio de rol.
+- Asistencias **5.0** (por componentes 4.5 · por tasa por minuto y defensa rival 5.2): asiste el 19.8% de las canastas de sus compañeros en pista × 22.7 canastas de compañeros esperadas (su equipo 40.1 por 48' contra esta defensa).
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
 | Minutos | 32.0 | 28.6 | 36.0 | 29.7 | 36.0 |
-| Robos | 0.8 | 0.7 | 1.0 | 0.9 | 3.0 |
-| % de las pérdidas del rival que roba | 10.0% | 9.4% | 10.7% | 11.3% | 28.7% |
+| Asistencias | 5.4 | 5.3 | 7.0 | 4.1 | 5.0 |
+| % de las canastas de compañeros que asiste | 23.8% | 25.7% | 27.7% | 18.9% | 19.7% |
+| Pérdidas por jugada | 20.0% | 21.7% | 26.9% | 16.7% | 16.0% |
 
 - Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -0%, vs defensa media +4%, vs defensa débil -3%; rebotes: vs defensa fuerte +1%, vs defensa media +2%, vs defensa débil -3%; asistencias: vs defensa fuerte -1%, vs defensa media +4%, vs defensa débil -3%; triples: vs defensa fuerte +13%, vs defensa media -17%, vs defensa débil +9%.
 
@@ -1100,7 +1106,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 |---|---|---|---|---|---|---|---|---|
 | **Robert Williams III: más de 0.5 tapones** ⚠️ suplente | **65%** | 60% | 68% | 0.9 ± 1.0 | 8/10 | 2/2 | 1, 0 | 1.41 (71%) |
 | **Collin Sexton: más de 0.5 robos** | **65%** | 69% | 63% | 1.4 ± 1.4 | 9/10 | 1/2 | 1 | 1.51 (66%) |
-| **Quentin Grimes: menos de 1.5 triples** ⚠️ suplente | **65%** | 66% | 64% | 1.2 ± 1.2 | 6/10 | 2/3 | 1 | 1.46 (68%) |
+| **Quentin Grimes: menos de 1.5 triples** ⚠️ suplente | **65%** | 66% | 64% | 1.2 ± 1.2 | 6/10 | 2/3 | 1 | 1.47 (68%) |
 | **Deni Avdija: más de 0.5 robos** | **64%** | 61% | 66% | 1.0 ± 1.0 | 5/10 | 2/2 | 1, 1 | 1.44 (70%) |
 | **Sandro Mamukelashvili: más de 0.5 triples** ⚠️ suplente | **63%** | 63% | 62% | 1.0 ± 1.0 | 5/10 | 2/3 | 3, 0 | 1.50 (67%) |
 | **Jrue Holiday: más de 0.5 robos** | **62%** | 63% | 62% | 1.1 ± 1.1 | 7/10 | 2/2 | 0, 1, 1 | 1.54 (65%) |
