@@ -502,6 +502,16 @@ los resultados reales. `nba rendimiento` y el inicio del informe muestran si el 
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
 
+### Bet builders y dobles (`apuestas/nba/builder.py`)
+
+Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel
+(cada pierna ~72 %+, prioridad a puntos y asistencias), y la doble de los dos bet builders más probables.
+La probabilidad de acertar todas usa la correlación entre jugadores del mismo partido (desvíos frente a su
+media, 2025-26: puntos +0.08 entre compañeros y +0.04 entre rivales; asistencias, rebotes y triples casi
+nada), con una simulación de cópula normal. Se da la cuota justa para compararla con la del bet builder de
+la casa. Backtest (22 oct-25 nov 2025 y 1 feb-10 mar 2026, 461 bet builders): prometían ~32 % y acertaron
+38-40 %; las piernas, 75 % y 78-79 %. Se registran como prueba (tipos `builder` y `doble_builder`).
+
 ### Razonamiento de cada pick, altura y ventajas del partido
 
 - Cada prop lleva su razonamiento factor por factor, marcado a favor (✅), en contra (❌) o neutro (➖):

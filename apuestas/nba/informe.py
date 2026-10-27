@@ -221,6 +221,27 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
     return out
 
 
+def seccion_builders(builders: list, doble) -> list[str]:
+    if not builders:
+        return []
+    out = ["## Bet builders del día", "",
+           "Por partido, 4 \"más de\" de titulares estables sin alertas, en líneas un poco por debajo de su "
+           "nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un "
+           "mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad: si tu casa paga más por el "
+           "bet builder, tiene valor. Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).", ""]
+    if doble:
+        a, b = doble
+        prob = a.prob * b.prob
+        out += [f"### Doble: {a.partido.titulo} + {b.partido.titulo}", "",
+                f"Probabilidad de acertar los dos bet builders: **{_pct(prob)}** (1 de cada {1 / prob:.0f}); "
+                f"cuota justa **{1 / prob:.2f}**.", ""]
+    for b in builders:
+        out += [f"**{b.partido.titulo}** — acertar las 4: **{_pct(b.prob)}**, cuota justa {b.cuota_justa:.2f}", ""]
+        out += [f"- {p.etiqueta} ({_pct(p.prob)}; esperado {p.mu:.1f}; últ. 10: {p.acierto_10[0]}/{p.acierto_10[1]})"
+                for p in b.piernas] + [""]
+    return out
+
+
 def seccion_cuotadas(combis: list) -> list[str]:
     cuotadas = [c for c in combis if c.tipo.startswith(("cuota_", "valor_"))]
     if not cuotadas:
@@ -289,7 +310,7 @@ def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
              picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
              por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = (),
-             combis: list = (), criterios: list = ()) -> tuple[Path, Path]:
+             combis: list = (), criterios: list = (), builders: list = (), doble=None) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -308,6 +329,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
                ("**Listo para dinero real.**" if listo else "**En calibración: todos los picks son de prueba.** ")
                + f" {cumplidos} de {len(criterios)} criterios cumplidos:", ""]
         md += [f"- {'✅' if ok else '⬜'} {nombre}: {detalle}" for nombre, ok, detalle in criterios] + [""]
+    md += seccion_builders(list(builders), doble)
     md += seccion_combinada_segura(list(candidatas), partidos)
     md += seccion_cuotadas(combis)
     md += seccion_seguras(partidos)

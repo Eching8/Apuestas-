@@ -20,7 +20,7 @@ from ..report import AVISO
 from .analizador import (analizar, candidatas_seguras, combinada_segura, emparejar_props, guardar_analisis,
                          guardar_picks, liquidar, mejores,
                          rendimiento)
-from . import combinadas
+from . import builder, combinadas
 from .backtest import backtest, resumen
 from .db import NbaDB
 from .enfrentamientos import descargar_avanzadas, descargar_temporada
@@ -113,10 +113,11 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     guardar_picks(nba, fecha, picks, partidos)
     guardar_analisis(nba, fecha, partidos)
     candidatas = candidatas_seguras(partidos, cfg.nba_cuota_min)
-    combis = combinadas.del_dia(partidos, candidatas)
+    builders, doble = builder.del_dia(ctx, partidos, modo="cuota")
+    combis = combinadas.del_dia(partidos, candidatas) + combinadas.de_builders(builders, doble)
     combinadas.guardar(nba, fecha, combis)
     md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido, candidatas,
-                      combis, combinadas.listo(nba))
+                      combis, combinadas.listo(nba), builders, doble)
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")
     for p, e in picks[:args.top]:
