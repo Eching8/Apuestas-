@@ -23,7 +23,7 @@ PROB_PIERNA = 0.72
 PIERNAS = 4
 SIMULACIONES = 20000
 # Media mínima en sus últimos 10 para considerar la estadística.
-MINIMOS = {"points": 14, "assists": 4, "rebounds": 6, "threes": 1.5}
+MINIMOS = {"points": 10, "assists": 3, "rebounds": 5, "threes": 1.5}
 # Varianza del factor partido (g) y del factor equipo (t) por estadística: correlación entre compañeros
 # = g + t y entre rivales = g.
 FACTORES = {"points": (0.036, 0.045), "rebounds": (0.026, 0.005), "assists": (0.01, 0.0), "threes": (0.005, 0.0)}
@@ -56,7 +56,16 @@ class Builder:
         return 1 / self.prob if self.prob else float("inf")
 
 
-def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA) -> list[Pierna]:
+def linea_minima_casa(principal: float) -> float:
+    """La línea alternativa más baja que suele ofrecer la casa: la principal menos ~10 % (al menos 1).
+    27 oct 2026, Betano: Cade 8.5 asistencias -> 8+, Brunson 25.5 puntos -> 24+, Dončić 32.5 -> 30+,
+    Reaves 5.5 asistencias -> 5+ (en rebotes y en algunos puntos ofrece incluso algo más bajo)."""
+    return principal - max(1, math.floor(0.1 * principal))
+
+
+def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
+            principales: dict[tuple[str, str], float] | None = None) -> list[Pierna]:
+    """Las piernas posibles del jugador. Con la línea principal de la casa, solo líneas que la casa ofrece."""
     if alertas(j, "points"):
         return []
     out = []
@@ -65,7 +74,11 @@ def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA) -> list[Pi
         if sum(valor(p, stat) for p in ult) / len(ult) < minimo:
             continue
         pred = predecir(ctx, j, stat)
+        principal = (principales or {}).get((j.player_id, stat))
+        piso = linea_minima_casa(principal) if principal is not None else -1
         for k in range(int(pred.mu), -1, -1):
+            if k + 0.5 < piso:
+                break
             p = _prob_jugador(j, stat, k + 0.5, "más", prob_lados(k + 0.5, pred.mu, pred.var)[0])
             if p >= objetivo:
                 out.append(Pierna(j.player_id, j.nombre, j.team_id, stat, k + 0.5, p, pred.mu,
@@ -99,9 +112,10 @@ def builder(ctx: Contexto, part: Partido, n: int = PIERNAS, objetivo: float = PR
             modo: str = "seguro") -> Builder | None:
     """modo "seguro": las piernas más probables. Modo "cuota": las más cercanas al objetivo (por encima),
     que son líneas más altas y pagan más (cuota justa del bet builder de 4 piernas en torno a 3.5-4)."""
+    principales = {(e.player_id, e.stat): e.line for e in part.evaluaciones}
     candidatas = []
     for j in part.jugadores.values():
-        candidatas += piernas(ctx, j, objetivo)
+        candidatas += piernas(ctx, j, objetivo, principales)
     if modo == "cuota":
         # Puntos y asistencias primero (las casas los pagan mejor que rebotes de 1.5) y lo más cerca del objetivo.
         orden = sorted(candidatas, key=lambda x: (x.stat not in ("points", "assists"), x.prob))
