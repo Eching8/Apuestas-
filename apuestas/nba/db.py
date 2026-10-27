@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS nba_picks (
     odd REAL,
     actual REAL,
     result INTEGER,
+    tipo TEXT NOT NULL DEFAULT 'prop',
     created_at TEXT NOT NULL,
     UNIQUE (fecha, game_id, player_id, stat, side, line)
 );
@@ -185,6 +186,10 @@ class NbaDB:
     def __init__(self, conn: sqlite3.Connection):
         self.conn = conn
         self.conn.executescript(SCHEMA)
+        # Bases creadas antes de existir la columna (p. ej. la caché de GitHub Actions).
+        columnas = {r[1] for r in self.conn.execute("PRAGMA table_info(nba_picks)")}
+        if "tipo" not in columnas:
+            self.conn.execute("ALTER TABLE nba_picks ADD COLUMN tipo TEXT NOT NULL DEFAULT 'prop'")
 
     def commit(self) -> None:
         self.conn.commit()

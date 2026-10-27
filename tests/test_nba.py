@@ -175,6 +175,31 @@ class ModeloTest(unittest.TestCase):
             self.assertIn("tiros de campo", pra.componentes["pts"]["explicacion"])
             self.assertIn("fallos del rival", pra.componentes["reb"]["explicacion"])
 
+    def test_seguras(self):
+        from apuestas.nba.modelo import es_titular, seguras
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2")
+            self.assertTrue(es_titular(j))
+            s = {x.stat: x for x in seguras(ctx, j, 0.85)}
+            # Titular con ~25 puntos: línea de puntos bastante por debajo de su media, al 85 % o más.
+            self.assertIn("points", s)
+            self.assertGreaterEqual(s["points"].prob, 0.85)
+            self.assertLess(s["points"].line, s["points"].mu)
+            self.assertAlmostEqual(s["points"].cuota_minima, 1 / s["points"].prob)
+            # Con menos de 30 minutos esperados no hay picks seguros.
+            j.minutos = 25
+            self.assertEqual(seguras(ctx, j, 0.85), [])
+
+    def test_columna_tipo_en_bases_viejas(self):
+        import sqlite3
+        conn = sqlite3.connect(":memory:")
+        conn.execute("CREATE TABLE nba_picks (id INTEGER PRIMARY KEY, fecha TEXT)")
+        NbaDB(conn)
+        self.assertIn("tipo", {r[1] for r in conn.execute("PRAGMA table_info(nba_picks)")})
+
     def test_oportunidades(self):
         p = {"minutes": 24, "fga": 10, "fgm": 5, "tpa": 4, "tpm": 2, "fta": 4, "ftm": 3, "tov": 2, "oreb": 1,
              "dreb": 5, "ast": 6, "stl": 1, "blk": 1}

@@ -101,9 +101,10 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         ctx = construir_contexto(nba.conn, fecha)
         props, sin_emparejar = emparejar_props(nba, fecha, eventos, ctx)
         print(f"{len(eventos)} partidos con líneas en SportsGameOdds; {props} props emparejadas.")
-    partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado)
+    partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado,
+                             prob_segura=cfg.nba_prob_segura)
     picks = mejores(partidos, cfg.nba_prob_min)
-    guardar_picks(nba, fecha, picks)
+    guardar_picks(nba, fecha, picks, partidos)
     guardar_analisis(nba, fecha, partidos)
     md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido)
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
@@ -111,6 +112,12 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     for p, e in picks[:args.top]:
         print(f"  {e.prob * 100:4.0f}%  {etiqueta(e):<55} esperado {e.mu:5.1f}  últ.10 {e.acierto_10[0]}/{e.acierto_10[1]}"
               f"  ({p.titulo})")
+    seguras = sorted(((p, s) for p in partidos for s in p.seguras), key=lambda x: -x[1].prob)
+    if seguras:
+        print(f"{len(seguras)} picks seguros de titulares estables (línea baja al {cfg.nba_prob_segura * 100:.0f}%+):")
+        for p, s in seguras[:args.top]:
+            print(f"  {s.prob * 100:4.0f}%  {s.nombre}: más de {s.line:g} {NOMBRES[s.stat]:<14} "
+                  f"cuota mínima {s.cuota_minima:.2f}  ({p.titulo})")
     print(f"Informe: {md}\nDatos: {js}\n")
     print(AVISO.replace("> ", "").replace("**", ""))
     return 0
@@ -128,6 +135,8 @@ def cmd_rendimiento(args, cfg: Config, db: Database) -> int:
                 f"prob. media {x['prob_media'] * 100:5.1f}%{ben}")
 
     print(linea("Total", r["total"]))
+    for t in r["tipos"]:
+        print(linea({"prop": "Props (línea normal)", "segura": "Seguras (titulares)"}.get(t["tipo"], t["tipo"]), t))
     print("Por tramo de probabilidad (si el acierto queda por debajo del tramo, el modelo es optimista):")
     for t in r["tramos"]:
         print(linea(t["tramo"], t))

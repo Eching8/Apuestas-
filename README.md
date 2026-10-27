@@ -467,6 +467,15 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
 - **La casa**: su probabilidad sin margen se mezcla con la del modelo (`APUESTAS_NBA_PESO_MERCADO`,
   0.4 por defecto). Cuando modelo y casa discrepan mucho, la casa suele saber algo (rol, rotación, una baja).
 
+### Picks seguros de titulares estables
+
+Para titulares con 30+ minutos esperados (titular en al menos 3 de sus últimos 5), el informe busca la
+línea de "más de" más alta que pasa con al menos 85 % (`APUESTAS_NBA_PROB_SEGURA`) en puntos, rebotes,
+asistencias y PRA: un "15+ puntos" casi seguro de una estrella en lugar de la línea normal de un suplente.
+Se muestra con su **cuota mínima** (1 / probabilidad) para buscarla en las líneas alternativas de la casa.
+Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026): elegidas al 85 % acertaron el 89-96 %; al 90 %, el
+93-99 %. Las props de suplentes llevan la marca "⚠️ suplente": dependen de los minutos que les dé el técnico.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.

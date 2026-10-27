@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 
 from ..db import now_iso
 from .db import NbaDB
-from .modelo import (ESTADOS_FUERA, PESO_MERCADO, Contexto, Evaluacion, Jugador, construir_contexto, evaluar, mejor_contra,
+from .modelo import (ESTADOS_FUERA, PESO_MERCADO, PROB_SEGURA, Segura, seguras, Contexto, Evaluacion, Jugador, construir_contexto, evaluar, mejor_contra,
                      preparar_jugador, valor)
 from .sgo import clave_nombre, equipos_evento, parse_props
 
@@ -21,6 +21,7 @@ class Partido:
     jugadores: dict[str, Jugador] = field(default_factory=dict)
     evaluaciones: list[Evaluacion] = field(default_factory=list)
     sin_datos: list[str] = field(default_factory=list)
+    seguras: list[Segura] = field(default_factory=list)   # líneas bajas de titulares estables
 
     @property
     def titulo(self) -> str:
@@ -70,7 +71,7 @@ def _por_apellido(por_nombre: dict[str, str], nombre: str) -> str | None:
 
 
 def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 12.0,
-             peso_mercado: float = PESO_MERCADO) -> tuple[list[Partido], Contexto]:
+             peso_mercado: float = PESO_MERCADO, prob_segura: float = PROB_SEGURA) -> tuple[list[Partido], Contexto]:
     ctx = construir_contexto(db.conn, fecha)
     lesiones = [dict(r) for r in db.injuries(fecha)]
     props_por_juego: dict[str, list[dict]] = {}
@@ -110,6 +111,9 @@ def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 
             part.evaluaciones.append(evaluar(ctx, j, prop["stat"], prop["line"], prop["over_odd"],
                                                    prop["under_odd"], peso_mercado))
         part.evaluaciones.sort(key=lambda e: e.prob, reverse=True)
+        for j in part.jugadores.values():
+            part.seguras += seguras(ctx, j, prob_segura)
+        part.seguras.sort(key=lambda s: (s.prob, s.line), reverse=True)
         partidos.append(part)
     return partidos, ctx
 
@@ -138,14 +142,16 @@ def mejores(partidos: list[Partido], prob_min: float) -> list[tuple[Partido, Eva
     return sorted(out, key=lambda x: x[1].prob, reverse=True)
 
 
-def guardar_picks(db: NbaDB, fecha: str, picks: list[tuple[Partido, Evaluacion]]) -> None:
+def guardar_picks(db: NbaDB, fecha: str, picks: list[tuple[Partido, Evaluacion]],
+                  partidos: list[Partido] = ()) -> None:
+    """Guarda las props más probables (tipo "prop") y las seguras de titulares (tipo "segura")."""
     db.conn.execute("DELETE FROM nba_picks WHERE fecha = ? AND result IS NULL", (fecha,))
-    db.conn.executemany(
-        """INSERT OR REPLACE INTO nba_picks(fecha, game_id, player_id, name, stat, line, side, prob, mu, odd,
-               created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-        [(fecha, p.game["id"], e.player_id, e.nombre, e.stat, e.line, e.lado, e.prob, e.mu, e.odd, now_iso())
-         for p, e in picks],
-    )
+    sql = """INSERT OR REPLACE INTO nba_picks(fecha, game_id, player_id, name, stat, line, side, prob, mu, odd,
+                 tipo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+    db.conn.executemany(sql, [(fecha, p.game["id"], e.player_id, e.nombre, e.stat, e.line, e.lado, e.prob, e.mu,
+                               e.odd, "prop", now_iso()) for p, e in picks])
+    db.conn.executemany(sql, [(fecha, p.game["id"], s.player_id, s.nombre, s.stat, s.line, "más", s.prob, s.mu,
+                               None, "segura", now_iso()) for p in partidos for s in p.seguras])
     db.commit()
 
 
@@ -194,8 +200,10 @@ def rendimiento(db: NbaDB) -> dict:
         g = [r for r in filas if lo <= r["prob"] < hi]
         if g:
             tramos.append({"tramo": f"{lo * 100:.0f}-{min(hi, 1) * 100:.0f}%", **resumen(g)})
-    por_stat = {}
+    por_stat, por_tipo = {}, {}
     for r in filas:
         por_stat.setdefault(r["stat"], []).append(r)
+        por_tipo.setdefault(r["tipo"] or "prop", []).append(r)
     return {"total": resumen(filas) if filas else None, "tramos": tramos,
+            "tipos": [{"tipo": k, **resumen(v)} for k, v in sorted(por_tipo.items())],
             "stats": sorted(({"stat": k, **resumen(v)} for k, v in por_stat.items()), key=lambda x: -x["n"])}
