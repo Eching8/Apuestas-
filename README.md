@@ -495,7 +495,9 @@ probabilidad de acertar todas cuya cuota llega al objetivo, con su valor (probab
 cuota alta nunca es segura (cuota 15 justa = 1 de cada 15) y si el valor es negativo no conviene ese día.
 Las piernas con alertas no entran: suplente (riesgo de minutos), minutos inestables, cambio de rol,
 traspaso, lesión y "muy lejos de la casa" (el modelo la ve más de 25 puntos más probable que la casa: la
-casa suele saber algo que el modelo no). Son picks de prueba: se liquidan solos con
+casa suele saber algo que el modelo no) y "menos de una estrella al inicio de temporada": en el arranque
+de 2025-26, los "menos de" en puntos de anotadores de 20+ prometían 67 % y acertaron 60 % (las estrellas
+arrancan fuertes); su probabilidad se acerca a 50 % hasta los 15 partidos. Son picks de prueba: se liquidan solos con
 los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
