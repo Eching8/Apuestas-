@@ -16,10 +16,10 @@ from . import equipos
 from .analizador import (PESO_MERCADO, AnalisisPartido, Evaluacion, _evaluacion_simple, evaluar, primer_td,
                          primer_td_periodo)
 from .mercado import Oferta
-from .modelo import NOMBRES, Contexto, cuota_justa, p_al_menos, valor
+from .modelo import NOMBRES, Contexto, _nombre, cuota_justa, p_al_menos, qb_del_partido, valor
 from .modelo_defensa import pateador
 from .modelo_partido import prob_pateador
-from .razones import tendencias
+from .razones import lectura_td, tendencias
 
 # Palabras -> estadística. El orden importa: primero las frases más específicas.
 PATRONES_STAT = (
@@ -201,6 +201,12 @@ def narrativa(ctx: Contexto, e: Evaluacion, oferta: Oferta | None) -> list[str]:
             out.append(f"Historial contra {equipos.apodo(e.opp)}: {', '.join(f'{v:g}' for v in vs)}.")
     if oferta and oferta.presion() > 0.02 and oferta.movimiento():
         out.append(f"El mercado se mueve a favor: {oferta.movimiento()} (entra dinero en este lado).")
+    if stat == "tds" and e.pos == "RB":
+        titular, principal, suplente = qb_del_partido(ctx, e.team)
+        if suplente:
+            out.append(f"Narrativa del QB suplente: con {_nombre(ctx, titular)} en lugar de {_nombre(ctx, principal)}, "
+                       f"'se la van a dar al RB cerca de la meta'. Los datos la apoyan a medias: el RB1 recibe un 9% más "
+                       f"de acarreos dentro de la 10, pero el equipo llega un 15% menos a la zona roja.")
     if e.stat == "tds" and e.line >= 1.5:
         out.append("Cuota alta y pago grande: las apuestas de múltiples TD atraen por el premio, no por la "
                    "probabilidad. Las casas cobran más margen en estos mercados.")
@@ -332,6 +338,10 @@ def texto_veredicto(ctx: Contexto, v: Veredicto) -> str:
                           f"Para validarla escribe \"{proy.jugador.nombre} más de {e.line:g} TD de pase\".")
     else:
         lineas.append(f"- Proyección: {e.mu:.1f} {NOMBRES.get(stat, stat)} (línea {e.line:g})")
+    if stat == "tds" and e.stat == "tds" and proy.jugador.pos in ("QB", "RB", "WR", "TE"):
+        td = next((t for t in a.tds if t.player_id == e.player_id), None)
+        lineas += ["", "### La lectura, paso a paso"]
+        lineas += [f"{k}. {paso}" for k, paso in enumerate(lectura_td(ctx, proy, td.ofertas if td else {}), 1)]
     if e.razones.a_favor:
         lineas += ["", "**A favor:**"] + [f"- {x}" for x in e.razones.a_favor]
     if e.razones.en_contra:

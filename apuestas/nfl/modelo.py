@@ -72,6 +72,11 @@ CALIBRACION_LOGIT = 0.75
 TD_REF, TD_EXP = 0.3, 0.85
 FUGA_REPARTO = 0.03        # parte del volumen que se llevan jugadores marginales que no se proyectan
 DUDA = 0.92                # recorte del volumen esperado de un jugador "questionable"
+# QB suplente, medido en 33 equipos-temporada de 2024-2026 (cada equipo comparado consigo mismo): TD de pase -28 %,
+# TD de carrera -7 %, puntos -13 %, visitas a la zona roja -15 %, y el RB1 recibe más balones cerca de la meta (+9 %
+# de los acarreos dentro de la 10 en 22 de 33 equipos). Pero en el backtest de 2025 ajustar las probabilidades con eso
+# no mejora (Brier de TD 0.1502 frente a 0.1500 sin ajustar): la línea de la casa ya descuenta al suplente y el
+# equipo llega menos a la zona roja. Por eso se usa como razonamiento (con sus datos), no como multiplicador.
 
 
 # --- Distribución ---------------------------------------------------------------------
@@ -276,6 +281,7 @@ class Contexto:
     rangos: dict = field(default_factory=dict)
     bajas: dict[str, list[dict]] = field(default_factory=dict)   # team -> jugadores importantes fuera
     periodos: dict = field(default_factory=dict)  # reparto por cuarto de puntos, TD y estadísticas (ver _periodos)
+    qb_principal: dict[str, str] = field(default_factory=dict)   # team -> QB con más titularidades de la temporada
 
 
 def _temporada(conn, fecha: str) -> int:
@@ -364,7 +370,41 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
                    dict(equipo_pbp), roster, lesiones, dict(movimientos), titular_qb)
     _preparar_liga(ctx)
     ctx.periodos = _periodos(conn, fecha, desde)
+    # QB principal: el de más titularidades esta temporada (2+); si no hay, el de la temporada anterior.
+    titularidades: dict[tuple[str, int], dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    for r in conn.execute("SELECT season, home_team, away_team, home_qb_id, away_qb_id FROM nfl_games "
+                          "WHERE gameday < ? AND season >= ?", (fecha, temporada - 1)):
+        for t, q in ((r["home_team"], r["home_qb_id"]), (r["away_team"], r["away_qb_id"])):
+            if q:
+                titularidades[(t, r["season"])][q] += 1
+    for (t, season), qbs in sorted(titularidades.items(), key=lambda kv: kv[0][1]):
+        q, n = max(qbs.items(), key=lambda kv: kv[1])
+        if season < temporada or n >= 2:
+            ctx.qb_principal[t] = q
     return ctx
+
+
+def qb_del_partido(ctx: Contexto, team: str) -> tuple[str | None, str | None, bool]:
+    """(QB que se espera de titular, QB principal del equipo, si juega un suplente)."""
+    principal = ctx.qb_principal.get(team)
+    titular = ctx.titular_qb.get(team)
+    if titular and not disponible(ctx, titular)[0]:
+        titular = None
+    if principal and titular != principal and disponible(ctx, principal)[0] and \
+            _equipo_actual(ctx, principal, ctx.jugadores.get(principal, [])) == team:
+        titular = principal       # el principal vuelve de lesión
+    suplente = bool(principal) and titular != principal
+    return titular, principal, suplente
+
+
+def _nombre(ctx: Contexto, pid: str | None) -> str:
+    if not pid:
+        return "?"
+    r = ctx.roster.get(pid)
+    if r and r.get("name"):
+        return r["name"]
+    p = ctx.jugadores.get(pid)
+    return (p[0].get("name") if p else None) or pid
 
 
 # Reparto por cuarto si la base aún no tiene jugada a jugada (medias aproximadas de la NFL).
@@ -514,6 +554,7 @@ class Entorno:
     viento: float | None
     techo: str | None
     factores: list = field(default_factory=list)
+    qb_suplente: bool = False
 
 
 def entorno(ctx: Contexto, team: str, opp: str, local: bool, linea: Linea | None = None,
@@ -532,6 +573,7 @@ def entorno(ctx: Contexto, team: str, opp: str, local: bool, linea: Linea | None
     else:
         pts = of["pts"] * de["pts"] / lg["pts"] + (VENTAJA_LOCAL / 2 if local else -VENTAJA_LOCAL / 2)
         fuente = "modelo (ataque × defensa rival)"
+    titular, principal, suplente = qb_del_partido(ctx, team)
     if spread is None:
         rival = ctx.perfiles[opp].ataque["pts"] * ctx.perfiles[team].defensa["pts"] / lg["pts"]
         spread = pts - (rival + (-VENTAJA_LOCAL / 2 if local else VENTAJA_LOCAL / 2))
@@ -550,6 +592,11 @@ def entorno(ctx: Contexto, team: str, opp: str, local: bool, linea: Linea | None
     share_of = of["pass_td_share"]
     share_de = de["pass_td_share"]
     p_pase = max(0.3, min(0.85, 0.5 * share_of + 0.5 * share_de))
+    if suplente:
+        factores.append(Factor(
+            f"QB suplente: {_nombre(ctx, titular)} en lugar de {_nombre(ctx, principal)}. Con suplente los equipos "
+            f"lanzan un 28% menos de TD, corren casi los mismos (-7%) y le dan más balones al RB1 cerca de la meta "
+            f"(+9%), pero llegan un 15% menos a la zona roja", None, "qb"))
     if viento is not None and viento >= VIENTO_FUERTE and techo not in ("dome", "closed"):
         dropbacks *= 0.97
         carries *= 1.03
@@ -557,7 +604,7 @@ def entorno(ctx: Contexto, team: str, opp: str, local: bool, linea: Linea | None
         factores.append(Factor(f"viento de {viento:.0f} mph: menos juego aéreo", EFECTO_VIENTO, "clima"))
     return Entorno(team, opp, local, pts, fuente, spread, dropbacks, dropbacks * of["att_por_db"],
                    dropbacks * of["targets_por_db"], carries, tds, tds * p_pase, tds * (1 - p_pase), viento, techo,
-                   factores)
+                   factores, suplente)
 
 
 # --- Jugadores -----------------------------------------------------------------------------
@@ -765,6 +812,13 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
             j.notas.append(f"llegó a {team} en la semana {j.llegada['week']} desde {j.llegada['from_team']}: "
                            f"{len(j.con_equipo)} partido(s) con su equipo nuevo")
     _corregir_regresos(ctx, team, activos)
+    # QB suplente: queda anotado en el RB1 como razonamiento (ver el comentario de DUDA).
+    titular, principal, suplente = qb_del_partido(ctx, team)
+    rbs = [j for j in activos if j.pos == "RB"]
+    if suplente and rbs:
+        rb1 = max(rbs, key=lambda j: j.shares.get("carries", 0))
+        rb1.notas.append(f"con {_nombre(ctx, titular)} de QB suplente, el plan lógico es apoyarse en él cerca de la "
+                         f"meta (+9% de acarreos dentro de la 10 en equipos con suplente)")
     # QB: el titular (el de su último partido si está disponible; si no, el QB disponible con más pases).
     qbs = [j for j in activos if j.pos == "QB"]
     if qbs:

@@ -28,7 +28,7 @@ from .fuentes import EspnNfl, Nflverse
 from .informe import escribir
 from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, parse_evento
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
-from .razones import tendencias
+from .razones import lectura_td, tendencias
 from .recolector import actualizar
 from .validar import (buscar_jugador, interpretar, interpretar_equipo, oferta_equipo, texto_veredicto,
                       texto_veredicto_equipo, validar)
@@ -155,7 +155,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     valor_ = con_valor(partidos, cfg.nfl_valor_min)
     probables = mas_probables(partidos)
     guardar_picks(nfl, desde, valor_)
-    md, js = escribir(cfg.reportes_dir, desde, hasta, partidos, valor_, probables, _novedades(ctx, nfl, partidos))
+    md, js = escribir(cfg.reportes_dir, desde, hasta, partidos, valor_, probables, _novedades(ctx, nfl, partidos), ctx)
     n_ofertas = sum(len(a.evaluaciones) for a in partidos)
     print(f"{len(partidos)} partidos entre {desde} y {hasta}; {n_ofertas} líneas de las casas evaluadas.")
     if valor_:
@@ -189,6 +189,15 @@ def cmd_td(args, cfg: Config, db: Database) -> int:
               f"{americana(cuota_justa(t.p2)):>8}{americana(o2.odd) if o2 else '-':>8}{t.p_first * 100:6.1f}%")
     print("\n'justa' = cuota americana que corresponde a la probabilidad; 'casa' = mejor cuota encontrada.")
     print("Si la casa paga más que la justa, hay valor.")
+    if args.razonar:
+        proys = {(p.jugador.player_id, a.game["game_id"]): p for a in partidos for p in a.proyecciones}
+        for t in tds[:args.razonar]:
+            p = proys.get((t.player_id, t.game_id))
+            if p is None:
+                continue
+            print(f"\n## {t.nombre} ({t.pos}, {t.team} vs {t.opp})")
+            for k, paso in enumerate(lectura_td(ctx, p, t.ofertas), 1):
+                print(f"  {k}. {paso}")
     return 0
 
 
@@ -500,6 +509,8 @@ def registrar(sub) -> None:
     ventana(t)
     t.add_argument("--equipo", help="solo los partidos de este equipo")
     t.add_argument("--multiples", action="store_true", help="ordenar por P(2+ TD)")
+    t.add_argument("--razonar", type=int, default=0, metavar="N",
+                   help="explicar paso a paso a los N primeros (partido, QB, zona roja, papel, eficiencia, apuesta)")
     t.add_argument("--top", type=int, default=25)
     t.set_defaults(func=cmd_td)
 

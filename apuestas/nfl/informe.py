@@ -7,7 +7,8 @@ from pathlib import Path
 from ..report import AVISO
 from . import equipos
 from .analizador import AnalisisPartido, Evaluacion
-from .modelo import NOMBRES, americana, cuota_justa, p_al_menos
+from .modelo import NOMBRES, Contexto, americana, cuota_justa, p_al_menos
+from .razones import lectura_td
 
 
 def _pct(p: float | None, dec: int = 0) -> str:
@@ -34,7 +35,8 @@ def _titulo_corto(a: AnalisisPartido) -> str:
 
 
 def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: list[Evaluacion],
-             probables: list[Evaluacion], novedades: dict, top_td: int = 25) -> str:
+             probables: list[Evaluacion], novedades: dict, ctx: Contexto | None = None, top_td: int = 25,
+             top_lecturas: int = 8) -> str:
     L = [f"# NFL: props y touchdowns del {desde} al {hasta}", "", AVISO, ""]
     L.append(f"{len(partidos)} partidos. Datos hasta la semana {novedades.get('ultima_semana', '?')} "
              f"({novedades.get('temporada', '')}); lesiones de ESPN de {novedades.get('lesiones_al', '?')}.")
@@ -72,6 +74,18 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
                  f"{_pct(t.p2, 1)} | {_odd(cuota_justa(t.p2))} | "
                  f"{_odd(o2.odd) + ' ' + _ev(o2.ev) if o2 and o2.odd else '-'} | {_pct(t.p_first, 1)} |")
     L.append("")
+    if ctx is None:
+        top_lecturas = 0
+    L += ["### La lectura de los mejores candidatos", "",
+          "El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel cerca de la meta, su "
+          "eficiencia y qué apuesta tiene sentido (anota o 2+ TD) al precio de hoy.", ""]
+    proys = {(p.jugador.player_id, a.game["game_id"]): p for a in partidos for p in a.proyecciones}
+    for t in tds[:top_lecturas]:
+        p = proys.get((t.player_id, t.game_id))
+        if p is None:
+            continue
+        L.append(f"**{t.nombre}** ({t.pos}, {t.team} vs {t.opp}, {fechas.get(t.game_id, '')})")
+        L += [f"{k}. {paso}" for k, paso in enumerate(lectura_td(ctx, p, t.ofertas), 1)] + [""]
     multi = sorted(tds, key=lambda t: -t.p2)[:12]
     L += ["### Candidatos a 2 o más touchdowns", ""]
     for t in multi:
@@ -164,11 +178,11 @@ def _eval_json(e: Evaluacion) -> dict:
 
 
 def escribir(directorio: Path, desde: str, hasta: str, partidos: list[AnalisisPartido], valor: list[Evaluacion],
-             probables: list[Evaluacion], novedades: dict) -> tuple[Path, Path]:
+             probables: list[Evaluacion], novedades: dict, ctx: Contexto | None = None) -> tuple[Path, Path]:
     d = Path(directorio) / "nfl"
     d.mkdir(parents=True, exist_ok=True)
     md, js = d / f"{desde}.md", d / f"{desde}.json"
-    md.write_text(markdown(desde, hasta, partidos, valor, probables, novedades), encoding="utf-8")
+    md.write_text(markdown(desde, hasta, partidos, valor, probables, novedades, ctx), encoding="utf-8")
     datos = {
         "desde": desde, "hasta": hasta, "novedades": novedades,
         "valor": [_eval_json(e) for e in valor], "probables": [_eval_json(e) for e in probables],

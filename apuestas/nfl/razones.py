@@ -12,7 +12,8 @@ from dataclasses import dataclass, field
 
 from . import equipos
 from .mercado import Oferta
-from .modelo import NOMBRES, Contexto, Proyeccion, rango, valor
+from .modelo import (NOMBRES, Contexto, Proyeccion, _nombre, cuota_justa, p_al_menos, qb_del_partido, rango,
+                     texto_rango, valor)
 
 # Métrica defensiva que mide a un rival para cada estadística: (lado, métrica, sentido).
 # sentido 1 = un valor alto de la métrica es una defensa débil (concede mucho).
@@ -183,3 +184,107 @@ def razones(ctx: Contexto, proy: Proyeccion, stat: str, line: float, lado: str, 
 def frase_principal(r: Razones, n: int = 2) -> str:
     """Las 1-2 razones más fuertes a favor, para una línea de resumen."""
     return "; ".join(r.a_favor[:n]) if r.a_favor else (r.contexto[0] if r.contexto else "")
+
+
+# --- La lectura del tipster: el razonamiento completo de un candidato a TD ---------------------------------
+
+def _conversion_liga(ctx: Contexto, pos: str) -> float:
+    """TD por tierra por acarreo dentro de la 10 de la posición en la liga (temporada actual y anterior)."""
+    clave = f"_conv_{pos}"
+    if clave not in ctx.periodos:
+        tds = acarreos = 0.0
+        for partidos in ctx.jugadores.values():
+            for p in partidos:
+                if p["season"] >= ctx.temporada - 1 and (p.get("position") or "") in ((pos,) if pos != "RB" else ("RB", "FB")):
+                    tds += p.get("rushing_tds") or 0
+                    acarreos += p.get("i10_carries") or 0
+        ctx.periodos[clave] = tds / acarreos if acarreos else 0.3
+    return ctx.periodos[clave]
+
+
+def lectura_td(ctx: Contexto, proy: Proyeccion, ofertas: dict) -> list[str]:
+    """Paso a paso, como lo pensaría un tipster: ¿por qué este jugador anotaría hoy (o no) y qué apuesta tiene sentido?
+
+    ofertas: {'1+': Evaluacion, '2+': Evaluacion} con lo que pagan las casas (puede faltar alguna).
+    """
+    j, ent = proy.jugador, proy.entorno
+    yo, rival = equipos.apodo(ent.team), equipos.apodo(ent.opp)
+    pasos = []
+    # 1. El partido.
+    favorito = f"favorito por {ent.spread:.1f}" if ent.spread > 0 else f"no favorito por {abs(ent.spread):.1f}"
+    pasos.append(f"El partido: {yo} espera {ent.puntos:.1f} puntos ({ent.puntos_fuente}) y es {favorito}; eso son "
+                 f"unos {ent.tds:.1f} TD, {ent.rush_tds:.1f} por tierra y {ent.pass_tds:.1f} por aire.")
+    # 2. El QB.
+    titular, principal, suplente = qb_del_partido(ctx, ent.team)
+    if suplente:
+        pasos.append(f"El QB: juega {_nombre(ctx, titular)}, suplente de {_nombre(ctx, principal)}. Con suplente los "
+                     f"equipos lanzan un 28% menos de TD y le dan más balones al RB1 cerca de la meta (+9%), pero "
+                     f"llegan un 15% menos a la zona roja: la casa ya lo descuenta en el total del equipo, así que el "
+                     f"suplente ayuda al RB1 en reparto, no en número de oportunidades.")
+    elif titular:
+        pasos.append(f"El QB: juega su titular, {_nombre(ctx, titular)}.")
+    # 3. El rival en la zona roja.
+    d = ctx.perfiles[ent.opp].defensa
+    r_rz = rango(ctx, "defensa", "rz_td_pct", ent.opp)
+    r_tr = rango(ctx, "defensa", "rz_trips", ent.opp)
+    if d.get("rz_td_pct") is not None:
+        pasos.append(f"El rival en la zona roja: {rival} deja anotar TD en el {d['rz_td_pct'] * 100:.0f}% de las visitas "
+                     f"({texto_rango(r_rz, 'más permite', 'menos permite')}) y concede {d.get('rz_trips', 0):.1f} visitas "
+                     f"por partido ({texto_rango(r_tr, 'más concede', 'menos concede')}).")
+    pd_ = ctx.perfiles[ent.opp].pos_defensa
+    col = "rushing_tds" if j.pos in ("RB", "QB") else "receiving_tds"
+    td_pos, td_lg = pd_.get(f"{j.pos}.{col}", 0), ctx.liga_pos.get(f"{j.pos}.{col}", 0)
+    if td_lg:
+        tipo = "por tierra" if col == "rushing_tds" else "por recepción"
+        pasos.append(f"Contra su posición: {rival} concede {td_pos:.2f} TD {tipo} por partido a los {j.pos} "
+                     f"(liga {td_lg:.2f}; {texto_rango(rango(ctx, 'pos', f'{j.pos}.{col}', ent.opp))}).")
+    # 4. Su papel cerca de la meta.
+    sh = j.shares
+    if j.pos in ("RB", "QB"):
+        pasos.append(f"Su papel: se lleva el {sh.get('i10_carries', 0) * 100:.0f}% de los acarreos de {yo} dentro de la 10 "
+                     f"y el {sh.get('rz_carries', 0) * 100:.0f}% en zona roja; además el {sh.get('rz_targets', 0) * 100:.0f}% "
+                     f"de los envíos en zona roja.")
+        partidos = j.partidos[:16]
+        i10 = sum(p.get("i10_carries") or 0 for p in partidos)
+        tds_t = sum(p.get("rushing_tds") or 0 for p in partidos)
+        if i10 >= 8:
+            conv, lg_conv = tds_t / i10, _conversion_liga(ctx, j.pos)
+            calidad = "mejor" if conv > lg_conv * 1.1 else "peor" if conv < lg_conv * 0.9 else "igual"
+            pasos.append(f"Su eficiencia: convierte {conv:.2f} TD por acarreo dentro de la 10 en sus últimos "
+                         f"{len(partidos)} partidos ({tds_t:g} de {i10:g}), {calidad} que la media de su posición "
+                         f"({lg_conv:.2f}).")
+    else:
+        pasos.append(f"Su papel: recibe el {sh.get('targets', 0) * 100:.0f}% de los envíos de {yo}, el "
+                     f"{sh.get('rz_targets', 0) * 100:.0f}% en zona roja y el {sh.get('ez_targets', 0) * 100:.0f}% "
+                     f"de los lanzados a la zona de anotación.")
+    temporada = [p for p in j.partidos if p["season"] == ctx.temporada]
+    if temporada:
+        anoto = sum(valor(p, "tds") >= 1 for p in temporada)
+        ultimos = ", ".join(f"{valor(p, 'tds'):g}" for p in j.partidos[:5])
+        pasos.append(f"Su temporada: anotó en {anoto} de {len(temporada)} partidos "
+                     f"({sum(valor(p, 'tds') for p in temporada):g} TD); últimos 5: "
+                     f"{ultimos}.")
+    for n in j.notas:
+        pasos.append(f"Ojo: {n}.")
+    # 5. Conclusión: la apuesta.
+    lam = proy.lambdas.get("tds", 0)
+    p1, p2 = p_al_menos(lam, 1), p_al_menos(lam, 2)
+    opciones = []
+    for clave, p in (("1+", p1), ("2+", p2)):
+        e = ofertas.get(clave)
+        nombre = "anota" if clave == "1+" else "2+ TD"
+        if e is not None and e.odd:
+            opciones.append((e.ev or -1, f"{nombre} a {e.odd:.2f} en {e.book} (probabilidad final {e.prob * 100:.0f}%, "
+                                         f"valor esperado {(e.ev or 0) * 100:+.0f}%)"))
+        else:
+            opciones.append((-9, f"{nombre}: sin línea; cuota justa {cuota_justa(p)}, juégala solo por encima de "
+                                 f"{(cuota_justa(p) or 0) * 1.04:.2f}"))
+    pasos.append(f"Números: {lam:.2f} TD esperados → anota {p1 * 100:.0f}%, 2+ TD {p2 * 100:.1f}%.")
+    mejor = max(opciones)
+    if mejor[0] > 0.03:
+        pasos.append(f"Conclusión: la jugada con valor es {mejor[1]}.")
+    elif mejor[0] > -9:
+        pasos.append(f"Conclusión: la lógica puede ser buena, pero a estos precios no hay valor ({'; '.join(o for _, o in opciones)}).")
+    else:
+        pasos.append(f"Conclusión: {'; '.join(o for _, o in opciones)}.")
+    return pasos

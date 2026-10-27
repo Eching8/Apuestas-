@@ -241,6 +241,7 @@ enfrentamiento métrica a métrica y cruza todo con las líneas de las casas par
 python -m apuestas nfl actualizar                      # la primera vez descarga 3 temporadas (~1 min); luego solo lo que cambió
 python -m apuestas nfl analizar                        # próximos 7 días -> reportes/nfl/AAAA-MM-DD.md y .json
 python -m apuestas nfl td --multiples                  # ranking de TD (ordenado por 2+ TD)
+python -m apuestas nfl td --razonar 5                  # y el razonamiento paso a paso de los 5 primeros
 python -m apuestas nfl mercados --tipo partido         # todos los mercados evaluados (jugador, periodos, td,
 python -m apuestas nfl mercados --texto "1.er cuarto"  #   defensa, pateador, partido), ordenados por valor
 python -m apuestas nfl validar "Bills -3.5"            # también spread, ML, totales, periodos, quién anota primero
@@ -290,6 +291,27 @@ lo descarga, así que se puede ejecutar varias veces al día. Guarda:
    la zona roja y que los acarreos totales) + TD por aire del equipo × su cuota de envíos en zona roja y a la zona de
    anotación, ajustado por el % de TD que el rival concede a su posición. P(1+), P(2+) y P(3+) con binomial negativa;
    el primer TD reparte la probabilidad de que haya alguno según los TD esperados de cada jugador.
+
+### La lectura del tipster (`razones.lectura_td`, `nfl td --razonar N`, `nfl validar`)
+
+Para cada candidato a TD, el razonamiento paso a paso: el partido (puntos y TD esperados, guion), el QB (si juega
+un suplente y qué cambia), el rival en la zona roja (% de TD por visita y visitas que concede, con su puesto), lo
+que concede a su posición, su papel cerca de la meta (acarreos dentro de la 10, zona roja, envíos a la zona de
+anotación), su eficiencia convirtiendo frente a la media de su posición, su temporada, y la conclusión: si la
+apuesta con valor es "anota" o "2+ TD" y a qué cuota mínima. Aparece en el informe ("La lectura de los mejores
+candidatos"), en `nfl td --razonar 5` y en `nfl validar` para cualquier apuesta de TD.
+
+**QB suplente.** Se detecta solo (el QB con más titularidades de la temporada no juega). Comparando a 33
+equipos-temporada consigo mismos (2024-2026), con suplente: TD de pase -28 %, TD de carrera -7 %, puntos -13 %,
+visitas a la zona roja -15 %, y el RB1 recibe un 9 % más de los acarreos dentro de la 10 (22 de 33 equipos). Es
+decir, la lógica de "se la van a dar al RB" se cumple en el reparto, pero el equipo llega menos a la zona roja. En el
+backtest de 2025, convertir eso en multiplicadores no mejora las predicciones (Brier de TD 0.1502 frente a 0.1500):
+la línea de la casa ya descuenta al suplente. Por eso entra como razonamiento con sus datos, no como ajuste.
+
+**Titular que vuelve de lesión.** Si un jugador que ya era parte del equipo vuelve tras faltar, a quienes lo
+sustituyeron se les descuenta (a mitad de fuerza) el volumen que ganaron en su ausencia. Caso Saquon Barkley y
+Dameon Pierce (26-10-2026): sin corrección el modelo daba 6.9 y 14 acarreos; con ella, 10.9 y 9.2; en el partido
+se repartieron 7 y 7 al empezar el 3.er cuarto. Efecto neutro en el backtest.
 
 ### Mercados de partido: un simulador posesión a posesión (`apuestas/nfl/modelo_partido.py`)
 
