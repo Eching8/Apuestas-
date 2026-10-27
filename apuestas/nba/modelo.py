@@ -532,6 +532,22 @@ def prob_mercado(over_odd: float | None, under_odd: float | None) -> tuple[float
             1 / under_odd / MARGEN_UN_LADO if under_odd else None)
 
 
+# "Menos de" en puntos y combinadas con puntos de anotadores de 20+ al inicio de temporada: backtest del
+# 22 oct-25 nov 2025, prometía 67.3 % y acertó 59.5 % (a mitad de temporada, 66.8 % y 69.1 %: bien). Las
+# estrellas arrancan fuertes y suben minutos. Se acerca su probabilidad a 50 % y queda fuera de combinadas.
+CORRECCION_MENOS_ESTRELLA = 0.6
+ESTRELLA_PUNTOS = 20.0
+
+
+def _menos_estrella_inicio(ctx: Contexto, j: Jugador, stat: str) -> bool:
+    if "pts" not in COMPONENTES[stat]:
+        return False
+    if sum(1 for p in j.partidos if p["season"] == ctx.temporada) >= PARTIDOS_INICIO:
+        return False
+    ult = j.partidos[:10]
+    return sum(p["pts"] for p in ult) / len(ult) >= ESTRELLA_PUNTOS
+
+
 def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -> float:
     """Modelo mezclado con su acierto real sobre la línea en los últimos 15 y calibrado."""
     hits, n = _aciertos(j.partidos[:15], stat, line, lado)
@@ -618,6 +634,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         if con_cuota and not odd:
             continue  # la casa no ofrece este lado: no se puede apostar
         p_jug = _prob_jugador(j, stat, line, lado, p_mod)
+        if lado == "menos" and _menos_estrella_inicio(ctx, j, stat):
+            p_jug = 0.5 + (p_jug - 0.5) * CORRECCION_MENOS_ESTRELLA
         final = p_jug if p_casa is None else (1 - peso_mercado) * p_jug + peso_mercado * p_casa
         lados[lado] = (final, p_jug, p_casa, odd)
     lado = max(lados, key=lambda k: lados[k][0])
@@ -631,7 +649,9 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         linea_segura(pred.mu, pred.var), pred.componentes,
         tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j),
         alertas(j, stat) + (["muy lejos de la casa"] if p_casa is not None and p_jug - p_casa > DISCREPANCIA_MAX
-                            else []),
+                            else [])
+        + (["menos de una estrella al inicio de temporada"]
+           if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
     )
 
 
