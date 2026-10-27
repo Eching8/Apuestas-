@@ -279,16 +279,19 @@ def seccion_rachas(combis: list) -> list[str]:
         return []
     out = ["## Combinadas de rachas", "",
            "Líneas principales que el jugador pasó en **todos** sus partidos de esta temporada (3 o más), con el "
-           "modelo del mismo lado, sin suplentes ni minutos inestables; hasta dos por partido. Al inicio de 2025-26 "
-           "estas props acertaron el 78 % cuando el modelo decía 68 %: el modelo se queda corto con las rachas del "
-           "arranque. Se registran como prueba para ver si se repite con las líneas reales de la casa.", ""]
+           "modelo del mismo lado, sin suplentes ni minutos inestables; hasta dos por partido. Además el resto del "
+           "análisis tiene que estar a favor (minutos, forma, defensa, altura, ritmo, historial contra el rival, "
+           "últimos 10, marcaje): al menos 3 factores más a favor que en contra. Al inicio de 2025-26 estas props "
+           "acertaron el 86 % (las rachas con el análisis en contra, el 62 %). Se registran como prueba para ver si "
+           "se repite con las líneas reales de la casa.", ""]
     for c in rachas:
         out += [f"**{c.tipo.split('_')[1]} patas:** cuota {c.cuota:.2f}, probabilidad del modelo **{_pct(c.prob)}** "
                 f"(1 de cada {1 / c.prob:.0f}); valor {(c.prob * c.cuota - 1) * 100:+.0f}%", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} — "
                 f"{x['acierto_temporada'][0]}/{x['acierto_temporada'][1]} esta temporada, "
                 f"{x['acierto_10'][0]}/{x['acierto_10'][1]} últimos 10 ({_pct(x['prob'])}, cuota {x['odd']:.2f}) "
-                f"— {x['partido']}" for x in c.patas] + [""]
+                f"— {x['partido']}" + "".join(f"\n  - {r}" for r in x.get("razones", []))
+                for x in c.patas] + [""]
     return out
 
 
