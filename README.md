@@ -487,6 +487,15 @@ Elige por **probabilidad**, no por valor:
   en 7+ de sus últimos 10 y en el 60 %+ de esta temporada, con cuota de al menos 1.30
   (`APUESTAS_NBA_CUOTA_MIN`). Si la casa no ofrece una línea, se usa la siguiente de la lista.
 
+### Combinadas con cuota objetivo y calibración
+
+Cada día se arman y registran (tabla `nba_combinadas`) la combinada de alternas, la de principales y las
+de cuota objetivo 2, 3 y 5: la combinación de jugadores constantes, en partidos distintos, con más
+probabilidad de acertar todas cuya cuota llega al objetivo. Son picks de prueba: se liquidan solos con
+los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
+dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
+prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.

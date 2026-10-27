@@ -161,6 +161,20 @@ CREATE TABLE IF NOT EXISTS nba_avanzadas (
     PRIMARY KEY (season, season_type, nba_id)
 );
 
+-- Combinadas del día (de prueba hasta que el sistema esté calibrado): patas en JSON.
+CREATE TABLE IF NOT EXISTS nba_combinadas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    patas TEXT NOT NULL,
+    prob REAL NOT NULL,
+    cuota REAL,
+    cuota_final REAL,
+    aciertos INTEGER,
+    result INTEGER,
+    created_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS nba_picks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fecha TEXT NOT NULL,

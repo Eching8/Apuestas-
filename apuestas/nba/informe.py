@@ -212,6 +212,22 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
     return out
 
 
+def seccion_cuotadas(combis: list) -> list[str]:
+    cuotadas = [c for c in combis if c.tipo.startswith("cuota_")]
+    if not cuotadas:
+        return []
+    out = ["## Combinadas con cuota objetivo", "",
+           "La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más "
+           "probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se "
+           "liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real.", ""]
+    for c in cuotadas:
+        out += [f"**Cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
+                f"**{_pct(c.prob)}**", ""]
+        out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
+                f"{x['odd']:.2f}) — {x['partido']}" for x in c.patas] + [""]
+    return out
+
+
 def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
     out, por_jugador = [], {}
     for e in part.evaluaciones:
@@ -226,7 +242,8 @@ def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
 
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
              picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
-             por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = ()) -> tuple[Path, Path]:
+             por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = (),
+             combis: list = (), criterios: list = ()) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -238,7 +255,15 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
           "rebotes disponibles que captura, % de las canastas de sus compañeros que asiste...) y se muestra con "
           "esas estadísticas en sus últimos 5 y 10 partidos, la temporada y contra este rival. Todo queda "
           "guardado en la tabla `nba_analisis` de la base.", ""]
+    if criterios:
+        cumplidos = sum(ok for _, ok, _ in criterios)
+        listo = cumplidos == len(criterios)
+        md += ["## Estado de calibración", "",
+               ("**Listo para dinero real.**" if listo else "**En calibración: todos los picks son de prueba.** ")
+               + f" {cumplidos} de {len(criterios)} criterios cumplidos:", ""]
+        md += [f"- {'✅' if ok else '⬜'} {nombre}: {detalle}" for nombre, ok, detalle in criterios] + [""]
     md += seccion_combinada_segura(list(candidatas), partidos)
+    md += seccion_cuotadas(combis)
     md += seccion_seguras(partidos)
     md += ["## Las más probables del día", ""]
     if picks:
