@@ -502,6 +502,20 @@ los resultados reales. `nba rendimiento` y el inicio del informe muestran si el 
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
 
+### Razonamiento de cada pick, altura y ventajas del partido
+
+- Cada prop lleva su razonamiento factor por factor, marcado a favor (✅), en contra (❌) o neutro (➖):
+  minutos y titularidad, forma (últimos 5, esta temporada y la anterior frente a la línea), cómo produce
+  la estadística (tiros por zona, % de rebotes, % de canastas asistidas...), defensa rival por posición
+  y por zona, altura, ritmo del partido, historial contra el rival, acierto en sus últimos 10 y notas
+  (bajas, cambio de rol...). Las combinadas muestran cuántos factores tiene cada pierna a favor y en contra.
+- **Altura** (plantillas de ESPN, se actualizan cada día): diferencia de estatura con los rivales de su
+  posición. En los residuos del modelo (nov 2025-mar 2026) explica rebotes (+0.67 % por pulgada, t = 2.9),
+  tapones, triples y puntos; se usa la mitad de cada efecto y como mucho ±6 %. Fuera de muestra (oct 2025
+  y abr 2026) mejora el Brier en ambos periodos (0.21688 → 0.21681 y 0.22456 → 0.22452).
+- **Ventajas del partido:** para los dos equipos, puntos y rebotes esperados de sus jugadores frente a su
+  media, ajuste por la defensa rival y diferencia de estatura.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.
