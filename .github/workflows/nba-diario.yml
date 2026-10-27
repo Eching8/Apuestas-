@@ -10,6 +10,11 @@ on:
     # listo hacia las 9:00.
     - cron: "43 13 * * *"
   workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha AAAA-MM-DD del informe (vacío = hoy en Bogotá)"
+        required: false
+        default: ""
   push:
     branches: [nba-props]
     paths: [".github/workflows/nba-diario.yml"]
@@ -44,7 +49,7 @@ jobs:
       - name: Historial de ESPN (desde el último día guardado)
         run: python -m apuestas nba historial
       - name: Props del día
-        run: python -m apuestas nba analizar --top 25
+        run: python -m apuestas nba analizar --top 25 ${{ inputs.fecha && format('--fecha {0}', inputs.fecha) || '' }}
       - name: Resultados acumulados
         run: python -m apuestas nba rendimiento
       - name: Guardar la base
