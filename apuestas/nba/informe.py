@@ -65,6 +65,10 @@ def _metrica(v: float | None, tipo: str) -> str:
 def por_que(e: Evaluacion) -> list[str]:
     """De dónde sale la media de la prop y las estadísticas relacionadas en que se basa."""
     out = [f"**¿Por qué {e.mu:.1f} {NOMBRES[e.stat]}?** (línea {e.line:g}; {e.factores['minutos']:.1f} minutos esperados)", ""]
+    if e.defensa:
+        out += [f"- Rival: {e.defensa}."]
+    if e.alertas:
+        out += [f"- ⚠️ Alertas: {', '.join(e.alertas)}."]
     for c, d in e.componentes.items():
         out.append(f"- {COMPONENTE[c]} **{d['final']:.1f}** (por componentes {d['por_motores']:.1f} · por tasa por "
                    f"minuto y defensa rival {d['por_tasa']:.1f}): {d['explicacion']}.")
@@ -198,7 +202,7 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
            "casa no ofrece esa línea, usa la siguiente de la lista \"Las más seguras con cuota\".", "",
            "| Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |", "|---|---|---|---|---|---|"]
     for p, e in combi:
-        out.append(f"| {p.titulo} | **{etiqueta(e)}** | **{_pct(e.prob)}** | {e.odd:.2f} | "
+        out.append(f"| {p.titulo} | **{etiqueta(e)}**<br>{e.defensa} | **{_pct(e.prob)}** | {e.odd:.2f} | "
                    f"{e.acierto_10[0]}/{e.acierto_10[1]} | {e.acierto_temporada[0]}/{e.acierto_temporada[1]} |")
     out += ["", "| Selecciones | Probabilidad de acertar todas | Cuota |", "|---|---|---|"]
     prob = cuota = 1.0
@@ -233,7 +237,8 @@ def seccion_cuotadas(combis: list) -> list[str]:
         out += [f"**{nombre}, cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
                 f"**{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f}); valor {valor * 100:+.0f}% {aviso}", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
-                f"{x['odd']:.2f}) — {x['partido']}" for x in c.patas] + [""]
+                f"{x['odd']:.2f}) — {x['partido']}" + (f"\n  - {x['defensa']}" if x.get("defensa") else "")
+                for x in c.patas] + [""]
     return out
 
 

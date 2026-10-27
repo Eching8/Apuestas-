@@ -50,7 +50,8 @@ class Combinada:
 
 def _pata_prop(p: Partido, e: Evaluacion) -> dict:
     return {"game_id": p.game["id"], "partido": p.titulo, "player_id": e.player_id, "nombre": e.nombre,
-            "stat": e.stat, "line": e.line, "side": e.lado, "prob": e.prob, "odd": e.odd}
+            "stat": e.stat, "line": e.line, "side": e.lado, "prob": e.prob, "odd": e.odd,
+            "defensa": e.defensa, "acierto_10": list(e.acierto_10)}
 
 
 def _pata_segura(p: Partido, s: Segura) -> dict:
