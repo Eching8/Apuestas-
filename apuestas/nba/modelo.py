@@ -513,6 +513,7 @@ class Evaluacion:
     metricas: list = field(default_factory=list)      # estadísticas relacionadas: últ. 5/10, temporada, rival
     titular: bool = True                              # suplente = riesgo de que el técnico le dé pocos minutos
     alertas: list = field(default_factory=list)       # motivos para no tomarla como pick "seguro"
+    defensa: str = ""                                 # cómo defiende el rival esta estadística, en una línea
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -546,6 +547,26 @@ def _menos_estrella_inicio(ctx: Contexto, j: Jugador, stat: str) -> bool:
         return False
     ult = j.partidos[:10]
     return sum(p["pts"] for p in ult) / len(ult) >= ESTRELLA_PUNTOS
+
+
+GRUPOS_TEXTO = {"G": "bases/escoltas", "F": "aleros/ala-pívots", "C": "pívots"}
+COMPONENTES_NOMBRE = {"pts": "points", "reb": "rebounds", "ast": "assists", "tpm": "threes", "stl": "steals",
+                      "blk": "blocks", "tov": "turnovers", "fgm": "fgm", "ftm": "ftm", "fta": "fta"}
+
+
+def texto_defensa(ctx: Contexto, j: Jugador, stat: str, pred: Prediccion) -> str:
+    """'el rival concede −5 % de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado −3 %'."""
+    c = COMPONENTES[stat][0]
+    nivel = ctx.nivel.get(j.grupo, {}).get(c, {}).get(j.opp_id, "media")
+    rel = ctx.defensa.get(j.opp_id, {}).get(j.grupo, {}).get(c, 1.0) - 1
+    texto = (f"el rival concede {rel * 100:+.0f}% de {NOMBRES[COMPONENTES_NOMBRE.get(c, stat)]} por minuto a "
+             f"{GRUPOS_TEXTO[j.grupo]} (defensa {nivel}); ajuste aplicado "
+             f"{(pred.factores.get('rival', 1) - 1) * 100:+.0f}%")
+    if c in ("pts", "tpm") and j.zonas:
+        z = max(j.zonas.items(), key=lambda kv: kv[1]["reparto"] * (kv[0] in ("esquina3", "triple") if c == "tpm" else 1))
+        texto += (f"; en su zona principal ({z[0]}) el rival concede {z[1]['pct_rival'] * 100:.0f}% "
+                  f"(liga {z[1]['pct_liga'] * 100:.0f}%)")
+    return texto
 
 
 def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -> float:
@@ -652,6 +673,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
                             else [])
         + (["menos de una estrella al inicio de temporada"]
            if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
+        texto_defensa(ctx, j, stat, pred),
     )
 
 

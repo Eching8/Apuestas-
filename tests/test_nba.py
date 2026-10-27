@@ -345,7 +345,8 @@ class CombinadasTest(unittest.TestCase):
     def _cand(self, gid, prob, odd, pid):
         from types import SimpleNamespace
         p = SimpleNamespace(game={"id": gid}, titulo=f"partido {gid}")
-        e = SimpleNamespace(player_id=pid, nombre=pid, stat="steals", line=0.5, lado="más", prob=prob, odd=odd)
+        e = SimpleNamespace(player_id=pid, nombre=pid, stat="steals", line=0.5, lado="más", prob=prob, odd=odd,
+                            defensa="", acierto_10=(7, 10))
         return p, e
 
     def test_con_cuota(self):
