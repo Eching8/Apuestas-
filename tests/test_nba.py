@@ -355,13 +355,16 @@ class CombinadasTest(unittest.TestCase):
 
         def ev(pid, prob, temporada, alertas=(), stat="points"):
             return SimpleNamespace(player_id=pid, nombre=pid, stat=stat, line=10.5, lado="más", prob=prob, odd=1.85,
-                                   defensa="", acierto_10=(7, 10), acierto_temporada=temporada, alertas=list(alertas))
+                                   defensa="", acierto_10=(7, 10), acierto_temporada=temporada, alertas=list(alertas),
+                                   razones=["✅ Racha", "✅ Defensa", "✅ Altura", "➖ Cómo produce"] if pid != "z"
+                                   else ["✅ Racha", "❌ Defensa", "❌ Contra este rival"])
         g1 = SimpleNamespace(game={"id": "g1"}, titulo="g1", evaluaciones=[
             ev("a", 0.60, (3, 3)), ev("b", 0.58, (4, 4)), ev("c", 0.57, (3, 3)),
             ev("d", 0.70, (2, 3)),                          # no pasó en todos
             ev("e", 0.70, (2, 2)),                          # pocos partidos
             ev("f", 0.70, (3, 3), ["suplente"]),
-            ev("g", 0.70, (3, 3), stat="steals")])          # fuera del backtest
+            ev("g", 0.70, (3, 3), stat="steals"),           # fuera del backtest
+            ev("z", 0.70, (3, 3))])                         # el análisis va en contra
         g2 = SimpleNamespace(game={"id": "g2"}, titulo="g2", evaluaciones=[
             ev("h", 0.55, (3, 3)), ev("h", 0.54, (3, 3), stat="rebounds"), ev("i", 0.53, (5, 5), ["cambio de rol"])])
         cands = candidatas_racha([g1, g2])
@@ -370,6 +373,7 @@ class CombinadasTest(unittest.TestCase):
         self.assertEqual([x["player_id"] for x in c.patas], ["a", "b", "h", "i"])   # 2 por partido, 1 por jugador
         self.assertIsNone(de_rachas(cands, 8))
         self.assertEqual(nombre_tipo(c.tipo), "Rachas de temporada (4 patas)")
+        self.assertEqual(c.patas[0]["razones"], ["✅ Racha", "✅ Defensa", "✅ Altura"])
 
     def test_con_cuota(self):
         from apuestas.nba.combinadas import con_cuota

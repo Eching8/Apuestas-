@@ -12,7 +12,10 @@ Tipos que se guardan cada día (todas "fantasma" hasta que el sistema esté cali
 - racha_4 / racha_8: líneas principales que el jugador pasó en todos sus partidos de esta temporada (3+), con el
   modelo del mismo lado. Backtest al inicio de 2025-26 (25 oct - 20 nov, línea = mediana de sus últimos 10):
   esas props acertaron el 78 % (n = 361) cuando el modelo decía 68 %; las de 0 de N, el 25 % frente al 30 %. Se
-  permiten dos patas del mismo partido, como en los bet builders.
+  permiten dos patas del mismo partido, como en los bet builders. Además, el resto del análisis (minutos, forma,
+  defensa, altura, ritmo, historial contra el rival, últimos 10, marcaje) tiene que estar a favor: al menos
+  BALANCE_RACHA factores más a favor que en contra. En el mismo backtest, con los filtros de abajo, las de balance
+  3+ acertaron el 86 % (n = 209) y las de menos, el 62 % (n = 40).
 """
 from __future__ import annotations
 
@@ -125,11 +128,18 @@ RACHA_STATS = ("points", "rebounds", "assists", "threes", "pra", "pr", "pa", "ra
 # "cambio de rol" y "traspaso reciente" no descartan: a menudo son justo la causa de la racha.
 RACHA_DESCARTA = {"suplente", "minutos inestables", "en el parte de lesiones", "muy lejos de la casa",
                   "menos de una estrella al inicio de temporada"}
+BALANCE_RACHA = 3
+
+
+def balance(e: Evaluacion) -> int:
+    """Factores del análisis a favor del lado elegido menos los que van en contra."""
+    return sum(r.startswith("✅") for r in e.razones) - sum(r.startswith("❌") for r in e.razones)
 
 
 def candidatas_racha(partidos: list[Partido], prob_min: float = 0.52, min_aciertos: int = 6
                      ) -> list[tuple[Partido, Evaluacion]]:
-    """Props con cuota que el jugador pasó en todos sus partidos de esta temporada (al menos 3)."""
+    """Props con cuota que el jugador pasó en todos sus partidos de esta temporada (al menos 3) y con el resto
+    del análisis a favor."""
     out = []
     for p in partidos:
         for e in p.evaluaciones:
@@ -137,6 +147,8 @@ def candidatas_racha(partidos: list[Partido], prob_min: float = 0.52, min_aciert
             if n < RACHA_MIN_PARTIDOS or hits < n or e.stat not in RACHA_STATS or not e.odd:
                 continue
             if e.prob < prob_min or e.acierto_10[0] < min_aciertos or set(e.alertas) & RACHA_DESCARTA:
+                continue
+            if balance(e) < BALANCE_RACHA:
                 continue
             out.append((p, e))
     return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)
@@ -152,7 +164,9 @@ def de_rachas(candidatas: list[tuple[Partido, Evaluacion]], n: int, por_partido:
         partidos[p.game["id"]] = partidos.get(p.game["id"], 0) + 1
         elegidas.append((p, e))
         if len(elegidas) == n:
-            return Combinada(f"racha_{n}", [_pata_prop(p, e) for p, e in elegidas])
+            # Los factores que cuentan (sin la descomposición de cómo produce, que es neutra).
+            return Combinada(f"racha_{n}", [{**_pata_prop(p, e), "razones": [
+                r for r in e.razones if not r.startswith("➖ Cómo produce")]} for p, e in elegidas])
     return None
 
 
