@@ -31,7 +31,99 @@
      "detail": "Shoulder"
     }
    ],
-   "seguras": [],
+   "seguras": [
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "rebounds",
+     "line": 2.5,
+     "prob": 0.8864997984665253,
+     "mu": 6.2392557977866385,
+     "media_10": 7.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "rebounds",
+     "line": 3.5,
+     "prob": 0.8767654653940584,
+     "mu": 8.102194291246343,
+     "media_10": 9.7,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "points",
+     "line": 11.5,
+     "prob": 0.8742096120059967,
+     "mu": 20.77531708177252,
+     "media_10": 23.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "assists",
+     "line": 2.5,
+     "prob": 0.8738353190130037,
+     "mu": 5.839272276494101,
+     "media_10": 7.3,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "points",
+     "line": 8.5,
+     "prob": 0.8730269571356628,
+     "mu": 17.449355092341158,
+     "media_10": 17.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "pra",
+     "line": 16.5,
+     "prob": 0.8681920599342285,
+     "mu": 27.45534347848551,
+     "media_10": 28.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "pra",
+     "line": 23.5,
+     "prob": 0.856253537791468,
+     "mu": 34.71678364951296,
+     "media_10": 40.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    }
+   ],
    "evaluaciones": []
   },
   {
@@ -71,7 +163,164 @@
      "detail": "Ankle"
     }
    ],
-   "seguras": [],
+   "seguras": [
+    {
+     "player_id": "3062679",
+     "nombre": "Josh Hart",
+     "stat": "rebounds",
+     "line": 3.5,
+     "prob": 0.8896482200723552,
+     "mu": 7.195773598836879,
+     "media_10": 9.1,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3136195",
+     "nombre": "Karl-Anthony Towns",
+     "stat": "rebounds",
+     "line": 5.5,
+     "prob": 0.8894857837054532,
+     "mu": 10.667707520690314,
+     "media_10": 11.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3934719",
+     "nombre": "OG Anunoby",
+     "stat": "points",
+     "line": 9.5,
+     "prob": 0.8872008888292493,
+     "mu": 17.389686411997367,
+     "media_10": 18.9,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3136195",
+     "nombre": "Karl-Anthony Towns",
+     "stat": "pra",
+     "line": 19.5,
+     "prob": 0.8767158309214048,
+     "mu": 30.676197316404465,
+     "media_10": 30.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3934672",
+     "nombre": "Jalen Brunson",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8737927792289921,
+     "mu": 21.832420820740037,
+     "media_10": 26.5,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3934672",
+     "nombre": "Jalen Brunson",
+     "stat": "pra",
+     "line": 20.5,
+     "prob": 0.8722559631954161,
+     "mu": 29.43326218068999,
+     "media_10": 35.4,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4432166",
+     "nombre": "Cade Cunningham",
+     "stat": "assists",
+     "line": 3.5,
+     "prob": 0.8722024254808365,
+     "mu": 7.302652244177123,
+     "media_10": 7.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3934672",
+     "nombre": "Jalen Brunson",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8710283555709839,
+     "mu": 4.363409377678112,
+     "media_10": 5.3,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3136195",
+     "nombre": "Karl-Anthony Towns",
+     "stat": "points",
+     "line": 9.5,
+     "prob": 0.8709182445529366,
+     "mu": 17.057137024599086,
+     "media_10": 16.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4432166",
+     "nombre": "Cade Cunningham",
+     "stat": "pra",
+     "line": 23.5,
+     "prob": 0.8598096450447849,
+     "mu": 33.61748116247852,
+     "media_10": 35.3,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4432166",
+     "nombre": "Cade Cunningham",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8592385513928944,
+     "mu": 21.16500872944417,
+     "media_10": 23.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3934719",
+     "nombre": "OG Anunoby",
+     "stat": "pra",
+     "line": 15.5,
+     "prob": 0.8578689401882064,
+     "mu": 25.678142247624795,
+     "media_10": 26.4,
+     "acierto_10": [
+      9,
+      10
+     ]
+    }
+   ],
    "evaluaciones": []
   },
   {
@@ -127,7 +376,203 @@
      "detail": "Calf"
     }
    ],
-   "seguras": [],
+   "seguras": [
+    {
+     "player_id": "3155942",
+     "nombre": "Domantas Sabonis",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8981133186654736,
+     "mu": 4.979706136758577,
+     "media_10": 5.3,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3155942",
+     "nombre": "Domantas Sabonis",
+     "stat": "rebounds",
+     "line": 6.5,
+     "prob": 0.895973745140783,
+     "mu": 12.650315958848692,
+     "media_10": 12.7,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4431679",
+     "nombre": "Precious Achiuwa",
+     "stat": "rebounds",
+     "line": 4.5,
+     "prob": 0.8800540398919767,
+     "mu": 8.558046607940717,
+     "media_10": 8.3,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "5104157",
+     "nombre": "Victor Wembanyama",
+     "stat": "rebounds",
+     "line": 5.5,
+     "prob": 0.8710077674203061,
+     "mu": 10.264396657470158,
+     "media_10": 10.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4066259",
+     "nombre": "De'Aaron Fox",
+     "stat": "assists",
+     "line": 3.5,
+     "prob": 0.869613401669574,
+     "mu": 6.637285092135571,
+     "media_10": 6.7,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4431679",
+     "nombre": "Precious Achiuwa",
+     "stat": "pra",
+     "line": 15.5,
+     "prob": 0.8682614078283508,
+     "mu": 26.230620551886645,
+     "media_10": 25.2,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "3155942",
+     "nombre": "Domantas Sabonis",
+     "stat": "points",
+     "line": 9.5,
+     "prob": 0.864285287090776,
+     "mu": 17.178751048973222,
+     "media_10": 15.5,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4431679",
+     "nombre": "Precious Achiuwa",
+     "stat": "points",
+     "line": 8.5,
+     "prob": 0.8616396898617726,
+     "mu": 15.868993629488946,
+     "media_10": 15.0,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "3064440",
+     "nombre": "Zach LaVine",
+     "stat": "points",
+     "line": 12.5,
+     "prob": 0.858663221458126,
+     "mu": 23.23344871887167,
+     "media_10": 20.2,
+     "acierto_10": [
+      7,
+      10
+     ]
+    },
+    {
+     "player_id": "5104157",
+     "nombre": "Victor Wembanyama",
+     "stat": "pra",
+     "line": 24.5,
+     "prob": 0.8586157891864248,
+     "mu": 36.53238247927172,
+     "media_10": 37.0,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3155942",
+     "nombre": "Domantas Sabonis",
+     "stat": "pra",
+     "line": 22.5,
+     "prob": 0.8573759110851473,
+     "mu": 34.80877314458049,
+     "media_10": 33.5,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "5037871",
+     "nombre": "Dylan Harper",
+     "stat": "points",
+     "line": 11.5,
+     "prob": 0.8547977148729964,
+     "mu": 18.402336779064022,
+     "media_10": 18.0,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "5037871",
+     "nombre": "Dylan Harper",
+     "stat": "pra",
+     "line": 18.5,
+     "prob": 0.8541583244084925,
+     "mu": 27.39601517073987,
+     "media_10": 27.1,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3064440",
+     "nombre": "Zach LaVine",
+     "stat": "pra",
+     "line": 18.5,
+     "prob": 0.8528326464026853,
+     "mu": 30.156635004635312,
+     "media_10": 25.3,
+     "acierto_10": [
+      7,
+      10
+     ]
+    },
+    {
+     "player_id": "5104157",
+     "nombre": "Victor Wembanyama",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8509187488793379,
+     "mu": 23.382696961784898,
+     "media_10": 24.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    }
+   ],
    "evaluaciones": []
   },
   {
@@ -175,7 +620,164 @@
      "detail": "Knee"
     }
    ],
-   "seguras": [],
+   "seguras": [
+    {
+     "player_id": "4683021",
+     "nombre": "Deni Avdija",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8885883304642652,
+     "mu": 4.75734518534465,
+     "media_10": 6.0,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4433136",
+     "nombre": "Walker Kessler",
+     "stat": "pra",
+     "line": 13.5,
+     "prob": 0.875189372646326,
+     "mu": 26.441246859674322,
+     "media_10": 27.375,
+     "acierto_10": [
+      7,
+      8
+     ]
+    },
+    {
+     "player_id": "4683021",
+     "nombre": "Deni Avdija",
+     "stat": "pra",
+     "line": 20.5,
+     "prob": 0.8669301646765657,
+     "mu": 32.07173162282515,
+     "media_10": 38.0,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4433136",
+     "nombre": "Walker Kessler",
+     "stat": "rebounds",
+     "line": 5.5,
+     "prob": 0.8668978145716799,
+     "mu": 9.288622387547136,
+     "media_10": 9.75,
+     "acierto_10": [
+      8,
+      8
+     ]
+    },
+    {
+     "player_id": "4433136",
+     "nombre": "Walker Kessler",
+     "stat": "points",
+     "line": 4.5,
+     "prob": 0.8666375627098641,
+     "mu": 14.961608739399878,
+     "media_10": 15.25,
+     "acierto_10": [
+      5,
+      8
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "points",
+     "line": 14.5,
+     "prob": 0.8623964313569272,
+     "mu": 22.476616664444222,
+     "media_10": 21.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "points",
+     "line": 17.5,
+     "prob": 0.8603781158173199,
+     "mu": 29.985161001356776,
+     "media_10": 36.6,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "pra",
+     "line": 21.5,
+     "prob": 0.8590333152687375,
+     "mu": 31.577748265550277,
+     "media_10": 30.5,
+     "acierto_10": [
+      7,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "pra",
+     "line": 28.5,
+     "prob": 0.8550619575801182,
+     "mu": 43.46209124338882,
+     "media_10": 50.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "assists",
+     "line": 3.5,
+     "prob": 0.853527227239166,
+     "mu": 6.790473119888616,
+     "media_10": 7.0,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4683021",
+     "nombre": "Deni Avdija",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8533091078490875,
+     "mu": 20.879615191139198,
+     "media_10": 25.6,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "assists",
+     "line": 2.5,
+     "prob": 0.851332395310568,
+     "mu": 5.323812575406093,
+     "media_10": 5.5,
+     "acierto_10": [
+      8,
+      10
+     ]
+    }
+   ],
    "evaluaciones": []
   }
  ]
