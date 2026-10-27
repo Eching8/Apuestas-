@@ -7,8 +7,9 @@ from pathlib import Path
 from ..report import AVISO
 from . import equipos
 from .analizador import AnalisisPartido, Evaluacion
-from .modelo import NOMBRES, Contexto, americana, cuota_justa, p_al_menos
+from .modelo import NOMBRES, Contexto, americana, cuota_justa, p_al_menos, texto_rango
 from .razones import lectura_td
+from .zona_roja import cruces
 
 
 def _pct(p: float | None, dec: int = 0) -> str:
@@ -86,6 +87,31 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
             continue
         L.append(f"**{t.nombre}** ({t.pos}, {t.team} vs {t.opp}, {fechas.get(t.game_id, '')})")
         L += [f"{k}. {paso}" for k, paso in enumerate(lectura_td(ctx, p, t.ofertas), 1)] + [""]
+    # Los cruces de zona roja de la jornada.
+    if ctx is not None:
+        filas = []
+        for a in partidos:
+            for team, ent in a.entornos.items():
+                filas += cruces(ctx, ent, [p for p in a.proyecciones if p.jugador.team == team])
+        if filas:
+            L += ["### Cruces de la zona roja: defensa débil contra una posición y quién la ocupa", ""]
+            for c in sorted(filas, key=lambda c: -c["ratio"] * c["jugador"].tds_rz)[:12]:
+                j = c["jugador"].proy.jugador
+                td = next((t for t in tds if t.player_id == j.player_id), None)
+                prob = f"; anota {td.p1 * 100:.0f}%, 2+ TD {td.p2 * 100:.1f}%" if td else ""
+                L.append(f"- **{equipos.apodo(c['opp'])} contra los {c['pos']}**: concede {c['tds_def']:.2f} TD por partido "
+                         f"dentro de la 20 ({c['ratio']:.1f}× la liga, {texto_rango(c['rango'], 'más concede', 'menos concede')})"
+                         f" → **{j.nombre}** ({c['team']}), {c['jugador'].tds_rz:.2f} TD esperados en la zona roja, "
+                         f"{c['jugador'].envios_rz:.1f} envíos y {c['jugador'].acarreos_rz:.1f} acarreos ahí{prob}.")
+            L.append("")
+        # Los mejores por posición (no solo RB).
+        L += ["### Los más probables de anotar por posición", ""]
+        for pos in ("RB", "WR", "TE", "QB"):
+            mejores = [t for t in tds if t.pos == pos][:5]
+            if mejores:
+                L.append(f"- **{pos}**: " + "; ".join(f"{t.nombre} ({t.team} vs {t.opp}) {t.p1 * 100:.0f}% / 2+ "
+                                                      f"{t.p2 * 100:.1f}%" for t in mejores))
+        L.append("")
     multi = sorted(tds, key=lambda t: -t.p2)[:12]
     L += ["### Candidatos a 2 o más touchdowns", ""]
     for t in multi:
@@ -143,6 +169,10 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
             L += ["**Defensores a seguir:** " + "; ".join(
                 f"{d.jugador.nombre} ({d.jugador.pos}, {d.jugador.team}) {d.medias['tackles']:.1f} tacleadas, "
                 f"{d.medias['sacks']:.2f} sacks" for d in defensa), ""]
+        for team, lineas in a.zona_roja.items():
+            if lineas:
+                L += [f"**La zona roja — ataque de {equipos.apodo(team)}:**", ""]
+                L += [x if x.startswith("- ") else f"- {x}" for x in lineas] + [""]
         L += ["| Jugador | Proyección |", "|---|---|"]
         for p in sorted(a.proyecciones, key=lambda p: (p.jugador.team, -sum(p.volumen.values()))):
             if sum(p.volumen.values()) < 2.5:

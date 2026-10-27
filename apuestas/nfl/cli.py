@@ -177,6 +177,8 @@ def cmd_td(args, cfg: Config, db: Database) -> int:
     nfl = NflDB(db.conn)
     ctx, partidos, desde, hasta = _analizar(args, cfg, nfl)
     tds = sorted((t for a in partidos for t in a.tds), key=lambda t: -(t.p2 if args.multiples else t.p1))
+    if args.posicion:
+        tds = [t for t in tds if t.pos == args.posicion.upper()]
     if not tds:
         print("Sin partidos en la ventana (o falta 'nfl actualizar').")
         return 0
@@ -273,6 +275,9 @@ def cmd_matchup(args, cfg: Config, db: Database) -> int:
             print(f"  - {c}")
         for b in ctx.bajas.get(team, []):
             print(f"  - Baja: {b['nombre']} ({b['pos']}) {b['estado']}")
+        print("\n  La zona roja:")
+        for x in a.zona_roja.get(team, []):
+            print(f"  {x if x.startswith('- ') else '  ' + x}")
         print()
     print("## Touchdowns")
     for t in a.tds[:12]:
@@ -509,6 +514,7 @@ def registrar(sub) -> None:
     ventana(t)
     t.add_argument("--equipo", help="solo los partidos de este equipo")
     t.add_argument("--multiples", action="store_true", help="ordenar por P(2+ TD)")
+    t.add_argument("--posicion", choices=("QB", "RB", "WR", "TE", "qb", "rb", "wr", "te"), help="solo una posición")
     t.add_argument("--razonar", type=int, default=0, metavar="N",
                    help="explicar paso a paso a los N primeros (partido, QB, zona roja, papel, eficiencia, apuesta)")
     t.add_argument("--top", type=int, default=25)

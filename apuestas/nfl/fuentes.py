@@ -170,7 +170,7 @@ def agregar_pbp(filas: Iterator[dict]) -> ResumenPbp:
     jug: dict[tuple[str, str], dict] = defaultdict(lambda: {
         "rz_carries": 0, "i10_carries": 0, "i5_carries": 0, "rz_targets": 0, "i10_targets": 0, "ez_targets": 0,
         "designed_runs": 0, "scrambles": 0, "long_rush": 0.0, "long_rec": 0.0, "long_pass": 0.0,
-        "rush_success": 0, "rec_success": 0})
+        "rush_success": 0, "rec_success": 0, "rz_rec": 0, "rz_rec_tds": 0, "rz_rush_tds": 0, "ez_rec": 0})
     eq: dict[tuple[str, str], dict] = {}
     rz_drives: dict[tuple[str, str], set] = defaultdict(set)
     rz_td_drives: dict[tuple[str, str], set] = defaultdict(set)
@@ -296,6 +296,11 @@ def agregar_pbp(filas: Iterator[dict]) -> ResumenPbp:
                     j["i10_targets"] += int(yl <= 10)
                     air = num(f.get("air_yards"))
                     j["ez_targets"] += int(air is not None and air >= yl)
+                    if yl <= 20:
+                        j["rz_rec"] += int(num(f.get("complete_pass")) == 1)
+                        j["rz_rec_tds"] += td_pase
+                    if air is not None and air >= yl:
+                        j["ez_rec"] += int(num(f.get("complete_pass")) == 1)
                 if num(f.get("complete_pass")) == 1:
                     j["long_rec"] = max(j["long_rec"], yds)
                 j["rec_success"] += int(num(f.get("success")) == 1)
@@ -320,6 +325,8 @@ def agregar_pbp(filas: Iterator[dict]) -> ResumenPbp:
                     j["rz_carries"] += int(yl <= 20)
                     j["i10_carries"] += int(yl <= 10)
                     j["i5_carries"] += int(yl <= 5)
+                    if yl <= 20:
+                        j["rz_rush_tds"] += int(td_propio and num(f.get("rush_touchdown")) == 1)
                 j["designed_runs"] += int(not scramble)
                 j["scrambles"] += int(scramble)
                 j["long_rush"] = max(j["long_rush"], yds)

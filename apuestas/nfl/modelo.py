@@ -300,7 +300,8 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
     for r in conn.execute(
             "SELECT pg.*, g.gameday, g.home_team, g.spread_line, g.total_line, g.roof, g.wind, "
             "pp.rz_carries, pp.i10_carries, pp.i5_carries, pp.rz_targets, pp.i10_targets, pp.ez_targets, "
-            "pp.designed_runs, pp.scrambles, pp.long_rush, pp.long_rec, pp.long_pass, s.offense_pct, s.offense_snaps "
+            "pp.designed_runs, pp.scrambles, pp.long_rush, pp.long_rec, pp.long_pass, pp.rz_rec, pp.rz_rec_tds, "
+            "pp.rz_rush_tds, pp.ez_rec, s.offense_pct, s.offense_snaps "
             "FROM nfl_player_games pg JOIN nfl_games g ON g.game_id = pg.game_id "
             "LEFT JOIN nfl_player_pbp pp ON pp.game_id = pg.game_id AND pp.player_id = pg.player_id "
             "LEFT JOIN nfl_snaps s ON s.game_id = pg.game_id AND s.player_id = pg.player_id "
@@ -327,7 +328,8 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
     for pid, partidos in jugadores.items():
         for p in partidos:
             e = equipo_pbp[(p["game_id"], p["team"])]
-            for c in ("rz_carries", "i10_carries", "i5_carries", "rz_targets", "i10_targets", "ez_targets"):
+            for c in ("rz_carries", "i10_carries", "i5_carries", "rz_targets", "i10_targets", "ez_targets", "rz_rec",
+                      "rz_rec_tds", "rz_rush_tds"):
                 e[c] += p.get(c) or 0
             e["rushing_tds"] += p.get("rushing_tds") or 0
             e["receiving_tds"] += p.get("receiving_tds") or 0
@@ -346,6 +348,8 @@ def construir_contexto(conn, fecha: str, usar_estado_actual: bool = True) -> Con
                            ("passing_yards", "passing_yards"), ("passing_tds", "passing_tds"),
                            ("ints", "passing_interceptions"), ("sacks", "sacks_suffered"),
                            ("rz_carries", "rz_carries"), ("rz_targets", "rz_targets"),
+                           ("rz_rec", "rz_rec"), ("rz_rec_tds", "rz_rec_tds"), ("rz_rush_tds", "rz_rush_tds"),
+                           ("ez_targets", "ez_targets"), ("ez_rec", "ez_rec"),
                            ("designed_runs", "designed_runs"), ("scrambles", "scrambles")):
                 d[f"{g}.{c}"] += p.get(src) or 0
     pos_concedido: dict[str, list[dict]] = {}

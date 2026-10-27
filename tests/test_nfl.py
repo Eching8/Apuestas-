@@ -356,6 +356,20 @@ class ModeloTest(unittest.TestCase):
         self.assertGreater(proyectar(ctx, sin["rb2_buf"], ent).medias["rush_att"],
                            proyectar(ctx, con["rb2_buf"], ent).medias["rush_att"])
 
+    def test_zona_roja(self):
+        from apuestas.nfl.zona_roja import candidatos as cand_rz, defensa_rz, mapa
+        ctx = construir_contexto(self.db.conn, HOY)
+        ent = entorno(ctx, "BUF", "LAC", True)
+        proys = [proyectar(ctx, j, ent) for j in preparar_equipo(ctx, "BUF")]
+        d = defensa_rz(ctx, "LAC")
+        self.assertEqual(set(d), {"QB", "RB", "WR", "TE"})
+        self.assertTrue(all(0 <= x.tasa_carrera <= 1 and 0 <= x.tasa_envio <= 1 for x in d.values()))
+        c = cand_rz(ctx, ent, proys)
+        self.assertTrue(c)
+        self.assertTrue(all(c[i].tds_rz >= c[i + 1].tds_rz for i in range(len(c) - 1)))
+        lineas = mapa(ctx, ent, proys)
+        self.assertTrue(lineas[0].startswith("Dónde se le anota a Chargers en la zona roja"))
+
     def test_analisis_validar_informe_y_liquidacion(self):
         ctx = construir_contexto(self.db.conn, HOY)
         g = dict(self.db.conn.execute("SELECT * FROM nfl_games WHERE game_id = '2026_09_LAC_BUF'").fetchone())

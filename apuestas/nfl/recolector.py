@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 
 # Sube cuando cambia lo que se extrae de los archivos: obliga a procesarlos de nuevo aunque no hayan cambiado.
-VERSION_PROCESO = "2"
+VERSION_PROCESO = "3"
 
 
 def _archivo(db: NflDB, nv: Nflverse, ruta: str, forzar: bool = False) -> list[dict] | None:

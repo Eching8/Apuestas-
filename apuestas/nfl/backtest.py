@@ -13,13 +13,14 @@ from collections import defaultdict
 from .modelo import (STATS_POR_POSICION, Linea, construir_contexto, entorno, p_al_menos, preparar_equipo,
                      proyectar, valor)
 from .modelo_partido import prob_partido, simular
+from .zona_roja import PESO_RZ, ajustar_tds
 
 TRAMOS = ((0.0, 0.1), (0.1, 0.2), (0.2, 0.3), (0.3, 0.4), (0.4, 0.5), (0.5, 0.6), (0.6, 0.7), (0.7, 0.8),
           (0.8, 1.01))
 
 
 def backtest(conn, desde: str, hasta: str, progreso=None, partidos: bool = False,
-             n_simulaciones: int = 1000) -> list[dict]:
+             n_simulaciones: int = 1000, peso_rz: float = PESO_RZ) -> list[dict]:
     """Con partidos=True también simula cada partido y lo compara con las líneas de cierre (spread y total) y
     con el ganador: 'g_spread' (cubre el local), 'g_total' (más del total) y 'g_ml' (gana el local)."""
     dias = [r[0] for r in conn.execute(
@@ -61,11 +62,13 @@ def backtest(conn, desde: str, hasta: str, progreso=None, partidos: bool = False
                     if historial[0]["team"] == team and pid not in reales:
                         ctx.lesiones[pid] = {"status": "Out", "detail": ""}
                 ent = entorno(ctx, team, opp, local, linea, g["wind"], g["roof"])
-                for j in preparar_equipo(ctx, team):
+                proys = [proyectar(ctx, j, ent) for j in preparar_equipo(ctx, team)]
+                ajustar_tds(ctx, ent, proys, peso_rz)
+                for p in proys:
+                    j = p.jugador
                     real = reales.get(j.player_id)
                     if real is None or j.n < 3:
                         continue
-                    p = proyectar(ctx, j, ent)
                     lam = p.lambdas.get("tds", 0)
                     if lam >= 0.02:
                         tds = valor(real, "tds")

@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS nfl_player_pbp (
     player_id TEXT NOT NULL,
     rz_carries INTEGER, i10_carries INTEGER, i5_carries INTEGER,
     rz_targets INTEGER, i10_targets INTEGER, ez_targets INTEGER,
+    rz_rec INTEGER, rz_rec_tds INTEGER, rz_rush_tds INTEGER, ez_rec INTEGER,
     designed_runs INTEGER, scrambles INTEGER,
     long_rush REAL, long_rec REAL, long_pass REAL,
     rush_success INTEGER, rec_success INTEGER,
@@ -277,7 +278,8 @@ class NflDB:
 
     def _migrar(self) -> None:
         """Columnas añadidas después de crear la base (las bases viejas no las tienen)."""
-        nuevas = {"nfl_team_games": ("drives INTEGER", "punts INTEGER", "fga INTEGER", "fgm INTEGER")}
+        nuevas = {"nfl_team_games": ("drives INTEGER", "punts INTEGER", "fga INTEGER", "fgm INTEGER"),
+                  "nfl_player_pbp": ("rz_rec INTEGER", "rz_rec_tds INTEGER", "rz_rush_tds INTEGER", "ez_rec INTEGER")}
         for tabla, columnas in nuevas.items():
             existentes = {r[1] for r in self.conn.execute(f"PRAGMA table_info({tabla})")}
             for col in columnas:

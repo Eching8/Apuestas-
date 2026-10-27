@@ -14,6 +14,8 @@ from . import equipos
 from .mercado import Oferta
 from .modelo import (NOMBRES, Contexto, Proyeccion, _nombre, cuota_justa, p_al_menos, qb_del_partido, rango,
                      texto_rango, valor)
+from .zona_roja import candidatos as candidatos_rz
+from .zona_roja import defensa_rz
 
 # Métrica defensiva que mide a un rival para cada estadística: (lado, métrica, sentido).
 # sentido 1 = un valor alto de la métrica es una defensa débil (concede mucho).
@@ -264,6 +266,15 @@ def lectura_td(ctx: Contexto, proy: Proyeccion, ofertas: dict) -> list[str]:
         pasos.append(f"Su temporada: anotó en {anoto} de {len(temporada)} partidos "
                      f"({sum(valor(p, 'tds') for p in temporada):g} TD); últimos 5: "
                      f"{ultimos}.")
+    # La zona roja: lo que concede a su posición ahí y su papel.
+    d_rz = defensa_rz(ctx, ent.opp).get(j.pos)
+    yo_rz = next((c for c in candidatos_rz(ctx, ent, [proy]) if c.proy is proy), None)
+    if d_rz and d_rz.liga_tds:
+        pasos.append(f"En la zona roja: {rival} concede {d_rz.tds:.2f} TD por partido a los {j.pos} dentro de la 20 "
+                     f"(liga {d_rz.liga_tds:.2f}, {texto_rango(d_rz.rango_tds, 'más concede', 'menos concede')})"
+                     + (f"; hoy se le esperan {yo_rz.acarreos_rz:.1f} acarreos y {yo_rz.envios_rz:.1f} envíos ahí "
+                        f"({yo_rz.envios_ez:.1f} a la zona de anotación), {yo_rz.tds_rz:.2f} TD esperados en la zona roja "
+                        f"y {yo_rz.p_2_envios * 100:.0f}% de recibir 2+ envíos ahí" if yo_rz else "") + ".")
     for n in j.notas:
         pasos.append(f"Ojo: {n}.")
     # 5. Conclusión: la apuesta.

@@ -15,6 +15,8 @@ from .modelo import (NOMBRE_PERIODO, NOMBRES, Contexto, Entorno, Linea, Proyecci
 from .modelo_defensa import candidatos_defensa, pateador, proyectar_defensa
 from .modelo_partido import Simulacion, media_equipo, prob_conteo, prob_partido, prob_pateador, simular
 from .razones import Razones, razones
+from .zona_roja import ajustar_tds
+from .zona_roja import mapa as mapa_rz
 
 PESO_MERCADO = 0.35            # peso de la probabilidad de la casa (sin margen) en la probabilidad final
 PESO_MERCADO_DUDOSO = 0.6      # si el jugador acaba de llegar, tiene poca muestra o está en duda
@@ -132,6 +134,7 @@ class AnalisisPartido:
     mercado: Mercado | None = None
     simulacion: Simulacion | None = None
     defensores: list[Proyeccion] = field(default_factory=list)
+    zona_roja: dict[str, list[str]] = field(default_factory=dict)   # team -> mapa de la zona roja (ver zona_roja.mapa)
 
     @property
     def titulo(self) -> str:
@@ -332,7 +335,9 @@ def analizar_partido(ctx: Contexto, game: dict, mercado: Mercado | None = None,
             continue
         ent = entorno(ctx, team, opp, local, linea, game.get("wind"), game.get("roof"))
         entornos[team] = ent
-        proys += [proyectar(ctx, j, ent) for j in preparar_equipo(ctx, team)]
+        propios = [proyectar(ctx, j, ent) for j in preparar_equipo(ctx, team)]
+        ajustar_tds(ctx, ent, propios)
+        proys += propios
     for team, opp in ((home, away), (away, home)):
         if opp in entornos:
             defensores += [proyectar_defensa(ctx, j, entornos[opp]) for j in candidatos_defensa(ctx, team)]
@@ -351,6 +356,7 @@ def analizar_partido(ctx: Contexto, game: dict, mercado: Mercado | None = None,
     tds.sort(key=lambda t: -t.lam)
     td_por_id = {t.player_id: t for t in tds}
     claves = {t: claves_enfrentamiento(ctx, t, e.opp) for t, e in entornos.items()}
+    zona = {t: mapa_rz(ctx, e, proys) for t, e in entornos.items()}
     sim = None
     if simular_partido and len(entornos) == 2:
         sim = simular(ctx, home, away, semilla=zlib.crc32(game["game_id"].encode()), viento=game.get("wind"),
@@ -396,7 +402,7 @@ def analizar_partido(ctx: Contexto, game: dict, mercado: Mercado | None = None,
                     t.ofertas["1+" if of.line == 0.5 else "2+"] = e
                 elif of.stat == "first_td":
                     t.ofertas["primero"] = e
-    return AnalisisPartido(dict(game), entornos, proys, evaluaciones, tds, claves, mercado, sim, defensores)
+    return AnalisisPartido(dict(game), entornos, proys, evaluaciones, tds, claves, mercado, sim, defensores, zona)
 
 
 def _precio_caducado(e: Evaluacion) -> bool:
