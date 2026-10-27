@@ -114,10 +114,12 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     guardar_analisis(nba, fecha, partidos)
     candidatas = candidatas_seguras(partidos, cfg.nba_cuota_min)
     builders, doble = builder.del_dia(ctx, partidos, modo="cuota")
+    ayer_fecha = (date.fromisoformat(fecha) - timedelta(days=1)).isoformat()
     combis = combinadas.del_dia(partidos, candidatas) + combinadas.de_builders(builders, doble)
     combinadas.guardar(nba, fecha, combis)
     md, js = escribir(cfg.reportes_dir, fecha, ctx, partidos, picks, sin_emparejar, args.por_partido, candidatas,
-                      combis, combinadas.listo(nba), builders, doble)
+                      combis, combinadas.listo(nba), builders, doble,
+                      (ayer_fecha, combinadas.detalle(nba, ayer_fecha)), combinadas.resumen(nba))
     print(f"{sum(len(p.evaluaciones) for p in partidos)} props evaluadas; {len(picks)} con probabilidad "
           f">= {cfg.nba_prob_min * 100:.0f}%.")
     for p, e in picks[:args.top]:

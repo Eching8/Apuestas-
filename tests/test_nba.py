@@ -376,6 +376,16 @@ class CombinadasTest(unittest.TestCase):
             self.assertEqual(combinadas.liquidar(db), 2)
             filas = db.conn.execute("SELECT result, cuota_final FROM nba_combinadas ORDER BY id").fetchall()
             self.assertEqual([(f["result"], f["cuota_final"]) for f in filas], [(1, 1.5), (0, 1.5)])
+            # Una pierna perdida decide la combinada aunque otra pierna sea de un partido sin terminar.
+            pendiente = dict(pata, game_id="sin_jugar", line=0.5)
+            combinadas.guardar(db, "2026-03-02", [combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] + 0.5),
+                                                                              pendiente])])
+            db.upsert_game({"id": "sin_jugar", "date_utc": "2026-03-02T23:00Z", "season": 2026, "season_type": 2,
+                            "status": "STATUS_SCHEDULED", "home_pts": None, "away_pts": None,
+                            "home": {"id": "1", "abbr": "1", "name": "Equipo Uno", "nickname": "Uno"},
+                            "away": {"id": "2", "abbr": "2", "name": "Equipo Dos", "nickname": "Dos"}}, "2026-03-02")
+            self.assertEqual(combinadas.liquidar(db), 1)
+            self.assertEqual(combinadas.detalle(db, "2026-03-02")[0]["result"], 0)
             criterios = combinadas.listo(db)
             self.assertFalse(all(ok for _, ok, _ in criterios))
 

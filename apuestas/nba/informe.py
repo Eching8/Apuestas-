@@ -221,6 +221,37 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
     return out
 
 
+def seccion_seguimiento(ayer: tuple[str, list] | None, acumulado: list) -> list[str]:
+    """Cómo terminaron las combinadas de prueba del día anterior, pierna por pierna, y el acumulado."""
+    from .combinadas import nombre_tipo
+    out = []
+    if ayer and ayer[1]:
+        fecha, combis = ayer
+        ganadas = sum(1 for c in combis if c["result"] == 1)
+        cerradas = sum(1 for c in combis if c["result"] in (0, 1))
+        out += [f"## Seguimiento: combinadas de prueba del {fecha}", "",
+                f"Ganadas {ganadas} de {cerradas} liquidadas.", ""]
+        marca = {1: "✅", 0: "❌", 2: "➖ anulada", None: "⏳"}
+        for c in combis:
+            estado = {1: "✅ GANADA", 0: "❌ perdida", 2: "➖ anulada", None: "⏳ pendiente"}[c["result"]]
+            cuota = f", cuota {c['cuota']:.2f}" if c["cuota"] else ""
+            partido = f" ({c['patas'][0]['partido']})" if c["tipo"] == "builder" and c["patas"] else ""
+            out.append(f"**{nombre_tipo(c['tipo'])}{partido}** — {estado} (prob. {_pct(c['prob'])}{cuota})")
+            out += [f"  - {marca[x['resultado']]} {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]}"
+                    + (f" → {x['real']:g}" if x["real"] is not None else "") for x in c["patas"]]
+            out.append("")
+    if acumulado:
+        out += ["### Acumulado de las combinadas de prueba", "",
+                "| Tipo | Jugadas | Ganadas | % ganadas | Prob. prometida | Beneficio (1 u, con cuota) |",
+                "|---|---|---|---|---|---|"]
+        for a in acumulado:
+            ben = "-" if a["beneficio"] is None else f"{a['beneficio']:+.2f} u en {a['con_cuota']}"
+            out.append(f"| {nombre_tipo(a['tipo'])} | {a['n']} | {a['ganadas']} | {a['ganadas'] / a['n'] * 100:.0f}% | "
+                       f"{_pct(a['prob_media'])} | {ben} |")
+        out.append("")
+    return out
+
+
 def seccion_builders(builders: list, doble) -> list[str]:
     if not builders:
         return []
@@ -310,7 +341,8 @@ def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
              picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
              por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = (),
-             combis: list = (), criterios: list = (), builders: list = (), doble=None) -> tuple[Path, Path]:
+             combis: list = (), criterios: list = (), builders: list = (), doble=None,
+             ayer: tuple[str, list] | None = None, acumulado: list = ()) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -329,6 +361,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
                ("**Listo para dinero real.**" if listo else "**En calibración: todos los picks son de prueba.** ")
                + f" {cumplidos} de {len(criterios)} criterios cumplidos:", ""]
         md += [f"- {'✅' if ok else '⬜'} {nombre}: {detalle}" for nombre, ok, detalle in criterios] + [""]
+    md += seccion_seguimiento(ayer, list(acumulado))
     md += seccion_builders(list(builders), doble)
     md += seccion_combinada_segura(list(candidatas), partidos)
     md += seccion_cuotadas(combis)

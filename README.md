@@ -502,6 +502,13 @@ los resultados reales. `nba rendimiento` y el inicio del informe muestran si el 
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
 
+### Seguimiento de las combinadas de prueba
+
+El informe empieza con cómo terminaron las combinadas del día anterior, pierna por pierna (✅/❌, con el
+valor real), y el acumulado por tipo (jugadas, ganadas, % frente a la probabilidad prometida y beneficio).
+Una pierna perdida decide la combinada aunque falten partidos por terminar. Para lanzar el informe de una
+fecha concreta: *Actions → NBA diario → Run workflow* con la fecha.
+
 ### Bet builders y dobles (`apuestas/nba/builder.py`)
 
 Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel

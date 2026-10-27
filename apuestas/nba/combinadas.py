@@ -168,6 +168,12 @@ def liquidar(db: NbaDB) -> int:
     for c in db.conn.execute("SELECT * FROM nba_combinadas WHERE result IS NULL").fetchall():
         patas = json.loads(c["patas"])
         res = [_resultado_pata(db, x) for x in patas]
+        if 0 in res:
+            # Una pierna perdida ya decide la combinada, aunque falten partidos por terminar.
+            db.conn.execute("UPDATE nba_combinadas SET result = 0, cuota_final = cuota, aciertos = ? WHERE id = ?",
+                            (sum(r == 1 for r in res), c["id"]))
+            n += 1
+            continue
         if any(r is None for r in res):
             continue
         validas = [(x, r) for x, r in zip(patas, res) if r != 2]
@@ -181,6 +187,34 @@ def liquidar(db: NbaDB) -> int:
         n += 1
     db.commit()
     return n
+
+
+NOMBRES_TIPO = {
+    "alternas": "Combinada segura A (alternas)", "principales": "Combinada segura B (principales)",
+    "builder": "Bet builder", "doble_builder": "Doble de bet builders",
+}
+
+
+def nombre_tipo(tipo: str) -> str:
+    if tipo in NOMBRES_TIPO:
+        return NOMBRES_TIPO[tipo]
+    base, cuota = tipo.rsplit("_", 1)
+    return f"{'Segura' if base == 'cuota' else 'De valor'} cuota {cuota}+"
+
+
+def detalle(db: NbaDB, fecha: str) -> list[dict]:
+    """Las combinadas de un día con el resultado de cada pierna (valor real, ✅/❌/anulada/pendiente)."""
+    out = []
+    for c in db.conn.execute("SELECT * FROM nba_combinadas WHERE fecha = ? ORDER BY id", (fecha,)).fetchall():
+        patas = []
+        for x in json.loads(c["patas"]):
+            fila = db.conn.execute("SELECT * FROM nba_player_games WHERE game_id = ? AND player_id = ?",
+                                   (x["game_id"], x["player_id"])).fetchone()
+            patas.append({**x, "resultado": _resultado_pata(db, x),
+                          "real": valor(dict(fila), x["stat"]) if fila else None})
+        out.append({"tipo": c["tipo"], "prob": c["prob"], "cuota": c["cuota_final"] or c["cuota"],
+                    "result": c["result"], "patas": patas})
+    return out
 
 
 def _producto(valores) -> float:
