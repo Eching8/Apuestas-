@@ -1,0 +1,182 @@
+{
+ "fecha": "2026-10-27",
+ "picks": [],
+ "partidos": [
+  {
+   "partido": "Brooklyn Nets @ Boston Celtics",
+   "game_id": "401909877",
+   "lesiones": [
+    {
+     "fecha": "2026-10-27",
+     "team_id": "2",
+     "player_id": "4433188",
+     "name": "Devin Carter",
+     "status": "Out",
+     "detail": "Illness"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "17",
+     "player_id": "5101761",
+     "name": "Mikel Brown Jr.",
+     "status": "Day-To-Day",
+     "detail": "Rest"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "17",
+     "player_id": "5105626",
+     "name": "Tyler Bilodeau",
+     "status": "Out",
+     "detail": "Shoulder"
+    }
+   ],
+   "seguras": [],
+   "evaluaciones": []
+  },
+  {
+   "partido": "Detroit Pistons @ New York Knicks",
+   "game_id": "401909878",
+   "lesiones": [
+    {
+     "fecha": "2026-10-27",
+     "team_id": "18",
+     "player_id": "4277869",
+     "name": "Jose Alvarado",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "8",
+     "player_id": "4395702",
+     "name": "Isaiah Joe",
+     "status": "Day-To-Day",
+     "detail": "Hip"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "8",
+     "player_id": "4433621",
+     "name": "Jalen Duren",
+     "status": "Out",
+     "detail": "Hamstring"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "8",
+     "player_id": "4684742",
+     "name": "Ausar Thompson",
+     "status": "Day-To-Day",
+     "detail": "Ankle"
+    }
+   ],
+   "seguras": [],
+   "evaluaciones": []
+  },
+  {
+   "partido": "Sacramento Kings @ San Antonio Spurs",
+   "game_id": "401909879",
+   "lesiones": [
+    {
+     "fecha": "2026-10-27",
+     "team_id": "23",
+     "player_id": "3907387",
+     "name": "Ben Simmons",
+     "status": "Out",
+     "detail": "Achilles"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "23",
+     "player_id": "4433174",
+     "name": "Dylan Cardwell",
+     "status": "Out",
+     "detail": "Calf"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "23",
+     "player_id": "4594327",
+     "name": "Keegan Murray",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "23",
+     "player_id": "4898371",
+     "name": "Maxime Raynaud",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "24",
+     "player_id": "5101845",
+     "name": "Jayden Quaintance",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "24",
+     "player_id": "6440",
+     "name": "Tobias Harris",
+     "status": "Out",
+     "detail": "Calf"
+    }
+   ],
+   "seguras": [],
+   "evaluaciones": []
+  },
+  {
+   "partido": "Portland Trail Blazers @ Los Angeles Lakers",
+   "game_id": "401909880",
+   "lesiones": [
+    {
+     "fecha": "2026-10-27",
+     "team_id": "22",
+     "player_id": "4592435",
+     "name": "Branden Carlson",
+     "status": "Day-To-Day",
+     "detail": "Concussion"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "22",
+     "player_id": "4683678",
+     "name": "Scoot Henderson",
+     "status": "Day-To-Day",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "22",
+     "player_id": "4706557",
+     "name": "Chris Youngblood",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "22",
+     "player_id": "4914336",
+     "name": "Shaedon Sharpe",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-10-27",
+     "team_id": "13",
+     "player_id": "5060631",
+     "name": "Adou Thiero",
+     "status": "Out",
+     "detail": "Knee"
+    }
+   ],
+   "seguras": [],
+   "evaluaciones": []
+  }
+ ]
+}
