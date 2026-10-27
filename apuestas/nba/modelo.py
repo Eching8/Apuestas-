@@ -642,6 +642,10 @@ def razones(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: 
                    f"{', '.join(f'{v:g}' for v in vs)} ({pasa} de {len(vs)} a favor).")
     hits, n = _aciertos(j.partidos[:10], stat, line, lado)
     out.append(f"{'✅' if hits >= 7 else '❌' if hits <= 4 else '➖'} Últimos 10: la habría pasado {hits} de {n}.")
+    hits_t, n_t = _aciertos([p for p in j.partidos if p["season"] == ctx.temporada], stat, line, lado)
+    if n_t >= 3 and hits_t in (0, n_t):
+        out.append(f"{'✅' if hits_t else '❌'} Racha: la {'pasó' if hits_t else 'falló'} en sus {n_t} partidos de esta "
+                   "temporada (al inicio de 2025-26 estas rachas siguieron más de lo que esperaba el modelo).")
     if j.enfrentamiento:
         out.append(f"{marca(j.enfrentamiento.factor - 1)} Marcaje: {marcajes.explicar(j.enfrentamiento)}.")
     for n_ in j.notas:

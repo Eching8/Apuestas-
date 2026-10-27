@@ -9,6 +9,10 @@ Tipos que se guardan cada día (todas "fantasma" hasta que el sistema esté cali
 - valor_5 / valor_10 / valor_15 / valor_30: lo mismo, pero solo con props donde el modelo ve más probabilidad de la
   que paga la casa (valor > +2 %). Las más seguras suelen tener valor negativo (la casa también las ve
   seguras y paga poco); se registran ambas para ver con resultados reales cuál gana dinero.
+- racha_4 / racha_8: líneas principales que el jugador pasó en todos sus partidos de esta temporada (3+), con el
+  modelo del mismo lado. Backtest al inicio de 2025-26 (25 oct - 20 nov, línea = mediana de sus últimos 10):
+  esas props acertaron el 78 % (n = 361) cuando el modelo decía 68 %; las de 0 de N, el 25 % frente al 30 %. Se
+  permiten dos patas del mismo partido, como en los bet builders.
 """
 from __future__ import annotations
 
@@ -54,7 +58,7 @@ class Combinada:
 def _pata_prop(p: Partido, e: Evaluacion) -> dict:
     return {"game_id": p.game["id"], "partido": p.titulo, "player_id": e.player_id, "nombre": e.nombre,
             "stat": e.stat, "line": e.line, "side": e.lado, "prob": e.prob, "odd": e.odd,
-            "defensa": e.defensa, "acierto_10": list(e.acierto_10),
+            "defensa": e.defensa, "acierto_10": list(e.acierto_10), "acierto_temporada": list(e.acierto_temporada),
             "a_favor": sum(r.startswith("✅") for r in getattr(e, "razones", [])),
             "en_contra": sum(r.startswith("❌") for r in getattr(e, "razones", []))}
 
@@ -116,6 +120,41 @@ def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float, tip
 
 OBJETIVOS_VALOR = (5.0, 10.0, 15.0, 30.0)
 
+RACHA_MIN_PARTIDOS = 3
+RACHA_STATS = ("points", "rebounds", "assists", "threes", "pra", "pr", "pa", "ra")   # las del backtest
+# "cambio de rol" y "traspaso reciente" no descartan: a menudo son justo la causa de la racha.
+RACHA_DESCARTA = {"suplente", "minutos inestables", "en el parte de lesiones", "muy lejos de la casa",
+                  "menos de una estrella al inicio de temporada"}
+
+
+def candidatas_racha(partidos: list[Partido], prob_min: float = 0.52, min_aciertos: int = 6
+                     ) -> list[tuple[Partido, Evaluacion]]:
+    """Props con cuota que el jugador pasó en todos sus partidos de esta temporada (al menos 3)."""
+    out = []
+    for p in partidos:
+        for e in p.evaluaciones:
+            hits, n = e.acierto_temporada
+            if n < RACHA_MIN_PARTIDOS or hits < n or e.stat not in RACHA_STATS or not e.odd:
+                continue
+            if e.prob < prob_min or e.acierto_10[0] < min_aciertos or set(e.alertas) & RACHA_DESCARTA:
+                continue
+            out.append((p, e))
+    return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)
+
+
+def de_rachas(candidatas: list[tuple[Partido, Evaluacion]], n: int, por_partido: int = 2) -> Combinada | None:
+    """Las n más probables, una por jugador y como mucho dos por partido."""
+    elegidas, jugadores, partidos = [], set(), {}
+    for p, e in candidatas:
+        if e.player_id in jugadores or partidos.get(p.game["id"], 0) >= por_partido:
+            continue
+        jugadores.add(e.player_id)
+        partidos[p.game["id"]] = partidos.get(p.game["id"], 0) + 1
+        elegidas.append((p, e))
+        if len(elegidas) == n:
+            return Combinada(f"racha_{n}", [_pata_prop(p, e) for p, e in elegidas])
+    return None
+
 
 def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]]) -> list[Combinada]:
     """Seguras (las más probables) y de valor (cuota mejor que su riesgo): se registran las dos para
@@ -123,6 +162,8 @@ def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]
     valor = candidatas_valor(partidos)
     out = [alternas(partidos), principales(candidatas)] + [con_cuota(candidatas, o) for o in OBJETIVOS]
     out += [con_cuota(valor, o, "valor") for o in OBJETIVOS_VALOR]
+    rachas = candidatas_racha(partidos)
+    out += [de_rachas(rachas, 4), de_rachas(rachas, 8)]
     return [c for c in out if c]
 
 
@@ -199,6 +240,8 @@ def nombre_tipo(tipo: str) -> str:
     if tipo in NOMBRES_TIPO:
         return NOMBRES_TIPO[tipo]
     base, cuota = tipo.rsplit("_", 1)
+    if base == "racha":
+        return f"Rachas de temporada ({cuota} patas)"
     return f"{'Segura' if base == 'cuota' else 'De valor'} cuota {cuota}+"
 
 
