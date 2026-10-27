@@ -493,7 +493,9 @@ Cada día se arman y registran (tabla `nba_combinadas`) la combinada de alternas
 de cuota objetivo 2, 3, 5, 10 y 15: la combinación de jugadores constantes, en partidos distintos, con más
 probabilidad de acertar todas cuya cuota llega al objetivo, con su valor (probabilidad × cuota − 1): una
 cuota alta nunca es segura (cuota 15 justa = 1 de cada 15) y si el valor es negativo no conviene ese día.
-Son picks de prueba: se liquidan solos con
+Las piernas con alertas no entran: suplente (riesgo de minutos), minutos inestables, cambio de rol,
+traspaso, lesión y "muy lejos de la casa" (el modelo la ve más de 25 puntos más probable que la casa: la
+casa suele saber algo que el modelo no). Son picks de prueba: se liquidan solos con
 los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
 dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
 prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.

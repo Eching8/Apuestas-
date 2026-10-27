@@ -540,6 +540,9 @@ def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -
 
 
 MINUTOS_SD_ESTABLE = 6.0
+# Si el modelo ve una prop más de 25 puntos más probable que la casa, la casa suele saber algo que el modelo
+# no (minutos, rol, salud). 26 oct 2026: Giannis menos de 47.5 PRA, modelo 80 % y casa 51 %, perdió con 52.
+DISCREPANCIA_MAX = 0.25
 
 
 def alertas(j: Jugador, stat: str) -> list[str]:
@@ -626,7 +629,9 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
         sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
         linea_segura(pred.mu, pred.var), pred.componentes,
-        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j), alertas(j, stat),
+        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j),
+        alertas(j, stat) + (["muy lejos de la casa"] if p_casa is not None and p_jug - p_casa > DISCREPANCIA_MAX
+                            else []),
     )
 
 
