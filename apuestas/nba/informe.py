@@ -273,6 +273,25 @@ def seccion_builders(builders: list, doble) -> list[str]:
     return out
 
 
+def seccion_rachas(combis: list) -> list[str]:
+    rachas = [c for c in combis if c.tipo.startswith("racha_")]
+    if not rachas:
+        return []
+    out = ["## Combinadas de rachas", "",
+           "Líneas principales que el jugador pasó en **todos** sus partidos de esta temporada (3 o más), con el "
+           "modelo del mismo lado, sin suplentes ni minutos inestables; hasta dos por partido. Al inicio de 2025-26 "
+           "estas props acertaron el 78 % cuando el modelo decía 68 %: el modelo se queda corto con las rachas del "
+           "arranque. Se registran como prueba para ver si se repite con las líneas reales de la casa.", ""]
+    for c in rachas:
+        out += [f"**{c.tipo.split('_')[1]} patas:** cuota {c.cuota:.2f}, probabilidad del modelo **{_pct(c.prob)}** "
+                f"(1 de cada {1 / c.prob:.0f}); valor {(c.prob * c.cuota - 1) * 100:+.0f}%", ""]
+        out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} — "
+                f"{x['acierto_temporada'][0]}/{x['acierto_temporada'][1]} esta temporada, "
+                f"{x['acierto_10'][0]}/{x['acierto_10'][1]} últimos 10 ({_pct(x['prob'])}, cuota {x['odd']:.2f}) "
+                f"— {x['partido']}" for x in c.patas] + [""]
+    return out
+
+
 def seccion_cuotadas(combis: list) -> list[str]:
     cuotadas = [c for c in combis if c.tipo.startswith(("cuota_", "valor_"))]
     if not cuotadas:
@@ -365,6 +384,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
     md += seccion_builders(list(builders), doble)
     md += seccion_combinada_segura(list(candidatas), partidos)
     md += seccion_cuotadas(combis)
+    md += seccion_rachas(combis)
     md += seccion_seguras(partidos)
     md += ["## Las más probables del día", ""]
     if picks:
