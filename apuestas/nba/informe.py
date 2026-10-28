@@ -402,6 +402,12 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
     for part in partidos:
         g = part.game
         md += [f"## {part.titulo}", ""]
+        margen = ctx.margen.get(g["home_id"])
+        if margen is not None:
+            fav = g["home_name"] if margen > 0 else g["away_name"]
+            md += [f"Diferencia esperada: {fav} por {abs(margen):.1f}"
+                   + (" — puede romperse: titulares -3% de minutos, suplentes +4%" if abs(margen) >= 12 else
+                      " — algo desigual: titulares hasta -1.5% de minutos" if abs(margen) > 9 else "") + ".", ""]
         if part.lesiones:
             md.append("Parte de lesiones: " + "; ".join(f"{l['name']} ({l['status']})" for l in part.lesiones) + ".")
             md.append("")

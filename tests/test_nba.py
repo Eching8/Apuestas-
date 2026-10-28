@@ -341,6 +341,22 @@ class EnfrentamientosTest(unittest.TestCase):
             self.assertNotIn("Jugador 20", [d["nombre"] for d in j2.enfrentamiento.defensores])
 
 
+class PalizaTest(unittest.TestCase):
+    def test_factor(self):
+        from apuestas.nba.modelo import factor_paliza
+        self.assertEqual(factor_paliza(34, 5), 1.0)              # partido parejo
+        self.assertAlmostEqual(factor_paliza(34, -14), 0.97)     # titular, no favorito por 14
+        self.assertAlmostEqual(factor_paliza(34, 10.5), 0.985)   # a medio camino
+        self.assertAlmostEqual(factor_paliza(18, 13), 1.04)      # suplente
+        self.assertEqual(factor_paliza(26, 15), 1.0)
+
+    def test_margen_de_la_casa(self):
+        from apuestas.nba.espn import _margen_esperado
+        self.assertEqual(_margen_esperado({"odds": [{"spread": -10.5}]}), 10.5)
+        self.assertEqual(_margen_esperado({"odds": [{"spread": 4.5}]}), -4.5)
+        self.assertIsNone(_margen_esperado({}))
+
+
 class CombinadasTest(unittest.TestCase):
     def _cand(self, gid, prob, odd, pid):
         from types import SimpleNamespace
