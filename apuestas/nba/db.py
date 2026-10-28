@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS nba_games (
     home_pts INTEGER,
     away_pts INTEGER,
     box_ok INTEGER NOT NULL DEFAULT 0,
-    updated_at TEXT
+    updated_at TEXT,
+    margen_esperado REAL          -- hándicap de la casa: por cuánto gana el local (ESPN, antes del partido)
 );
 CREATE INDEX IF NOT EXISTS ix_nba_games_fecha ON nba_games(fecha);
 
@@ -215,6 +216,8 @@ class NbaDB:
         columnas = {r[1] for r in self.conn.execute("PRAGMA table_info(nba_picks)")}
         if "tipo" not in columnas:
             self.conn.execute("ALTER TABLE nba_picks ADD COLUMN tipo TEXT NOT NULL DEFAULT 'prop'")
+        if "margen_esperado" not in {r[1] for r in self.conn.execute("PRAGMA table_info(nba_games)")}:
+            self.conn.execute("ALTER TABLE nba_games ADD COLUMN margen_esperado REAL")
 
     def commit(self) -> None:
         self.conn.commit()
@@ -230,13 +233,14 @@ class NbaDB:
         self.upsert_team(g["away"])
         self.conn.execute(
             """INSERT INTO nba_games(id, date_utc, fecha, season, season_type, home_id, away_id, status,
-                                     home_pts, away_pts, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                     home_pts, away_pts, updated_at, margen_esperado)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                ON CONFLICT(id) DO UPDATE SET date_utc = excluded.date_utc, fecha = excluded.fecha,
                    status = excluded.status, home_pts = excluded.home_pts, away_pts = excluded.away_pts,
-                   updated_at = excluded.updated_at""",
+                   updated_at = excluded.updated_at,
+                   margen_esperado = COALESCE(excluded.margen_esperado, nba_games.margen_esperado)""",
             (g["id"], g["date_utc"], fecha, g["season"], g["season_type"], g["home"]["id"], g["away"]["id"],
-             g["status"], g["home_pts"], g["away_pts"], now_iso()),
+             g["status"], g["home_pts"], g["away_pts"], now_iso(), g.get("margen_esperado")),
         )
 
     def save_box(self, game_id: str, home_id: str, players: list[dict], shots: list[dict]) -> None:

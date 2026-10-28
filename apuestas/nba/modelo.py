@@ -146,6 +146,7 @@ class Contexto:
     marcajes: marcajes.Marcajes | None = None           # stats.nba.com, si se descargó
     altura: dict = field(default_factory=dict)          # jugador -> estatura (pulgadas)
     altura_rival: dict = field(default_factory=dict)    # equipo -> grupo -> estatura media por minutos
+    margen: dict = field(default_factory=dict)          # equipo -> por cuánto se espera que gane hoy (± puntos)
 
 
 def _peso_temporada(season: int, actual: int) -> float:
@@ -270,7 +271,38 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
     liga_motor = tasas_liga(filas, grupo, equipo_partido, temporada, PESO_TEMPORADA_ANTERIOR)
     return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
                     zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor,
-                    marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo))
+                    marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo),
+                    _margenes(conn, fecha, temporada))
+
+
+# Partido desigual. Sin hándicap de la casa se estima con la diferencia media de puntos de cada equipo (temporada
+# anterior a la mitad, K_MARGEN partidos de 0 para encoger) y LOCALIA puntos para el local; en 2025-26 el margen
+# real sigue a esta estimación con pendiente 0.96.
+K_MARGEN = 5
+LOCALIA = 2.0
+
+
+def _margenes(conn, fecha: str, temporada: int) -> dict[str, float]:
+    # Bases abiertas sin NbaDB (backtest) pueden no tener aún la columna del hándicap.
+    con_casa = "margen_esperado" in {r[1] for r in conn.execute("PRAGMA table_info(nba_games)")}
+    hoy = conn.execute(f"SELECT home_id, away_id, {'margen_esperado' if con_casa else 'NULL'} FROM nba_games "
+                       "WHERE fecha = ?", (fecha,)).fetchall()
+    if not hoy:
+        return {}
+    neto: dict[str, list[float]] = defaultdict(lambda: [0.0, 0.0])
+    for g in conn.execute(
+            """SELECT home_id, away_id, home_pts, away_pts, season FROM nba_games WHERE fecha < ? AND season >= ?
+               AND season_type = 2 AND home_pts IS NOT NULL""", (fecha, temporada - 1)):
+        w = 1.0 if g[4] == temporada else PESO_TEMPORADA_ANTERIOR
+        for t, m in ((g[0], g[2] - g[3]), (g[1], g[3] - g[2])):
+            neto[t][0] += w * m
+            neto[t][1] += w
+    media = {t: v[0] / (v[1] + K_MARGEN) for t, v in neto.items()}
+    out = {}
+    for local, visita, casa in hoy:
+        m = casa if casa is not None else media.get(local, 0.0) - media.get(visita, 0.0) + LOCALIA
+        out[local], out[visita] = m, -m
+    return out
 
 
 # --- Jugador --------------------------------------------------------------------------
@@ -303,10 +335,30 @@ class Jugador:
     pocos_con_equipo: bool = False
     diferencia_altura: float | None = None   # su estatura menos la media de los rivales de su posición
     cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
+    factor_paliza: float = 1.0               # minutos por partido desigual (ver PALIZA)
 
     @property
     def n(self) -> int:
         return len(self.partidos)
+
+
+# Factor de paliza: 2025-26 (18.694 partidos de jugador, margen esperado sin hándicap real). Con 12+ puntos de
+# diferencia esperada, los titulares de 28+ minutos jugaron un 3-4 % menos de lo previsto y produjeron un 3 % menos
+# (pra 0.97 frente a 1.00 en partidos parejos), favoritos y no favoritos por igual; los de menos de 24 minutos, un
+# 4 % más. Entre 9 y 12 puntos el efecto es la mitad o menos. No aumenta la dispersión de los minutos ni el riesgo
+# de que fallen juntas varias piernas del mismo partido (4 titulares: 0.88 de lo independiente, igual que en
+# partidos parejos), así que solo se baja la media.
+PALIZA = {"titular": -0.03, "suplente": 0.04}
+PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
+
+
+def factor_paliza(minutos: float, margen: float) -> float:
+    t = min(1.0, max(0.0, (abs(margen) - PALIZA_DESDE) / (PALIZA_PLENO - PALIZA_DESDE)))
+    if minutos >= 28:
+        return 1 + PALIZA["titular"] * t
+    if minutos < 24:
+        return 1 + PALIZA["suplente"] * t
+    return 1.0
 
 
 def _pesos(partidos: list[dict], temporada: int, decay: float) -> list[float]:
@@ -423,6 +475,14 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
     if ctx.ultimo_partido.get(team_id) == ayer and j.minutos > 28:
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
+    margen = ctx.margen.get(team_id)
+    if margen is not None:
+        j.factor_paliza = factor_paliza(j.minutos, margen)
+        if j.factor_paliza != 1.0:
+            j.minutos *= j.factor_paliza
+            j.notas.append(f"partido desigual ({'favorito' if margen > 0 else 'no favorito'} por {abs(margen):.1f}): "
+                           f"{'los titulares' if j.factor_paliza < 1 else 'los suplentes'} suelen jugar "
+                           f"{(j.factor_paliza - 1) * 100:+.0f}% de minutos si se rompe")
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
