@@ -233,6 +233,19 @@ CREATE TABLE IF NOT EXISTS nfl_picks (
     UNIQUE (fecha, game_id, player_id, stat, line, lado, origen)
 );
 
+-- Combinadas del día (del sistema y las que arma el usuario, tipo "usuario:<nombre>") y su resultado.
+CREATE TABLE IF NOT EXISTS nfl_combinadas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    patas TEXT NOT NULL,
+    prob REAL NOT NULL,
+    cuota REAL,
+    aciertos INTEGER,
+    result INTEGER,
+    created_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS nfl_descargas (
     url TEXT PRIMARY KEY,
     etag TEXT,

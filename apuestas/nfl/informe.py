@@ -8,6 +8,8 @@ from ..report import AVISO
 from . import equipos
 from .analizador import AnalisisPartido, Evaluacion
 from .modelo import NOMBRES, Contexto, americana, cuota_justa, p_al_menos, texto_rango
+from .combinadas import nombre_tipo
+from .combinadas import texto as texto_combinada
 from .hoja import hoja
 from .razones import lectura_td
 from .zona_roja import cruces
@@ -38,7 +40,7 @@ def _titulo_corto(a: AnalisisPartido) -> str:
 
 def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: list[Evaluacion],
              probables: list[Evaluacion], novedades: dict, ctx: Contexto | None = None, top_td: int = 25,
-             top_lecturas: int = 8) -> str:
+             top_lecturas: int = 8, combis: list | None = None, acumulado: list | None = None) -> str:
     L = [f"# NFL: props y touchdowns del {desde} al {hasta}", "", AVISO, ""]
     L.append(f"{len(partidos)} partidos. Datos hasta la semana {novedades.get('ultima_semana', '?')} "
              f"({novedades.get('temporada', '')}); lesiones de ESPN de {novedades.get('lesiones_al', '?')}.")
@@ -51,6 +53,21 @@ def markdown(desde: str, hasta: str, partidos: list[AnalisisPartido], valor: lis
         L += ["## Bajas que mueven el reparto", ""]
         L += [f"- {b}" for b in novedades["bajas"]] + [""]
     por_juego = {a.game["game_id"]: _titulo_corto(a) for a in partidos}
+    if combis:
+        L += ["## Combinadas del día", "",
+              "Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últimos 10 y 60 %+ esta "
+              "temporada), las menos patas posibles y ninguna moneda al aire. Con un solo partido, las patas son del "
+              "mismo partido y la probabilidad tiene en cuenta cuánto se mueven juntas. La cuota es la de las mejores "
+              "casas de EE. UU.: el bet builder de tu casa pagará distinto; compárala con la cuota justa.", ""]
+        for c in combis:
+            L += texto_combinada(c) + [""]
+    if acumulado:
+        L += ["## Acumulado de las combinadas", "", "| Tipo | Ganadas | Prometían | Beneficio |", "|---|---|---|---|"]
+        for r in acumulado:
+            nombre = "Tus apuestas" if r["tipo"] == "usuario" else nombre_tipo(r["tipo"])
+            ben = f"{r['beneficio']:+.2f} u ({r['con_cuota']} con cuota)" if r["beneficio"] is not None else "-"
+            L.append(f"| {nombre} | {r['ganadas']}/{r['n']} | {r['prob_media'] * 100:.0f}% | {ben} |")
+        L.append("")
     L += ["## Apuestas con valor (la cuota paga más de lo que vale)", "",
           "Probabilidad final = mezcla del modelo y la casa sin margen. EV = probabilidad × mejor cuota − 1.", ""]
     if valor:
@@ -215,11 +232,13 @@ def _eval_json(e: Evaluacion) -> dict:
 
 
 def escribir(directorio: Path, desde: str, hasta: str, partidos: list[AnalisisPartido], valor: list[Evaluacion],
-             probables: list[Evaluacion], novedades: dict, ctx: Contexto | None = None) -> tuple[Path, Path]:
+             probables: list[Evaluacion], novedades: dict, ctx: Contexto | None = None, combis: list | None = None,
+             acumulado: list | None = None) -> tuple[Path, Path]:
     d = Path(directorio) / "nfl"
     d.mkdir(parents=True, exist_ok=True)
     md, js = d / f"{desde}.md", d / f"{desde}.json"
-    md.write_text(markdown(desde, hasta, partidos, valor, probables, novedades, ctx), encoding="utf-8")
+    md.write_text(markdown(desde, hasta, partidos, valor, probables, novedades, ctx, combis=combis,
+                           acumulado=acumulado), encoding="utf-8")
     datos = {
         "desde": desde, "hasta": hasta, "novedades": novedades,
         "valor": [_eval_json(e) for e in valor], "probables": [_eval_json(e) for e in probables],

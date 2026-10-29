@@ -5,6 +5,8 @@
     python -m apuestas nfl td                             # quién tiene más probabilidad de anotar (1+ y 2+)
     python -m apuestas nfl mercados --tipo partido        # todos los mercados: jugador, periodos, defensa, partido
     python -m apuestas nfl hoja --equipo BUF              # hoja de picks del partido: los dos lados, listos para elegir
+    python -m apuestas nfl combinadas                     # combinadas del día con el criterio de CLAUDE.md
+    python -m apuestas nfl seguimiento --fecha 2026-10-29 # cómo salió cada pierna y el acumulado
     python -m apuestas nfl matchup BUF LAC                # el enfrentamiento: ataque contra defensa, métrica a métrica
     python -m apuestas nfl validar "Derrick Henry +2 TD"  # ¿es buena esta apuesta? ¿por qué la juega la gente?
     python -m apuestas nfl jugador "Josh Allen"           # ficha: rol, tendencias, rivales, próxima proyección
@@ -26,12 +28,14 @@ from .analizador import (AnalisisPartido, analizar_partido, con_valor, evaluar_e
 from .backtest import backtest, resumen
 from .db import NflDB
 from .fuentes import EspnNfl, Nflverse
+from . import combinadas
 from .hoja import hoja
 from .informe import escribir
 from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, parse_evento
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
 from .razones import lectura_td, tendencias
 from .recolector import actualizar
+from .usuario import registrar as registrar_usuario
 from .validar import (buscar_jugador, interpretar, interpretar_equipo, oferta_equipo, texto_veredicto,
                       texto_veredicto_equipo, validar)
 
@@ -53,6 +57,8 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
     nv = Nflverse()
     r = actualizar(nfl, nv, temporadas, None if args.sin_espn else EspnNfl(), forzar=args.forzar)
     liquidadas = liquidar(nfl)
+    registrar_usuario(nfl)
+    combis_liquidadas = combinadas.liquidar(nfl)
     print(f"nflverse: {nv.descargas} archivos nuevos o cambiados (temporadas {', '.join(map(str, temporadas))}).")
     if r["partidos"]:
         print(f"  Calendario: {r['partidos']} partidos.")
@@ -66,7 +72,7 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
           f"{r.get('transacciones', 0)} movimientos de plantilla nuevos.")
     for t in r.get("traspasos_espn", []):
         print(f"  Traspaso (ESPN): {t['name']} {t['from_team']} → {t['to_team']} ({t['fecha']})")
-    print(f"{liquidadas} selecciones liquidadas.")
+    print(f"{liquidadas} selecciones y {combis_liquidadas} combinadas liquidadas.")
     return 0
 
 
@@ -150,6 +156,8 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     if not args.sin_descarga:
         actualizar(nfl, Nflverse(), temporadas_por_defecto(_hoy(cfg)), EspnNfl())
         liquidar(nfl)
+        registrar_usuario(nfl)
+        combinadas.liquidar(nfl)
     ctx, partidos, desde, hasta = _analizar(args, cfg, nfl)
     if not partidos:
         print(f"No hay partidos entre {desde} y {hasta} (o falta ejecutar 'nfl actualizar').")
@@ -157,7 +165,10 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     valor_ = con_valor(partidos, cfg.nfl_valor_min)
     probables = mas_probables(partidos)
     guardar_picks(nfl, desde, valor_)
-    md, js = escribir(cfg.reportes_dir, desde, hasta, partidos, valor_, probables, _novedades(ctx, nfl, partidos), ctx)
+    combis = combinadas.del_dia(ctx, partidos)
+    combinadas.guardar(nfl, desde, combis)
+    md, js = escribir(cfg.reportes_dir, desde, hasta, partidos, valor_, probables, _novedades(ctx, nfl, partidos), ctx,
+                      combis, combinadas.resumen(nfl))
     n_ofertas = sum(len(a.evaluaciones) for a in partidos)
     print(f"{len(partidos)} partidos entre {desde} y {hasta}; {n_ofertas} líneas de las casas evaluadas.")
     if valor_:
@@ -170,8 +181,49 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
     print("Más probables de anotar:")
     for t in tds:
         print(f"  {t.p1 * 100:4.0f}%  2+: {t.p2 * 100:4.1f}%  {t.nombre} ({t.pos}, {t.team} vs {t.opp})")
+    print("Combinadas del día (criterio de CLAUDE.md):")
+    for c in combis:
+        cuota = f"cuota {c.cuota:5.2f}" if c.cuota else "cuota   -  "
+        print(f"  {c.prob * 100:5.1f}%  {cuota}  justa {c.cuota_justa:6.2f}  {combinadas.nombre_tipo(c.tipo)} "
+              f"({len(c.patas)} patas)")
     print(f"Informe: {md}\nDatos: {js}\n")
     print(AVISO.replace("> ", "").replace("**", ""))
+    return 0
+
+
+def cmd_combinadas(args, cfg: Config, db: Database) -> int:
+    nfl = NflDB(db.conn)
+    ctx, partidos, desde, hasta = _analizar(args, cfg, nfl)
+    if not partidos:
+        print(f"No hay partidos entre {desde} y {hasta}.")
+        return 0
+    combis = combinadas.del_dia(ctx, partidos)
+    combinadas.guardar(nfl, desde, combis)
+    for c in combis:
+        print("\n".join(combinadas.texto(c)) + "\n")
+    print(AVISO.replace("> ", "").replace("**", ""))
+    return 0
+
+
+def cmd_seguimiento(args, cfg: Config, db: Database) -> int:
+    nfl = NflDB(db.conn)
+    registrar_usuario(nfl)
+    combinadas.liquidar(nfl)
+    fecha = args.fecha or _hoy(cfg).isoformat()
+    print(f"Combinadas del {fecha}:")
+    for c in combinadas.detalle(nfl, fecha):
+        estado = {1: "✅ ganada", 0: "❌ perdida", 2: "anulada", None: "pendiente"}[c["result"]]
+        cuota = f", cuota {c['cuota']:.2f}" if c["cuota"] else ""
+        print(f"\n{combinadas.nombre_tipo(c['tipo'])} — {estado} (prometía {c['prob'] * 100:.1f}%{cuota})")
+        for x in c["patas"]:
+            marca = {1: "✅", 0: "❌", 2: "anulada", None: "…"}[x["resultado"]]
+            real = f" → {x['real']:g}" if x["real"] is not None else ""
+            print(f"  {marca} {x['nombre']} {x['side']} de {x['line']:g} {NOMBRES.get(x['stat'], x['stat'])}{real}")
+    print("\nAcumulado:")
+    for r in combinadas.resumen(nfl):
+        ben = f", {r['beneficio']:+.2f} u en {r['con_cuota']} con cuota" if r["beneficio"] is not None else ""
+        print(f"  {combinadas.nombre_tipo(r['tipo']) if r['tipo'] != 'usuario' else 'Tus apuestas':<40} "
+              f"{r['ganadas']}/{r['n']} ganadas (prometían {r['prob_media'] * 100:.0f}%){ben}")
     return 0
 
 
@@ -549,6 +601,16 @@ def registrar(sub) -> None:
     ventana(hj)
     hj.add_argument("--equipo", help="solo los partidos de este equipo")
     hj.set_defaults(func=cmd_hoja)
+
+    cb = s.add_parser("combinadas", help="combinadas del día con el criterio de CLAUDE.md (seguras, cuota objetivo, "
+                                         "valor, rachas y bet builders)")
+    ventana(cb)
+    cb.add_argument("--equipo", help="solo los partidos de este equipo")
+    cb.set_defaults(func=cmd_combinadas)
+
+    sg = s.add_parser("seguimiento", help="resultado pierna por pierna de las combinadas de un día y el acumulado")
+    sg.add_argument("--fecha", help="AAAA-MM-DD (por defecto, hoy)")
+    sg.set_defaults(func=cmd_seguimiento)
 
     m = s.add_parser("matchup", help="el enfrentamiento de dos equipos, métrica a métrica")
     m.add_argument("equipo")

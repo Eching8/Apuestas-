@@ -545,5 +545,51 @@ class TodosLosMercadosTest(unittest.TestCase):
         self.assertEqual(e.etiqueta(), "Total más de 44.5 puntos (1.ª mitad)")
 
 
+
+class CombinadasTest(unittest.TestCase):
+    def _pata(self, pid, team, pos, stat, prob, side="más", odd=1.8, game="g1"):
+        from apuestas.nfl.combinadas import Pata
+        return Pata(game, "A @ B", pid, pid, team, pos, stat, 0.5, side, prob, odd, "fd", (8, 10), (5, 6))
+
+    def test_correlacion_qb_receptor(self):
+        from apuestas.nfl.combinadas import prob_conjunta
+        qb = self._pata("qb", "BUF", "QB", "pass_yds", 0.6)
+        wr = self._pata("wr", "BUF", "WR", "rec_yds", 0.6)
+        juntas = prob_conjunta([qb, wr], sims=20000)
+        self.assertGreater(juntas, 0.36 + 0.03)                  # van juntas: más que el producto
+        wr_menos = self._pata("wr", "BUF", "WR", "rec_yds", 0.6, side="menos")
+        self.assertLess(prob_conjunta([qb, wr_menos], sims=20000), 0.36 - 0.03)
+        otro = self._pata("x", "KC", "WR", "rec_yds", 0.6, game="g2")
+        self.assertAlmostEqual(prob_conjunta([qb, otro]), 0.36)  # partidos distintos: independientes
+
+    def test_con_cuota_menos_patas(self):
+        from apuestas.nfl.combinadas import con_cuota
+        cands = [self._pata(f"p{i}", "BUF" if i % 2 else "MIA", "WR", "rec", 0.7 - i * 0.02, odd=1.5,
+                            game=f"g{i}") for i in range(6)]
+        c = con_cuota(cands, 3.0, "cuota", un_partido=False)
+        self.assertEqual(len(c.patas), 3)                        # 1.5^3 = 3.375 >= 3, con las menos patas
+        self.assertEqual({p.player_id for p in c.patas}, {"p0", "p1", "p2"})
+        self.assertEqual(c.tipo, "cuota_3")
+
+    def test_registro_y_liquidacion(self):
+        from apuestas.nfl import combinadas
+        tmp = TemporaryDirectory()
+        db = Database(Path(tmp.name) / "t.db")
+        nfl = NflDB(db.conn)
+        _llenar(nfl)
+        g = db.conn.execute("SELECT game_id FROM nfl_games WHERE home_score IS NOT NULL LIMIT 1").fetchone()[0]
+        fila = db.conn.execute("SELECT player_id, team, receptions FROM nfl_player_games WHERE game_id = ? "
+                               "AND receptions > 0 LIMIT 1", (g,)).fetchone()
+        p = combinadas.Pata(g, "x", fila[0], fila[0], fila[1], "WR", "rec", 0.5, "más", 0.8, 1.2)
+        q = combinadas.Pata(g, "x", fila[0], fila[0], fila[1], "WR", "rec", fila[2] + 0.5, "más", 0.3, 3.0)
+        combinadas.guardar(nfl, "2026-09-10", [combinadas.Combinada("cuota_2", [p], 0.8),
+                                               combinadas.Combinada("valor_5", [p, q], 0.24)])
+        self.assertEqual(combinadas.liquidar(nfl), 2)
+        res = {r["tipo"]: r["result"] for r in db.conn.execute("SELECT tipo, result FROM nfl_combinadas")}
+        self.assertEqual(res, {"cuota_2": 1, "valor_5": 0})
+        db.close()
+        tmp.cleanup()
+
+
 if __name__ == "__main__":
     unittest.main()

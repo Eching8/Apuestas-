@@ -1,0 +1,142 @@
+{
+ "fecha": "2026-10-29",
+ "apuestas": [
+  {
+   "nombre": "Base 5.80",
+   "cuota": 5.8,
+   "prob": 0.2,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Bryce Young",
+     "stat": "rush_yds",
+     "lado": "menos",
+     "linea": 8.5,
+     "prob": 0.575
+    },
+    {
+     "jugador": "John Metchie III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.6
+    },
+    {
+     "jugador": "Jonnu Smith",
+     "stat": "rec_yds",
+     "lado": "más",
+     "linea": 3.5,
+     "prob": 0.59
+    }
+   ]
+  },
+  {
+   "nombre": "Segura",
+   "cuota": null,
+   "prob": 0.47,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jordan Love",
+     "stat": "pass_tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.78
+    },
+    {
+     "jugador": "Bryce Young",
+     "stat": "pass_tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.73
+    },
+    {
+     "jugador": "John Metchie III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.83
+    }
+   ]
+  },
+  {
+   "nombre": "Valor 10+",
+   "cuota": null,
+   "prob": 0.12,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Bryce Young",
+     "stat": "rush_yds",
+     "lado": "menos",
+     "linea": 8.5,
+     "prob": 0.575
+    },
+    {
+     "jugador": "John Metchie III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.6
+    },
+    {
+     "jugador": "Jonnu Smith",
+     "stat": "rec_yds",
+     "lado": "más",
+     "linea": 3.5,
+     "prob": 0.59
+    },
+    {
+     "jugador": "Chuba Hubbard",
+     "stat": "rush_att",
+     "lado": "más",
+     "linea": 9.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Agresiva",
+   "cuota": null,
+   "prob": 0.03,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Bryce Young",
+     "stat": "rush_yds",
+     "lado": "menos",
+     "linea": 8.5,
+     "prob": 0.575
+    },
+    {
+     "jugador": "John Metchie III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.6
+    },
+    {
+     "jugador": "Jonnu Smith",
+     "stat": "rec_yds",
+     "lado": "más",
+     "linea": 3.5,
+     "prob": 0.59
+    },
+    {
+     "jugador": "Chuba Hubbard",
+     "stat": "rush_att",
+     "lado": "más",
+     "linea": 9.5,
+     "prob": 0.62
+    },
+    {
+     "jugador": "MarShawn Lloyd",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.24
+    }
+   ]
+  }
+ ]
+}

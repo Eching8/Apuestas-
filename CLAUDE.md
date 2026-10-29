@@ -28,3 +28,40 @@ seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
 combinadas de prueba") si estos tipos siguen cumpliendo lo prometido y decírselo si dejan de hacerlo.
+
+# Apuestas NFL: cómo armar combinadas cuando el usuario las pida
+
+Mismo criterio que la NBA (arriba), traducido a la NFL en `apuestas/nfl/combinadas.py` (`nfl combinadas`,
+`nfl seguimiento`). Las apuestas que comparta van a `apuestas_usuario/nfl/AAAA-MM-DD.json`
+(`apuestas/nfl/usuario.py`); son de prueba hasta que diga lo contrario.
+
+## Reglas
+
+1. **Solo jugadores constantes** (`combinadas.constante`): sin alertas (`combinadas.alertas`: papel menor por
+   snaps, vuelve de lesión, cambio de rol, traspaso reciente, en el parte de lesiones, muy lejos de la casa), que
+   pasaron la línea en 7+ de sus últimos 10 y en el 60 %+ de esta temporada. Cada pata con 62 %+ de probabilidad.
+2. **Un partido por pata** cuando hay varios partidos. Con uno solo (jueves, lunes) las patas son del mismo
+   partido, como mucho dos por equipo, y la probabilidad conjunta usa las correlaciones medidas en 2024-2026
+   (`combinadas.CORRELACIONES`): yardas del QB ↔ yardas de sus receptores +0.37, ↔ recepciones +0.26, ↔ su RB
+   −0.13; QB rivales +0.11; RB rivales −0.17; receptores entre sí ~0. Por eso el bet builder de la casa paga
+   mucho menos que el producto de las cuotas: no alargarlo con patas de relleno.
+3. **Las menos patas posibles** para la cuota pedida (`combinadas.con_cuota`); para cuotas altas, la de valor
+   antes que alargar una segura.
+4. **Primero la segura A** (líneas alternativas al 85 %+ de jugadores sin alertas, 8+ de 10) si piden algo seguro.
+5. **Ninguna pata moneda al aire** ni con valor negativo a la cuota de la casa del usuario: si su casa no ofrece
+   la línea o paga menos que la cuota mínima (justa × 1.04), cambiarla por la siguiente más segura.
+6. Para cuotas de 30+, avisar de la probabilidad real y armarla igual con estas reglas.
+
+## Lecciones de los partidos jugados (actualizar con el seguimiento)
+
+- **Solo props de partido completo**: de 153 selecciones liquidadas, las de cuarto y mitad pierden dinero.
+- **Las patas de una combinada tienen que ganar con el mismo guion** (26 oct, DAL 38-21 PHI: el under de acarreos
+  del RB del favorito y el under de recepciones del receptor del que pierde se cayeron juntos en la paliza).
+- **Nada de unders de acarreos de RB titulares en partidos parejos o de no favoritos**: en 2025 el modelo los
+  proyectaba 1.3 acarreos por debajo de lo real.
+- **Si el modelo va contra la casa en todo un equipo a la vez, es un sesgo del modelo**, no valor (29 oct, Green
+  Bay: Jacobs volvía de lesión y Lloyd había sido el titular): revisar el historial antes de recomendar.
+- **Comprobar el historial de cada pata con la línea exacta de la casa del usuario** (el pateador de Carolina:
+  el modelo daba 60 % al menos de 6.5 puntos y lo había pasado en 5 de 6).
+- **El bet builder de Betano recorta mucho las patas del mismo partido**: comparar su cuota con la justa y no
+  aceptar la combinada si queda por debajo.
