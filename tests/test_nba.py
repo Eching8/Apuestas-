@@ -407,6 +407,30 @@ class CombinadasTest(unittest.TestCase):
         self.assertIsNone(con_cuota(cands, 50.0))
         self.assertTrue(con_cuota(cands, 2.0, "valor").tipo.startswith("valor_"))
 
+    def test_apuestas_usuario(self):
+        import json as _json
+        from apuestas.nba import combinadas, usuario
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ayer = (date.fromisoformat(FECHA) - timedelta(days=1)).isoformat()
+            fila = db.conn.execute("""SELECT pg.* FROM nba_player_games pg JOIN nba_games g ON g.id = pg.game_id
+                                      WHERE g.fecha = ? AND pg.player_id = 'a1'""", (ayer,)).fetchone()
+            pata = {"jugador": "Angel Perez Jr", "stat": "points", "lado": "más", "linea": fila["pts"] - 0.5}
+            carpeta = Path(tmp) / "usuario"
+            carpeta.mkdir()
+            (carpeta / f"{ayer}.json").write_text(_json.dumps({"fecha": ayer, "apuestas": [
+                {"nombre": "Doble", "cuota": 3.1, "prob": 0.3, "patas": [pata]},
+                {"nombre": "Sin jugador", "cuota": 2.0, "prob": 0.5, "patas": [dict(pata, jugador="Nadie")]}]}))
+            self.assertEqual(usuario.registrar(db, carpeta), 1)
+            self.assertEqual(usuario.registrar(db, carpeta), 0)       # no se duplica
+            combinadas.guardar(db, ayer, [])                           # regenerar el día no la borra
+            combinadas.liquidar(db)
+            fila_c = db.conn.execute("SELECT tipo, result, cuota_final FROM nba_combinadas").fetchone()
+            self.assertEqual((fila_c["tipo"], fila_c["result"], fila_c["cuota_final"]), ("usuario:Doble", 1, 3.1))
+            self.assertEqual(combinadas.nombre_tipo(fila_c["tipo"]), "Tu apuesta: Doble")
+            self.assertEqual(combinadas.resumen(db)[0]["tipo"], "usuario")
+
     def test_liquidar(self):
         import json as _json
         from apuestas.nba import combinadas
