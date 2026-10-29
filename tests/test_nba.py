@@ -141,6 +141,11 @@ class ParsersTest(unittest.TestCase):
         self.assertEqual((props[0]["stat"], props[0]["line"], props[0]["books"]), ("points", 20.5, 1))
         # El lado "menos" no lo ofrece ninguna casa: sin cuota, no se puede apostar.
         self.assertEqual((props[0]["over_odd"], props[0]["under_odd"]), (americana_a_decimal("-110"), None))
+        # Sin nombre (29 oct 2026), se saca del id.
+        ev["players"] = {"NICKEIL_ALEXANDERWALKER_1_NBA": {"teamID": "T"}}
+        for o in ev["odds"].values():
+            o["playerID"] = "NICKEIL_ALEXANDERWALKER_1_NBA"
+        self.assertEqual(parse_props(ev)[0]["name"], "NICKEIL_ALEXANDERWALKER")
 
 
 class ModeloTest(unittest.TestCase):

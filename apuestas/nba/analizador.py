@@ -44,11 +44,14 @@ def emparejar_props(db: NbaDB, fecha: str, eventos: list[dict], ctx: Contexto) -
             continue
         # Jugadores de los dos equipos según su último partido, por nombre normalizado.
         por_nombre: dict[str, str] = {}
+        # Sin separadores: el id de SportsGameOdds junta los guiones ('NICKEIL_ALEXANDERWALKER').
+        compacto: dict[str, str] = {}
         for pid, ps in ctx.por_jugador.items():
             if ps[0]["team_id"] in (g["home_id"], g["away_id"]):
                 por_nombre.setdefault(clave_nombre(ps[0]["name"]), pid)
+                compacto.setdefault(clave_nombre(ps[0]["name"]).replace("_", ""), pid)
         for p in parse_props(ev):
-            pid = por_nombre.get(clave_nombre(p["name"]))
+            pid = por_nombre.get(clave_nombre(p["name"])) or compacto.get(clave_nombre(p["name"]).replace("_", ""))
             if pid is None:
                 pid = _por_apellido(por_nombre, p["name"])
             if pid is None:
