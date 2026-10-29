@@ -253,6 +253,64 @@
      "prob": 0.6
     }
    ]
+  },
+  {
+   "nombre": "Agresiva Betano 17.50",
+   "cuota": 17.5,
+   "prob": 0.0526,
+   "real": false,
+   "nota": "Bet builder de Betano tal como lo armó el usuario (justa 19.0: valor -8 %)",
+   "patas": [
+    {
+     "jugador": "Bryce Young",
+     "stat": "rush_yds",
+     "lado": "menos",
+     "linea": 9.5,
+     "prob": 0.567
+    },
+    {
+     "jugador": "John Metchie III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.596
+    },
+    {
+     "jugador": "Jonnu Smith",
+     "stat": "rec_yds",
+     "lado": "más",
+     "linea": 2.5,
+     "prob": 0.582
+    },
+    {
+     "jugador": "Jordan Love",
+     "stat": "pass_tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.811
+    },
+    {
+     "jugador": "Bryce Young",
+     "stat": "pass_tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.758
+    },
+    {
+     "jugador": "Josh Jacobs",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.532
+    },
+    {
+     "jugador": "Chuba Hubbard",
+     "stat": "rush_att",
+     "lado": "menos",
+     "linea": 17.5,
+     "prob": 0.6
+    }
+   ]
   }
  ]
 }
