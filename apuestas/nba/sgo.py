@@ -35,6 +35,11 @@ def clave_nombre(nombre: str) -> str:
     return re.sub(r"[^A-Z0-9]+", "_", s).strip("_")
 
 
+def nombre_de_id(player_id: str) -> str:
+    """'CJ_MCCOLLUM_1_NBA' -> 'CJ_MCCOLLUM'. Desde el 29 oct 2026 SportsGameOdds no siempre manda el nombre."""
+    return re.sub(r"_\d+_NBA$", "", player_id or "")
+
+
 def americana_a_decimal(v) -> float | None:
     try:
         a = float(str(v).replace("+", ""))
@@ -105,7 +110,7 @@ def parse_props(evento: dict) -> list[dict]:
             continue
         info = jugadores.get(pid, {})
         filas.append({
-            "sgo_player_id": pid, "name": info.get("name") or pid, "sgo_team_id": info.get("teamID"),
+            "sgo_player_id": pid, "name": info.get("name") or nombre_de_id(pid), "sgo_team_id": info.get("teamID"),
             "stat": stat, "line": linea,
             # Cada lado vale solo si alguna casa lo ofrece; si no, su cuota es relleno (+100).
             "over_odd": americana_a_decimal(over.get("bookOdds")) if over and over.get("byBookmaker") else None,
