@@ -89,16 +89,18 @@
     {
      "jugador": "Chuba Hubbard",
      "stat": "rush_att",
-     "lado": "más",
-     "linea": 9.5,
-     "prob": 0.62
+     "lado": "menos",
+     "linea": 17.5,
+     "prob": 0.6,
+     "cuota": 1.82
     }
-   ]
+   ],
+   "nota": "Betano no tiene Hubbard más de 9.5 acarreos (su línea es 17.5): se cambió por menos de 17.5 a 1.82"
   },
   {
    "nombre": "Agresiva",
    "cuota": null,
-   "prob": 0.03,
+   "prob": 0.028,
    "real": false,
    "patas": [
     {
@@ -125,9 +127,10 @@
     {
      "jugador": "Chuba Hubbard",
      "stat": "rush_att",
-     "lado": "más",
-     "linea": 9.5,
-     "prob": 0.62
+     "lado": "menos",
+     "linea": 17.5,
+     "prob": 0.6,
+     "cuota": 1.82
     },
     {
      "jugador": "MarShawn Lloyd",
@@ -136,7 +139,8 @@
      "linea": 0.5,
      "prob": 0.24
     }
-   ]
+   ],
+   "nota": "Betano no tiene Hubbard más de 9.5 acarreos (su línea es 17.5): se cambió por menos de 17.5 a 1.82"
   },
   {
    "nombre": "Agresiva 8 patas (dom-lun)",
@@ -232,6 +236,21 @@
      "lado": "más",
      "linea": 1.5,
      "prob": 0.174
+    }
+   ]
+  },
+  {
+   "nombre": "Hubbard menos de 17.5 acarreos",
+   "cuota": 1.82,
+   "prob": 0.6,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Chuba Hubbard",
+     "stat": "rush_att",
+     "lado": "menos",
+     "linea": 17.5,
+     "prob": 0.6
     }
    ]
   }
