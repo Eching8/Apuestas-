@@ -64,6 +64,12 @@ def linea_minima_casa(principal: float) -> float:
     return principal - max(1, math.floor(0.1 * principal))
 
 
+# Con 3+ partidos esta temporada, la línea tiene que haberla pasado en al menos 2 de cada 3; si no, se prueba
+# una más baja (sin bajar de la mínima de la casa). Backtest 2025-26: inicio (25 oct-20 nov) prometían 50.9 % y
+# acertaron 61.0 % (sin el filtro, 48.1 % y 56.4 %); diciembre, 51.6 % y 55.8 % (sin él, 49.3 % y 52.9 %). Dar
+# más peso a esta temporada en todo el modelo empeoró el Brier en las dos ventanas, incluso solo para quien
+# cambió de rol o de equipo: pocos partidos son ruido para la media, pero sirven para descartar líneas.
+ACIERTO_TEMPORADA_MIN = 0.67
 DESCARTA = {"suplente", "minutos inestables", "traspaso reciente", "en el parte de lesiones"}
 
 
@@ -80,10 +86,14 @@ def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
         pred = predecir(ctx, j, stat)
         principal = (principales or {}).get((j.player_id, stat))
         piso = linea_minima_casa(principal) if principal is not None else -1
+        actual = [x for x in j.partidos if x["season"] == ctx.temporada]
         for k in range(int(pred.mu), -1, -1):
             if k + 0.5 < piso:
                 break
             p = _prob_jugador(j, stat, k + 0.5, "más", prob_lados(k + 0.5, pred.mu, pred.var)[0])
+            hits_t, n_t = _aciertos(actual, stat, k + 0.5, "más")
+            if n_t >= 3 and hits_t < ACIERTO_TEMPORADA_MIN * n_t:
+                continue   # esta temporada no la está pasando: probar una línea más baja
             if p >= objetivo:
                 out.append(Pierna(j.player_id, j.nombre, j.team_id, stat, k + 0.5, p, pred.mu,
                                   _aciertos(ult, stat, k + 0.5, "más")))
