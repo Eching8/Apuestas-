@@ -1,7 +1,8 @@
 """Bet builder por partido (varios "más de" de titulares del mismo partido) y dobles de bet builders.
 
-Cada pierna es la línea .5 más alta de un titular estable (sin alertas) que pasa con al menos
-PROB_PIERNA. La probabilidad de acertar todas tiene en cuenta que los jugadores de un mismo partido se
+Cada pierna es la línea .5 más alta de un titular estable que pasa con al menos PROB_PIERNA. Descartan
+al jugador las alertas de DESCARTA; el cambio de rol no, porque al inicio de temporada lo tiene casi un tercio
+de los jugadores (28 oct 2026: 43 de 134) y a menudo es justo lo que explica su buena racha. La probabilidad de acertar todas tiene en cuenta que los jugadores de un mismo partido se
 mueven un poco juntos (ritmo, prórroga): correlación de sus desvíos frente a su media, temporada 2025-26,
 puntos +0.08 entre compañeros y +0.04 entre rivales; asistencias, rebotes y triples casi nada. Se simula
 con una cópula normal con un factor del partido y otro del equipo.
@@ -63,10 +64,13 @@ def linea_minima_casa(principal: float) -> float:
     return principal - max(1, math.floor(0.1 * principal))
 
 
+DESCARTA = {"suplente", "minutos inestables", "traspaso reciente", "en el parte de lesiones"}
+
+
 def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
             principales: dict[tuple[str, str], float] | None = None) -> list[Pierna]:
     """Las piernas posibles del jugador. Con la línea principal de la casa, solo líneas que la casa ofrece."""
-    if alertas(j, "points"):
+    if set(alertas(j, "points")) & DESCARTA:
         return []
     out = []
     ult = j.partidos[:10]
