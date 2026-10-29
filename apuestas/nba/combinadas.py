@@ -196,7 +196,9 @@ def de_builders(builders: list, doble) -> list[Combinada]:
 # --- Registro y liquidación ----------------------------------------------------------
 
 def guardar(db: NbaDB, fecha: str, combis: list[Combinada]) -> None:
-    db.conn.execute("DELETE FROM nba_combinadas WHERE fecha = ? AND result IS NULL", (fecha,))
+    # Las apuestas del usuario (tipo "usuario:...") no son del sistema: no se borran al regenerar el día.
+    db.conn.execute("DELETE FROM nba_combinadas WHERE fecha = ? AND result IS NULL AND tipo NOT LIKE 'usuario:%'",
+                    (fecha,))
     db.conn.executemany(
         "INSERT INTO nba_combinadas(fecha, tipo, patas, prob, cuota, created_at) VALUES (?, ?, ?, ?, ?, ?)",
         [(fecha, c.tipo, json.dumps(c.patas, ensure_ascii=False), c.prob, c.cuota, now_iso()) for c in combis])
@@ -236,7 +238,10 @@ def liquidar(db: NbaDB) -> int:
             resultado, cuota = 2, c["cuota"]
         else:
             resultado = int(all(r == 1 for _, r in validas))
-            cuota = None if c["cuota"] is None else _producto(x["odd"] for x, _ in validas)
+            if c["cuota"] is None or any(x["odd"] is None for x, _ in validas):
+                cuota = c["cuota"]   # bet builders del usuario: la cuota es la de la casa, no el producto
+            else:
+                cuota = _producto(x["odd"] for x, _ in validas)
         db.conn.execute("UPDATE nba_combinadas SET result = ?, cuota_final = ?, aciertos = ? WHERE id = ?",
                         (resultado, cuota, sum(r == 1 for _, r in validas), c["id"]))
         n += 1
@@ -251,6 +256,10 @@ NOMBRES_TIPO = {
 
 
 def nombre_tipo(tipo: str) -> str:
+    if tipo.startswith("usuario:"):
+        return "Tu apuesta: " + tipo.split(":", 1)[1]
+    if tipo == "usuario":
+        return "Tus apuestas"
     if tipo in NOMBRES_TIPO:
         return NOMBRES_TIPO[tipo]
     base, cuota = tipo.rsplit("_", 1)
@@ -296,7 +305,7 @@ def resumen(db: NbaDB) -> list[dict]:
 def _por_tipo(db: NbaDB) -> dict[str, list]:
     out: dict[str, list] = {}
     for f in db.conn.execute("SELECT * FROM nba_combinadas WHERE result IN (0, 1) ORDER BY tipo"):
-        out.setdefault(f["tipo"], []).append(f)
+        out.setdefault("usuario" if f["tipo"].startswith("usuario:") else f["tipo"], []).append(f)
     return out
 
 
@@ -323,7 +332,8 @@ def listo(db: NbaDB) -> list[tuple[str, bool, str]]:
     f = db.conn.execute("""SELECT COUNT(*), SUM(CASE WHEN result = 1 THEN odd - 1 ELSE -1 END) FROM nba_picks
                            WHERE result IN (0, 1) AND tipo = 'prop' AND odd IS NOT NULL""").fetchone()
     out.append(("Props con cuota: beneficio positivo", (f[1] or 0) > 0, f"{f[1] or 0:+.2f} u en {f[0]}"))
-    combis = db.conn.execute("SELECT COUNT(*), AVG(result), AVG(prob) FROM nba_combinadas WHERE result IN (0, 1)"
+    combis = db.conn.execute("SELECT COUNT(*), AVG(result), AVG(prob) FROM nba_combinadas WHERE result IN (0, 1) "
+                             "AND tipo NOT LIKE 'usuario:%'"
                              ).fetchone()
     n, ganadas, prob = combis[0], combis[1] or 0, combis[2] or 0
     out.append(("Combinadas: muestra", n >= MIN_COMBINADAS, f"{n} de {MIN_COMBINADAS}"))

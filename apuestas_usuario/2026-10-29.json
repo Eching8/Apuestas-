@@ -1,0 +1,117 @@
+{
+ "fecha": "2026-10-29",
+ "apuestas": [
+  {
+   "nombre": "Doble 8.54",
+   "cuota": 8.54,
+   "prob": 0.165,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jaylen Wells",
+     "stat": "points",
+     "lado": "más",
+     "linea": 9.5
+    },
+    {
+     "jugador": "Ty Jerome",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Cedric Coward",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Deni Avdija",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "De'Andre Hunter",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Zion Williamson",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Trey Murphy III",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 3.5
+    },
+    {
+     "jugador": "Jeremiah Fears",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 1.5
+    }
+   ]
+  },
+  {
+   "nombre": "Agresiva 70.76",
+   "cuota": 70.76,
+   "prob": 0.0135,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Peyton Watson",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Onyeka Okongwu",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 6.5
+    },
+    {
+     "jugador": "Jalen Johnson",
+     "stat": "pa",
+     "lado": "menos",
+     "linea": 28.5
+    },
+    {
+     "jugador": "Donovan Mitchell",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "CJ McCollum",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 2.5
+    },
+    {
+     "jugador": "Jeremiah Fears",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 2.5
+    },
+    {
+     "jugador": "Dejounte Murray",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Jaylen Wells",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 15.5
+    }
+   ]
+  }
+ ]
+}

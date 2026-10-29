@@ -1,0 +1,173 @@
+{
+ "fecha": "2026-10-27",
+ "apuestas": [
+  {
+   "nombre": "Doble 7.37",
+   "cuota": 7.37,
+   "prob": 0.13,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jalen Brunson",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Cade Cunningham",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "OG Anunoby",
+     "stat": "points",
+     "lado": "más",
+     "linea": 13.5
+    },
+    {
+     "jugador": "Karl-Anthony Towns",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 8.5
+    },
+    {
+     "jugador": "Stephon Castle",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Precious Achiuwa",
+     "stat": "points",
+     "lado": "más",
+     "linea": 9.5
+    }
+   ]
+  },
+  {
+   "nombre": "Combinada 58.56",
+   "cuota": 58.56,
+   "prob": 0.018,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Ziaire Williams",
+     "stat": "pr",
+     "lado": "más",
+     "linea": 11.5
+    },
+    {
+     "jugador": "Donovan Clingan",
+     "stat": "pr",
+     "lado": "menos",
+     "linea": 22.5
+    },
+    {
+     "jugador": "Zach LaVine",
+     "stat": "steals",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Dylan Harper",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Devin Vassell",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 3.5
+    },
+    {
+     "jugador": "Cade Cunningham",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Day'Ron Sharpe",
+     "stat": "pr",
+     "lado": "menos",
+     "linea": 17.5
+    },
+    {
+     "jugador": "Egor Demin",
+     "stat": "assists",
+     "lado": "menos",
+     "linea": 3.5
+    }
+   ]
+  },
+  {
+   "nombre": "Combinada 138.20",
+   "cuota": 138.2,
+   "prob": 0.002,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Julius Randle",
+     "stat": "ra",
+     "lado": "más",
+     "linea": 11.5
+    },
+    {
+     "jugador": "Derrick White",
+     "stat": "ra",
+     "lado": "más",
+     "linea": 9.5
+    },
+    {
+     "jugador": "Karl-Anthony Towns",
+     "stat": "points",
+     "lado": "más",
+     "linea": 19.5
+    },
+    {
+     "jugador": "Dylan Harper",
+     "stat": "points",
+     "lado": "más",
+     "linea": 17.5
+    },
+    {
+     "jugador": "De'Aaron Fox",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 6.5
+    },
+    {
+     "jugador": "Ja Morant",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 6.5
+    },
+    {
+     "jugador": "Luka Doncic",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 7.5
+    },
+    {
+     "jugador": "Austin Reaves",
+     "stat": "points",
+     "lado": "más",
+     "linea": 22.5
+    }
+   ]
+  }
+ ]
+}

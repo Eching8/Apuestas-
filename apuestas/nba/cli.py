@@ -20,7 +20,7 @@ from ..report import AVISO
 from .analizador import (analizar, candidatas_seguras, combinada_segura, emparejar_props, guardar_analisis,
                          guardar_picks, liquidar, mejores,
                          rendimiento)
-from . import builder, combinadas
+from . import builder, combinadas, usuario
 from .backtest import backtest, resumen
 from .db import NbaDB
 from .enfrentamientos import descargar_avanzadas, descargar_temporada
@@ -99,6 +99,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         ayer = (date.fromisoformat(fecha) - timedelta(days=1)).isoformat()
         descargar_dia(espn, nba, ayer)
         liquidar(nba)
+        print(f"{usuario.registrar(nba)} apuestas tuyas registradas para seguirlas.")
         combinadas.liquidar(nba)
         n = descargar_dia(espn, nba, fecha, lesiones=True)
         print(f"{descargar_alturas(espn, nba)} jugadores con estatura (plantillas de ESPN).")

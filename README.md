@@ -509,6 +509,11 @@ valor real), y el acumulado por tipo (jugadas, ganadas, % frente a la probabilid
 Una pierna perdida decide la combinada aunque falten partidos por terminar. Para lanzar el informe de una
 fecha concreta: *Actions → NBA diario → Run workflow* con la fecha.
 
+Las apuestas que armas tú en la casa (de prueba o reales) van en `apuestas_usuario/AAAA-MM-DD.json` (formato
+en `apuestas/nba/usuario.py`): el flujo diario las registra como "Tu apuesta: ...", las liquida con las demás y
+salen en el seguimiento y en el acumulado como "Tus apuestas" (no cuentan para los criterios de calibración
+del sistema).
+
 ### Bet builders y dobles (`apuestas/nba/builder.py`)
 
 Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel
