@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS nba_games (
     home_pts INTEGER,
     away_pts INTEGER,
     box_ok INTEGER NOT NULL DEFAULT 0,
-    updated_at TEXT
+    updated_at TEXT,
+    margen_esperado REAL          -- hándicap de la casa: por cuánto gana el local (ESPN, antes del partido)
 );
 CREATE INDEX IF NOT EXISTS ix_nba_games_fecha ON nba_games(fecha);
 
@@ -161,6 +162,31 @@ CREATE TABLE IF NOT EXISTS nba_avanzadas (
     PRIMARY KEY (season, season_type, nba_id)
 );
 
+-- Combinadas del día (de prueba hasta que el sistema esté calibrado): patas en JSON.
+CREATE TABLE IF NOT EXISTS nba_combinadas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    patas TEXT NOT NULL,
+    prob REAL NOT NULL,
+    cuota REAL,
+    cuota_final REAL,
+    aciertos INTEGER,
+    result INTEGER,
+    created_at TEXT NOT NULL
+);
+
+-- Estatura (pulgadas) y peso (libras) de cada jugador, de las plantillas de ESPN.
+CREATE TABLE IF NOT EXISTS nba_alturas (
+    player_id TEXT PRIMARY KEY,
+    team_id TEXT,
+    name TEXT,
+    position TEXT,
+    altura REAL,
+    peso REAL,
+    updated_at TEXT
+);
+
 CREATE TABLE IF NOT EXISTS nba_picks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fecha TEXT NOT NULL,
@@ -175,6 +201,7 @@ CREATE TABLE IF NOT EXISTS nba_picks (
     odd REAL,
     actual REAL,
     result INTEGER,
+    tipo TEXT NOT NULL DEFAULT 'prop',
     created_at TEXT NOT NULL,
     UNIQUE (fecha, game_id, player_id, stat, side, line)
 );
@@ -185,6 +212,12 @@ class NbaDB:
     def __init__(self, conn: sqlite3.Connection):
         self.conn = conn
         self.conn.executescript(SCHEMA)
+        # Bases creadas antes de existir la columna (p. ej. la caché de GitHub Actions).
+        columnas = {r[1] for r in self.conn.execute("PRAGMA table_info(nba_picks)")}
+        if "tipo" not in columnas:
+            self.conn.execute("ALTER TABLE nba_picks ADD COLUMN tipo TEXT NOT NULL DEFAULT 'prop'")
+        if "margen_esperado" not in {r[1] for r in self.conn.execute("PRAGMA table_info(nba_games)")}:
+            self.conn.execute("ALTER TABLE nba_games ADD COLUMN margen_esperado REAL")
 
     def commit(self) -> None:
         self.conn.commit()
@@ -200,13 +233,14 @@ class NbaDB:
         self.upsert_team(g["away"])
         self.conn.execute(
             """INSERT INTO nba_games(id, date_utc, fecha, season, season_type, home_id, away_id, status,
-                                     home_pts, away_pts, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                     home_pts, away_pts, updated_at, margen_esperado)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                ON CONFLICT(id) DO UPDATE SET date_utc = excluded.date_utc, fecha = excluded.fecha,
                    status = excluded.status, home_pts = excluded.home_pts, away_pts = excluded.away_pts,
-                   updated_at = excluded.updated_at""",
+                   updated_at = excluded.updated_at,
+                   margen_esperado = COALESCE(excluded.margen_esperado, nba_games.margen_esperado)""",
             (g["id"], g["date_utc"], fecha, g["season"], g["season_type"], g["home"]["id"], g["away"]["id"],
-             g["status"], g["home_pts"], g["away_pts"], now_iso()),
+             g["status"], g["home_pts"], g["away_pts"], now_iso(), g.get("margen_esperado")),
         )
 
     def save_box(self, game_id: str, home_id: str, players: list[dict], shots: list[dict]) -> None:
@@ -228,6 +262,12 @@ class NbaDB:
         )
         self.conn.execute("UPDATE nba_games SET box_ok = 1 WHERE id = ?", (game_id,))
 
+    def save_alturas(self, rows: list[dict]) -> None:
+        self.conn.executemany(
+            """INSERT OR REPLACE INTO nba_alturas(player_id, team_id, name, position, altura, peso, updated_at)
+               VALUES (:player_id, :team_id, :name, :position, :altura, :peso, :updated_at)""",
+            [{**r, "updated_at": now_iso()} for r in rows])
+
     def save_injuries(self, fecha: str, rows: list[dict]) -> None:
         self.conn.executemany(
             """INSERT OR REPLACE INTO nba_injuries(fecha, team_id, player_id, name, status, detail)
@@ -236,6 +276,8 @@ class NbaDB:
         )
 
     def save_props(self, fecha: str, rows: list[dict]) -> None:
+        # Cada descarga reemplaza las líneas del día: las que ya no ofrece ninguna casa no deben quedar.
+        self.conn.execute("DELETE FROM nba_props WHERE fecha = ?", (fecha,))
         self.conn.executemany(
             """INSERT OR REPLACE INTO nba_props(fecha, game_id, player_id, stat, line, over_odd, under_odd, books,
                    fetched_at)

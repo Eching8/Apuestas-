@@ -76,6 +76,10 @@ class Config:
     nba_min_partidos: int = field(default_factory=lambda: _int("APUESTAS_NBA_MIN_PARTIDOS", 8))
     # Peso de la probabilidad de la casa (sin margen) en la probabilidad final de cada prop.
     nba_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NBA_PESO_MERCADO", 0.4))
+    # Probabilidad objetivo de los picks seguros (líneas bajas de titulares estables).
+    nba_prob_segura: float = field(default_factory=lambda: _float("APUESTAS_NBA_PROB_SEGURA", 0.85))
+    # Combinada segura: cuota mínima de cada selección (con cuota real de la casa).
+    nba_cuota_min: float = field(default_factory=lambda: _float("APUESTAS_NBA_CUOTA_MIN", 1.30))
 
     # NFL: peso de la casa en la probabilidad final, valor mínimo para recomendar y días por delante a analizar.
     nfl_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NFL_PESO_MERCADO", 0.35))

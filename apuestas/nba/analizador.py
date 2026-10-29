@@ -4,11 +4,12 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 
 from ..db import now_iso
 from .db import NbaDB
-from .modelo import (ESTADOS_FUERA, PESO_MERCADO, Contexto, Evaluacion, Jugador, construir_contexto, evaluar, mejor_contra,
-                     preparar_jugador, valor)
+from .modelo import (ESTADOS_FUERA, PESO_MERCADO, PROB_SEGURA, Contexto, Evaluacion, Jugador, Segura,
+                     construir_contexto, evaluar, mejor_contra, preparar_jugador, seguras, valor)
 from .sgo import clave_nombre, equipos_evento, parse_props
 
 log = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ class Partido:
     jugadores: dict[str, Jugador] = field(default_factory=dict)
     evaluaciones: list[Evaluacion] = field(default_factory=list)
     sin_datos: list[str] = field(default_factory=list)
+    seguras: list[Segura] = field(default_factory=list)   # líneas bajas de titulares estables
 
     @property
     def titulo(self) -> str:
@@ -42,11 +44,14 @@ def emparejar_props(db: NbaDB, fecha: str, eventos: list[dict], ctx: Contexto) -
             continue
         # Jugadores de los dos equipos según su último partido, por nombre normalizado.
         por_nombre: dict[str, str] = {}
+        # Sin separadores: el id de SportsGameOdds junta los guiones ('NICKEIL_ALEXANDERWALKER').
+        compacto: dict[str, str] = {}
         for pid, ps in ctx.por_jugador.items():
             if ps[0]["team_id"] in (g["home_id"], g["away_id"]):
                 por_nombre.setdefault(clave_nombre(ps[0]["name"]), pid)
+                compacto.setdefault(clave_nombre(ps[0]["name"]).replace("_", ""), pid)
         for p in parse_props(ev):
-            pid = por_nombre.get(clave_nombre(p["name"]))
+            pid = por_nombre.get(clave_nombre(p["name"])) or compacto.get(clave_nombre(p["name"]).replace("_", ""))
             if pid is None:
                 pid = _por_apellido(por_nombre, p["name"])
             if pid is None:
@@ -70,46 +75,59 @@ def _por_apellido(por_nombre: dict[str, str], nombre: str) -> str | None:
 
 
 def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 12.0,
-             peso_mercado: float = PESO_MERCADO) -> tuple[list[Partido], Contexto]:
+             peso_mercado: float = PESO_MERCADO, prob_segura: float = PROB_SEGURA) -> tuple[list[Partido], Contexto]:
     ctx = construir_contexto(db.conn, fecha)
     lesiones = [dict(r) for r in db.injuries(fecha)]
     props_por_juego: dict[str, list[dict]] = {}
     for r in db.props(fecha):
         props_por_juego.setdefault(r["game_id"], []).append(dict(r))
     partidos = []
+    hace_3_semanas = (date.fromisoformat(fecha) - timedelta(days=21)).isoformat()
     for g in db.games_on(fecha):
         g = dict(g)
         part = Partido(g, [l for l in lesiones if l["team_id"] in (g["home_id"], g["away_id"])])
         estado = {l["player_id"]: l["status"].lower() for l in part.lesiones}
+
+        def jugador(pid: str) -> Jugador | None:
+            """Prepara al jugador una sola vez por partido; None si está fuera o le faltan datos."""
+            if pid in part.jugadores:
+                return part.jugadores[pid]
+            if pid in part.sin_datos or estado.get(pid, "") in ESTADOS_FUERA:
+                return None
+            hist = ctx.por_jugador.get(pid, [])
+            if not hist:
+                part.sin_datos.append(pid)
+                return None
+            team = hist[0]["team_id"] if hist[0]["team_id"] in (g["home_id"], g["away_id"]) else g["home_id"]
+            opp = g["away_id"] if team == g["home_id"] else g["home_id"]
+            ausentes = [(l["player_id"], l["name"]) for l in part.lesiones
+                        if l["team_id"] == team and l["status"].lower() in ESTADOS_FUERA]
+            fuera_rival = [l["player_id"] for l in part.lesiones
+                           if l["team_id"] == opp and l["status"].lower() in ESTADOS_FUERA]
+            j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes, fuera_rival)
+            if estado.get(pid):
+                j.notas.insert(0, f"en el parte de lesiones: {estado[pid]}")
+            if j.n < min_partidos or j.minutos < min_minutos:
+                part.sin_datos.append(pid)
+                return None
+            part.jugadores[pid] = j
+            return j
+
         for prop in props_por_juego.get(g["id"], []):
-            pid = prop["player_id"]
-            if estado.get(pid, "") in ESTADOS_FUERA:
-                continue
-            j = part.jugadores.get(pid)
-            if j is None and pid not in part.sin_datos:
-                hist = ctx.por_jugador.get(pid, [])
-                if not hist:
-                    part.sin_datos.append(pid)
-                    continue
-                team = hist[0]["team_id"] if hist[0]["team_id"] in (g["home_id"], g["away_id"]) else None
-                team = team or g["home_id"]
-                opp = g["away_id"] if team == g["home_id"] else g["home_id"]
-                ausentes = [(l["player_id"], l["name"]) for l in part.lesiones
-                            if l["team_id"] == team and l["status"].lower() in ESTADOS_FUERA]
-                fuera_rival = [l["player_id"] for l in part.lesiones
-                               if l["team_id"] == opp and l["status"].lower() in ESTADOS_FUERA]
-                j = preparar_jugador(ctx, pid, hist[0]["name"], team, opp, ausentes, fuera_rival)
-                if estado.get(pid):
-                    j.notas.insert(0, f"en el parte de lesiones: {estado[pid]}")
-                if j.n < min_partidos or j.minutos < min_minutos:
-                    part.sin_datos.append(pid)
-                    continue
-                part.jugadores[pid] = j
-            if j is None:
-                continue
-            part.evaluaciones.append(evaluar(ctx, j, prop["stat"], prop["line"], prop["over_odd"],
-                                                   prop["under_odd"], peso_mercado))
+            j = jugador(prop["player_id"])
+            if j is not None:
+                part.evaluaciones.append(evaluar(ctx, j, prop["stat"], prop["line"], prop["over_odd"],
+                                                 prop["under_odd"], peso_mercado))
+        # También los habituales de los dos equipos sin línea publicada: los picks seguros y los bet builders
+        # no necesitan la línea de la casa (las casas suelen publicar las props la misma mañana).
+        for pid, hist in ctx.por_jugador.items():
+            if (hist[0]["team_id"] in (g["home_id"], g["away_id"]) and hist[0]["season"] == ctx.temporada
+                    and hist[0]["fecha"] >= hace_3_semanas):
+                jugador(pid)
         part.evaluaciones.sort(key=lambda e: e.prob, reverse=True)
+        for j in part.jugadores.values():
+            part.seguras += seguras(ctx, j, prob_segura)
+        part.seguras.sort(key=lambda s: (s.prob, s.line), reverse=True)
         partidos.append(part)
     return partidos, ctx
 
@@ -133,19 +151,53 @@ def guardar_analisis(db: NbaDB, fecha: str, partidos: list[Partido]) -> None:
     db.commit()
 
 
+def candidatas_seguras(partidos: list[Partido], cuota_min: float = 1.30, prob_min: float = 0.62,
+                       min_aciertos: int = 7) -> list[tuple[Partido, Evaluacion]]:
+    """Props con cuota real ordenadas por probabilidad (no por valor), solo de jugadores constantes:
+    titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado en al
+    menos 7 de sus últimos 10 partidos y en al menos el 60 % de esta temporada."""
+    out = []
+    for p in partidos:
+        for e in p.evaluaciones:
+            if e.alertas or not e.odd or e.odd < cuota_min or e.prob < prob_min:
+                continue
+            hits, n = e.acierto_10
+            if n < 8 or hits < min_aciertos:
+                continue
+            hits_t, n_t = e.acierto_temporada
+            if n_t >= 2 and hits_t / n_t < 0.6:
+                continue
+            out.append((p, e))
+    return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)
+
+
+def combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], n: int = 4) -> list[tuple[Partido, Evaluacion]]:
+    """La más probable de cada partido, hasta n partidos distintos."""
+    elegidas, usados = [], set()
+    for p, e in candidatas:
+        if p.game["id"] not in usados:
+            usados.add(p.game["id"])
+            elegidas.append((p, e))
+            if len(elegidas) == n:
+                break
+    return elegidas
+
+
 def mejores(partidos: list[Partido], prob_min: float) -> list[tuple[Partido, Evaluacion]]:
     out = [(p, e) for p in partidos for e in p.evaluaciones if e.prob >= prob_min]
     return sorted(out, key=lambda x: x[1].prob, reverse=True)
 
 
-def guardar_picks(db: NbaDB, fecha: str, picks: list[tuple[Partido, Evaluacion]]) -> None:
+def guardar_picks(db: NbaDB, fecha: str, picks: list[tuple[Partido, Evaluacion]],
+                  partidos: list[Partido] = ()) -> None:
+    """Guarda las props más probables (tipo "prop") y las seguras de titulares (tipo "segura")."""
     db.conn.execute("DELETE FROM nba_picks WHERE fecha = ? AND result IS NULL", (fecha,))
-    db.conn.executemany(
-        """INSERT OR REPLACE INTO nba_picks(fecha, game_id, player_id, name, stat, line, side, prob, mu, odd,
-               created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-        [(fecha, p.game["id"], e.player_id, e.nombre, e.stat, e.line, e.lado, e.prob, e.mu, e.odd, now_iso())
-         for p, e in picks],
-    )
+    sql = """INSERT OR REPLACE INTO nba_picks(fecha, game_id, player_id, name, stat, line, side, prob, mu, odd,
+                 tipo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+    db.conn.executemany(sql, [(fecha, p.game["id"], e.player_id, e.nombre, e.stat, e.line, e.lado, e.prob, e.mu,
+                               e.odd, "prop", now_iso()) for p, e in picks])
+    db.conn.executemany(sql, [(fecha, p.game["id"], s.player_id, s.nombre, s.stat, s.line, "más", s.prob, s.mu,
+                               None, "segura", now_iso()) for p in partidos for s in p.seguras])
     db.commit()
 
 
@@ -194,8 +246,10 @@ def rendimiento(db: NbaDB) -> dict:
         g = [r for r in filas if lo <= r["prob"] < hi]
         if g:
             tramos.append({"tramo": f"{lo * 100:.0f}-{min(hi, 1) * 100:.0f}%", **resumen(g)})
-    por_stat = {}
+    por_stat, por_tipo = {}, {}
     for r in filas:
         por_stat.setdefault(r["stat"], []).append(r)
+        por_tipo.setdefault(r["tipo"] or "prop", []).append(r)
     return {"total": resumen(filas) if filas else None, "tramos": tramos,
+            "tipos": [{"tipo": k, **resumen(v)} for k, v in sorted(por_tipo.items())],
             "stats": sorted(({"stat": k, **resumen(v)} for k, v in por_stat.items()), key=lambda x: -x["n"])}

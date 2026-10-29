@@ -60,6 +60,13 @@ class Espn:
     def resumen(self, game_id: str) -> dict:
         return self._get("/summary", event=game_id)
 
+    def plantilla(self, team_id: str) -> list[dict]:
+        """Jugadores del equipo con estatura (pulgadas) y peso (libras)."""
+        data = self._get(f"/teams/{team_id}/roster")
+        return [{"player_id": str(a["id"]), "team_id": str(team_id), "name": a.get("displayName"),
+                 "position": (a.get("position") or {}).get("abbreviation"), "altura": a.get("height"),
+                 "peso": a.get("weight")} for a in data.get("athletes", []) if a.get("id")]
+
 
 # --- Parsers --------------------------------------------------------------------------
 
@@ -86,8 +93,17 @@ def parse_scoreboard(data: dict) -> list[dict]:
             "away": _team(lados["away"]["team"]),
             "home_pts": _int(lados["home"].get("score")),
             "away_pts": _int(lados["away"].get("score")),
+            "margen_esperado": _margen_esperado(comp),
         })
     return out
+
+
+def _margen_esperado(comp: dict) -> float | None:
+    """Por cuánto gana el local según el hándicap de la casa (ESPN da el del local: -10.5 = favorito por 10.5)."""
+    for o in comp.get("odds") or []:
+        if isinstance(o.get("spread"), (int, float)):
+            return -float(o["spread"])
+    return None
 
 
 def _int(v) -> int | None:

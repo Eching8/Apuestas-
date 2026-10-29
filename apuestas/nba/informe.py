@@ -6,8 +6,8 @@ from dataclasses import asdict
 from pathlib import Path
 
 from ..report import AVISO
-from .analizador import Partido
-from .modelo import NOMBRES, Contexto, Evaluacion, mejor_contra
+from .analizador import Partido, combinada_segura
+from .modelo import NOMBRES, Contexto, Evaluacion, Segura, mejor_contra
 from .zonas import NOMBRES as ZONAS_NOMBRE
 
 MAX_POR_JUGADOR = 2
@@ -31,6 +31,11 @@ def etiqueta(e: Evaluacion) -> str:
     return f"{e.nombre}: {e.lado} de {e.line:g} {NOMBRES[e.stat]}"
 
 
+def _etiqueta_fila(e: Evaluacion) -> str:
+    # Un suplente depende de los minutos que le dé el técnico: en puntos y combinadas es el mayor riesgo.
+    return f"**{etiqueta(e)}**" + ("" if e.titular else " ⚠️ suplente")
+
+
 def _cuota(e: Evaluacion) -> str:
     return f"{e.odd:.2f} ({_pct(1 / e.odd)})" if e.odd else "-"
 
@@ -38,7 +43,7 @@ def _cuota(e: Evaluacion) -> str:
 def _fila(e: Evaluacion, partido: str | None = None) -> str:
     vs = ", ".join(f"{v:g}" for v in e.vs_rival) or "-"
     celdas = ([partido] if partido else []) + [
-        f"**{etiqueta(e)}**", f"**{_pct(e.prob)}**", _pct(e.prob_modelo),
+        _etiqueta_fila(e), f"**{_pct(e.prob)}**", _pct(e.prob_modelo),
         _pct(e.prob_mercado) if e.prob_mercado is not None else "-", f"{e.mu:.1f} ± {e.sd:.1f}",
         f"{e.acierto_10[0]}/{e.acierto_10[1]}", f"{e.acierto_temporada[0]}/{e.acierto_temporada[1]}", vs,
         _cuota(e),
@@ -60,6 +65,15 @@ def _metrica(v: float | None, tipo: str) -> str:
 def por_que(e: Evaluacion) -> list[str]:
     """De dónde sale la media de la prop y las estadísticas relacionadas en que se basa."""
     out = [f"**¿Por qué {e.mu:.1f} {NOMBRES[e.stat]}?** (línea {e.line:g}; {e.factores['minutos']:.1f} minutos esperados)", ""]
+    if e.razones:
+        a_favor = sum(r.startswith("✅") for r in e.razones)
+        en_contra = sum(r.startswith("❌") for r in e.razones)
+        out += [f"Razonamiento ({a_favor} factores a favor, {en_contra} en contra):", ""]
+        out += [f"- {r}" for r in e.razones] + [""]
+    elif e.defensa:
+        out += [f"- Rival: {e.defensa}."]
+    if e.alertas:
+        out += [f"- ⚠️ Alertas: {', '.join(e.alertas)}."]
     for c, d in e.componentes.items():
         out.append(f"- {COMPONENTE[c]} **{d['final']:.1f}** (por componentes {d['por_motores']:.1f} · por tasa por "
                    f"minuto y defensa rival {d['por_tasa']:.1f}): {d['explicacion']}.")
@@ -135,6 +149,205 @@ def combinadas(picks: list[tuple[Partido, Evaluacion]]) -> list[str]:
                   "menor del 1 %.", ""]
 
 
+CABECERA_SEGURAS = "| Jugador | Pick seguro | Prob. | Cuota mínima | Esperado | Últ. 10 |"
+SEPARADOR_SEGURAS = "|---|---|---|---|---|---|"
+
+
+def _fila_segura(s: Segura, partido: str | None = None) -> str:
+    celdas = ([partido] if partido else []) + [
+        s.nombre, f"**más de {s.line:g} {NOMBRES[s.stat]}**", f"**{_pct(s.prob)}**", f"{s.cuota_minima:.2f}",
+        f"{s.mu:.1f}", f"{s.acierto_10[0]}/{s.acierto_10[1]}"]
+    return "| " + " | ".join(celdas) + " |"
+
+
+def seccion_seguras(partidos: list[Partido], n: int = 15) -> list[str]:
+    todas = sorted(((p, s) for p in partidos for s in p.seguras), key=lambda x: (-x[1].prob, -x[1].line))
+    if not todas:
+        return []
+    return ["## Picks seguros de titulares estables", "",
+            "Líneas bajas (alternativas) de titulares con 30+ minutos: mejor un \"15+ puntos\" casi seguro de "
+            "una estrella que la línea normal de un suplente. En el backtest, elegidas al 85 % acertaron el "
+            "89-96 %. **Cuota mínima** = la que hace falta para que valga la pena (1 / probabilidad); búscala en "
+            "las líneas alternativas de tu casa.", "",
+            "| Partido " + CABECERA_SEGURAS, "|---" + SEPARADOR_SEGURAS] + \
+        [_fila_segura(s, p.titulo) for p, s in todas[:n]] + [""]
+
+
+def combinada_alternas(partidos: list[Partido], n: int = 4) -> list[tuple[Partido, Segura]]:
+    """El pick seguro más probable de cada partido (líneas alternativas de titulares estables)."""
+    mejores = [(p, p.seguras[0]) for p in partidos if p.seguras]
+    return sorted(mejores, key=lambda x: -x[1].prob)[:n]
+
+
+def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], partidos: list[Partido] = (),
+                             n: int = 4) -> list[str]:
+    out = ["## Combinada segura del día", ""]
+    alternas = combinada_alternas(list(partidos), n)
+    if len(alternas) >= 2:
+        out += ["**Opción A, líneas alternativas (la más segura):** el pick seguro más probable de cada partido, "
+                "de titulares estables. Búscalas en las líneas alternativas de tu casa (\"15+\", \"20+\"...): "
+                "cada una vale la pena si paga al menos su cuota mínima.", "",
+                "| Partido | Selección | Prob. | Cuota mínima | Esperado | Últ. 10 |", "|---|---|---|---|---|---|"]
+        prob = 1.0
+        filas = []
+        for k, (p, s_) in enumerate(alternas, 1):
+            out.append(f"| {p.titulo} | **{s_.nombre}: más de {s_.line:g} {NOMBRES[s_.stat]}** | **{_pct(s_.prob)}** | "
+                       f"{s_.cuota_minima:.2f} | {s_.mu:.1f} | {s_.acierto_10[0]}/{s_.acierto_10[1]} |")
+            prob *= s_.prob
+            if k >= 2:
+                filas.append(f"| {k} | **{_pct(prob)}** |")
+        out += ["", "| Selecciones | Probabilidad de acertar todas |", "|---|---|"] + filas + [""]
+    combi = combinada_segura(candidatas, n)
+    if not combi:
+        return out + ["Hoy ninguna línea principal cumple los filtros de jugador constante.", ""]
+    out += [f"**Opción {'B' if len(alternas) >= 2 else 'A'}, líneas principales con cuota real:**", "",
+           "Se elige por **probabilidad**, no por valor: la más probable de cada partido entre jugadores "
+           "constantes (titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían "
+           "pasado en 7+ de sus últimos 10 y en el 60 %+ de esta temporada) y con cuota real de la casa. Si tu "
+           "casa no ofrece esa línea, usa la siguiente de la lista \"Las más seguras con cuota\".", "",
+           "| Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |", "|---|---|---|---|---|---|"]
+    for p, e in combi:
+        out.append(f"| {p.titulo} | **{etiqueta(e)}**<br>{e.defensa} | **{_pct(e.prob)}** | {e.odd:.2f} | "
+                   f"{e.acierto_10[0]}/{e.acierto_10[1]} | {e.acierto_temporada[0]}/{e.acierto_temporada[1]} |")
+    out += ["", "| Selecciones | Probabilidad de acertar todas | Cuota |", "|---|---|---|"]
+    prob = cuota = 1.0
+    for k, (_, e) in enumerate(combi, 1):
+        prob *= e.prob
+        cuota *= e.odd
+        if k >= 2:
+            out.append(f"| {k} | **{_pct(prob)}** | {cuota:.2f} |")
+    out += ["", "### Las más seguras con cuota", "", "| Partido " + CABECERA, "|---" + SEPARADOR]
+    out += [_fila(e, p.titulo) for p, e in candidatas[:12]] + [""]
+    return out
+
+
+def seccion_seguimiento(ayer: tuple[str, list] | None, acumulado: list) -> list[str]:
+    """Cómo terminaron las combinadas de prueba del día anterior, pierna por pierna, y el acumulado."""
+    from .combinadas import nombre_tipo
+    out = []
+    if ayer and ayer[1]:
+        fecha, combis = ayer
+        ganadas = sum(1 for c in combis if c["result"] == 1)
+        cerradas = sum(1 for c in combis if c["result"] in (0, 1))
+        out += [f"## Seguimiento: combinadas de prueba del {fecha}", "",
+                f"Ganadas {ganadas} de {cerradas} liquidadas.", ""]
+        marca = {1: "✅", 0: "❌", 2: "➖ anulada", None: "⏳"}
+        for c in combis:
+            estado = {1: "✅ GANADA", 0: "❌ perdida", 2: "➖ anulada", None: "⏳ pendiente"}[c["result"]]
+            cuota = f", cuota {c['cuota']:.2f}" if c["cuota"] else ""
+            partido = f" ({c['patas'][0]['partido']})" if c["tipo"] == "builder" and c["patas"] else ""
+            out.append(f"**{nombre_tipo(c['tipo'])}{partido}** — {estado} (prob. {_pct(c['prob'])}{cuota})")
+            out += [f"  - {marca[x['resultado']]} {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]}"
+                    + (f" → {x['real']:g}" if x["real"] is not None else "") for x in c["patas"]]
+            out.append("")
+    if acumulado:
+        out += ["### Acumulado de las combinadas de prueba", "",
+                "| Tipo | Jugadas | Ganadas | % ganadas | Prob. prometida | Beneficio (1 u, con cuota) |",
+                "|---|---|---|---|---|---|"]
+        for a in acumulado:
+            ben = "-" if a["beneficio"] is None else f"{a['beneficio']:+.2f} u en {a['con_cuota']}"
+            out.append(f"| {nombre_tipo(a['tipo'])} | {a['n']} | {a['ganadas']} | {a['ganadas'] / a['n'] * 100:.0f}% | "
+                       f"{_pct(a['prob_media'])} | {ben} |")
+        out.append("")
+    return out
+
+
+def seccion_builders(builders: list, doble) -> list[str]:
+    if not builders:
+        return []
+    out = ["## Bet builders del día", "",
+           "Por partido, 4 \"más de\" de titulares estables sin alertas, en líneas un poco por debajo de su "
+           "nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un "
+           "mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad: si tu casa paga más por el "
+           "bet builder, tiene valor. Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).", ""]
+    if doble:
+        a, b = doble
+        prob = a.prob * b.prob
+        out += [f"### Doble: {a.partido.titulo} + {b.partido.titulo}", "",
+                f"Probabilidad de acertar los dos bet builders: **{_pct(prob)}** (1 de cada {1 / prob:.0f}); "
+                f"cuota justa **{1 / prob:.2f}**.", ""]
+    for b in builders:
+        out += [f"**{b.partido.titulo}** — acertar las 4: **{_pct(b.prob)}**, cuota justa {b.cuota_justa:.2f}", ""]
+        out += [f"- {p.etiqueta} ({_pct(p.prob)}; esperado {p.mu:.1f}; últ. 10: {p.acierto_10[0]}/{p.acierto_10[1]})"
+                for p in b.piernas] + [""]
+    return out
+
+
+def seccion_rachas(combis: list) -> list[str]:
+    rachas = [c for c in combis if c.tipo.startswith("racha_")]
+    if not rachas:
+        return []
+    out = ["## Combinadas de rachas", "",
+           "Líneas principales que el jugador pasó en **todos** sus partidos de esta temporada (3 o más), con el "
+           "modelo del mismo lado, sin suplentes ni minutos inestables; hasta dos por partido. Además el resto del "
+           "análisis tiene que estar a favor (minutos, forma, defensa, altura, ritmo, historial contra el rival, "
+           "últimos 10, marcaje): al menos 3 factores más a favor que en contra. Al inicio de 2025-26 estas props "
+           "acertaron el 86 % (las rachas con el análisis en contra, el 62 %). Se registran como prueba para ver si "
+           "se repite con las líneas reales de la casa.", ""]
+    for c in rachas:
+        out += [f"**{c.tipo.split('_')[1]} patas:** cuota {c.cuota:.2f}, probabilidad del modelo **{_pct(c.prob)}** "
+                f"(1 de cada {1 / c.prob:.0f}); valor {(c.prob * c.cuota - 1) * 100:+.0f}%", ""]
+        out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} — "
+                f"{x['acierto_temporada'][0]}/{x['acierto_temporada'][1]} esta temporada, "
+                f"{x['acierto_10'][0]}/{x['acierto_10'][1]} últimos 10 ({_pct(x['prob'])}, cuota {x['odd']:.2f}) "
+                f"— {x['partido']}" + "".join(f"\n  - {r}" for r in x.get("razones", []))
+                for x in c.patas] + [""]
+    return out
+
+
+def seccion_cuotadas(combis: list) -> list[str]:
+    cuotadas = [c for c in combis if c.tipo.startswith(("cuota_", "valor_"))]
+    if not cuotadas:
+        return []
+    out = ["## Combinadas con cuota objetivo", "",
+           "La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más "
+           "probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se "
+           "liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota "
+           "alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse "
+           "o superar esa probabilidad; si no llega (valor negativo), esa combinada no conviene ese día. "
+           "**Segura** = solo los picks más probables de jugadores constantes. **De valor** = solo picks donde "
+           "el modelo ve más de lo que paga la casa. Se registran las dos para ver cuál gana con resultados reales.",
+           ""]
+    for c in cuotadas:
+        valor = c.prob * c.cuota - 1
+        aviso = ("✅ con valor" if valor > 0 else
+                 "⚠️ sin valor: la cuota paga menos de lo que vale el riesgo, mejor no jugarla hoy")
+        nombre = "Segura" if c.tipo.startswith("cuota_") else "De valor"
+        out += [f"**{nombre}, cuota {c.tipo.split('_')[1]}+:** cuota {c.cuota:.2f}, probabilidad de acertar todas "
+                f"**{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f}); valor {valor * 100:+.0f}% {aviso}", ""]
+        out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
+                f"{x['odd']:.2f}) — {x['partido']}"
+                + (f" — {x['a_favor']} factores a favor, {x['en_contra']} en contra" if "a_favor" in x else "")
+                + (f"\n  - {x['defensa']}" if x.get("defensa") else "")
+                for x in c.patas] + [""]
+    return out
+
+
+def ventajas(ctx: Contexto, part: Partido, n: int = 5) -> list[str]:
+    """Los dos lados del partido: quién llega con ventaja sobre la defensa rival en puntos y rebotes."""
+    from .modelo import predecir
+    filas = []
+    for j in sorted(part.jugadores.values(), key=lambda x: -x.minutos):
+        equipo = part.game["home_abbr"] if j.team_id == part.game["home_id"] else part.game["away_abbr"]
+        pts, reb = predecir(ctx, j, "points"), predecir(ctx, j, "rebounds")
+        media = sum(p["pts"] for p in j.partidos[:10]) / min(10, j.n)
+        altura = f"{j.diferencia_altura:+.1f}\"" if j.diferencia_altura is not None else "-"
+        filas.append((equipo, j.nombre, pts.mu, media, pts.factores.get("rival", 1), reb.mu, altura))
+    if not filas:
+        return []
+    out = ["Ventajas del partido (los dos lados): puntos esperados frente a su media de los últimos 10, "
+           "ajuste por la defensa rival y diferencia de estatura con los rivales de su posición.", "",
+           "| Equipo | Jugador | Puntos esperados | Su media (últ. 10) | Defensa rival en puntos | Rebotes esperados | Altura vs rival |",
+           "|---|---|---|---|---|---|---|"]
+    por_equipo: dict[str, int] = {}
+    for equipo, nombre, mu, media, rival, reb, altura in filas:
+        if por_equipo.get(equipo, 0) >= n:
+            continue
+        por_equipo[equipo] = por_equipo.get(equipo, 0) + 1
+        out.append(f"| {equipo} | {nombre} | {mu:.1f} | {media:.1f} | {_rel(rival)} | {reb:.1f} | {altura} |")
+    return out + [""]
+
+
 def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
     out, por_jugador = [], {}
     for e in part.evaluaciones:
@@ -149,7 +362,9 @@ def mejores_del_partido(part: Partido, n: int) -> list[Evaluacion]:
 
 def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
              picks: list[tuple[Partido, Evaluacion]], sin_emparejar: list[str],
-             por_partido: int = 8) -> tuple[Path, Path]:
+             por_partido: int = 8, candidatas: list[tuple[Partido, Evaluacion]] = (),
+             combis: list = (), criterios: list = (), builders: list = (), doble=None,
+             ayer: tuple[str, list] | None = None, acumulado: list = ()) -> tuple[Path, Path]:
     dir_ = dir_ / "nba"
     dir_.mkdir(parents=True, exist_ok=True)
     md = [f"# Props NBA {fecha}", "", AVISO, "",
@@ -161,6 +376,19 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
           "rebotes disponibles que captura, % de las canastas de sus compañeros que asiste...) y se muestra con "
           "esas estadísticas en sus últimos 5 y 10 partidos, la temporada y contra este rival. Todo queda "
           "guardado en la tabla `nba_analisis` de la base.", ""]
+    if criterios:
+        cumplidos = sum(ok for _, ok, _ in criterios)
+        listo = cumplidos == len(criterios)
+        md += ["## Estado de calibración", "",
+               ("**Listo para dinero real.**" if listo else "**En calibración: todos los picks son de prueba.** ")
+               + f" {cumplidos} de {len(criterios)} criterios cumplidos:", ""]
+        md += [f"- {'✅' if ok else '⬜'} {nombre}: {detalle}" for nombre, ok, detalle in criterios] + [""]
+    md += seccion_seguimiento(ayer, list(acumulado))
+    md += seccion_builders(list(builders), doble)
+    md += seccion_combinada_segura(list(candidatas), partidos)
+    md += seccion_cuotadas(combis)
+    md += seccion_rachas(combis)
+    md += seccion_seguras(partidos)
     md += ["## Las más probables del día", ""]
     if picks:
         md += ["| Partido " + CABECERA, "|---" + SEPARADOR]
@@ -174,6 +402,12 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
     for part in partidos:
         g = part.game
         md += [f"## {part.titulo}", ""]
+        margen = ctx.margen.get(g["home_id"])
+        if margen is not None:
+            fav = g["home_name"] if margen > 0 else g["away_name"]
+            md += [f"Diferencia esperada: {fav} por {abs(margen):.1f}"
+                   + (" — puede romperse: titulares -3% de minutos, suplentes +4%" if abs(margen) >= 12 else
+                      " — algo desigual: titulares hasta -1.5% de minutos" if abs(margen) > 9 else "") + ".", ""]
         if part.lesiones:
             md.append("Parte de lesiones: " + "; ".join(f"{l['name']} ({l['status']})" for l in part.lesiones) + ".")
             md.append("")
@@ -181,6 +415,10 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
             md += ["Sin líneas de props para este partido (o sin historial suficiente de los jugadores).", ""]
             continue
         elegidas = mejores_del_partido(part, por_partido)
+        md += ventajas(ctx, part)
+        if part.seguras:
+            md += ["Picks seguros de titulares estables:", "", CABECERA_SEGURAS, SEPARADOR_SEGURAS]
+            md += [_fila_segura(s) for s in part.seguras[:6]] + [""]
         md += [f"Las {len(elegidas)} más probables (máximo {MAX_POR_JUGADOR} por jugador: las de un mismo jugador "
                "suelen ganar o perder juntas).", "", CABECERA, SEPARADOR] + [_fila(e) for e in elegidas] + [""]
         destacados = list(dict.fromkeys(e.player_id for e in elegidas))[:5]
@@ -196,6 +434,7 @@ def escribir(dir_: Path, fecha: str, ctx: Contexto, partidos: list[Partido],
         "fecha": fecha,
         "picks": [{"partido": p.titulo, **asdict(e)} for p, e in picks],
         "partidos": [{"partido": p.titulo, "game_id": p.game["id"], "lesiones": p.lesiones,
+                      "seguras": [asdict(s) for s in p.seguras],
                       "evaluaciones": [asdict(e) for e in p.evaluaciones]} for p in partidos],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     return ruta_md, ruta_js

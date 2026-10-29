@@ -35,6 +35,11 @@ def clave_nombre(nombre: str) -> str:
     return re.sub(r"[^A-Z0-9]+", "_", s).strip("_")
 
 
+def nombre_de_id(player_id: str) -> str:
+    """'CJ_MCCOLLUM_1_NBA' -> 'CJ_MCCOLLUM'. Desde el 29 oct 2026 SportsGameOdds no siempre manda el nombre."""
+    return re.sub(r"_\d+_NBA$", "", player_id or "")
+
+
 def americana_a_decimal(v) -> float | None:
     try:
         a = float(str(v).replace("+", ""))
@@ -98,13 +103,19 @@ def parse_props(evento: dict) -> list[dict]:
             linea = float(base["bookOverUnder"])
         except (TypeError, ValueError, KeyError):
             continue
+        casas = len((over or {}).get("byBookmaker") or {}) + len((under or {}).get("byBookmaker") or {})
+        if not casas:
+            # Sin ninguna casa detrás, SportsGameOdds rellena línea y cuota (+100) con valores que no son
+            # apostables: el 26 oct 2026 era un tercio de las props, con líneas lejos de las reales.
+            continue
         info = jugadores.get(pid, {})
         filas.append({
-            "sgo_player_id": pid, "name": info.get("name") or pid, "sgo_team_id": info.get("teamID"),
+            "sgo_player_id": pid, "name": info.get("name") or nombre_de_id(pid), "sgo_team_id": info.get("teamID"),
             "stat": stat, "line": linea,
-            "over_odd": americana_a_decimal(over and over.get("bookOdds")),
-            "under_odd": americana_a_decimal(under and under.get("bookOdds")),
-            "books": len(base.get("byBookmaker") or {}),
+            # Cada lado vale solo si alguna casa lo ofrece; si no, su cuota es relleno (+100).
+            "over_odd": americana_a_decimal(over.get("bookOdds")) if over and over.get("byBookmaker") else None,
+            "under_odd": americana_a_decimal(under.get("bookOdds")) if under and under.get("byBookmaker") else None,
+            "books": max(len((over or {}).get("byBookmaker") or {}), len((under or {}).get("byBookmaker") or {})),
         })
     return filas
 

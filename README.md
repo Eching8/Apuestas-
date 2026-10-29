@@ -1,4 +1,338 @@
-# Apuestas: analizador diario de partidos, combinadas y props de la NBA y la NFL
+# Apuestas
+
+Este repositorio contiene dos cosas:
+
+1. **`nbaev/` — sistema de props NBA con valor esperado** (en construcción por fases, ver abajo). Estima la
+   probabilidad de cada prop de jugador con una simulación del partido, la compara con las cuotas sin margen y
+   solo señala apuestas con EV positivo en mercados que hayan superado el backtest.
+2. **`apuestas/` — analizador** de fútbol, props NBA y **NFL** (props de todos los mercados, touchdowns, zona roja, hojas de picks y combinadas; documentado más abajo, en "Sistema anterior" y "NFL").
+
+> Las apuestas implican riesgo de perder dinero. Ningún modelo garantiza ganancias: las casas tienen margen,
+> información y límites. Este sistema está pensado para medir con honestidad si existe ventaja y desactivar
+> lo que no la tenga.
+
+## nbaev: props NBA con valor esperado
+
+### Uso rápido (cada día)
+
+```bash
+pip install -r requirements.txt
+python -m nbaev datos historial            # solo la primera vez (~40 min): histórico desde 2021-22
+python -m nbaev diario                     # datos, lesiones, cuotas, simulación y picks de hoy
+python -m nbaev props --n 8                # las 8 mejores props del día, con su estado de validación
+python -m nbaev datos importar-csv b365.csv && python -m nbaev diario --sin-actualizar   # con cuotas de bet365
+streamlit run nbaev/app/dashboard.py       # tabla completa con filtros
+```
+
+Repite `python -m nbaev diario` cerca del inicio de los partidos (lesiones y cuotas más recientes). **Estado actual:
+ningún mercado está validado** (ver fases 4 y 6): las props salen con monto 0 y son informativas.
+
+### Plan por fases
+
+| Fase | Contenido | Estado |
+|---|---|---|
+| 1 | Datos: box scores, jugada a jugada, cuartos, quintetos, primer anotador, contexto, lesiones, cuotas | **hecha** |
+| 2 | Proyección de minutos | **hecha** |
+| 3 | Modelo de puntos (distribución completa + Monte Carlo) | **hecha** |
+| 4 | Validación walk-forward y backtest con cuotas reales | **hecha** (puntos: desactivado) |
+| 5 | Comparación con cuotas sin margen, filtros y banca (Kelly fraccional) | **hecha** |
+| 6 | Resto de mercados, validados uno a uno, y combinadas | **hecha** (ninguno validado) |
+
+### Resultados de la fase 1 (26/10/2026)
+
+- **Partidos**: 6.676 terminados, de 2021-22 a la temporada actual (regular, play-in y playoffs), con box score y
+  jugada a jugada. Faltan 4 de playoffs de 2026 que ESPN no tiene (devuelve 404).
+- **Jugada a jugada frente al box score** (fracción de jugadores cuya suma por cuartos cuadra exactamente):
+  puntos 99,9 %, triples 100 %, libres 100 %, asistencias 99,7 %, rebotes 99,5-99,8 %, tapones 99,7 %,
+  robos 99,5 %, pérdidas 98,2 %. Minutos reconstruidos con los cambios: error medio de 0,25 min (el box de ESPN
+  redondea al entero).
+- **Primer anotador**: salto inicial identificado en el 99,7 % de los partidos, titulares en el 99,9 %, primera
+  canasta en el 100 %. El equipo que gana el salto anota primero el 63-65 % de las veces.
+- **Spread y total previos**: 100 % de los partidos (pickcenter de ESPN, API core de ESPN y cierre de SportsGameOdds).
+  Control: el total implícito de cada equipo tiene correlación 0,55 con sus puntos reales y sesgo de +0,2 puntos.
+- **Cuotas históricas reales** (SportsGameOdds, consenso de casas de EE. UU.), 2025-26: 1.320 partidos con cierre
+  (desde octubre de 2025) y 710 con apertura (desde el 17/01/2026); 1,24 millones de cuotas. Jugador emparejado
+  con ESPN en el 99,95 %. El resultado que guarda la fuente coincide con el box de ESPN en el 96-99,9 % de los casos;
+  para liquidar se usará siempre el box de ESPN.
+- **Margen de la casa en el cierre** (overround medio over+under): ~6,5 % en puntos, 6,7-7,3 % en rebotes,
+  asistencias y combinados, ~7 % en triples, robos y tapones. Es el listón que el modelo tiene que superar.
+- **Catálogo de mercados**: 40 combinaciones vistas, todas "sin validar". En el histórico solo hay mercados de
+  partido completo: SportsGameOdds no conserva apertura/cierre de 1.er cuarto, 1.ª mitad ni primera canasta, así
+  que esos mercados solo se podrán validar con las capturas diarias que se acumulen desde ahora.
+
+### Fase 2: proyección de minutos (`nbaev/features/minutos.py`, `nbaev/models/minutos.py`)
+
+```bash
+python -m nbaev minutos validar      # walk-forward mensual -> reportes/fase2_minutos.md
+python -m nbaev minutos entrenar     # entrena con todo el histórico (data/modelos/minutos.joblib)
+python -m nbaev minutos proyectar    # minutos de los partidos de hoy (tabla proj_minutos)
+```
+
+- **Población**: jugadores vestidos (jugaron o DNP técnico). Los lesionados no se proyectan: el parte de lesiones
+  dice antes del partido que no juegan. En partidos futuros la plantilla probable son los que aparecieron en los
+  últimos 5 partidos del equipo esta temporada (sin traspasados) más los del parte de lesiones, cada uno con una
+  probabilidad de jugar según su estado (`minutos.prob_juega` en la configuración: Out 0, Doubtful 0,25,
+  Questionable 0,5, Day-To-Day 0,65; es una heurística sin calibrar porque no hay partes históricos).
+- **Bajas de compañeros**: ESPN casi nunca lista a los lesionados, así que no se cuentan uno a uno. Se mide cuántos
+  minutos habituales hay disponibles en el equipo frente a lo normal (`libres`, también por posición) y se reparte
+  la base de cada jugador para que el equipo sume 240 (`min_norm`).
+- **Modelo**: LightGBM con 34 variables (historial del jugador, rol, minutos liberados, descanso, viaje, spread y
+  total). Da la media con riesgo de no jugar, la media y los cuantiles 10/50/90 **si juega** (las props se anulan si
+  no juega) y la P(DNP técnico). Las medias de cada equipo se reparten para sumar los minutos de un partido.
+- **Resultado** (walk-forward mensual, oct-2023 a oct-2026, 102.378 filas fuera de muestra; informe completo en
+  `docs/resultados/fase2_minutos.md`): error medio de **4,49 min** frente a 5,24 del mejor baseline (−14 %; bootstrap
+  por partido: −0,75 min, IC 95 % [−0,78, −0,71]). En jugadores con prop: 4,53 frente a 5,10. Mejora en todos los
+  segmentos (bajas de compañeros 5,15 frente a 6,26; vuelta de lesión 5,06 frente a 6,03; playoffs 4,04 frente a
+  5,11). Cuantiles si juega: cobertura real 9,7 / 49,6 / 89,0 % (nominal 10 / 50 / 90). P(DNP) calibrada: Brier
+  0,079 frente a 0,093 de la tasa reciente del jugador.
+- **Limitaciones**: en jugadores con prop y proyección baja (< 15 min) el modelo se queda 3 min corto: la casa saca
+  prop cuando espera más rol (sabe de bajas o cambios que el modelo no ve). No se usa el quinteto titular confirmado
+  (no hay histórico fiable antes del salto); usarlo cuando se publique mejoraría la proyección.
+
+### Fase 3: modelo de puntos (`nbaev/features/produccion.py`, `nbaev/models/simulacion.py`, `nbaev/models/puntos.py`)
+
+```bash
+python -m nbaev puntos validar      # walk-forward con minutos fuera de muestra y líneas reales -> reportes/fase3_puntos.md
+python -m nbaev puntos proyectar    # distribución de puntos de hoy (10.000 simulaciones; tabla proj_puntos)
+```
+
+- **Tasas** por minuto de cada jugador (media exponencial con regresión bayesiana hacia su posición) y porcentajes
+  de 2, 3 y libres encogidos; defensa rival por posición, rating defensivo, ritmo esperado y total implícito.
+- **LightGBM** predice los puntos por minuto con ese contexto; la simulación escala los volúmenes de tiro del
+  jugador para reproducir esa media sin cambiar su perfil (reparto 2/3, libres, acierto).
+- **Simulación Monte Carlo** por componentes: minutos (fase 2, con efecto paliza según el margen sorteado) ->
+  intentos (binomial negativa) -> aciertos (beta-binomial), con ritmo del partido y acierto de cada equipo
+  compartidos. Puntos, triples, tiros de campo y libres salen de la misma simulación: todas las líneas son
+  coherentes (P(25+) ≤ P(20+) siempre). La varianza de cada componente se estima con datos (método de momentos).
+- **Resultados** (walk-forward mensual oct-2023 a oct-2026, 85.732 actuaciones con minutos también fuera de
+  muestra; informe completo en `docs/resultados/fase3_puntos.md`):
+  - Error medio de la media: **4,40 puntos** frente a 4,57 del baseline (estable en las 3 temporadas). En jugadores
+    con prop: 4,90 frente a **4,78 de la línea de cierre de la casa**: la casa estima mejor la media.
+  - Distribución calibrada: PIT aleatorizado casi uniforme (deciles 0,095-0,12).
+  - Contra las líneas reales (consenso de casas de EE. UU., 2025-26), **el modelo solo no supera al mercado**:
+    log loss 0,6966 frente a 0,6918 en apertura y 0,7060 frente a 0,6921 en cierre. Cuando discrepa mucho de la
+    línea suele equivocarse él.
+  - Mezclado con el mercado (pesos ajustados solo con meses anteriores) mejora un poco el log loss de la apertura
+    (−0,0027, IC 95 % [−0,0057, +0,0001]: en el límite de la significación) y nada el del cierre. La fase 4 explica
+    de dónde sale esa mejora a la apertura (información que llega tarde).
+  - Valores recalculados tras descartar las cuotas sin margen (ver fase 6); la primera versión, con ellas, daba
+    −0,0030 (IC [−0,0053, −0,0008]).
+  - El modelo cuantílico directo es marginalmente mejor en P(over) (−0,002 de log loss) y el promedio de ambos no
+    mejora al cuantílico: se mantiene la simulación como fuente única porque garantiza la coherencia entre líneas,
+    mercados y jugadores.
+- **Calidad de datos**: los "cierres" de SportsGameOdds de oct-2025 a mediados de enero de 2026 tienen ~10 % de líneas
+  tomadas con el partido empezado. Solo se usa un cierre si hay apertura y no se aleja más de 3 puntos.
+
+### Fase 4: backtest con cuotas reales (`nbaev/backtest/apuestas.py`, `nbaev/betting/`)
+
+```bash
+python -m nbaev backtest puntos     # -> reportes/fase4_backtest_puntos.md y estado del mercado en el catálogo
+```
+
+- Motor genérico para mercados de dos lados: elige el lado con más EV si edge ≥ umbral; máx. 1 apuesta por
+  jugador y 3 por partido; liquida con el resultado real; ROI, drawdown, CLV (por precio y **ajustado por línea**:
+  la probabilidad justa del cierre trasladada a la línea apostada), % de veces que se bate el cierre, bootstrap por
+  partido y p-valores de Holm por probar varias estrategias. Banca simulada con 1/4 Kelly, tope 2 % por apuesta y
+  10 % por día. Quitar margen: multiplicativo, power y Shin (`nbaev/betting/margen.py`).
+- **Resultado del mercado de puntos (feb-jun 2026): DESACTIVADO.** Informe completo en
+  `docs/resultados/fase4_backtest_puntos.md` (recalculado sin las cuotas de relleno; primera versión entre paréntesis).
+  - A la cuota de apertura parecía haber ventaja: 1.529 apuestas, ROI +6,2 % (IC 95 % [+1,6 %, +10,8 %]), CLV
+    ajustado +1,8 %, bate el cierre el 75 % de las veces (antes: 1.694 apuestas, ROI +8,9 %).
+  - Pero el diagnóstico muestra de dónde sale: ROI +20,7 % cuando la línea se movió después hacia la apuesta,
+    −3,9 % (el margen) cuando no se movió; +11,9 % con bajas de compañeros, +1,2 % sin ellas. El modelo usa
+    información que solo se conoce cerca del salto (quién se viste, spread y total de cierre) y que la apertura no
+    tenía. No es una ventaja alcanzable: quien tiene esa información ve ya cuotas cercanas al cierre.
+  - Prueba realista, apostando a la cuota de cierre: ROI **−7,2 %** (IC 95 % [−16,0 %, +1,6 %]; antes −13,4 %). El
+    modelo no supera al mercado cuando ambos saben lo mismo.
+- Regla de validación (aplicada a cada mercado): ≥ 300 apuestas, CLV ajustado > 0, batir el cierre > 50 % y ROI con
+  IC 95 % > 0 apostando cuando se conoce la información que usa el modelo. Se guarda en `market_validation` y en el
+  estado del `market_catalog`.
+- Qué haría falta para medir la ventaja real a la apertura: partes de lesiones y cuotas con hora, para ejecutar el
+  modelo con lo que se sabía en cada momento. Las capturas diarias (`datos diario` + `datos cuotas`) ya los guardan;
+  con 2-3 meses de capturas se podrá repetir este backtest "en el momento".
+
+### Fase 5: comparación con cuotas, picks y banca (`nbaev/diario.py`, `nbaev/betting/`)
+
+```bash
+python -m nbaev diario                       # datos + lesiones + cuotas + proyección + picks -> reportes/diario/AAAA-MM-DD.{md,csv,json}
+python -m nbaev diario --sin-actualizar      # solo proyecta y compara con lo ya descargado
+python -m nbaev apuestas ver                 # registro de apuestas, rendimiento y banca
+python -m nbaev apuestas confirmar 12 --cuota 1.87 --monto 20   # la hice (con mi cuota y monto reales)
+python -m nbaev apuestas descartar 13
+streamlit run nbaev/app/dashboard.py         # dashboard con filtros por mercado, partido y jugador
+```
+
+Para cada línea capturada (cada casa y cada línea alternativa) el flujo diario:
+
+1. Simula el partido (10.000 veces) y calcula P(over), P(under) y P(empate) del jugador.
+2. Quita el margen de la casa (multiplicativo, power o Shin; si la casa solo da un lado, se usa el consenso).
+3. Probabilidad final = **mezcla modelo + mercado** (regresión logística ajustada con las líneas reales fuera de muestra
+   de la validación; con el cierre, el modelo pesa poco, que es lo honesto según la fase 4).
+4. EV = p_gana × cuota + p_empate − 1; edge = p_final − p_justa. Ordena por EV, no por probabilidad.
+5. Filtros: EV > 0; edge ≥ 4 % (más en mercados exóticos: primera canasta 10 %, triple-doble 8 %, 1.er cuarto 7 %...);
+   ≥ 15 minutos proyectados; fuera Questionable/Doubtful/Day-To-Day; **Benjamini-Hochberg** sobre todas las líneas del
+   día (10 % de falsos descubrimientos) para que no pasen EV+ por azar; máximo 1 apuesta por jugador y 3 por partido.
+6. Monto con 1/4 Kelly, tope 2 % por apuesta y 10 % por día, **solo en mercados validados**; en mercados sin validar o
+   desactivados el pick aparece con monto 0.
+7. Exporta la tabla (jugador, partido, mercado, línea, proyección, P(over), P(under), cuota y casa, prob. justa,
+   prob. final, edge, EV, monto, estado del mercado y las 3 razones SHAP en puntos), registra **cada línea evaluada con
+   la hora** (`predicciones`: permite medir el CLV real a futuro) y las apuestas sugeridas (`apuestas`), y liquida las
+   pendientes con el resultado real y la cuota de cierre (CLV).
+
+bet365: si se cargan sus cuotas por CSV (`datos importar-csv`), es la casa preferida aunque otra pague más.
+Las demás casas vienen de SportsGameOdds.
+
+### Fase 6: todos los mercados (`nbaev/models/estadisticas.py`, `proyeccion.py`, `primer_anotador.py`, `betting/combinadas.py`)
+
+```bash
+python -m nbaev mercados validar          # walk-forward de todos los mercados (temporada 2025-26)
+python -m nbaev backtest mercados         # backtest por mercado, estados y docs/resultados/fase6_mercados.md
+python -m nbaev combinada --sel "Jayson Tatum|pts|24.5|over|1.87|0.5" --sel "Jayson Tatum|pra|38.5|over|1.87|0.5"
+python -m nbaev comparar duelo "Jayson Tatum" "Paul George" --mercado pts
+python -m nbaev comparar maximo "Jayson Tatum" [--equipo]
+```
+
+- **Una sola simulación por partido** para todo: minutos -> tiros (puntos, triples, tiros de campo, libres) y rebotes
+  ofensivos/defensivos, asistencias, robos, tapones y pérdidas (cada uno con su LightGBM de tasa, su defensa rival por
+  posición y su binomial negativa con varianza estimada). Combinados (PR, PA, RA, PRA, robos+tapones), doble-doble y
+  triple-doble salen de esas simulaciones; las líneas alternativas son simplemente otras líneas sobre la misma
+  distribución (coherencia garantizada). Periodos: reparto beta-binomial con la fracción de cada jugador en el 1.er
+  cuarto y la 1.ª mitad (1.er cuarto ≤ 1.ª mitad ≤ partido). Primer anotador: salto inicial (Bradley-Terry con el
+  historial de cada saltador), probabilidad de anotar primero tras ganar el salto (63 %) y reparto entre titulares.
+  Duelos y máximo anotador: comparaciones dentro de cada simulación (empates repartidos).
+- **Combinadas**: probabilidad conjunta contando simulaciones (las selecciones del mismo partido están correlacionadas)
+  y margen acumulado frente a las simples. Ojo: las casas ponen precio propio a las combinadas del mismo partido
+  (no multiplican cuotas) precisamente por esa correlación.
+- **Calibración** (PIT, temporada 2025-26, ~29.500 actuaciones): todas las estadísticas con desviación máxima por decil
+  ≤ 0,02; 1.er cuarto y 1.ª mitad ≤ 0,024. Máximo anotador: log loss 0,121 frente a 0,187 del uniforme, bien calibrado.
+  Primera canasta (2.680 partidos): log loss 2,291 frente a 2,381 (volumen de tiro) y 2,398 (uniforme).
+- **Datos**: una parte de las cuotas de consenso de SportsGameOdds son valores de relleno (2,00 / 2,00, sin margen):
+  casi todas las de pérdidas, todas las de 1.ª mitad capturadas hoy y un 15-25 % del resto. Se descartan siempre
+  (margen < 1 %), también en el flujo diario. Los mercados "sí/no" por estadística (p. ej. "anota un triple") no traen
+  el umbral en la fuente y no se modelan.
+- **Resultado del backtest por mercado** (feb-jun 2026; informe en `docs/resultados/fase6_mercados.md`): **ningún
+  mercado queda validado.** Todos parecen rentables a la apertura por la misma razón que puntos (información tardía);
+  apostando al cierre ninguno tiene ROI con IC 95 % > 0 **y** CLV positivo. Candidatos a seguir en tiempo real:
+  **robos** (ROI al cierre +7,6 %, IC [+2,2 %, +13,1 %]; aporta ~5 puntos sobre "todo al under") y **robos + tapones**
+  (+5,8 %, IC [+0,4 %, +11,0 %]), pero con CLV ajustado negativo a la apertura, así que no cumplen la regla.
+  Pérdidas: sin cuotas reales suficientes. Triple-doble, 1.er cuarto, 1.ª mitad, primera canasta, duelos y máximo
+  anotador: sin cuotas históricas → "sin validar" hasta acumular capturas.
+
+### Limitaciones (léelas antes de apostar)
+
+- **No hay evidencia de ventaja explotable** en ningún mercado con los datos disponibles. El sistema no sugiere montos
+  mientras ningún mercado esté validado. Apostar con él hoy es apostar contra el margen de la casa.
+- La aparente ventaja a la apertura es un artefacto: el modelo usa información que se conoce cerca del salto. Para
+  medir la ventaja real hacen falta partes de lesiones y cuotas con hora; el flujo diario ya los guarda
+  (`predicciones`, `injuries`, `prop_odds`). Con 2-3 meses de capturas (dos al día) se puede repetir el backtest con
+  la información de cada momento.
+- Solo hay una temporada parcial de cuotas reales (feb-jun 2026) y de consenso de casas de EE. UU.; **no hay cuotas
+  de bet365** (se cargan a mano por CSV). Las cuotas de una casa concreta y sus límites pueden ser peores.
+- stats.nba.com (tracking) no responde desde la nube; ESPN no da partes de lesiones históricos; los minutos a
+  principio de temporada y los cambios de rol son la mayor fuente de error.
+- Las probabilidades de jugar según el parte (Questionable, Day-To-Day...) son heurísticas sin calibrar.
+
+### Instalación
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # Python 3.11 o superior
+pip install -r requirements.txt
+```
+
+Configuración en `config/config.yaml`. Para cambios propios crea `config/local.yaml` (no se versiona) con solo
+las claves que quieras sobrescribir. Para SportsGameOdds exporta `SPORTSGAMEODDS_KEY` (gratis en
+sportsgameodds.com; en el entorno de Claude Code el proxy ya la inyecta).
+
+### Paso a paso (fase 1: datos)
+
+```bash
+# 1. Histórico desde 2021-22 (una vez; ~7.000 partidos, 1-2 horas). Se puede cortar y reanudar.
+python -m nbaev datos historial
+
+# 2. Cuotas históricas reales (apertura y cierre de consenso) para el backtest. Cada partido gasta
+#    una "entidad" del plan de SportsGameOdds (2.500/mes en el plan amateur); se respeta una reserva.
+python -m nbaev datos cuotas-historicas --desde 2025-10-21 --hasta 2026-06-30
+
+# 3. Cada día (antes de los partidos): partidos de ayer, lesiones, cierres de ayer, cuotas de hoy.
+python -m nbaev datos diario
+
+# 4. Cuotas de bet365 cargadas a mano (ver plantillas/cuotas_manual.csv).
+python -m nbaev datos importar-csv mis_cuotas_bet365.csv
+
+# 5. Cobertura y calidad de la base.
+python -m nbaev datos estado
+```
+
+Programarlo cada día (Linux/macOS, `crontab -e`), por ejemplo a las 11:00 y a las 17:30 para tener dos capturas
+de cuotas (la diferencia entre ambas y el cierre es lo que mide el CLV):
+
+```
+0 11 * * *  cd /ruta/al/repo && .venv/bin/python -m nbaev datos diario >> logs/cron.log 2>&1
+30 17 * * * cd /ruta/al/repo && .venv/bin/python -m nbaev datos cuotas >> logs/cron.log 2>&1
+```
+
+### Fuentes de datos
+
+| Fuente | Qué aporta | Notas |
+|---|---|---|
+| ESPN (API pública) | Calendario, box score, jugada a jugada con coordenadas, líneas de cierre (spread/total), parte de lesiones | Fuente principal: responde desde cualquier red |
+| stats.nba.com (`nba_api`) | Métricas avanzadas y tracking: potential assists, rebound chances, touches | **Bloquea servidores en la nube**. Funciona desde casa: `python -m nbaev datos nba-api --temporada 2025` |
+| SportsGameOdds | Props de ~8 casas de EE. UU. (FanDuel, DraftKings, Caesars, BetMGM...), apertura y cierre de consenso, resultados | No incluye bet365. Plan amateur: 10 peticiones/min, 2.500 partidos/mes |
+| CSV manual | Cuotas de bet365 (o cualquier casa) | Plantilla en `plantillas/cuotas_manual.csv` |
+
+`nba_api` es la librería pedida para los box scores, pero stats.nba.com no responde desde servidores en la nube
+(probado: la conexión se queda colgada; cdn.nba.com devuelve 403). Por eso los box scores y el jugada a jugada
+salen de ESPN, que trae lo mismo (y además coordenadas de tiro y líneas de cierre), y `nba_api` queda para lo
+que solo tiene la NBA (tracking). En modo `auto` se prueba una vez y, si no responde, se sigue sin esos datos.
+
+### Base de datos (`data/nbaev.duckdb`)
+
+| Tabla | Contenido |
+|---|---|
+| `games`, `teams` | Partidos (regular, play-in y playoffs) y equipos. `season` = año de inicio (2021 = 2021-22) |
+| `player_games` | Box score por jugador y partido |
+| `player_absences` | Convocados que no jugaron y motivo (lesión / decisión técnica): parte de bajas histórico |
+| `team_games` | Totales de equipo y puntos por cuarto |
+| `plays` | Jugada a jugada normalizado |
+| `player_periods` | Producción y segundos en pista de cada jugador por cuarto (props de 1.er cuarto y 1.ª mitad) |
+| `stints` | Tramos con el mismo quinteto en pista |
+| `shots` | Tiros de campo con zona (aro, pintura, media, triple de esquina, triple frontal) |
+| `game_starts` | Salto inicial (quién saltó y quién ganó), titulares, primera canasta y primeros puntos del partido y de cada equipo |
+| `game_lines` | Spread, total y moneyline (cierre de ESPN; apertura, cierre y capturas de SportsGameOdds) |
+| `team_context` | Local/visitante, días de descanso, back-to-back, partidos en 4 y 7 días, km de viaje, cambio de huso, total implícito de cada equipo |
+| `injuries`, `lineups` | Parte de lesiones y titulares con la hora de cada captura |
+| `prop_odds` | Cuotas de props: fuente, tipo (apertura/cierre/captura), hora, casa, jugador, mercado, periodo, línea, lado, cuota y resultado |
+| `market_catalog` | Cada mercado visto en las fuentes. Los nuevos entran como **sin validar** |
+| `player_map`, `event_map` | Correspondencia de ids de otras fuentes con los de ESPN |
+| `nba_stats` | Métricas de stats.nba.com acumuladas hasta `date_to` |
+| `pbp_quality` | Control de cada partido: cuánto cuadra el jugada a jugada con el box score |
+| Vistas `v_team_adv`, `v_player_adv` | Posesiones, pace, rating ofensivo/defensivo, usage y true shooting |
+
+Las respuestas originales de ESPN se guardan comprimidas en `data/crudos/`: si se mejora un parser,
+`python -m nbaev datos reprocesar` reconstruye las tablas sin volver a descargar.
+
+### Cero fuga de información (`nbaev/data/asof.py`)
+
+Toda feature y toda evaluación deben leer los datos a través de `asof`, que aplica estas reglas:
+
+- Las estadísticas de un partido solo existen desde su inicio + 3,5 h.
+- Lesiones, alineaciones y cuotas solo desde la hora de su captura (`snapshot_at`).
+- Las cuotas de **cierre** y el **resultado** de las props nunca son entrada del modelo: solo sirven para medir CLV y aciertos.
+- stats.nba.com: solo fotos acumuladas hasta el día anterior al partido.
+
+Limitaciones conocidas: para partidos pasados no existe el parte de lesiones de esa hora, así que las bajas se
+toman de quién no jugó según el box score (incluye bajas de última hora que quizá no se sabían al apostar). Y las
+líneas de spread/total históricas son de cierre (en directo se usará la captura disponible a la hora de la predicción).
+
+### Pruebas
+
+```bash
+python -m pytest tests/nbaev -q
+```
+
+---
+
+# Sistema anterior (`apuestas/`): fútbol, NBA y NFL
 
 Busca los partidos de fútbol del día (desde el 21 de octubre de 2026 en adelante), descarga
 estadísticas reales de cada equipo y jugador, las guarda en una base de datos local que crece
@@ -133,6 +467,79 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
 - **La casa**: su probabilidad sin margen se mezcla con la del modelo (`APUESTAS_NBA_PESO_MERCADO`,
   0.4 por defecto). Cuando modelo y casa discrepan mucho, la casa suele saber algo (rol, rotación, una baja).
 
+### Picks seguros de titulares estables
+
+Para titulares con 30+ minutos esperados (titular en al menos 3 de sus últimos 5), el informe busca la
+línea de "más de" más alta que pasa con al menos 85 % (`APUESTAS_NBA_PROB_SEGURA`) en puntos, rebotes,
+asistencias y PRA: un "15+ puntos" casi seguro de una estrella en lugar de la línea normal de un suplente.
+Se muestra con su **cuota mínima** (1 / probabilidad) para buscarla en las líneas alternativas de la casa.
+Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026): elegidas al 85 % acertaron el 89-96 %; al 90 %, el
+93-99 %. Las props de suplentes llevan la marca "⚠️ suplente": dependen de los minutos que les dé el técnico.
+
+### Combinada segura del día
+
+Elige por **probabilidad**, no por valor:
+
+- **Opción A, líneas alternativas:** el pick seguro más probable de cada partido (ver arriba), con la
+  probabilidad de acertar 2, 3 y 4 juntos (con 4 picks al ~90 %, ~65 %).
+- **Opción B, líneas principales con cuota real:** la más probable de cada partido entre jugadores
+  constantes: titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado
+  en 7+ de sus últimos 10 y en el 60 %+ de esta temporada, con cuota de al menos 1.30
+  (`APUESTAS_NBA_CUOTA_MIN`). Si la casa no ofrece una línea, se usa la siguiente de la lista.
+
+### Combinadas con cuota objetivo y calibración
+
+Cada día se arman y registran (tabla `nba_combinadas`) la combinada de alternas, la de principales y las
+de cuota objetivo 2, 3, 5, 10 y 15: la combinación de jugadores constantes, en partidos distintos, con más
+probabilidad de acertar todas cuya cuota llega al objetivo, con su valor (probabilidad × cuota − 1): una
+cuota alta nunca es segura (cuota 15 justa = 1 de cada 15) y si el valor es negativo no conviene ese día.
+Las piernas con alertas no entran: suplente (riesgo de minutos), minutos inestables, cambio de rol,
+traspaso, lesión y "muy lejos de la casa" (el modelo la ve más de 25 puntos más probable que la casa: la
+casa suele saber algo que el modelo no) y "menos de una estrella al inicio de temporada": en el arranque
+de 2025-26, los "menos de" en puntos de anotadores de 20+ prometían 67 % y acertaron 60 % (las estrellas
+arrancan fuertes); su probabilidad se acerca a 50 % hasta los 15 partidos. Son picks de prueba: se liquidan solos con
+los resultados reales. `nba rendimiento` y el inicio del informe muestran si el sistema está listo para
+dinero real: 21+ días con picks liquidados, 150+ props y 150+ picks seguros que aciertan al menos lo
+prometido (−2 puntos), beneficio positivo en las props con cuota y 30+ combinadas que ganan lo prometido.
+
+### Seguimiento de las combinadas de prueba
+
+El informe empieza con cómo terminaron las combinadas del día anterior, pierna por pierna (✅/❌, con el
+valor real), y el acumulado por tipo (jugadas, ganadas, % frente a la probabilidad prometida y beneficio).
+Una pierna perdida decide la combinada aunque falten partidos por terminar. Para lanzar el informe de una
+fecha concreta: *Actions → NBA diario → Run workflow* con la fecha.
+
+Las apuestas que armas tú en la casa (de prueba o reales) van en `apuestas_usuario/AAAA-MM-DD.json` (formato
+en `apuestas/nba/usuario.py`): el flujo diario las registra como "Tu apuesta: ...", las liquida con las demás y
+salen en el seguimiento y en el acumulado como "Tus apuestas" (no cuentan para los criterios de calibración
+del sistema).
+
+### Bet builders y dobles (`apuestas/nba/builder.py`)
+
+Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel
+(cada pierna ~72 %+, prioridad a puntos y asistencias), y la doble de los dos bet builders más probables.
+La probabilidad de acertar todas usa la correlación entre jugadores del mismo partido (desvíos frente a su
+media, 2025-26: puntos +0.08 entre compañeros y +0.04 entre rivales; asistencias, rebotes y triples casi
+nada), con una simulación de cópula normal. Se da la cuota justa para compararla con la del bet builder de
+la casa. Backtest (22 oct-25 nov 2025 y 1 feb-10 mar 2026, 461 bet builders): prometían ~32 % y acertaron
+38-40 %; las piernas, 75 % y 78-79 %. Se registran como prueba (tipos `builder` y `doble_builder`). Cuando la casa tiene línea principal de esa
+estadística, solo se usan líneas que suele ofrecer como alternativa: la principal menos ~10 % (al menos 1),
+como las mínimas de Betano el 27 oct (Cade 8.5 asistencias → 8+, Brunson 25.5 puntos → 24+).
+
+### Razonamiento de cada pick, altura y ventajas del partido
+
+- Cada prop lleva su razonamiento factor por factor, marcado a favor (✅), en contra (❌) o neutro (➖):
+  minutos y titularidad, forma (últimos 5, esta temporada y la anterior frente a la línea), cómo produce
+  la estadística (tiros por zona, % de rebotes, % de canastas asistidas...), defensa rival por posición
+  y por zona, altura, ritmo del partido, historial contra el rival, acierto en sus últimos 10 y notas
+  (bajas, cambio de rol...). Las combinadas muestran cuántos factores tiene cada pierna a favor y en contra.
+- **Altura** (plantillas de ESPN, se actualizan cada día): diferencia de estatura con los rivales de su
+  posición. En los residuos del modelo (nov 2025-mar 2026) explica rebotes (+0.67 % por pulgada, t = 2.9),
+  tapones, triples y puntos; se usa la mitad de cada efecto y como mucho ±6 %. Fuera de muestra (oct 2025
+  y abr 2026) mejora el Brier en ambos periodos (0.21688 → 0.21681 y 0.22456 → 0.22452).
+- **Ventajas del partido:** para los dos equipos, puntos y rebotes esperados de sus jugadores frente a su
+  media, ajuste por la defensa rival y diferencia de estatura.
+
 ### Cada prop, desde las estadísticas que la producen (`apuestas/nba/desglose.py`)
 
 La media de cada prop se construye también desde sus componentes, y el informe explica de dónde sale.
@@ -186,7 +593,7 @@ se queda colgada). Funciona desde una conexión de casa, así que hay dos formas
 
 ### Automático cada día en GitHub (`.github/workflows/nba-diario.yml`)
 
-Corre en los servidores de GitHub a las 10:47 (Ciudad de México): guarda los resultados de ayer, liquida
+Corre en los servidores de GitHub cada día hacia las 9:00 de Bogotá (programado a las 8:13: GitHub retrasa los horarios hasta casi una hora): guarda los resultados de ayer, liquida
 las props, baja lesiones y líneas de hoy y publica el informe en la rama `nba-informes`
 (`ultimo.md` y `nba/AAAA-MM-DD.md`). Necesita el secreto `SPORTSGAMEODDS_KEY` (*Settings → Secrets and
 variables → Actions*) y que el flujo esté en `main` para el horario y el botón *Run workflow*. La base se

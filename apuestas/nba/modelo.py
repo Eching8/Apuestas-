@@ -73,6 +73,12 @@ PESO_MOTORES = 0.3
 # Contracción hacia 50 %: el backtest (feb-mar 2026, 19.700 props) mostró que sin ella el modelo era
 # ~3 puntos optimista por encima del 70 %. Con 0.9 queda calibrado (incluso algo conservador arriba).
 CALIBRACION = 0.9
+# Picks seguros: una línea más baja (p. ej. "15+ puntos") de un titular estable en vez de la línea normal.
+# Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026), titulares con 30+ minutos: eligiendo la línea al
+# 85 % acertaron el 89-96 % según la estadística; al 90 %, el 93-99 %.
+PROB_SEGURA = 0.85
+MIN_SEGURA = 30.0
+MEDIAS_SEGURA = {"points": 15, "rebounds": 7, "assists": 5, "pra": 25}   # media mínima en sus últimos 10
 # Peso de la probabilidad de la casa (sin margen) en la probabilidad final. La línea recoge lo que el
 # modelo no ve (rol, rotaciones, noticias de última hora).
 PESO_MERCADO = 0.4
@@ -138,10 +144,43 @@ class Contexto:
     liga_equipo: dict = field(default_factory=dict)     # media de liga por equipo y 48'
     liga_motor: dict = field(default_factory=dict)      # grupo -> tasa de liga de cada componente
     marcajes: marcajes.Marcajes | None = None           # stats.nba.com, si se descargó
+    altura: dict = field(default_factory=dict)          # jugador -> estatura (pulgadas)
+    altura_rival: dict = field(default_factory=dict)    # equipo -> grupo -> estatura media por minutos
+    margen: dict = field(default_factory=dict)          # equipo -> por cuánto se espera que gane hoy (± puntos)
 
 
 def _peso_temporada(season: int, actual: int) -> float:
     return 1.0 if season == actual else PESO_TEMPORADA_ANTERIOR
+
+
+# Diferencia de estatura con los rivales de su posición (pulgadas). Residuos del modelo, nov 2025-mar 2026
+# (13.390 partidos de jugador): rebotes +0.67 % por pulgada (t = 2.9), tapones +1.5 % (t = 2.0), triples
+# +0.7 % (t = 1.8), puntos +0.4 % (t = 1.9), asistencias sin efecto claro. Se usa la mitad de cada
+# pendiente (contracción) y como mucho ±6 %.
+EFECTO_ALTURA = {"reb": 0.0035, "blk": 0.0075, "tpm": 0.0035, "pts": 0.002, "fgm": 0.002}
+TOPE_ALTURA = 0.06
+PARTIDOS_ALTURA_RIVAL = 10
+
+
+def _alturas(conn, filas: list[dict], grupo: dict[str, str]) -> tuple[dict, dict]:
+    try:
+        altura = {r[0]: r[1] for r in conn.execute("SELECT player_id, altura FROM nba_alturas WHERE altura > 0")}
+    except Exception:
+        return {}, {}
+    if not altura:
+        return {}, {}
+    juegos: dict[str, list] = defaultdict(list)
+    for f in filas:
+        if f["game_id"] not in juegos[f["team_id"]]:
+            juegos[f["team_id"]].append(f["game_id"])
+    recientes = {t: set(g[:PARTIDOS_ALTURA_RIVAL]) for t, g in juegos.items()}
+    acc = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
+    for f in filas:
+        if f["player_id"] in altura and f["game_id"] in recientes[f["team_id"]]:
+            a = acc[f["team_id"]][grupo[f["player_id"]]]
+            a[0] += f["minutes"] * altura[f["player_id"]]
+            a[1] += f["minutes"]
+    return altura, {t: {g: x / n for g, (x, n) in por_g.items() if n} for t, por_g in acc.items()}
 
 
 def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
@@ -232,7 +271,38 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
     liga_motor = tasas_liga(filas, grupo, equipo_partido, temporada, PESO_TEMPORADA_ANTERIOR)
     return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
                     zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor,
-                    marcajes.construir(conn, fecha, desde, grupo))
+                    marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo),
+                    _margenes(conn, fecha, temporada))
+
+
+# Partido desigual. Sin hándicap de la casa se estima con la diferencia media de puntos de cada equipo (temporada
+# anterior a la mitad, K_MARGEN partidos de 0 para encoger) y LOCALIA puntos para el local; en 2025-26 el margen
+# real sigue a esta estimación con pendiente 0.96.
+K_MARGEN = 5
+LOCALIA = 2.0
+
+
+def _margenes(conn, fecha: str, temporada: int) -> dict[str, float]:
+    # Bases abiertas sin NbaDB (backtest) pueden no tener aún la columna del hándicap.
+    con_casa = "margen_esperado" in {r[1] for r in conn.execute("PRAGMA table_info(nba_games)")}
+    hoy = conn.execute(f"SELECT home_id, away_id, {'margen_esperado' if con_casa else 'NULL'} FROM nba_games "
+                       "WHERE fecha = ?", (fecha,)).fetchall()
+    if not hoy:
+        return {}
+    neto: dict[str, list[float]] = defaultdict(lambda: [0.0, 0.0])
+    for g in conn.execute(
+            """SELECT home_id, away_id, home_pts, away_pts, season FROM nba_games WHERE fecha < ? AND season >= ?
+               AND season_type = 2 AND home_pts IS NOT NULL""", (fecha, temporada - 1)):
+        w = 1.0 if g[4] == temporada else PESO_TEMPORADA_ANTERIOR
+        for t, m in ((g[0], g[2] - g[3]), (g[1], g[3] - g[2])):
+            neto[t][0] += w * m
+            neto[t][1] += w
+    media = {t: v[0] / (v[1] + K_MARGEN) for t, v in neto.items()}
+    out = {}
+    for local, visita, casa in hoy:
+        m = casa if casa is not None else media.get(local, 0.0) - media.get(visita, 0.0) + LOCALIA
+        out[local], out[visita] = m, -m
+    return out
 
 
 # --- Jugador --------------------------------------------------------------------------
@@ -263,11 +333,32 @@ class Jugador:
     motores: dict[str, Motor] | None = None
     enfrentamiento: marcajes.Enfrentamiento | None = None
     pocos_con_equipo: bool = False
+    diferencia_altura: float | None = None   # su estatura menos la media de los rivales de su posición
     cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
+    factor_paliza: float = 1.0               # minutos por partido desigual (ver PALIZA)
 
     @property
     def n(self) -> int:
         return len(self.partidos)
+
+
+# Factor de paliza: 2025-26 (18.694 partidos de jugador, margen esperado sin hándicap real). Con 12+ puntos de
+# diferencia esperada, los titulares de 28+ minutos jugaron un 3-4 % menos de lo previsto y produjeron un 3 % menos
+# (pra 0.97 frente a 1.00 en partidos parejos), favoritos y no favoritos por igual; los de menos de 24 minutos, un
+# 4 % más. Entre 9 y 12 puntos el efecto es la mitad o menos. No aumenta la dispersión de los minutos ni el riesgo
+# de que fallen juntas varias piernas del mismo partido (4 titulares: 0.88 de lo independiente, igual que en
+# partidos parejos), así que solo se baja la media.
+PALIZA = {"titular": -0.03, "suplente": 0.04}
+PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
+
+
+def factor_paliza(minutos: float, margen: float) -> float:
+    t = min(1.0, max(0.0, (abs(margen) - PALIZA_DESDE) / (PALIZA_PLENO - PALIZA_DESDE)))
+    if minutos >= 28:
+        return 1 + PALIZA["titular"] * t
+    if minutos < 24:
+        return 1 + PALIZA["suplente"] * t
+    return 1.0
 
 
 def _pesos(partidos: list[dict], temporada: int, decay: float) -> list[float]:
@@ -384,7 +475,17 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
     if ctx.ultimo_partido.get(team_id) == ayer and j.minutos > 28:
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
+    margen = ctx.margen.get(team_id)
+    if margen is not None:
+        j.factor_paliza = factor_paliza(j.minutos, margen)
+        if j.factor_paliza != 1.0:
+            j.minutos *= j.factor_paliza
+            j.notas.append(f"partido desigual ({'favorito' if margen > 0 else 'no favorito'} por {abs(margen):.1f}): "
+                           f"{'los titulares' if j.factor_paliza < 1 else 'los suplentes'} suelen jugar "
+                           f"{(j.factor_paliza - 1) * 100:+.0f}% de minutos si se rompe")
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
+    if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
+        j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
     j.enfrentamiento = marcajes.evaluar(ctx.marcajes, player_id, j.grupo, opp_id, set(fuera_rival or ()))
     return j
 
@@ -457,6 +558,11 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
         mu_final = PESO_MOTORES * motor.mu + (1 - PESO_MOTORES) * mu_c * j.minutos
         componentes[c] = {"por_tasa": mu_c * j.minutos, "por_motores": motor.mu, "final": mu_final,
                           "explicacion": motor.explicacion, "datos": motor.datos}
+        if j.diferencia_altura is not None and c in EFECTO_ALTURA:
+            ajuste = min(1 + TOPE_ALTURA, max(1 - TOPE_ALTURA, 1 + EFECTO_ALTURA[c] * j.diferencia_altura))
+            mu_final *= ajuste
+            componentes[c]["final"] = mu_final
+            componentes[c]["altura"] = ajuste
         if j.enfrentamiento and c in ("pts", "fgm", "tpm"):
             mu_final *= j.enfrentamiento.factor
             componentes[c]["final"] = mu_final
@@ -505,6 +611,10 @@ class Evaluacion:
     linea_80: tuple[float | None, float | None]
     componentes: dict = field(default_factory=dict)   # de dónde sale la media: ver Prediccion
     metricas: list = field(default_factory=list)      # estadísticas relacionadas: últ. 5/10, temporada, rival
+    titular: bool = True                              # suplente = riesgo de que el técnico le dé pocos minutos
+    alertas: list = field(default_factory=list)       # motivos para no tomarla como pick "seguro"
+    defensa: str = ""                                 # cómo defiende el rival esta estadística, en una línea
+    razones: list = field(default_factory=list)       # el razonamiento completo, factor por factor
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -524,6 +634,169 @@ def prob_mercado(over_odd: float | None, under_odd: float | None) -> tuple[float
             1 / under_odd / MARGEN_UN_LADO if under_odd else None)
 
 
+# "Menos de" en puntos y combinadas con puntos de anotadores de 20+ al inicio de temporada: backtest del
+# 22 oct-25 nov 2025, prometía 67.3 % y acertó 59.5 % (a mitad de temporada, 66.8 % y 69.1 %: bien). Las
+# estrellas arrancan fuertes y suben minutos. Se acerca su probabilidad a 50 % y queda fuera de combinadas.
+CORRECCION_MENOS_ESTRELLA = 0.6
+ESTRELLA_PUNTOS = 20.0
+
+
+def _menos_estrella_inicio(ctx: Contexto, j: Jugador, stat: str) -> bool:
+    if "pts" not in COMPONENTES[stat]:
+        return False
+    if sum(1 for p in j.partidos if p["season"] == ctx.temporada) >= PARTIDOS_INICIO:
+        return False
+    ult = j.partidos[:10]
+    return sum(p["pts"] for p in ult) / len(ult) >= ESTRELLA_PUNTOS
+
+
+GRUPOS_TEXTO = {"G": "bases/escoltas", "F": "aleros/ala-pívots", "C": "pívots"}
+COMPONENTES_NOMBRE = {"pts": "points", "reb": "rebounds", "ast": "assists", "tpm": "threes", "stl": "steals",
+                      "blk": "blocks", "tov": "turnovers", "fgm": "fgm", "ftm": "ftm", "fta": "fta"}
+
+
+def _pulgadas(x: float) -> str:
+    return f"{int(x // 12)}'{int(round(x % 12))}\""
+
+
+def razones(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: Prediccion) -> list[str]:
+    """Cada factor del pick en una línea, marcado a favor (✅), en contra (❌) o neutro (➖) del lado elegido."""
+    signo = 1 if lado == "más" else -1
+
+    def marca(efecto: float, umbral: float = 0.02) -> str:
+        return "✅" if efecto * signo > umbral else "❌" if efecto * signo < -umbral else "➖"
+
+    out = []
+    sd = j.minutos_sd
+    out.append(f"{'✅' if sd <= MINUTOS_SD_ESTABLE and es_titular(j) else '❌'} Minutos: {j.minutos:.1f} esperados "
+               f"({'titular' if es_titular(j) else 'suplente'}, ±{sd:.1f}).")
+    ult5 = [valor(p, stat) for p in j.partidos[:5]]
+    temp = [valor(p, stat) for p in j.partidos if p["season"] == ctx.temporada]
+    ant = [valor(p, stat) for p in j.partidos if p["season"] != ctx.temporada][:60]
+    if ult5:
+        media5 = sum(ult5) / len(ult5)
+        texto = f"Forma: {media5:.1f} en sus últimos 5"
+        if temp:
+            texto += f", {sum(temp) / len(temp):.1f} esta temporada ({len(temp)} partidos)"
+        if ant:
+            texto += f", {sum(ant) / len(ant):.1f} la temporada pasada"
+        out.append(f"{marca((media5 - line) / max(line, 1), 0.05)} {texto} (línea {line:g}).")
+    for c, d in pred.componentes.items():
+        out.append(f"➖ Cómo produce {NOMBRES[COMPONENTES_NOMBRE.get(c, stat)]}: {d['explicacion'].split('; marcaje')[0]}.")
+    rival = pred.factores.get("rival", 1) - 1
+    out.append(f"{marca(rival)} Defensa: {texto_defensa(ctx, j, stat, pred)}.")
+    if j.diferencia_altura is not None and abs(j.diferencia_altura) >= 1.5 and any(
+            c in EFECTO_ALTURA for c in COMPONENTES[stat]):
+        efecto = sum(d.get("altura", 1) - 1 for d in pred.componentes.values())
+        out.append(f"{marca(efecto, 0.005)} Altura: mide {_pulgadas(ctx.altura[j.player_id])}, "
+                   f"{abs(j.diferencia_altura):.1f} pulgadas {'más' if j.diferencia_altura > 0 else 'menos'} que los "
+                   f"{GRUPOS_TEXTO[j.grupo]} del rival ({efecto * 100:+.1f}% en esta estadística).")
+    if j.team_id in ctx.ritmo and j.opp_id in ctx.ritmo and ctx.ritmo_liga:
+        ritmo = (ctx.ritmo[j.team_id] + ctx.ritmo[j.opp_id]) / 2 / ctx.ritmo_liga - 1
+        out.append(f"{marca(ritmo, 0.015)} Ritmo del partido: {ritmo * 100:+.0f}% de posesiones frente a la media "
+                   "(ya incluido en lo que concede el rival).")
+    vs = [valor(p, stat) for p in j.partidos if p["opp_id"] == j.opp_id][:5]
+    if vs:
+        pasa = sum((v > line) if lado == "más" else (v < line) for v in vs)
+        out.append(f"{'✅' if pasa / len(vs) >= 0.6 else '❌' if pasa / len(vs) < 0.4 else '➖'} Contra este rival: "
+                   f"{', '.join(f'{v:g}' for v in vs)} ({pasa} de {len(vs)} a favor).")
+    hits, n = _aciertos(j.partidos[:10], stat, line, lado)
+    out.append(f"{'✅' if hits >= 7 else '❌' if hits <= 4 else '➖'} Últimos 10: la habría pasado {hits} de {n}.")
+    hits_t, n_t = _aciertos([p for p in j.partidos if p["season"] == ctx.temporada], stat, line, lado)
+    if n_t >= 3 and hits_t in (0, n_t):
+        out.append(f"{'✅' if hits_t else '❌'} Racha: la {'pasó' if hits_t else 'falló'} en sus {n_t} partidos de esta "
+                   "temporada (al inicio de 2025-26 estas rachas siguieron más de lo que esperaba el modelo).")
+    if j.enfrentamiento:
+        out.append(f"{marca(j.enfrentamiento.factor - 1)} Marcaje: {marcajes.explicar(j.enfrentamiento)}.")
+    for n_ in j.notas:
+        out.append(f"⚠️ {n_}.")
+    return out
+
+
+def texto_defensa(ctx: Contexto, j: Jugador, stat: str, pred: Prediccion) -> str:
+    """'el rival concede −5 % de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado −3 %'."""
+    c = COMPONENTES[stat][0]
+    nivel = ctx.nivel.get(j.grupo, {}).get(c, {}).get(j.opp_id, "media")
+    rel = ctx.defensa.get(j.opp_id, {}).get(j.grupo, {}).get(c, 1.0) - 1
+    texto = (f"el rival concede {rel * 100:+.0f}% de {NOMBRES[COMPONENTES_NOMBRE.get(c, stat)]} por minuto a "
+             f"{GRUPOS_TEXTO[j.grupo]} (defensa {nivel}); ajuste aplicado "
+             f"{(pred.factores.get('rival', 1) - 1) * 100:+.0f}%")
+    if c in ("pts", "tpm") and j.zonas:
+        z = max(j.zonas.items(), key=lambda kv: kv[1]["reparto"] * (kv[0] in ("esquina3", "triple") if c == "tpm" else 1))
+        texto += (f"; en su zona principal ({z[0]}) el rival concede {z[1]['pct_rival'] * 100:.0f}% "
+                  f"(liga {z[1]['pct_liga'] * 100:.0f}%)")
+    return texto
+
+
+def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -> float:
+    """Modelo mezclado con su acierto real sobre la línea en los últimos 15 y calibrado."""
+    hits, n = _aciertos(j.partidos[:15], stat, line, lado)
+    p_emp = (hits + 5 * p_mod) / (n + 5)
+    return 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+
+
+MINUTOS_SD_ESTABLE = 6.0
+# Si el modelo ve una prop más de 25 puntos más probable que la casa, la casa suele saber algo que el modelo
+# no (minutos, rol, salud). 26 oct 2026: Giannis menos de 47.5 PRA, modelo 80 % y casa 51 %, perdió con 52.
+DISCREPANCIA_MAX = 0.25
+
+
+def alertas(j: Jugador, stat: str) -> list[str]:
+    """Lo que hace dudosa una prop aunque su probabilidad sea alta."""
+    out = []
+    if not es_titular(j):
+        out.append("suplente")
+    if j.minutos_sd > MINUTOS_SD_ESTABLE:
+        out.append("minutos inestables")
+    if set(COMPONENTES[stat]) & set(j.cambio_rol):
+        out.append("cambio de rol")
+    if j.pocos_con_equipo:
+        out.append("traspaso reciente")
+    if any(n.startswith("en el parte de lesiones") for n in j.notas):
+        out.append("en el parte de lesiones")
+    return out
+
+
+def es_titular(j: Jugador) -> bool:
+    return sum(p["starter"] for p in j.partidos[:5]) >= 3
+
+
+@dataclass
+class Segura:
+    player_id: str
+    nombre: str
+    stat: str
+    line: float
+    prob: float
+    mu: float
+    media_10: float
+    acierto_10: tuple[int, int]
+
+    @property
+    def cuota_minima(self) -> float:
+        return 1 / self.prob
+
+
+def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA) -> list[Segura]:
+    """Para titulares estables, la línea de "más de" más alta que pasa con al menos esa probabilidad."""
+    if j.minutos < MIN_SEGURA or not es_titular(j):
+        return []
+    out = []
+    ult = j.partidos[:10]
+    for stat, minimo in MEDIAS_SEGURA.items():
+        media = sum(valor(p, stat) for p in ult) / len(ult)
+        if media < minimo:
+            continue
+        pred = predecir(ctx, j, stat)
+        for k in range(int(pred.mu), -1, -1):
+            p = _prob_jugador(j, stat, k + 0.5, "más", prob_lados(k + 0.5, pred.mu, pred.var)[0])
+            if p >= objetivo:
+                out.append(Segura(j.player_id, j.nombre, stat, k + 0.5, p, pred.mu, media,
+                                  _aciertos(ult, stat, k + 0.5, "más")))
+                break
+    return out
+
+
 def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float | None = None,
             under_odd: float | None = None, peso_mercado: float = PESO_MERCADO, detalle: bool = True) -> Evaluacion:
     pred = predecir(ctx, j, stat)
@@ -540,9 +813,9 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
                                         (over_odd, under_odd), prob_mercado(over_odd, under_odd)):
         if con_cuota and not odd:
             continue  # la casa no ofrece este lado: no se puede apostar
-        hits, n = _aciertos(j.partidos[:15], stat, line, lado)
-        p_emp = (hits + 5 * p_mod) / (n + 5)
-        p_jug = 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+        p_jug = _prob_jugador(j, stat, line, lado, p_mod)
+        if lado == "menos" and _menos_estrella_inicio(ctx, j, stat):
+            p_jug = 0.5 + (p_jug - 0.5) * CORRECCION_MENOS_ESTRELLA
         final = p_jug if p_casa is None else (1 - peso_mercado) * p_jug + peso_mercado * p_casa
         lados[lado] = (final, p_jug, p_casa, odd)
     lado = max(lados, key=lambda k: lados[k][0])
@@ -554,7 +827,12 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         _aciertos(j.partidos[:10], stat, line, lado), _aciertos(temporada, stat, line, lado), vs,
         sum(valor(p, stat) for p in j.partidos[:10]) / min(10, j.n), odd, pred.factores,
         linea_segura(pred.mu, pred.var), pred.componentes,
-        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [],
+        tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j),
+        alertas(j, stat) + (["muy lejos de la casa"] if p_casa is not None and p_jug - p_casa > DISCREPANCIA_MAX
+                            else [])
+        + (["menos de una estrella al inicio de temporada"]
+           if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
+        texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),
     )
 
 

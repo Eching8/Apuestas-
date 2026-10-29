@@ -1,0 +1,81 @@
+# Configuración del sistema de props NBA con valor esperado (paquete nbaev).
+# Las rutas son relativas a la raíz del proyecto.
+
+general:
+  zona_horaria: America/Mexico_City   # para decidir qué es "hoy" en el comando diario
+  db: data/nbaev.duckdb
+  crudos: data/crudos                  # respuestas JSON originales comprimidas (permite reprocesar sin descargar)
+  logs: logs
+  nivel_log: INFO
+
+temporadas:
+  desde: 2021            # año de inicio de la primera temporada (2021 = 2021-22)
+  tipos: [2, 3, 5]       # tipos de ESPN: 2 regular, 3 playoffs, 5 play-in (se excluye pretemporada y All-Star)
+
+fuentes:
+  espn:
+    url: https://site.api.espn.com/apis/site/v2/sports/basketball/nba
+    min_intervalo_s: 0.35      # pausa mínima entre peticiones (API pública sin clave)
+    reintentos: 4
+    timeout_s: 30
+  nba_api:
+    # stats.nba.com bloquea servidores en la nube; en "auto" se prueba una vez y, si no responde,
+    # se omite el resto de la ejecución (métricas avanzadas y tracking quedan vacías).
+    modo: auto                 # auto | si | no
+    timeout_s: 20
+    min_intervalo_s: 0.8
+  sportsgameodds:
+    url: https://api.sportsgameodds.com/v2
+    max_peticiones_minuto: 10  # límite del plan amateur
+    reserva_entidades: 300     # entidades (partidos) del mes que nunca se gastan en el histórico
+    libros: [bet365, fanduel, draftkings, caesars, betmgm, espnbet, bovada]
+
+cuotas:
+  # Casa principal con la que se compara. Si la fuente no la trae se usa el consenso.
+  casa_principal: bet365
+  csv_manual: data/cuotas_manual   # carpeta con CSV de cuotas cargadas a mano (ver plantilla)
+
+datos:
+  # Margen tras el inicio del partido a partir del cual sus estadísticas cuentan como disponibles.
+  horas_hasta_disponible: 3.5
+
+minutos:
+  modelo: data/modelos/minutos.joblib
+  reentrenar_cada_dias: 7
+  # Probabilidad de jugar según el estado del parte de lesiones de ESPN. Heurística: no hay partes de
+  # lesiones históricos con los que calibrarla (se revisará con las capturas diarias que se acumulen).
+  prob_juega:
+    Out: 0.0
+    Suspension: 0.0
+    Doubtful: 0.25
+    Questionable: 0.5
+    Day-To-Day: 0.65
+    Probable: 0.9
+    otro: 0.5
+
+puntos:
+  modelo: data/modelos/puntos.joblib
+  reentrenar_cada_dias: 7
+  simulaciones: 10000       # por partido (mínimo pedido: 10.000)
+
+apuestas:
+  banca_inicial: 1000.0
+  fraccion_kelly: 0.25        # 1/4 Kelly
+  tope_apuesta: 0.02          # máximo 2 % de la banca por apuesta
+  tope_diario: 0.10           # máximo 10 % de la banca arriesgado en un día
+  edge_min: 0.04              # edge mínimo general (probabilidad final - probabilidad justa)
+  edge_min_por_mercado:       # más exigente en mercados con mucho margen o pocos datos
+    primera_canasta: 0.10
+    primera_canasta_equipo: 0.08
+    triple_doble: 0.08
+    doble_doble: 0.06
+    periodo_1q: 0.07
+    periodo_1h: 0.06
+  fdr: 0.10                   # Benjamini-Hochberg: tasa de falsos descubrimientos entre las líneas del día
+  min_minutos: 15             # minutos proyectados mínimos
+  excluir_en_duda: true       # excluir jugadores Questionable / Doubtful / Day-To-Day sin confirmar
+  max_por_jugador: 1
+  max_por_partido: 3
+  metodo_margen: multiplicativo
+  mezclas: config/mezclas.json        # mezcla modelo + mercado de cada mercado (versionada; `backtest mercados` la regenera)
+  mezcla_con: cierre          # líneas con las que se ajusta la mezcla modelo + mercado

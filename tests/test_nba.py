@@ -133,7 +133,19 @@ class ParsersTest(unittest.TestCase):
         }}
         props = parse_props(ev)
         self.assertEqual(len(props), 1)
+        # Una línea sin ninguna casa detrás no es apostable: se descarta.
+        del ev["odds"]["a"]["byBookmaker"]
+        self.assertEqual(parse_props(ev), [])
+        ev["odds"]["a"]["byBookmaker"] = {"fd": {}}
+        props = parse_props(ev)
         self.assertEqual((props[0]["stat"], props[0]["line"], props[0]["books"]), ("points", 20.5, 1))
+        # El lado "menos" no lo ofrece ninguna casa: sin cuota, no se puede apostar.
+        self.assertEqual((props[0]["over_odd"], props[0]["under_odd"]), (americana_a_decimal("-110"), None))
+        # Sin nombre (29 oct 2026), se saca del id.
+        ev["players"] = {"NICKEIL_ALEXANDERWALKER_1_NBA": {"teamID": "T"}}
+        for o in ev["odds"].values():
+            o["playerID"] = "NICKEIL_ALEXANDERWALKER_1_NBA"
+        self.assertEqual(parse_props(ev)[0]["name"], "NICKEIL_ALEXANDERWALKER")
 
 
 class ModeloTest(unittest.TestCase):
@@ -168,6 +180,31 @@ class ModeloTest(unittest.TestCase):
             self.assertIn("tiros de campo", pra.componentes["pts"]["explicacion"])
             self.assertIn("fallos del rival", pra.componentes["reb"]["explicacion"])
 
+    def test_seguras(self):
+        from apuestas.nba.modelo import es_titular, seguras
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2")
+            self.assertTrue(es_titular(j))
+            s = {x.stat: x for x in seguras(ctx, j, 0.85)}
+            # Titular con ~25 puntos: línea de puntos bastante por debajo de su media, al 85 % o más.
+            self.assertIn("points", s)
+            self.assertGreaterEqual(s["points"].prob, 0.85)
+            self.assertLess(s["points"].line, s["points"].mu)
+            self.assertAlmostEqual(s["points"].cuota_minima, 1 / s["points"].prob)
+            # Con menos de 30 minutos esperados no hay picks seguros.
+            j.minutos = 25
+            self.assertEqual(seguras(ctx, j, 0.85), [])
+
+    def test_columna_tipo_en_bases_viejas(self):
+        import sqlite3
+        conn = sqlite3.connect(":memory:")
+        conn.execute("CREATE TABLE nba_picks (id INTEGER PRIMARY KEY, fecha TEXT)")
+        NbaDB(conn)
+        self.assertIn("tipo", {r[1] for r in conn.execute("PRAGMA table_info(nba_picks)")})
+
     def test_oportunidades(self):
         p = {"minutes": 24, "fga": 10, "fgm": 5, "tpa": 4, "tpm": 2, "fta": 4, "ftm": 3, "tov": 2, "oreb": 1,
              "dreb": 5, "ast": 6, "stl": 1, "blk": 1}
@@ -196,7 +233,8 @@ class ModeloTest(unittest.TestCase):
                                   "JUGADOR_11_1_NBA": {"name": "Jugador 11"}},
                       "odds": {f"{lado}{pid}": {"statID": "points", "playerID": pid, "periodID": "game",
                                                 "betTypeID": "ou", "sideID": lado, "bookOddsAvailable": True,
-                                                "bookOverUnder": "14.5", "bookOdds": "-110"}
+                                                "bookOverUnder": "14.5", "bookOdds": "-110",
+                                                "byBookmaker": {"fanduel": {}}}
                                for lado in ("over", "under") for pid in ("ANGEL_PEREZ_JR_1_NBA", "JUGADOR_11_1_NBA")}}
             ctx = construir_contexto(db.conn, FECHA)
             n, sin = emparejar_props(db, FECHA, [evento], ctx)
@@ -209,6 +247,8 @@ class ModeloTest(unittest.TestCase):
             # Cuotas -110 / -110: la casa dice 50%, y la probabilidad final queda entre ambas.
             self.assertAlmostEqual(evs[0].prob_mercado, 0.5)
             self.assertAlmostEqual(evs[0].prob, 0.6 * evs[0].prob_modelo + 0.4 * 0.5)
+            # El modelo ve la prop mucho más probable que la casa (50 %): la casa suele saber algo.
+            self.assertIn("muy lejos de la casa", evs[0].alertas)
             picks = mejores(partidos, 0.65)
             guardar_picks(db, FECHA, picks)
             guardar_analisis(db, FECHA, partidos)
@@ -304,3 +344,133 @@ class EnfrentamientosTest(unittest.TestCase):
             # Si su defensor habitual está fuera hoy, deja de contar.
             j2 = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2", fuera_rival=["p20"])
             self.assertNotIn("Jugador 20", [d["nombre"] for d in j2.enfrentamiento.defensores])
+
+
+class PalizaTest(unittest.TestCase):
+    def test_factor(self):
+        from apuestas.nba.modelo import factor_paliza
+        self.assertEqual(factor_paliza(34, 5), 1.0)              # partido parejo
+        self.assertAlmostEqual(factor_paliza(34, -14), 0.97)     # titular, no favorito por 14
+        self.assertAlmostEqual(factor_paliza(34, 10.5), 0.985)   # a medio camino
+        self.assertAlmostEqual(factor_paliza(18, 13), 1.04)      # suplente
+        self.assertEqual(factor_paliza(26, 15), 1.0)
+
+    def test_margen_de_la_casa(self):
+        from apuestas.nba.espn import _margen_esperado
+        self.assertEqual(_margen_esperado({"odds": [{"spread": -10.5}]}), 10.5)
+        self.assertEqual(_margen_esperado({"odds": [{"spread": 4.5}]}), -4.5)
+        self.assertIsNone(_margen_esperado({}))
+
+
+class CombinadasTest(unittest.TestCase):
+    def _cand(self, gid, prob, odd, pid):
+        from types import SimpleNamespace
+        p = SimpleNamespace(game={"id": gid}, titulo=f"partido {gid}")
+        e = SimpleNamespace(player_id=pid, nombre=pid, stat="steals", line=0.5, lado="más", prob=prob, odd=odd,
+                            defensa="", acierto_10=(7, 10), acierto_temporada=(3, 3))
+        return p, e
+
+    def test_rachas(self):
+        from types import SimpleNamespace
+        from apuestas.nba.combinadas import candidatas_racha, de_rachas, nombre_tipo
+
+        def ev(pid, prob, temporada, alertas=(), stat="points"):
+            return SimpleNamespace(player_id=pid, nombre=pid, stat=stat, line=10.5, lado="más", prob=prob, odd=1.85,
+                                   defensa="", acierto_10=(7, 10), acierto_temporada=temporada, alertas=list(alertas),
+                                   razones=["✅ Racha", "✅ Defensa", "✅ Altura", "➖ Cómo produce"] if pid != "z"
+                                   else ["✅ Racha", "❌ Defensa", "❌ Contra este rival"])
+        g1 = SimpleNamespace(game={"id": "g1"}, titulo="g1", evaluaciones=[
+            ev("a", 0.60, (3, 3)), ev("b", 0.58, (4, 4)), ev("c", 0.57, (3, 3)),
+            ev("d", 0.70, (2, 3)),                          # no pasó en todos
+            ev("e", 0.70, (2, 2)),                          # pocos partidos
+            ev("f", 0.70, (3, 3), ["suplente"]),
+            ev("g", 0.70, (3, 3), stat="steals"),           # fuera del backtest
+            ev("z", 0.70, (3, 3))])                         # el análisis va en contra
+        g2 = SimpleNamespace(game={"id": "g2"}, titulo="g2", evaluaciones=[
+            ev("h", 0.55, (3, 3)), ev("h", 0.54, (3, 3), stat="rebounds"), ev("i", 0.53, (5, 5), ["cambio de rol"])])
+        cands = candidatas_racha([g1, g2])
+        self.assertEqual([e.player_id for _, e in cands], ["a", "b", "c", "h", "h", "i"])
+        c = de_rachas(cands, 4)
+        self.assertEqual([x["player_id"] for x in c.patas], ["a", "b", "h", "i"])   # 2 por partido, 1 por jugador
+        self.assertIsNone(de_rachas(cands, 8))
+        self.assertEqual(nombre_tipo(c.tipo), "Rachas de temporada (4 patas)")
+        self.assertEqual(c.patas[0]["razones"], ["✅ Racha", "✅ Defensa", "✅ Altura"])
+
+    def test_con_cuota(self):
+        from apuestas.nba.combinadas import con_cuota
+        cands = [self._cand("g1", 0.70, 1.40, "a"), self._cand("g1", 0.69, 1.45, "b"),
+                 self._cand("g2", 0.68, 1.45, "c"), self._cand("g3", 0.62, 1.70, "d")]
+        c = con_cuota(cands, 2.0)
+        self.assertGreaterEqual(c.cuota, 2.0)
+        self.assertEqual(len({x["game_id"] for x in c.patas}), len(c.patas))  # partidos distintos
+        self.assertAlmostEqual(c.prob, 0.70 * 0.68)  # la más probable que llega a cuota 2
+        self.assertIsNone(con_cuota(cands, 50.0))
+        self.assertTrue(con_cuota(cands, 2.0, "valor").tipo.startswith("valor_"))
+
+    def test_apuestas_usuario(self):
+        import json as _json
+        from apuestas.nba import combinadas, usuario
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ayer = (date.fromisoformat(FECHA) - timedelta(days=1)).isoformat()
+            fila = db.conn.execute("""SELECT pg.* FROM nba_player_games pg JOIN nba_games g ON g.id = pg.game_id
+                                      WHERE g.fecha = ? AND pg.player_id = 'a1'""", (ayer,)).fetchone()
+            pata = {"jugador": "Angel Perez Jr", "stat": "points", "lado": "más", "linea": fila["pts"] - 0.5}
+            carpeta = Path(tmp) / "usuario"
+            carpeta.mkdir()
+            (carpeta / f"{ayer}.json").write_text(_json.dumps({"fecha": ayer, "apuestas": [
+                {"nombre": "Doble", "cuota": 3.1, "prob": 0.3, "patas": [pata]},
+                {"nombre": "Sin jugador", "cuota": 2.0, "prob": 0.5, "patas": [dict(pata, jugador="Nadie")]}]}))
+            self.assertEqual(usuario.registrar(db, carpeta), 1)
+            self.assertEqual(usuario.registrar(db, carpeta), 0)       # no se duplica
+            combinadas.guardar(db, ayer, [])                           # regenerar el día no la borra
+            combinadas.liquidar(db)
+            fila_c = db.conn.execute("SELECT tipo, result, cuota_final FROM nba_combinadas").fetchone()
+            self.assertEqual((fila_c["tipo"], fila_c["result"], fila_c["cuota_final"]), ("usuario:Doble", 1, 3.1))
+            self.assertEqual(combinadas.nombre_tipo(fila_c["tipo"]), "Tu apuesta: Doble")
+            self.assertEqual(combinadas.resumen(db)[0]["tipo"], "usuario")
+
+    def test_liquidar(self):
+        import json as _json
+        from apuestas.nba import combinadas
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            fila = db.conn.execute("SELECT * FROM nba_player_games WHERE player_id = 'a1' LIMIT 1").fetchone()
+            pata = {"game_id": fila["game_id"], "player_id": "a1", "stat": "points", "side": "más", "odd": 1.5,
+                    "prob": 0.8, "partido": "x", "nombre": "a1"}
+            gana = combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] - 0.5),
+                                                   dict(pata, player_id="nadie", line=1.5)])  # no jugó: anulada
+            pierde = combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] + 0.5)])
+            combinadas.guardar(db, FECHA, [gana, pierde])
+            self.assertEqual(combinadas.liquidar(db), 2)
+            filas = db.conn.execute("SELECT result, cuota_final FROM nba_combinadas ORDER BY id").fetchall()
+            self.assertEqual([(f["result"], f["cuota_final"]) for f in filas], [(1, 1.5), (0, 1.5)])
+            # Una pierna perdida decide la combinada aunque otra pierna sea de un partido sin terminar.
+            pendiente = dict(pata, game_id="sin_jugar", line=0.5)
+            combinadas.guardar(db, "2026-03-02", [combinadas.Combinada("prueba", [dict(pata, line=fila["pts"] + 0.5),
+                                                                              pendiente])])
+            db.upsert_game({"id": "sin_jugar", "date_utc": "2026-03-02T23:00Z", "season": 2026, "season_type": 2,
+                            "status": "STATUS_SCHEDULED", "home_pts": None, "away_pts": None,
+                            "home": {"id": "1", "abbr": "1", "name": "Equipo Uno", "nickname": "Uno"},
+                            "away": {"id": "2", "abbr": "2", "name": "Equipo Dos", "nickname": "Dos"}}, "2026-03-02")
+            self.assertEqual(combinadas.liquidar(db), 1)
+            self.assertEqual(combinadas.detalle(db, "2026-03-02")[0]["result"], 0)
+            criterios = combinadas.listo(db)
+            self.assertFalse(all(ok for _, ok, _ in criterios))
+
+
+class BuilderTest(unittest.TestCase):
+    def test_prob_conjunta(self):
+        from apuestas.nba.builder import Pierna, prob_conjunta
+        piernas = [Pierna(f"p{i}", f"p{i}", "1" if i < 2 else "2", "points", 10.5, 0.75, 14.0, (8, 10))
+                   for i in range(4)]
+        p = prob_conjunta(piernas, sims=40000)
+        # Con correlación positiva acierta algo más que multiplicando, pero no mucho más.
+        self.assertGreater(p, 0.75 ** 4)
+        self.assertLess(p, 0.75 ** 4 + 0.06)
+        from apuestas.nba.builder import linea_minima_casa
+        self.assertEqual([linea_minima_casa(x) for x in (5.5, 8.5, 25.5, 32.5)], [4.5, 7.5, 23.5, 29.5])
+        sola = prob_conjunta(piernas[:1], sims=40000)
+        self.assertAlmostEqual(sola, 0.75, delta=0.01)
