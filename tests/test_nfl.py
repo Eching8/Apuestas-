@@ -590,6 +590,29 @@ class CombinadasTest(unittest.TestCase):
         db.close()
         tmp.cleanup()
 
+    def test_usuario_patas_de_la_semana(self):
+        import json
+        from apuestas.nfl import usuario
+        tmp = TemporaryDirectory()
+        db = Database(Path(tmp.name) / "t.db")
+        nfl = NflDB(db.conn)
+        _llenar(nfl)
+        # Un homónimo defensivo en el rival no se lleva la pata (Justin Jefferson de MIN y el LB de CLE).
+        nfl.actualizar_roster([{"player_id": "lb_lac", "name": "James Cook", "position": "LB", "team": "LAC",
+                                "status": "ACT", "season": 2026, "week": 8}])
+        carpeta = Path(tmp.name) / "nfl"
+        carpeta.mkdir()
+        # Armada 3 días antes del BUF-LAC: la pata se busca en los partidos de la semana, no solo en los del día.
+        fecha = (date.fromisoformat(HOY) - timedelta(days=3)).isoformat()
+        (carpeta / f"{fecha}.json").write_text(json.dumps({"fecha": fecha, "apuestas": [
+            {"nombre": "Cook 2+", "cuota": None, "prob": 0.15, "real": False,
+             "patas": [{"jugador": "James Cook", "stat": "tds", "lado": "más", "linea": 1.5}]}]}), encoding="utf-8")
+        self.assertEqual(usuario.registrar(nfl, carpeta), 1)
+        patas = json.loads(db.conn.execute("SELECT patas FROM nfl_combinadas").fetchone()[0])
+        self.assertEqual(patas[0]["game_id"], "2026_09_LAC_BUF")
+        db.close()
+        tmp.cleanup()
+
 
 if __name__ == "__main__":
     unittest.main()

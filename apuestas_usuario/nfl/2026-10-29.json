@@ -137,6 +137,103 @@
      "prob": 0.24
     }
    ]
+  },
+  {
+   "nombre": "Agresiva 8 patas (dom-lun)",
+   "cuota": null,
+   "cuota_ee_uu": 64.79,
+   "prob": 0.0266,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.616
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.627
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.627
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.643
+    },
+    {
+     "jugador": "Justin Jefferson",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 6.5,
+     "prob": 0.639
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.617
+    },
+    {
+     "jugador": "Rome Odunze",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.619
+    },
+    {
+     "jugador": "Justin Herbert",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.658
+    }
+   ]
+  },
+  {
+   "nombre": "Hubbard 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 6.5,
+   "prob": 0.16,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Chuba Hubbard",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.16
+    }
+   ]
+  },
+  {
+   "nombre": "Jacobs 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 5.0,
+   "prob": 0.174,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Josh Jacobs",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.174
+    }
+   ]
   }
  ]
 }

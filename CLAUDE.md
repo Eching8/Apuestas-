@@ -33,7 +33,9 @@ combinadas de prueba") si estos tipos siguen cumpliendo lo prometido y decírsel
 
 Mismo criterio que la NBA (arriba), traducido a la NFL en `apuestas/nfl/combinadas.py` (`nfl combinadas`,
 `nfl seguimiento`). Las apuestas que comparta van a `apuestas_usuario/nfl/AAAA-MM-DD.json`
-(`apuestas/nfl/usuario.py`); son de prueba hasta que diga lo contrario.
+(`apuestas/nfl/usuario.py`; las patas pueden ser de cualquier partido de esa semana, y "equipo" desempata
+homónimos). Son **apuestas fantasma** (no las juega en Betano: el 29 oct pidió seguirlas todas para tener la data
+completa antes de empezar de verdad), así que se registran y se liquidan todas, también las que no le gusten.
 
 ## Reglas
 
