@@ -571,6 +571,18 @@ class CombinadasTest(unittest.TestCase):
         self.assertEqual({p.player_id for p in c.patas}, {"p0", "p1", "p2"})
         self.assertEqual(c.tipo, "cuota_3")
 
+    def test_un_partido_sin_tope_por_equipo_y_mismo_guion(self):
+        from apuestas.nfl.combinadas import coherente, con_cuota
+        # Un solo partido: 3 patas del mismo equipo valen si ganan con el mismo guion.
+        qb = self._pata("qb", "BUF", "QB", "pass_yds", 0.7, odd=1.5)
+        wr = self._pata("wr", "BUF", "WR", "rec_yds", 0.68, odd=1.5)
+        te = self._pata("te", "BUF", "TE", "rec", 0.66, odd=1.5)
+        wr_menos = self._pata("wr2", "BUF", "WR", "rec_yds", 0.69, side="menos", odd=1.5)
+        self.assertTrue(coherente([qb, wr, te]))
+        self.assertFalse(coherente([qb], wr_menos))               # el QB pasa mucho y su receptor no: no
+        c = con_cuota([qb, wr_menos, wr, te], 3.0, "cuota", un_partido=True)
+        self.assertEqual({p.player_id for p in c.patas}, {"qb", "wr", "te"})
+
     def test_registro_y_liquidacion(self):
         from apuestas.nfl import combinadas
         tmp = TemporaryDirectory()

@@ -40,6 +40,8 @@ CANDIDATAS_MAX = 16
 PROB_SEGURA_A = 0.85
 PROB_PIERNA_BUILDER = 0.72
 PIERNAS_BUILDER = 4
+PIERNAS_UN_PARTIDO = 6            # días de un solo partido (jueves, lunes): hay que sacar todo de ese partido
+RANKING_CONJUNTA = 25             # con un solo partido, las mejores por producto se reordenan con la correlación
 ACIERTO_TEMPORADA_MIN = 0.67      # bet builders: líneas que esta temporada pasa en 2 de cada 3
 BALANCE_RACHA = 2                 # menos factores que en la NBA: 2 más a favor que en contra
 SIMULACIONES = 20000
@@ -126,6 +128,8 @@ def _pata(ctx: Contexto, a: AnalisisPartido, e: Evaluacion) -> Pata | None:
     proy = next((p for p in a.proyecciones + a.defensores if p.jugador.player_id == e.player_id), None)
     if proy is None or e.tipo != "jugador" or e.periodo != "game" or e.stat not in STATS_PATA:
         return None
+    if e.stat == "tds" and e.lado == "menos":     # Betano (la casa del usuario) no tiene "no anota"
+        return None
     t = tendencias(ctx, proy.jugador.partidos, e.stat, e.line, e.lado, e.opp)
     return Pata(a.game["game_id"], a.titulo, e.player_id, e.nombre, e.team, e.pos, e.stat, e.line, e.lado, e.prob,
                 e.odd, e.book, t.aciertos_10, t.aciertos_temporada, alertas(ctx, proy, e.prob_modelo, e.prob_casa),
@@ -188,6 +192,14 @@ def _rho(a: Pata, b: Pata) -> float:
     r = CORRELACIONES.get((rel,) + tuple(sorted((ca, cb))), 0.0)
     # Un "menos de" es el lado contrario del mismo desvío.
     return r * (1 if a.side == b.side else -1)
+
+
+def coherente(patas: list[Pata] | tuple[Pata, ...], nueva: Pata | None = None) -> bool:
+    """Todas las patas ganan con el mismo guion: ningún par tira en contra (correlación negativa medida), como
+    el under de acarreos del RB del favorito y el under de recepciones del receptor del que pierde (DAL-PHI)."""
+    if nueva is not None:
+        return all(_rho(nueva, p) >= 0 for p in patas)
+    return all(_rho(a, b) >= 0 for i, a in enumerate(patas) for b in patas[i + 1:])
 
 
 def _cholesky(m: list[list[float]]) -> list[list[float]] | None:
@@ -254,32 +266,33 @@ def _combinar(patas: list[Pata]) -> Combinada:
 def con_cuota(candidatas: list[Pata], objetivo: float, tipo: str, un_partido: bool) -> Combinada | None:
     """La combinación con más probabilidad de acertar todas cuya cuota llega al objetivo, con las menos patas.
 
-    Con varios partidos, una pata por partido; con uno solo, como mucho dos patas por equipo y una por jugador."""
+    Con varios partidos, una pata por partido. Con uno solo (jueves, lunes) todas salen de ese partido, sin tope
+    por equipo: una por jugador, todas con el mismo guion (`coherente`) y ordenadas por la probabilidad conjunta
+    con la correlación del partido."""
     pool = []
     usados: dict[str, int] = {}
     for p in candidatas:
-        clave = p.team if un_partido else p.game_id
-        if usados.get(clave, 0) < 2:
-            usados[clave] = usados.get(clave, 0) + 1
+        if un_partido or usados.get(p.game_id, 0) < 2:
+            usados[p.game_id] = usados.get(p.game_id, 0) + 1
             pool.append(p)
     pool = pool[:CANDIDATAS_MAX]
-    for k in range(2, MAX_PATAS + 1):
-        mejor = None
+    for k in range(2, (PIERNAS_UN_PARTIDO if un_partido else MAX_PATAS) + 1):
+        validas = []
         for comb in combinations(pool, k):
             if len({p.player_id for p in comb}) < k:
                 continue
             if not un_partido and len({p.game_id for p in comb}) < k:
                 continue
-            if un_partido and max(sum(p.team == t for p in comb) for t in {p.team for p in comb}) > 2:
+            if un_partido and not coherente(comb):
                 continue
-            cuota = math.prod(p.odd for p in comb)
-            if cuota < objetivo:
+            if math.prod(p.odd for p in comb) < objetivo:
                 continue
-            prob_ind = math.prod(p.prob for p in comb)
-            if mejor is None or prob_ind > mejor[0]:
-                mejor = (prob_ind, comb)
-        if mejor is not None:   # las menos patas posibles
-            c = _combinar(mejor[1])
+            validas.append((math.prod(p.prob for p in comb), comb))
+        if validas:   # las menos patas posibles
+            validas.sort(key=lambda x: -x[0])
+            if un_partido:
+                validas = [(prob_conjunta(list(comb), sims=4000), comb) for _, comb in validas[:RANKING_CONJUNTA]]
+            c = _combinar(max(validas, key=lambda x: x[0])[1])
             c.tipo = f"{tipo}_{objetivo:g}"
             return c
     return None
@@ -320,14 +333,13 @@ def seguras_a(ctx: Contexto, partidos: list[AnalisisPartido], prob_min: float = 
 
 
 def builder(ctx: Contexto, a: AnalisisPartido, n: int = PIERNAS_BUILDER) -> Combinada | None:
-    """Bet builder del partido: las piernas alternativas más probables (>= 72 %), una por jugador, como mucho dos
-    por equipo, con la probabilidad conjunta corregida por la correlación del partido."""
+    """Bet builder del partido: las piernas alternativas más probables (>= 72 %), una por jugador, todas con el
+    mismo guion, con la probabilidad conjunta corregida por la correlación del partido."""
     candidatas = seguras_a(ctx, [a], prob_min=PROB_PIERNA_BUILDER)
-    elegidas, por_equipo = [], {}
+    elegidas = []
     for p in candidatas:
-        if por_equipo.get(p.team, 0) >= 2:
+        if not coherente(elegidas, p):
             continue
-        por_equipo[p.team] = por_equipo.get(p.team, 0) + 1
         elegidas.append(p)
         if len(elegidas) == n:
             break
@@ -344,12 +356,11 @@ def del_dia(ctx: Contexto, partidos: list[AnalisisPartido]) -> list[Combinada]:
     out: list[Combinada | None] = []
     alt = seguras_a(ctx, partidos)
     if un_partido:
-        por_equipo, sel = {}, []
+        sel = []
         for p in alt:
-            if por_equipo.get(p.team, 0) < 2:
-                por_equipo[p.team] = por_equipo.get(p.team, 0) + 1
+            if coherente(sel, p):
                 sel.append(p)
-            if len(sel) == 3:
+            if len(sel) == 4:
                 break
     else:
         sel, vistos = [], set()
@@ -376,8 +387,8 @@ def del_dia(ctx: Contexto, partidos: list[AnalisisPartido]) -> list[Combinada]:
     rachas = candidatas_racha(patas)
     sel, jugadores, por_clave = [], set(), {}
     for p in rachas:
-        clave = p.team if un_partido else p.game_id
-        if p.player_id in jugadores or por_clave.get(clave, 0) >= 2:
+        clave = p.game_id
+        if p.player_id in jugadores or (not un_partido and por_clave.get(clave, 0) >= 2) or not coherente(sel, p):
             continue
         jugadores.add(p.player_id)
         por_clave[clave] = por_clave.get(clave, 0) + 1
@@ -386,7 +397,8 @@ def del_dia(ctx: Contexto, partidos: list[AnalisisPartido]) -> list[Combinada]:
             break
     if len(sel) >= 3:
         out.append(Combinada(f"racha_{len(sel)}", sel, prob_conjunta(sel)))
-    builders = sorted([b for b in (builder(ctx, a) for a in partidos) if b], key=lambda b: -b.prob)
+    n_builder = PIERNAS_UN_PARTIDO if un_partido else PIERNAS_BUILDER
+    builders = sorted([b for b in (builder(ctx, a, n_builder) for a in partidos) if b], key=lambda b: -b.prob)
     out += builders
     if len(builders) >= 2:
         out.append(Combinada("doble_builder", builders[0].patas + builders[1].patas, builders[0].prob * builders[1].prob))

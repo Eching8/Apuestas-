@@ -42,8 +42,9 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
 1. **Solo jugadores constantes** (`combinadas.constante`): sin alertas (`combinadas.alertas`: papel menor por
    snaps, vuelve de lesión, cambio de rol, traspaso reciente, en el parte de lesiones, muy lejos de la casa), que
    pasaron la línea en 7+ de sus últimos 10 y en el 60 %+ de esta temporada. Cada pata con 62 %+ de probabilidad.
-2. **Un partido por pata** cuando hay varios partidos. Con uno solo (jueves, lunes) las patas son del mismo
-   partido, como mucho dos por equipo, y la probabilidad conjunta usa las correlaciones medidas en 2024-2026
+2. **Un partido por pata** cuando hay varios partidos. Con uno solo (jueves, lunes) hay que sacar los mejores props
+   de ese partido (lo pidió el 29 oct): **sin tope por equipo**, una pata por jugador, y **todas con el mismo guion**
+   (`combinadas.coherente`: ningún par con correlación en contra). La probabilidad conjunta usa las correlaciones medidas en 2024-2026
    (`combinadas.CORRELACIONES`): yardas del QB ↔ yardas de sus receptores +0.37, ↔ recepciones +0.26, ↔ su RB
    −0.13; QB rivales +0.11; RB rivales −0.17; receptores entre sí ~0. Por eso el bet builder de la casa paga
    mucho menos que el producto de las cuotas: no alargarlo con patas de relleno.
@@ -53,6 +54,7 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
 5. **Ninguna pata moneda al aire** ni con valor negativo a la cuota de la casa del usuario: si su casa no ofrece
    la línea o paga menos que la cuota mínima (justa × 1.04), cambiarla por la siguiente más segura.
 6. Para cuotas de 30+, avisar de la probabilidad real y armarla igual con estas reglas.
+7. Betano no tiene "no anota": no usarlo en las combinadas (el sistema ya no lo propone).
 
 ## Lecciones de los partidos jugados (actualizar con el seguimiento)
 

@@ -707,8 +707,8 @@ segura A (líneas alternativas al 85 %+), segura B (la principal más probable d
 2, 3, 5 y 10 y de valor 5, 10 y 15 (con las menos patas posibles), rachas de temporada y un bet builder por
 partido (más la doble). Solo entran jugadores constantes: sin alertas (papel menor, vuelve de lesión, cambio de
 rol, traspaso reciente, en el parte de lesiones, muy lejos de la casa), 7+ de sus últimos 10 y 60 %+ de esta
-temporada. Con varios partidos, una pata por partido; con uno solo, como mucho dos por equipo, y la probabilidad
-conjunta usa las correlaciones medidas en 2024-2026 (yardas del QB ↔ yardas de sus receptores +0.37, ↔ su RB
+temporada. Con varios partidos, una pata por partido; con uno solo (jueves, lunes), sin tope por equipo pero
+todas con el mismo guion (ningún par con correlación en contra), y la probabilidad conjunta usa las correlaciones medidas en 2024-2026 (yardas del QB ↔ yardas de sus receptores +0.37, ↔ su RB
 −0.13; RB rivales −0.17...), que es también por qué el bet builder de la casa paga menos que el producto.
 
 Todas se guardan en `nfl_combinadas` y se liquidan solas con los resultados; las apuestas que hace el usuario
