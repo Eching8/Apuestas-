@@ -44,6 +44,56 @@
      "linea": 0.5
     }
    ]
+  },
+  {
+   "nombre": "Combinada 13.64",
+   "cuota": 13.64,
+   "prob": 0.068,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Nikola Jokic",
+     "stat": "blocks",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Immanuel Quickley",
+     "stat": "steals",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Anthony Davis",
+     "stat": "steals",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Pascal Siakam",
+     "stat": "steals",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Jaden McDaniels",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Jonathan Kuminga",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Darius Garland",
+     "stat": "points",
+     "lado": "menos",
+     "linea": 23.5
+    }
+   ]
   }
  ]
 }
