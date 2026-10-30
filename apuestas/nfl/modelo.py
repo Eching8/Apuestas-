@@ -926,17 +926,15 @@ CLAVES_REPARTO = ("carries", "targets", "rz_carries", "i10_carries", "i5_carries
 CUOTA_REGRESO = 0.15       # cuota mínima del que vuelve para corregir a sus compañeros
 PARTIDOS_REGRESO = 6       # últimos partidos del equipo en los que se mira quién faltó
 FUERZA_REGRESO = 0.5       # parte de la corrección que se aplica (el que vuelve suele tener carga limitada)
-# ...salvo cerca de la zona de anotación: el titular que vuelve recupera de inmediato el balón en la línea de gol.
-# 2024-2026, RB titulares (50 %+ de los acarreos) en su partido de regreso: 80 % de su cuota de acarreos de antes,
-# pero 124 % de la de acarreos dentro de la 10 (0.54 → 0.67) y más TD (0.43 → 0.50 por partido). Saquon Barkley
-# contra Dallas y Josh Jacobs contra Carolina (29 oct, TD de 1 yarda; Lloyd, nada).
-FUERZA_REGRESO_GOL = 1.0
-CLAVES_GOL = ("rz_carries", "i10_carries", "i5_carries", "td_rush")
-# El RB titular que vuelve tiene prioridad (lección de Saquon y de Jacobs): conserva su cuota de antes (80 % de los
-# acarreos, 100 % cerca de la meta) y los demás se reparten lo que queda, en vez de diluirlo con las cuotas que
-# inflaron mientras él no estaba.
+# El RB titular que vuelve tiene prioridad (Saquon contra Dallas, Jacobs contra Carolina: 14 acarreos y 2 TD; Lloyd,
+# 2 y nada): conserva el 80 % de su cuota de antes (acarreos y cerca de la meta) y los demás RB se reparten lo que
+# queda, en vez de diluirlo con las cuotas que inflaron mientras él no estaba. 2024-2026: en su regreso los
+# titulares tuvieron el 80 % de sus acarreos de antes. Backtest de 2025 en los afectados: acarreos (Brier) 0.2153 →
+# 0.2127 (titulares: real 37.9 %, antes 32.0 %, ahora 36.1 %; suplentes: real 28.9 %, antes 33.1 %, ahora 27.8 %);
+# anotar, titulares 34.5 % → 34.4 % (real 33.3 %) y suplentes 22.0 % → 21.0 % (real 17.9 %). Darle el 100 % cerca
+# de la meta lo pasaba de largo en los titulares (38.4 %).
 TITULAR_REGRESO = 0.45     # cuota de acarreos de antes para considerarlo el titular
-PRIORIDAD_REGRESO = {"carries": 0.8, "rz_carries": 1.0, "i10_carries": 1.0, "i5_carries": 1.0, "td_rush": 1.0}
+PRIORIDAD_REGRESO = {"carries": 0.8, "rz_carries": 0.8, "i10_carries": 0.8, "i5_carries": 0.8, "td_rush": 0.8}
 
 
 def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None:
@@ -964,7 +962,7 @@ def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None
             continue
         if j.pos == "RB" and j.shares_base.get("carries", 0) >= TITULAR_REGRESO:
             j.titular_regresa = True
-            j.notas.append("titular que vuelve: recupera su papel (sobre todo cerca de la meta)")
+            j.notas.append("titular que vuelve: recupera su papel antes que los suplentes")
         for k in activos:
             if k is j or k.pos == "QB" or not getattr(k, "juegos", None):
                 continue
@@ -974,8 +972,7 @@ def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None
                 continue
             for clave in CLAVES_REPARTO:
                 cuota_j = min(0.8, j.shares_base.get(clave, 0))
-                fuerza = FUERZA_REGRESO_GOL if clave in CLAVES_GOL else FUERZA_REGRESO
-                k.shares[clave] = k.shares.get(clave, 0) * (1 - fuerza * frac * cuota_j)
+                k.shares[clave] = k.shares.get(clave, 0) * (1 - FUERZA_REGRESO * frac * cuota_j)
             efecto = 1 - FUERZA_REGRESO * frac * min(0.8, j.shares_base.get("carries" if k.pos == "RB" else "targets", 0))
             if efecto < 0.93:
                 k.notas.append(f"parte de su volumen fue sin {j.nombre}, que hoy juega (×{efecto:.2f})")

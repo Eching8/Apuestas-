@@ -65,6 +65,10 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
   proyectaba 1.3 acarreos por debajo de lo real.
 - **Si el modelo va contra la casa en todo un equipo a la vez, es un sesgo del modelo**, no valor (29 oct, Green
   Bay: Jacobs volvía de lesión y Lloyd había sido el titular): revisar el historial antes de recomendar.
+- **El RB titular que vuelve de lesión tiene prioridad sobre sus suplentes** (Saquon contra Dallas; 29 oct, Jacobs
+  14 acarreos y 2 TD contra 2 acarreos y nada de Lloyd). El modelo lo diluía con las cuotas que habían inflado los
+  suplentes; ahora conserva el 80 % de su papel (`modelo.PRIORIDAD_REGRESO`). No apostar a los suplentes de un
+  titular que vuelve (ni a su "anota" ni a sus acarreos), aunque hayan sido los titulares mientras él no estaba.
 - **Comprobar el historial de cada pata con la línea exacta de la casa del usuario** (el pateador de Carolina:
   el modelo daba 60 % al menos de 6.5 puntos y lo había pasado en 5 de 6).
 - **El bet builder de Betano recorta mucho las patas del mismo partido**: comparar su cuota con la justa y no
