@@ -49,7 +49,7 @@
    "nombre": "Combinada 13.64",
    "cuota": 13.64,
    "prob": 0.068,
-   "real": false,
+   "real": true,
    "patas": [
     {
      "jugador": "Nikola Jokic",
@@ -93,7 +93,9 @@
      "lado": "menos",
      "linea": 23.5
     }
-   ]
+   ],
+   "monto": 10000,
+   "ganancia_potencial": 136444
   }
  ]
 }

@@ -6,7 +6,8 @@ Cada día va en apuestas_usuario/AAAA-MM-DD.json:
         {"nombre": "Doble de bet builders", "cuota": 8.54, "prob": 0.165, "real": false,
          "patas": [{"jugador": "Jaylen Wells", "stat": "points", "lado": "más", "linea": 9.5}, ...]}]}
 
-"linea" es la de la casa: "10+" es más de 9.5. "prob" es la que daba el modelo al armarla. Se registran como
+"linea" es la de la casa: "10+" es más de 9.5. Las de dinero real llevan "real": true y, si se quiere, "monto" y
+"ganancia_potencial" (en pesos). "prob" es la que daba el modelo al armarla. Se registran como
 combinadas de tipo "usuario:<nombre>" la primera vez que los partidos están en la base (si un jugador no se
 encuentra, se reintenta al día siguiente) y se liquidan solas con las demás.
 """
