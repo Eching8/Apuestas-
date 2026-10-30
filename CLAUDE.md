@@ -62,7 +62,12 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
 - **Las patas de una combinada tienen que ganar con el mismo guion** (26 oct, DAL 38-21 PHI: el under de acarreos
   del RB del favorito y el under de recepciones del receptor del que pierde se cayeron juntos en la paliza).
 - **Nada de unders de acarreos de RB titulares en partidos parejos o de no favoritos**: en 2025 el modelo los
-  proyectaba 1.3 acarreos por debajo de lo real.
+  proyectaba 1.3 acarreos por debajo de lo real. **Tampoco cuando la línea de la casa parece desfasada** (29 oct:
+  Hubbard menos de 17.5 con la línea de EE. UU. en 16.5; Carolina perdió por 14 casi todo el partido y aun así le
+  dieron 22 acarreos: tumbó la sencilla, la de valor, la agresiva y el bet builder de 17.50).
+- **Revisar los inactivos ~90 minutos antes del partido y cambiar las patas de quien no juegue** (29 oct: Jonnu
+  Smith salió como baja a las 23:03 UTC, una hora antes; la pata queda anulada y en un bet builder la casa puede
+  anular o recalcular toda la apuesta).
 - **Si el modelo va contra la casa en todo un equipo a la vez, es un sesgo del modelo**, no valor (29 oct, Green
   Bay: Jacobs volvía de lesión y Lloyd había sido el titular): revisar el historial antes de recomendar.
 - **El RB titular que vuelve de lesión tiene prioridad sobre sus suplentes** (Saquon contra Dallas; 29 oct, Jacobs
