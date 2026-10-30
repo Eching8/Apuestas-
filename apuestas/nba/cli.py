@@ -104,9 +104,18 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         n = descargar_dia(espn, nba, fecha, lesiones=True)
         print(f"{descargar_alturas(espn, nba)} jugadores con estatura (plantillas de ESPN).")
         print(f"{n['partidos']} partidos el {fecha}; {n['lesiones']} jugadores en el parte de lesiones.")
-        eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana_dia(fecha, cfg.zona_horaria))
-        ctx = construir_contexto(nba.conn, fecha)
-        props, sin_emparejar = emparejar_props(nba, fecha, eventos, ctx)
+        try:
+            eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana_dia(fecha, cfg.zona_horaria))
+        except Exception as exc:   # p. ej. 429 por el límite mensual del plan: el informe sale igual, sin líneas
+            log.warning("SportsGameOdds no respondió (%s): informe sin líneas de la casa", exc)
+            eventos = []
+            sin_emparejar = [f"SIN LÍNEAS DE LA CASA HOY: SportsGameOdds no respondió ({str(exc)[:120]})"]
+        if eventos:   # sin respuesta no se borran las líneas que ya hubiera de una ejecución anterior
+            ctx = construir_contexto(nba.conn, fecha)
+            props, no_emparejadas = emparejar_props(nba, fecha, eventos, ctx)
+            sin_emparejar += no_emparejadas
+        else:
+            props = 0
         print(f"{len(eventos)} partidos con líneas en SportsGameOdds; {props} props emparejadas.")
     partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado,
                              prob_segura=cfg.nba_prob_segura)
