@@ -96,6 +96,70 @@
    ],
    "monto": 10000,
    "ganancia_potencial": 136444
+  },
+  {
+   "nombre": "Combinada 8.49",
+   "cuota": 8.49,
+   "prob": 0.065,
+   "real": true,
+   "monto": 10000,
+   "ganancia_potencial": 84900,
+   "patas": [
+    {
+     "jugador": "Kevin Durant",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Max Christie",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "P.J. Washington",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Kevin Durant",
+     "stat": "points",
+     "lado": "más",
+     "linea": 21.5
+    },
+    {
+     "jugador": "Jalen Brunson",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "VJ Edgecombe",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Tyrese Maxey",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 3.5
+    },
+    {
+     "jugador": "Josh Hart",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 6.5
+    },
+    {
+     "jugador": "Dillon Brooks",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    }
+   ]
   }
  ]
 }
