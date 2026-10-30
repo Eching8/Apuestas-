@@ -1,0 +1,201 @@
+{
+ "fecha": "2026-11-01",
+ "apuestas": [
+  {
+   "nombre": "Segura A domingo",
+   "cuota": null,
+   "prob": 0.77,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "DK Metcalf",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Luther Burden III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Hunter Henry",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Trey McBride",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 2.5,
+     "prob": 0.92
+    }
+   ]
+  },
+  {
+   "nombre": "Burrow menos de 25.5 completos",
+   "cuota": null,
+   "cuota_ee_uu": 1.88,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Boston menos de 3.5 recepciones",
+   "cuota": null,
+   "cuota_ee_uu": 1.81,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Jones más de 18.5 completos",
+   "cuota": null,
+   "cuota_ee_uu": 1.74,
+   "prob": 0.63,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.63
+    }
+   ]
+  },
+  {
+   "nombre": "Murray menos de 1.5 TD de pase",
+   "cuota": null,
+   "cuota_ee_uu": 1.71,
+   "prob": 0.64,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.64
+    }
+   ]
+  },
+  {
+   "nombre": "Dak menos de 2.5 TD de pase",
+   "cuota": null,
+   "cuota_ee_uu": 1.69,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Barner menos de 3.5 recepciones",
+   "cuota": null,
+   "cuota_ee_uu": 1.64,
+   "prob": 0.63,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "AJ Barner",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.63
+    }
+   ]
+  },
+  {
+   "nombre": "Pitts anota",
+   "cuota": null,
+   "cuota_ee_uu": 4.0,
+   "prob": 0.32,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyle Pitts",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.32
+    }
+   ]
+  },
+  {
+   "nombre": "Hockenson anota",
+   "cuota": null,
+   "cuota_ee_uu": 3.75,
+   "prob": 0.33,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "T.J. Hockenson",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.33
+    }
+   ]
+  },
+  {
+   "nombre": "Kyren Williams 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 5.8,
+   "prob": 0.193,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyren Williams",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.193
+    }
+   ]
+  },
+  {
+   "nombre": "Jayden Daniels anota",
+   "cuota": null,
+   "cuota_ee_uu": 3.3,
+   "prob": 0.33,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jayden Daniels",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.33
+    }
+   ]
+  }
+ ]
+}
