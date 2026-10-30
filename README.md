@@ -460,6 +460,8 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
 - **Bajas**: si un compañero importante está fuera, compara al jugador con y sin él (minutos y tasas).
   Si ese compañero ya faltaba en los últimos partidos, la baja ya está en sus minutos y no se suma.
 - **Defensa rival por posición**: lo que concede el rival por minuto a bases, aleros o pívots.
+- **Bajas del rival**: por cada titular del rival fuera (26+ min de media), +1.7 % en puntos y triples y
+  +1.5 % en asistencias, hasta tres bajas (2025-26: +2 % con una baja, +5 % con tres o más; rebotes sin efecto).
 - **Zonas de tiro**: dónde tira el jugador (aro, pintura, media distancia, triple de esquina y frontal),
   su acierto en cada zona y lo que concede el rival ahí. Ajusta puntos y triples.
 - **Tipo de defensa**: cómo le fue contra defensas fuertes, medias y débiles en esa estadística.

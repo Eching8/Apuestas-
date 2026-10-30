@@ -346,6 +346,21 @@ class EnfrentamientosTest(unittest.TestCase):
             self.assertNotIn("Jugador 20", [d["nombre"] for d in j2.enfrentamiento.defensores])
 
 
+class BajasRivalTest(unittest.TestCase):
+    def test_titular_del_rival_fuera(self):
+        from apuestas.nba.modelo import construir_contexto, predecir, preparar_jugador
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            base = preparar_jugador(ctx, "a1", "a1", "1", "2")
+            sin = preparar_jugador(ctx, "a1", "a1", "1", "2", fuera_rival=["p20", "p21"])
+            self.assertEqual(len(sin.bajas_rival), 2)          # p20 (34 min) y p21 (28 min) son titulares
+            self.assertAlmostEqual(predecir(ctx, sin, "points").mu / predecir(ctx, base, "points").mu, 1.034, 2)
+            self.assertAlmostEqual(predecir(ctx, sin, "rebounds").mu, predecir(ctx, base, "rebounds").mu)
+            self.assertEqual(preparar_jugador(ctx, "a1", "a1", "1", "2", fuera_rival=["nadie"]).bajas_rival, [])
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
