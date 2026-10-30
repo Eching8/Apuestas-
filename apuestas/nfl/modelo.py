@@ -841,14 +841,28 @@ def preparar_equipo(ctx: Contexto, team: str) -> list[Jugador]:
     # Reparto: los activos se quedan con lo que dejan los de fuera (proporcional a su cuota), con tope.
     nombres_fuera = ", ".join(j.nombre for j in fuera
                               if max(j.shares_base.get("carries", 0), j.shares_base.get("targets", 0)) >= 0.12)
+    titulares = [j for j in activos if getattr(j, "titular_regresa", False)]
     for clave in CLAVES_REPARTO:
+        fijos = titulares if clave in PRIORIDAD_REGRESO else []
+        for j in fijos:
+            j.shares[clave] = j.shares_base.get(clave, 0) * PRIORIDAD_REGRESO[clave]
         total = sum(j.shares.get(clave, 0) for j in activos)
         if total <= 0:
             continue
         f = max(0.75, min(1.5, (1 - FUGA_REPARTO) / total))
+        # Con un titular que vuelve, sus compañeros de posición se reparten lo que él deja; el resto, como siempre.
+        rbs = [j for j in activos if j.pos == "RB" and j not in fijos]
+        total_rb = sum(j.shares.get(clave, 0) for j in rbs)
+        if fijos and total_rb > 0:
+            libre = 1 - FUGA_REPARTO - sum(j.shares[clave] for j in fijos) - \
+                sum(j.shares.get(clave, 0) * f for j in activos if j.pos != "RB")
+            f_rb = max(0.3, min(1.5, max(libre, 0) / total_rb))
         for j in activos:
-            j.shares[clave] = j.shares.get(clave, 0) * f
-            j.ajuste_reparto[clave] = f
+            if j in fijos:
+                continue
+            g = f_rb if fijos and total_rb > 0 and j.pos == "RB" else f
+            j.shares[clave] = j.shares.get(clave, 0) * g
+            j.ajuste_reparto[clave] = g
     ctx.bajas[team] = [
         {"player_id": j.player_id, "nombre": j.nombre, "pos": j.pos, "estado": j.estado, "detalle": j.detalle_lesion,
          "acarreos": j.shares_base.get("carries", 0), "envios": j.shares_base.get("targets", 0),
@@ -912,6 +926,17 @@ CLAVES_REPARTO = ("carries", "targets", "rz_carries", "i10_carries", "i5_carries
 CUOTA_REGRESO = 0.15       # cuota mínima del que vuelve para corregir a sus compañeros
 PARTIDOS_REGRESO = 6       # últimos partidos del equipo en los que se mira quién faltó
 FUERZA_REGRESO = 0.5       # parte de la corrección que se aplica (el que vuelve suele tener carga limitada)
+# ...salvo cerca de la zona de anotación: el titular que vuelve recupera de inmediato el balón en la línea de gol.
+# 2024-2026, RB titulares (50 %+ de los acarreos) en su partido de regreso: 80 % de su cuota de acarreos de antes,
+# pero 124 % de la de acarreos dentro de la 10 (0.54 → 0.67) y más TD (0.43 → 0.50 por partido). Saquon Barkley
+# contra Dallas y Josh Jacobs contra Carolina (29 oct, TD de 1 yarda; Lloyd, nada).
+FUERZA_REGRESO_GOL = 1.0
+CLAVES_GOL = ("rz_carries", "i10_carries", "i5_carries", "td_rush")
+# El RB titular que vuelve tiene prioridad (lección de Saquon y de Jacobs): conserva su cuota de antes (80 % de los
+# acarreos, 100 % cerca de la meta) y los demás se reparten lo que queda, en vez de diluirlo con las cuotas que
+# inflaron mientras él no estaba.
+TITULAR_REGRESO = 0.45     # cuota de acarreos de antes para considerarlo el titular
+PRIORIDAD_REGRESO = {"carries": 0.8, "rz_carries": 1.0, "i10_carries": 1.0, "i5_carries": 1.0, "td_rush": 1.0}
 
 
 def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None:
@@ -937,6 +962,9 @@ def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None
         inicio = min(ctx.equipo_partido[(g, team)]["gameday"] for g in sin_el)
         if not any(p["team"] == team and p["gameday"] < inicio for p in j.partidos):
             continue
+        if j.pos == "RB" and j.shares_base.get("carries", 0) >= TITULAR_REGRESO:
+            j.titular_regresa = True
+            j.notas.append("titular que vuelve: recupera su papel (sobre todo cerca de la meta)")
         for k in activos:
             if k is j or k.pos == "QB" or not getattr(k, "juegos", None):
                 continue
@@ -946,7 +974,8 @@ def _corregir_regresos(ctx: Contexto, team: str, activos: list[Jugador]) -> None
                 continue
             for clave in CLAVES_REPARTO:
                 cuota_j = min(0.8, j.shares_base.get(clave, 0))
-                k.shares[clave] = k.shares.get(clave, 0) * (1 - FUERZA_REGRESO * frac * cuota_j)
+                fuerza = FUERZA_REGRESO_GOL if clave in CLAVES_GOL else FUERZA_REGRESO
+                k.shares[clave] = k.shares.get(clave, 0) * (1 - fuerza * frac * cuota_j)
             efecto = 1 - FUERZA_REGRESO * frac * min(0.8, j.shares_base.get("carries" if k.pos == "RB" else "targets", 0))
             if efecto < 0.93:
                 k.notas.append(f"parte de su volumen fue sin {j.nombre}, que hoy juega (×{efecto:.2f})")
