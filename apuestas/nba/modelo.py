@@ -336,6 +336,7 @@ class Jugador:
     diferencia_altura: float | None = None   # su estatura menos la media de los rivales de su posición
     cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
     factor_paliza: float = 1.0               # minutos por partido desigual (ver PALIZA)
+    bajas_rival: list[str] = field(default_factory=list)   # titulares del rival que no juegan
 
     @property
     def n(self) -> int:
@@ -348,6 +349,13 @@ class Jugador:
 # 4 % más. Entre 9 y 12 puntos el efecto es la mitad o menos. No aumenta la dispersión de los minutos ni el riesgo
 # de que fallen juntas varias piernas del mismo partido (4 titulares: 0.88 de lo independiente, igual que en
 # partidos parejos), así que solo se baja la media.
+# Bajas del rival: 2025-26 (15.080 partidos de jugador, titulares = 26+ min de media en sus últimos 10). Con un
+# titular del rival fuera, el jugador hizo +2 % de puntos y +1.5 % de asistencias frente a lo esperado; con tres o
+# más, +5 % y +3 %. Rebotes, sin efecto. Da igual que la baja sea de su posición o de otra (defensa de equipo).
+BAJAS_RIVAL = {"pts": 0.017, "fgm": 0.017, "tpm": 0.017, "ftm": 0.017, "fta": 0.017, "ast": 0.015}
+BAJAS_RIVAL_MAX = 3
+TITULAR_MIN = 26.0
+
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
 
@@ -487,6 +495,11 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
     j.enfrentamiento = marcajes.evaluar(ctx.marcajes, player_id, j.grupo, opp_id, set(fuera_rival or ()))
+    hace_10 = (date.fromisoformat(ctx.fecha) - timedelta(days=10)).isoformat()
+    for pid in fuera_rival or ():
+        rec = ctx.por_jugador.get(pid, [])[:10]
+        if rec and rec[0]["fecha"] >= hace_10 and sum(p["minutes"] for p in rec) / len(rec) >= TITULAR_MIN:
+            j.bajas_rival.append(rec[0]["name"])
     return j
 
 
@@ -563,6 +576,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
             mu_final *= ajuste
             componentes[c]["final"] = mu_final
             componentes[c]["altura"] = ajuste
+        if j.bajas_rival and c in BAJAS_RIVAL:
+            mu_final *= 1 + BAJAS_RIVAL[c] * min(len(j.bajas_rival), BAJAS_RIVAL_MAX)
+            componentes[c]["final"] = mu_final
         if j.enfrentamiento and c in ("pts", "fgm", "tpm"):
             mu_final *= j.enfrentamiento.factor
             componentes[c]["final"] = mu_final
@@ -708,6 +724,11 @@ def razones(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: 
                    "temporada (al inicio de 2025-26 estas rachas siguieron más de lo que esperaba el modelo).")
     if j.enfrentamiento:
         out.append(f"{marca(j.enfrentamiento.factor - 1)} Marcaje: {marcajes.explicar(j.enfrentamiento)}.")
+    efecto = sum(BAJAS_RIVAL.get(c, 0) for c in COMPONENTES[stat]) / len(COMPONENTES[stat]) * min(
+        len(j.bajas_rival), BAJAS_RIVAL_MAX)
+    if j.bajas_rival and efecto:
+        out.append(f"{marca(efecto, 0.005)} Bajas del rival: sin {', '.join(j.bajas_rival)} (titular"
+                   f"{'es' if len(j.bajas_rival) > 1 else ''}); +{efecto * 100:.1f}% en esta estadística.")
     for n_ in j.notas:
         out.append(f"⚠️ {n_}.")
     return out
