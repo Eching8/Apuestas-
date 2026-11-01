@@ -22,6 +22,8 @@ jobs:
     timeout-minutes: 30
     env:
       SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
+      # Respaldo si SportsGameOdds no responde (sin cupo): The Odds API, solo los partidos de las próximas 30 h.
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
       APUESTAS_TZ: America/Mexico_City
     steps:
       - uses: actions/checkout@v4

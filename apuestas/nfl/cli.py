@@ -35,6 +35,8 @@ from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, mercad
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
 from .razones import lectura_td, tendencias
 from .recolector import actualizar
+from . import theodds
+from .theodds import TheOddsApiNfl
 from .usuario import registrar as registrar_usuario
 from .validar import (buscar_jugador, interpretar, interpretar_equipo, oferta_equipo, texto_veredicto,
                       texto_veredicto_equipo, validar)
@@ -78,13 +80,23 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
 
 def _mercados(cfg: Config, nfl: NflDB, desde: str, dias: int, juegos: list[dict]) -> dict[str, Mercado]:
     """Líneas de SportsGameOdds para los partidos de la ventana, emparejadas con nflverse y guardadas. Si no
-    responden (cupo del mes agotado), las últimas guardadas de cada partido."""
+    responden (cupo del mes agotado), The Odds API para los partidos que empiezan pronto y las últimas guardadas
+    para el resto."""
     try:
-        return _descargar_mercados(cfg, nfl, desde, dias, juegos)
+        out = _descargar_mercados(cfg, nfl, desde, dias, juegos)
+        if out:
+            return out
     except Exception as e:
         log.warning("No se pudieron descargar las líneas: %s", e)
-    out = {}
+        out = {}
+    if cfg.odds_api_key:
+        try:
+            out = _mercados_theodds(cfg, nfl, juegos)
+        except Exception as e:   # sin líneas, el análisis sigue con las guardadas o con cuotas justas
+            log.warning("The Odds API no respondió: %s", e)
     for g in juegos:
+        if g["game_id"] in out:
+            continue
         guardado = mercado_guardado(nfl.conn, g)
         if guardado:
             out[g["game_id"]] = guardado[0]
@@ -111,6 +123,37 @@ def _descargar_mercados(cfg: Config, nfl: NflDB, desde: str, dias: int, juegos: 
         nfl.guardar_lineas(filas_lineas(m, juego["game_id"], capturado))
     nfl.commit()
     log.info("SportsGameOdds: %d partidos con líneas (%d consultas).", len(out), sgo.peticiones)
+    return out
+
+
+def _mercados_theodds(cfg: Config, nfl: NflDB, juegos: list[dict]) -> dict[str, Mercado]:
+    """Respaldo de The Odds API: los partidos que empiezan en las próximas `nfl_theodds_horas`, cada uno como mucho
+    una vez cada REFRESCO_HORAS y sin bajar de la reserva de créditos."""
+    api = TheOddsApiNfl(cfg.odds_api_key)
+    ahora = datetime.now(timezone.utc)
+    limite = (ahora - timedelta(hours=theodds.REFRESCO_HORAS)).isoformat()
+    recientes = {r[0] for r in nfl.conn.execute(
+        "SELECT DISTINCT game_id FROM nfl_lineas WHERE event_id LIKE ? AND captured_at >= ?",
+        (theodds.PREFIJO + "%", limite))}
+    roster = [dict(r) for r in nfl.conn.execute("SELECT player_id, name, team FROM nfl_rosters")]
+    out, capturado = {}, now_iso()
+    for p in api.partidos(ahora, ahora + timedelta(hours=cfg.nfl_theodds_horas)):
+        home, away = equipos.por_nombre_largo(p.get("home_team") or ""), equipos.por_nombre_largo(p.get("away_team") or "")
+        juego = next((g for g in juegos if g["home_team"] == home and g["away_team"] == away), None)
+        if juego is None or juego["game_id"] in recientes:
+            continue
+        creditos = api.creditos()
+        if creditos is not None and creditos < cfg.nfl_theodds_reserva + len(theodds.MERCADOS):
+            log.warning("The Odds API: quedan %d créditos (reserva %d); no pido más partidos.", creditos,
+                        cfg.nfl_theodds_reserva)
+            break
+        m = api.mercado(p)
+        emparejar(m, roster)
+        out[juego["game_id"]] = m
+        nfl.guardar_lineas(filas_lineas(m, juego["game_id"], capturado))
+    nfl.commit()
+    log.warning("The Odds API: %d partidos con líneas nuevas (%d consultas, %s créditos restantes).", len(out),
+                api.peticiones, api.restantes)
     return out
 
 
