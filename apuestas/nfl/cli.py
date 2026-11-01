@@ -11,6 +11,7 @@
     python -m apuestas nfl validar "Derrick Henry +2 TD"  # ¿es buena esta apuesta? ¿por qué la juega la gente?
     python -m apuestas nfl jugador "Josh Allen"           # ficha: rol, tendencias, rivales, próxima proyección
     python -m apuestas nfl rendimiento                    # acierto real de lo recomendado
+    python -m apuestas nfl verificar --fecha 2026-11-01   # cuotas de las apuestas reales en The Odds API y Betano
     python -m apuestas nfl backtest --desde 2025-10-01 --hasta 2026-01-05
 """
 from __future__ import annotations
@@ -613,6 +614,20 @@ def cmd_backtest(args, cfg: Config, db: Database) -> int:
     return 0
 
 
+def cmd_verificar(args, cfg: Config, db: Database) -> int:
+    from .verificar import verificar
+    if not cfg.odds_api_key:
+        print("Falta ODDS_API_KEY.")
+        return 1
+    texto = verificar(NflDB(db.conn), TheOddsApiNfl(cfg.odds_api_key), args.fecha or _hoy(cfg).isoformat(),
+                      solo_reales=not args.todas, reserva=cfg.nfl_theodds_reserva)
+    print(texto)
+    if args.salida:
+        with open(args.salida, "a", encoding="utf-8") as f:
+            f.write(texto + "\n")
+    return 0
+
+
 def registrar(sub) -> None:
     nfl = sub.add_parser("nfl", help="props, touchdowns y enfrentamientos de la NFL")
     s = nfl.add_subparsers(dest="nfl_cmd", required=True)
@@ -693,6 +708,12 @@ def registrar(sub) -> None:
 
     r = s.add_parser("rendimiento", help="acierto real de las selecciones liquidadas")
     r.set_defaults(func=cmd_rendimiento)
+
+    vf = s.add_parser("verificar", help="cuotas de las apuestas del usuario en The Odds API y si está Betano")
+    vf.add_argument("--fecha", help="AAAA-MM-DD del archivo de apuestas_usuario/nfl (por defecto, hoy)")
+    vf.add_argument("--todas", action="store_true", help="también las fantasma (gasta más créditos)")
+    vf.add_argument("--salida", help="añade el resultado en Markdown a este archivo")
+    vf.set_defaults(func=cmd_verificar)
 
     b = s.add_parser("backtest", help="calibración sobre partidos ya jugados")
     b.add_argument("--desde", required=True)

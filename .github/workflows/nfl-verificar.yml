@@ -1,0 +1,44 @@
+name: NFL verificar cuotas
+
+# A mano: comprueba con The Odds API las cuotas de las apuestas del usuario de un día
+# (apuestas_usuario/nfl/AAAA-MM-DD.json) y si Betano aparece entre las casas. Gasta pocos créditos
+# (1-2 de la búsqueda de Betano + 1 por mercado y región de cada partido que aún no empezó) y respeta la reserva.
+on:
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "AAAA-MM-DD del archivo de apuestas (vacío = hoy)"
+        required: false
+      todas:
+        description: "También las fantasma (gasta más créditos)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+      APUESTAS_TZ: America/Bogota
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Recuperar la base (solo lectura)
+        uses: actions/cache/restore@v4
+        with:
+          path: data/apuestas.db
+          key: nfl-db-none
+          restore-keys: nfl-db-
+      - name: Plantillas si no hay base
+        run: test -f data/apuestas.db || python -m apuestas nfl actualizar --sin-espn
+      - name: Verificar
+        run: |
+          python -m apuestas nfl verificar ${{ inputs.fecha && format('--fecha {0}', inputs.fecha) || '' }} \
+            ${{ inputs.todas && '--todas' || '' }} --salida "$GITHUB_STEP_SUMMARY"
