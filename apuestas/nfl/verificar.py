@@ -36,7 +36,7 @@ def buscar_betano(api: TheOddsApiNfl, regiones=("eu", "uk")) -> tuple[str | None
         datos = api._get(f"/sports/{DEPORTE}/odds", regions=region, markets="h2h", oddsFormat="decimal")
         casas = sorted({c["key"] for ev in datos for c in ev.get("bookmakers", [])})
         vistas[region] = casas
-        if CASA in casas:
+        if any(c.startswith(CASA) for c in casas):      # en uk aparece como "betano_uk"
             return region, vistas
     return None, vistas
 
@@ -60,7 +60,7 @@ def verificar(nfl: NflDB, api: TheOddsApiNfl, fecha: str, carpeta: Path = DIR, s
     region_betano, vistas = buscar_betano(api)
     for region, casas in vistas.items():
         lineas.append(f"- Casas de la NFL en la región **{region}**: {', '.join(casas) or '(ninguna)'}")
-    lineas.append(f"- **Betano**: {'sí, en la región ' + region_betano if region_betano else 'no aparece'}"
+    lineas.append(f"- **Betano**: {'sí, en la región ' + region_betano + ' (no es la de Colombia)' if region_betano else 'no aparece'}"
                   f" (créditos restantes: {api.restantes})")
     lineas.append("")
     if region_betano and region_betano not in regiones.split(","):
@@ -115,7 +115,7 @@ def verificar(nfl: NflDB, api: TheOddsApiNfl, fecha: str, carpeta: Path = DIR, s
             precios = _precios(odds[ev["id"]], p)
             casas = ", ".join(f"{k} {v:.2f}" for k, v in sorted(precios.items()))
             med = f"{median(precios.values()):.2f}" if precios else "no la ofrecen"
-            bet = f"{precios[CASA]:.2f}" if CASA in precios else "—"
+            bet = next((f"{v:.2f}" for k, v in precios.items() if k.startswith(CASA)), "—")
             lineas.append(f"| {texto} | {partido} | {p.get('cuota')} | {bet} | {med} | {casas} |")
         lineas.append("")
     lineas.append(f"Consultas: {api.peticiones}; créditos restantes: {api.restantes}.")
