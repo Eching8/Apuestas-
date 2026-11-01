@@ -441,6 +441,7 @@ tapones, pérdidas, PRA y sus combinaciones, tiros de campo y tiros libres) y or
 |---|---|---|
 | ESPN (API pública) | Calendario, box score de cada jugador, **cada tiro con sus coordenadas** (zonas), posiciones y parte de lesiones | No necesita |
 | [SportsGameOdds](https://sportsgameodds.com) | Líneas y cuotas de props de varias casas (FanDuel, DraftKings, Caesars, BetMGM...) | `SPORTSGAMEODDS_KEY`. Plan gratuito: 2.500 partidos/mes, se piden solo los del día |
+| [The Odds API](https://the-odds-api.com) | Respaldo si SportsGameOdds no responde (p. ej. sin cupo): puntos, rebotes, asistencias y triples, línea que ofrecen más casas y mediana de sus cuotas | `ODDS_API_KEY` (secreto de GitHub con el mismo nombre). Plan gratuito: 500 créditos/mes, ~4 por partido |
 
 ```bash
 python -m apuestas nba historial --desde 2025-10-21     # una vez: temporada pasada + actual (~1.400 partidos, ~15 min)

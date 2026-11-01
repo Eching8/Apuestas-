@@ -30,6 +30,7 @@ from .modelo import NOMBRES, construir_contexto
 from .nbastats import TIPOS, NbaStats, temporada_nba
 from .recolector import descargar_alturas, descargar_dia, descargar_rango
 from .sgo import SportsGameOdds, ventana_dia
+from .theodds import TheOddsApi
 
 log = logging.getLogger("apuestas")
 HISTORIAL_INICIO = date(2025, 10, 21)
@@ -104,19 +105,26 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         n = descargar_dia(espn, nba, fecha, lesiones=True)
         print(f"{descargar_alturas(espn, nba)} jugadores con estatura (plantillas de ESPN).")
         print(f"{n['partidos']} partidos el {fecha}; {n['lesiones']} jugadores en el parte de lesiones.")
+        ventana = ventana_dia(fecha, cfg.zona_horaria)
         try:
-            eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana_dia(fecha, cfg.zona_horaria))
-        except Exception as exc:   # p. ej. 429 por el límite mensual del plan: el informe sale igual, sin líneas
-            log.warning("SportsGameOdds no respondió (%s): informe sin líneas de la casa", exc)
+            eventos = SportsGameOdds(cfg.sgo_key).eventos(*ventana)
+        except Exception as exc:   # p. ej. 429 por el límite mensual del plan
+            log.warning("SportsGameOdds no respondió (%s)", exc)
             eventos = []
             sin_emparejar = [f"SIN LÍNEAS DE LA CASA HOY: SportsGameOdds no respondió ({str(exc)[:120]})"]
+        if not eventos and cfg.odds_api_key:
+            try:
+                eventos = TheOddsApi(cfg.odds_api_key).eventos(*ventana)
+                sin_emparejar = ["Líneas de The Odds API (SportsGameOdds sin respuesta)"] if eventos else sin_emparejar
+            except Exception as exc:   # sin líneas, el informe sale igual con lo que no depende de la casa
+                log.warning("The Odds API no respondió (%s)", exc)
         if eventos:   # sin respuesta no se borran las líneas que ya hubiera de una ejecución anterior
             ctx = construir_contexto(nba.conn, fecha)
             props, no_emparejadas = emparejar_props(nba, fecha, eventos, ctx)
             sin_emparejar += no_emparejadas
         else:
             props = 0
-        print(f"{len(eventos)} partidos con líneas en SportsGameOdds; {props} props emparejadas.")
+        print(f"{len(eventos)} partidos con líneas de la casa; {props} props emparejadas.")
     partidos, ctx = analizar(nba, fecha, cfg.nba_min_partidos, peso_mercado=cfg.nba_peso_mercado,
                              prob_segura=cfg.nba_prob_segura)
     picks = mejores(partidos, cfg.nba_prob_min)

@@ -148,6 +148,55 @@ class ParsersTest(unittest.TestCase):
         self.assertEqual(parse_props(ev)[0]["name"], "NICKEIL_ALEXANDERWALKER")
 
 
+class TheOddsApiTest(unittest.TestCase):
+    ODDS = {"bookmakers": [
+        {"key": "dk", "markets": [{"key": "player_points", "outcomes": [
+            {"name": "Over", "description": "LeBron James", "price": 1.9, "point": 20.5},
+            {"name": "Under", "description": "LeBron James", "price": 1.9, "point": 20.5}]}]},
+        {"key": "fd", "markets": [{"key": "player_points", "outcomes": [
+            {"name": "Over", "description": "LeBron James", "price": 1.85, "point": 20.5},
+            {"name": "Under", "description": "LeBron James", "price": 1.95, "point": 20.5}]},
+            {"key": "player_threes", "outcomes": [
+                {"name": "Over", "description": "LeBron James", "price": 1.7, "point": 1.5}]},
+            {"key": "h2h", "outcomes": [{"name": "Lakers", "price": 1.5}]}]},
+        {"key": "mgm", "markets": [{"key": "player_points", "outcomes": [
+            {"name": "Over", "description": "LeBron James", "price": 2.0, "point": 21.5},
+            {"name": "Under", "description": "LeBron James", "price": 1.8, "point": 21.5}]}]}]}
+
+    def test_parse_props(self):
+        from apuestas.nba.theodds import parse_props
+        props = {p["stat"]: p for p in parse_props(self.ODDS)}
+        # La línea que ofrecen más casas (20.5, dos casas) y la mediana de sus cuotas.
+        self.assertEqual((props["points"]["line"], props["points"]["books"]), (20.5, 2))
+        self.assertAlmostEqual(props["points"]["over_odd"], 1.875)
+        self.assertAlmostEqual(props["points"]["under_odd"], 1.925)
+        self.assertEqual((props["threes"]["over_odd"], props["threes"]["under_odd"]), (1.7, None))
+        self.assertEqual(set(props), {"points", "threes"})
+
+    def test_eventos_y_emparejar_equipos(self):
+        from datetime import datetime, timezone
+        from types import SimpleNamespace
+        from apuestas.nba.analizador import _es_equipo
+        from apuestas.nba.theodds import TheOddsApi
+
+        class Sesion:
+            def get(self, url, params, timeout):
+                datos = ([{"id": "e1", "home_team": "Los Angeles Clippers", "away_team": "Portland Trail Blazers"}]
+                         if url.endswith("/events") else TheOddsApiTest.ODDS)
+                return SimpleNamespace(status_code=200, json=lambda: datos, text="",
+                                       headers={"x-requests-remaining": "460"})
+        api = TheOddsApi("k", session=Sesion())
+        t = datetime(2026, 11, 1, tzinfo=timezone.utc)
+        evs = api.eventos(t, t)
+        self.assertEqual(evs[0]["equipos"], [("LOS_ANGELES_CLIPPERS", "PORTLAND_TRAIL_BLAZERS")])
+        self.assertEqual((api.peticiones, api.restantes), (2, "460"))
+        self.assertTrue(_es_equipo("LOS_ANGELES_CLIPPERS", "LA Clippers", "Clippers"))
+        self.assertTrue(_es_equipo("PORTLAND_TRAIL_BLAZERS", "Portland Trail Blazers", "Trail Blazers"))
+        self.assertTrue(_es_equipo("JAZZ", "Utah Jazz", "Jazz"))
+        self.assertFalse(_es_equipo("LOS_ANGELES_LAKERS", "LA Clippers", "Clippers"))
+        self.assertFalse(_es_equipo("", "LA Clippers", "Clippers"))
+
+
 class ModeloTest(unittest.TestCase):
     def test_prob_lados(self):
         o, u = prob_lados(20.5, 22.0, 40.0)
@@ -237,6 +286,11 @@ class ModeloTest(unittest.TestCase):
                                                 "byBookmaker": {"fanduel": {}}}
                                for lado in ("over", "under") for pid in ("ANGEL_PEREZ_JR_1_NBA", "JUGADOR_11_1_NBA")}}
             ctx = construir_contexto(db.conn, FECHA)
+            # Formato de The Odds API (ya normalizado): mismo emparejamiento de partido y jugador.
+            normalizado = {"equipos": [("EQUIPO_UNO", "EQUIPO_DOS")], "props": [
+                {"sgo_player_id": None, "name": "Angel Perez Jr.", "sgo_team_id": None, "stat": "points",
+                 "line": 14.5, "over_odd": 1.9, "under_odd": 1.9, "books": 2}]}
+            self.assertEqual(emparejar_props(db, FECHA, [normalizado], ctx), (1, []))
             n, sin = emparejar_props(db, FECHA, [evento], ctx)
             self.assertEqual((n, sin), (2, []))  # el nombre con tilde se empareja igual
             partidos, ctx = analizar(db, FECHA)
