@@ -29,18 +29,24 @@ class Partido:
         return f"{self.game['away_name']} @ {self.game['home_name']}"
 
 
+def _es_equipo(clave: str, nombre: str, apodo: str) -> bool:
+    """'LOS_ANGELES_CLIPPERS' (The Odds API) o 'CLIPPERS' (SportsGameOdds, nombre corto) es 'LA Clippers' de ESPN."""
+    n, a = clave_nombre(nombre), clave_nombre(apodo)
+    return bool(clave) and (clave in (n, a) or clave.endswith("_" + a))
+
+
 def emparejar_props(db: NbaDB, fecha: str, eventos: list[dict], ctx: Contexto) -> tuple[int, list[str]]:
-    """Asigna cada evento de SportsGameOdds a su partido de ESPN y cada jugador a su id de ESPN."""
-    juegos = {}
-    for g in db.games_on(fecha):
-        juegos[(clave_nombre(g["home_name"]), clave_nombre(g["away_name"]))] = g
-        # Respaldo por apodo: ESPN dice "LA Clippers" y SportsGameOdds "Los Angeles Clippers".
-        juegos[(clave_nombre(g["home_nick"]), clave_nombre(g["away_nick"]))] = g
+    """Asigna cada evento a su partido de ESPN y cada jugador a su id de ESPN. Los eventos son los de
+    SportsGameOdds o los ya normalizados de The Odds API ({"equipos": [(local, visitante)], "props": [...]})."""
+    juegos = db.games_on(fecha)
     filas, sin_emparejar = [], []
     for ev in eventos:
-        g = juegos.get(equipos_evento(ev)) or juegos.get(equipos_evento(ev, "medium"))
+        equipos = ev["equipos"] if "props" in ev else [equipos_evento(ev), equipos_evento(ev, "medium")]
+        g = next((g for local, visita in equipos for g in juegos
+                  if _es_equipo(local, g["home_name"], g["home_nick"])
+                  and _es_equipo(visita, g["away_name"], g["away_nick"])), None)
         if g is None:
-            sin_emparejar.append(" vs ".join(equipos_evento(ev)))
+            sin_emparejar.append(" vs ".join(equipos[0]))
             continue
         # Jugadores de los dos equipos según su último partido, por nombre normalizado.
         por_nombre: dict[str, str] = {}
@@ -50,7 +56,7 @@ def emparejar_props(db: NbaDB, fecha: str, eventos: list[dict], ctx: Contexto) -
             if ps[0]["team_id"] in (g["home_id"], g["away_id"]):
                 por_nombre.setdefault(clave_nombre(ps[0]["name"]), pid)
                 compacto.setdefault(clave_nombre(ps[0]["name"]).replace("_", ""), pid)
-        for p in parse_props(ev):
+        for p in ev["props"] if "props" in ev else parse_props(ev):
             pid = por_nombre.get(clave_nombre(p["name"])) or compacto.get(clave_nombre(p["name"]).replace("_", ""))
             if pid is None:
                 pid = _por_apellido(por_nombre, p["name"])

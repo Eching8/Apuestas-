@@ -32,6 +32,8 @@ jobs:
     timeout-minutes: 60
     env:
       SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
+      # Respaldo si SportsGameOdds no responde (sin cupo): The Odds API. Vacío = sin respaldo.
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
       APUESTAS_TZ: America/Bogota
     steps:
       - uses: actions/checkout@v4

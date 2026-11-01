@@ -72,6 +72,8 @@ class Config:
 
     # NBA: clave de SportsGameOdds (líneas de props) y filtros.
     sgo_key: str = field(default_factory=lambda: os.environ.get("SPORTSGAMEODDS_KEY", ""))
+    # Respaldo cuando SportsGameOdds no responde (p. ej. sin cupo): The Odds API.
+    odds_api_key: str = field(default_factory=lambda: os.environ.get("ODDS_API_KEY", ""))
     nba_prob_min: float = field(default_factory=lambda: _float("APUESTAS_NBA_PROB_MIN", 0.65))
     nba_min_partidos: int = field(default_factory=lambda: _int("APUESTAS_NBA_MIN_PARTIDOS", 8))
     # Peso de la probabilidad de la casa (sin margen) en la probabilidad final de cada prop.
