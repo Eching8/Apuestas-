@@ -2,7 +2,7 @@
 
 > **Aviso:** las apuestas implican riesgo de perder dinero. Estas probabilidades son estimaciones estadísticas, no garantías: ningún modelo acierta siempre y las combinadas multiplican el riesgo. Apuesta solo lo que puedas permitirte perder. Si el juego deja de ser un entretenimiento, busca ayuda.
 
-27 partidos. Datos hasta la semana 8 (2026); lesiones de ESPN de 2026-11-01T16:48.
+27 partidos. Datos hasta la semana 8 (2026); lesiones de ESPN de 2026-11-01T16:56.
 
 ## Traspasos y cambios de equipo recientes
 
@@ -20,8 +20,8 @@
 
 ## Bajas que mueven el reparto
 
-- ATL: Brian Robinson (RB, 30% de los acarreos) — Out (Hamstring)
 - ATL: Andy Dalton (QB, lanzó el 96% de los pases cuando jugó) — Out (Coach's Decision)
+- ATL: Brian Robinson (RB, 30% de los acarreos) — Out (Hamstring)
 - ATL: Cooper Rush (QB, lanzó el 70% de los pases cuando jugó) — Inactivo
 - CAR: AJ Dillon (RB, 20% de los acarreos) — Out (Coach's Decision)
 - CHI: Kyle Monangai (RB, 40% de los acarreos) — Out (Thumb)
@@ -40,25 +40,25 @@
 - LA: Davante Adams (WR, 19% de los envíos) — Injured Reserve (Hamstring)
 - LAC: Jake Browning (QB, lanzó el 84% de los pases cuando jugó) — Equipo de prácticas
 - LAC: David Njoku (TE, 15% de los envíos) — Reserva/IR
-- MIA: De'Von Achane (RB, 67% de los acarreos) — Reserva/IR
 - MIA: Brady Cook (QB, lanzó el 97% de los pases cuando jugó) — Equipo de prácticas
-- NE: TreVeyon Henderson (RB, 35% de los acarreos) — Out (Illness)
-- NE: Mack Hollins (WR, 17% de los envíos) — Out (Calf)
+- MIA: De'Von Achane (RB, 67% de los acarreos) — Reserva/IR
 - NE: Romeo Doubs (WR, 16% de los envíos) — Reserva/IR
 - NE: A.J. Brown (WR, 22% de los envíos) — Out (Ankle)
-- NO: Travis Etienne (RB, 39% de los acarreos) — Reserva/IR
+- NE: Mack Hollins (WR, 17% de los envíos) — Out (Calf)
+- NE: TreVeyon Henderson (RB, 35% de los acarreos) — Out (Illness)
 - NO: Zamir White (RB, 17% de los acarreos) — Equipo de prácticas
+- NO: Travis Etienne (RB, 39% de los acarreos) — Reserva/IR
 - NO: Ty Chandler (RB, 19% de los acarreos) — Reserva/IR
-- NYG: Najee Harris (RB, 24% de los acarreos) — Cortado
 - NYG: Calvin Austin III (WR, 14% de los envíos) — Reserva/IR
 - NYG: Phil Mafah (RB, 18% de los acarreos) — Equipo de prácticas
+- NYG: Najee Harris (RB, 24% de los acarreos) — Cortado
 - NYG: Tyrone Tracy Jr. (RB, 25% de los acarreos) — Injured Reserve (Hamstring)
 - PHI: Will Shipley (RB, 16% de los acarreos) — Out (Foot)
+- PHI: Tank Bigsby (RB, 31% de los acarreos) — Reserva/IR
+- PHI: Dameon Pierce (RB, 68% de los acarreos) — Injured Reserve (Undisclosed)
+- PHI: Jalen Hurts (QB titular) — Out (Calf)
 - PHI: Dontayvion Wicks (WR, 16% de los envíos) — Out (Ankle)
 - PHI: DeVonta Smith (WR, 31% de los envíos) — Out (Hamstring)
-- PHI: Tank Bigsby (RB, 31% de los acarreos) — Reserva/IR
-- PHI: Jalen Hurts (QB titular) — Out (Calf)
-- PHI: Dameon Pierce (RB, 68% de los acarreos) — Injured Reserve (Undisclosed)
 - PIT: Roman Wilson (WR, 13% de los envíos) — Out (Finger)
 - PIT: Marquez Valdes-Scantling (WR, 14% de los envíos) — Equipo de prácticas
 - PIT: Jakobie Keeney-James (WR, 20% de los envíos) — Cortado
@@ -66,47 +66,102 @@
 - SF: Deebo Samuel Sr. (WR, 14% de los envíos) — Inactivo
 - SF: Mike Evans (WR, 24% de los envíos) — Inactivo
 - TB: Emeka Egbuka (WR, 27% de los envíos) — Out (Foot)
-- TEN: Carnell Tate (WR, 26% de los envíos) — Out (Shoulder)
 - TEN: Tyjae Spears (RB, 14% de los acarreos) — Out (Knee)
-- WAS: Devin Neal (RB, 36% de los acarreos) — Equipo de prácticas
+- TEN: Carnell Tate (WR, 26% de los envíos) — Out (Shoulder)
 - WAS: Terry McLaurin (WR, 23% de los envíos) — Injured Reserve (Knee)
 - WAS: Jacory Croskey-Merritt (RB, 45% de los acarreos) — Out (Groin)
+- WAS: Devin Neal (RB, 36% de los acarreos) — Equipo de prácticas
 
 ## Combinadas del día
 
 Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últimos 10 y 60 %+ esta temporada), las menos patas posibles y ninguna moneda al aire. Con un solo partido, las patas son del mismo partido y la probabilidad tiene en cuenta cuánto se mueven juntas. La cuota es la de las mejores casas de EE. UU.: el bet builder de tu casa pagará distinto; compárala con la cuota justa.
 
-**Combinada segura A (líneas alternativas)** — acierta 80.8% (cuota justa 1.24)
+**Combinada segura A (líneas alternativas)** — acierta 81.2% (cuota justa 1.23)
+- Tre Tucker más de 0.5 recepciones (LV) — 95%, justa 1.05; pasó 10/10 últimos, 7/7 esta temporada
 - George Pickens más de 0.5 recepciones (DAL) — 95%, justa 1.05; pasó 10/10 últimos, 7/7 esta temporada
 - KC Concepcion más de 0.5 recepciones (CLE) — 95%, justa 1.06; pasó 7/7 últimos, 7/7 esta temporada
 - Sam LaPorta más de 0.5 recepciones (DET) — 95%, justa 1.06; pasó 10/10 últimos, 6/6 esta temporada
-- Tre Tucker más de 0.5 recepciones (LV) — 95%, justa 1.06; pasó 10/10 últimos, 7/7 esta temporada
+
+**Combinada segura B (principales)** — acierta 27.2% (cuota 4.26 (mejores casas de EE. UU.), cuota justa 3.68, valor +16%)
+- Daniel Jones más de 160.5 yardas de pase (IND) — 74%, 1.40 en bovada; pasó 7/10 últimos, 5/7 esta temporada
+- Ja'Marr Chase menos de 102.5 yardas por recepción (CIN) — 72%, 1.42 en bovada; pasó 8/10 últimos, 6/6 esta temporada
+- Dak Prescott menos de 301.5 yardas de pase (DAL) — 71%, 1.43 en bovada; pasó 7/10 últimos, 5/7 esta temporada
+- Quinshon Judkins menos de 59.5 yardas por tierra (CLE) — 71%, 1.50 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+
+**Segura cuota 2+** — acierta 53.0% (cuota 2.02 (mejores casas de EE. UU.), cuota justa 1.89, valor +7%)
+- Trevor Lawrence menos de 267.5 yardas de pase (JAX) — 74%, 1.42 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Ja'Marr Chase menos de 102.5 yardas por recepción (CIN) — 72%, 1.42 en bovada; pasó 8/10 últimos, 6/6 esta temporada
+
+**Segura cuota 3+** — acierta 38.1% (cuota 3.04 (mejores casas de EE. UU.), cuota justa 2.62, valor +16%)
+- Daniel Jones más de 160.5 yardas de pase (IND) — 74%, 1.40 en bovada; pasó 7/10 últimos, 5/7 esta temporada
+- Ja'Marr Chase menos de 102.5 yardas por recepción (CIN) — 72%, 1.42 en bovada; pasó 8/10 últimos, 6/6 esta temporada
+- Courtland Sutton menos de 49.5 yardas por recepción (DEN) — 71%, 1.53 en bovada; pasó 9/10 últimos, 7/7 esta temporada
+
+**Segura cuota 5+** — acierta 19.4% (cuota 6.52 (mejores casas de EE. UU.), cuota justa 5.17, valor +26%)
+- Daniel Jones más de 160.5 yardas de pase (IND) — 74%, 1.40 en bovada; pasó 7/10 últimos, 5/7 esta temporada
+- Ja'Marr Chase menos de 102.5 yardas por recepción (CIN) — 72%, 1.42 en bovada; pasó 8/10 últimos, 6/6 esta temporada
+- Dak Prescott menos de 301.5 yardas de pase (DAL) — 71%, 1.43 en bovada; pasó 7/10 últimos, 5/7 esta temporada
+- Quinshon Judkins menos de 59.5 yardas por tierra (CLE) — 71%, 1.50 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Courtland Sutton menos de 49.5 yardas por recepción (DEN) — 71%, 1.53 en bovada; pasó 9/10 últimos, 7/7 esta temporada
+
+**De valor cuota 5+** — acierta 25.2% (cuota 5.02 (mejores casas de EE. UU.), cuota justa 3.96, valor +27%)
+- Trevor Lawrence menos de 267.5 yardas de pase (JAX) — 74%, 1.42 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Quinshon Judkins menos de 59.5 yardas por tierra (CLE) — 71%, 1.50 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Courtland Sutton menos de 49.5 yardas por recepción (DEN) — 71%, 1.53 en bovada; pasó 9/10 últimos, 7/7 esta temporada
+- Joe Burrow menos de 292.5 yardas de pase (CIN) — 68%, 1.54 en bovada; pasó 7/10 últimos, 5/6 esta temporada
+
+**De valor cuota 10+** — acierta 13.8% (cuota 10.18 (mejores casas de EE. UU.), cuota justa 7.22, valor +41%)
+- Quentin Johnston menos de 41.5 yardas por recepción (LAC) — 71%, 1.48 en bovada; pasó 6/10 últimos, 3/5 esta temporada
+- Quinshon Judkins menos de 59.5 yardas por tierra (CLE) — 71%, 1.50 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Amon-Ra St. Brown menos de 87.5 yardas por recepción (DET) — 66%, 1.59 en bovada; pasó 6/10 últimos, 4/6 esta temporada
+- Khalil Shakir menos de 4.5 recepciones (BUF) — 64%, 1.62 en betmgm; pasó 6/10 últimos, 5/6 esta temporada
+- Courtland Sutton menos de 3.5 recepciones (DEN) — 64%, 1.78 en draftkings; pasó 9/10 últimos, 7/7 esta temporada
+
+**De valor cuota 15+** — acierta 9.6% (cuota 15.04 (mejores casas de EE. UU.), cuota justa 10.38, valor +45%)
+- Trevor Lawrence menos de 267.5 yardas de pase (JAX) — 74%, 1.42 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Quinshon Judkins menos de 59.5 yardas por tierra (CLE) — 71%, 1.50 en bovada; pasó 7/10 últimos, 4/6 esta temporada
+- Joe Burrow menos de 292.5 yardas de pase (CIN) — 68%, 1.54 en bovada; pasó 7/10 últimos, 5/6 esta temporada
+- Amon-Ra St. Brown menos de 87.5 yardas por recepción (DET) — 66%, 1.59 en bovada; pasó 6/10 últimos, 4/6 esta temporada
+- Khalil Shakir menos de 4.5 recepciones (BUF) — 64%, 1.62 en betmgm; pasó 6/10 últimos, 5/6 esta temporada
+- Courtland Sutton menos de 3.5 recepciones (DEN) — 64%, 1.78 en draftkings; pasó 9/10 últimos, 7/7 esta temporada
+
+**Rachas de temporada (4 patas)** — acierta 29.0% (cuota 4.34 (mejores casas de EE. UU.), cuota justa 3.45, valor +26%)
+- J.K. Dobbins más de 20.5 yardas por tierra (DEN) — 78%, 1.36 en bovada; pasó 10/10 últimos, 7/7 esta temporada
+- Rachaad White menos de 50.5 yardas por tierra (WAS) — 73%, 1.47 en bovada; pasó 9/10 últimos, 5/5 esta temporada
+- Ja'Marr Chase menos de 102.5 yardas por recepción (CIN) — 72%, 1.42 en bovada; pasó 8/10 últimos, 6/6 esta temporada
+- Courtland Sutton menos de 49.5 yardas por recepción (DEN) — 71%, 1.53 en bovada; pasó 9/10 últimos, 7/7 esta temporada
 
 **Bet builder** — acierta 58.3% (cuota justa 1.72)
 - Isaiah Likely más de 1.5 recepciones (NYG) — 80%, justa 1.24; pasó 9/10 últimos, 7/7 esta temporada
 - Malachi Fields más de 15.5 yardas por recepción (NYG) — 74%, justa 1.36; pasó 7/7 últimos, 7/7 esta temporada
 
-**Bet builder** — acierta 56.7% (cuota justa 1.77)
-- Pat Freiermuth más de 0.5 recepciones (PIT) — 88%, justa 1.14; pasó 10/10 últimos, 7/7 esta temporada
-- Jaylen Warren más de 0.5 recepciones (PIT) — 88%, justa 1.14; pasó 9/10 últimos, 7/7 esta temporada
+**Bet builder** — acierta 57.5% (cuota justa 1.74)
+- Pat Freiermuth más de 0.5 recepciones (PIT) — 89%, justa 1.13; pasó 10/10 últimos, 7/7 esta temporada
+- Jaylen Warren más de 0.5 recepciones (PIT) — 88%, justa 1.13; pasó 9/10 últimos, 7/7 esta temporada
 - Denzel Boston más de 0.5 recepciones (CLE) — 88%, justa 1.14; pasó 7/7 últimos, 7/7 esta temporada
 - KC Concepcion más de 1.5 recepciones (CLE) — 84%, justa 1.18; pasó 6/7 últimos, 6/7 esta temporada
 
-**Bet builder** — acierta 54.2% (cuota justa 1.85)
+**Bet builder** — acierta 54.2% (cuota justa 1.84)
 - Ryan Flournoy más de 0.5 recepciones (DAL) — 87%, justa 1.15; pasó 10/10 últimos, 7/7 esta temporada
 - Dak Prescott más de 0.5 TD de pase (DAL) — 85%, justa 1.17; pasó 9/10 últimos, 7/7 esta temporada
 - George Pickens más de 1.5 recepciones (DAL) — 85%, justa 1.18; pasó 9/10 últimos, 7/7 esta temporada
-- Michael Wilson más de 1.5 recepciones (ARI) — 84%, justa 1.20; pasó 10/10 últimos, 7/7 esta temporada
-
-**Bet builder** — acierta 52.7% (cuota justa 1.90)
-- Jakobi Meyers más de 0.5 recepciones (JAX) — 87%, justa 1.15; pasó 10/10 últimos, 6/6 esta temporada
-- Trevor Lawrence más de 0.5 TD de pase (JAX) — 86%, justa 1.16; pasó 8/10 últimos, 5/6 esta temporada
-- Keenan Allen más de 1.5 recepciones (IND) — 85%, justa 1.17; pasó 8/10 últimos, 5/6 esta temporada
-- Parker Washington más de 1.5 recepciones (JAX) — 80%, justa 1.25; pasó 9/10 últimos, 5/6 esta temporada
+- Michael Wilson más de 1.5 recepciones (ARI) — 84%, justa 1.19; pasó 10/10 últimos, 7/7 esta temporada
 
 **Bet builder** — acierta 52.4% (cuota justa 1.91)
 - Greg Dulcich más de 1.5 recepciones (MIA) — 74%, justa 1.35; pasó 10/10 últimos, 5/5 esta temporada
 - Drake Maye más de 173.5 yardas de pase (NE) — 72%, justa 1.39; pasó 9/10 últimos, 7/7 esta temporada
+
+**Bet builder** — acierta 49.4% (cuota justa 2.02)
+- Brock Purdy más de 0.5 TD de pase (SF) — 85%, justa 1.17; pasó 8/10 últimos, 7/7 esta temporada
+- Tre Tucker más de 1.5 recepciones (LV) — 85%, justa 1.18; pasó 10/10 últimos, 7/7 esta temporada
+- George Kittle más de 2.5 recepciones (SF) — 84%, justa 1.19; pasó 8/10 últimos, 6/7 esta temporada
+- Ashton Jeanty más de 2.5 recepciones (LV) — 81%, justa 1.24; pasó 8/10 últimos, 7/7 esta temporada
+
+**Bet builder** — acierta 49.1% (cuota justa 2.04)
+- Ryan Flournoy más de 0.5 recepciones (DAL) — 88%, justa 1.14; pasó 10/10 últimos, 7/7 esta temporada
+- Dak Prescott más de 0.5 TD de pase (DAL) — 83%, justa 1.21; pasó 9/10 últimos, 7/7 esta temporada
+- Keenan Allen más de 1.5 recepciones (IND) — 81%, justa 1.23; pasó 8/10 últimos, 5/6 esta temporada
+- CeeDee Lamb más de 2.5 recepciones (DAL) — 80%, justa 1.24; pasó 8/10 últimos, 6/7 esta temporada
 
 **Bet builder** — acierta 48.8% (cuota justa 2.05)
 - Kenneth Walker III más de 0.5 recepciones (KC) — 88%, justa 1.14; pasó 10/10 últimos, 6/6 esta temporada
@@ -114,11 +169,17 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 - Travis Kelce más de 1.5 recepciones (KC) — 82%, justa 1.22; pasó 9/10 últimos, 6/6 esta temporada
 - Bo Nix más de 14.5 pases completos (DEN) — 78%, justa 1.29; pasó 9/10 últimos, 7/7 esta temporada
 
-**Bet builder** — acierta 48.8% (cuota justa 2.05)
-- Ryan Flournoy más de 0.5 recepciones (DAL) — 88%, justa 1.14; pasó 10/10 últimos, 7/7 esta temporada
-- Dak Prescott más de 0.5 TD de pase (DAL) — 83%, justa 1.21; pasó 9/10 últimos, 7/7 esta temporada
-- Keenan Allen más de 1.5 recepciones (IND) — 81%, justa 1.24; pasó 8/10 últimos, 5/6 esta temporada
-- CeeDee Lamb más de 2.5 recepciones (DAL) — 80%, justa 1.24; pasó 8/10 últimos, 6/7 esta temporada
+**Bet builder** — acierta 48.7% (cuota justa 2.05)
+- Jakobi Meyers más de 0.5 recepciones (JAX) — 87%, justa 1.15; pasó 10/10 últimos, 6/6 esta temporada
+- Trevor Lawrence más de 0.5 TD de pase (JAX) — 86%, justa 1.16; pasó 8/10 últimos, 5/6 esta temporada
+- Parker Washington más de 1.5 recepciones (JAX) — 80%, justa 1.25; pasó 9/10 últimos, 5/6 esta temporada
+- Josh Downs más de 1.5 recepciones (IND) — 79%, justa 1.27; pasó 10/10 últimos, 7/7 esta temporada
+
+**Bet builder** — acierta 48.2% (cuota justa 2.07)
+- Michael Mayer más de 0.5 recepciones (LV) — 86%, justa 1.16; pasó 10/10 últimos, 7/7 esta temporada
+- Ashton Jeanty más de 1.5 recepciones (LV) — 83%, justa 1.21; pasó 9/10 últimos, 7/7 esta temporada
+- Tre Tucker más de 1.5 recepciones (LV) — 81%, justa 1.24; pasó 10/10 últimos, 7/7 esta temporada
+- Kirk Cousins más de 0.5 TD de pase (LV) — 77%, justa 1.29; pasó 10/10 últimos, 7/7 esta temporada
 
 **Bet builder** — acierta 48.1% (cuota justa 2.08)
 - Jared Goff más de 0.5 TD de pase (DET) — 86%, justa 1.17; pasó 10/10 últimos, 6/6 esta temporada
@@ -126,23 +187,11 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 - Amon-Ra St. Brown más de 2.5 recepciones (DET) — 82%, justa 1.22; pasó 10/10 últimos, 6/6 esta temporada
 - Greg Dulcich más de 1.5 recepciones (MIA) — 79%, justa 1.26; pasó 10/10 últimos, 5/5 esta temporada
 
-**Bet builder** — acierta 48.0% (cuota justa 2.08)
-- Brock Purdy más de 0.5 TD de pase (SF) — 85%, justa 1.17; pasó 8/10 últimos, 7/7 esta temporada
-- Tre Tucker más de 1.5 recepciones (LV) — 84%, justa 1.19; pasó 10/10 últimos, 7/7 esta temporada
-- George Kittle más de 2.5 recepciones (SF) — 84%, justa 1.19; pasó 8/10 últimos, 6/7 esta temporada
-- Ashton Jeanty más de 2.5 recepciones (LV) — 80%, justa 1.25; pasó 8/10 últimos, 7/7 esta temporada
-
-**Bet builder** — acierta 46.7% (cuota justa 2.14)
-- Michael Mayer más de 0.5 recepciones (LV) — 86%, justa 1.16; pasó 10/10 últimos, 7/7 esta temporada
-- Ashton Jeanty más de 1.5 recepciones (LV) — 81%, justa 1.23; pasó 9/10 últimos, 7/7 esta temporada
-- Tre Tucker más de 1.5 recepciones (LV) — 80%, justa 1.26; pasó 10/10 últimos, 7/7 esta temporada
-- Kirk Cousins más de 0.5 TD de pase (LV) — 77%, justa 1.29; pasó 10/10 últimos, 7/7 esta temporada
-
-**Bet builder** — acierta 45.6% (cuota justa 2.19)
+**Bet builder** — acierta 45.8% (cuota justa 2.19)
 - Jordan Addison más de 0.5 recepciones (MIN) — 87%, justa 1.15; pasó 8/10 últimos, 4/5 esta temporada
 - Jahmyr Gibbs más de 1.5 recepciones (DET) — 82%, justa 1.22; pasó 10/10 últimos, 6/6 esta temporada
 - Amon-Ra St. Brown más de 2.5 recepciones (DET) — 82%, justa 1.22; pasó 10/10 últimos, 6/6 esta temporada
-- T.J. Hockenson más de 1.5 recepciones (MIN) — 79%, justa 1.26; pasó 8/10 últimos, 5/6 esta temporada
+- T.J. Hockenson más de 1.5 recepciones (MIN) — 80%, justa 1.26; pasó 8/10 últimos, 5/6 esta temporada
 
 **Bet builder** — acierta 44.7% (cuota justa 2.23)
 - Mark Andrews más de 0.5 recepciones (BAL) — 88%, justa 1.14; pasó 10/10 últimos, 7/7 esta temporada
@@ -156,17 +205,17 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 - Bryce Young más de 16.5 pases completos (CAR) — 76%, justa 1.32; pasó 8/10 últimos, 6/7 esta temporada
 - Bo Nix más de 14.5 pases completos (DEN) — 75%, justa 1.33; pasó 9/10 últimos, 7/7 esta temporada
 
+**Bet builder** — acierta 42.8% (cuota justa 2.33)
+- Kendrick Bourne más de 0.5 recepciones (ARI) — 83%, justa 1.21; pasó 8/10 últimos, 6/6 esta temporada
+- Michael Wilson más de 1.5 recepciones (ARI) — 82%, justa 1.22; pasó 10/10 últimos, 7/7 esta temporada
+- Trey McBride más de 4.5 recepciones (ARI) — 76%, justa 1.32; pasó 9/10 últimos, 7/7 esta temporada
+- Jacoby Brissett más de 18.5 pases completos (ARI) — 76%, justa 1.32; pasó 8/10 últimos, 6/7 esta temporada
+
 **Bet builder** — acierta 42.7% (cuota justa 2.34)
 - Colston Loveland más de 1.5 recepciones (CHI) — 84%, justa 1.19; pasó 8/10 últimos, 5/7 esta temporada
 - Bucky Irving más de 0.5 recepciones (TB) — 83%, justa 1.21; pasó 8/10 últimos, 6/7 esta temporada
 - Kalif Raymond más de 0.5 recepciones (CHI) — 82%, justa 1.22; pasó 9/10 últimos, 6/7 esta temporada
 - Rome Odunze más de 1.5 recepciones (CHI) — 76%, justa 1.31; pasó 10/10 últimos, 7/7 esta temporada
-
-**Bet builder** — acierta 42.5% (cuota justa 2.35)
-- Kendrick Bourne más de 0.5 recepciones (ARI) — 83%, justa 1.21; pasó 8/10 últimos, 6/6 esta temporada
-- Michael Wilson más de 1.5 recepciones (ARI) — 82%, justa 1.22; pasó 10/10 últimos, 7/7 esta temporada
-- Jacoby Brissett más de 18.5 pases completos (ARI) — 76%, justa 1.32; pasó 8/10 últimos, 6/7 esta temporada
-- Trey McBride más de 4.5 recepciones (ARI) — 76%, justa 1.32; pasó 9/10 últimos, 7/7 esta temporada
 
 **Bet builder** — acierta 42.3% (cuota justa 2.36)
 - Xavier Worthy más de 0.5 recepciones (KC) — 88%, justa 1.13; pasó 9/10 últimos, 6/6 esta temporada
@@ -209,8 +258,8 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 - James Cook más de 11.5 acarreos (BUF) — 76%, justa 1.31; pasó 9/10 últimos, 6/6 esta temporada
 - Mark Andrews más de 1.5 recepciones (BAL) — 76%, justa 1.32; pasó 9/10 últimos, 6/7 esta temporada
 
-**Bet builder** — acierta 38.7% (cuota justa 2.58)
-- Joe Burrow más de 0.5 TD de pase (CIN) — 85%, justa 1.17; pasó 9/10 últimos, 6/6 esta temporada
+**Bet builder** — acierta 38.8% (cuota justa 2.58)
+- Joe Burrow más de 0.5 TD de pase (CIN) — 86%, justa 1.17; pasó 9/10 últimos, 6/6 esta temporada
 - Chase Brown más de 1.5 recepciones (CIN) — 77%, justa 1.30; pasó 10/10 últimos, 6/6 esta temporada
 - Tee Higgins más de 2.5 recepciones (CIN) — 76%, justa 1.31; pasó 9/10 últimos, 5/6 esta temporada
 - Tony Pollard más de 7.5 acarreos (TEN) — 75%, justa 1.33; pasó 9/10 últimos, 6/7 esta temporada
@@ -239,11 +288,11 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 - Quentin Johnston más de 10.5 yardas por recepción (LAC) — 73%, justa 1.38; pasó 8/10 últimos, 4/5 esta temporada
 - Justin Herbert más de 156.5 yardas de pase (LAC) — 72%, justa 1.38; pasó 9/10 últimos, 5/6 esta temporada
 
-**Doble de bet builders** — acierta 33.0% (cuota justa 3.03)
+**Doble de bet builders** — acierta 33.5% (cuota justa 2.98)
 - Isaiah Likely más de 1.5 recepciones (NYG) — 80%, justa 1.24; pasó 9/10 últimos, 7/7 esta temporada
 - Malachi Fields más de 15.5 yardas por recepción (NYG) — 74%, justa 1.36; pasó 7/7 últimos, 7/7 esta temporada
-- Pat Freiermuth más de 0.5 recepciones (PIT) — 88%, justa 1.14; pasó 10/10 últimos, 7/7 esta temporada
-- Jaylen Warren más de 0.5 recepciones (PIT) — 88%, justa 1.14; pasó 9/10 últimos, 7/7 esta temporada
+- Pat Freiermuth más de 0.5 recepciones (PIT) — 89%, justa 1.13; pasó 10/10 últimos, 7/7 esta temporada
+- Jaylen Warren más de 0.5 recepciones (PIT) — 88%, justa 1.13; pasó 9/10 últimos, 7/7 esta temporada
 - Denzel Boston más de 0.5 recepciones (CLE) — 88%, justa 1.14; pasó 7/7 últimos, 7/7 esta temporada
 - KC Concepcion más de 1.5 recepciones (CLE) — 84%, justa 1.18; pasó 6/7 últimos, 6/7 esta temporada
 
@@ -257,37 +306,93 @@ Con el criterio de CLAUDE.md: jugadores constantes (sin alertas, 7+ de sus últi
 
 Probabilidad final = mezcla del modelo y la casa sin margen. EV = probabilidad × mejor cuota − 1.
 
-_Ninguna selección supera los filtros de valor (o no hay líneas de las casas todavía)._
+| Selección | Partido | Prob. | Modelo | Casa | Mejor cuota | EV | Por qué |
+|---|---|---|---|---|---|---|---|
+| Reggie Virgil anota | ARI @ DAL | 12% | 16% | 10% | 12.00 (+1100) betrivers | +48% | zona roja: 0.13 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+7%); mejor precio en betrivers: 12.00 frente a 9.25 de consenso |
+| KeAndre Lambert-Smith anota | LAC @ LA | 13% | 14% | 10% | 11.00 (+1000) fanduel | +41% | LA concede a los WR el 66% de sus TD por recepción (liga 59%) (+13%); mejor precio en fanduel: 11.00 frente a 9.25 de consenso |
+| Kyle Pitts anota | ATL @ TB | 31% | 36% | 23% | 4.30 (+330) draftkings | +34% | TB concede a los TE el 39% de sus TD por recepción (liga 29%) (+32%); zona roja: 0.45 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+8%) |
+| Jacoby Brissett anota | ARI @ DAL | 16% | 18% | 12% | 8.50 (+750) draftkings | +33% | DAL concede 0.22 TD por tierra por partido a los QB (liga 0.19; 13º que más de 32) (+14%); contra Cowboys: 1.0 (1/1 pasando la línea) |
+| Austin Ekeler anota | PHI @ WAS | 19% | 22% | 14% | 7.00 (+600) draftkings | +32% | como local promedia 0.3 (frente a 0.1); el modelo le da 22% y la casa 14%: la cuota paga más de lo que vale |
+| Cam Ward anota | TEN @ CIN | 19% | 21% | 14% | 7.00 (+600) draftkings | +32% | CIN concede 0.24 TD por tierra por partido a los QB (liga 0.19; 9º que más de 32) (+28%); CIN concede a los QB el 24% de sus TD por tierra (liga 20%) (+21%) |
+| Bam Knight anota | ARI @ DAL | 25% | 28% | 19% | 5.30 (+430) fanduel | +31% | DAL concede a los RB el 14% de sus TD por recepción (liga 12%) (+14%); zona roja: 0.31 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (+7%) |
+| Jalen Nailor anota | LV @ NYJ | 17% | 18% | 14% | 7.50 (+650) betrivers | +27% | zona roja: 0.17 TD esperados ahí contra Jets (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+13%); Jets es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (8 partidos) frente a 0.1 contra el resto |
+| Sean Tucker anota | ATL @ TB | 21% | 24% | 16% | 6.00 (+500) draftkings | +27% | Falcons es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.5 (8 partidos) frente a 0.4 contra el resto; el modelo le da 24% y la casa 16%: la cuota paga más de lo que vale |
+| Jahmyr Gibbs menos de 68.5 yardas por tierra | MIN @ DET | 38% | 43% | 28% | 3.30 (+230) bovada | +26% | Vikings es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 53 (7 partidos) frente a 93 contra el resto; el modelo le da 43% y la casa 28%: la cuota paga más de lo que vale |
+| Derrick Henry menos de 60.5 yardas por tierra | BAL @ BUF | 37% | 42% | 28% | 3.40 (+240) bovada | +25% | BUF permite 3.97 yardas por acarreo a los RB (media 4.24; 12º que menos de 32 en yardas por acarreo) (-4%); el modelo le da 42% y la casa 28%: la cuota paga más de lo que vale |
+| Mason Taylor anota | LV @ NYJ | 26% | 29% | 21% | 4.75 (+375) betrivers | +25% | LV concede a los TE el 39% de sus TD por recepción (liga 29%) (+32%); Raiders es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (6 partidos) frente a 0.1 contra el resto |
+| Brian Thomas Jr. anota | IND @ JAX | 21% | 23% | 16% | 6.00 (+500) draftkings | +24% | como local promedia 0.3 (frente a 0.2); mejor precio en draftkings: 6.00 frente a 5.75 de consenso |
+| T.J. Hockenson anota | MIN @ DET | 34% | 37% | 28% | 3.60 (+260) betrivers | +22% | DET concede a los TE el 45% de sus TD por recepción (liga 29%) (+35%); zona roja: 0.50 TD esperados ahí contra Lions (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+11%) |
+| Drake London menos de 58.5 yardas por recepción | ATL @ TB | 40% | 45% | 31% | 3.05 (+205) bovada | +21% | TB concede 7.4 yardas por envío a los WR (media 8.0) (-5%); contra Buccaneers: 55, 34, 154 (2/3 pasando la línea) |
+| Bijan Robinson menos de 61.5 yardas por tierra | ATL @ TB | 36% | 40% | 28% | 3.40 (+240) bovada | +21% | TB permite 3.99 yardas por acarreo a los RB (media 4.24; 11º que menos de 32 en yardas por acarreo) (-4%); el modelo le da 40% y la casa 28%: la cuota paga más de lo que vale |
+| Tanner McKee menos de 177.5 yardas de pase | PHI @ WAS | 42% | 48% | 33% | 2.85 (+185) bovada | +21% | como visitante promedia 0.0 (frente a 146); el modelo le da 48% y la casa 33%: la cuota paga más de lo que vale |
+| Kyler Murray menos de 15.5 yardas por tierra | MIN @ DET | 37% | 42% | 29% | 3.25 (+225) bovada | +21% | DET concede 16.3 yardas por tierra por partido a los QB (media 17.7; 16º que más de 32) (-8%); Lions es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 16 (7 partidos) frente a 36 contra el resto |
+| Bijan Robinson menos de 20.5 yardas por recepción | ATL @ TB | 42% | 47% | 33% | 2.85 (+185) bovada | +20% | el modelo le da 47% y la casa 33%: la cuota paga más de lo que vale |
+| J.K. Dobbins más de 40.5 yardas por tierra | KC @ DEN | 43% | 48% | 33% | 2.80 (+180) bovada | +20% | pasó más de 40.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/7); últimos: 23, 41, 68, 40, 49; como local promedia 71 (frente a 56) |
+| Brian Thomas Jr. más de 1.5 recepciones | IND @ JAX | 45% | 50% | 36% | 2.65 (+165) betrivers | +19% | pasó más de 1.5 recepciones en 2 de sus últimos 5 y 7 de 10 (esta temporada 3/6); últimos: 0.0, 0.0, 2.0, 1.0, 3.0; contra Colts: 4.0, 3.0, 7.0, 5.0 (4/4 pasando la línea) |
+| James Cook menos de 64.5 yardas por tierra | BAL @ BUF | 36% | 40% | 28% | 3.35 (+235) bovada | +19% | BAL permite 3.90 yardas por acarreo a los RB (media 4.24; 6º que menos de 32 en yardas por acarreo) (-6%); contra Ravens: 44, 67, 39 (2/3 pasando la línea) |
+| Kyler Murray menos de 195.5 yardas de pase | MIN @ DET | 42% | 46% | 33% | 2.85 (+185) bovada | +19% | el modelo le da 46% y la casa 33%: la cuota paga más de lo que vale |
+| Treylon Burks anota | PHI @ WAS | 20% | 24% | 17% | 6.00 (+500) draftkings | +18% | PHI concede a los WR el 66% de sus TD por recepción (liga 59%) (+12%); mejor precio en draftkings: 6.00 frente a 5.45 de consenso |
+| Bucky Irving menos de 49.5 yardas por tierra | ATL @ TB | 32% | 36% | 25% | 3.70 (+270) bovada | +18% | contra Falcons: 60, 37, 44, 44 (3/4 pasando la línea); Falcons es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 57 (9 partidos) frente a 84 contra el resto |
+| Ja'Kobi Lane anota | BAL @ BUF | 28% | 34% | 24% | 4.20 (+320) betrivers | +18% | BUF concede a los WR el 68% de sus TD por recepción (liga 59%) (+16%); mejor precio en betrivers: 4.20 frente a 3.90 de consenso |
+| Ashton Jeanty menos de 40.5 yardas por tierra | LV @ NYJ | 44% | 49% | 35% | 2.65 (+165) bovada | +18% | racha: 3 partidos seguidos pasando esta línea; el modelo le da 49% y la casa 35%: la cuota paga más de lo que vale |
+| Tre Harris menos de 23.5 yardas por recepción | LAC @ LA | 42% | 47% | 33% | 2.80 (+180) bovada | +18% | LA concede 7.3 yardas por envío a los WR (media 8.0) (-6%); Rams es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 20 (9 partidos) frente a 30 contra el resto |
+| Ladd McConkey menos de 3.5 recepciones | LAC @ LA | 53% | 68% | 44% | 2.20 (+120) fanduel | +18% | LA permite 57% de recepciones a los WR (media 62%) (-7%); pasó menos de 3.5 recepciones en 3 de sus últimos 5 y 7 de 10 (esta temporada 3/5); últimos: 1.0, 0.0, 4.0, 3.0, 5.0 |
+| Oronde Gadsden II anota | LAC @ LA | 16% | 17% | 13% | 7.50 (+650) draftkings | +17% | zona roja: 0.21 TD esperados ahí contra Rams (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+14%); mejor precio en draftkings: 7.50 frente a 7.00 de consenso |
+
+## Las más probables (con cuota jugable)
+
+| Selección | Partido | Prob. | Modelo | Casa | Mejor cuota | EV | Por qué |
+|---|---|---|---|---|---|---|---|
+| J.K. Dobbins más de 20.5 yardas por tierra | KC @ DEN | 78% | 83% | 69% | 1.36 (-278) bovada | +6% | pasó más de 20.5 yardas por tierra en 5 de sus últimos 5 y 10 de 10 (esta temporada 7/7); últimos: 23, 41, 68, 40, 49; racha: 31 partidos seguidos pasando esta línea |
+| Aaron Jones más de 19.5 yardas por tierra | MIN @ DET | 76% | 86% | 70% | 1.34 (-294) bovada | +2% | pasó más de 19.5 yardas por tierra en 5 de sus últimos 5 y 10 de 10 (esta temporada 6/6); últimos: 26, 113, 94, 58, 105; racha: 10 partidos seguidos pasando esta línea |
+| Kyler Murray menos de 35.5 yardas por tierra | MIN @ DET | 75% | 87% | 68% | 1.38 (-263) bovada | +4% | DET concede 16.3 yardas por tierra por partido a los QB (media 17.7; 16º que más de 32) (-8%); Lions es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 16 (7 partidos) frente a 36 contra el resto |
+| Elijah Mitchell menos de 36.5 yardas por tierra | PHI @ WAS | 74% | 100% | 66% | 1.42 (-238) bovada | +6% | como visitante promedia 0.0 (frente a 11); el modelo le da 100% y la casa 66%: la cuota paga más de lo que vale |
+| Daniel Jones más de 160.5 yardas de pase | IND @ JAX | 74% | 78% | 67% | 1.40 (-250) bovada | +4% | JAX permite 7.34 yardas por pase (media 7.04; 9º que más de 32 en yardas por pase) (+3%); pasó más de 160.5 yardas de pase en 3 de sus últimos 5 y 7 de 10 (esta temporada 5/7); últimos: 108, 269, 267, 143, 235 |
+| Jared Goff menos de 289.5 yardas de pase | MIN @ DET | 74% | 79% | 65% | 1.43 (-233) bovada | +6% | MIN permite 6.34 yardas por pase (media 7.04; 2º que menos de 32 en yardas por pase) (-6%); contra Vikings: 197, 284, 231, 280 (4/4 pasando la línea) |
+| Malik Willis menos de 42.5 yardas por tierra | NE @ MIA | 74% | 86% | 66% | 1.42 (-238) bovada | +5% | NE concede 13.5 yardas por tierra por partido a los QB (media 17.7; 7º que menos de 32) (-24%); pasó menos de 42.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/6); últimos: 37, 74, 11, 56, 6.0 |
+| Trevor Lawrence menos de 267.5 yardas de pase | IND @ JAX | 74% | 78% | 66% | 1.42 (-238) bovada | +4% | pasó menos de 267.5 yardas de pase en 3 de sus últimos 5 y 7 de 10 (esta temporada 4/6); últimos: 306, 331, 227, 182, 189; contra Colts: 263, 244, 371 (2/3 pasando la línea) |
+| Jonah Coleman menos de 54.5 yardas por tierra | KC @ DEN | 73% | 88% | 63% | 1.48 (-208) bovada | +8% | KC permite 3.67 yardas por acarreo a los RB (media 4.24; 2º que menos de 32 en yardas por acarreo) (-10%); pasó menos de 54.5 yardas por tierra en 3 de sus últimos 3 y 3 de 3 (esta temporada 3/3); últimos: 54, 39, 0.0 |
+| Drake Maye menos de 35.5 yardas por tierra | NE @ MIA | 73% | 76% | 68% | 1.38 (-263) bovada | +1% | MIA concede 12.9 yardas por tierra por partido a los QB (media 17.7; 4º que menos de 32) (-27%); pasó menos de 35.5 yardas por tierra en 4 de sus últimos 5 y 6 de 10 (esta temporada 5/7); últimos: 26, 24, 25, 54, 18 |
+| Rachaad White menos de 50.5 yardas por tierra | PHI @ WAS | 73% | 77% | 64% | 1.47 (-213) bovada | +7% | pasó menos de 50.5 yardas por tierra en 5 de sus últimos 5 y 9 de 10 (esta temporada 5/5); últimos: 27, 18, 35, 43, 22; racha: 9 partidos seguidos pasando esta línea |
+| Ja'Marr Chase menos de 102.5 yardas por recepción | TEN @ CIN | 72% | 75% | 66% | 1.42 (-238) bovada | +2% | pasó menos de 102.5 yardas por recepción en 5 de sus últimos 5 y 8 de 10 (esta temporada 6/6); últimos: 62, 77, 27, 98, 75; racha: 8 partidos seguidos pasando esta línea |
+| Amon-Ra St. Brown menos de 97.5 yardas por recepción | MIN @ DET | 72% | 75% | 67% | 1.41 (-244) bovada | +1% | MIN concede 7.5 yardas por envío a los WR (media 8.0) (-5%); pasó menos de 97.5 yardas por recepción en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/6); últimos: 153, 69, 75, 19, 142 |
+| Tez Johnson menos de 41.5 yardas por recepción | ATL @ TB | 72% | 76% | 63% | 1.48 (-208) bovada | +6% | pasó menos de 41.5 yardas por recepción en 4 de sus últimos 5 y 8 de 10 (esta temporada 5/7); últimos: 33, 7.0, 64, 17, 8.0; contra Falcons: 0.0, 0.0 (2/2 pasando la línea) |
+| Quentin Johnston menos de 41.5 yardas por recepción | LAC @ LA | 71% | 76% | 63% | 1.48 (-208) bovada | +6% | LA concede 7.3 yardas por envío a los WR (media 8.0) (-6%); pasó menos de 41.5 yardas por recepción en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/5); últimos: 57, 44, 40, 7.0, 17 |
+| Keenan Allen más de 24.5 yardas por recepción | IND @ JAX | 71% | 74% | 66% | 1.42 (-238) bovada | +1% | JAX concede 9.0 yardas por envío a los WR (media 8.0) (+9%); pasó más de 24.5 yardas por recepción en 4 de sus últimos 5 y 8 de 10 (esta temporada 5/6); últimos: 31, 82, 45, 63, 5.0 |
+| Dak Prescott menos de 301.5 yardas de pase | ARI @ DAL | 71% | 74% | 65% | 1.43 (-233) bovada | +2% | pasó menos de 301.5 yardas de pase en 3 de sus últimos 5 y 7 de 10 (esta temporada 5/7); últimos: 212, 258, 316, 335, 276; contra Cardinals: 250 (1/1 pasando la línea) |
+| Quinshon Judkins menos de 59.5 yardas por tierra | CLE @ PIT | 71% | 76% | 62% | 1.50 (-200) bovada | +7% | PIT permite 3.84 yardas por acarreo a los RB (media 4.24; 5º que menos de 32 en yardas por acarreo) (-7%); pasó menos de 59.5 yardas por tierra en 3 de sus últimos 5 y 7 de 10 (esta temporada 4/6); últimos: 96, 44, 53, 70, 21 |
+| Courtland Sutton menos de 49.5 yardas por recepción | KC @ DEN | 71% | 76% | 62% | 1.53 (-189) bovada | +9% | KC concede 7.5 yardas por envío a los WR (media 8.0) (-4%); pasó menos de 49.5 yardas por recepción en 5 de sus últimos 5 y 9 de 10 (esta temporada 7/7); últimos: 45, 19, 18, 4.0, 46 |
+| Joe Burrow menos de 302.5 yardas de pase | TEN @ CIN | 71% | 74% | 65% | 1.43 (-233) bovada | +2% | pasó menos de 302.5 yardas de pase en 4 de sus últimos 5 y 7 de 10 (esta temporada 5/6); últimos: 292, 190, 428, 282, 207; contra Titans: 271 (1/1 pasando la línea) |
 
 ## ¿Quién anota? Probabilidad de touchdown
 
 | Jugador | Equipo | vs | TD esp. | P(anota) | Cuota justa | Mejor cuota (EV) | P(2+) | Cuota justa 2+ | Mejor cuota 2+ (EV) | P(primer TD) |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Jahmyr Gibbs (RB) | DET | MIA 11-08 | 1.11 | 65% | 1.53 (-189) | - | 30.2% | 3.31 (+231) | - | 20.0% |
-| Jahmyr Gibbs (RB) | DET | MIN 11-01 | 1.05 | 64% | 1.57 (-175) | - | 28.3% | 3.53 (+253) | - | 22.1% |
+| Jahmyr Gibbs (RB) | DET | MIN 11-01 | 1.05 | 64% | 1.57 (-175) | 1.43 (-233) -8% | 28.3% | 3.53 (+253) | 3.30 (+230) -6% | 22.1% |
 | Kenneth Walker III (RB) | KC | NYJ 11-08 | 0.99 | 62% | 1.62 (-161) | - | 26.2% | 3.82 (+282) | - | 21.8% |
-| Javonte Williams (RB) | DAL | ARI 11-01 | 0.93 | 59% | 1.69 (-145) | - | 23.9% | 4.19 (+319) | - | 16.1% |
-| Derrick Henry (RB) | BAL | BUF 11-01 | 0.84 | 56% | 1.80 (-125) | - | 20.8% | 4.81 (+381) | - | 14.0% |
-| Kyren Williams (RB) | LA | LAC 11-01 | 0.83 | 55% | 1.80 (-125) | - | 20.5% | 4.87 (+387) | - | 16.3% |
+| Javonte Williams (RB) | DAL | ARI 11-01 | 0.93 | 59% | 1.69 (-145) | 1.43 (-233) -12% | 23.9% | 4.19 (+319) | 3.25 (+225) -17% | 16.2% |
+| Derrick Henry (RB) | BAL | BUF 11-01 | 0.84 | 56% | 1.80 (-125) | 1.48 (-208) -14% | 20.8% | 4.81 (+381) | 3.60 (+260) -17% | 14.0% |
+| Kyren Williams (RB) | LA | LAC 11-01 | 0.83 | 55% | 1.80 (-125) | 1.80 (-125) -1% | 20.5% | 4.87 (+387) | 6.00 (+500) +17% | 16.3% |
 | Christian McCaffrey (RB) | SF | LV 11-08 | 0.83 | 55% | 1.81 (-123) | - | 20.4% | 4.90 (+390) | - | 15.2% |
-| Kenneth Walker III (RB) | KC | DEN 11-01 | 0.82 | 55% | 1.83 (-120) | - | 19.9% | 5.03 (+403) | - | 19.3% |
+| Kenneth Walker III (RB) | KC | DEN 11-01 | 0.82 | 55% | 1.83 (-120) | 1.71 (-141) -6% | 19.9% | 5.03 (+403) | 5.60 (+460) +13% | 19.3% |
 | Kyren Williams (RB) | LA | WAS 11-08 | 0.81 | 54% | 1.84 (-119) | - | 19.7% | 5.07 (+407) | - | 14.1% |
 | Javonte Williams (RB) | DAL | IND 11-08 | 0.81 | 54% | 1.84 (-119) | - | 19.5% | 5.12 (+412) | - | 15.4% |
 | Josh Jacobs (RB) | GB | NE 11-08 | 0.78 | 53% | 1.88 (-114) | - | 18.8% | 5.32 (+432) | - | 15.4% |
 | Chuba Hubbard (RB) | CAR | DEN 11-08 | 0.77 | 52% | 1.91 (-110) | - | 18.1% | 5.52 (+452) | - | 15.8% |
 | Chase Brown (RB) | CIN | ATL 11-08 | 0.76 | 52% | 1.92 (-109) | - | 17.8% | 5.60 (+460) | - | 14.1% |
-| Jonathan Taylor (RB) | IND | DAL 11-08 | 0.75 | 52% | 1.94 (-106) | - | 17.5% | 5.71 (+471) | - | 14.3% |
+| Jonathan Taylor (RB) | IND | DAL 11-08 | 0.75 | 52% | 1.93 (-108) | - | 17.6% | 5.69 (+469) | - | 14.3% |
 | Puka Nacua (WR) | LA | WAS 11-08 | 0.72 | 50% | 1.98 (-102) | - | 16.6% | 6.03 (+503) | - | 12.5% |
 | Derrick Henry (RB) | BAL | JAX 11-05 | 0.72 | 50% | 1.99 (-101) | - | 16.4% | 6.09 (+509) | - | 13.2% |
-| Chase Brown (RB) | CIN | TEN 11-01 | 0.70 | 49% | 2.02 (+102) | - | 15.9% | 6.28 (+528) | - | 13.9% |
+| Chase Brown (RB) | CIN | TEN 11-01 | 0.71 | 50% | 2.01 (+101) | 1.71 (-141) -11% | 16.1% | 6.19 (+519) | 5.40 (+440) -7% | 13.9% |
 | D'Andre Swift (RB) | CHI | TB 11-08 | 0.70 | 49% | 2.03 (+103) | - | 15.8% | 6.32 (+532) | - | 14.2% |
 | Jaxon Smith-Njigba (WR) | SEA | ARI 11-08 | 0.70 | 49% | 2.03 (+103) | - | 15.8% | 6.33 (+533) | - | 15.1% |
-| Puka Nacua (WR) | LA | LAC 11-01 | 0.70 | 49% | 2.03 (+103) | - | 15.7% | 6.35 (+535) | - | 13.6% |
+| Puka Nacua (WR) | LA | LAC 11-01 | 0.70 | 49% | 2.03 (+103) | 1.85 (-118) -8% | 15.7% | 6.35 (+535) | 6.50 (+550) +4% | 13.6% |
 | D'Andre Swift (RB) | CHI | SEA 11-02 | 0.70 | 49% | 2.03 (+103) | - | 15.7% | 6.36 (+536) | - | 14.8% |
+| Ashton Jeanty (RB) | LV | NYJ 11-01 | 0.69 | 49% | 2.05 (+105) | 2.00 (+100) -4% | 15.4% | 6.50 (+550) | 8.00 (+700) +17% | 13.7% |
 | George Kittle (TE) | SF | LV 11-08 | 0.68 | 48% | 2.07 (+107) | - | 15.2% | 6.60 (+560) | - | 12.4% |
-| James Cook (RB) | BUF | BAL 11-01 | 0.67 | 48% | 2.08 (+108) | - | 15.0% | 6.67 (+567) | - | 11.2% |
-| Ashton Jeanty (RB) | LV | NYJ 11-01 | 0.67 | 48% | 2.08 (+108) | - | 14.9% | 6.73 (+573) | - | 13.3% |
-| Bucky Irving (RB) | TB | ATL 11-01 | 0.66 | 47% | 2.11 (+111) | - | 14.5% | 6.89 (+589) | - | 13.9% |
+| James Cook (RB) | BUF | BAL 11-01 | 0.67 | 48% | 2.08 (+108) | 1.62 (-161) -17% | 15.0% | 6.67 (+567) | 4.80 (+380) -18% | 11.2% |
+| Bucky Irving (RB) | TB | ATL 11-01 | 0.66 | 47% | 2.11 (+111) | 2.10 (+110) -0% | 14.5% | 6.89 (+589) | 8.00 (+700) +13% | 13.9% |
 
 ### La lectura de los mejores candidatos
 
@@ -315,7 +420,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 7. Su temporada: anotó en 5 de 6 partidos (9 TD); últimos 5: 0, 2, 1, 3, 1.
 8. En la zona roja: Vikings concede 0.54 TD por partido a los RB dentro de la 20 (liga 0.74, 7º que menos concede de 32); hoy se le esperan 4.1 acarreos y 0.6 envíos ahí (0.1 a la zona de anotación), 0.95 TD esperados en la zona roja y 13% de recibir 2+ envíos ahí.
 9. Números: 1.05 TD esperados → anota 64%, 2+ TD 28.3%.
-10. Conclusión: anota: sin línea; cuota justa 1.57, juégala solo por encima de 1.63; 2+ TD: sin línea; cuota justa 3.53, juégala solo por encima de 3.67.
+10. Conclusión: la lógica puede ser buena, pero a estos precios no hay valor (anota a 1.43 en draftkings (probabilidad final 65%, valor esperado -8%); 2+ TD a 3.30 en draftkings (probabilidad final 28%, valor esperado -6%)).
 
 **Kenneth Walker III** (RB, KC vs NYJ, 11-08)
 1. El partido: Chiefs espera 26.5 puntos (total y spread de las casas) y es favorito por 9.5; eso son unos 2.8 TD, 1.1 por tierra y 1.7 por aire.
@@ -339,7 +444,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 7. Su temporada: anotó en 6 de 7 partidos (9 TD); últimos 5: 1, 1, 1, 3, 1.
 8. En la zona roja: Cardinals concede 0.89 TD por partido a los RB dentro de la 20 (liga 0.74, 9º que más concede de 32); hoy se le esperan 4.1 acarreos y 0.3 envíos ahí (0.0 a la zona de anotación), 0.87 TD esperados en la zona roja y 3% de recibir 2+ envíos ahí.
 9. Números: 0.93 TD esperados → anota 59%, 2+ TD 23.9%.
-10. Conclusión: anota: sin línea; cuota justa 1.69, juégala solo por encima de 1.76; 2+ TD: sin línea; cuota justa 4.19, juégala solo por encima de 4.36.
+10. Conclusión: la lógica puede ser buena, pero a estos precios no hay valor (anota a 1.43 en betmgm (probabilidad final 62%, valor esperado -12%); 2+ TD a 3.25 en draftkings (probabilidad final 26%, valor esperado -17%)).
 
 **Derrick Henry** (RB, BAL vs BUF, 11-01)
 1. El partido: Ravens espera 25.8 puntos (total y spread de las casas) y es no favorito por 3.0; eso son unos 2.8 TD, 1.1 por tierra y 1.7 por aire.
@@ -351,7 +456,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 7. Su temporada: anotó en 5 de 7 partidos (8 TD); últimos 5: 0, 0, 1, 1, 2.
 8. En la zona roja: Bills concede 1.07 TD por partido a los RB dentro de la 20 (liga 0.74, 3º que más concede de 32); hoy se le esperan 4.2 acarreos y 0.2 envíos ahí (0.0 a la zona de anotación), 0.87 TD esperados en la zona roja y 1% de recibir 2+ envíos ahí.
 9. Números: 0.84 TD esperados → anota 56%, 2+ TD 20.8%.
-10. Conclusión: anota: sin línea; cuota justa 1.8, juégala solo por encima de 1.87; 2+ TD: sin línea; cuota justa 4.81, juégala solo por encima de 5.00.
+10. Conclusión: la lógica puede ser buena, pero a estos precios no hay valor (anota a 1.48 en draftkings (probabilidad final 58%, valor esperado -14%); 2+ TD a 3.60 en fanduel (probabilidad final 23%, valor esperado -17%)).
 
 **Kyren Williams** (RB, LA vs LAC, 11-01)
 1. El partido: Rams espera 26.0 puntos (total y spread de las casas) y es favorito por 6.5; eso son unos 3.2 TD, 1.4 por tierra y 1.8 por aire.
@@ -363,7 +468,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 7. Su temporada: anotó en 5 de 7 partidos (6 TD); últimos 5: 1, 0, 1, 2, 0.
 8. En la zona roja: Chargers concede 0.75 TD por partido a los RB dentro de la 20 (liga 0.74, 16º que menos concede de 32); hoy se le esperan 2.8 acarreos y 0.7 envíos ahí (0.1 a la zona de anotación), 0.70 TD esperados en la zona roja y 15% de recibir 2+ envíos ahí.
 9. Números: 0.83 TD esperados → anota 55%, 2+ TD 20.5%.
-10. Conclusión: anota: sin línea; cuota justa 1.8, juégala solo por encima de 1.87; 2+ TD: sin línea; cuota justa 4.87, juégala solo por encima de 5.06.
+10. Conclusión: la jugada con valor es 2+ TD a 6.00 en fanduel (probabilidad final 20%, valor esperado +17%).
 
 **Christian McCaffrey** (RB, SF vs LV, 11-08)
 1. El partido: 49ers espera 29.2 puntos (total y spread de las casas) y es favorito por 10.0; eso son unos 3.5 TD, 1.4 por tierra y 2.1 por aire.
@@ -387,7 +492,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 7. Su temporada: anotó en 4 de 6 partidos (8 TD); últimos 5: 0, 2, 2, 2, 0.
 8. En la zona roja: Broncos concede 0.59 TD por partido a los RB dentro de la 20 (liga 0.74, 10º que menos concede de 32); hoy se le esperan 3.8 acarreos y 0.7 envíos ahí (0.2 a la zona de anotación), 0.62 TD esperados en la zona roja y 16% de recibir 2+ envíos ahí.
 9. Números: 0.82 TD esperados → anota 55%, 2+ TD 19.9%.
-10. Conclusión: anota: sin línea; cuota justa 1.83, juégala solo por encima de 1.90; 2+ TD: sin línea; cuota justa 5.03, juégala solo por encima de 5.23.
+10. Conclusión: la jugada con valor es 2+ TD a 5.60 en fanduel (probabilidad final 20%, valor esperado +13%).
 
 ### Cruces de la zona roja: defensa débil contra una posición y quién la ocupa
 
@@ -396,7 +501,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - **Bills contra los RB**: concede 1.07 TD por partido dentro de la 20 (1.4× la liga, 3º que más concede de 32) → **Derrick Henry** (BAL), 0.87 TD esperados en la zona roja, 0.2 envíos y 4.2 acarreos ahí; anota 56%, 2+ TD 20.8%.
 - **Lions contra los TE**: concede 0.94 TD por partido dentro de la 20 (2.4× la liga, 1º que más concede de 32) → **T.J. Hockenson** (MIN), 0.50 TD esperados en la zona roja, 1.3 envíos y 0.0 acarreos ahí; anota 37%, 2+ TD 8.3%.
 - **Raiders contra los TE**: concede 0.81 TD por partido dentro de la 20 (2.1× la liga, 3º que más concede de 32) → **George Kittle** (SF), 0.57 TD esperados en la zona roja, 1.5 envíos y 0.0 acarreos ahí; anota 48%, 2+ TD 15.2%.
-- **Cowboys contra los RB**: concede 1.08 TD por partido dentro de la 20 (1.5× la liga, 2º que más concede de 32) → **Jonathan Taylor** (IND), 0.76 TD esperados en la zona roja, 0.2 envíos y 3.8 acarreos ahí; anota 52%, 2+ TD 17.5%.
+- **Cowboys contra los RB**: concede 1.08 TD por partido dentro de la 20 (1.5× la liga, 2º que más concede de 32) → **Jonathan Taylor** (IND), 0.77 TD esperados en la zona roja, 0.3 envíos y 3.8 acarreos ahí; anota 52%, 2+ TD 17.6%.
 - **Falcons contra los RB**: concede 1.12 TD por partido dentro de la 20 (1.5× la liga, 1º que más concede de 32) → **Chase Brown** (CIN), 0.74 TD esperados en la zona roja, 0.7 envíos y 2.3 acarreos ahí; anota 52%, 2+ TD 17.8%.
 - **Cardinals contra los RB**: concede 0.89 TD por partido dentro de la 20 (1.2× la liga, 9º que más concede de 32) → **Javonte Williams** (DAL), 0.87 TD esperados en la zona roja, 0.3 envíos y 4.1 acarreos ahí; anota 59%, 2+ TD 23.9%.
 - **Jets contra los RB**: concede 0.97 TD por partido dentro de la 20 (1.3× la liga, 8º que más concede de 32) → **Kenneth Walker III** (KC), 0.75 TD esperados en la zona roja, 0.7 envíos y 4.7 acarreos ahí; anota 62%, 2+ TD 26.2%.
@@ -409,18 +514,18 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - **RB**: Jahmyr Gibbs (DET vs MIA) 65% / 2+ 30.2%; Jahmyr Gibbs (DET vs MIN) 64% / 2+ 28.3%; Kenneth Walker III (KC vs NYJ) 62% / 2+ 26.2%; Javonte Williams (DAL vs ARI) 59% / 2+ 23.9%; Derrick Henry (BAL vs BUF) 56% / 2+ 20.8%
 - **WR**: Puka Nacua (LA vs WAS) 50% / 2+ 16.6%; Jaxon Smith-Njigba (SEA vs ARI) 49% / 2+ 15.8%; Puka Nacua (LA vs LAC) 49% / 2+ 15.7%; CeeDee Lamb (DAL vs ARI) 46% / 2+ 13.5%; Jaxon Smith-Njigba (SEA vs CHI) 44% / 2+ 12.3%
 - **TE**: George Kittle (SF vs LV) 48% / 2+ 15.2%; Dallas Goedert (PHI vs WAS) 44% / 2+ 12.2%; Eli Raridon (NE vs MIA) 38% / 2+ 9.0%; Colston Loveland (CHI vs TB) 37% / 2+ 8.5%; Sam LaPorta (DET vs MIA) 37% / 2+ 8.5%
-- **QB**: Josh Allen (BUF vs BAL) 45% / 2+ 12.9%; Jayden Daniels (WAS vs PHI) 35% / 2+ 7.6%; Brock Purdy (SF vs LV) 28% / 2+ 4.8%; Jayden Daniels (WAS vs LA) 28% / 2+ 4.6%; Joe Burrow (CIN vs TEN) 26% / 2+ 4.1%
+- **QB**: Josh Allen (BUF vs BAL) 45% / 2+ 12.9%; Jayden Daniels (WAS vs PHI) 35% / 2+ 7.6%; Brock Purdy (SF vs LV) 28% / 2+ 4.8%; Jayden Daniels (WAS vs LA) 28% / 2+ 4.6%; Joe Burrow (CIN vs TEN) 27% / 2+ 4.2%
 
 ### Candidatos a 2 o más touchdowns
 
 - **Jahmyr Gibbs** (DET vs MIA, 11-08): P(2+) 30.2%, cuota justa 3.31 (+231). 0.79 TD esperados por tierra y 0.32 por aire.
-- **Jahmyr Gibbs** (DET vs MIN, 11-01): P(2+) 28.3%, cuota justa 3.53 (+253). 0.92 TD esperados por tierra y 0.14 por aire.
+- **Jahmyr Gibbs** (DET vs MIN, 11-01): P(2+) 28.3%, cuota justa 3.53 (+253); la casa paga 3.30 (+230) (EV -6%). 0.92 TD esperados por tierra y 0.14 por aire.
 - **Kenneth Walker III** (KC vs NYJ, 11-08): P(2+) 26.2%, cuota justa 3.82 (+282). 0.72 TD esperados por tierra y 0.27 por aire.
-- **Javonte Williams** (DAL vs ARI, 11-01): P(2+) 23.9%, cuota justa 4.19 (+319). 0.82 TD esperados por tierra y 0.10 por aire.
-- **Derrick Henry** (BAL vs BUF, 11-01): P(2+) 20.8%, cuota justa 4.81 (+381). 0.77 TD esperados por tierra y 0.07 por aire.
-- **Kyren Williams** (LA vs LAC, 11-01): P(2+) 20.5%, cuota justa 4.87 (+387). 0.64 TD esperados por tierra y 0.20 por aire.
+- **Javonte Williams** (DAL vs ARI, 11-01): P(2+) 23.9%, cuota justa 4.19 (+319); la casa paga 3.25 (+225) (EV -17%). 0.82 TD esperados por tierra y 0.10 por aire.
+- **Derrick Henry** (BAL vs BUF, 11-01): P(2+) 20.8%, cuota justa 4.81 (+381); la casa paga 3.60 (+260) (EV -17%). 0.77 TD esperados por tierra y 0.07 por aire.
+- **Kyren Williams** (LA vs LAC, 11-01): P(2+) 20.5%, cuota justa 4.87 (+387); la casa paga 6.00 (+500) (EV +17%). 0.64 TD esperados por tierra y 0.20 por aire.
 - **Christian McCaffrey** (SF vs LV, 11-08): P(2+) 20.4%, cuota justa 4.90 (+390). 0.63 TD esperados por tierra y 0.20 por aire.
-- **Kenneth Walker III** (KC vs DEN, 11-01): P(2+) 19.9%, cuota justa 5.03 (+403). 0.65 TD esperados por tierra y 0.17 por aire.
+- **Kenneth Walker III** (KC vs DEN, 11-01): P(2+) 19.9%, cuota justa 5.03 (+403); la casa paga 5.60 (+460) (EV +13%). 0.65 TD esperados por tierra y 0.17 por aire.
 - **Kyren Williams** (LA vs WAS, 11-08): P(2+) 19.7%, cuota justa 5.07 (+407). 0.62 TD esperados por tierra y 0.19 por aire.
 - **Javonte Williams** (DAL vs IND, 11-08): P(2+) 19.5%, cuota justa 5.12 (+412). 0.73 TD esperados por tierra y 0.07 por aire.
 - **Josh Jacobs** (GB vs NE, 11-08): P(2+) 18.8%, cuota justa 5.32 (+432). 0.53 TD esperados por tierra y 0.25 por aire.
@@ -443,10 +548,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Javonte Williams (RB) | 59% | 23.9% | - | - | sin línea: anota vale a partir de 1.76 |
-| CeeDee Lamb (WR) | 46% | 13.5% | - | - | sin línea: anota vale a partir de 2.27 |
-| George Pickens (WR) | 29% | 5.0% | - | - | sin línea: anota vale a partir de 3.58 |
-| Ryan Flournoy (WR) | 25% | 3.7% | - | - | sin línea: anota vale a partir de 4.16 |
+| Javonte Williams (RB) | 59% | 23.9% | 1.43 (-12%) | 3.25 (-17%) | sin valor hoy: anota solo a 1.76 o más (la mejor es 1.43) |
+| CeeDee Lamb (WR) | 46% | 13.5% | 1.77 (-13%) | 6.00 (-8%) | sin valor hoy: anota solo a 2.27 o más (la mejor es 6.00) |
+| George Pickens (WR) | 29% | 5.0% | 2.10 (-17%) | 7.50 (-42%) | sin valor hoy: anota solo a 3.58 o más (la mejor es 2.10) |
+| Ryan Flournoy (WR) | 25% | 3.7% | 3.85 (-2%) | 28.00 (+3%) | sin valor hoy: anota solo a 4.16 o más (la mejor es 28.00) |
+
+**Props:**
+- ✅ Brevyn Spann-Ford menos de 1.5 recepciones — 52% (modelo 64%, casa 44%), 2.22 en draftkings, valor +15%. pasó menos de 1.5 recepciones en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/7); últimos: 2.0, 4.0, 0.0, 0.0, 1.0; contra Cardinals: 0.0 (1/1 pasando la línea)
+- ✅ Dak Prescott menos de 271.5 yardas de pase — 59% (modelo 64%, casa 50%), 1.94 en betonlineag, valor +14%. contra Cardinals: 250 (1/1 pasando la línea); el modelo le da 64% y la casa 50%: la cuota paga más de lo que vale
+- ✅ CeeDee Lamb menos de 74.5 yardas por recepción — 50% (modelo 54%, casa 41%), 2.30 en bovada, valor +14%. pasó menos de 74.5 yardas por recepción en 3 de sus últimos 5 y 7 de 10 (esta temporada 4/7); últimos: 74, 70, 9.0, 189, 112; racha: 3 partidos seguidos pasando esta línea
+- ✅ Dak Prescott menos de 241.5 yardas de pase — 41% (modelo 51%, casa 33%), 2.80 en bovada, valor +14%. el modelo le da 51% y la casa 33%: la cuota paga más de lo que vale
+- 🔒 Dak Prescott menos de 301.5 yardas de pase — 71%, 1.43 en bovada, valor +2% (de las más probables)
+- 🔒 CeeDee Lamb menos de 104.5 yardas por recepción — 69%, 1.42 en bovada, valor -2% (de las más probables)
+- 🔒 Dak Prescott menos de 291.5 yardas de pase — 68%, 1.54 en bovada, valor +4% (de las más probables)
 
 **Defensa:** tacleadas: Caleb Downs 6.7, DeMarvion Overshown 4.8, Markquese Bell 4.5; sacks: Quinnen Williams 0.47, Elijah Garcia 0.32.
 
@@ -460,16 +574,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jeremiyah Love (RB) | 33% | 6.7% | - | - | sin línea: anota vale a partir de 3.12 |
-| Trey McBride (TE) | 29% | 5.1% | - | - | sin línea: anota vale a partir de 3.55 |
-| Michael Wilson (WR) | 28% | 4.8% | - | - | sin línea: anota vale a partir de 3.65 |
-| Bam Knight (RB) | 26% | 4.0% | - | - | sin línea: anota vale a partir de 3.99 |
+| Jeremiyah Love (RB) | 33% | 6.7% | 2.55 (-11%) | 12.00 (-12%) | sin valor hoy: anota solo a 3.12 o más (la mejor es 2.55) |
+| Trey McBride (TE) | 29% | 5.2% | 1.95 (-20%) | 7.50 (-39%) | sin valor hoy: anota solo a 3.54 o más (la mejor es 1.95) |
+| Michael Wilson (WR) | 29% | 4.8% | 2.70 (-16%) | 15.00 (-15%) | sin valor hoy: anota solo a 3.65 o más (la mejor es 15.00) |
+| Bam Knight (RB) | 28% | 4.7% | 5.30 (+31%) | 41.00 (+57%) | ✅ 2+ TD a 41.00 (fanduel), valor +57% |
+
+**Props:**
+- ✅ Jacoby Brissett menos de 226.5 yardas de pase — 41% (modelo 45%, casa 33%), 2.85 en bovada, valor +17%. Cowboys es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 169 (5 partidos) frente a 232 contra el resto; el modelo le da 45% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Jeremiyah Love menos de 36.5 yardas por tierra — 42% (modelo 47%, casa 34%), 2.75 en bovada, valor +16%. el modelo le da 47% y la casa 34%: la cuota paga más de lo que vale
+- ✅ Trey McBride menos de 7.5 recepciones — 55% (modelo 59%, casa 48%), 2.05 en bovada, valor +13%. contra Cowboys: 5.0 (1/1 pasando la línea); Cowboys es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 6.3 (3 partidos) frente a 7.9 contra el resto
+- ✅ Trey McBride menos de 64.5 yardas por recepción — 48% (modelo 61%, casa 40%), 2.35 en bovada, valor +13%. contra Cowboys: 55 (1/1 pasando la línea); Cowboys es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 54 (3 partidos) frente a 74 contra el resto
+- 🔒 Reggie Virgil más de 0.5 recepciones — 69%, 1.59 en bovada, valor +9% (de las más probables)
+- 🔒 Jeremiyah Love menos de 2.5 recepciones — 68%, 1.58 en fanduel, valor +7% (de las más probables)
+- 🔒 Jeremiyah Love menos de 56.5 yardas por tierra — 67%, 1.50 en bovada, valor +1% (de las más probables)
 
 **Defensa:** tacleadas: Jack Gibbens 6.3, Mack Wilson 6.1, Budda Baker 5.6; sacks: Budda Baker 0.21, Darius Robinson 0.19.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Cardinals] **Teagan Quitoriano 2+ TD** — prob. 1%, 181.00 en draftkings, valor +115%
+- [Cardinals] **Jacoby Brissett 2+ TD** — prob. 2%, 126.00 en fanduel, valor +101%
+- [Cardinals] **Bam Knight 2+ TD** — prob. 4%, 41.00 en fanduel, valor +57%
+- [Cardinals] **Reggie Virgil anota** — prob. 12%, 12.00 en betrivers, valor +48%
+- [Cardinals] **Jacoby Brissett anota** — prob. 16%, 8.50 en draftkings, valor +33%
+- [Cardinals] **Bam Knight anota** — prob. 25%, 5.30 en fanduel, valor +31%
+- [Cardinals] **Jacoby Brissett menos de 226.5 yardas de pase** — prob. 41%, 2.85 en bovada, valor +17%
+- [Cardinals] **Jeremiyah Love menos de 36.5 yardas por tierra** — prob. 42%, 2.75 en bovada, valor +16%
 
 ## Atlanta Falcons @ Tampa Bay Buccaneers — 2026-11-01 13:00
 
@@ -484,10 +614,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Bucky Irving (RB) | 47% | 14.5% | - | - | sin línea: anota vale a partir de 2.19 |
-| Sean Tucker (RB) | 24% | 3.5% | - | - | sin línea: anota vale a partir de 4.28 |
-| Kenny Gainwell (RB) | 21% | 2.4% | - | - | sin línea: anota vale a partir de 5.06 |
-| Ted Hurst III (WR) | 19% | 2.0% | - | - | sin línea: anota vale a partir de 5.58 |
+| Bucky Irving (RB) | 47% | 14.5% | 2.10 (-0%) | 8.00 (+13%) | ✅ 2+ TD a 8.00 (draftkings), valor +13% |
+| Sean Tucker (RB) | 24% | 3.5% | 6.00 (+27%) | 61.00 (+72%) | ✅ 2+ TD a 61.00 (fanduel), valor +72% |
+| Kenny Gainwell (RB) | 21% | 2.4% | 4.75 (-3%) | 41.00 (+3%) | sin valor hoy: anota solo a 5.06 o más (la mejor es 41.00) |
+| Ted Hurst III (WR) | 19% | 2.0% | 4.30 (-11%) | 29.00 (-27%) | sin valor hoy: anota solo a 5.58 o más (la mejor es 4.30) |
+
+**Props:**
+- ✅ Bucky Irving menos de 49.5 yardas por tierra — 32% (modelo 36%, casa 25%), 3.70 en bovada, valor +18%. contra Falcons: 60, 37, 44, 44 (3/4 pasando la línea); Falcons es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 57 (9 partidos) frente a 84 contra el resto
+- ✅ Tez Johnson menos de 21.5 yardas por recepción — 42% (modelo 54%, casa 34%), 2.75 en bovada, valor +16%. pasó menos de 21.5 yardas por recepción en 3 de sus últimos 5 y 7 de 10 (esta temporada 4/7); últimos: 33, 7.0, 64, 17, 8.0; contra Falcons: 0.0, 0.0 (2/2 pasando la línea)
+- ✅ Baker Mayfield menos de 182.5 yardas de pase — 40% (modelo 44%, casa 33%), 2.85 en bovada, valor +15%. el modelo le da 44% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Kenny Gainwell más de 1.5 recepciones — 62% (modelo 71%, casa 56%), 1.80 en betonlineag, valor +11%. pasó más de 1.5 recepciones en 3 de sus últimos 5 y 7 de 10 (esta temporada 4/7); últimos: 0.0, 1.0, 3.0, 2.0, 2.0; mejor precio en betonlineag: 1.80 frente a 1.69 de consenso
+- 🔒 Tez Johnson menos de 41.5 yardas por recepción — 72%, 1.48 en bovada, valor +6% (de las más probables)
+- 🔒 Baker Mayfield menos de 1.5 TD de pase — 64%, 1.68 en fanduel, valor +8% (de las más probables)
+- 🔒 Tez Johnson menos de 2.5 recepciones — 64%, 1.73 en draftkings, valor +11% (de las más probables)
 
 **Defensa:** tacleadas: Josiah Trotter 7.9, Tykee Smith 5.3, Keionte Scott 5.2; sacks: Yaya Diaby 0.46, David Walker 0.42.
 
@@ -500,16 +639,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Bijan Robinson (RB) | 44% | 12.5% | - | - | sin línea: anota vale a partir de 2.35 |
-| Kyle Pitts (TE) | 36% | 7.7% | - | - | sin línea: anota vale a partir de 2.93 |
-| Drake London (WR) | 27% | 4.2% | - | - | sin línea: anota vale a partir de 3.92 |
-| Khalil Herbert (RB) | 18% | 1.8% | - | - | sin línea: anota vale a partir de 5.84 |
+| Bijan Robinson (RB) | 44% | 12.5% | 1.56 (-15%) | 4.10 (-32%) | sin valor hoy: anota solo a 2.35 o más (la mejor es 1.56) |
+| Kyle Pitts (TE) | 36% | 7.7% | 4.30 (+34%) | 36.00 (+121%) | ✅ 2+ TD a 36.00 (draftkings), valor +121% |
+| Drake London (WR) | 27% | 4.2% | 2.55 (-21%) | 13.00 (-26%) | sin valor hoy: anota solo a 3.92 o más (la mejor es 2.55) |
+| Khalil Herbert (RB) | 18% | 1.8% | 9.00 (+39%) | 126.00 (+94%) | ✅ 2+ TD a 126.00 (fanduel), valor +94% |
+
+**Props:**
+- ✅ Drake London menos de 58.5 yardas por recepción — 40% (modelo 45%, casa 31%), 3.05 en bovada, valor +21%. TB concede 7.4 yardas por envío a los WR (media 8.0) (-5%); contra Buccaneers: 55, 34, 154 (2/3 pasando la línea)
+- ✅ Bijan Robinson menos de 61.5 yardas por tierra — 36% (modelo 40%, casa 28%), 3.40 en bovada, valor +21%. TB permite 3.99 yardas por acarreo a los RB (media 4.24; 11º que menos de 32 en yardas por acarreo) (-4%); el modelo le da 40% y la casa 28%: la cuota paga más de lo que vale
+- ✅ Bijan Robinson menos de 20.5 yardas por recepción — 42% (modelo 47%, casa 33%), 2.85 en bovada, valor +20%. el modelo le da 47% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Bijan Robinson menos de 25.5 yardas por recepción — 50% (modelo 54%, casa 41%), 2.30 en bovada, valor +14%. el modelo le da 54% y la casa 41%: la cuota paga más de lo que vale
+- 🔒 Bijan Robinson menos de 40.5 yardas por recepción — 67%, 1.50 en bovada, valor +1% (de las más probables)
+- 🔒 Austin Hooper más de 0.5 recepciones — 66%, 1.61 en betmgm, valor +6% (de las más probables)
+- 🔒 Bijan Robinson menos de 35.5 yardas por recepción — 62%, 1.67 en bovada, valor +4% (de las más probables)
 
 **Defensa:** tacleadas: Kendal Daniels 5.9, Xavier Watts 5.4, Jessie Bates 5.0; sacks: Za'Darius Smith 0.65, Samson Ebukam 0.43.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Falcons] **Nick Muse anota** — prob. 9%, 29.00 en betmgm, valor +147%
+- [Falcons] **Kyle Pitts 2+ TD** — prob. 6%, 36.00 en draftkings, valor +121%
+- [Falcons] **Khalil Herbert 2+ TD** — prob. 2%, 126.00 en fanduel, valor +94%
+- [Buccaneers] **Sean Tucker 2+ TD** — prob. 3%, 61.00 en fanduel, valor +72%
+- [Falcons] **Olamide Zaccheaus anota** — prob. 7%, 23.00 en bovada, valor +50%
+- [Buccaneers] **Baker Mayfield 2+ TD** — prob. 2%, 81.00 en fanduel, valor +41%
+- [Falcons] **Austin Hooper anota** — prob. 10%, 14.00 en bovada, valor +40%
+- [Falcons] **Kyle Pitts anota** — prob. 31%, 4.30 en draftkings, valor +34%
 
 ## Baltimore Ravens @ Buffalo Bills — 2026-11-01 13:00
 
@@ -524,10 +679,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| James Cook (RB) | 48% | 15.0% | - | - | sin línea: anota vale a partir de 2.16 |
-| Josh Allen (QB) | 45% | 12.9% | - | - | sin línea: anota vale a partir de 2.32 |
-| Dalton Kincaid (TE) | 29% | 5.0% | - | - | sin línea: anota vale a partir de 3.60 |
-| DJ Moore (WR) | 29% | 4.8% | - | - | sin línea: anota vale a partir de 3.64 |
+| James Cook (RB) | 48% | 15.0% | 1.62 (-17%) | 4.80 (-18%) | sin valor hoy: anota solo a 2.16 o más (la mejor es 1.62) |
+| Josh Allen (QB) | 45% | 12.9% | 1.67 (-17%) | 4.80 (-25%) | sin valor hoy: anota solo a 2.32 o más (la mejor es 1.67) |
+| Dalton Kincaid (TE) | 29% | 5.0% | 3.25 (-5%) | 20.00 (-1%) | sin valor hoy: anota solo a 3.60 o más (la mejor es 20.00) |
+| DJ Moore (WR) | 29% | 4.8% | 3.00 (-11%) | 19.00 (+1%) | sin valor hoy: anota solo a 3.64 o más (la mejor es 19.00) |
+
+**Props:**
+- ✅ James Cook menos de 64.5 yardas por tierra — 36% (modelo 40%, casa 28%), 3.35 en bovada, valor +19%. BAL permite 3.90 yardas por acarreo a los RB (media 4.24; 6º que menos de 32 en yardas por acarreo) (-6%); contra Ravens: 44, 67, 39 (2/3 pasando la línea)
+- ✅ Josh Allen menos de 218.5 yardas de pase — 41% (modelo 45%, casa 33%), 2.85 en bovada, valor +16%. contra Ravens: 394, 127, 180 (2/3 pasando la línea); el modelo le da 45% y la casa 33%: la cuota paga más de lo que vale
+- ✅ DJ Moore menos de 3.5 recepciones — 50% (modelo 55%, casa 41%), 2.30 en betmgm, valor +15%. Ravens es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 2.9 (7 partidos) frente a 3.6 contra el resto; el modelo le da 55% y la casa 41%: la cuota paga más de lo que vale
+- ✅ Khalil Shakir menos de 3.5 recepciones — 51% (modelo 55%, casa 43%), 2.25 en draftkings, valor +14%. como local promedia 3.3 (frente a 5.5); el modelo le da 55% y la casa 43%: la cuota paga más de lo que vale
+- 🔒 Josh Allen menos de 278.5 yardas de pase — 70%, 1.43 en bovada, valor -0% (de las más probables)
+- 🔒 Josh Allen menos de 48.5 yardas por tierra — 70%, 1.45 en bovada, valor +1% (de las más probables)
+- 🔒 Dalton Kincaid menos de 53.5 yardas por recepción — 68%, 1.53 en bovada, valor +4% (de las más probables)
 
 **Defensa:** tacleadas: Terrel Bernard 6.0, Cole Bishop 5.9, Dorian Williams 5.8; sacks: Greg Rousseau 0.63, Ed Oliver 0.32.
 
@@ -544,16 +708,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Derrick Henry (RB) | 56% | 20.8% | - | - | sin línea: anota vale a partir de 1.87 |
-| Zay Flowers (WR) | 36% | 7.9% | - | - | sin línea: anota vale a partir de 2.89 |
-| Ja'Kobi Lane (WR) | 34% | 7.2% | - | - | sin línea: anota vale a partir de 3.03 |
-| Mark Andrews (TE) | 18% | 1.8% | - | - | sin línea: anota vale a partir de 5.84 |
+| Derrick Henry (RB) | 56% | 20.8% | 1.48 (-14%) | 3.60 (-17%) | sin valor hoy: anota solo a 1.87 o más (la mejor es 1.48) |
+| Zay Flowers (WR) | 36% | 7.9% | 2.40 (-9%) | 11.00 (-7%) | sin valor hoy: anota solo a 2.89 o más (la mejor es 11.00) |
+| Ja'Kobi Lane (WR) | 34% | 7.2% | 4.20 (+18%) | 31.00 (+56%) | ✅ 2+ TD a 31.00 (betrivers), valor +56% |
+| Mark Andrews (TE) | 18% | 1.8% | 3.40 (-25%) | 23.00 (-33%) | sin valor hoy: anota solo a 5.84 o más (la mejor es 3.40) |
+
+**Props:**
+- ✅ Derrick Henry menos de 60.5 yardas por tierra — 37% (modelo 42%, casa 28%), 3.40 en bovada, valor +25%. BUF permite 3.97 yardas por acarreo a los RB (media 4.24; 12º que menos de 32 en yardas por acarreo) (-4%); el modelo le da 42% y la casa 28%: la cuota paga más de lo que vale
+- ✅ Zay Flowers menos de 69.5 yardas por recepción — 40% (modelo 44%, casa 32%), 2.90 en bovada, valor +15%. el modelo le da 44% y la casa 32%: la cuota paga más de lo que vale
+- ✅ Devontez Walker más de 0.5 recepciones — 48% (modelo 60%, casa 40%), 2.40 en bovada, valor +15%. Bills es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.8 (4 partidos) frente a 0.7 contra el resto; el modelo le da 60% y la casa 40%: la cuota paga más de lo que vale
+- ✅ Josh Cuevas más de 1.5 recepciones — 45% (modelo 49%, casa 38%), 2.52 en betonlineag, valor +14%. pasó más de 1.5 recepciones en 3 de sus últimos 5 y 3 de 5 (esta temporada 3/5); últimos: 2.0, 4.0, 2.0, 0.0, 1.0; racha: 3 partidos seguidos pasando esta línea
+- 🔒 Ja'Kobi Lane menos de 41.5 yardas por recepción — 67%, 1.48 en bovada, valor -1% (de las más probables)
+- 🔒 Derrick Henry menos de 90.5 yardas por tierra — 64%, 1.56 en bovada, valor +0% (de las más probables)
+- 🔒 Zay Flowers menos de 99.5 yardas por recepción — 61%, 1.61 en bovada, valor -1% (de las más probables)
 
 **Defensa:** tacleadas: Roquan Smith 6.8, Trenton Simpson 6.3, Kyle Hamilton 5.4; sacks: Mike Green 0.34, Trey Hendrickson 0.28.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Ravens] **Devontez Walker 2+ TD** — prob. 1%, 151.00 en fanduel, valor +80%
+- [Ravens] **Ja'Kobi Lane 2+ TD** — prob. 5%, 31.00 en betrivers, valor +56%
+- [Ravens] **Josh Cuevas 2+ TD** — prob. 1%, 176.00 en fanduel, valor +39%
+- [Ravens] **Derrick Henry menos de 60.5 yardas por tierra** — prob. 37%, 3.40 en bovada, valor +25%
+- [Bills] **Dawson Knox 2+ TD** — prob. 2%, 66.00 en fanduel, valor +24%
+- [Bills] **James Cook menos de 64.5 yardas por tierra** — prob. 36%, 3.35 en bovada, valor +19%
+- [Ravens] **Ja'Kobi Lane anota** — prob. 28%, 4.20 en betrivers, valor +18%
+- [Bills] **Josh Allen menos de 218.5 yardas de pase** — prob. 41%, 2.85 en bovada, valor +16%
 
 ## Cleveland Browns @ Pittsburgh Steelers — 2026-11-01 13:00
 
@@ -567,10 +747,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Germie Bernard (WR) | 27% | 4.4% | - | - | sin línea: anota vale a partir de 3.83 |
-| Rico Dowdle (RB) | 27% | 4.2% | - | - | sin línea: anota vale a partir de 3.91 |
-| Jaylen Warren (RB) | 25% | 3.8% | - | - | sin línea: anota vale a partir de 4.11 |
-| Darnell Washington (TE) | 24% | 3.5% | - | - | sin línea: anota vale a partir de 4.25 |
+| Germie Bernard (WR) | 28% | 4.7% | 4.10 (+9%) | 34.00 (+45%) | ✅ 2+ TD a 34.00 (fanduel), valor +45% |
+| Rico Dowdle (RB) | 27% | 4.3% | 4.10 (+6%) | 31.00 (+21%) | ✅ 2+ TD a 31.00 (fanduel), valor +21% |
+| Jaylen Warren (RB) | 26% | 3.8% | 2.20 (-19%) | 9.50 (-39%) | sin valor hoy: anota solo a 4.08 o más (la mejor es 2.20) |
+| Darnell Washington (TE) | 25% | 3.8% | 4.25 (+8%) | 26.00 (+0%) | sin valor hoy: anota solo a 4.10 o más (la mejor es 4.25) |
+
+**Props:**
+- ✅ Jaylen Warren menos de 46.5 yardas por tierra — 31% (modelo 34%, casa 25%), 3.75 en bovada, valor +16%. el modelo le da 34% y la casa 25%: la cuota paga más de lo que vale
+- ✅ DK Metcalf menos de 43.5 yardas por recepción — 46% (modelo 49%, casa 38%), 2.45 en bovada, valor +12%. pasó menos de 43.5 yardas por recepción en 2 de sus últimos 5 y 6 de 10 (esta temporada 4/7); últimos: 56, 93, 12, 115, 31; como local promedia 33 (frente a 67)
+- ✅ Aaron Rodgers más de 0.5 yardas por tierra — 58% (modelo 71%, casa 49%), 1.92 en draftkings, valor +12%. pasó más de 0.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/7); últimos: 6.0, -1.0, 6.0, 0.0, 10; contra Browns: 0.0, 6.0, 1.0 (2/3 pasando la línea)
+- ✅ Rico Dowdle menos de 22.5 yardas por tierra — 38% (modelo 41%, casa 32%), 2.90 en bovada, valor +11%. como local promedia 40 (frente a 50); el modelo le da 41% y la casa 32%: la cuota paga más de lo que vale
+- 🔒 Rico Dowdle menos de 42.5 yardas por tierra — 69%, 1.42 en bovada, valor -2% (de las más probables)
+- 🔒 DK Metcalf menos de 63.5 yardas por recepción — 63%, 1.56 en bovada, valor -2% (de las más probables)
+- 🔒 Rico Dowdle menos de 37.5 yardas por tierra — 63%, 1.59 en bovada, valor -0% (de las más probables)
 
 **Defensa:** tacleadas: Payton Wilson 6.4, Patrick Queen 5.7, Jalen Ramsey 5.6; sacks: T.J. Watt 0.76, Nick Herbig 0.43.
 
@@ -580,16 +769,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Quinshon Judkins (RB) | 33% | 6.5% | - | - | sin línea: anota vale a partir de 3.18 |
-| Denzel Boston (WR) | 20% | 2.2% | - | - | sin línea: anota vale a partir de 5.27 |
-| Harold Fannin Jr. (TE) | 17% | 1.7% | - | - | sin línea: anota vale a partir de 5.96 |
-| KC Concepcion (WR) | 17% | 1.6% | - | - | sin línea: anota vale a partir de 6.17 |
+| Quinshon Judkins (RB) | 33% | 6.5% | 2.40 (-16%) | 11.00 (-19%) | sin valor hoy: anota solo a 3.18 o más (la mejor es 2.40) |
+| Denzel Boston (WR) | 20% | 2.2% | 4.00 (-14%) | 31.00 (-17%) | sin valor hoy: anota solo a 5.27 o más (la mejor es 4.00) |
+| Harold Fannin Jr. (TE) | 17% | 1.7% | 4.30 (-18%) | 36.00 (-24%) | sin valor hoy: anota solo a 5.96 o más (la mejor es 4.30) |
+| KC Concepcion (WR) | 17% | 1.6% | 4.50 (-17%) | 41.00 (-18%) | sin valor hoy: anota solo a 6.17 o más (la mejor es 4.50) |
+
+**Props:**
+- ✅ Harold Fannin Jr. menos de 3.5 recepciones — 56% (modelo 60%, casa 48%), 2.05 en betmgm, valor +14%. contra Steelers: 3.0, 2.0, 7.0 (2/3 pasando la línea); mejor precio en betmgm: 2.05 frente a 1.95 de consenso
+- ✅ Dylan Sampson menos de 2.5 recepciones — 63% (modelo 68%, casa 53%), 1.82 en draftkings, valor +14%. pasó menos de 2.5 recepciones en 2 de sus últimos 5 y 6 de 10 (esta temporada 1/2); últimos: 3.0, 0.0, 2.0, 3.0, 5.0; Steelers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 1.5 (4 partidos) frente a 2.3 contra el resto
+- ✅ KC Concepcion menos de 37.5 yardas por recepción — 45% (modelo 50%, casa 38%), 2.50 en bovada, valor +14%. PIT concede 7.5 yardas por envío a los WR (media 8.0) (-4%); el modelo le da 50% y la casa 38%: la cuota paga más de lo que vale
+- ✅ Quinshon Judkins menos de 39.5 yardas por tierra — 43% (modelo 54%, casa 35%), 2.65 en bovada, valor +13%. PIT permite 3.84 yardas por acarreo a los RB (media 4.24; 5º que menos de 32 en yardas por acarreo) (-7%); como visitante promedia 44 (frente a 58)
+- 🔒 Quinshon Judkins menos de 59.5 yardas por tierra — 71%, 1.50 en bovada, valor +7% (de las más probables)
+- 🔒 Denzel Boston menos de 57.5 yardas por recepción — 69%, 1.54 en bovada, valor +7% (de las más probables)
+- 🔒 Harold Fannin Jr. menos de 43.5 yardas por recepción — 68%, 1.53 en bovada, valor +4% (de las más probables)
 
 **Defensa:** tacleadas: Carson Schwesinger 7.5, Quincy Williams 6.0, Ronnie Hickman Jr. 5.5; sacks: Maliek Collins 0.54, Isaiah McGuire 0.41.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Steelers] **Travis Homer anota** — prob. 6%, 41.00 en fanduel, valor +149%
+- [Steelers] **Lew Nichols III anota** — prob. 3%, 71.00 en draftkings, valor +138%
+- [Browns] **Isaiah Bond anota** — prob. 7%, 23.00 en draftkings, valor +67%
+- [Steelers] **Robert Tonyan anota** — prob. 6%, 29.00 en betmgm, valor +65%
+- [Steelers] **Germie Bernard 2+ TD** — prob. 4%, 34.00 en fanduel, valor +45%
+- [Browns] **Blake Whiteheart anota** — prob. 5%, 25.00 en betrivers, valor +30%
+- [Steelers] **Rico Dowdle 2+ TD** — prob. 4%, 31.00 en fanduel, valor +21%
+- [Browns] **Jaleel McLaughlin anota** — prob. 6%, 21.00 en draftkings, valor +21%
 
 ## Indianapolis Colts @ Jacksonville Jaguars — 2026-11-01 13:00
 
@@ -604,10 +809,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Bhayshul Tuten (RB) | 38% | 8.9% | - | - | sin línea: anota vale a partir de 2.74 |
-| Parker Washington (WR) | 32% | 6.1% | - | - | sin línea: anota vale a partir de 3.28 |
-| Chris Rodriguez Jr. (RB) | 30% | 5.5% | - | - | sin línea: anota vale a partir de 3.44 |
-| Jakobi Meyers (WR) | 27% | 4.3% | - | - | sin línea: anota vale a partir de 3.86 |
+| Bhayshul Tuten (RB) | 38% | 8.9% | 1.95 (-18%) | 7.50 (-21%) | sin valor hoy: anota solo a 2.74 o más (la mejor es 1.95) |
+| Parker Washington (WR) | 32% | 6.1% | 2.10 (-24%) | 8.50 (-31%) | sin valor hoy: anota solo a 3.28 o más (la mejor es 2.10) |
+| Chris Rodriguez Jr. (RB) | 30% | 5.5% | 3.60 (+5%) | 23.00 (+17%) | ✅ 2+ TD a 23.00 (draftkings), valor +17% |
+| Jakobi Meyers (WR) | 27% | 4.3% | 3.50 (-6%) | 24.00 (+1%) | sin valor hoy: anota solo a 3.86 o más (la mejor es 24.00) |
+
+**Props:**
+- ✅ Brian Thomas Jr. más de 1.5 recepciones — 45% (modelo 50%, casa 36%), 2.65 en betrivers, valor +19%. pasó más de 1.5 recepciones en 2 de sus últimos 5 y 7 de 10 (esta temporada 3/6); últimos: 0.0, 0.0, 2.0, 1.0, 3.0; contra Colts: 4.0, 3.0, 7.0, 5.0 (4/4 pasando la línea)
+- ✅ Brenton Strange menos de 31.5 yardas por recepción — 46% (modelo 51%, casa 37%), 2.55 en bovada, valor +17%. como local promedia 34 (frente a 55); el modelo le da 51% y la casa 37%: la cuota paga más de lo que vale
+- ✅ Brenton Strange menos de 3.5 recepciones — 51% (modelo 56%, casa 44%), 2.24 en fanduel, valor +15%. como local promedia 3.3 (frente a 4.4); mejor precio en fanduel: 2.24 frente a 2.15 de consenso
+- ✅ Parker Washington menos de 4.5 recepciones — 55% (modelo 66%, casa 47%), 2.08 en fanduel, valor +14%. Colts es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 3.0 (10 partidos) frente a 4.5 contra el resto; el modelo le da 66% y la casa 47%: la cuota paga más de lo que vale
+- 🔒 Trevor Lawrence menos de 267.5 yardas de pase — 74%, 1.42 en bovada, valor +4% (de las más probables)
+- 🔒 Brenton Strange menos de 51.5 yardas por recepción — 70%, 1.53 en bovada, valor +7% (de las más probables)
+- 🔒 Trevor Lawrence menos de 257.5 yardas de pase — 69%, 1.54 en bovada, valor +7% (de las más probables)
 
 **Defensa:** tacleadas: Foyesade Oluokun 6.1, Ventrell Miller 4.9, Jarrian Jones 4.6; sacks: Travon Walker 0.29, Ruke Orhorhoro 0.27.
 
@@ -620,16 +834,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jonathan Taylor (RB) | 40% | 10.0% | - | - | sin línea: anota vale a partir de 2.59 |
-| Tyler Warren (TE) | 26% | 3.8% | - | - | sin línea: anota vale a partir de 4.08 |
-| Daniel Jones (QB) | 20% | 2.3% | - | - | sin línea: anota vale a partir de 5.24 |
-| Will Mallory (TE) | 14% | 1.0% | - | - | sin línea: anota vale a partir de 7.65 |
+| Jonathan Taylor (RB) | 40% | 10.1% | 2.20 (-9%) | 8.50 (-11%) | sin valor hoy: anota solo a 2.59 o más (la mejor es 2.20) |
+| Tyler Warren (TE) | 26% | 4.0% | 4.50 (+10%) | 36.00 (+27%) | ✅ 2+ TD a 36.00 (draftkings), valor +27% |
+| Daniel Jones (QB) | 20% | 2.3% | 9.50 (+57%) | 151.00 (+172%) | ✅ 2+ TD a 151.00 (fanduel), valor +172% |
+| Will Mallory (TE) | 14% | 1.1% | 26.00 (+173%) | 181.00 (+62%) | ✅ anota a 26.00 (draftkings), valor +173% |
 
-**Defensa:** tacleadas: Akeem Davis-Gaither 7.5, A.J. Haulcy 4.9, Bryce Boettcher 4.3; sacks: Adetomiwa Adebawore 0.49, DeForest Buckner 0.32.
+**Props:**
+- ✅ Daniel Jones más de 220.5 yardas de pase — 42% (modelo 54%, casa 34%), 2.75 en bovada, valor +15%. JAX permite 7.34 yardas por pase (media 7.04; 9º que más de 32 en yardas por pase) (+3%); el modelo le da 54% y la casa 34%: la cuota paga más de lo que vale
+- ✅ Tyler Warren menos de 29.5 yardas por recepción — 42% (modelo 46%, casa 35%), 2.70 en bovada, valor +14%. JAX concede 6.1 yardas por envío a los TE (media 7.2) (-8%); Jaguars es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 41 (8 partidos) frente a 50 contra el resto
+- ✅ Daniel Jones menos de 8.5 yardas por tierra — 58% (modelo 63%, casa 49%), 1.92 en draftkings, valor +12%. JAX concede 14.1 yardas por tierra por partido a los QB (media 17.7; 8º que menos de 32) (-20%); pasó menos de 8.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/7); últimos: 13, 30, 4.0, 2.0, 5.0
+- ✅ Daniel Jones más de 210.5 yardas de pase — 47% (modelo 58%, casa 39%), 2.40 en bovada, valor +12%. JAX permite 7.34 yardas por pase (media 7.04; 9º que más de 32 en yardas por pase) (+3%); el modelo le da 58% y la casa 39%: la cuota paga más de lo que vale
+- 🔒 Daniel Jones más de 160.5 yardas de pase — 74%, 1.40 en bovada, valor +4% (de las más probables)
+- 🔒 Keenan Allen más de 24.5 yardas por recepción — 71%, 1.42 en bovada, valor +1% (de las más probables)
+- 🔒 Daniel Jones más de 170.5 yardas de pase — 70%, 1.53 en bovada, valor +7% (de las más probables)
+
+**Defensa:** tacleadas: Akeem Davis-Gaither 7.5, A.J. Haulcy 4.9, DeForest Buckner 4.2; sacks: Adetomiwa Adebawore 0.49, DeForest Buckner 0.32.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Colts] **Will Mallory anota** — prob. 11%, 26.00 en draftkings, valor +173%
+- [Colts] **Daniel Jones 2+ TD** — prob. 2%, 151.00 en fanduel, valor +172%
+- [Colts] **Mo Alie-Cox anota** — prob. 9%, 23.00 en draftkings, valor +104%
+- [Jaguars] **Ameer Abdullah anota** — prob. 5%, 36.00 en betrivers, valor +90%
+- [Jaguars] **Quintin Morris anota** — prob. 8%, 23.00 en fanduel, valor +73%
+- [Jaguars] **Brian Thomas Jr. 2+ TD** — prob. 3%, 56.00 en draftkings, valor +51%
+- [Colts] **Tyler Warren 2+ TD** — prob. 4%, 36.00 en draftkings, valor +27%
+- [Jaguars] **Brian Thomas Jr. anota** — prob. 21%, 6.00 en draftkings, valor +24%
 
 ## Las Vegas Raiders @ New York Jets — 2026-11-01 13:00
 
@@ -645,10 +875,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Braelon Allen (RB) | 29% | 5.1% | - | - | sin línea: anota vale a partir de 3.55 |
-| Mason Taylor (TE) | 29% | 5.1% | - | - | sin línea: anota vale a partir de 3.57 |
-| Omar Cooper Jr. (WR) | 25% | 3.8% | - | - | sin línea: anota vale a partir de 4.09 |
-| Garrett Wilson (WR) | 21% | 2.6% | - | - | sin línea: anota vale a partir de 4.94 |
+| Braelon Allen (RB) | 29% | 5.1% | 1.80 (-23%) | 6.00 (-46%) | sin valor hoy: anota solo a 3.55 o más (la mejor es 1.80) |
+| Mason Taylor (TE) | 29% | 5.1% | 4.75 (+25%) | 41.00 (+73%) | ✅ 2+ TD a 41.00 (betrivers), valor +73% |
+| Omar Cooper Jr. (WR) | 25% | 3.8% | 3.80 (-4%) | 28.00 (+3%) | ✅ 2+ TD a 28.00 (fanduel), valor +3% |
+| Garrett Wilson (WR) | 21% | 2.6% | 2.70 (-30%) | 15.00 (-40%) | sin valor hoy: anota solo a 4.94 o más (la mejor es 2.70) |
+
+**Props:**
+- ✅ Braelon Allen menos de 69.5 yardas por tierra — 47% (modelo 59%, casa 38%), 2.45 en bovada, valor +15%. pasó menos de 69.5 yardas por tierra en 2 de sus últimos 5 y 7 de 10 (esta temporada 4/7); últimos: 104, 78, 116, 59, 14; Raiders es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 13 (4 partidos) frente a 32 contra el resto
+- ✅ Kenyon Sadiq menos de 1.5 recepciones — 47% (modelo 50%, casa 40%), 2.40 en fanduel, valor +12%. como local promedia 1.7 (frente a 2.8); el modelo le da 50% y la casa 40%: la cuota paga más de lo que vale
+- ✅ Kenyon Sadiq menos de 16.5 yardas por recepción — 58% (modelo 63%, casa 50%), 1.92 en draftkings, valor +12%. LV concede 6.7 yardas por envío a los TE (media 7.2) (-4%); racha: 4 partidos seguidos pasando esta línea
+- ✅ Braelon Allen menos de 18.5 acarreos — 57% (modelo 70%, casa 48%), 1.98 en draftkings, valor +12%. pasó menos de 18.5 acarreos en 4 de sus últimos 5 y 9 de 10 (esta temporada 6/7); últimos: 17, 17, 24, 14, 4.0; Raiders es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 3.2 (4 partidos) frente a 8.1 contra el resto
+- 🔒 Garrett Wilson menos de 73.5 yardas por recepción — 66%, 1.59 en bovada, valor +4% (de las más probables)
+- 🔒 Braelon Allen menos de 89.5 yardas por tierra — 65%, 1.56 en bovada, valor +2% (de las más probables)
+- 🔒 Garrett Wilson menos de 5.5 recepciones — 61%, 1.81 en betonlineag, valor +10% (de las más probables)
 
 **Defensa:** tacleadas: Dane Belton 7.1, Minkah Fitzpatrick 6.9, Jamien Sherwood 6.4; sacks: Nate Lynn 0.40, Will McDonald IV 0.32.
 
@@ -663,16 +902,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Ashton Jeanty (RB) | 48% | 14.9% | - | - | sin línea: anota vale a partir de 2.16 |
-| Brock Bowers (TE) | 27% | 4.4% | - | - | sin línea: anota vale a partir de 3.84 |
-| Tre Tucker (WR) | 27% | 4.3% | - | - | sin línea: anota vale a partir de 3.85 |
-| Cody White (WR) | 22% | 2.9% | - | - | sin línea: anota vale a partir de 4.66 |
+| Ashton Jeanty (RB) | 49% | 15.4% | 2.00 (-4%) | 8.00 (+17%) | ✅ 2+ TD a 8.00 (fanduel), valor +17% |
+| Brock Bowers (TE) | 29% | 4.9% | 2.15 (-27%) | 9.50 (-33%) | sin valor hoy: anota solo a 3.64 o más (la mejor es 2.15) |
+| Tre Tucker (WR) | 28% | 4.8% | 3.50 (-2%) | 23.00 (+4%) | ✅ 2+ TD a 23.00 (draftkings), valor +4% |
+| Cody White (WR) | 24% | 3.2% | 14.00 (+103%) | 161.00 (+274%) | ✅ 2+ TD a 161.00 (draftkings), valor +274% |
+
+**Props:**
+- ✅ Ashton Jeanty menos de 40.5 yardas por tierra — 44% (modelo 49%, casa 35%), 2.65 en bovada, valor +18%. racha: 3 partidos seguidos pasando esta línea; el modelo le da 49% y la casa 35%: la cuota paga más de lo que vale
+- ✅ Mike Washington Jr. menos de 22.5 yardas por tierra — 38% (modelo 49%, casa 31%), 3.00 en bovada, valor +15%. en duda (Questionable, Foot): volumen ×0.92 (-8%); como visitante promedia 22 (frente a 32)
+- ✅ Brock Bowers menos de 59.5 yardas por recepción — 48% (modelo 52%, casa 40%), 2.35 en bovada, valor +12%. Jets es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 57 (3 partidos) frente a 69 contra el resto; el modelo le da 52% y la casa 40%: la cuota paga más de lo que vale
+- ✅ Brock Bowers menos de 5.5 recepciones — 50% (modelo 54%, casa 43%), 2.20 en bovada, valor +11%. el modelo le da 54% y la casa 43%: la cuota paga más de lo que vale
+- 🔒 Mike Washington Jr. menos de 42.5 yardas por tierra — 71%, 1.43 en bovada, valor +1% (de las más probables)
+- 🔒 Ashton Jeanty menos de 60.5 yardas por tierra — 66%, 1.50 en bovada, valor -0% (de las más probables)
+- 🔒 Brock Bowers menos de 79.5 yardas por recepción — 65%, 1.59 en bovada, valor +3% (de las más probables)
 
 **Defensa:** tacleadas: Nakobe Dean 8.1, Quay Walker 6.2, Jeremy Chinn 5.7; sacks: Malcolm Koonce 0.54, Kwity Paye 0.43.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Raiders] **Cody White 2+ TD** — prob. 2%, 161.00 en draftkings, valor +274%
+- [Jets] **Andrew Beck 2+ TD** — prob. 1%, 251.00 en draftkings, valor +273%
+- [Jets] **Kene Nwangwu anota** — prob. 9%, 21.00 en fanduel, valor +97%
+- [Raiders] **Jalen Nailor 2+ TD** — prob. 2%, 101.00 en fanduel, valor +74%
+- [Jets] **Mason Taylor 2+ TD** — prob. 4%, 41.00 en betrivers, valor +73%
+- [Jets] **Jeremy Ruckert anota** — prob. 12%, 14.00 en draftkings, valor +69%
+- [Jets] **Isaiah Williams anota** — prob. 9%, 15.00 en draftkings, valor +32%
+- [Raiders] **Jalen Nailor anota** — prob. 17%, 7.50 en betrivers, valor +27%
 
 ## Minnesota Vikings @ Detroit Lions — 2026-11-01 13:00
 
@@ -682,10 +937,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jahmyr Gibbs (RB) | 64% | 28.3% | - | - | sin línea: anota vale a partir de 1.63 |
-| Amon-Ra St. Brown (WR) | 35% | 7.4% | - | - | sin línea: anota vale a partir de 3.00 |
-| Jameson Williams (WR) | 27% | 4.2% | - | - | sin línea: anota vale a partir de 3.92 |
-| Sam LaPorta (TE) | 23% | 3.1% | - | - | sin línea: anota vale a partir de 4.50 |
+| Jahmyr Gibbs (RB) | 64% | 28.3% | 1.43 (-8%) | 3.30 (-6%) | sin valor hoy: anota solo a 1.63 o más (la mejor es 3.30) |
+| Amon-Ra St. Brown (WR) | 35% | 7.4% | 2.20 (-16%) | 10.00 (-15%) | sin valor hoy: anota solo a 3.00 o más (la mejor es 10.00) |
+| Jameson Williams (WR) | 27% | 4.2% | 3.30 (-9%) | 20.00 (-12%) | sin valor hoy: anota solo a 3.92 o más (la mejor es 3.30) |
+| Sam LaPorta (TE) | 23% | 3.1% | 3.40 (-15%) | 21.00 (-25%) | sin valor hoy: anota solo a 4.50 o más (la mejor es 3.40) |
+
+**Props:**
+- ✅ Jahmyr Gibbs menos de 68.5 yardas por tierra — 38% (modelo 43%, casa 28%), 3.30 en bovada, valor +26%. Vikings es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 53 (7 partidos) frente a 93 contra el resto; el modelo le da 43% y la casa 28%: la cuota paga más de lo que vale
+- ✅ Amon-Ra St. Brown menos de 57.5 yardas por recepción — 38% (modelo 49%, casa 31%), 3.05 en bovada, valor +16%. MIN concede 7.5 yardas por envío a los WR (media 8.0) (-5%); el modelo le da 49% y la casa 31%: la cuota paga más de lo que vale
+- ✅ Jameson Williams menos de 41.5 yardas por recepción — 47% (modelo 51%, casa 38%), 2.45 en bovada, valor +15%. MIN concede 7.5 yardas por envío a los WR (media 8.0) (-5%); contra Vikings: 37, 66, 34, -4.0 (3/4 pasando la línea)
+- ✅ Sam LaPorta menos de 32.5 yardas por recepción — 45% (modelo 50%, casa 37%), 2.55 en bovada, valor +15%. MIN concede 6.2 yardas por envío a los TE (media 7.2) (-7%); como local promedia 42 (frente a 67)
+- 🔒 Jared Goff menos de 289.5 yardas de pase — 74%, 1.43 en bovada, valor +6% (de las más probables)
+- 🔒 Amon-Ra St. Brown menos de 97.5 yardas por recepción — 72%, 1.41 en bovada, valor +1% (de las más probables)
+- 🔒 Sam LaPorta menos de 52.5 yardas por recepción — 71%, 1.53 en bovada, valor +9% (de las más probables)
 
 **Defensa:** tacleadas: Jack Campbell 7.5, Chuck Clark 5.4, D.J. Reed 5.1; sacks: DJ Wonnum 0.74, Aidan Hutchinson 0.73.
 
@@ -699,20 +963,36 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| T.J. Hockenson (TE) | 37% | 8.3% | - | - | sin línea: anota vale a partir de 2.84 |
-| Aaron Jones (RB) | 32% | 6.1% | - | - | sin línea: anota vale a partir de 3.28 |
-| Jordan Mason (RB) | 25% | 3.8% | - | - | sin línea: anota vale a partir de 4.10 |
-| Justin Jefferson (WR) | 23% | 3.2% | - | - | sin línea: anota vale a partir de 4.47 |
+| T.J. Hockenson (TE) | 37% | 8.3% | 3.60 (+22%) | 26.00 (+82%) | ✅ 2+ TD a 26.00 (fanduel), valor +82% |
+| Aaron Jones (RB) | 32% | 6.1% | 3.50 (+6%) | 23.00 (+24%) | ✅ 2+ TD a 23.00 (draftkings), valor +24% |
+| Jordan Mason (RB) | 25% | 3.8% | 2.80 (-20%) | 15.00 (-28%) | sin valor hoy: anota solo a 4.10 o más (la mejor es 2.80) |
+| Justin Jefferson (WR) | 23% | 3.2% | 2.80 (-24%) | 17.00 (-26%) | sin valor hoy: anota solo a 4.45 o más (la mejor es 2.80) |
+
+**Props:**
+- ✅ Kyler Murray menos de 15.5 yardas por tierra — 37% (modelo 42%, casa 29%), 3.25 en bovada, valor +21%. DET concede 16.3 yardas por tierra por partido a los QB (media 17.7; 16º que más de 32) (-8%); Lions es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 16 (7 partidos) frente a 36 contra el resto
+- ✅ Kyler Murray menos de 195.5 yardas de pase — 42% (modelo 46%, casa 33%), 2.85 en bovada, valor +19%. el modelo le da 46% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Justin Jefferson menos de 65.5 yardas por recepción — 51% (modelo 56%, casa 41%), 2.30 en bovada, valor +16%. pasó menos de 65.5 yardas por recepción en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/5); últimos: 44, 79, 32, 55, 92; contra Lions: 30, 47, 54, 81 (3/4 pasando la línea)
+- ✅ Kyler Murray menos de 205.5 yardas de pase — 47% (modelo 51%, casa 38%), 2.45 en bovada, valor +14%. pasó menos de 205.5 yardas de pase en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/5); últimos: 150, 229, 247, 168, 18; el modelo le da 51% y la casa 38%: la cuota paga más de lo que vale
+- 🔒 Aaron Jones más de 19.5 yardas por tierra — 76%, 1.34 en bovada, valor +2% (de las más probables)
+- 🔒 Kyler Murray menos de 35.5 yardas por tierra — 75%, 1.38 en bovada, valor +4% (de las más probables)
+- 🔒 Jordan Mason menos de 60.5 yardas por tierra — 70%, 1.50 en bovada, valor +5% (de las más probables)
 
 **Defensa:** tacleadas: Blake Cashman 8.4, Josh Metellus 5.9, Eric Wilson 5.1; sacks: Dallas Turner 0.63, Blake Cashman 0.55.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Vikings] **T.J. Hockenson 2+ TD** — prob. 7%, 26.00 en fanduel, valor +82%
+- [Lions] **Tyler Conklin anota** — prob. 6%, 26.00 en draftkings, valor +62%
+- [Vikings] **Myles Price anota** — prob. 6%, 21.00 en betmgm, valor +35%
+- [Lions] **Jahmyr Gibbs menos de 68.5 yardas por tierra** — prob. 38%, 3.30 en bovada, valor +26%
+- [Vikings] **Aaron Jones 2+ TD** — prob. 5%, 23.00 en draftkings, valor +24%
+- [Vikings] **T.J. Hockenson anota** — prob. 34%, 3.60 en betrivers, valor +22%
+- [Vikings] **Gavin Bartholomew anota** — prob. 10%, 12.50 en betmgm, valor +21%
+- [Vikings] **Kyler Murray menos de 15.5 yardas por tierra** — prob. 37%, 3.25 en bovada, valor +21%
 
 ## Tennessee Titans @ Cincinnati Bengals — 2026-11-01 13:00
 
-### Cincinnati Bengals (29.5 puntos esperados, favorito por 13.5, 3.4 TD)
+### Cincinnati Bengals (30.0 puntos esperados, favorito por 13.5, 3.4 TD)
 
 **Ventajas sobre la defensa de Titans:**
 - EPA por jugada: Bengals +0.079 (6º de 32) contra Titans que concede +0.051 (9º que más concede) (ventaja clara)
@@ -724,14 +1004,23 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Chase Brown (RB) | 49% | 15.9% | - | - | sin línea: anota vale a partir de 2.10 |
-| Ja'Marr Chase (WR) | 44% | 12.1% | - | - | sin línea: anota vale a partir de 2.38 |
-| Samaje Perine (RB) | 32% | 6.2% | - | - | sin línea: anota vale a partir de 3.24 |
-| Mike Gesicki (TE) | 30% | 5.2% | - | - | sin línea: anota vale a partir de 3.53 |
+| Chase Brown (RB) | 50% | 16.1% | 1.71 (-11%) | 5.40 (-7%) | sin valor hoy: anota solo a 2.09 o más (la mejor es 5.40) |
+| Ja'Marr Chase (WR) | 44% | 12.3% | 1.91 (-11%) | 6.50 (-14%) | sin valor hoy: anota solo a 2.36 o más (la mejor es 1.91) |
+| Samaje Perine (RB) | 32% | 6.3% | 3.15 (+0%) | 19.00 (+14%) | ✅ 2+ TD a 19.00 (fanduel), valor +14% |
+| Mike Gesicki (TE) | 30% | 5.3% | 3.25 (-4%) | 20.00 (+2%) | sin valor hoy: anota solo a 3.49 o más (la mejor es 20.00) |
+
+**Props:**
+- ✅ Ja'Marr Chase menos de 62.5 yardas por recepción — 38% (modelo 49%, casa 31%), 3.00 en bovada, valor +15%. el modelo le da 49% y la casa 31%: la cuota paga más de lo que vale
+- ✅ Ja'Marr Chase menos de 82.5 yardas por recepción — 59% (modelo 64%, casa 50%), 1.91 en draftkings, valor +13%. pasó menos de 82.5 yardas por recepción en 4 de sus últimos 5 y 6 de 10 (esta temporada 5/6); últimos: 62, 77, 27, 98, 75; racha: 3 partidos seguidos pasando esta línea
+- ✅ Joe Burrow menos de 252.5 yardas de pase — 47% (modelo 58%, casa 39%), 2.40 en bovada, valor +12%. el modelo le da 58% y la casa 39%: la cuota paga más de lo que vale
+- ✅ Mike Gesicki menos de 22.5 yardas por recepción — 59% (modelo 63%, casa 50%), 1.91 en betonlineag, valor +12%. TEN concede 6.7 yardas por envío a los TE (media 7.2) (-4%); Titans es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 28 (10 partidos) frente a 34 contra el resto
+- 🔒 Ja'Marr Chase menos de 102.5 yardas por recepción — 72%, 1.42 en bovada, valor +2% (de las más probables)
+- 🔒 Joe Burrow menos de 302.5 yardas de pase — 71%, 1.43 en bovada, valor +2% (de las más probables)
+- 🔒 Samaje Perine menos de 1.5 recepciones — 68%, 1.60 en draftkings, valor +9% (de las más probables)
 
 **Defensa:** tacleadas: Barrett Carter 5.9, Demetrius Knight Jr. 5.7, Jordan Battle 5.3; sacks: Boye Mafe 0.58, Dexter Lawrence 0.50.
 
-### Tennessee Titans (16.0 puntos esperados, no favorito por 13.5, 1.6 TD)
+### Tennessee Titans (16.5 puntos esperados, no favorito por 13.5, 1.6 TD)
 
 **Ventajas sobre la defensa de Bengals:**
 - Zona roja: Bengals concede a los QB 1.3 veces los TD de la media dentro de la 20
@@ -740,16 +1029,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Tony Pollard (RB) | 30% | 5.4% | - | - | sin línea: anota vale a partir de 3.46 |
-| Wan'Dale Robinson (WR) | 27% | 4.3% | - | - | sin línea: anota vale a partir de 3.86 |
-| Elic Ayomanor (WR) | 23% | 3.0% | - | - | sin línea: anota vale a partir de 4.56 |
-| Cam Ward (QB) | 21% | 2.6% | - | - | sin línea: anota vale a partir de 4.93 |
+| Tony Pollard (RB) | 31% | 5.6% | 2.50 (-16%) | 12.00 (-18%) | sin valor hoy: anota solo a 3.41 o más (la mejor es 2.50) |
+| Wan'Dale Robinson (WR) | 27% | 4.4% | 4.40 (+11%) | 36.00 (+37%) | ✅ 2+ TD a 36.00 (draftkings), valor +37% |
+| Elic Ayomanor (WR) | 23% | 3.1% | 5.30 (+15%) | 51.00 (+44%) | ✅ 2+ TD a 51.00 (fanduel), valor +44% |
+| Cam Ward (QB) | 21% | 2.7% | 7.00 (+32%) | 81.00 (+78%) | ✅ 2+ TD a 81.00 (draftkings), valor +78% |
+
+**Props:**
+- ✅ Cam Ward menos de 0.5 TD de pase — 42% (modelo 44%, casa 38%), 2.70 en betrivers, valor +13%. Bengals es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.6 (7 partidos) frente a 0.9 contra el resto; mejor precio en betrivers: 2.70 frente a 2.47 de consenso
+- ✅ Tony Pollard menos de 65.5 yardas por tierra — 59% (modelo 73%, casa 50%), 1.89 en betonlineag, valor +12%. contra Bengals: 45 (1/1 pasando la línea); el modelo le da 73% y la casa 50%: la cuota paga más de lo que vale
+- ✅ Elic Ayomanor menos de 2.5 recepciones — 51% (modelo 55%, casa 45%), 2.16 en draftkings, valor +11%. pasó menos de 2.5 recepciones en 4 de sus últimos 5 y 6 de 10 (esta temporada 6/7); últimos: 3.0, 1.0, 1.0, 1.0, 1.0; como visitante promedia 1.7 (frente a 2.2)
+- ✅ Daniel Bellinger más de 1.5 recepciones — 46% (modelo 48%, casa 41%), 2.43 en betrivers, valor +11%. como visitante promedia 1.6 (frente a 1.1); mejor precio en betrivers: 2.43 frente a 2.33 de consenso
+- 🔒 Tony Pollard menos de 75.5 yardas por tierra — 69%, 1.53 en bovada, valor +6% (de las más probables)
+- 🔒 Elic Ayomanor menos de 43.5 yardas por recepción — 65%, 1.50 en bovada, valor -2% (de las más probables)
+- 🔒 Cam Ward más de 171.5 yardas de pase — 65%, 1.53 en bovada, valor -1% (de las más probables)
 
 **Defensa:** tacleadas: Anthony Hill Jr. 7.9, Kevin Winston Jr. 6.5, Amani Hooker 5.8; sacks: Jacob Martin 0.30, Jermaine Johnson II 0.29.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Bengals] **Joe Burrow 2+ TD** — prob. 3%, 76.00 en fanduel, valor +149%
+- [Titans] **Michael Carter 2+ TD** — prob. 2%, 101.00 en fanduel, valor +109%
+- [Titans] **Cam Ward 2+ TD** — prob. 2%, 81.00 en draftkings, valor +78%
+- [Titans] **Elic Ayomanor 2+ TD** — prob. 3%, 51.00 en fanduel, valor +44%
+- [Titans] **Wan'Dale Robinson 2+ TD** — prob. 4%, 36.00 en draftkings, valor +37%
+- [Titans] **Cam Ward anota** — prob. 19%, 7.00 en draftkings, valor +32%
+- [Titans] **Elic Ayomanor anota** — prob. 22%, 5.30 en fanduel, valor +15%
+- [Bengals] **Ja'Marr Chase menos de 62.5 yardas por recepción** — prob. 38%, 3.00 en bovada, valor +15%
 
 ## Los Angeles Chargers @ Los Angeles Rams — 2026-11-01 16:05
 
@@ -764,10 +1069,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Kyren Williams (RB) | 55% | 20.5% | - | - | sin línea: anota vale a partir de 1.87 |
-| Puka Nacua (WR) | 49% | 15.7% | - | - | sin línea: anota vale a partir de 2.11 |
-| Blake Corum (RB) | 37% | 8.6% | - | - | sin línea: anota vale a partir de 2.79 |
-| Davis Allen (TE) | 20% | 2.2% | - | - | sin línea: anota vale a partir de 5.30 |
+| Kyren Williams (RB) | 55% | 20.5% | 1.80 (-1%) | 6.00 (+17%) | ✅ 2+ TD a 6.00 (fanduel), valor +17% |
+| Puka Nacua (WR) | 49% | 15.7% | 1.85 (-8%) | 6.50 (+4%) | sin valor hoy: anota solo a 2.11 o más (la mejor es 6.50) |
+| Blake Corum (RB) | 37% | 8.6% | 2.75 (-0%) | 14.00 (+11%) | ✅ 2+ TD a 14.00 (draftkings), valor +11% |
+| Davis Allen (TE) | 20% | 2.2% | 4.00 (-15%) | 31.00 (-13%) | sin valor hoy: anota solo a 5.30 o más (la mejor es 31.00) |
+
+**Props:**
+- ✅ Puka Nacua menos de 72.5 yardas por recepción — 40% (modelo 44%, casa 32%), 2.90 en bovada, valor +16%. el modelo le da 44% y la casa 32%: la cuota paga más de lo que vale
+- ✅ Puka Nacua más de 1.5 yardas por tierra — 55% (modelo 68%, casa 46%), 2.07 en draftkings, valor +13%. LAC permite 8.42 yardas por acarreo a los WR (media 5.23; 13º que más de 32 en yardas por acarreo) (+4%); pasó más de 1.5 yardas por tierra en 3 de sus últimos 5 y 7 de 10 (esta temporada 3/5); últimos: 10, 0.0, 9.0, 2.0, 0.0
+- ✅ Matthew Stafford menos de 219.5 yardas de pase — 39% (modelo 42%, casa 33%), 2.85 en bovada, valor +11%. el modelo le da 42% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Matthew Stafford más de 0.5 yardas por tierra — 49% (modelo 59%, casa 42%), 2.26 en fanduel, valor +11%. Chargers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 2.2 (9 partidos) frente a 1.5 contra el resto; el modelo le da 59% y la casa 42%: la cuota paga más de lo que vale
+- 🔒 Kyren Williams más de 50.5 yardas por tierra — 68%, 1.50 en bovada, valor +2% (de las más probables)
+- 🔒 Kyren Williams más de 55.5 yardas por tierra — 62%, 1.69 en bovada, valor +4% (de las más probables)
+- 🔒 Puka Nacua menos de 102.5 yardas por recepción — 62%, 1.61 en bovada, valor -1% (de las más probables)
 
 **Defensa:** tacleadas: Nate Landman 7.2, Quentin Lake 6.0, Kamren Kinchens 5.2; sacks: Byron Young 0.71, Braden Fiske 0.36.
 
@@ -780,16 +1094,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Omarion Hampton (RB) | 30% | 5.6% | - | - | sin línea: anota vale a partir de 3.41 |
-| Ladd McConkey (WR) | 20% | 2.4% | - | - | sin línea: anota vale a partir de 5.13 |
-| Kimani Vidal (RB) | 18% | 1.9% | - | - | sin línea: anota vale a partir de 5.75 |
-| Justin Herbert (QB) | 18% | 1.8% | - | - | sin línea: anota vale a partir de 5.81 |
+| Omarion Hampton (RB) | 30% | 5.6% | 3.15 (-4%) | 19.00 (+3%) | ✅ 2+ TD a 19.00 (draftkings), valor +3% |
+| Ladd McConkey (WR) | 20% | 2.4% | 3.95 (-12%) | 29.00 (-16%) | sin valor hoy: anota solo a 5.13 o más (la mejor es 3.95) |
+| Kimani Vidal (RB) | 18% | 1.9% | 6.00 (+5%) | 61.00 (+13%) | ✅ 2+ TD a 61.00 (draftkings), valor +13% |
+| Justin Herbert (QB) | 18% | 1.8% | 7.00 (+19%) | 81.00 (+39%) | ✅ 2+ TD a 81.00 (fanduel), valor +39% |
+
+**Props:**
+- ✅ Tre Harris menos de 23.5 yardas por recepción — 42% (modelo 47%, casa 33%), 2.80 en bovada, valor +18%. LA concede 7.3 yardas por envío a los WR (media 8.0) (-6%); Rams es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 20 (9 partidos) frente a 30 contra el resto
+- ✅ Ladd McConkey menos de 3.5 recepciones — 53% (modelo 68%, casa 44%), 2.20 en fanduel, valor +18%. LA permite 57% de recepciones a los WR (media 62%) (-7%); pasó menos de 3.5 recepciones en 3 de sus últimos 5 y 7 de 10 (esta temporada 3/5); últimos: 1.0, 0.0, 4.0, 3.0, 5.0
+- ✅ Tre Harris menos de 2.5 recepciones — 53% (modelo 58%, casa 45%), 2.20 en fanduel, valor +17%. LA permite 57% de recepciones a los WR (media 62%) (-7%); Rams es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 1.7 (9 partidos) frente a 2.5 contra el resto
+- ✅ Ladd McConkey menos de 43.5 yardas por recepción — 53% (modelo 66%, casa 44%), 2.15 en bovada, valor +13%. LA concede 7.3 yardas por envío a los WR (media 8.0) (-6%); pasó menos de 43.5 yardas por recepción en 3 de sus últimos 5 y 8 de 10 (esta temporada 3/5); últimos: 17, 0.0, 66, 35, 82
+- 🔒 Quentin Johnston menos de 41.5 yardas por recepción — 71%, 1.48 en bovada, valor +6% (de las más probables)
+- 🔒 Tre Harris menos de 43.5 yardas por recepción — 68%, 1.53 en bovada, valor +4% (de las más probables)
+- 🔒 Ladd McConkey menos de 58.5 yardas por recepción — 68%, 1.54 en bovada, valor +5% (de las más probables)
 
 **Defensa:** tacleadas: Daiyan Henley 5.8, Elijah Molden 5.2, Del'Shawn Phillips 5.2; sacks: Khalil Mack 0.27, Akheem Mesidor 0.26.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Chargers] **Theo Wease Jr. anota** — prob. 8%, 23.00 en betmgm, valor +84%
+- [Rams] **Matthew Stafford anota** — prob. 8%, 23.00 en betrivers, valor +80%
+- [Chargers] **KeAndre Lambert-Smith anota** — prob. 13%, 11.00 en fanduel, valor +41%
+- [Chargers] **Justin Herbert 2+ TD** — prob. 2%, 81.00 en fanduel, valor +39%
+- [Chargers] **Hayden Rucci anota** — prob. 6%, 23.00 en betmgm, valor +37%
+- [Chargers] **Oronde Gadsden II 2+ TD** — prob. 2%, 81.00 en draftkings, valor +23%
+- [Chargers] **Tre Harris menos de 23.5 yardas por recepción** — prob. 42%, 2.80 en bovada, valor +18%
+- [Chargers] **Ladd McConkey menos de 3.5 recepciones** — prob. 53%, 2.20 en fanduel, valor +18%
 
 ## Kansas City Chiefs @ Denver Broncos — 2026-11-01 16:25
 
@@ -802,10 +1132,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| J.K. Dobbins (RB) | 32% | 6.0% | - | - | sin línea: anota vale a partir de 3.30 |
-| Jonah Coleman (RB) | 22% | 2.8% | - | - | sin línea: anota vale a partir de 4.70 |
-| Courtland Sutton (WR) | 20% | 2.4% | - | - | sin línea: anota vale a partir de 5.08 |
-| Nate Adkins (TE) | 16% | 1.5% | - | - | sin línea: anota vale a partir de 6.44 |
+| J.K. Dobbins (RB) | 32% | 6.0% | 3.20 (+1%) | 18.00 (+7%) | ✅ 2+ TD a 18.00 (betrivers), valor +7% |
+| Jonah Coleman (RB) | 22% | 2.8% | 2.75 (-19%) | 15.00 (-18%) | sin valor hoy: anota solo a 4.70 o más (la mejor es 15.00) |
+| Courtland Sutton (WR) | 20% | 2.4% | 3.40 (-22%) | 23.00 (-27%) | sin valor hoy: anota solo a 5.08 o más (la mejor es 3.40) |
+| Nate Adkins (TE) | 16% | 1.5% | 15.00 (+90%) | 201.00 (+138%) | ✅ 2+ TD a 201.00 (draftkings), valor +138% |
+
+**Props:**
+- ✅ J.K. Dobbins más de 40.5 yardas por tierra — 43% (modelo 48%, casa 33%), 2.80 en bovada, valor +20%. pasó más de 40.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/7); últimos: 23, 41, 68, 40, 49; como local promedia 71 (frente a 56)
+- ✅ Bo Nix menos de 178.5 yardas de pase — 40% (modelo 44%, casa 33%), 2.85 en bovada, valor +15%. KC permite 6.78 yardas por pase (media 7.04; 11º que menos de 32 en yardas por pase) (-2%); Chiefs es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 190 (10 partidos) frente a 243 contra el resto
+- ✅ J.K. Dobbins más de 8.5 acarreos — 63% (modelo 76%, casa 55%), 1.81 en betonlineag, valor +15%. pasó más de 8.5 acarreos en 4 de sus últimos 5 y 8 de 10 (esta temporada 5/7); últimos: 6.0, 17, 18, 11, 17; mejor precio en betonlineag: 1.81 frente a 1.72 de consenso
+- ✅ Courtland Sutton menos de 3.5 recepciones — 64% (modelo 69%, casa 55%), 1.78 en draftkings, valor +14%. pasó menos de 3.5 recepciones en 5 de sus últimos 5 y 9 de 10 (esta temporada 7/7); últimos: 3.0, 2.0, 2.0, 1.0, 3.0; racha: 8 partidos seguidos pasando esta línea
+- 🔒 J.K. Dobbins más de 20.5 yardas por tierra — 78%, 1.36 en bovada, valor +6% (de las más probables)
+- 🔒 Jonah Coleman menos de 54.5 yardas por tierra — 73%, 1.48 en bovada, valor +8% (de las más probables)
+- 🔒 Courtland Sutton menos de 49.5 yardas por recepción — 71%, 1.53 en bovada, valor +9% (de las más probables)
 
 **Defensa:** tacleadas: Alex Singleton 9.2, Brandon Jones 5.8, Justin Strnad 4.5; sacks: Zach Allen 0.33, Nik Bonitto 0.32.
 
@@ -819,16 +1158,31 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Kenneth Walker III (RB) | 55% | 19.9% | - | - | sin línea: anota vale a partir de 1.90 |
-| Rashee Rice (WR) | 25% | 3.7% | - | - | sin línea: anota vale a partir de 4.15 |
-| Travis Kelce (TE) | 22% | 2.7% | - | - | sin línea: anota vale a partir de 4.82 |
-| Xavier Worthy (WR) | 14% | 1.1% | - | - | sin línea: anota vale a partir de 7.33 |
+| Kenneth Walker III (RB) | 55% | 19.9% | 1.71 (-6%) | 5.60 (+13%) | sin valor hoy: anota solo a 1.90 o más (la mejor es 5.60) |
+| Rashee Rice (WR) | 25% | 3.7% | 3.40 (-11%) | 23.00 (-8%) | sin valor hoy: anota solo a 4.15 o más (la mejor es 23.00) |
+| Travis Kelce (TE) | 22% | 2.7% | 3.60 (-16%) | 25.00 (-20%) | sin valor hoy: anota solo a 4.82 o más (la mejor es 3.60) |
+| Xavier Worthy (WR) | 14% | 1.1% | 4.30 (-25%) | 35.00 (-35%) | sin valor hoy: anota solo a 7.33 o más (la mejor es 4.30) |
+
+**Props:**
+- ✅ Kenneth Walker III menos de 68.5 yardas por tierra — 34% (modelo 37%, casa 28%), 3.30 en bovada, valor +12%. el modelo le da 37% y la casa 28%: la cuota paga más de lo que vale
+- ✅ Cyrus Allen más de 4.5 yardas por recepción — 54% (modelo 66%, casa 47%), 2.02 en fanduel, valor +10%. el modelo le da 66% y la casa 47%: la cuota paga más de lo que vale
+- ✅ Kenneth Walker III más de 108.5 yardas por tierra — 36% (modelo 39%, casa 31%), 3.00 en bovada, valor +9%. pasó más de 108.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 4/6); últimos: 36, 128, 177, 70, 117; Broncos es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 88 (7 partidos) frente a 77 contra el resto
+- ✅ Emmett Johnson más de 7.5 yardas por recepción — 55% (modelo 58%, casa 49%), 1.97 en draftkings, valor +9%. pasó más de 7.5 yardas por recepción en 4 de sus últimos 5 y 5 de 6 (esta temporada 5/6); últimos: 17, 18, 10, 0.0, 20; racha: 3 partidos seguidos pasando esta línea
+- 🔒 Travis Kelce menos de 55.5 yardas por recepción — 64%, 1.54 en bovada, valor -2% (de las más probables)
+- 🔒 Kenneth Walker III menos de 3.5 recepciones — 62%, 1.67 en draftkings, valor +4% (de las más probables)
 
 **Defensa:** tacleadas: Nick Bolton 7.7, Drue Tranquill 6.6, Chamarri Conner 4.8; sacks: Chris Jones 0.16, George Karlaftis 0.14.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Broncos] **Nate Adkins 2+ TD** — prob. 1%, 201.00 en draftkings, valor +138%
+- [Broncos] **Lil'Jordan Humphrey anota** — prob. 10%, 17.00 en draftkings, valor +73%
+- [Broncos] **Adam Trautman anota** — prob. 9%, 17.00 en draftkings, valor +47%
+- [Chiefs] **Andrew Armstrong 2+ TD** — prob. 1%, 201.00 en betonlineag, valor +44%
+- [Broncos] **J.K. Dobbins más de 40.5 yardas por tierra** — prob. 43%, 2.80 en bovada, valor +20%
+- [Chiefs] **Jalen Royals anota** — prob. 10%, 12.00 en draftkings, valor +18%
+- [Broncos] **Bo Nix menos de 178.5 yardas de pase** — prob. 40%, 2.85 en bovada, valor +15%
+- [Broncos] **J.K. Dobbins más de 8.5 acarreos** — prob. 63%, 1.81 en betonlineag, valor +15%
 
 ## New England Patriots @ Miami Dolphins — 2026-11-01 16:25
 
@@ -841,10 +1195,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Ollie Gordon II (RB) | 39% | 9.5% | - | - | sin línea: anota vale a partir de 2.65 |
-| Caleb Douglas (WR) | 23% | 3.0% | - | - | sin línea: anota vale a partir de 4.54 |
-| Kevin Coleman Jr. (WR) | 19% | 2.2% | - | - | sin línea: anota vale a partir de 5.35 |
-| Malik Washington (WR) | 19% | 2.1% | - | - | sin línea: anota vale a partir de 5.49 |
+| Ollie Gordon II (RB) | 39% | 9.5% | 2.55 (-2%) | 13.00 (+19%) | ✅ 2+ TD a 13.00 (fanduel), valor +19% |
+| Caleb Douglas (WR) | 23% | 3.0% | 5.25 (+11%) | 46.00 (+24%) | ✅ 2+ TD a 46.00 (draftkings), valor +24% |
+| Kevin Coleman Jr. (WR) | 19% | 2.2% | 19.00 (+180%) | 201.00 (+217%) | ✅ 2+ TD a 201.00 (draftkings), valor +217% |
+| Malik Washington (WR) | 19% | 2.1% | 4.50 (-11%) | 36.00 (-18%) | sin valor hoy: anota solo a 5.49 o más (la mejor es 4.50) |
+
+**Props:**
+- ✅ Ollie Gordon II menos de 57.5 yardas por tierra — 53% (modelo 67%, casa 44%), 2.15 en bovada, valor +14%. pasó menos de 57.5 yardas por tierra en 2 de sus últimos 5 y 7 de 10 (esta temporada 2/5); últimos: 103, 88, 100, 41, 7.0; contra Patriots: 9.0, 8.0 (2/2 pasando la línea)
+- ✅ Ollie Gordon II menos de 1.5 recepciones — 59% (modelo 64%, casa 51%), 1.89 en draftkings, valor +12%. pasó menos de 1.5 recepciones en 3 de sus últimos 5 y 8 de 10 (esta temporada 3/5); últimos: 1.0, 0.0, 2.0, 3.0, 0.0; contra Patriots: 1.0, 1.0 (2/2 pasando la línea)
+- ✅ Malik Willis más de 207.5 yardas de pase — 41% (modelo 44%, casa 34%), 2.75 en bovada, valor +12%. el modelo le da 44% y la casa 34%: la cuota paga más de lo que vale
+- ✅ Ollie Gordon II menos de 9.5 yardas por recepción — 58% (modelo 71%, casa 49%), 1.93 en draftkings, valor +11%. pasó menos de 9.5 yardas por recepción en 4 de sus últimos 5 y 9 de 10 (esta temporada 4/5); últimos: 0.0, 0.0, 0.0, 14, 0.0; racha: 3 partidos seguidos pasando esta línea
+- 🔒 Malik Willis menos de 42.5 yardas por tierra — 74%, 1.42 en bovada, valor +5% (de las más probables)
+- 🔒 Ollie Gordon II menos de 72.5 yardas por tierra — 69%, 1.53 en bovada, valor +6% (de las más probables)
+- 🔒 Malik Willis menos de 37.5 yardas por tierra — 68%, 1.59 en bovada, valor +8% (de las más probables)
 
 **Defensa:** tacleadas: Jacob Rodriguez 8.5, Jordyn Brooks 8.2, Dante Trader Jr. 4.9; sacks: Chop Robinson 0.32, Zach Sieler 0.30.
 
@@ -861,16 +1224,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Rhamondre Stevenson (RB) | 39% | 9.7% | - | - | sin línea: anota vale a partir de 2.64 |
-| Eli Raridon (TE) | 38% | 9.0% | - | - | sin línea: anota vale a partir de 2.72 |
-| Hunter Henry (TE) | 37% | 8.5% | - | - | sin línea: anota vale a partir de 2.80 |
-| DeMario Douglas (WR) | 29% | 5.1% | - | - | sin línea: anota vale a partir de 3.55 |
+| Rhamondre Stevenson (RB) | 39% | 9.7% | 1.80 (-20%) | 6.00 (-25%) | sin valor hoy: anota solo a 2.64 o más (la mejor es 1.80) |
+| Eli Raridon (TE) | 38% | 9.0% | 4.20 (+38%) | 31.00 (+115%) | ✅ 2+ TD a 31.00 (draftkings), valor +115% |
+| Hunter Henry (TE) | 37% | 8.5% | 2.75 (+0%) | 15.00 (+21%) | ✅ 2+ TD a 15.00 (fanduel), valor +21% |
+| DeMario Douglas (WR) | 29% | 5.1% | 3.60 (+3%) | 23.00 (+13%) | ✅ 2+ TD a 23.00 (fanduel), valor +13% |
+
+**Props:**
+- ✅ Rhamondre Stevenson menos de 49.5 yardas por tierra — 45% (modelo 49%, casa 36%), 2.60 en bovada, valor +17%. pasó menos de 49.5 yardas por tierra en 4 de sus últimos 5 y 6 de 10 (esta temporada 5/7); últimos: 22, 36, 64, 47, 22; como visitante promedia 44 (frente a 57)
+- ✅ Drake Maye menos de 212.5 yardas de pase — 41% (modelo 45%, casa 33%), 2.85 en bovada, valor +16%. el modelo le da 45% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Corey Kiner menos de 25.5 yardas por tierra — 40% (modelo 50%, casa 33%), 2.80 en bovada, valor +12%. pasó menos de 25.5 yardas por tierra en 3 de sus últimos 5 y 7 de 10 (esta temporada 5/7); últimos: 13, 57, 52, 0.0, 18; como visitante promedia 9.7 (frente a 35)
+- ✅ Corey Kiner menos de 30.5 yardas por tierra — 51% (modelo 55%, casa 42%), 2.20 en bovada, valor +11%. pasó menos de 30.5 yardas por tierra en 3 de sus últimos 5 y 7 de 10 (esta temporada 5/7); últimos: 13, 57, 52, 0.0, 18; como visitante promedia 9.7 (frente a 35)
+- 🔒 Drake Maye menos de 35.5 yardas por tierra — 73%, 1.38 en bovada, valor +1% (de las más probables)
+- 🔒 Rhamondre Stevenson menos de 69.5 yardas por tierra — 66%, 1.54 en bovada, valor +2% (de las más probables)
+- 🔒 Drake Maye menos de 30.5 yardas por tierra — 65%, 1.56 en bovada, valor +1% (de las más probables)
 
 **Defensa:** tacleadas: Christian Elliss 6.2, Robert Spillane 5.0, Craig Woodson 4.6; sacks: Elijah Ponder 0.63, Christian Barmore 0.54.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Dolphins] **Kevin Coleman Jr. 2+ TD** — prob. 2%, 201.00 en draftkings, valor +217%
+- [Dolphins] **Jalen Tolbert anota** — prob. 7%, 41.00 en fanduel, valor +178%
+- [Patriots] **Eli Raridon 2+ TD** — prob. 7%, 31.00 en draftkings, valor +115%
+- [Dolphins] **Kaytron Allen anota** — prob. 7%, 28.00 en fanduel, valor +97%
+- [Dolphins] **Jared Wayne anota** — prob. 5%, 41.00 en fanduel, valor +95%
+- [Patriots] **Ryan Miller anota** — prob. 8%, 17.00 en fanduel, valor +31%
+- [Dolphins] **Caleb Douglas 2+ TD** — prob. 3%, 46.00 en draftkings, valor +24%
+- [Patriots] **Hunter Henry 2+ TD** — prob. 8%, 15.00 en fanduel, valor +21%
 
 ## Philadelphia Eagles @ Washington Commanders — 2026-11-01 20:20
 
@@ -885,10 +1264,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jayden Daniels (QB) | 35% | 7.6% | - | - | sin línea: anota vale a partir de 2.94 |
-| Stefon Diggs (WR) | 31% | 5.6% | - | - | sin línea: anota vale a partir de 3.40 |
-| Rachaad White (RB) | 27% | 4.3% | - | - | sin línea: anota vale a partir de 3.87 |
-| Treylon Burks (WR) | 24% | 3.3% | - | - | sin línea: anota vale a partir de 4.40 |
+| Jayden Daniels (QB) | 35% | 7.6% | 3.30 (+10%) | 21.00 (+38%) | ✅ 2+ TD a 21.00 (draftkings), valor +38% |
+| Stefon Diggs (WR) | 31% | 5.6% | 3.30 (+2%) | 19.00 (+6%) | ✅ 2+ TD a 19.00 (betrivers), valor +6% |
+| Rachaad White (RB) | 27% | 4.3% | 2.25 (-18%) | 9.50 (-38%) | sin valor hoy: anota solo a 3.87 o más (la mejor es 2.25) |
+| Treylon Burks (WR) | 24% | 3.3% | 6.00 (+18%) | 56.00 (+42%) | ✅ 2+ TD a 56.00 (draftkings), valor +42% |
+
+**Props:**
+- ✅ Rachaad White menos de 30.5 yardas por tierra — 42% (modelo 46%, casa 33%), 2.80 en bovada, valor +17%. pasó menos de 30.5 yardas por tierra en 3 de sus últimos 5 y 6 de 10 (esta temporada 3/5); últimos: 27, 18, 35, 43, 22; contra Eagles: 22, 17, 49 (2/3 pasando la línea)
+- ✅ Chig Okonkwo menos de 23.5 yardas por recepción — 41% (modelo 53%, casa 33%), 2.80 en bovada, valor +16%. contra Eagles: 16 (1/1 pasando la línea); el modelo le da 53% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Chig Okonkwo menos de 3.5 recepciones — 64% (modelo 69%, casa 55%), 1.80 en betmgm, valor +15%. contra Eagles: 2.0 (1/1 pasando la línea); como local promedia 3.0 (frente a 3.9)
+- ✅ Antonio Williams menos de 35.5 yardas por recepción — 58% (modelo 70%, casa 49%), 2.00 en betmgm, valor +15%. pasó menos de 35.5 yardas por recepción en 4 de sus últimos 5 y 4 de 6 (esta temporada 4/6); últimos: 50, 31, 21, 15, 24; como local promedia 22 (frente a 46)
+- 🔒 Rachaad White menos de 50.5 yardas por tierra — 73%, 1.47 en bovada, valor +7% (de las más probables)
+- 🔒 Antonio Williams menos de 45.5 yardas por recepción — 70%, 1.50 en bovada, valor +5% (de las más probables)
+- 🔒 Chig Okonkwo menos de 43.5 yardas por recepción — 69%, 1.53 en bovada, valor +5% (de las más probables)
 
 **Defensa:** tacleadas: Sonny Styles 6.2, Amik Robertson 6.0, Jeremy Reaves 5.8; sacks: Odafe Oweh 0.41, K'Lavon Chaisson 0.34.
 
@@ -904,16 +1292,32 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Dallas Goedert (TE) | 44% | 12.2% | - | - | sin línea: anota vale a partir de 2.37 |
-| Saquon Barkley (RB) | 33% | 6.7% | - | - | sin línea: anota vale a partir de 3.13 |
-| Jaydon Blue (RB) | 30% | 5.2% | - | - | sin línea: anota vale a partir de 3.52 |
-| Darius Cooper (WR) | 28% | 4.6% | - | - | sin línea: anota vale a partir de 3.73 |
+| Dallas Goedert (TE) | 44% | 12.2% | 3.70 (+25%) | 26.00 (+144%) | ✅ 2+ TD a 26.00 (betrivers), valor +144% |
+| Saquon Barkley (RB) | 33% | 6.7% | 2.65 (-8%) | 14.00 (+1%) | sin valor hoy: anota solo a 3.13 o más (la mejor es 14.00) |
+| Jaydon Blue (RB) | 30% | 5.2% | 10.00 (+84%) | 176.00 (+551%) | ✅ 2+ TD a 176.00 (fanduel), valor +551% |
+| Darius Cooper (WR) | 28% | 4.6% | 6.00 (+42%) | 61.00 (+120%) | ✅ 2+ TD a 61.00 (fanduel), valor +120% |
+
+**Props:**
+- ✅ Tanner McKee menos de 177.5 yardas de pase — 42% (modelo 48%, casa 33%), 2.85 en bovada, valor +21%. como visitante promedia 0.0 (frente a 146); el modelo le da 48% y la casa 33%: la cuota paga más de lo que vale
+- ✅ Dallas Goedert más de 55.5 yardas por recepción — 46% (modelo 51%, casa 38%), 2.50 en bovada, valor +15%. WAS concede 8.3 yardas por envío a los TE (media 7.2) (+8%); contra Commanders: 77, 32, 85, 61 (3/4 pasando la línea)
+- ✅ Tanner McKee menos de 187.5 yardas de pase — 46% (modelo 50%, casa 38%), 2.45 en bovada, valor +12%. como visitante promedia 0.0 (frente a 146); el modelo le da 50% y la casa 38%: la cuota paga más de lo que vale
+- ✅ Saquon Barkley más de 2.5 recepciones — 44% (modelo 47%, casa 39%), 2.50 en betonlineag, valor +10%. el modelo le da 47% y la casa 39%: la cuota paga más de lo que vale
+- 🔒 Elijah Mitchell menos de 36.5 yardas por tierra — 74%, 1.42 en bovada, valor +6% (de las más probables)
+- 🔒 Elijah Mitchell menos de 31.5 yardas por tierra — 69%, 1.61 en bovada, valor +11% (de las más probables)
+- 🔒 Tanner McKee más de 0.5 TD de pase — 68%, 1.50 en betmgm, valor +2% (de las más probables)
 
 **Defensa:** tacleadas: Zack Baun 6.9, Jeremiah Trotter Jr. 5.4, Cooper DeJean 5.3; sacks: Nolan Smith 0.39, Jalen Carter 0.37.
 
 ### Picks recomendados del partido (los dos lados)
 
-- Ninguna apuesta de este partido supera los filtros de valor con las cuotas de ahora.
+- [Eagles] **Jaydon Blue 2+ TD** — prob. 4%, 176.00 en fanduel, valor +551%
+- [Eagles] **Dallas Goedert 2+ TD** — prob. 9%, 26.00 en betrivers, valor +144%
+- [Eagles] **Darius Cooper 2+ TD** — prob. 4%, 61.00 en fanduel, valor +120%
+- [Commanders] **Austin Ekeler 2+ TD** — prob. 2%, 81.00 en fanduel, valor +83%
+- [Commanders] **Luke McCaffrey anota** — prob. 6%, 31.00 en fanduel, valor +76%
+- [Commanders] **Van Jefferson anota** — prob. 10%, 16.00 en draftkings, valor +66%
+- [Commanders] **Treylon Burks 2+ TD** — prob. 3%, 56.00 en draftkings, valor +42%
+- [Commanders] **Jayden Daniels 2+ TD** — prob. 7%, 21.00 en draftkings, valor +38%
 
 ## Chicago Bears @ Seattle Seahawks — 2026-11-02 20:15
 
@@ -1087,12 +1491,12 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jonathan Taylor (RB) | 52% | 17.5% | - | - | sin línea: anota vale a partir de 2.02 |
-| Tyler Warren (TE) | 22% | 2.9% | - | - | sin línea: anota vale a partir de 4.69 |
+| Jonathan Taylor (RB) | 52% | 17.6% | - | - | sin línea: anota vale a partir de 2.01 |
+| Tyler Warren (TE) | 23% | 3.0% | - | - | sin línea: anota vale a partir de 4.61 |
 | Daniel Jones (QB) | 21% | 2.5% | - | - | sin línea: anota vale a partir de 5.04 |
-| Josh Downs (WR) | 19% | 2.0% | - | - | sin línea: anota vale a partir de 5.53 |
+| Josh Downs (WR) | 19% | 2.1% | - | - | sin línea: anota vale a partir de 5.44 |
 
-**Defensa:** tacleadas: Akeem Davis-Gaither 7.1, A.J. Haulcy 5.3, Bryce Boettcher 4.1; sacks: Adetomiwa Adebawore 0.40, DeForest Buckner 0.26.
+**Defensa:** tacleadas: Akeem Davis-Gaither 7.1, A.J. Haulcy 5.3, DeForest Buckner 4.0; sacks: Adetomiwa Adebawore 0.40, DeForest Buckner 0.26.
 
 ### Dallas Cowboys (28.0 puntos esperados, favorito por 4.5, 3.1 TD)
 
@@ -1400,10 +1804,10 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Ashton Jeanty (RB) | 41% | 10.4% | - | - | sin línea: anota vale a partir de 2.55 |
-| Brock Bowers (TE) | 30% | 5.5% | - | - | sin línea: anota vale a partir de 3.42 |
-| Tre Tucker (WR) | 24% | 3.3% | - | - | sin línea: anota vale a partir de 4.38 |
-| Cody White (WR) | 20% | 2.2% | - | - | sin línea: anota vale a partir de 5.29 |
+| Ashton Jeanty (RB) | 42% | 10.8% | - | - | sin línea: anota vale a partir de 2.51 |
+| Brock Bowers (TE) | 32% | 6.2% | - | - | sin línea: anota vale a partir de 3.26 |
+| Tre Tucker (WR) | 25% | 3.7% | - | - | sin línea: anota vale a partir de 4.17 |
+| Cody White (WR) | 21% | 2.5% | - | - | sin línea: anota vale a partir de 5.01 |
 
 **Defensa:** tacleadas: Nakobe Dean 8.8, Quay Walker 6.7, Jeremy Chinn 5.6; sacks: Malcolm Koonce 0.29, Kwity Paye 0.23.
 
@@ -1437,10 +1841,10 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Anota | 2+ TD | Mejor cuota anota | Mejor cuota 2+ | Qué apostar |
 |---|---|---|---|---|---|
-| Jeremiyah Love (RB) | 26% | 4.0% | - | - | sin línea: anota vale a partir de 3.97 |
+| Jeremiyah Love (RB) | 26% | 4.1% | - | - | sin línea: anota vale a partir de 3.97 |
 | Trey McBride (TE) | 24% | 3.5% | - | - | sin línea: anota vale a partir de 4.27 |
-| Michael Wilson (WR) | 22% | 2.9% | - | - | sin línea: anota vale a partir de 4.64 |
-| Bam Knight (RB) | 21% | 2.5% | - | - | sin línea: anota vale a partir de 5.00 |
+| Michael Wilson (WR) | 22% | 2.9% | - | - | sin línea: anota vale a partir de 4.63 |
+| Bam Knight (RB) | 22% | 2.9% | - | - | sin línea: anota vale a partir de 4.66 |
 
 **Defensa:** tacleadas: Jack Gibbens 7.0, Mack Wilson 6.7, Budda Baker 5.4; sacks: Budda Baker 0.31, Darius Robinson 0.28.
 
@@ -1588,21 +1992,21 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Cómo reparte Cardinals la zona roja (hoy se esperan 6.0 acarreos y 5.6 envíos dentro de la 20, 3.0 a la zona de anotación):
 - Jeremiyah Love (RB): 41% de los acarreos en la zona roja (34% dentro de la 10), 5% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.46; P(2+ envíos en la zona roja) 4%.
 - Trey McBride (TE) — blanco principal en la zona roja: 25% de los envíos en la zona roja, 14% de los envíos a la zona de anotación; convierte 29% de sus oportunidades en la zona roja (34 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.41; P(2+ envíos en la zona roja) 40%.
-- Bam Knight (RB): 19% de los acarreos en la zona roja (25% dentro de la 10), 6% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (30 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.27; P(2+ envíos en la zona roja) 5%.
+- Bam Knight (RB): 23% de los acarreos en la zona roja (28% dentro de la 10), 6% de los envíos en la zona roja, 9% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (30 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.31; P(2+ envíos en la zona roja) 5%.
 - Michael Wilson (WR) — el más buscado en la zona de anotación: 19% de los envíos en la zona roja, 31% de los envíos a la zona de anotación; convierte 15% de sus oportunidades en la zona roja (26 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 29%.
 - Teagan Quitoriano (TE): 11% de los envíos en la zona roja, 18% de los envíos a la zona de anotación. TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 13%.
 - Candidato principal en la zona roja: Jeremiyah Love (RB), 0.46 TD esperados ahí.
 
 | Jugador | Proyección |
 |---|---|
-| Jacoby Brissett (QB, ARI) | 244.2 yardas de pase, 1.4 TD de pase, 13.6 yardas por tierra, P(TD) 18% |
-| Jeremiyah Love (RB, ARI) | 43.1 yardas por tierra, 1.6 recepciones, 9.6 yardas por recepción, P(TD) 33% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Bam Knight, que hoy juega (×0.83) |
-| Trey McBride (TE, ARI) | 0.0 yardas por tierra, 6.8 recepciones, 58.3 yardas por recepción, P(TD) 29% |
-| Michael Wilson (WR, ARI) | 1.2 yardas por tierra, 4.7 recepciones, 56.0 yardas por recepción, P(TD) 28% |
-| Bam Knight (RB, ARI) | 19.2 yardas por tierra, 2.3 recepciones, 16.1 yardas por recepción, P(TD) 26% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.83) |
-| Tyler Allgeier (RB, ARI) | 12.1 yardas por tierra, 1.7 recepciones, 11.0 yardas por recepción, P(TD) 17% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.88); parte de su volumen fue sin Bam Knight, que hoy juega (×0.90) |
-| Kendrick Bourne (WR, ARI) | 0.0 yardas por tierra, 3.4 recepciones, 39.5 yardas por recepción, P(TD) 17% |
-| Reggie Virgil (WR, ARI) | 0.0 yardas por tierra, 2.2 recepciones, 29.0 yardas por recepción, P(TD) 16% |
+| Jacoby Brissett (QB, ARI) | 244.2 yardas de pase, 1.4 TD de pase, 14.4 yardas por tierra, P(TD) 18% |
+| Jeremiyah Love (RB, ARI) | 43.1 yardas por tierra, 1.6 recepciones, 9.7 yardas por recepción, P(TD) 33% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Bam Knight, que hoy juega (×0.83) |
+| Trey McBride (TE, ARI) | 0.0 yardas por tierra, 6.8 recepciones, 58.5 yardas por recepción, P(TD) 29% |
+| Michael Wilson (WR, ARI) | 1.3 yardas por tierra, 4.7 recepciones, 56.2 yardas por recepción, P(TD) 29% |
+| Bam Knight (RB, ARI) | 22.7 yardas por tierra, 2.3 recepciones, 16.2 yardas por recepción, P(TD) 28% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.83) |
+| Tyler Allgeier (RB, ARI) | 14.3 yardas por tierra, 1.7 recepciones, 11.0 yardas por recepción, P(TD) 18% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.88); parte de su volumen fue sin Bam Knight, que hoy juega (×0.90) |
+| Kendrick Bourne (WR, ARI) | 0.0 yardas por tierra, 3.4 recepciones, 39.6 yardas por recepción, P(TD) 17% |
+| Reggie Virgil (WR, ARI) | 0.0 yardas por tierra, 2.2 recepciones, 29.1 yardas por recepción, P(TD) 16% |
 | Dak Prescott (QB, DAL) | 244.5 yardas de pase, 2.1 TD de pase, 11.1 yardas por tierra, P(TD) 15% |
 | Javonte Williams (RB, DAL) | 80.4 yardas por tierra, 1.7 recepciones, 11.8 yardas por recepción, P(TD) 59% |
 | CeeDee Lamb (WR, DAL) | 1.0 yardas por tierra, 5.6 recepciones, 77.0 yardas por recepción, P(TD) 46% |
@@ -1610,6 +2014,46 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Tyler Goodson (RB, DAL) | 21.1 yardas por tierra, 0.7 recepciones, 5.1 yardas por recepción, P(TD) 19% |
 | Ryan Flournoy (WR, DAL) | 0.1 yardas por tierra, 2.9 recepciones, 38.2 yardas por recepción, P(TD) 25% |
 | Jake Ferguson (TE, DAL) | 0.0 yardas por tierra, 2.1 recepciones, 18.7 yardas por recepción, P(TD) 22% |
+
+**Las mejores líneas del partido:**
+
+- **Teagan Quitoriano 2+ TD** — prob. 1% (modelo 2%, casa 1%), mejor cuota 181.00 (+18000) en draftkings, EV +115%
+  - ✔ zona roja: 0.24 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+16%)
+  - ✔ mejor precio en draftkings: 181.00 frente a 146.00 de consenso
+  - ✘ DAL concede a los TE el 25% de sus TD por recepción (liga 29%) (-16%)
+  - ✘ pasó más de 1.5 touchdowns en 1 de sus últimos 3 y 1 de 3 (esta temporada 1/1); últimos: 2.0, 0.0, 0.0
+  - ✘ como visitante promedia 0.0 (frente a 1.0)
+- **Jacoby Brissett 2+ TD** — prob. 2% (modelo 2%, casa 1%), mejor cuota 126.00 (+12500) en fanduel, EV +101%
+  - ✔ DAL concede 0.22 TD por tierra por partido a los QB (liga 0.19; 13º que más de 32) (+14%)
+  - ✔ Cowboys es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (5 partidos) frente a 0.1 contra el resto
+  - ✔ mejor precio en fanduel: 126.00 frente a 81.00 de consenso
+  - ✘ DAL concede a los QB el 18% de sus TD por tierra (liga 20%) (-10%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 28 partidos seguidos sin pasar esta línea
+- **Teagan Quitoriano anota** — prob. 12% (modelo 19%, casa 8%), mejor cuota 15.00 (+1400) en draftkings, EV +82%
+  - ✔ zona roja: 0.24 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+16%)
+  - ✔ mejor precio en draftkings: 15.00 frente a 12.00 de consenso
+  - ✔ el modelo le da 19% y la casa 8%: la cuota paga más de lo que vale
+  - ✘ DAL concede a los TE el 25% de sus TD por recepción (liga 29%) (-16%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 3 y 1 de 3 (esta temporada 1/1); últimos: 2.0, 0.0, 0.0
+  - ✘ como visitante promedia 0.0 (frente a 1.0)
+- **Bam Knight 2+ TD** — prob. 4% (modelo 5%, casa 2%), mejor cuota 41.00 (+4000) en fanduel, EV +57%
+  - ✔ DAL concede a los RB el 14% de sus TD por recepción (liga 12%) (+14%)
+  - ✔ zona roja: 0.31 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (+7%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/4); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 16 partidos seguidos sin pasar esta línea
+  - ✘ contra Cowboys: 0.0 (0/1 pasando la línea)
+- **Reggie Virgil anota** — prob. 12% (modelo 16%, casa 10%), mejor cuota 12.00 (+1100) en betrivers, EV +48%
+  - ✔ zona roja: 0.13 TD esperados ahí contra Cowboys (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+7%)
+  - ✔ mejor precio en betrivers: 12.00 frente a 9.25 de consenso
+  - ✔ el modelo le da 16% y la casa 10%: la cuota paga más de lo que vale
+  - ✘ muestra corta: 1 partidos en la base
+- **Hunter Luepke 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 176.00 (+17500) en fanduel, EV +45%
+  - ✔ ARI concede a los RB el 14% de sus TD por recepción (liga 12%) (+18%)
+  - ✔ mejor precio en fanduel: 176.00 frente a 66.00 de consenso
+  - ✘ zona roja: 0.05 TD esperados ahí contra Cardinals (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-13%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 34 partidos seguidos sin pasar esta línea
 
 ## Atlanta Falcons @ Tampa Bay Buccaneers — 2026-11-01 13:00
 
@@ -1694,6 +2138,49 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Sean Tucker (RB, TB) | 17.9 yardas por tierra, 0.2 recepciones, 1.7 yardas por recepción, P(TD) 24% |
 | David Sills (WR, TB) | 0.0 yardas por tierra, 2.1 recepciones, 25.4 yardas por recepción, P(TD) 16% — más volumen por las bajas de Emeka Egbuka (×1.07) |
 | Tez Johnson (WR, TB) | 2.1 yardas por tierra, 1.8 recepciones, 24.6 yardas por recepción, P(TD) 16% — más volumen por las bajas de Emeka Egbuka (×1.07) |
+
+**Las mejores líneas del partido:**
+
+- **Nick Muse anota** — prob. 9% (modelo 11%, casa 4%), mejor cuota 29.00 (+2800) en betmgm, EV +147%
+  - ✔ TB concede a los TE el 39% de sus TD por recepción (liga 29%) (+32%)
+  - ✔ mejor precio en betmgm: 29.00 frente a 21.00 de consenso
+  - ✔ el modelo le da 11% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.07 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (-10%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 5 (esta temporada 1/5); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ como visitante promedia 0.0 (frente a 0.3)
+- **Kyle Pitts 2+ TD** — prob. 6% (modelo 8%, casa 3%), mejor cuota 36.00 (+3500) en draftkings, EV +121%
+  - ✔ TB concede a los TE el 39% de sus TD por recepción (liga 29%) (+32%)
+  - ✔ zona roja: 0.45 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+8%)
+  - ✔ Buccaneers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.4 (9 partidos) frente a 0.3 contra el resto
+  - ✔ mejor precio en draftkings: 36.00 frente a 29.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 1/7); últimos: 1.0, 2.0, 1.0, 0.0, 0.0
+- **Khalil Herbert 2+ TD** — prob. 2% (modelo 2%, casa 1%), mejor cuota 126.00 (+12500) en fanduel, EV +94%
+  - ✔ mejor precio en fanduel: 126.00 frente a 91.00 de consenso
+  - ✘ TB concede a los RB el 8% de sus TD por recepción (liga 12%) (-25%)
+  - ✘ zona roja: 0.13 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-7%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+- **Kyle Pitts 3+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 171.00 (+17000) en draftkings, EV +88%
+  - ✔ TB concede a los TE el 39% de sus TD por recepción (liga 29%) (+32%)
+  - ✔ zona roja: 0.45 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+8%)
+  - ✔ Buccaneers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.4 (9 partidos) frente a 0.3 contra el resto
+  - ✔ mejor precio en draftkings: 171.00 frente a 111.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 1.0, 2.0, 1.0, 0.0, 0.0
+  - ✘ racha: 10 partidos seguidos sin pasar esta línea
+  - ✘ contra Buccaneers: 3.0, 0.0, 2.0, 0.0 (1/4 pasando la línea)
+- **Sean Tucker 2+ TD** — prob. 3% (modelo 3%, casa 2%), mejor cuota 61.00 (+6000) en fanduel, EV +72%
+  - ✔ Falcons es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.5 (8 partidos) frente a 0.4 contra el resto
+  - ✔ mejor precio en fanduel: 61.00 frente a 56.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/3); últimos: 1.0, 0.0, 1.0, 0.0, 0.0
+  - ✘ racha: 10 partidos seguidos sin pasar esta línea
+  - ✘ contra Falcons: 1.0, 0.0, 0.0, 0.0 (0/4 pasando la línea)
+- **Olamide Zaccheaus anota** — prob. 7% (modelo 7%, casa 6%), mejor cuota 23.00 (+2200) en bovada, EV +50%
+  - ✔ zona roja: 0.05 TD esperados ahí contra Buccaneers (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+6%)
+  - ✔ Buccaneers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (5 partidos) frente a 0.1 contra el resto
+  - ✔ como visitante promedia 0.3 (frente a 0.1)
+  - ✔ mejor precio en bovada: 23.00 frente a 14.75 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 0/6); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 7 partidos seguidos sin pasar esta línea
+  - ✘ contra Buccaneers: 0.0, 0.0 (0/2 pasando la línea)
 
 ## Baltimore Ravens @ Buffalo Bills — 2026-11-01 13:00
 
@@ -1780,6 +2267,45 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Dalton Kincaid (TE, BUF) | 0.0 yardas por tierra, 2.8 recepciones, 32.0 yardas por recepción, P(TD) 29% |
 | Keon Coleman (WR, BUF) | 0.0 yardas por tierra, 2.5 recepciones, 36.0 yardas por recepción, P(TD) 23% |
 
+**Las mejores líneas del partido:**
+
+- **Devontez Walker 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 151.00 (+15000) en fanduel, EV +80%
+  - ✔ BUF concede a los WR el 68% de sus TD por recepción (liga 59%) (+16%)
+  - ✔ como visitante promedia 0.4 (frente a 0.2)
+  - ✔ mejor precio en fanduel: 151.00 frente a 128.50 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ racha: 12 partidos seguidos sin pasar esta línea
+  - ✘ Bills es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.0 (3 partidos) frente a 0.4 contra el resto
+- **Devontez Walker anota** — prob. 13% (modelo 16%, casa 8%), mejor cuota 13.00 (+1200) en betmgm, EV +72%
+  - ✔ BUF concede a los WR el 68% de sus TD por recepción (liga 59%) (+16%)
+  - ✔ como visitante promedia 0.4 (frente a 0.2)
+  - ✔ mejor precio en betmgm: 13.00 frente a 11.50 de consenso
+  - ✔ el modelo le da 16% y la casa 8%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 2 de 10 (esta temporada 1/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ Bills es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.0 (3 partidos) frente a 0.4 contra el resto
+- **Ja'Kobi Lane 2+ TD** — prob. 5% (modelo 7%, casa 4%), mejor cuota 31.00 (+3000) en betrivers, EV +56%
+  - ✔ BUF concede a los WR el 68% de sus TD por recepción (liga 59%) (+16%)
+  - ✔ mejor precio en betrivers: 31.00 frente a 26.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 3 y 0 de 3 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ muestra corta: 3 partidos en la base
+- **Josh Cuevas 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 176.00 (+17500) en fanduel, EV +39%
+  - ✔ mejor precio en fanduel: 176.00 frente a 136.00 de consenso
+  - ✘ BUF concede a los TE el 17% de sus TD por recepción (liga 29%) (-25%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 5 (esta temporada 0/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ racha: 5 partidos seguidos sin pasar esta línea
+- **Ja'Kobi Lane 3+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 151.00 (+15000) en betrivers, EV +37%
+  - ✔ BUF concede a los WR el 68% de sus TD por recepción (liga 59%) (+16%)
+  - ✔ mejor precio en betrivers: 151.00 frente a 121.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 3 y 0 de 3 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ muestra corta: 3 partidos en la base
+- **Josh Cuevas anota** — prob. 11% (modelo 12%, casa 9%), mejor cuota 12.00 (+1100) en draftkings, EV +32%
+  - ✔ mejor precio en draftkings: 12.00 frente a 10.75 de consenso
+  - ✘ BUF concede a los TE el 17% de sus TD por recepción (liga 29%) (-25%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 5 (esta temporada 1/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ muestra corta: 5 partidos en la base
+
 ## Cleveland Browns @ Pittsburgh Steelers — 2026-11-01 13:00
 
 - **Steelers**: 21.0 puntos esperados (total y spread de las casas), favorito por 3.5; 37 dropbacks y 24 carreras; 2.05 TD esperados.
@@ -1823,12 +2349,12 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 - Dónde se le anota a Browns en la zona roja: TE 0.37 TD por partido (liga 0.40, 16º que menos concede de 32: normal); WR 0.54 TD por partido (liga 0.58, 15º que más concede de 32: normal); RB 0.57 TD por partido (liga 0.74, 9º que menos concede de 32: fuerte); QB (carreras) 0.07 TD por partido (liga 0.17, 4º que menos concede de 32: fuerte).
 - Cómo reparte Steelers la zona roja (hoy se esperan 3.3 acarreos y 4.5 envíos dentro de la 20, 2.2 a la zona de anotación):
-- Germie Bernard (WR) — blanco principal en la zona roja: 26% de los envíos en la zona roja, 10% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.23; P(2+ envíos en la zona roja) 33%.
-- Darnell Washington (TE) — el más buscado en la zona de anotación: 17% de los envíos en la zona roja, 31% de los envíos a la zona de anotación; convierte 20% de sus oportunidades en la zona roja (10 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.23; P(2+ envíos en la zona roja) 18%.
-- Pat Freiermuth (TE): 12% de los envíos en la zona roja, 14% de los envíos a la zona de anotación; convierte 56% de sus oportunidades en la zona roja (9 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.23; P(2+ envíos en la zona roja) 10%.
-- Rico Dowdle (RB): 39% de los acarreos en la zona roja (40% dentro de la 10), 8% de los envíos en la zona roja; convierte 12% de sus oportunidades en la zona roja (32 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.22; P(2+ envíos en la zona roja) 5%.
+- Germie Bernard (WR) — blanco principal en la zona roja: 27% de los envíos en la zona roja, 11% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 35%.
+- Darnell Washington (TE) — el más buscado en la zona de anotación: 18% de los envíos en la zona roja, 33% de los envíos a la zona de anotación; convierte 20% de sus oportunidades en la zona roja (10 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 19%.
+- Pat Freiermuth (TE): 12% de los envíos en la zona roja, 15% de los envíos a la zona de anotación; convierte 56% de sus oportunidades en la zona roja (9 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 11%.
+- Rico Dowdle (RB): 39% de los acarreos en la zona roja (40% dentro de la 10), 8% de los envíos en la zona roja; convierte 12% de sus oportunidades en la zona roja (32 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.22; P(2+ envíos en la zona roja) 6%.
 - Jaylen Warren (RB): 42% de los acarreos en la zona roja (35% dentro de la 10), 7% de los envíos en la zona roja; convierte 6% de sus oportunidades en la zona roja (34 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.16; P(2+ envíos en la zona roja) 4%.
-- Candidato principal en la zona roja: Germie Bernard (WR), 0.23 TD esperados ahí.
+- Candidato principal en la zona roja: Germie Bernard (WR), 0.24 TD esperados ahí.
 
 **La zona roja — ataque de Browns:**
 
@@ -1853,12 +2379,52 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Jerry Jeudy (WR, CLE) | 0.1 yardas por tierra, 2.3 recepciones, 25.9 yardas por recepción, P(TD) 9% |
 | Jaleel McLaughlin (RB, CLE) | 5.9 yardas por tierra, 0.9 recepciones, 6.3 yardas por recepción, P(TD) 6% — parte de su volumen fue sin Quinshon Judkins, que hoy juega (×0.92) |
 | Aaron Rodgers (QB, PIT) | 214.4 yardas de pase, 1.4 TD de pase, 4.6 yardas por tierra, P(TD) 2% |
-| Jaylen Warren (RB, PIT) | 70.3 yardas por tierra, 2.8 recepciones, 24.7 yardas por recepción, P(TD) 25% |
-| Rico Dowdle (RB, PIT) | 31.2 yardas por tierra, 2.9 recepciones, 19.1 yardas por recepción, P(TD) 27% |
-| Germie Bernard (WR, PIT) | 1.0 yardas por tierra, 5.0 recepciones, 55.4 yardas por recepción, P(TD) 27% |
-| DK Metcalf (WR, PIT) | 0.7 yardas por tierra, 4.0 recepciones, 51.5 yardas por recepción, P(TD) 22% |
-| Pat Freiermuth (TE, PIT) | 0.7 yardas por tierra, 2.8 recepciones, 26.2 yardas por recepción, P(TD) 21% |
-| Darnell Washington (TE, PIT) | 0.0 yardas por tierra, 2.1 recepciones, 20.7 yardas por recepción, P(TD) 24% |
+| Jaylen Warren (RB, PIT) | 70.3 yardas por tierra, 2.8 recepciones, 25.4 yardas por recepción, P(TD) 26% |
+| Rico Dowdle (RB, PIT) | 31.2 yardas por tierra, 3.0 recepciones, 19.7 yardas por recepción, P(TD) 27% |
+| Germie Bernard (WR, PIT) | 1.0 yardas por tierra, 5.1 recepciones, 56.9 yardas por recepción, P(TD) 28% |
+| DK Metcalf (WR, PIT) | 0.7 yardas por tierra, 4.1 recepciones, 53.0 yardas por recepción, P(TD) 23% |
+| Pat Freiermuth (TE, PIT) | 0.7 yardas por tierra, 2.9 recepciones, 26.9 yardas por recepción, P(TD) 22% |
+| Darnell Washington (TE, PIT) | 0.0 yardas por tierra, 2.2 recepciones, 21.3 yardas por recepción, P(TD) 25% |
+
+**Las mejores líneas del partido:**
+
+- **Travis Homer anota** — prob. 6% (modelo 8%, casa 3%), mejor cuota 41.00 (+4000) en fanduel, EV +149%
+  - ✔ CLE concede a los RB el 83% de sus TD por tierra (liga 76%) (+10%)
+  - ✔ mejor precio en fanduel: 41.00 frente a 29.00 de consenso
+  - ✔ el modelo le da 8% y la casa 3%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.04 TD esperados ahí contra Browns (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-12%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/5); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 21 partidos seguidos sin pasar esta línea
+- **Lew Nichols III anota** — prob. 3% (modelo 4%, casa 2%), mejor cuota 71.00 (+7000) en draftkings, EV +138%
+  - ✔ mejor precio en draftkings: 71.00 frente a 51.00 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 6 (esta temporada 0/5); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 6 partidos seguidos sin pasar esta línea
+  - ✘ contra Browns: 0.0 (0/1 pasando la línea)
+- **Isaiah Bond anota** — prob. 7% (modelo 9%, casa 4%), mejor cuota 23.00 (+2200) en draftkings, EV +67%
+  - ✔ mejor precio en draftkings: 23.00 frente a 21.00 de consenso
+  - ✔ el modelo le da 9% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.04 TD esperados ahí contra Steelers (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (-12%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 18 partidos seguidos sin pasar esta línea
+- **Robert Tonyan anota** — prob. 6% (modelo 9%, casa 4%), mejor cuota 29.00 (+2800) en betmgm, EV +65%
+  - ✔ zona roja: 0.10 TD esperados ahí contra Browns (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+15%)
+  - ✔ CLE concede a los TE el 32% de sus TD por recepción (liga 29%) (+8%)
+  - ✔ mejor precio en betmgm: 29.00 frente a 26.00 de consenso
+  - ✔ el modelo le da 9% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 3 y 0 de 3 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ muestra corta: 3 partidos en la base
+- **Germie Bernard 2+ TD** — prob. 4% (modelo 5%, casa 3%), mejor cuota 34.00 (+3300) en fanduel, EV +45%
+  - ✔ zona roja: 0.24 TD esperados ahí contra Browns (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+6%)
+  - ✔ mejor precio en fanduel: 34.00 frente a 27.50 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 6 (esta temporada 0/6); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ racha: 6 partidos seguidos sin pasar esta línea
+  - ✘ contra Browns: 0.0 (0/1 pasando la línea)
+- **Blake Whiteheart anota** — prob. 5% (modelo 5%, casa 5%), mejor cuota 25.00 (+2400) en betrivers, EV +30%
+  - ✔ mejor precio en betrivers: 25.00 frente a 19.50 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 1/4); últimos: 0.0, 0.0, 1.0, 0.0, 0.0
+  - ✘ contra Steelers: 0.0, 0.0, 0.0, 0.0, 0.0 (0/5 pasando la línea)
+  - ✘ Steelers es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.1 (11 partidos) frente a 0.1 contra el resto
 
 ## Indianapolis Colts @ Jacksonville Jaguars — 2026-11-01 13:00
 
@@ -1900,7 +2466,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Jaguars contra los WR: concede 185 yardas y 0.67 TD por partido (liga 149 y 0.90)
 - Jaguars contra los TE: concede 45 yardas y 0.61 TD por partido (liga 54 y 0.45)
 
-**Defensores a seguir:** Akeem Davis-Gaither (LB, IND) 7.5 tacleadas, 0.04 sacks; Foyesade Oluokun (LB, JAX) 6.1 tacleadas, 0.06 sacks; Ventrell Miller (LB, JAX) 4.9 tacleadas, 0.13 sacks; A.J. Haulcy (DB, IND) 4.9 tacleadas, 0.01 sacks; Jarrian Jones (DB, JAX) 4.6 tacleadas, 0.01 sacks; Bryce Boettcher (LB, IND) 4.3 tacleadas, 0.04 sacks
+**Defensores a seguir:** Akeem Davis-Gaither (LB, IND) 7.5 tacleadas, 0.04 sacks; Foyesade Oluokun (LB, JAX) 6.1 tacleadas, 0.06 sacks; Ventrell Miller (LB, JAX) 4.9 tacleadas, 0.13 sacks; A.J. Haulcy (DB, IND) 4.9 tacleadas, 0.01 sacks; Jarrian Jones (DB, JAX) 4.6 tacleadas, 0.01 sacks; DeForest Buckner (DL, IND) 4.2 tacleadas, 0.32 sacks
 
 **La zona roja — ataque de Jaguars:**
 
@@ -1920,23 +2486,23 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Su punto débil: los TE. Les concede 1.5 veces los TD de la media en la zona roja y les deja convertir el 38% por envío (liga 32%).
 - Cómo reparte Colts la zona roja (hoy se esperan 4.6 acarreos y 4.0 envíos dentro de la 20, 1.7 a la zona de anotación):
 - Jonathan Taylor (RB): 62% de los acarreos en la zona roja (61% dentro de la 10), 7% de los envíos en la zona roja; convierte 18% de sus oportunidades en la zona roja (61 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.49; P(2+ envíos en la zona roja) 3%.
-- Tyler Warren (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 17% de los envíos en la zona roja, 22% de los envíos a la zona de anotación; convierte 25% de sus oportunidades en la zona roja (20 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.28; P(2+ envíos en la zona roja) 16%.
+- Tyler Warren (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 18% de los envíos en la zona roja, 23% de los envíos a la zona de anotación; convierte 25% de sus oportunidades en la zona roja (20 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.29; P(2+ envíos en la zona roja) 16%.
 - Daniel Jones (QB): 13% de los acarreos en la zona roja (15% dentro de la 10); convierte 27% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 25%). TD esperados en la zona roja: 0.16; P(2+ envíos en la zona roja) 0%.
-- Will Mallory (TE): 10% de los envíos en la zona roja, 15% de los envíos a la zona de anotación. TD esperados en la zona roja: 0.15; P(2+ envíos en la zona roja) 6%.
-- Josh Downs (WR): 16% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 23%). TD esperados en la zona roja: 0.10; P(2+ envíos en la zona roja) 13%.
+- Will Mallory (TE): 10% de los envíos en la zona roja, 15% de los envíos a la zona de anotación. TD esperados en la zona roja: 0.15; P(2+ envíos en la zona roja) 7%.
+- Josh Downs (WR): 16% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 23%). TD esperados en la zona roja: 0.11; P(2+ envíos en la zona roja) 14%.
 - Candidato principal en la zona roja: Jonathan Taylor (RB), 0.49 TD esperados ahí.
 
 | Jugador | Proyección |
 |---|---|
 | Daniel Jones (QB, IND) | 237.8 yardas de pase, 0.9 TD de pase, 7.7 yardas por tierra, P(TD) 20% |
-| Jonathan Taylor (RB, IND) | 54.4 yardas por tierra, 2.4 recepciones, 19.6 yardas por recepción, P(TD) 40% |
-| Tyler Warren (TE, IND) | 1.1 yardas por tierra, 4.4 recepciones, 36.1 yardas por recepción, P(TD) 26% |
-| Keenan Allen (WR, IND) | 0.0 yardas por tierra, 4.2 recepciones, 46.1 yardas por recepción, P(TD) 13% |
-| Josh Downs (WR, IND) | 0.8 yardas por tierra, 3.4 recepciones, 43.0 yardas por recepción, P(TD) 13% |
+| Jonathan Taylor (RB, IND) | 54.4 yardas por tierra, 2.4 recepciones, 19.9 yardas por recepción, P(TD) 40% |
+| Tyler Warren (TE, IND) | 1.1 yardas por tierra, 4.5 recepciones, 36.6 yardas por recepción, P(TD) 26% |
+| Keenan Allen (WR, IND) | 0.0 yardas por tierra, 4.2 recepciones, 46.8 yardas por recepción, P(TD) 14% |
+| Josh Downs (WR, IND) | 0.8 yardas por tierra, 3.5 recepciones, 43.7 yardas por recepción, P(TD) 13% |
 | Seth McGowan (RB, IND) | 17.2 yardas por tierra, 0.5 recepciones, 3.6 yardas por recepción, P(TD) 10% |
-| Laquon Treadwell (WR, IND) | 0.0 yardas por tierra, 2.2 recepciones, 29.2 yardas por recepción, P(TD) 10% |
-| Will Mallory (TE, IND) | 0.0 yardas por tierra, 1.9 recepciones, 17.8 yardas por recepción, P(TD) 14% — parte de su volumen fue sin Tyler Warren, que hoy juega (×0.92) |
-| Ashton Dulin (WR, IND) | 0.5 yardas por tierra, 1.5 recepciones, 20.2 yardas por recepción, P(TD) 4% |
+| Laquon Treadwell (WR, IND) | 0.0 yardas por tierra, 2.2 recepciones, 29.6 yardas por recepción, P(TD) 10% |
+| Will Mallory (TE, IND) | 0.0 yardas por tierra, 1.9 recepciones, 18.0 yardas por recepción, P(TD) 14% — parte de su volumen fue sin Tyler Warren, que hoy juega (×0.92) |
+| Ashton Dulin (WR, IND) | 0.5 yardas por tierra, 1.5 recepciones, 20.5 yardas por recepción, P(TD) 4% |
 | Trevor Lawrence (QB, JAX) | 214.7 yardas de pase, 2.1 TD de pase, 16.7 yardas por tierra, P(TD) 13% |
 | Bhayshul Tuten (RB, JAX) | 59.9 yardas por tierra, 1.4 recepciones, 12.5 yardas por recepción, P(TD) 38% |
 | Chris Rodriguez Jr. (RB, JAX) | 33.9 yardas por tierra, 0.2 recepciones, 1.3 yardas por recepción, P(TD) 30% |
@@ -1945,6 +2511,50 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Jakobi Meyers (WR, JAX) | 0.8 yardas por tierra, 2.7 recepciones, 36.0 yardas por recepción, P(TD) 27% |
 | Brian Thomas Jr. (WR, JAX) | 0.1 yardas por tierra, 1.7 recepciones, 22.3 yardas por recepción, P(TD) 23% |
 | Ameer Abdullah (RB, JAX) | 9.5 yardas por tierra, 0.4 recepciones, 3.1 yardas por recepción, P(TD) 6% |
+
+**Las mejores líneas del partido:**
+
+- **Will Mallory anota** — prob. 11% (modelo 14%, casa 4%), mejor cuota 26.00 (+2500) en draftkings, EV +173%
+  - ✔ JAX concede a los TE el 40% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.15 TD esperados ahí contra Jaguars (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+7%)
+  - ✔ mejor precio en draftkings: 26.00 frente a 22.25 de consenso
+  - ✔ el modelo le da 14% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/2); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 10 partidos seguidos sin pasar esta línea
+  - ✘ contra Jaguars: 0.0, 0.0 (0/2 pasando la línea)
+- **Daniel Jones 2+ TD** — prob. 2% (modelo 2%, casa 1%), mejor cuota 151.00 (+15000) en fanduel, EV +172%
+  - ✔ JAX concede 0.23 TD por tierra por partido a los QB (liga 0.19; 10º que más de 32) (+21%)
+  - ✔ JAX concede a los QB el 24% de sus TD por tierra (liga 20%) (+19%)
+  - ✔ como visitante promedia 0.2 (frente a 0.1)
+  - ✔ mejor precio en fanduel: 151.00 frente a 101.00 de consenso
+  - ✘ zona roja: 0.16 TD esperados ahí contra Jaguars (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-9%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 0.0, 0.0, 0.0, 1.0, 0.0
+  - ✘ racha: 19 partidos seguidos sin pasar esta línea
+- **Mo Alie-Cox anota** — prob. 9% (modelo 11%, casa 4%), mejor cuota 23.00 (+2200) en draftkings, EV +104%
+  - ✔ JAX concede a los TE el 40% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ Jaguars es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (11 partidos) frente a 0.1 contra el resto
+  - ✔ mejor precio en draftkings: 23.00 frente a 21.25 de consenso
+  - ✔ el modelo le da 11% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 2 de 10 (esta temporada 1/4); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ como visitante promedia 0.0 (frente a 0.2)
+- **Ameer Abdullah anota** — prob. 5% (modelo 6%, casa 4%), mejor cuota 36.00 (+3500) en betrivers, EV +90%
+  - ✔ mejor precio en betrivers: 36.00 frente a 24.50 de consenso
+  - ✘ zona roja: 0.04 TD esperados ahí contra Colts (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-11%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 18 partidos seguidos sin pasar esta línea
+- **Quintin Morris anota** — prob. 8% (modelo 9%, casa 6%), mejor cuota 23.00 (+2200) en fanduel, EV +73%
+  - ✔ IND concede a los TE el 36% de sus TD por recepción (liga 29%) (+24%)
+  - ✔ Colts es de las defensas medias en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.1 (7 partidos) frente a 0.1 contra el resto
+  - ✔ mejor precio en fanduel: 23.00 frente a 16.50 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 0/4); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 4 partidos seguidos sin pasar esta línea
+  - ✘ contra Colts: 0.0, 0.0 (0/2 pasando la línea)
+- **Will Mallory 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 181.00 (+18000) en draftkings, EV +62%
+  - ✔ JAX concede a los TE el 40% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.15 TD esperados ahí contra Jaguars (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+7%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/2); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 10 partidos seguidos sin pasar esta línea
+  - ✘ contra Jaguars: 0.0, 0.0 (0/2 pasando la línea)
 
 ## Las Vegas Raiders @ New York Jets — 2026-11-01 13:00
 
@@ -2004,22 +2614,22 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Dónde se le anota a Jets en la zona roja: RB 0.97 TD por partido (liga 0.74, 8º que más concede de 32: débil); WR 0.67 TD por partido (liga 0.58, 8º que más concede de 32: normal); QB (carreras) 0.19 TD por partido (liga 0.17, 13º que más concede de 32: normal); TE 0.30 TD por partido (liga 0.40, 10º que menos concede de 32: fuerte).
 - Su punto débil: los RB. Les concede 1.3 veces los TD de la media en la zona roja y les deja convertir el 14% por acarreo (liga 15%).
 - Cómo reparte Raiders la zona roja (hoy se esperan 5.2 acarreos y 4.9 envíos dentro de la 20, 2.3 a la zona de anotación):
-- Ashton Jeanty (RB): 60% de los acarreos en la zona roja (67% dentro de la 10), 21% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 12% de sus oportunidades en la zona roja (48 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.56; P(2+ envíos en la zona roja) 27%.
-- Brock Bowers (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 22% de los envíos en la zona roja, 24% de los envíos a la zona de anotación; convierte 38% de sus oportunidades en la zona roja (24 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.33; P(2+ envíos en la zona roja) 29%.
-- Tre Tucker (WR): 16% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 18% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 19%.
-- Cody White (WR): 12% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 50% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 11%.
-- Mike Washington Jr. (RB): 30% de los acarreos en la zona roja (22% dentro de la 10); convierte 0% de sus oportunidades en la zona roja (8 en 16 partidos; media de su perfil 15%). TD esperados en la zona roja: 0.16; P(2+ envíos en la zona roja) 0%.
-- Candidato principal en la zona roja: Ashton Jeanty (RB), 0.56 TD esperados ahí.
+- Ashton Jeanty (RB): 60% de los acarreos en la zona roja (67% dentro de la 10), 23% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 12% de sus oportunidades en la zona roja (48 en 16 partidos; media de su perfil 17%). TD esperados en la zona roja: 0.58; P(2+ envíos en la zona roja) 30%.
+- Brock Bowers (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 24% de los envíos en la zona roja, 24% de los envíos a la zona de anotación; convierte 38% de sus oportunidades en la zona roja (24 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.37; P(2+ envíos en la zona roja) 33%.
+- Tre Tucker (WR): 18% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 18% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.21; P(2+ envíos en la zona roja) 22%.
+- Cody White (WR): 13% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 50% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.21; P(2+ envíos en la zona roja) 13%.
+- Jalen Nailor (WR): 11% de los envíos en la zona roja, 17% de los envíos a la zona de anotación; convierte 43% de sus oportunidades en la zona roja (7 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.17; P(2+ envíos en la zona roja) 10%.
+- Candidato principal en la zona roja: Ashton Jeanty (RB), 0.58 TD esperados ahí.
 
 | Jugador | Proyección |
 |---|---|
 | Kirk Cousins (QB, LV) | 242.2 yardas de pase, 1.6 TD de pase, 6.8 yardas por tierra, P(TD) 3% |
-| Ashton Jeanty (RB, LV) | 46.4 yardas por tierra, 3.7 recepciones, 29.6 yardas por recepción, P(TD) 48% |
-| Brock Bowers (TE, LV) | 0.1 yardas por tierra, 5.2 recepciones, 61.3 yardas por recepción, P(TD) 27% |
-| Mike Washington Jr. (RB, LV) | 28.0 yardas por tierra, 0.5 recepciones, 3.5 yardas por recepción, P(TD) 18% |
-| Tre Tucker (WR, LV) | 1.8 yardas por tierra, 3.5 recepciones, 50.4 yardas por recepción, P(TD) 27% |
-| Michael Mayer (TE, LV) | 0.0 yardas por tierra, 3.3 recepciones, 33.0 yardas por recepción, P(TD) 10% |
-| Jalen Nailor (WR, LV) | 0.0 yardas por tierra, 1.8 recepciones, 22.6 yardas por recepción, P(TD) 17% |
+| Ashton Jeanty (RB, LV) | 46.6 yardas por tierra, 3.8 recepciones, 30.6 yardas por recepción, P(TD) 49% |
+| Brock Bowers (TE, LV) | 0.1 yardas por tierra, 5.4 recepciones, 63.4 yardas por recepción, P(TD) 29% |
+| Mike Washington Jr. (RB, LV) | 25.9 yardas por tierra, 0.5 recepciones, 3.3 yardas por recepción, P(TD) 17% |
+| Tre Tucker (WR, LV) | 1.9 yardas por tierra, 3.6 recepciones, 52.1 yardas por recepción, P(TD) 28% |
+| Michael Mayer (TE, LV) | 0.0 yardas por tierra, 3.4 recepciones, 34.1 yardas por recepción, P(TD) 11% |
+| Jalen Nailor (WR, LV) | 0.0 yardas por tierra, 1.9 recepciones, 23.4 yardas por recepción, P(TD) 18% |
 | Geno Smith (QB, NYJ) | 223.0 yardas de pase, 1.6 TD de pase, 10.9 yardas por tierra, P(TD) 7% |
 | Braelon Allen (RB, NYJ) | 67.8 yardas por tierra, 1.9 recepciones, 13.7 yardas por recepción, P(TD) 29% — titular que vuelve: recupera su papel antes que los suplentes |
 | Garrett Wilson (WR, NYJ) | 0.0 yardas por tierra, 3.1 recepciones, 40.7 yardas por recepción, P(TD) 21% |
@@ -2027,6 +2637,44 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Adonai Mitchell (WR, NYJ) | 0.2 yardas por tierra, 2.3 recepciones, 32.1 yardas por recepción, P(TD) 20% |
 | Omar Cooper Jr. (WR, NYJ) | 0.0 yardas por tierra, 3.0 recepciones, 49.9 yardas por recepción, P(TD) 25% |
 | Mason Taylor (TE, NYJ) | 0.0 yardas por tierra, 3.0 recepciones, 25.9 yardas por recepción, P(TD) 29% |
+
+**Las mejores líneas del partido:**
+
+- **Cody White 2+ TD** — prob. 2% (modelo 3%, casa 1%), mejor cuota 161.00 (+16000) en draftkings, EV +274%
+  - ✔ zona roja: 0.21 TD esperados ahí contra Jets (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+9%)
+  - ✔ mejor precio en draftkings: 161.00 frente a 146.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 1/7); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 5 partidos seguidos sin pasar esta línea
+  - ✘ Jets es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (5 partidos) frente a 0.2 contra el resto
+- **Andrew Beck 2+ TD** — prob. 1% (modelo 2%, casa 0%), mejor cuota 251.00 (+25000) en draftkings, EV +273%
+  - ✘ zona roja: 0.14 TD esperados ahí contra Raiders (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-9%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 1.0, 0.0
+  - ✘ racha: 16 partidos seguidos sin pasar esta línea
+- **Andrew Beck anota** — prob. 9% (modelo 19%, casa 3%), mejor cuota 31.00 (+3000) en draftkings, EV +192%
+  - ✔ el modelo le da 19% y la casa 3%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.14 TD esperados ahí contra Raiders (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-9%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 1.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+- **Cody White anota** — prob. 15% (modelo 24%, casa 8%), mejor cuota 14.00 (+1300) en bovada, EV +103%
+  - ✔ zona roja: 0.21 TD esperados ahí contra Jets (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+9%)
+  - ✔ mejor precio en bovada: 14.00 frente a 11.00 de consenso
+  - ✔ el modelo le da 24% y la casa 8%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 2 de 10 (esta temporada 2/7); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 4 partidos seguidos sin pasar esta línea
+  - ✘ Jets es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (5 partidos) frente a 0.2 contra el resto
+- **Kene Nwangwu anota** — prob. 9% (modelo 12%, casa 5%), mejor cuota 21.00 (+2000) en fanduel, EV +97%
+  - ✔ mejor precio en fanduel: 21.00 frente a 18.00 de consenso
+  - ✔ el modelo le da 12% y la casa 5%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.05 TD esperados ahí contra Raiders (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-19%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 9 partidos seguidos sin pasar esta línea
+- **Jalen Nailor 2+ TD** — prob. 2% (modelo 2%, casa 1%), mejor cuota 101.00 (+10000) en fanduel, EV +74%
+  - ✔ zona roja: 0.17 TD esperados ahí contra Jets (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+13%)
+  - ✔ Jets es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (8 partidos) frente a 0.1 contra el resto
+  - ✔ como visitante promedia 0.2 (frente a 0.1)
+  - ✔ mejor precio en fanduel: 101.00 frente a 71.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 0/5); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 8 partidos seguidos sin pasar esta línea
 
 ## Minnesota Vikings @ Detroit Lions — 2026-11-01 13:00
 
@@ -2086,10 +2734,10 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Dónde se le anota a Lions en la zona roja: TE 0.94 TD por partido (liga 0.40, 1º que más concede de 32: débil); QB (carreras) 0.22 TD por partido (liga 0.17, 10º que más concede de 32: débil); RB 0.65 TD por partido (liga 0.74, 13º que menos concede de 32: normal); WR 0.42 TD por partido (liga 0.58, 6º que menos concede de 32: fuerte).
 - Su punto débil: los TE. Les concede 2.4 veces los TD de la media en la zona roja y les deja convertir el 42% por envío (liga 32%).
 - Cómo reparte Vikings la zona roja (hoy se esperan 3.5 acarreos y 4.5 envíos dentro de la 20, 2.1 a la zona de anotación):
-- T.J. Hockenson (TE) — blanco principal en la zona roja: 28% de los envíos en la zona roja, 21% de los envíos a la zona de anotación; convierte 27% de sus oportunidades en la zona roja (15 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.50; P(2+ envíos en la zona roja) 36%.
+- T.J. Hockenson (TE) — blanco principal en la zona roja: 28% de los envíos en la zona roja, 22% de los envíos a la zona de anotación; convierte 27% de sus oportunidades en la zona roja (15 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.50; P(2+ envíos en la zona roja) 37%.
 - Aaron Jones (RB): 55% de los acarreos en la zona roja (53% dentro de la 10), 10% de los envíos en la zona roja; convierte 12% de sus oportunidades en la zona roja (33 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.32; P(2+ envíos en la zona roja) 8%.
 - Jordan Mason (RB): 42% de los acarreos en la zona roja (40% dentro de la 10); convierte 22% de sus oportunidades en la zona roja (32 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.31; P(2+ envíos en la zona roja) 0%.
-- Justin Jefferson (WR) — el más buscado en la zona de anotación: 23% de los envíos en la zona roja, 30% de los envíos a la zona de anotación; convierte 19% de sus oportunidades en la zona roja (16 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.20; P(2+ envíos en la zona roja) 29%.
+- Justin Jefferson (WR) — el más buscado en la zona de anotación: 24% de los envíos en la zona roja, 30% de los envíos a la zona de anotación; convierte 19% de sus oportunidades en la zona roja (16 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.20; P(2+ envíos en la zona roja) 29%.
 - Kyler Murray (QB): 13% de los acarreos en la zona roja (10% dentro de la 10); convierte 29% de sus oportunidades en la zona roja (7 en 16 partidos; media de su perfil 25%). TD esperados en la zona roja: 0.13; P(2+ envíos en la zona roja) 0%.
 - Candidato principal en la zona roja: T.J. Hockenson (TE), 0.50 TD esperados ahí.
 
@@ -2102,17 +2750,58 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Sam LaPorta (TE, DET) | 0.0 yardas por tierra, 3.1 recepciones, 36.0 yardas por recepción, P(TD) 23% |
 | Sione Vaki (RB, DET) | 10.9 yardas por tierra, 0.4 recepciones, 3.4 yardas por recepción, P(TD) 4% |
 | Isaac TeSlaa (WR, DET) | 0.0 yardas por tierra, 1.4 recepciones, 21.0 yardas por recepción, P(TD) 17% |
-| Kyler Murray (QB, MIN) | 210.1 yardas de pase, 1.2 TD de pase, 19.0 yardas por tierra, P(TD) 14% |
-| Aaron Jones (RB, MIN) | 55.0 yardas por tierra, 2.5 recepciones, 16.2 yardas por recepción, P(TD) 32% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Jordan Mason, que hoy juega (×0.83) |
-| Jordan Mason (RB, MIN) | 42.1 yardas por tierra, 0.6 recepciones, 4.4 yardas por recepción, P(TD) 25% — parte de su volumen fue sin Aaron Jones, que hoy juega (×0.90); titular que vuelve: recupera su papel antes que los suplentes |
-| Justin Jefferson (WR, MIN) | 0.7 yardas por tierra, 5.2 recepciones, 64.5 yardas por recepción, P(TD) 23% |
-| T.J. Hockenson (TE, MIN) | 0.0 yardas por tierra, 5.2 recepciones, 48.9 yardas por recepción, P(TD) 37% |
-| Jordan Addison (WR, MIN) | 1.4 yardas por tierra, 2.9 recepciones, 37.8 yardas por recepción, P(TD) 13% |
+| Kyler Murray (QB, MIN) | 210.1 yardas de pase, 1.2 TD de pase, 19.6 yardas por tierra, P(TD) 14% |
+| Aaron Jones (RB, MIN) | 55.0 yardas por tierra, 2.5 recepciones, 16.5 yardas por recepción, P(TD) 32% — parte de su volumen fue sin Jordan Mason, que hoy juega (×0.83); titular que vuelve: recupera su papel antes que los suplentes |
+| Jordan Mason (RB, MIN) | 42.1 yardas por tierra, 0.6 recepciones, 4.4 yardas por recepción, P(TD) 25% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Aaron Jones, que hoy juega (×0.90) |
+| Justin Jefferson (WR, MIN) | 0.7 yardas por tierra, 5.2 recepciones, 65.4 yardas por recepción, P(TD) 23% |
+| T.J. Hockenson (TE, MIN) | 0.0 yardas por tierra, 5.2 recepciones, 49.6 yardas por recepción, P(TD) 37% |
+| Jordan Addison (WR, MIN) | 1.4 yardas por tierra, 2.9 recepciones, 38.4 yardas por recepción, P(TD) 13% |
+
+**Las mejores líneas del partido:**
+
+- **T.J. Hockenson 2+ TD** — prob. 7% (modelo 8%, casa 4%), mejor cuota 26.00 (+2500) en fanduel, EV +82%
+  - ✔ DET concede a los TE el 45% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.50 TD esperados ahí contra Lions (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+11%)
+  - ✔ Lions es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (6 partidos) frente a 0.2 contra el resto
+  - ✔ mejor precio en fanduel: 26.00 frente a 21.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 32 partidos seguidos sin pasar esta línea
+  - ✘ contra Lions: 1.0, 0.0 (0/2 pasando la línea)
+- **Tyler Conklin anota** — prob. 6% (modelo 7%, casa 5%), mejor cuota 26.00 (+2500) en draftkings, EV +62%
+  - ✔ mejor precio en draftkings: 26.00 frente a 20.50 de consenso
+  - ✘ MIN concede a los TE el 26% de sus TD por recepción (liga 29%) (-12%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 2 de 10 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 7 partidos seguidos sin pasar esta línea
+- **T.J. Hockenson 3+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 121.00 (+12000) en betrivers, EV +49%
+  - ✔ DET concede a los TE el 45% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.50 TD esperados ahí contra Lions (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+11%)
+  - ✔ Lions es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (6 partidos) frente a 0.2 contra el resto
+  - ✔ mejor precio en betrivers: 121.00 frente a 103.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 32 partidos seguidos sin pasar esta línea
+  - ✘ contra Lions: 1.0, 0.0 (0/2 pasando la línea)
+- **Jahmyr Gibbs 4+ TD** — prob. 3% (modelo 3%, casa 2%), mejor cuota 51.00 (+5000) en fanduel, EV +36%
+  - ✔ MIN concede a los RB el 83% de sus TD por tierra (liga 76%) (+9%)
+  - ✔ como local promedia 1.5 (frente a 1.0)
+  - ✔ mejor precio en fanduel: 51.00 frente a 38.50 de consenso
+  - ✘ MIN concede a los RB el 10% de sus TD por recepción (liga 12%) (-18%)
+  - ✘ pasó más de 3.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 0.0, 2.0, 1.0, 3.0, 1.0
+  - ✘ racha: 24 partidos seguidos sin pasar esta línea
+- **Myles Price anota** — prob. 6% (modelo 7%, casa 5%), mejor cuota 21.00 (+2000) en betmgm, EV +35%
+  - ✔ zona roja: 0.07 TD esperados ahí contra Lions (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+24%)
+  - ✔ mejor precio en betmgm: 21.00 frente a 17.50 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 1/6); últimos: 0.0, 0.0, 0.0, 1.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ contra Lions: 0.0, 0.0 (0/2 pasando la línea)
+- **Jahmyr Gibbs menos de 68.5 yardas por tierra** — prob. 38% (modelo 43%, casa 28%), mejor cuota 3.30 (+230) en bovada, EV +26%
+  - ✔ Vikings es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 53 (7 partidos) frente a 93 contra el resto
+  - ✔ el modelo le da 43% y la casa 28%: la cuota paga más de lo que vale
+  - ✘ como local promedia 91 (frente a 74)
 
 ## Tennessee Titans @ Cincinnati Bengals — 2026-11-01 13:00
 
-- **Bengals**: 29.5 puntos esperados (total y spread de las casas), favorito por 13.5; 33 dropbacks y 28 carreras; 3.37 TD esperados.
-- **Titans**: 16.0 puntos esperados (total y spread de las casas), no favorito por 13.5; 37 dropbacks y 20 carreras; 1.56 TD esperados.
+- **Bengals**: 30.0 puntos esperados (total y spread de las casas), favorito por 13.5; 33 dropbacks y 28 carreras; 3.43 TD esperados.
+- **Titans**: 16.5 puntos esperados (total y spread de las casas), no favorito por 13.5; 37 dropbacks y 20 carreras; 1.61 TD esperados.
 - estadio: outdoors
 
 **Ataque de Bengals contra la defensa de Titans:**
@@ -2175,20 +2864,64 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 | Jugador | Proyección |
 |---|---|
-| Joe Burrow (QB, CIN) | 238.2 yardas de pase, 2.1 TD de pase, 13.9 yardas por tierra, P(TD) 26% |
-| Chase Brown (RB, CIN) | 62.2 yardas por tierra, 3.3 recepciones, 22.8 yardas por recepción, P(TD) 49% |
+| Joe Burrow (QB, CIN) | 238.2 yardas de pase, 2.1 TD de pase, 13.9 yardas por tierra, P(TD) 27% |
+| Chase Brown (RB, CIN) | 62.2 yardas por tierra, 3.3 recepciones, 22.8 yardas por recepción, P(TD) 50% |
 | Ja'Marr Chase (WR, CIN) | 0.2 yardas por tierra, 6.0 recepciones, 70.6 yardas por recepción, P(TD) 44% |
 | Samaje Perine (RB, CIN) | 29.3 yardas por tierra, 0.9 recepciones, 7.1 yardas por recepción, P(TD) 32% |
 | Tee Higgins (WR, CIN) | 0.0 yardas por tierra, 4.6 recepciones, 70.1 yardas por recepción, P(TD) 27% |
 | Dohnte Meyers (WR, CIN) | 0.0 yardas por tierra, 2.2 recepciones, 26.9 yardas por recepción, P(TD) 15% |
 | Mike Gesicki (TE, CIN) | 0.0 yardas por tierra, 1.8 recepciones, 19.4 yardas por recepción, P(TD) 30% |
 | Cam Ward (QB, TEN) | 212.8 yardas de pase, 0.8 TD de pase, 8.6 yardas por tierra, P(TD) 21% |
-| Tony Pollard (RB, TEN) | 47.1 yardas por tierra, 2.1 recepciones, 14.5 yardas por recepción, P(TD) 30% |
+| Tony Pollard (RB, TEN) | 47.1 yardas por tierra, 2.1 recepciones, 14.5 yardas por recepción, P(TD) 31% |
 | Michael Carter (RB, TEN) | 25.7 yardas por tierra, 2.9 recepciones, 22.1 yardas por recepción, P(TD) 21% |
-| Wan'Dale Robinson (WR, TEN) | 0.5 yardas por tierra, 5.1 recepciones, 50.1 yardas por recepción, P(TD) 27% — más volumen por las bajas de Carnell Tate, Tyjae Spears (×1.14) |
-| Elic Ayomanor (WR, TEN) | 0.0 yardas por tierra, 2.4 recepciones, 34.1 yardas por recepción, P(TD) 23% — más volumen por las bajas de Carnell Tate, Tyjae Spears (×1.14) |
-| Gunnar Helm (TE, TEN) | 0.0 yardas por tierra, 2.8 recepciones, 26.8 yardas por recepción, P(TD) 9% — más volumen por las bajas de Carnell Tate, Tyjae Spears (×1.14) |
-| Calvin Ridley (WR, TEN) | 0.1 yardas por tierra, 2.1 recepciones, 29.3 yardas por recepción, P(TD) 10% — más volumen por las bajas de Carnell Tate, Tyjae Spears (×1.14) |
+| Wan'Dale Robinson (WR, TEN) | 0.5 yardas por tierra, 5.1 recepciones, 50.1 yardas por recepción, P(TD) 27% — más volumen por las bajas de Tyjae Spears, Carnell Tate (×1.14) |
+| Elic Ayomanor (WR, TEN) | 0.0 yardas por tierra, 2.4 recepciones, 34.1 yardas por recepción, P(TD) 23% — más volumen por las bajas de Tyjae Spears, Carnell Tate (×1.14) |
+| Gunnar Helm (TE, TEN) | 0.0 yardas por tierra, 2.8 recepciones, 26.8 yardas por recepción, P(TD) 9% — más volumen por las bajas de Tyjae Spears, Carnell Tate (×1.14) |
+| Calvin Ridley (WR, TEN) | 0.1 yardas por tierra, 2.1 recepciones, 29.3 yardas por recepción, P(TD) 11% — más volumen por las bajas de Tyjae Spears, Carnell Tate (×1.14) |
+
+**Las mejores líneas del partido:**
+
+- **Joe Burrow 2+ TD** — prob. 3% (modelo 4%, casa 2%), mejor cuota 76.00 (+7500) en fanduel, EV +149%
+  - ✔ TEN concede 0.28 TD por tierra por partido a los QB (liga 0.19; 5º que más de 32) (+47%)
+  - ✔ TEN concede a los QB el 22% de sus TD por tierra (liga 20%) (+11%)
+  - ✔ mejor precio en fanduel: 76.00 frente a 61.00 de consenso
+  - ✘ zona roja: 0.21 TD esperados ahí contra Titans (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-11%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 0.0, 0.0, 1.0, 0.0, 0.0
+  - ✘ racha: 31 partidos seguidos sin pasar esta línea
+- **Michael Carter 2+ TD** — prob. 2% (modelo 3%, casa 1%), mejor cuota 101.00 (+10000) en fanduel, EV +109%
+  - ✔ mejor precio en fanduel: 101.00 frente a 80.50 de consenso
+  - ✘ CIN concede a los RB el 9% de sus TD por recepción (liga 12%) (-21%)
+  - ✘ zona roja: 0.17 TD esperados ahí contra Bengals (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-5%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+- **Cam Ward 2+ TD** — prob. 2% (modelo 3%, casa 1%), mejor cuota 81.00 (+8000) en draftkings, EV +78%
+  - ✔ CIN concede 0.24 TD por tierra por partido a los QB (liga 0.19; 9º que más de 32) (+28%)
+  - ✔ CIN concede a los QB el 24% de sus TD por tierra (liga 20%) (+21%)
+  - ✔ Bengals es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.2 (8 partidos) frente a 0.1 contra el resto
+  - ✔ mejor precio en draftkings: 81.00 frente a 71.00 de consenso
+  - ✘ zona roja: 0.19 TD esperados ahí contra Bengals (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-6%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 1/7); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 5 partidos seguidos sin pasar esta línea
+- **Joe Burrow anota** — prob. 23% (modelo 27%, casa 16%), mejor cuota 7.00 (+600) en betrivers, EV +60%
+  - ✔ TEN concede 0.28 TD por tierra por partido a los QB (liga 0.19; 5º que más de 32) (+47%)
+  - ✔ TEN concede a los QB el 22% de sus TD por tierra (liga 20%) (+11%)
+  - ✔ mejor precio en betrivers: 7.00 frente a 6.00 de consenso
+  - ✔ el modelo le da 27% y la casa 16%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.21 TD esperados ahí contra Titans (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-11%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 1/6); últimos: 0.0, 0.0, 1.0, 0.0, 0.0
+  - ✘ contra Titans: 0.0 (0/1 pasando la línea)
+- **Michael Carter anota** — prob. 18% (modelo 21%, casa 13%), mejor cuota 8.50 (+750) en fanduel, EV +55%
+  - ✔ mejor precio en fanduel: 8.50 frente a 7.12 de consenso
+  - ✔ el modelo le da 21% y la casa 13%: la cuota paga más de lo que vale
+  - ✘ CIN concede a los RB el 9% de sus TD por recepción (liga 12%) (-21%)
+  - ✘ zona roja: 0.17 TD esperados ahí contra Bengals (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (-5%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+- **Elic Ayomanor 2+ TD** — prob. 3% (modelo 3%, casa 2%), mejor cuota 51.00 (+5000) en fanduel, EV +44%
+  - ✔ CIN concede a los WR el 67% de sus TD por recepción (liga 59%) (+14%)
+  - ✔ zona roja: 0.21 TD esperados ahí contra Bengals (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+12%)
+  - ✔ mejor precio en fanduel: 51.00 frente a 41.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 23 partidos seguidos sin pasar esta línea
+  - ✘ Bengals es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.1 (7 partidos) frente a 0.2 contra el resto
 
 ## Los Angeles Chargers @ Los Angeles Rams — 2026-11-01 16:05
 
@@ -2275,6 +3008,45 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Oronde Gadsden II (TE, LAC) | 0.3 yardas por tierra, 2.1 recepciones, 20.2 yardas por recepción, P(TD) 17% |
 | Charlie Kolar (TE, LAC) | 0.0 yardas por tierra, 2.1 recepciones, 20.3 yardas por recepción, P(TD) 12% |
 
+**Las mejores líneas del partido:**
+
+- **Theo Wease Jr. anota** — prob. 8% (modelo 10%, casa 5%), mejor cuota 23.00 (+2200) en betmgm, EV +84%
+  - ✔ LA concede a los WR el 66% de sus TD por recepción (liga 59%) (+13%)
+  - ✔ mejor precio en betmgm: 23.00 frente a 19.00 de consenso
+  - ✔ el modelo le da 10% y la casa 5%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 5 (esta temporada 0/2); últimos: 0.0, 0.0, 0.0, 1.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ como visitante promedia 0.0 (frente a 0.3)
+- **Matthew Stafford anota** — prob. 8% (modelo 9%, casa 5%), mejor cuota 23.00 (+2200) en betrivers, EV +80%
+  - ✔ LAC concede 0.25 TD por tierra por partido a los QB (liga 0.19; 8º que más de 32) (+30%)
+  - ✔ mejor precio en betrivers: 23.00 frente a 18.50 de consenso
+  - ✔ el modelo le da 9% y la casa 5%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.08 TD esperados ahí contra Chargers (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-6%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 45 partidos seguidos sin pasar esta línea
+- **Kyren Williams 3+ TD** — prob. 5% (modelo 6%, casa 5%), mejor cuota 28.00 (+2700) en fanduel, EV +52%
+  - ✔ mejor precio en fanduel: 28.00 frente a 20.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/7); últimos: 1.0, 0.0, 1.0, 2.0, 0.0
+  - ✘ racha: 42 partidos seguidos sin pasar esta línea
+- **KeAndre Lambert-Smith anota** — prob. 13% (modelo 14%, casa 10%), mejor cuota 11.00 (+1000) en fanduel, EV +41%
+  - ✔ LA concede a los WR el 66% de sus TD por recepción (liga 59%) (+13%)
+  - ✔ mejor precio en fanduel: 11.00 frente a 9.25 de consenso
+  - ✔ el modelo le da 14% y la casa 10%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 0/1); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 4 partidos seguidos sin pasar esta línea
+- **Justin Herbert 2+ TD** — prob. 2% (modelo 2%, casa 1%), mejor cuota 81.00 (+8000) en fanduel, EV +39%
+  - ✔ LA concede a los QB el 26% de sus TD por tierra (liga 20%) (+29%)
+  - ✔ LA concede 0.23 TD por tierra por partido a los QB (liga 0.19; 11º que más de 32) (+21%)
+  - ✔ mejor precio en fanduel: 81.00 frente a 63.00 de consenso
+  - ✘ zona roja: 0.14 TD esperados ahí contra Rams (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-10%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/6); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 41 partidos seguidos sin pasar esta línea
+- **Hayden Rucci anota** — prob. 6% (modelo 7%, casa 5%), mejor cuota 23.00 (+2200) en betmgm, EV +37%
+  - ✔ mejor precio en betmgm: 23.00 frente a 20.50 de consenso
+  - ✘ LA concede a los TE el 21% de sus TD por recepción (liga 29%) (-25%)
+  - ✘ zona roja: 0.05 TD esperados ahí contra Rams (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (-5%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 4 y 1 de 4 (esta temporada 1/3); últimos: 0.0, 1.0, 0.0, 0.0
+
 ## Kansas City Chiefs @ Denver Broncos — 2026-11-01 16:25
 
 - **Broncos**: 20.0 puntos esperados (total y spread de las casas), no favorito por 1.5; 34 dropbacks y 25 carreras; 2.01 TD esperados.
@@ -2342,7 +3114,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Jugador | Proyección |
 |---|---|
 | Bo Nix (QB, DEN) | 198.3 yardas de pase, 1.1 TD de pase, 20.3 yardas por tierra, P(TD) 14% |
-| J.K. Dobbins (RB, DEN) | 42.0 yardas por tierra, 1.3 recepciones, 8.4 yardas por recepción, P(TD) 32% — parte de su volumen fue sin Jonah Coleman, que hoy juega (×0.87); titular que vuelve: recupera su papel antes que los suplentes |
+| J.K. Dobbins (RB, DEN) | 42.0 yardas por tierra, 1.3 recepciones, 8.4 yardas por recepción, P(TD) 32% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Jonah Coleman, que hoy juega (×0.87) |
 | Jonah Coleman (RB, DEN) | 28.2 yardas por tierra, 2.1 recepciones, 15.3 yardas por recepción, P(TD) 22% — parte de su volumen fue sin J.K. Dobbins, que hoy juega (×0.84) |
 | Jaylen Waddle (WR, DEN) | 1.1 yardas por tierra, 3.4 recepciones, 40.0 yardas por recepción, P(TD) 16% |
 | Courtland Sutton (WR, DEN) | 0.0 yardas por tierra, 2.6 recepciones, 30.9 yardas por recepción, P(TD) 20% |
@@ -2355,6 +3127,45 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Travis Kelce (TE, KC) | 0.0 yardas por tierra, 4.0 recepciones, 45.9 yardas por recepción, P(TD) 22% |
 | Xavier Worthy (WR, KC) | 0.6 yardas por tierra, 3.2 recepciones, 35.3 yardas por recepción, P(TD) 14% |
 | Emmett Johnson (RB, KC) | 10.2 yardas por tierra, 1.4 recepciones, 11.2 yardas por recepción, P(TD) 9% |
+
+**Las mejores líneas del partido:**
+
+- **Nate Adkins 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 201.00 (+20000) en draftkings, EV +138%
+  - ✔ KC concede a los TE el 39% de sus TD por recepción (liga 29%) (+33%)
+  - ✔ Chiefs es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (7 partidos) frente a 0.2 contra el resto
+  - ✔ como local promedia 0.3 (frente a 0.2)
+  - ✔ mejor precio en draftkings: 201.00 frente a 151.00 de consenso
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/4); últimos: 0.0, 1.0, 1.0, 0.0, 0.0
+  - ✘ racha: 26 partidos seguidos sin pasar esta línea
+  - ✘ contra Chiefs: 0.0, 0.0 (0/2 pasando la línea)
+- **Nate Adkins anota** — prob. 13% (modelo 16%, casa 6%), mejor cuota 15.00 (+1400) en draftkings, EV +90%
+  - ✔ KC concede a los TE el 39% de sus TD por recepción (liga 29%) (+33%)
+  - ✔ Chiefs es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (7 partidos) frente a 0.2 contra el resto
+  - ✔ como local promedia 0.3 (frente a 0.2)
+  - ✔ el modelo le da 16% y la casa 6%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 2 de sus últimos 5 y 3 de 10 (esta temporada 2/4); últimos: 0.0, 1.0, 1.0, 0.0, 0.0
+  - ✘ contra Chiefs: 0.0, 0.0 (0/2 pasando la línea)
+- **Lil'Jordan Humphrey anota** — prob. 10% (modelo 12%, casa 6%), mejor cuota 17.00 (+1600) en draftkings, EV +73%
+  - ✔ mejor precio en draftkings: 17.00 frente a 14.50 de consenso
+  - ✔ el modelo le da 12% y la casa 6%: la cuota paga más de lo que vale
+  - ✘ KC concede a los WR el 50% de sus TD por recepción (liga 59%) (-14%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 2 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 4 partidos seguidos sin pasar esta línea
+- **Adam Trautman anota** — prob. 9% (modelo 10%, casa 6%), mejor cuota 17.00 (+1600) en draftkings, EV +47%
+  - ✔ KC concede a los TE el 39% de sus TD por recepción (liga 29%) (+33%)
+  - ✔ mejor precio en draftkings: 17.00 frente a 14.50 de consenso
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 15 partidos seguidos sin pasar esta línea
+  - ✘ contra Chiefs: 0.0, 0.0, 0.0, 0.0 (0/4 pasando la línea)
+- **Andrew Armstrong 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 201.00 (+20000) en betonlineag, EV +44%
+  - ✔ mejor precio en betonlineag: 201.00 frente a 151.00 de consenso
+  - ✘ DEN concede a los WR el 50% de sus TD por recepción (liga 59%) (-15%)
+  - ✘ muestra corta: 2 partidos en la base
+- **Lil'Jordan Humphrey 2+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 181.00 (+18000) en draftkings, EV +42%
+  - ✔ mejor precio en draftkings: 181.00 frente a 136.00 de consenso
+  - ✘ KC concede a los WR el 50% de sus TD por recepción (liga 59%) (-14%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0, 0.0, 1.0
+  - ✘ racha: 26 partidos seguidos sin pasar esta línea
 
 ## New England Patriots @ Miami Dolphins — 2026-11-01 16:25
 
@@ -2430,12 +3241,55 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Chris Bell (WR, MIA) | 0.8 yardas por tierra, 1.6 recepciones, 21.4 yardas por recepción, P(TD) 8% |
 | Kaytron Allen (RB, MIA) | 11.6 yardas por tierra, 0.0 recepciones, 0.0 yardas por recepción, P(TD) 12% — llegó a MIA en la semana 5 desde WAS: 0 partido(s) con su equipo nuevo |
 | Drake Maye (QB, NE) | 233.0 yardas de pase, 1.9 TD de pase, 24.4 yardas por tierra, P(TD) 22% |
-| Rhamondre Stevenson (RB, NE) | 54.6 yardas por tierra, 3.6 recepciones, 32.8 yardas por recepción, P(TD) 39% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.17) |
-| Corey Kiner (RB, NE) | 34.4 yardas por tierra, 0.4 recepciones, 2.6 yardas por recepción, P(TD) 19% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.17) |
-| Hunter Henry (TE, NE) | 0.0 yardas por tierra, 5.0 recepciones, 54.3 yardas por recepción, P(TD) 37% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| DeMario Douglas (WR, NE) | 0.1 yardas por tierra, 3.8 recepciones, 45.6 yardas por recepción, P(TD) 29% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Eli Raridon (TE, NE) | 0.0 yardas por tierra, 3.1 recepciones, 34.8 yardas por recepción, P(TD) 38% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Efton Chism III (WR, NE) | 1.1 yardas por tierra, 1.8 recepciones, 23.2 yardas por recepción, P(TD) 17% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
+| Rhamondre Stevenson (RB, NE) | 54.6 yardas por tierra, 3.6 recepciones, 32.8 yardas por recepción, P(TD) 39% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.17) |
+| Corey Kiner (RB, NE) | 34.4 yardas por tierra, 0.4 recepciones, 2.6 yardas por recepción, P(TD) 19% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.17) |
+| Hunter Henry (TE, NE) | 0.0 yardas por tierra, 5.0 recepciones, 54.3 yardas por recepción, P(TD) 37% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| DeMario Douglas (WR, NE) | 0.1 yardas por tierra, 3.8 recepciones, 45.6 yardas por recepción, P(TD) 29% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Eli Raridon (TE, NE) | 0.0 yardas por tierra, 3.1 recepciones, 34.8 yardas por recepción, P(TD) 38% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Efton Chism III (WR, NE) | 1.1 yardas por tierra, 1.8 recepciones, 23.2 yardas por recepción, P(TD) 17% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+
+**Las mejores líneas del partido:**
+
+- **Kevin Coleman Jr. 2+ TD** — prob. 2% (modelo 2%, casa 0%), mejor cuota 201.00 (+20000) en draftkings, EV +217%
+  - ✔ NE concede a los WR el 64% de sus TD por recepción (liga 59%) (+10%)
+  - ✘ zona roja: 0.11 TD esperados ahí contra Patriots (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (-9%)
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 5 (esta temporada 0/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ racha: 5 partidos seguidos sin pasar esta línea
+- **Kevin Coleman Jr. anota** — prob. 15% (modelo 19%, casa 6%), mejor cuota 19.00 (+1800) en draftkings, EV +180%
+  - ✔ NE concede a los WR el 64% de sus TD por recepción (liga 59%) (+10%)
+  - ✔ mejor precio en draftkings: 19.00 frente a 15.75 de consenso
+  - ✔ el modelo le da 19% y la casa 6%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.11 TD esperados ahí contra Patriots (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (-9%)
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 5 (esta temporada 1/5); últimos: 0.0, 1.0, 0.0, 0.0, 0.0
+  - ✘ muestra corta: 5 partidos en la base
+- **Jalen Tolbert anota** — prob. 7% (modelo 9%, casa 3%), mejor cuota 41.00 (+4000) en fanduel, EV +178%
+  - ✔ NE concede a los WR el 64% de sus TD por recepción (liga 59%) (+10%)
+  - ✔ Patriots es de las defensas fuertes en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (6 partidos) frente a 0.2 contra el resto
+  - ✔ mejor precio en fanduel: 41.00 frente a 29.00 de consenso
+  - ✔ el modelo le da 9% y la casa 3%: la cuota paga más de lo que vale
+  - ✘ zona roja: 0.05 TD esperados ahí contra Patriots (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (-8%)
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 5 y 1 de 10 (esta temporada 0/2); últimos: 0.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 6 partidos seguidos sin pasar esta línea
+- **Eli Raridon 2+ TD** — prob. 7% (modelo 9%, casa 3%), mejor cuota 31.00 (+3000) en draftkings, EV +115%
+  - ✔ MIA concede a los TE el 37% de sus TD por recepción (liga 29%) (+26%)
+  - ✔ mejor precio en draftkings: 31.00 frente a 29.50 de consenso
+  - ✔ el modelo le da 9% y la casa 3%: la cuota paga más de lo que vale
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 6 (esta temporada 0/6); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 6 partidos seguidos sin pasar esta línea
+  - ✘ Dolphins es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.0 (3 partidos) frente a 0.7 contra el resto
+- **Eli Raridon 3+ TD** — prob. 1% (modelo 2%, casa 1%), mejor cuota 161.00 (+16000) en draftkings, EV +112%
+  - ✔ MIA concede a los TE el 37% de sus TD por recepción (liga 29%) (+26%)
+  - ✔ mejor precio en draftkings: 161.00 frente a 111.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 6 (esta temporada 0/6); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 6 partidos seguidos sin pasar esta línea
+  - ✘ Dolphins es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.0 (3 partidos) frente a 0.7 contra el resto
+- **Kaytron Allen anota** — prob. 7% (modelo 12%, casa 4%), mejor cuota 28.00 (+2700) en fanduel, EV +97%
+  - ✔ zona roja: 0.13 TD esperados ahí contra Patriots (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (+10%)
+  - ✔ mejor precio en fanduel: 28.00 frente a 26.00 de consenso
+  - ✔ el modelo le da 12% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 0 de sus últimos 3 y 0 de 3 (esta temporada 0/3); últimos: 0.0, 0.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+  - ✘ muestra corta: 3 partidos en la base
 
 ## Philadelphia Eagles @ Washington Commanders — 2026-11-01 20:20
 
@@ -2506,21 +3360,68 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 |---|---|
 | Tanner McKee (QB, PHI) | 225.8 yardas de pase, 1.2 TD de pase, 5.8 yardas por tierra, P(TD) 2% — titular por la baja de Jalen Hurts |
 | Saquon Barkley (RB, PHI) | 56.1 yardas por tierra, 3.0 recepciones, 19.9 yardas por recepción, P(TD) 33% — titular que vuelve: recupera su papel antes que los suplentes; con ? de QB suplente, el plan lógico es apoyarse en él cerca de la meta (+9% de acarreos dentro de la 10 en equipos con suplente) |
-| Dallas Goedert (TE, PHI) | 0.1 yardas por tierra, 6.1 recepciones, 64.3 yardas por recepción, P(TD) 44% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
-| Makai Lemon (WR, PHI) | 0.3 yardas por tierra, 4.4 recepciones, 44.4 yardas por recepción, P(TD) 18% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
+| Dallas Goedert (TE, PHI) | 0.1 yardas por tierra, 6.1 recepciones, 64.3 yardas por recepción, P(TD) 44% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
+| Makai Lemon (WR, PHI) | 0.3 yardas por tierra, 4.4 recepciones, 44.4 yardas por recepción, P(TD) 18% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
 | Jaydon Blue (RB, PHI) | 24.3 yardas por tierra, 0.3 recepciones, 1.9 yardas por recepción, P(TD) 30% |
 | Elijah Mitchell (RB, PHI) | 5.7 yardas por tierra, 2.9 recepciones, 21.4 yardas por recepción, P(TD) 10% — parte de su volumen fue sin Saquon Barkley, que hoy juega (×0.74) |
-| Darius Cooper (WR, PHI) | 0.0 yardas por tierra, 2.2 recepciones, 30.4 yardas por recepción, P(TD) 28% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
-| Marquise Brown (WR, PHI) | 2.3 yardas por tierra, 1.8 recepciones, 23.3 yardas por recepción, P(TD) 9% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
+| Darius Cooper (WR, PHI) | 0.0 yardas por tierra, 2.2 recepciones, 30.4 yardas por recepción, P(TD) 28% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
+| Marquise Brown (WR, PHI) | 2.3 yardas por tierra, 1.8 recepciones, 23.3 yardas por recepción, P(TD) 9% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
 | Jayden Daniels (QB, WAS) | 206.9 yardas de pase, 1.4 TD de pase, 43.3 yardas por tierra, P(TD) 35% |
-| Rachaad White (RB, WAS) | 34.9 yardas por tierra, 1.7 recepciones, 11.3 yardas por recepción, P(TD) 27% — parte de su volumen fue sin Austin Ekeler, que hoy juega (×0.88); más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
-| Austin Ekeler (RB, WAS) | 30.3 yardas por tierra, 1.4 recepciones, 10.5 yardas por recepción, P(TD) 22% — más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
-| Jeremy McNichols (RB, WAS) | 19.2 yardas por tierra, 0.8 recepciones, 5.8 yardas por recepción, P(TD) 18% — más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
+| Rachaad White (RB, WAS) | 34.9 yardas por tierra, 1.7 recepciones, 11.3 yardas por recepción, P(TD) 27% — parte de su volumen fue sin Austin Ekeler, que hoy juega (×0.88); más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
+| Austin Ekeler (RB, WAS) | 30.3 yardas por tierra, 1.4 recepciones, 10.5 yardas por recepción, P(TD) 22% — más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
+| Jeremy McNichols (RB, WAS) | 19.2 yardas por tierra, 0.8 recepciones, 5.8 yardas por recepción, P(TD) 18% — más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
 | Stefon Diggs (WR, WAS) | 0.0 yardas por tierra, 3.4 recepciones, 39.3 yardas por recepción, P(TD) 31% |
 | Chig Okonkwo (TE, WAS) | 0.0 yardas por tierra, 2.6 recepciones, 25.4 yardas por recepción, P(TD) 9% |
 | Antonio Williams (WR, WAS) | 0.0 yardas por tierra, 2.0 recepciones, 26.4 yardas por recepción, P(TD) 13% |
 | Van Jefferson (WR, WAS) | 0.0 yardas por tierra, 1.9 recepciones, 26.2 yardas por recepción, P(TD) 13% |
 | Treylon Burks (WR, WAS) | 0.0 yardas por tierra, 1.7 recepciones, 24.8 yardas por recepción, P(TD) 24% |
+
+**Las mejores líneas del partido:**
+
+- **Jaydon Blue 2+ TD** — prob. 4% (modelo 5%, casa 1%), mejor cuota 176.00 (+17500) en fanduel, EV +551%
+  - ✔ zona roja: 0.35 TD esperados ahí contra Commanders (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (+10%)
+  - ✔ mejor precio en fanduel: 176.00 frente a 111.00 de consenso
+  - ✔ el modelo le da 5% y la casa 1%: la cuota paga más de lo que vale
+  - ✘ pasó más de 1.5 touchdowns en 0 de sus últimos 5 y 0 de 5 (esta temporada 0/0); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ racha: 5 partidos seguidos sin pasar esta línea
+  - ✘ contra Commanders: 0.0 (0/1 pasando la línea)
+- **Dallas Goedert 2+ TD** — prob. 9% (modelo 12%, casa 4%), mejor cuota 26.00 (+2500) en betrivers, EV +144%
+  - ✔ WAS concede a los TE el 42% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.68 TD esperados ahí contra Commanders (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+17%)
+  - ✔ mejor precio en betrivers: 26.00 frente a 23.00 de consenso
+  - ✔ el modelo le da 12% y la casa 4%: la cuota paga más de lo que vale
+  - ✘ pasó más de 1.5 touchdowns en 1 de sus últimos 5 y 3 de 10 (esta temporada 1/5); últimos: 0.0, 0.0, 0.0, 0.0, 2.0
+  - ✘ racha: 4 partidos seguidos sin pasar esta línea
+  - ✘ contra Commanders: 2.0, 1.0, 0.0, 0.0 (1/4 pasando la línea)
+- **Dallas Goedert 3+ TD** — prob. 2% (modelo 3%, casa 1%), mejor cuota 121.00 (+12000) en betrivers, EV +140%
+  - ✔ WAS concede a los TE el 42% de sus TD por recepción (liga 29%) (+35%)
+  - ✔ zona roja: 0.68 TD esperados ahí contra Commanders (oportunidades × lo que concede a los TE en la zona roja × su eficiencia) (+17%)
+  - ✔ mejor precio en betrivers: 121.00 frente a 101.00 de consenso
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/5); últimos: 0.0, 0.0, 0.0, 0.0, 2.0
+  - ✘ racha: 35 partidos seguidos sin pasar esta línea
+  - ✘ contra Commanders: 2.0, 1.0, 0.0, 0.0 (0/4 pasando la línea)
+- **Darius Cooper 2+ TD** — prob. 4% (modelo 5%, casa 2%), mejor cuota 61.00 (+6000) en fanduel, EV +120%
+  - ✔ zona roja: 0.30 TD esperados ahí contra Commanders (oportunidades × lo que concede a los WR en la zona roja × su eficiencia) (+22%)
+  - ✔ como visitante promedia 0.3 (frente a 0.2)
+  - ✔ mejor precio en fanduel: 61.00 frente a 53.50 de consenso
+  - ✘ WAS concede a los WR el 51% de sus TD por recepción (liga 59%) (-13%)
+  - ✘ pasó más de 1.5 touchdowns en 1 de sus últimos 5 y 1 de 10 (esta temporada 1/7); últimos: 0.0, 0.0, 1.0, 2.0, 0.0
+  - ✘ racha: 3 partidos seguidos sin pasar esta línea
+- **Jayden Daniels 3+ TD** — prob. 1% (modelo 1%, casa 1%), mejor cuota 176.00 (+17500) en fanduel, EV +103%
+  - ✔ PHI concede 0.30 TD por tierra por partido a los QB (liga 0.19; 3º que más de 32) (+50%)
+  - ✔ PHI concede a los QB el 25% de sus TD por tierra (liga 20%) (+21%)
+  - ✔ Eagles es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.3 (9 partidos) frente a 0.3 contra el resto
+  - ✔ como local promedia 0.6 (frente a 0.2)
+  - ✘ zona roja: 0.36 TD esperados ahí contra Eagles (oportunidades × lo que concede a los QB en la zona roja × su eficiencia) (-5%)
+  - ✘ pasó más de 2.5 touchdowns en 0 de sus últimos 5 y 0 de 10 (esta temporada 0/4); últimos: 0.0, 2.0, 0.0, 0.0, 0.0
+  - ✘ racha: 31 partidos seguidos sin pasar esta línea
+- **Jaydon Blue anota** — prob. 18% (modelo 30%, casa 11%), mejor cuota 10.00 (+900) en fanduel, EV +84%
+  - ✔ zona roja: 0.35 TD esperados ahí contra Commanders (oportunidades × lo que concede a los RB en la zona roja × su eficiencia) (+10%)
+  - ✔ mejor precio en fanduel: 10.00 frente a 8.50 de consenso
+  - ✔ el modelo le da 30% y la casa 11%: la cuota paga más de lo que vale
+  - ✘ pasó más de 0.5 touchdowns en 1 de sus últimos 5 y 1 de 5 (esta temporada 0/0); últimos: 1.0, 0.0, 0.0, 0.0, 0.0
+  - ✘ contra Commanders: 0.0 (0/1 pasando la línea)
+  - ✘ Commanders es de las defensas débiles en lo que mide esta apuesta; contra ese tipo de defensa promedia 0.0 (3 partidos) frente a 0.5 contra el resto
 
 ## Chicago Bears @ Seattle Seahawks — 2026-11-02 20:15
 
@@ -2896,12 +3797,12 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Dónde se le anota a Cowboys en la zona roja: RB 1.08 TD por partido (liga 0.74, 2º que más concede de 32: débil); WR 0.85 TD por partido (liga 0.58, 3º que más concede de 32: débil); QB (carreras) 0.21 TD por partido (liga 0.17, 11º que más concede de 32: débil); TE 0.32 TD por partido (liga 0.40, 11º que menos concede de 32: normal).
 - Su punto débil: los RB. Les concede 1.5 veces los TD de la media en la zona roja y les deja convertir el 17% por acarreo (liga 15%).
 - Cómo reparte Colts la zona roja (hoy se esperan 6.1 acarreos y 3.6 envíos dentro de la 20, 1.7 a la zona de anotación):
-- Jonathan Taylor (RB): 62% de los acarreos en la zona roja (61% dentro de la 10), 7% de los envíos en la zona roja; convierte 18% de sus oportunidades en la zona roja (61 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.76; P(2+ envíos en la zona roja) 3%.
-- Tyler Warren (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 17% de los envíos en la zona roja, 22% de los envíos a la zona de anotación; convierte 25% de sus oportunidades en la zona roja (20 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.23; P(2+ envíos en la zona roja) 13%.
+- Jonathan Taylor (RB): 62% de los acarreos en la zona roja (61% dentro de la 10), 7% de los envíos en la zona roja; convierte 18% de sus oportunidades en la zona roja (61 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.77; P(2+ envíos en la zona roja) 3%.
+- Tyler Warren (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 18% de los envíos en la zona roja, 23% de los envíos a la zona de anotación; convierte 25% de sus oportunidades en la zona roja (20 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.24; P(2+ envíos en la zona roja) 14%.
 - Daniel Jones (QB): 13% de los acarreos en la zona roja (15% dentro de la 10); convierte 27% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 25%). TD esperados en la zona roja: 0.20; P(2+ envíos en la zona roja) 0%.
-- Josh Downs (WR): 16% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 22%). TD esperados en la zona roja: 0.16; P(2+ envíos en la zona roja) 11%.
+- Josh Downs (WR): 16% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 22%). TD esperados en la zona roja: 0.16; P(2+ envíos en la zona roja) 12%.
 - Seth McGowan (RB): 15% de los acarreos en la zona roja (10% dentro de la 10). TD esperados en la zona roja: 0.13; P(2+ envíos en la zona roja) 0%.
-- Candidato principal en la zona roja: Jonathan Taylor (RB), 0.76 TD esperados ahí.
+- Candidato principal en la zona roja: Jonathan Taylor (RB), 0.77 TD esperados ahí.
 
 **La zona roja — ataque de Cowboys:**
 
@@ -2925,13 +3826,13 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Ryan Flournoy (WR, DAL) | 0.1 yardas por tierra, 3.0 recepciones, 36.7 yardas por recepción, P(TD) 22% |
 | Jake Ferguson (TE, DAL) | 0.0 yardas por tierra, 2.1 recepciones, 17.4 yardas por recepción, P(TD) 23% |
 | Daniel Jones (QB, IND) | 223.8 yardas de pase, 1.1 TD de pase, 15.0 yardas por tierra, P(TD) 21% |
-| Jonathan Taylor (RB, IND) | 73.9 yardas por tierra, 2.0 recepciones, 17.1 yardas por recepción, P(TD) 52% |
-| Seth McGowan (RB, IND) | 23.3 yardas por tierra, 0.5 recepciones, 3.1 yardas por recepción, P(TD) 14% |
-| Tyler Warren (TE, IND) | 1.3 yardas por tierra, 4.1 recepciones, 35.1 yardas por recepción, P(TD) 22% |
-| Keenan Allen (WR, IND) | 0.0 yardas por tierra, 3.6 recepciones, 40.0 yardas por recepción, P(TD) 18% |
-| Josh Downs (WR, IND) | 0.9 yardas por tierra, 3.0 recepciones, 37.3 yardas por recepción, P(TD) 19% |
-| Laquon Treadwell (WR, IND) | 0.0 yardas por tierra, 1.9 recepciones, 25.3 yardas por recepción, P(TD) 13% |
-| Will Mallory (TE, IND) | 0.0 yardas por tierra, 1.8 recepciones, 17.3 yardas por recepción, P(TD) 11% — parte de su volumen fue sin Tyler Warren, que hoy juega (×0.92) |
+| Jonathan Taylor (RB, IND) | 73.9 yardas por tierra, 2.1 recepciones, 17.4 yardas por recepción, P(TD) 52% |
+| Seth McGowan (RB, IND) | 23.3 yardas por tierra, 0.5 recepciones, 3.2 yardas por recepción, P(TD) 14% |
+| Tyler Warren (TE, IND) | 1.3 yardas por tierra, 4.1 recepciones, 35.6 yardas por recepción, P(TD) 23% |
+| Keenan Allen (WR, IND) | 0.0 yardas por tierra, 3.7 recepciones, 40.6 yardas por recepción, P(TD) 19% |
+| Josh Downs (WR, IND) | 0.9 yardas por tierra, 3.0 recepciones, 37.9 yardas por recepción, P(TD) 19% |
+| Laquon Treadwell (WR, IND) | 0.0 yardas por tierra, 1.9 recepciones, 25.7 yardas por recepción, P(TD) 14% |
+| Will Mallory (TE, IND) | 0.0 yardas por tierra, 1.8 recepciones, 17.6 yardas por recepción, P(TD) 11% — parte de su volumen fue sin Tyler Warren, que hoy juega (×0.92) |
 
 ## Denver Broncos @ Carolina Panthers — 2026-11-08 13:00
 
@@ -3009,7 +3910,7 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Tommy Tremble (TE, CAR) | 0.0 yardas por tierra, 2.3 recepciones, 23.1 yardas por recepción, P(TD) 15% |
 | Trevor Etienne (RB, CAR) | 8.1 yardas por tierra, 0.4 recepciones, 2.9 yardas por recepción, P(TD) 6% — más volumen por las bajas de AJ Dillon (×1.07) |
 | Bo Nix (QB, DEN) | 185.9 yardas de pase, 1.2 TD de pase, 18.2 yardas por tierra, P(TD) 19% |
-| J.K. Dobbins (RB, DEN) | 48.9 yardas por tierra, 1.3 recepciones, 7.3 yardas por recepción, P(TD) 40% — parte de su volumen fue sin Jonah Coleman, que hoy juega (×0.87); titular que vuelve: recupera su papel antes que los suplentes |
+| J.K. Dobbins (RB, DEN) | 48.9 yardas por tierra, 1.3 recepciones, 7.3 yardas por recepción, P(TD) 40% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Jonah Coleman, que hoy juega (×0.87) |
 | Jonah Coleman (RB, DEN) | 32.8 yardas por tierra, 2.0 recepciones, 13.4 yardas por recepción, P(TD) 29% — parte de su volumen fue sin J.K. Dobbins, que hoy juega (×0.84) |
 | Jaylen Waddle (WR, DEN) | 1.2 yardas por tierra, 3.5 recepciones, 39.6 yardas por recepción, P(TD) 19% |
 | Courtland Sutton (WR, DEN) | 0.0 yardas por tierra, 2.6 recepciones, 30.6 yardas por recepción, P(TD) 24% |
@@ -3175,10 +4076,10 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Colby Parkinson (TE, LA) | 0.0 yardas por tierra, 2.6 recepciones, 25.9 yardas por recepción, P(TD) 29% |
 | Konata Mumpfield (WR, LA) | 0.0 yardas por tierra, 1.8 recepciones, 22.7 yardas por recepción, P(TD) 13% |
 | Jayden Daniels (QB, WAS) | 214.7 yardas de pase, 1.4 TD de pase, 52.4 yardas por tierra, P(TD) 28% |
-| Rachaad White (RB, WAS) | 27.5 yardas por tierra, 2.1 recepciones, 15.6 yardas por recepción, P(TD) 27% — parte de su volumen fue sin Austin Ekeler, que hoy juega (×0.88); más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
-| Austin Ekeler (RB, WAS) | 23.9 yardas por tierra, 1.8 recepciones, 14.5 yardas por recepción, P(TD) 20% — más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
+| Rachaad White (RB, WAS) | 27.5 yardas por tierra, 2.1 recepciones, 15.6 yardas por recepción, P(TD) 27% — parte de su volumen fue sin Austin Ekeler, que hoy juega (×0.88); más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
+| Austin Ekeler (RB, WAS) | 23.9 yardas por tierra, 1.8 recepciones, 14.5 yardas por recepción, P(TD) 20% — más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
 | Stefon Diggs (WR, WAS) | 0.0 yardas por tierra, 3.3 recepciones, 36.1 yardas por recepción, P(TD) 32% |
-| Jeremy McNichols (RB, WAS) | 15.1 yardas por tierra, 1.0 recepciones, 8.0 yardas por recepción, P(TD) 17% — más volumen por las bajas de Devin Neal, Terry McLaurin, Jacory Croskey-Merritt (×1.15) |
+| Jeremy McNichols (RB, WAS) | 15.1 yardas por tierra, 1.0 recepciones, 8.0 yardas por recepción, P(TD) 17% — más volumen por las bajas de Terry McLaurin, Jacory Croskey-Merritt, Devin Neal (×1.15) |
 | Chig Okonkwo (TE, WAS) | 0.0 yardas por tierra, 3.0 recepciones, 29.1 yardas por recepción, P(TD) 8% |
 | Antonio Williams (WR, WAS) | 0.0 yardas por tierra, 2.0 recepciones, 24.2 yardas por recepción, P(TD) 14% |
 | Van Jefferson (WR, WAS) | 0.0 yardas por tierra, 1.9 recepciones, 24.1 yardas por recepción, P(TD) 13% |
@@ -3254,19 +4155,19 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 |---|---|
 | J.J. McCarthy (QB, NYG) | 245.1 yardas de pase, 1.3 TD de pase, 8.8 yardas por tierra, P(TD) 24% |
 | Cam Skattebo (RB, NYG) | 50.9 yardas por tierra, 1.5 recepciones, 11.0 yardas por recepción, P(TD) 29% — titular que vuelve: recupera su papel antes que los suplentes |
-| Devin Singletary (RB, NYG) | 35.7 yardas por tierra, 1.5 recepciones, 10.5 yardas por recepción, P(TD) 25% — más volumen por las bajas de Najee Harris, Calvin Austin III, Phil Mafah, Tyrone Tracy Jr. (×1.50) |
+| Devin Singletary (RB, NYG) | 35.7 yardas por tierra, 1.5 recepciones, 10.5 yardas por recepción, P(TD) 25% — más volumen por las bajas de Calvin Austin III, Phil Mafah, Najee Harris, Tyrone Tracy Jr. (×1.50) |
 | Malik Nabers (WR, NYG) | 0.0 yardas por tierra, 6.4 recepciones, 86.6 yardas por recepción, P(TD) 32% |
 | Isaiah Likely (TE, NYG) | 0.0 yardas por tierra, 4.9 recepciones, 48.1 yardas por recepción, P(TD) 31% |
 | Malachi Fields (WR, NYG) | 0.0 yardas por tierra, 2.4 recepciones, 34.8 yardas por recepción, P(TD) 17% |
 | Darnell Mooney (WR, NYG) | 3.8 yardas por tierra, 1.5 recepciones, 20.3 yardas por recepción, P(TD) 9% |
 | Tanner McKee (QB, PHI) | 195.8 yardas de pase, 1.4 TD de pase, 7.3 yardas por tierra, P(TD) 6% — titular por la baja de Jalen Hurts |
 | Saquon Barkley (RB, PHI) | 64.7 yardas por tierra, 2.3 recepciones, 15.5 yardas por recepción, P(TD) 32% — titular que vuelve: recupera su papel antes que los suplentes; con ? de QB suplente, el plan lógico es apoyarse en él cerca de la meta (+9% de acarreos dentro de la 10 en equipos con suplente) |
-| Dallas Goedert (TE, PHI) | 0.1 yardas por tierra, 5.3 recepciones, 50.2 yardas por recepción, P(TD) 34% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
+| Dallas Goedert (TE, PHI) | 0.1 yardas por tierra, 5.3 recepciones, 50.2 yardas por recepción, P(TD) 34% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
 | Jaydon Blue (RB, PHI) | 28.0 yardas por tierra, 0.2 recepciones, 1.5 yardas por recepción, P(TD) 26% |
-| Makai Lemon (WR, PHI) | 0.4 yardas por tierra, 3.7 recepciones, 37.2 yardas por recepción, P(TD) 21% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
+| Makai Lemon (WR, PHI) | 0.4 yardas por tierra, 3.7 recepciones, 37.2 yardas por recepción, P(TD) 21% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
 | Elijah Mitchell (RB, PHI) | 6.5 yardas por tierra, 2.3 recepciones, 16.7 yardas por recepción, P(TD) 14% — parte de su volumen fue sin Saquon Barkley, que hoy juega (×0.74) |
-| Darius Cooper (WR, PHI) | 0.0 yardas por tierra, 1.9 recepciones, 25.5 yardas por recepción, P(TD) 31% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
-| Marquise Brown (WR, PHI) | 2.5 yardas por tierra, 1.5 recepciones, 19.5 yardas por recepción, P(TD) 10% — más volumen por las bajas de Will Shipley, Dontayvion Wicks, DeVonta Smith, Tank Bigsby, Jalen Hurts, Dameon Pierce (×1.17) |
+| Darius Cooper (WR, PHI) | 0.0 yardas por tierra, 1.9 recepciones, 25.5 yardas por recepción, P(TD) 31% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
+| Marquise Brown (WR, PHI) | 2.5 yardas por tierra, 1.5 recepciones, 19.5 yardas por recepción, P(TD) 10% — más volumen por las bajas de Will Shipley, Tank Bigsby, Dameon Pierce, Jalen Hurts, Dontayvion Wicks, DeVonta Smith (×1.17) |
 
 ## New York Jets @ Kansas City Chiefs — 2026-11-08 13:00
 
@@ -3491,23 +4392,23 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 
 - Dónde se le anota a 49ers en la zona roja: TE 0.41 TD por partido (liga 0.40, 14º que más concede de 32: normal); WR 0.58 TD por partido (liga 0.58, 13º que más concede de 32: normal); RB 0.66 TD por partido (liga 0.74, 14º que menos concede de 32: normal); QB (carreras) 0.13 TD por partido (liga 0.17, 11º que menos concede de 32: fuerte).
 - Cómo reparte Raiders la zona roja (hoy se esperan 4.3 acarreos y 4.8 envíos dentro de la 20, 1.9 a la zona de anotación):
-- Ashton Jeanty (RB): 60% de los acarreos en la zona roja (67% dentro de la 10), 21% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 12% de sus oportunidades en la zona roja (48 en 16 partidos; media de su perfil 17%). TD esperados en la zona roja: 0.44; P(2+ envíos en la zona roja) 26%.
-- Brock Bowers (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 22% de los envíos en la zona roja, 24% de los envíos a la zona de anotación; convierte 38% de sus oportunidades en la zona roja (24 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.39; P(2+ envíos en la zona roja) 28%.
-- Tre Tucker (WR): 16% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 18% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.17; P(2+ envíos en la zona roja) 18%.
-- Cody White (WR): 12% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 50% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.17; P(2+ envíos en la zona roja) 11%.
-- Jalen Nailor (WR): 10% de los envíos en la zona roja, 16% de los envíos a la zona de anotación; convierte 43% de sus oportunidades en la zona roja (7 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.14; P(2+ envíos en la zona roja) 8%.
-- Candidato principal en la zona roja: Ashton Jeanty (RB), 0.44 TD esperados ahí.
+- Ashton Jeanty (RB): 60% de los acarreos en la zona roja (67% dentro de la 10), 23% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 12% de sus oportunidades en la zona roja (48 en 16 partidos; media de su perfil 17%). TD esperados en la zona roja: 0.46; P(2+ envíos en la zona roja) 30%.
+- Brock Bowers (TE) — blanco principal en la zona roja, el más buscado en la zona de anotación: 24% de los envíos en la zona roja, 24% de los envíos a la zona de anotación; convierte 38% de sus oportunidades en la zona roja (24 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.43; P(2+ envíos en la zona roja) 32%.
+- Tre Tucker (WR): 18% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 18% de sus oportunidades en la zona roja (11 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 21%.
+- Cody White (WR): 13% de los envíos en la zona roja, 19% de los envíos a la zona de anotación; convierte 50% de sus oportunidades en la zona roja (6 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 13%.
+- Jalen Nailor (WR): 11% de los envíos en la zona roja, 17% de los envíos a la zona de anotación; convierte 43% de sus oportunidades en la zona roja (7 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.15; P(2+ envíos en la zona roja) 10%.
+- Candidato principal en la zona roja: Ashton Jeanty (RB), 0.46 TD esperados ahí.
 
 | Jugador | Proyección |
 |---|---|
-| Kirk Cousins (QB, LV) | 257.8 yardas de pase, 1.4 TD de pase, 2.9 yardas por tierra, P(TD) 2% |
-| Ashton Jeanty (RB, LV) | 36.9 yardas por tierra, 5.2 recepciones, 42.4 yardas por recepción, P(TD) 41% |
-| Brock Bowers (TE, LV) | 0.1 yardas por tierra, 6.2 recepciones, 64.4 yardas por recepción, P(TD) 30% |
-| Tre Tucker (WR, LV) | 1.5 yardas por tierra, 3.9 recepciones, 54.6 yardas por recepción, P(TD) 24% |
-| Mike Washington Jr. (RB, LV) | 22.3 yardas por tierra, 0.7 recepciones, 5.0 yardas por recepción, P(TD) 14% |
-| Michael Mayer (TE, LV) | 0.0 yardas por tierra, 3.9 recepciones, 34.6 yardas por recepción, P(TD) 12% |
-| Jalen Nailor (WR, LV) | 0.0 yardas por tierra, 2.1 recepciones, 24.5 yardas por recepción, P(TD) 15% |
-| Cody White (WR, LV) | 0.0 yardas por tierra, 1.4 recepciones, 17.8 yardas por recepción, P(TD) 20% |
+| Kirk Cousins (QB, LV) | 257.8 yardas de pase, 1.4 TD de pase, 3.0 yardas por tierra, P(TD) 2% |
+| Ashton Jeanty (RB, LV) | 37.0 yardas por tierra, 5.4 recepciones, 43.9 yardas por recepción, P(TD) 42% |
+| Brock Bowers (TE, LV) | 0.1 yardas por tierra, 6.4 recepciones, 66.6 yardas por recepción, P(TD) 32% |
+| Tre Tucker (WR, LV) | 1.5 yardas por tierra, 4.1 recepciones, 56.5 yardas por recepción, P(TD) 25% |
+| Mike Washington Jr. (RB, LV) | 20.6 yardas por tierra, 0.7 recepciones, 4.7 yardas por recepción, P(TD) 13% |
+| Michael Mayer (TE, LV) | 0.0 yardas por tierra, 4.0 recepciones, 35.8 yardas por recepción, P(TD) 12% |
+| Jalen Nailor (WR, LV) | 0.0 yardas por tierra, 2.1 recepciones, 25.3 yardas por recepción, P(TD) 16% |
+| Cody White (WR, LV) | 0.0 yardas por tierra, 1.4 recepciones, 18.4 yardas por recepción, P(TD) 21% |
 | Brock Purdy (QB, SF) | 222.3 yardas de pase, 2.1 TD de pase, 18.0 yardas por tierra, P(TD) 28% |
 | Christian McCaffrey (RB, SF) | 59.6 yardas por tierra, 4.1 recepciones, 33.9 yardas por recepción, P(TD) 55% |
 | Kaelon Black (RB, SF) | 41.0 yardas por tierra, 0.7 recepciones, 5.0 yardas por recepción, P(TD) 26% |
@@ -3574,21 +4475,21 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 - Cómo reparte Cardinals la zona roja (hoy se esperan 3.5 acarreos y 4.4 envíos dentro de la 20, 2.3 a la zona de anotación):
 - Jeremiyah Love (RB): 41% de los acarreos en la zona roja (34% dentro de la 10), 5% de los envíos en la zona roja; convierte 14% de sus oportunidades en la zona roja (14 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.33; P(2+ envíos en la zona roja) 2%.
 - Trey McBride (TE) — blanco principal en la zona roja: 25% de los envíos en la zona roja, 14% de los envíos a la zona de anotación; convierte 29% de sus oportunidades en la zona roja (34 en 16 partidos; media de su perfil 32%). TD esperados en la zona roja: 0.32; P(2+ envíos en la zona roja) 30%.
-- Bam Knight (RB): 19% de los acarreos en la zona roja (25% dentro de la 10), 6% de los envíos en la zona roja, 8% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (30 en 16 partidos; media de su perfil 17%). TD esperados en la zona roja: 0.20; P(2+ envíos en la zona roja) 3%.
+- Bam Knight (RB): 23% de los acarreos en la zona roja (28% dentro de la 10), 6% de los envíos en la zona roja, 9% de los envíos a la zona de anotación; convierte 17% de sus oportunidades en la zona roja (30 en 16 partidos; media de su perfil 16%). TD esperados en la zona roja: 0.23; P(2+ envíos en la zona roja) 3%.
 - Michael Wilson (WR) — el más buscado en la zona de anotación: 19% de los envíos en la zona roja, 31% de los envíos a la zona de anotación; convierte 15% de sus oportunidades en la zona roja (26 en 16 partidos; media de su perfil 24%). TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 21%.
 - Teagan Quitoriano (TE): 11% de los envíos en la zona roja, 18% de los envíos a la zona de anotación. TD esperados en la zona roja: 0.19; P(2+ envíos en la zona roja) 9%.
 - Candidato principal en la zona roja: Jeremiyah Love (RB), 0.33 TD esperados ahí.
 
 | Jugador | Proyección |
 |---|---|
-| Jacoby Brissett (QB, ARI) | 219.6 yardas de pase, 1.1 TD de pase, 9.2 yardas por tierra, P(TD) 8% |
+| Jacoby Brissett (QB, ARI) | 219.6 yardas de pase, 1.1 TD de pase, 9.8 yardas por tierra, P(TD) 8% |
 | Jeremiyah Love (RB, ARI) | 35.0 yardas por tierra, 1.8 recepciones, 10.5 yardas por recepción, P(TD) 26% — titular que vuelve: recupera su papel antes que los suplentes; parte de su volumen fue sin Bam Knight, que hoy juega (×0.83) |
-| Trey McBride (TE, ARI) | 0.0 yardas por tierra, 7.0 recepciones, 58.3 yardas por recepción, P(TD) 24% |
-| Michael Wilson (WR, ARI) | 1.0 yardas por tierra, 4.3 recepciones, 45.9 yardas por recepción, P(TD) 22% |
-| Bam Knight (RB, ARI) | 15.6 yardas por tierra, 2.6 recepciones, 17.5 yardas por recepción, P(TD) 21% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.83) |
-| Tyler Allgeier (RB, ARI) | 9.9 yardas por tierra, 1.9 recepciones, 11.9 yardas por recepción, P(TD) 13% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.88); parte de su volumen fue sin Bam Knight, que hoy juega (×0.90) |
-| Kendrick Bourne (WR, ARI) | 0.0 yardas por tierra, 3.1 recepciones, 32.4 yardas por recepción, P(TD) 13% |
-| Reggie Virgil (WR, ARI) | 0.0 yardas por tierra, 2.0 recepciones, 23.8 yardas por recepción, P(TD) 12% |
+| Trey McBride (TE, ARI) | 0.0 yardas por tierra, 7.0 recepciones, 58.5 yardas por recepción, P(TD) 24% |
+| Michael Wilson (WR, ARI) | 1.1 yardas por tierra, 4.3 recepciones, 46.1 yardas por recepción, P(TD) 22% |
+| Bam Knight (RB, ARI) | 18.4 yardas por tierra, 2.6 recepciones, 17.6 yardas por recepción, P(TD) 22% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.83) |
+| Tyler Allgeier (RB, ARI) | 11.6 yardas por tierra, 1.9 recepciones, 12.0 yardas por recepción, P(TD) 14% — parte de su volumen fue sin Jeremiyah Love, que hoy juega (×0.88); parte de su volumen fue sin Bam Knight, que hoy juega (×0.90) |
+| Kendrick Bourne (WR, ARI) | 0.0 yardas por tierra, 3.1 recepciones, 32.5 yardas por recepción, P(TD) 13% |
+| Reggie Virgil (WR, ARI) | 0.0 yardas por tierra, 2.0 recepciones, 23.9 yardas por recepción, P(TD) 12% |
 | Sam Darnold (QB, SEA) | 218.7 yardas de pase, 1.7 TD de pase, 11.4 yardas por tierra, P(TD) 6% |
 | Emanuel Wilson (RB, SEA) | 86.8 yardas por tierra, 1.0 recepciones, 9.1 yardas por recepción, P(TD) 46% — más volumen por las bajas de Rashid Shaheed (×1.12) |
 | Jaxon Smith-Njigba (WR, SEA) | 3.7 yardas por tierra, 7.3 recepciones, 113.4 yardas por recepción, P(TD) 49% — más volumen por las bajas de Rashid Shaheed (×1.12) |
@@ -3670,13 +4571,13 @@ El razonamiento paso a paso: el partido, el QB, la zona roja del rival, su papel
 | Tucker Kraft (TE, GB) | 0.4 yardas por tierra, 3.7 recepciones, 38.0 yardas por recepción, P(TD) 27% |
 | Savion Williams (WR, GB) | 5.2 yardas por tierra, 1.4 recepciones, 16.5 yardas por recepción, P(TD) 9% |
 | Drake Maye (QB, NE) | 236.2 yardas de pase, 1.7 TD de pase, 26.8 yardas por tierra, P(TD) 21% |
-| Rhamondre Stevenson (RB, NE) | 51.3 yardas por tierra, 3.8 recepciones, 33.7 yardas por recepción, P(TD) 43% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.17) |
-| Corey Kiner (RB, NE) | 32.3 yardas por tierra, 0.4 recepciones, 2.7 yardas por recepción, P(TD) 23% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.17) |
-| DeMario Douglas (WR, NE) | 0.1 yardas por tierra, 4.7 recepciones, 53.6 yardas por recepción, P(TD) 33% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Hunter Henry (TE, NE) | 0.0 yardas por tierra, 4.6 recepciones, 49.4 yardas por recepción, P(TD) 26% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Eli Raridon (TE, NE) | 0.0 yardas por tierra, 2.8 recepciones, 31.7 yardas por recepción, P(TD) 27% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Efton Chism III (WR, NE) | 1.1 yardas por tierra, 2.3 recepciones, 27.3 yardas por recepción, P(TD) 19% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
-| Kyle Williams (WR, NE) | 0.1 yardas por tierra, 1.6 recepciones, 23.2 yardas por recepción, P(TD) 11% — más volumen por las bajas de TreVeyon Henderson, Mack Hollins, Romeo Doubs, A.J. Brown (×1.34) |
+| Rhamondre Stevenson (RB, NE) | 51.3 yardas por tierra, 3.8 recepciones, 33.7 yardas por recepción, P(TD) 43% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.17) |
+| Corey Kiner (RB, NE) | 32.3 yardas por tierra, 0.4 recepciones, 2.7 yardas por recepción, P(TD) 23% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.17) |
+| DeMario Douglas (WR, NE) | 0.1 yardas por tierra, 4.7 recepciones, 53.6 yardas por recepción, P(TD) 33% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Hunter Henry (TE, NE) | 0.0 yardas por tierra, 4.6 recepciones, 49.4 yardas por recepción, P(TD) 26% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Eli Raridon (TE, NE) | 0.0 yardas por tierra, 2.8 recepciones, 31.7 yardas por recepción, P(TD) 27% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Efton Chism III (WR, NE) | 1.1 yardas por tierra, 2.3 recepciones, 27.3 yardas por recepción, P(TD) 19% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
+| Kyle Williams (WR, NE) | 0.1 yardas por tierra, 1.6 recepciones, 23.2 yardas por recepción, P(TD) 11% — más volumen por las bajas de Romeo Doubs, A.J. Brown, Mack Hollins, TreVeyon Henderson (×1.34) |
 
 ## Tampa Bay Buccaneers @ Chicago Bears — 2026-11-08 20:20
 
