@@ -89,5 +89,11 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
   titular que vuelve (ni a su "anota" ni a sus acarreos), aunque hayan sido los titulares mientras él no estaba.
 - **Comprobar el historial de cada pata con la línea exacta de la casa del usuario** (el pateador de Carolina:
   el modelo daba 60 % al menos de 6.5 puntos y lo había pasado en 5 de 6).
+- **Combinadas de 2+ TD: las patas entran en el orden de probabilidad del modelo** (`nfl td`, "Candidatos a 2 o más
+  touchdowns"), sin saltarse a nadie por uno que esté más abajo en la lista. El 1 nov se metió a Jeanty (14 %) y se
+  dejó fuera a Derrick Henry (21 %), que anotó en el primer cuarto. Aun bien elegidas, 4 patas de 2+ TD dan ~0.2 %:
+  con dinero real, solo montos pequeños y avisando de la probabilidad (van contra las reglas 1 y 8 de la NBA, patas
+  del 70 %+). Comparar su cuota de Betano con las de EE. UU. (`nfl verificar`): el 1 nov Betano pagaba 15-25 % menos
+  por pata (248 frente a ~547 la combinada).
 - **El bet builder de Betano recorta mucho las patas del mismo partido**: comparar su cuota con la justa y no
   aceptar la combinada si queda por debajo.
