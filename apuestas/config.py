@@ -88,8 +88,9 @@ class Config:
     nfl_valor_min: float = field(default_factory=lambda: _float("APUESTAS_NFL_VALOR_MIN", 0.04))
     nfl_dias: int = field(default_factory=lambda: _int("APUESTAS_NFL_DIAS", 7))
     # Respaldo de The Odds API en la NFL: solo los partidos que empiezan en estas horas, y sin bajar de esta reserva
-    # de créditos del mes (para dejar cupo a la NBA).
-    nfl_theodds_horas: int = field(default_factory=lambda: _int("APUESTAS_NFL_THEODDS_HORAS", 30))
+    # de créditos del mes (para dejar cupo a la NBA). Con 24 h y el informe a las 15:17 UTC, cada partido se pide una
+    # sola vez, el mismo día (el de los domingos, el domingo por la mañana; el del lunes, el lunes).
+    nfl_theodds_horas: int = field(default_factory=lambda: _int("APUESTAS_NFL_THEODDS_HORAS", 24))
     nfl_theodds_reserva: int = field(default_factory=lambda: _int("APUESTAS_NFL_THEODDS_RESERVA", 100))
 
 
