@@ -1,0 +1,75 @@
+name: NFL diario
+
+# Cada día en los servidores de GitHub: actualiza la base con nflverse y ESPN (estadísticas, jugada a jugada,
+# lesiones y traspasos), liquida las selecciones de los partidos jugados, analiza los próximos 7 días con las
+# líneas de SportsGameOdds y publica el informe en la rama nfl-informes (nfl/AAAA-MM-DD.md y ultimo.md).
+# La base se conserva con la caché de Actions; si se pierde, se reconstruye sola desde nflverse (~1 min).
+on:
+  schedule:
+    - cron: "17 15 * * *"   # 9:17 en Ciudad de México
+  workflow_dispatch:
+
+concurrency:
+  group: nfl-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  informe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
+      APUESTAS_TZ: America/Mexico_City
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Recuperar la base
+        uses: actions/cache/restore@v4
+        with:
+          path: data/apuestas.db
+          key: nfl-db-${{ github.run_id }}
+          restore-keys: nfl-db-
+      - name: Datos de nflverse y ESPN
+        run: python -m apuestas nfl actualizar
+      - name: Props y touchdowns de los próximos días
+        run: python -m apuestas nfl analizar --sin-descarga --top 25
+      - name: Resultados acumulados
+        run: python -m apuestas nfl rendimiento
+      - name: Guardar la base
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/apuestas.db
+          key: nfl-db-${{ github.run_id }}
+      - name: Publicar el informe en la rama nfl-informes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          ls reportes/nfl/*.md >/dev/null 2>&1 || { echo "Sin partidos en la ventana: no hay informe."; exit 0; }
+          ultimo=$(ls -t reportes/nfl/*.md | head -1)
+          mkdir publicar && cd publicar
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q origin nfl-informes; then git checkout -q -b nfl-informes FETCH_HEAD; else git checkout -q --orphan nfl-informes; fi
+          mkdir -p nfl
+          cp ../reportes/nfl/*.md ../reportes/nfl/*.json nfl/
+          cp "../$ultimo" ultimo.md
+          git add -A
+          git commit -q -m "Informe NFL $(basename "$ultimo" .md)" || exit 0
+          git push -q origin nfl-informes
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: informe-nfl-${{ github.run_number }}
+          path: reportes/nfl/
+          retention-days: 30
+          if-no-files-found: ignore

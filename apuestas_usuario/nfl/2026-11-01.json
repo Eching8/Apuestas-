@@ -1,0 +1,498 @@
+{
+ "fecha": "2026-11-01",
+ "apuestas": [
+  {
+   "nombre": "Segura A domingo",
+   "cuota": null,
+   "prob": 0.77,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "DK Metcalf",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Luther Burden III",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Hunter Henry",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.94
+    },
+    {
+     "jugador": "Trey McBride",
+     "stat": "rec",
+     "lado": "más",
+     "linea": 2.5,
+     "prob": 0.92
+    }
+   ]
+  },
+  {
+   "nombre": "Burrow menos de 25.5 completos",
+   "cuota": null,
+   "cuota_ee_uu": 1.88,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Boston menos de 3.5 recepciones",
+   "cuota": null,
+   "cuota_ee_uu": 1.81,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Jones más de 18.5 completos",
+   "cuota": null,
+   "cuota_ee_uu": 1.74,
+   "prob": 0.63,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.63
+    }
+   ]
+  },
+  {
+   "nombre": "Murray menos de 1.5 TD de pase",
+   "cuota": null,
+   "cuota_ee_uu": 1.71,
+   "prob": 0.64,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.64
+    }
+   ]
+  },
+  {
+   "nombre": "Dak menos de 2.5 TD de pase",
+   "cuota": null,
+   "cuota_ee_uu": 1.69,
+   "prob": 0.62,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.62
+    }
+   ]
+  },
+  {
+   "nombre": "Barner menos de 3.5 recepciones",
+   "cuota": null,
+   "cuota_ee_uu": 1.64,
+   "prob": 0.63,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "AJ Barner",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.63
+    }
+   ]
+  },
+  {
+   "nombre": "Pitts anota",
+   "cuota": null,
+   "cuota_ee_uu": 4.0,
+   "prob": 0.32,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyle Pitts",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.32
+    }
+   ]
+  },
+  {
+   "nombre": "Hockenson anota",
+   "cuota": null,
+   "cuota_ee_uu": 3.75,
+   "prob": 0.33,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "T.J. Hockenson",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.33
+    }
+   ]
+  },
+  {
+   "nombre": "Kyren Williams 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 5.8,
+   "prob": 0.193,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kyren Williams",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.193
+    }
+   ]
+  },
+  {
+   "nombre": "Jayden Daniels anota",
+   "cuota": null,
+   "cuota_ee_uu": 3.3,
+   "prob": 0.33,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jayden Daniels",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 0.5,
+     "prob": 0.33
+    }
+   ]
+  },
+  {
+   "nombre": "Agresiva domingo calibrada",
+   "cuota": null,
+   "cuota_ee_uu": 76.57,
+   "prob": 0.0229,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.616
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.624
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.63
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.638
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.618
+    },
+    {
+     "jugador": "AJ Barner",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.632
+    },
+    {
+     "jugador": "Rome Odunze",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.619
+    },
+    {
+     "jugador": "Evan Engram",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.617
+    }
+   ]
+  },
+  {
+   "nombre": "Gibbs 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 3.1,
+   "prob": 0.3,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Jahmyr Gibbs",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.3
+    }
+   ]
+  },
+  {
+   "nombre": "Kenneth Walker 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 5.6,
+   "prob": 0.192,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Kenneth Walker III",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.192
+    }
+   ]
+  },
+  {
+   "nombre": "Ashton Jeanty 2+ TD",
+   "cuota": null,
+   "cuota_ee_uu": 7.5,
+   "prob": 0.141,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Ashton Jeanty",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.141
+    }
+   ]
+  },
+  {
+   "nombre": "Agresiva solo domingo",
+   "cuota": null,
+   "cuota_ee_uu": 65.31,
+   "prob": 0.0271,
+   "real": false,
+   "nota": "Líneas del viernes 30 oct (SportsGameOdds sin cupo el domingo)",
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.617
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.624
+    },
+    {
+     "jugador": "Amon-Ra St. Brown",
+     "stat": "rec_yds",
+     "lado": "menos",
+     "linea": 79.5,
+     "prob": 0.618
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.63
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.638
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.629
+    },
+    {
+     "jugador": "Justin Herbert",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686
+    },
+    {
+     "jugador": "Bo Nix",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686
+    }
+   ]
+  },
+  {
+   "nombre": "Betano 51.89 (real)",
+   "cuota": 51.89,
+   "prob": 0.026,
+   "real": true,
+   "apostado": 10000,
+   "moneda": "COP",
+   "nota": "Primera apuesta con dinero real. Murray + St. Brown van en bet builder a 2.77",
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.617,
+     "cuota": 1.82
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.624,
+     "cuota": 1.67
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 19.5,
+     "prob": 0.584,
+     "cuota": 1.78
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.638,
+     "cuota": null
+    },
+    {
+     "jugador": "Amon-Ra St. Brown",
+     "stat": "rec_yds",
+     "lado": "menos",
+     "linea": 80.5,
+     "prob": 0.635,
+     "cuota": null
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.629,
+     "cuota": 1.78
+    },
+    {
+     "jugador": "Justin Herbert",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686,
+     "cuota": 1.42
+    },
+    {
+     "jugador": "Bo Nix",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686,
+     "cuota": 1.37
+    }
+   ]
+  },
+  {
+   "nombre": "Betano 2+ TD 248.02 (real)",
+   "cuota": 248.02,
+   "prob": 0.00157,
+   "real": true,
+   "apostado": 5000,
+   "moneda": "COP",
+   "nota": "Busca cash out. Las 4 patas por debajo de su cuota mínima (Gibbs 3.70, Jeanty 7.30, Kyren 5.00, Walker 5.45)",
+   "patas": [
+    {
+     "jugador": "Jahmyr Gibbs",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.3,
+     "cuota": 2.77
+    },
+    {
+     "jugador": "Ashton Jeanty",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.141,
+     "cuota": 5.5
+    },
+    {
+     "jugador": "Kyren Williams",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.193,
+     "cuota": 4.4
+    },
+    {
+     "jugador": "Kenneth Walker III",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.192,
+     "cuota": 3.7
+    }
+   ]
+  }
+ ]
+}
