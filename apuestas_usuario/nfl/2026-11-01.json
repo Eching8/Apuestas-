@@ -450,6 +450,49 @@
      "cuota": 1.37
     }
    ]
+  },
+  {
+   "nombre": "Betano 2+ TD 248.02 (real)",
+   "cuota": 248.02,
+   "prob": 0.00157,
+   "real": true,
+   "apostado": 5000,
+   "moneda": "COP",
+   "nota": "Busca cash out. Las 4 patas por debajo de su cuota mínima (Gibbs 3.70, Jeanty 7.30, Kyren 5.00, Walker 5.45)",
+   "patas": [
+    {
+     "jugador": "Jahmyr Gibbs",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.3,
+     "cuota": 2.77
+    },
+    {
+     "jugador": "Ashton Jeanty",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.141,
+     "cuota": 5.5
+    },
+    {
+     "jugador": "Kyren Williams",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.193,
+     "cuota": 4.4
+    },
+    {
+     "jugador": "Kenneth Walker III",
+     "stat": "tds",
+     "lado": "más",
+     "linea": 1.5,
+     "prob": 0.192,
+     "cuota": 3.7
+    }
+   ]
   }
  ]
 }
