@@ -375,6 +375,81 @@
      "prob": 0.686
     }
    ]
+  },
+  {
+   "nombre": "Betano 51.89 (real)",
+   "cuota": 51.89,
+   "prob": 0.026,
+   "real": true,
+   "apostado": 10000,
+   "moneda": "COP",
+   "nota": "Primera apuesta con dinero real. Murray + St. Brown van en bet builder a 2.77",
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.617,
+     "cuota": 1.82
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.624,
+     "cuota": 1.67
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 19.5,
+     "prob": 0.584,
+     "cuota": 1.78
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.638,
+     "cuota": null
+    },
+    {
+     "jugador": "Amon-Ra St. Brown",
+     "stat": "rec_yds",
+     "lado": "menos",
+     "linea": 80.5,
+     "prob": 0.635,
+     "cuota": null
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.629,
+     "cuota": 1.78
+    },
+    {
+     "jugador": "Justin Herbert",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686,
+     "cuota": 1.42
+    },
+    {
+     "jugador": "Bo Nix",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686,
+     "cuota": 1.37
+    }
+   ]
   }
  ]
 }

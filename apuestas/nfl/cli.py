@@ -77,7 +77,23 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
 
 
 def _mercados(cfg: Config, nfl: NflDB, desde: str, dias: int, juegos: list[dict]) -> dict[str, Mercado]:
-    """Líneas de SportsGameOdds para los partidos de la ventana, emparejadas con nflverse y guardadas."""
+    """Líneas de SportsGameOdds para los partidos de la ventana, emparejadas con nflverse y guardadas. Si no
+    responden (cupo del mes agotado), las últimas guardadas de cada partido."""
+    try:
+        return _descargar_mercados(cfg, nfl, desde, dias, juegos)
+    except Exception as e:
+        log.warning("No se pudieron descargar las líneas: %s", e)
+    out = {}
+    for g in juegos:
+        guardado = mercado_guardado(nfl.conn, g)
+        if guardado:
+            out[g["game_id"]] = guardado[0]
+            log.warning("  %s @ %s: uso las líneas guardadas del %s", g["away_team"], g["home_team"],
+                        guardado[1][:16].replace("T", " "))
+    return out
+
+
+def _descargar_mercados(cfg: Config, nfl: NflDB, desde: str, dias: int, juegos: list[dict]) -> dict[str, Mercado]:
     sgo = SportsGameOddsNfl(cfg.sgo_key)
     ini = datetime.now(timezone.utc) - timedelta(hours=4)
     # Los partidos nocturnos de EE. UU. empiezan después de medianoche UTC: la ventana llega hasta el mediodía siguiente.
@@ -115,14 +131,8 @@ def _analizar(args, cfg: Config, nfl: NflDB) -> tuple[Contexto, list[AnalisisPar
     if juegos and not getattr(args, "sin_lineas", False):
         try:
             mercados = _mercados(cfg, nfl, desde, dias, juegos)
-        except Exception as e:  # sin líneas nuevas: las últimas guardadas, y si no hay, con cuotas justas
+        except Exception as e:  # sin líneas el análisis sigue (con cuotas justas)
             log.warning("No se pudieron descargar las líneas: %s", e)
-            for g in juegos:
-                guardado = mercado_guardado(nfl.conn, g)
-                if guardado:
-                    mercados[g["game_id"]] = guardado[0]
-                    log.warning("  %s @ %s: uso las líneas guardadas del %s", g["away_team"], g["home_team"],
-                                guardado[1][:16].replace("T", " "))
     partidos = [analizar_partido(ctx, g, mercados.get(g["game_id"]), cfg.nfl_peso_mercado) for g in juegos
                 if g["home_team"] in ctx.perfiles and g["away_team"] in ctx.perfiles]
     return ctx, partidos, desde, hasta

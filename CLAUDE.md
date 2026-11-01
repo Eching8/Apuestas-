@@ -36,6 +36,8 @@ Mismo criterio que la NBA (arriba), traducido a la NFL en `apuestas/nfl/combinad
 (`apuestas/nfl/usuario.py`; las patas pueden ser de cualquier partido de esa semana, y "equipo" desempata
 homónimos). Son **apuestas fantasma** (no las juega en Betano: el 29 oct pidió seguirlas todas para tener la data
 completa antes de empezar de verdad), así que se registran y se liquidan todas, también las que no le gusten.
+**La primera con dinero real** fue el 1 nov 2026: la combinada de 7 de Betano a 51.89 con 10.000 COP
+("Betano 51.89 (real)", `"real": true`); las reales llevan `apostado` y `moneda` y se siguen aparte en el acumulado.
 
 ## Reglas
 
