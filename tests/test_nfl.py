@@ -13,7 +13,7 @@ from apuestas.nfl.db import STATS_JUGADOR, NflDB, estado_duda, estado_fuera
 from apuestas.nfl.fuentes import (agregar_pbp, cambios_semanales, parse_calendario, parse_lesiones_espn,
                                   parse_stats_jugador, traspasos_en_texto)
 from apuestas.nfl.informe import escribir
-from apuestas.nfl.mercado import emparejar, parse_evento
+from apuestas.nfl.mercado import emparejar, filas_lineas, parse_evento
 from apuestas.nfl.modelo import (Linea, construir_contexto, entorno, p_al_menos, preparar_equipo, prob_lados,
                                  proyectar)
 from apuestas.nfl.modelo_partido import prob_partido, simular
@@ -294,6 +294,31 @@ class MercadoTest(unittest.TestCase):
                           {"player_id": "otro", "name": "James Cook", "team": "MIA"}])
         self.assertEqual(n, 4)
         self.assertTrue(all(o.player_id == "rb_buf" for o in m.ofertas))
+
+    def test_mercado_guardado(self):
+        # Sin cupo en SportsGameOdds se sigue con las últimas líneas guardadas, con las mismas ofertas y precios.
+        from apuestas.nfl.mercado import mercado_guardado
+        tmp = TemporaryDirectory()
+        db = Database(Path(tmp.name) / "t.db")
+        nfl = NflDB(db.conn)
+        juego = {"game_id": "g1", "home_team": "BUF", "away_team": "LAC"}
+        m = parse_evento(_evento_sgo())
+        emparejar(m, [{"player_id": "rb_buf", "name": "James Cook", "team": "BUF"}])
+        nfl.guardar_lineas(filas_lineas(m, "g1", "2026-10-30T04:00:00+00:00"))
+        g, cap = mercado_guardado(db.conn, juego)
+        self.assertEqual(cap, "2026-10-30T04:00:00+00:00")
+        self.assertEqual((g.home, g.away, g.total), ("BUF", "LAC", 48.0))
+        antes = {(o.stat, o.lado, o.line): o for o in m.ofertas}
+        despues = {(o.stat, o.lado, o.line): o for o in g.ofertas}
+        self.assertEqual(antes.keys(), despues.keys())
+        for k, o in antes.items():
+            self.assertEqual(despues[k].libros, o.libros)
+            self.assertEqual(despues[k].player_id, "rb_buf")
+        ry = despues[("rush_yds", "más", 79.5)]
+        self.assertAlmostEqual(ry.prob_casa(), 0.5, places=3)               # sin margen, con el otro lado
+        self.assertIsNone(mercado_guardado(db.conn, {"game_id": "otro", "home_team": "BUF", "away_team": "LAC"}))
+        db.close()
+        tmp.cleanup()
 
 
 class ModeloTest(unittest.TestCase):

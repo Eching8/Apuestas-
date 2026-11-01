@@ -336,3 +336,57 @@ def filas_lineas(m: Mercado, game_id: str | None, capturado: str) -> list[dict]:
             filas.append({"captured_at": capturado, "event_id": m.event_id, "game_id": game_id, "entidad": "all",
                           "stat": nombre, "lado": "-", "book": "consenso", "line": v})
     return filas
+
+
+CONTRARIO = {"más": "menos", "menos": "más", "home": "away", "away": "home", "sí": "no", "no": "sí",
+             "par": "impar", "impar": "par"}
+
+
+def mercado_guardado(conn, game: dict) -> tuple[Mercado, str] | None:
+    """Las últimas líneas guardadas del partido (nfl_lineas) como Mercado, para seguir cuando SportsGameOdds no
+    responde (cupo del mes agotado). Sin la cuota justa de SGO: la probabilidad de la casa sale de quitar el margen
+    al consenso de los dos lados. Devuelve el mercado y cuándo se capturó."""
+    cap = conn.execute("SELECT MAX(captured_at) FROM nfl_lineas WHERE game_id = ?", (game["game_id"],)).fetchone()[0]
+    if cap is None:
+        return None
+    filas = conn.execute("SELECT * FROM nfl_lineas WHERE game_id = ? AND captured_at = ?",
+                         (game["game_id"], cap)).fetchall()
+    home, away = game["home_team"], game["away_team"]
+    m = Mercado(filas[0]["event_id"], home, away, None)
+    nombres_equipo = {"home": equipos.nombre(home), "away": equipos.nombre(away), "all": "Partido"}
+    ofertas: dict[tuple, Oferta] = {}
+    for f in filas:
+        if f["stat"] in ("total", "spread_home"):
+            if f["stat"] == "total":
+                m.total = f["line"]
+            else:
+                m.spread_home = f["line"]
+            continue
+        codigo, entidad = f["stat"], f["entidad"]
+        if "/" in codigo:
+            base, bet = codigo.split("/")
+            stat, periodo = base.split("@")
+            tipo, nombre = "equipo", nombres_equipo.get(entidad, entidad)
+        else:
+            stat, _, periodo = codigo.partition("@")
+            periodo, bet, tipo, nombre = periodo or "game", "ou", "jugador", entidad
+        k = (entidad, codigo, f["lado"], f["line"])
+        of = ofertas.get(k)
+        if of is None:
+            of = ofertas[k] = Oferta(entidad, nombre, None, stat, f["lado"], f["line"], tipo=tipo, periodo=periodo,
+                                     bet=bet, player_id=f["player_id"])
+        if f["book"] == "consenso":
+            of.consenso, of.open_line, of.open_odd = f["odd"], f["open_line"], f["open_odd"]
+        elif f["odd"]:
+            of.libros[f["book"]] = f["odd"]
+    for (entidad, codigo, lado, line), of in ofertas.items():
+        otra_entidad = CONTRARIO.get(entidad, entidad) if of.bet in ("ml", "sp") else entidad
+        otra_linea = -line if of.bet == "sp" else line
+        otra = ofertas.get((otra_entidad, codigo, CONTRARIO.get(lado, lado), otra_linea))
+        if otra is not None:
+            of.contraria = otra.consenso
+        if of.tipo == "equipo" and of.stat == "pts" and of.periodo == "game" and of.bet == "ou" and lado == "más" \
+                and entidad in ("home", "away"):
+            m.team_total[home if entidad == "home" else away] = line
+    m.ofertas = list(ofertas.values())
+    return m, cap

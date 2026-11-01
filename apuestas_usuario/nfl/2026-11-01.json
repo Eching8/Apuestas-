@@ -309,6 +309,72 @@
      "prob": 0.141
     }
    ]
+  },
+  {
+   "nombre": "Agresiva solo domingo",
+   "cuota": null,
+   "cuota_ee_uu": 65.31,
+   "prob": 0.0271,
+   "real": false,
+   "nota": "Líneas del viernes 30 oct (SportsGameOdds sin cupo el domingo)",
+   "patas": [
+    {
+     "jugador": "Joe Burrow",
+     "stat": "comp",
+     "lado": "menos",
+     "linea": 25.5,
+     "prob": 0.617
+    },
+    {
+     "jugador": "Denzel Boston",
+     "stat": "rec",
+     "lado": "menos",
+     "linea": 3.5,
+     "prob": 0.624
+    },
+    {
+     "jugador": "Amon-Ra St. Brown",
+     "stat": "rec_yds",
+     "lado": "menos",
+     "linea": 79.5,
+     "prob": 0.618
+    },
+    {
+     "jugador": "Daniel Jones",
+     "stat": "comp",
+     "lado": "más",
+     "linea": 18.5,
+     "prob": 0.63
+    },
+    {
+     "jugador": "Kyler Murray",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.638
+    },
+    {
+     "jugador": "Dak Prescott",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 2.5,
+     "prob": 0.629
+    },
+    {
+     "jugador": "Justin Herbert",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686
+    },
+    {
+     "jugador": "Bo Nix",
+     "stat": "pass_tds",
+     "lado": "menos",
+     "linea": 1.5,
+     "prob": 0.686
+    }
+   ]
   }
  ]
 }

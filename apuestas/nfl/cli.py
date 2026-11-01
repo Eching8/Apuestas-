@@ -31,7 +31,7 @@ from .fuentes import EspnNfl, Nflverse
 from . import combinadas
 from .hoja import hoja
 from .informe import escribir
-from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, parse_evento
+from .mercado import Mercado, SportsGameOddsNfl, emparejar, filas_lineas, mercado_guardado, parse_evento
 from .modelo import NOMBRES, Contexto, americana, construir_contexto, cuota_justa, rango, texto_rango, valor
 from .razones import lectura_td, tendencias
 from .recolector import actualizar
@@ -115,8 +115,14 @@ def _analizar(args, cfg: Config, nfl: NflDB) -> tuple[Contexto, list[AnalisisPar
     if juegos and not getattr(args, "sin_lineas", False):
         try:
             mercados = _mercados(cfg, nfl, desde, dias, juegos)
-        except Exception as e:  # sin líneas el análisis sigue (con cuotas justas)
+        except Exception as e:  # sin líneas nuevas: las últimas guardadas, y si no hay, con cuotas justas
             log.warning("No se pudieron descargar las líneas: %s", e)
+            for g in juegos:
+                guardado = mercado_guardado(nfl.conn, g)
+                if guardado:
+                    mercados[g["game_id"]] = guardado[0]
+                    log.warning("  %s @ %s: uso las líneas guardadas del %s", g["away_team"], g["home_team"],
+                                guardado[1][:16].replace("T", " "))
     partidos = [analizar_partido(ctx, g, mercados.get(g["game_id"]), cfg.nfl_peso_mercado) for g in juegos
                 if g["home_team"] in ctx.perfiles and g["away_team"] in ctx.perfiles]
     return ctx, partidos, desde, hasta
