@@ -1,0 +1,63 @@
+{
+ "fecha": "2026-11-01",
+ "apuestas": [
+  {
+   "nombre": "Agresiva 8 patas",
+   "cuota": 48.5,
+   "prob": 0.02,
+   "real": true,
+   "monto": 10000,
+   "nota": "cuota aproximada (consenso The Odds API); falta la captura de Betano",
+   "patas": [
+    {
+     "jugador": "Wendell Carter Jr.",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Paul George",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Keon Ellis",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Pascal Siakam",
+     "stat": "assists",
+     "lado": "menos",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Kris Dunn",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Isaiah Jackson",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 7.5
+    },
+    {
+     "jugador": "Scottie Barnes",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 7.5
+    },
+    {
+     "jugador": "Walker Kessler",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 10.5
+    }
+   ]
+  }
+ ]
+}
