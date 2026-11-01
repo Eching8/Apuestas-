@@ -1,0 +1,859 @@
+{
+ "fecha": "2026-11-01",
+ "picks": [],
+ "partidos": [
+  {
+   "partido": "Boston Celtics @ Orlando Magic",
+   "game_id": "401909903",
+   "lesiones": [
+    {
+     "fecha": "2026-11-01",
+     "team_id": "19",
+     "player_id": "4065654",
+     "name": "Jonathan Isaac",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "2",
+     "player_id": "4351852",
+     "name": "Mitchell Robinson",
+     "status": "Day-To-Day",
+     "detail": "Rest"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "19",
+     "player_id": "4432165",
+     "name": "Jalen Suggs",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "19",
+     "player_id": "4432573",
+     "name": "Paolo Banchero",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "2",
+     "player_id": "4433188",
+     "name": "Devin Carter",
+     "status": "Out",
+     "detail": "Illness"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "19",
+     "player_id": "5107251",
+     "name": "Izaiyah Nelson",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "19",
+     "player_id": "5214637",
+     "name": "Noah Penda",
+     "status": "Out",
+     "detail": "Hamstring"
+    }
+   ],
+   "seguras": [
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "assists",
+     "line": 2.5,
+     "prob": 0.9004650969094881,
+     "mu": 6.07155819994496,
+     "media_10": 7.3,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4566434",
+     "nombre": "Franz Wagner",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8936415974470313,
+     "mu": 5.335862164719989,
+     "media_10": 5.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "rebounds",
+     "line": 3.5,
+     "prob": 0.8720828847202757,
+     "mu": 8.011478679830672,
+     "media_10": 8.5,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4277847",
+     "nombre": "Wendell Carter Jr.",
+     "stat": "rebounds",
+     "line": 4.5,
+     "prob": 0.8695171865846287,
+     "mu": 8.78712136765459,
+     "media_10": 8.0,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4251",
+     "nombre": "Paul George",
+     "stat": "points",
+     "line": 8.5,
+     "prob": 0.8680569398158275,
+     "mu": 18.52663424669449,
+     "media_10": 17.8,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "points",
+     "line": 14.5,
+     "prob": 0.8666861997813596,
+     "mu": 24.51930579762787,
+     "media_10": 25.3,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4065648",
+     "nombre": "Jayson Tatum",
+     "stat": "pra",
+     "line": 27.5,
+     "prob": 0.8642985944866464,
+     "mu": 38.602342677403506,
+     "media_10": 41.1,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4566434",
+     "nombre": "Franz Wagner",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8605906674712303,
+     "mu": 20.38227021879177,
+     "media_10": 18.9,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4251",
+     "nombre": "Paul George",
+     "stat": "pra",
+     "line": 15.5,
+     "prob": 0.8603063079892168,
+     "mu": 27.205515300687534,
+     "media_10": 26.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4566434",
+     "nombre": "Franz Wagner",
+     "stat": "pra",
+     "line": 22.5,
+     "prob": 0.8541247981617937,
+     "mu": 33.01169369165281,
+     "media_10": 30.7,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066320",
+     "nombre": "Desmond Bane",
+     "stat": "points",
+     "line": 10.5,
+     "prob": 0.8504884424332995,
+     "mu": 18.412940852803846,
+     "media_10": 18.4,
+     "acierto_10": [
+      9,
+      10
+     ]
+    }
+   ],
+   "evaluaciones": []
+  },
+  {
+   "partido": "Brooklyn Nets @ Indiana Pacers",
+   "game_id": "401909904",
+   "lesiones": [
+    {
+     "fecha": "2026-11-01",
+     "team_id": "11",
+     "player_id": "2530530",
+     "name": "T.J. McConnell",
+     "status": "Out",
+     "detail": "Hamstring"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "11",
+     "player_id": "4017837",
+     "name": "Ivica Zubac",
+     "status": "Out",
+     "detail": "Ankle"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "11",
+     "player_id": "4278355",
+     "name": "Obi Toppin",
+     "status": "Day-To-Day",
+     "detail": "Back"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "11",
+     "player_id": "4396909",
+     "name": "Aaron Nesmith",
+     "status": "Day-To-Day",
+     "detail": "Hamstring"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "17",
+     "player_id": "5101761",
+     "name": "Mikel Brown Jr.",
+     "status": "Out",
+     "detail": "Rest"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "17",
+     "player_id": "5105626",
+     "name": "Tyler Bilodeau",
+     "status": "Out",
+     "detail": "Shoulder"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "11",
+     "player_id": "5157066",
+     "name": "Johnny Furphy",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "17",
+     "player_id": "5175643",
+     "name": "Egor Demin",
+     "status": "Out",
+     "detail": "Leg"
+    }
+   ],
+   "seguras": [
+    {
+     "player_id": "4395712",
+     "nombre": "Andrew Nembhard",
+     "stat": "assists",
+     "line": 4.5,
+     "prob": 0.8844044361192871,
+     "mu": 10.445014187845702,
+     "media_10": 10.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "points",
+     "line": 9.5,
+     "prob": 0.8827539251545877,
+     "mu": 19.538742575261736,
+     "media_10": 16.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4395712",
+     "nombre": "Andrew Nembhard",
+     "stat": "points",
+     "line": 10.5,
+     "prob": 0.8763120560595639,
+     "mu": 17.954373512375696,
+     "media_10": 16.8,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "rebounds",
+     "line": 3.5,
+     "prob": 0.8688305120323156,
+     "mu": 7.249260391952143,
+     "media_10": 7.4,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4395712",
+     "nombre": "Andrew Nembhard",
+     "stat": "pra",
+     "line": 21.5,
+     "prob": 0.866124184158685,
+     "mu": 32.16972797291405,
+     "media_10": 29.2,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3149673",
+     "nombre": "Pascal Siakam",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8654479410718809,
+     "mu": 21.60874954722665,
+     "media_10": 22.9,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4278104",
+     "nombre": "Michael Porter Jr.",
+     "stat": "points",
+     "line": 11.5,
+     "prob": 0.8617589659864464,
+     "mu": 20.229757703108888,
+     "media_10": 21.5,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4278104",
+     "nombre": "Michael Porter Jr.",
+     "stat": "pra",
+     "line": 17.5,
+     "prob": 0.8551044567866575,
+     "mu": 28.930152998732694,
+     "media_10": 30.0,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4278104",
+     "nombre": "Michael Porter Jr.",
+     "stat": "rebounds",
+     "line": 2.5,
+     "prob": 0.854899462088494,
+     "mu": 7.02216848130882,
+     "media_10": 7.1,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "3064514",
+     "nombre": "Julius Randle",
+     "stat": "pra",
+     "line": 18.5,
+     "prob": 0.8541011830778729,
+     "mu": 30.941393794604846,
+     "media_10": 26.8,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "3149673",
+     "nombre": "Pascal Siakam",
+     "stat": "pra",
+     "line": 22.5,
+     "prob": 0.8531188180005176,
+     "mu": 32.128538976775566,
+     "media_10": 34.3,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "3149673",
+     "nombre": "Pascal Siakam",
+     "stat": "rebounds",
+     "line": 3.5,
+     "prob": 0.851629794765006,
+     "mu": 6.893797930808211,
+     "media_10": 7.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    }
+   ],
+   "evaluaciones": []
+  },
+  {
+   "partido": "LA Clippers @ Golden State Warriors",
+   "game_id": "401909905",
+   "lesiones": [
+    {
+     "fecha": "2026-11-01",
+     "team_id": "9",
+     "player_id": "3102531",
+     "name": "Kristaps Porzingis",
+     "status": "Out",
+     "detail": "Illness"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "12",
+     "player_id": "3913176",
+     "name": "Brandon Ingram",
+     "status": "Out",
+     "detail": "Achilles"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "9",
+     "player_id": "3975",
+     "name": "Stephen Curry",
+     "status": "Out",
+     "detail": "Rest"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "12",
+     "player_id": "4065778",
+     "name": "Max Strus",
+     "status": "Out",
+     "detail": "Foot"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "12",
+     "player_id": "4396818",
+     "name": "Jordan Miller",
+     "status": "Out",
+     "detail": "Shoulder"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "9",
+     "player_id": "4432171",
+     "name": "Moses Moody",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "9",
+     "player_id": "4997536",
+     "name": "Gui Santos",
+     "status": "Day-To-Day",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "12",
+     "player_id": "5108024",
+     "name": "Yanic Konan Niederhauser",
+     "status": "Out",
+     "detail": "Foot"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "12",
+     "player_id": "6580",
+     "name": "Bradley Beal",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "9",
+     "player_id": "6589",
+     "name": "Draymond Green",
+     "status": "Out",
+     "detail": "Rest"
+    }
+   ],
+   "seguras": [
+    {
+     "player_id": "4396907",
+     "nombre": "Darius Garland",
+     "stat": "assists",
+     "line": 2.5,
+     "prob": 0.899890499352631,
+     "mu": 6.046608029253638,
+     "media_10": 6.2,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "2991139",
+     "nombre": "Kris Dunn",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.894129600337181,
+     "mu": 4.94722664019655,
+     "media_10": 5.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4709138",
+     "nombre": "Brandin Podziemski",
+     "stat": "pra",
+     "line": 22.5,
+     "prob": 0.8833633732648174,
+     "mu": 33.898874288194854,
+     "media_10": 25.6,
+     "acierto_10": [
+      7,
+      10
+     ]
+    },
+    {
+     "player_id": "4709138",
+     "nombre": "Brandin Podziemski",
+     "stat": "points",
+     "line": 12.5,
+     "prob": 0.8694931621014768,
+     "mu": 20.330485040527794,
+     "media_10": 18.2,
+     "acierto_10": [
+      8,
+      10
+     ]
+    },
+    {
+     "player_id": "4396907",
+     "nombre": "Darius Garland",
+     "stat": "pra",
+     "line": 20.5,
+     "prob": 0.8664743640790955,
+     "mu": 29.651037316255405,
+     "media_10": 28.7,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066648",
+     "nombre": "Rui Hachimura",
+     "stat": "points",
+     "line": 7.5,
+     "prob": 0.8658359221862495,
+     "mu": 13.302233467254865,
+     "media_10": 15.6,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4396907",
+     "nombre": "Darius Garland",
+     "stat": "points",
+     "line": 13.5,
+     "prob": 0.8500764872053754,
+     "mu": 21.086242793693074,
+     "media_10": 20.1,
+     "acierto_10": [
+      10,
+      10
+     ]
+    }
+   ],
+   "evaluaciones": []
+  },
+  {
+   "partido": "Toronto Raptors @ Los Angeles Lakers",
+   "game_id": "401909906",
+   "lesiones": [
+    {
+     "fecha": "2026-11-01",
+     "team_id": "28",
+     "player_id": "4432586",
+     "name": "Nate Bittle",
+     "status": "Out",
+     "detail": "Foot"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "13",
+     "player_id": "4433137",
+     "name": "Ziaire Williams",
+     "status": "Day-To-Day",
+     "detail": "Foot"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "13",
+     "player_id": "5060631",
+     "name": "Adou Thiero",
+     "status": "Out",
+     "detail": "Knee"
+    },
+    {
+     "fecha": "2026-11-01",
+     "team_id": "28",
+     "player_id": "6450",
+     "name": "Kawhi Leonard",
+     "status": "Out",
+     "detail": "Knee"
+    }
+   ],
+   "seguras": [
+    {
+     "player_id": "4395724",
+     "nombre": "Immanuel Quickley",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.9038499121682193,
+     "mu": 5.602015031291405,
+     "media_10": 5.2,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8930908177663981,
+     "mu": 4.926704386244112,
+     "media_10": 5.9,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4433134",
+     "nombre": "Scottie Barnes",
+     "stat": "assists",
+     "line": 1.5,
+     "prob": 0.8828974760130204,
+     "mu": 4.742906626535625,
+     "media_10": 7.0,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "4433136",
+     "nombre": "Walker Kessler",
+     "stat": "pra",
+     "line": 13.5,
+     "prob": 0.8765196082062037,
+     "mu": 24.564545757911247,
+     "media_10": 25.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "points",
+     "line": 14.5,
+     "prob": 0.874882385209121,
+     "mu": 22.21088619502358,
+     "media_10": 22.6,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4395625",
+     "nombre": "RJ Barrett",
+     "stat": "points",
+     "line": 11.5,
+     "prob": 0.8718268092938009,
+     "mu": 19.279802713767584,
+     "media_10": 22.0,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4433134",
+     "nombre": "Scottie Barnes",
+     "stat": "points",
+     "line": 10.5,
+     "prob": 0.8662082822565023,
+     "mu": 21.40752975004826,
+     "media_10": 24.2,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4066457",
+     "nombre": "Austin Reaves",
+     "stat": "pra",
+     "line": 21.5,
+     "prob": 0.8652753508513031,
+     "mu": 31.13813499146026,
+     "media_10": 32.3,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4433136",
+     "nombre": "Walker Kessler",
+     "stat": "rebounds",
+     "line": 5.5,
+     "prob": 0.8645187879541163,
+     "mu": 9.195324409942948,
+     "media_10": 9.9,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "points",
+     "line": 20.5,
+     "prob": 0.8636620913165103,
+     "mu": 32.440892308467845,
+     "media_10": 35.1,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4433134",
+     "nombre": "Scottie Barnes",
+     "stat": "pra",
+     "line": 18.5,
+     "prob": 0.8632612107872035,
+     "mu": 32.403577121551045,
+     "media_10": 38.4,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4395625",
+     "nombre": "RJ Barrett",
+     "stat": "pra",
+     "line": 18.5,
+     "prob": 0.8630517258416379,
+     "mu": 28.051032480212456,
+     "media_10": 32.5,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "4433134",
+     "nombre": "Scottie Barnes",
+     "stat": "rebounds",
+     "line": 2.5,
+     "prob": 0.8596982990730593,
+     "mu": 6.253140744967156,
+     "media_10": 7.2,
+     "acierto_10": [
+      10,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "pra",
+     "line": 32.5,
+     "prob": 0.8535763928067654,
+     "mu": 45.72059783298129,
+     "media_10": 48.8,
+     "acierto_10": [
+      9,
+      10
+     ]
+    },
+    {
+     "player_id": "3945274",
+     "nombre": "Luka Doncic",
+     "stat": "assists",
+     "line": 3.5,
+     "prob": 0.8521463186062583,
+     "mu": 6.715548269942322,
+     "media_10": 7.3,
+     "acierto_10": [
+      9,
+      10
+     ]
+    }
+   ],
+   "evaluaciones": []
+  }
+ ]
+}
