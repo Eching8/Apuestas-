@@ -3,11 +3,10 @@
  "apuestas": [
   {
    "nombre": "Agresiva 8 patas",
-   "cuota": 48.5,
+   "cuota": 51.48,
    "prob": 0.02,
    "real": true,
    "monto": 10000,
-   "nota": "cuota aproximada (consenso The Odds API); falta la captura de Betano",
    "patas": [
     {
      "jugador": "Wendell Carter Jr.",
@@ -57,7 +56,8 @@
      "lado": "menos",
      "linea": 10.5
     }
-   ]
+   ],
+   "ganancia_potencial": 514806
   }
  ]
 }
