@@ -653,3 +653,82 @@ class CombinadasTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TheOddsApiNflTest(unittest.TestCase):
+    PARTIDO = {"id": "e1", "home_team": "Buffalo Bills", "away_team": "Los Angeles Chargers",
+               "commence_time": "2026-11-02T18:00:00Z"}
+    ODDS = {"bookmakers": [
+        {"key": "draftkings", "markets": [
+            {"key": "player_rush_yds", "outcomes": [
+                {"name": "Over", "description": "James Cook", "price": 1.87, "point": 79.5},
+                {"name": "Under", "description": "James Cook", "price": 1.93, "point": 79.5}]},
+            {"key": "player_anytime_td", "outcomes": [{"name": "Yes", "description": "James Cook", "price": 1.9}]}]},
+        {"key": "fanduel", "markets": [
+            {"key": "player_rush_yds", "outcomes": [
+                {"name": "Over", "description": "James Cook", "price": 1.91, "point": 79.5},
+                {"name": "Under", "description": "James Cook", "price": 1.89, "point": 79.5}]},
+            {"key": "player_tds_over", "outcomes": [
+                {"name": "Over", "description": "James Cook", "price": 2.0, "point": 0.5},
+                {"name": "Over", "description": "James Cook", "price": 6.5, "point": 1.5}]},
+            {"key": "h2h", "outcomes": [{"name": "Buffalo Bills", "price": 1.5}]}]}]}
+
+    def test_parse_evento(self):
+        from apuestas.nfl.theodds import parse_evento as parse_theodds
+        m = parse_theodds({**self.PARTIDO, **self.ODDS})
+        self.assertEqual((m.home, m.away, m.event_id), ("BUF", "LAC", "theodds:e1"))
+        of = {(o.stat, o.lado, o.line): o for o in m.ofertas}
+        self.assertEqual(set(of), {("rush_yds", "más", 79.5), ("rush_yds", "menos", 79.5), ("tds", "más", 0.5),
+                                   ("tds", "más", 1.5)})
+        ry = of[("rush_yds", "más", 79.5)]
+        self.assertEqual((ry.consenso, ry.contraria), (1.89, 1.91))
+        self.assertAlmostEqual(ry.prob_casa(), (1 / 1.89) / (1 / 1.89 + 1 / 1.91), places=4)
+        # "Anota" (sí) y "más de 0.5 TD" son la misma apuesta; 2+ TD queda aparte.
+        self.assertEqual(of[("tds", "más", 0.5)].libros, {"draftkings": 1.9, "fanduel": 2.0})
+        self.assertEqual(of[("tds", "más", 1.5)].libros, {"fanduel": 6.5})
+        self.assertEqual(emparejar(m, [{"player_id": "rb_buf", "name": "James Cook", "team": "BUF"}]), 4)
+
+    def test_respaldo_y_creditos(self):
+        from types import SimpleNamespace
+        from unittest import mock
+        from apuestas.config import Config
+        from apuestas.nfl import cli
+        from apuestas.nfl.theodds import TheOddsApiNfl
+
+        llamadas = []
+
+        class Sesion:
+            def __init__(self, restantes):
+                self.restantes = restantes
+
+            def get(self, url, params, timeout):
+                llamadas.append(url)
+                datos = [TheOddsApiNflTest.PARTIDO] if url.endswith("/events") else TheOddsApiNflTest.ODDS
+                return SimpleNamespace(status_code=200, json=lambda: datos, text="",
+                                       headers={"x-requests-remaining": self.restantes})
+
+        tmp = TemporaryDirectory()
+        db = Database(Path(tmp.name) / "t.db")
+        nfl = NflDB(db.conn)
+        db.conn.execute("INSERT INTO nfl_rosters(player_id, name, team) VALUES ('rb_buf', 'James Cook', 'BUF')")
+        juegos = [{"game_id": "g1", "home_team": "BUF", "away_team": "LAC"}]
+        cfg = Config(odds_api_key="k")
+        restantes = ["400"]
+        sin_cupo = mock.patch.object(cli, "_descargar_mercados", side_effect=RuntimeError("HTTP 429"))
+        api = mock.patch.object(cli, "TheOddsApiNfl", lambda key: TheOddsApiNfl(key, session=Sesion(restantes[0])))
+        with sin_cupo, api:
+            # Poco cupo: no se gasta en el partido y no hay líneas guardadas.
+            restantes[0] = "105"
+            self.assertEqual(cli._mercados(cfg, nfl, "2026-11-01", 7, juegos), {})
+            self.assertFalse(any(u.endswith("/odds") for u in llamadas))
+            # Con cupo: se piden las cuotas y se guardan.
+            restantes[0] = "400"
+            m = cli._mercados(cfg, nfl, "2026-11-01", 7, juegos)["g1"]
+            self.assertEqual(sum(u.endswith("/odds") for u in llamadas), 1)
+            self.assertTrue(all(o.player_id == "rb_buf" for o in m.ofertas))
+            # Una segunda ejecución el mismo día usa las guardadas sin gastar créditos.
+            g = cli._mercados(cfg, nfl, "2026-11-01", 7, juegos)["g1"]
+            self.assertEqual(sum(u.endswith("/odds") for u in llamadas), 1)
+            self.assertEqual({(o.stat, o.lado, o.line) for o in g.ofertas}, {(o.stat, o.lado, o.line) for o in m.ofertas})
+        db.close()
+        tmp.cleanup()
