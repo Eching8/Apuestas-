@@ -1,0 +1,79 @@
+{
+ "fecha": "2026-11-02",
+ "apuestas": [
+  {
+   "nombre": "Combinada 8.05",
+   "cuota": 8.05,
+   "prob": 0.11,
+   "real": true,
+   "monto": 5000,
+   "ganancia_potencial": 40297,
+   "patas": [
+    {
+     "jugador": "Cade Cunningham",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "CJ McCollum",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 2.5
+    },
+    {
+     "jugador": "Jaime Jaquez Jr.",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Khaman Maluach",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Isaiah Jackson",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 7.5
+    }
+   ]
+  },
+  {
+   "nombre": "De valor 11.85",
+   "cuota": 11.85,
+   "prob": 0.127,
+   "real": true,
+   "monto": 5000,
+   "ganancia_potencial": 59274,
+   "patas": [
+    {
+     "jugador": "Anthony Davis",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 11.5
+    },
+    {
+     "jugador": "Cade Cunningham",
+     "stat": "assists",
+     "lado": "menos",
+     "linea": 8.5
+    },
+    {
+     "jugador": "LaMelo Ball",
+     "stat": "points",
+     "lado": "menos",
+     "linea": 20.5
+    },
+    {
+     "jugador": "Isaiah Jackson",
+     "stat": "rebounds",
+     "lado": "menos",
+     "linea": 7.5
+    }
+   ]
+  }
+ ]
+}
