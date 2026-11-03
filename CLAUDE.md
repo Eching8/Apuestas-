@@ -1,7 +1,7 @@
 # Apuestas NBA: cómo armar combinadas cuando el usuario las pida
 
 El usuario (Bogotá, apuesta en Betano) pidió el 29 oct 2026 que **cualquier combinada que pida** se arme con
-el criterio de las que ganaron el 28 oct (segura A, segura B, seguras de cuota 2+ y 3+, de valor 15+), y no
+el criterio de las que ganaron el 28 oct (segura A, segura B, seguras de cuota 2+ y 3+), y no
 con el de las que perdieron (combinadas largas con una pata floja, rachas de "menos de triples", 5 patas del
 mismo partido). Probabilidad y constancia por encima de la cuota.
 
@@ -13,14 +13,19 @@ mismo partido). Probabilidad y constancia por encima de la cuota.
 2. **Un partido por pata** en las combinadas (como la B y las de cuota objetivo). Los bet builders son la
    excepción, y cada pierna tiene que haberse pasado en 2 de cada 3 partidos de esta temporada
    (`builder.ACIERTO_TEMPORADA_MIN`) y no bajar de la línea mínima de la casa.
-3. **Las menos patas posibles** para llegar a la cuota pedida (`combinadas.con_cuota`): 2-3 patas para cuota
-   2-3; para cuotas altas, la combinada "de valor" (picks donde el modelo ve más de lo que paga la casa, 6+ de
-   10, sin alertas) antes que alargar una segura.
+3. **Las menos patas posibles** para llegar a la cuota pedida (`combinadas.con_cuota`, máximo 5): 2-3 patas
+   para cuota 2-3. **Nada de combinadas "de valor"** (lo pidió el 3 nov 2026: buscarle valor a la casa metía
+   "menos" de estrellas y patas flojas, 0 de 5). Una cuota alta tiene que tener lógica de partido (minutos, rol,
+   bajas, guion del partido) y patas probables; si no se llega, se dice y se propone una cuota menor.
 4. **Primero la segura A** (líneas alternativas de estrellas al 85-92 %) cuando se pide algo muy seguro.
 5. **Ninguna pata "moneda al aire"**: si una pata queda por debajo de ~60 % o la casa no ofrece la línea,
    cambiarla por la siguiente más segura de la lista, no por la que más paga.
 6. Si el usuario pide algo agresivo (cuota 30+), avisar de la probabilidad real y armarlo igual con estas
    reglas, sin meter más de 2 patas del mismo partido.
+
+- **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
+  de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
+  rebotes, asistencias y defensa de titulares sí rinden (75 % frente a 65 % prometido, 25 oct-1 nov).
 
 ## Con dinero real (desde el 30 oct 2026)
 

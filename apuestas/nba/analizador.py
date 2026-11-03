@@ -157,6 +157,21 @@ def guardar_analisis(db: NbaDB, fecha: str, partidos: list[Partido]) -> None:
     db.commit()
 
 
+# "Menos" de anotación (puntos, triples y sus sumas). Líneas reales de la casa, 25 oct-1 nov 2026 (4.430 props):
+# los "menos" de anotación de titulares del 62-70 % acertaron 62 % (prometían 64 %) y las patas "menos" que se
+# jugaron (casi todas de anotación de estrellas), 7 de 13; los "menos" de rebotes, asistencias y defensa de titulares,
+# 75 % frente a 65 %. Solo entran los de anotación muy claros.
+STATS_ANOTACION = {"points", "threes", "pra", "pr", "pa", "fgm", "ftm"}
+MENOS_ANOTACION_PROB = 0.75
+MENOS_ANOTACION_ACIERTOS = 8
+
+
+def menos_aceptable(e: Evaluacion) -> bool:
+    if e.lado != "menos" or e.stat not in STATS_ANOTACION:
+        return True
+    return e.prob >= MENOS_ANOTACION_PROB and e.acierto_10[0] >= MENOS_ANOTACION_ACIERTOS
+
+
 def candidatas_seguras(partidos: list[Partido], cuota_min: float = 1.30, prob_min: float = 0.62,
                        min_aciertos: int = 7) -> list[tuple[Partido, Evaluacion]]:
     """Props con cuota real ordenadas por probabilidad (no por valor), solo de jugadores constantes:
@@ -172,6 +187,8 @@ def candidatas_seguras(partidos: list[Partido], cuota_min: float = 1.30, prob_mi
                 continue
             hits_t, n_t = e.acierto_temporada
             if n_t >= 2 and hits_t / n_t < 0.6:
+                continue
+            if not menos_aceptable(e):
                 continue
             out.append((p, e))
     return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)

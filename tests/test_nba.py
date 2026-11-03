@@ -502,7 +502,15 @@ class CombinadasTest(unittest.TestCase):
         self.assertEqual(len({x["game_id"] for x in c.patas}), len(c.patas))  # partidos distintos
         self.assertAlmostEqual(c.prob, 0.70 * 0.68)  # la más probable que llega a cuota 2
         self.assertIsNone(con_cuota(cands, 50.0))
-        self.assertTrue(con_cuota(cands, 2.0, "valor").tipo.startswith("valor_"))
+
+    def test_menos_de_anotacion(self):
+        from types import SimpleNamespace as N
+        from apuestas.nba.analizador import menos_aceptable
+        self.assertFalse(menos_aceptable(N(lado="menos", stat="points", prob=0.70, acierto_10=(9, 10))))
+        self.assertFalse(menos_aceptable(N(lado="menos", stat="threes", prob=0.80, acierto_10=(7, 10))))
+        self.assertTrue(menos_aceptable(N(lado="menos", stat="pra", prob=0.76, acierto_10=(8, 10))))
+        self.assertTrue(menos_aceptable(N(lado="menos", stat="rebounds", prob=0.65, acierto_10=(7, 10))))
+        self.assertTrue(menos_aceptable(N(lado="más", stat="points", prob=0.65, acierto_10=(7, 10))))
 
     def test_apuestas_usuario(self):
         import json as _json
