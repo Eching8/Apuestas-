@@ -258,8 +258,8 @@ def seccion_builders(builders: list, doble) -> list[str]:
     out = ["## Bet builders del día", "",
            "Por partido, 4 \"más de\" de titulares estables sin alertas, en líneas un poco por debajo de su "
            "nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un "
-           "mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad: si tu casa paga más por el "
-           "bet builder, tiene valor. Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).", ""]
+           "mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad (solo para saber cuánto "
+           "debería pagar; se elige por probabilidad). Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).", ""]
     if doble:
         a, b = doble
         prob = a.prob * b.prob
@@ -286,7 +286,7 @@ def seccion_rachas(combis: list) -> list[str]:
            "se repite con las líneas reales de la casa.", ""]
     for c in rachas:
         out += [f"**{c.tipo.split('_')[1]} patas:** cuota {c.cuota:.2f}, probabilidad del modelo **{_pct(c.prob)}** "
-                f"(1 de cada {1 / c.prob:.0f}); valor {(c.prob * c.cuota - 1) * 100:+.0f}%", ""]
+                f"(1 de cada {1 / c.prob:.0f})", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} — "
                 f"{x['acierto_temporada'][0]}/{x['acierto_temporada'][1]} esta temporada, "
                 f"{x['acierto_10'][0]}/{x['acierto_10'][1]} últimos 10 ({_pct(x['prob'])}, cuota {x['odd']:.2f}) "
@@ -304,16 +304,12 @@ def seccion_cuotadas(combis: list) -> list[str]:
            "probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se "
            "liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota "
            "alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse "
-           "o superar esa probabilidad; si la casa paga menos que la cuota justa, esa combinada no conviene ese día. "
-           "Como mucho 5 patas, sin \"menos\" de anotación dudosos y sin combinadas de valor.",
+           "o superar esa probabilidad. Se eligen solo por probabilidad de acertar (nunca por valor): como mucho 5 "
+           "patas, sin \"menos\" de anotación dudosos.",
            ""]
     for c in cuotadas:
-        valor = c.prob * c.cuota - 1
-        aviso = ("✅ la casa paga al menos la cuota justa" if valor > 0 else
-                 "⚠️ la casa paga menos que la cuota justa, mejor no jugarla hoy")
         out += [f"**Segura, cuota {c.tipo.split('_')[1]}+ ({len(c.patas)} patas):** cuota {c.cuota:.2f}, probabilidad "
-                f"de acertar todas **{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f}), cuota justa {1 / c.prob:.2f}; "
-                f"{aviso}", ""]
+                f"de acertar todas **{_pct(c.prob)}** (1 de cada {1 / c.prob:.0f})", ""]
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
                 f"{x['odd']:.2f}) — {x['partido']}"
                 + (f" — {x['a_favor']} factores a favor, {x['en_contra']} en contra" if "a_favor" in x else "")

@@ -5,6 +5,11 @@ el criterio de las que ganaron el 28 oct (segura A, segura B, seguras de cuota 2
 con el de las que perdieron (combinadas largas con una pata floja, rachas de "menos de triples", 5 patas del
 mismo partido). Probabilidad y constancia por encima de la cuota.
 
+**Lo que busca el usuario (3 nov 2026): ganar sus apuestas, no sacarle valor a la casa.** Cada pata y cada
+combinada se elige por la probabilidad más alta de acertar, respaldada por los datos de esta temporada y la lógica
+del partido. El valor (lo que paga la casa frente a lo que vale) nunca es criterio para meter una pata ni para
+elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas más seguras. Vale para la NBA y la NFL.
+
 ## Reglas
 
 1. **Solo jugadores constantes** (`analizador.candidatas_seguras`): titulares con minutos estables, sin alertas
