@@ -460,6 +460,12 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
   ±30 % con menos de 10 partidos), la línea de la casa pesa más (60 %): conoce el rol nuevo.
 - **Bajas**: si un compañero importante está fuera, compara al jugador con y sin él (minutos y tasas).
   Si ese compañero ya faltaba en los últimos partidos, la baja ya está en sus minutos y no se suma.
+- **Estrella ausente**: si falta el que más jugadas usa de su equipo (28+ min, 20+ jugadas de tiro por 36'),
+  sus compañeros suben por minuto +7.5 % en puntos, +4 % en triples, +6 % en asistencias y +2 % en rebotes sobre
+  su ritmo normal, corregido con sus propios partidos sin la estrella, aunque ya llevara varios partidos fuera
+  (2025-26: el modelo anterior se quedaba corto y sus "menos de puntos" del 62 %+ acertaban 63 % frente a 67 %
+  prometido; ahora 67 %). Además, un "menos" de puntos, triples o asistencias de esos compañeros lleva la alerta
+  "sin <estrella>: más tiros para él" y no entra en picks seguros ni combinadas.
 - **Defensa rival por posición**: lo que concede el rival por minuto a bases, aleros o pívots.
 - **Bajas del rival**: por cada titular del rival fuera (26+ min de media), +1.7 % en puntos y triples y
   +1.5 % en asistencias, hasta tres bajas (2025-26: +2 % con una baja, +5 % con tres o más; rebotes sin efecto).

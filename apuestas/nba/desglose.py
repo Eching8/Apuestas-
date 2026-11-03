@@ -200,7 +200,7 @@ def motores(ctx, j, pesos: list[float]) -> dict[str, Motor]:
     out["fta"] = Motor("fta", fta, f"{fta_r * 36:.1f} libres por 36' × {mins:.0f}' × rival {(f_fta - 1) * 100:+.0f}%",
                        {"fta": fta})
     out["ftm"] = Motor("ftm", fta * ft_pct, f"{fta:.1f} tiros libres × {ft_pct * 100:.0f}%", {"fta": fta, "ft_pct": ft_pct})
-    tpa = tpa_r * mins * f_fga * f_tpa * uso
+    tpa = tpa_r * mins * f_fga * f_tpa * bajas.get("tpm", uso)
     out["tpm"] = Motor("tpm", tpa * tp_pct,
                        f"{tpa:.1f} triples intentados (su ritmo {tpa_r * 36:.1f} por 36'; el rival concede "
                        f"{(f_tpa - 1) * 100:+.0f}% de triples en su reparto) × {tp_pct * 100:.0f}% esperado",
