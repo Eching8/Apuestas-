@@ -18,7 +18,8 @@ from dataclasses import dataclass, field
 from statistics import NormalDist
 
 from .analizador import Partido
-from .modelo import Contexto, Jugador, NOMBRES, _aciertos, _prob_jugador, alertas, predecir, prob_lados, valor
+from .modelo import (Contexto, Jugador, NOMBRES, _aciertos, _prob_jugador, alertas, predecir, prob_lados, valor,
+                     vetada)
 
 PROB_PIERNA = 0.72
 PIERNAS = 4
@@ -81,7 +82,7 @@ def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
     out = []
     ult = j.partidos[:10]
     for stat, minimo in MINIMOS.items():
-        if sum(valor(p, stat) for p in ult) / len(ult) < minimo:
+        if vetada(j.nombre, stat) or sum(valor(p, stat) for p in ult) / len(ult) < minimo:
             continue
         pred = predecir(ctx, j, stat)
         principal = (principales or {}).get((j.player_id, stat))

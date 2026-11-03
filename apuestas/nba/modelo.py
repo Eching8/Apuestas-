@@ -20,6 +20,7 @@ sobre esa línea en los últimos partidos y, si hay cuotas, con la probabilidad 
 from __future__ import annotations
 
 import math
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, timedelta
@@ -828,9 +829,21 @@ MINUTOS_SD_ESTABLE = 6.0
 DISCREPANCIA_MAX = 0.25
 
 
+# Props que el usuario no quiere volver a jugar (nombre sin espacios ni signos, componente). Se descartan de picks
+# seguros, combinadas, rachas y bet builders, por los dos lados.
+# 2 nov 2026: Isaiah Jackson menos de 7.5 rebotes (con los pívots de los Clippers fuera) hizo 8 y tumbó las dos
+# apuestas reales del día.
+VETADOS = {("isaiahjackson", "reb")}
+
+
+def vetada(nombre: str, stat: str) -> bool:
+    clave = "".join(ch for ch in unicodedata.normalize("NFKD", nombre.lower()) if ch.isalnum())
+    return any((clave, c) in VETADOS for c in COMPONENTES.get(stat, ()))
+
+
 def alertas(j: Jugador, stat: str) -> list[str]:
     """Lo que hace dudosa una prop aunque su probabilidad sea alta."""
-    out = []
+    out = ["vetada por el usuario"] if vetada(j.nombre, stat) else []
     if not es_titular(j):
         out.append("suplente")
     if j.minutos_sd > MINUTOS_SD_ESTABLE:
@@ -871,6 +884,8 @@ def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA) -> list[Se
     out = []
     ult = j.partidos[:10]
     for stat, minimo in MEDIAS_SEGURA.items():
+        if vetada(j.nombre, stat):
+            continue
         media = sum(valor(p, stat) for p in ult) / len(ult)
         if media < minimo:
             continue
