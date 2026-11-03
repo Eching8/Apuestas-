@@ -337,6 +337,7 @@ class Jugador:
     cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
     factor_paliza: float = 1.0               # minutos por partido desigual (ver PALIZA)
     bajas_rival: list[str] = field(default_factory=list)   # titulares del rival que no juegan
+    sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
 
     @property
     def n(self) -> int:
@@ -355,6 +356,22 @@ class Jugador:
 BAJAS_RIVAL = {"pts": 0.017, "fgm": 0.017, "tpm": 0.017, "ftm": 0.017, "fta": 0.017, "ast": 0.015}
 BAJAS_RIVAL_MAX = 3
 TITULAR_MIN = 26.0
+
+# Estrella ausente: 2024-25 y 2025-26 (1.107 partidos de compañeros con 20+ min). Cuando falta el jugador que más
+# jugadas usa (28+ min y 20+ jugadas de tiro por 36'), sus compañeros hicieron por minuto +15 % de tiros y de puntos,
+# +8 % de triples, +25 % de tiros libres y +12 % de asistencias frente a su ritmo con él (con la estrella jugando, la
+# misma cuenta da 0.98-1.03), y la media ponderada que usaba el modelo seguía corta aunque llevara 3-5 partidos fuera.
+# En el backtest de 2025-26 (4.068 jugadores en partidos sin su estrella) la mitad de ese efecto es lo que deja el
+# error medio en cero (puntos: +0.13 antes, -0.06 con la mitad, -0.49 con el efecto entero) y mejora el log-loss de
+# todas las estadísticas; los "menos de puntos" del 62 %+ pasan de acertar 63 % (prometían 67 %) a 67 % (67 %).
+# 2 nov 2026: sin Anthony Edwards, el modelo dio a LaMelo 16 puntos (menos de 20.5 al 58 %) y metió 24 al descanso.
+ESTRELLA_MIN = 28.0
+ESTRELLA_USO_36 = 20.0
+ESTRELLA_EFECTO = {"pts": 1.075, "fgm": 1.075, "tpm": 1.04, "ftm": 1.125, "fta": 1.125, "ast": 1.06, "reb": 1.02}
+K_ESTRELLA = 8          # partidos "virtuales" del efecto medio que se suman a los suyos sin la estrella
+ESTRELLA_TOPE = (0.85, 1.40)
+NOMBRE_CORTO = {"pts": "puntos", "ast": "asistencias", "tpm": "triples"}
+SUBEN_SIN_ESTRELLA = {"pts", "fgm", "tpm", "ftm", "ast"}   # un "menos" de estas no entra en combinadas
 
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
@@ -393,6 +410,10 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
         recientes = [p for p in comp[:PARTIDOS_MINUTOS] if p["team_id"] == j.team_id]
         if not recientes or sum(p["minutes"] for p in recientes) / len(recientes) < MIN_COMPANERO:
             continue
+        estrella = _es_estrella(recientes)
+        if estrella:
+            j.sin_estrella.append(comp_nombre)
+            _ajuste_estrella(ctx, j, comp, comp_nombre)
         # Si ya faltaba en los últimos partidos, sus minutos recientes ya reflejan la baja: no se suma dos veces.
         ultimos = [p["game_id"] for p in j.partidos if p["team_id"] == j.team_id][:3]
         if ultimos and not {p["game_id"] for p in comp} & set(ultimos):
@@ -404,7 +425,8 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
         con = [p for p in mios if p["game_id"] in juegos_comp]
         sin = [p for p in mios if p["game_id"] not in juegos_comp]
         if len(sin) < 3 or len(con) < 3:
-            j.notas.append(f"sin {comp_nombre}: muestra insuficiente ({len(sin)} partidos sin él)")
+            if not estrella:
+                j.notas.append(f"sin {comp_nombre}: muestra insuficiente ({len(sin)} partidos sin él)")
             continue
         m_con = sum(p["minutes"] for p in con) / len(con)
         m_sin = sum(p["minutes"] for p in sin) / len(sin)
@@ -413,7 +435,7 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
         delta = min(4.0, max(0.0, (m_sin - m_con) * len(sin) / (len(sin) + 4)))
         delta_total += delta
         cambios = []
-        for s in BASICAS:
+        for s in ([] if estrella else BASICAS):   # con la estrella, las tasas ya las ajustó _ajuste_estrella
             t_con = sum(p[s] for p in con) / max(1.0, sum(p["minutes"] for p in con))
             t_sin = sum(p[s] for p in sin) / max(1.0, sum(p["minutes"] for p in sin))
             if t_con <= 0:
@@ -427,6 +449,48 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
                        + (f"; {', '.join(cambios)}" if cambios else ""))
     # Varias bajas del mismo puesto no se suman sin límite: los minutos se reparten entre varios.
     return min(6.0, delta_total)
+
+
+def _es_estrella(recientes: list[dict]) -> bool:
+    """El que más tiros usa de su equipo: 28+ minutos y 20+ jugadas de tiro (tiros + 0.44 libres + pérdidas) por 36'."""
+    if len(recientes) < 3:
+        return False
+    mins = sum(p["minutes"] for p in recientes)
+    uso = sum(p["fga"] + 0.44 * p["fta"] + p["tov"] for p in recientes)
+    return mins / len(recientes) >= ESTRELLA_MIN and mins and uso * 36 / mins >= ESTRELLA_USO_36
+
+
+def _ajuste_estrella(ctx: Contexto, j: Jugador, comp: list[dict], comp_nombre: str) -> None:
+    """Sube sus tasas por minuto a lo que hacen los compañeros sin la estrella (ESTRELLA_EFECTO sobre su ritmo
+    normal), corregido con sus propios partidos sin ella (K_ESTRELLA partidos virtuales), y descuenta lo que la
+    media ponderada del modelo ya recoge de esos partidos."""
+    juegos_comp = {p["game_id"] for p in comp}
+    temporadas = {p["season"] for p in comp if p["team_id"] == j.team_id}
+    w = _pesos(j.partidos, ctx.temporada, DECAY_TASA)
+    es_sin = [p["team_id"] == j.team_id and p["season"] in temporadas and p["game_id"] not in juegos_comp
+              for p in j.partidos]
+    # Su ritmo "normal": todos sus partidos menos los que jugó sin la estrella (con ella o en otro equipo).
+    normal = [(wi, p) for wi, p, x in zip(w, j.partidos, es_sin) if not x]
+    sin = [p for p, x in zip(j.partidos, es_sin) if x and p["minutes"] > 0][:20]
+    m_normal = sum(wi * p["minutes"] for wi, p in normal)
+    m_todo = sum(wi * p["minutes"] for wi, p in zip(w, j.partidos))
+    if len(normal) < 5 or not m_normal or not m_todo:
+        return
+    min_hoy = max(j.minutos, 1.0)
+    m_sin = sum(p["minutes"] for p in sin)
+    cambios = []
+    for s, efecto in ESTRELLA_EFECTO.items():
+        t_normal = sum(wi * p[s] for wi, p in normal) / m_normal
+        t_modelo = sum(wi * p[s] for wi, p in zip(w, j.partidos)) / m_todo
+        if t_normal <= 0 or t_modelo <= 0:
+            continue
+        objetivo = (sum(p[s] for p in sin) + K_ESTRELLA * min_hoy * t_normal * efecto) / (m_sin + K_ESTRELLA * min_hoy)
+        ratio = min(ESTRELLA_TOPE[1], max(ESTRELLA_TOPE[0], objetivo / t_modelo))
+        j.ajuste_bajas[s] = min(ESTRELLA_TOPE[1], j.ajuste_bajas.get(s, 1.0) * ratio)
+        if s in ("pts", "ast", "tpm"):
+            cambios.append(f"{NOMBRE_CORTO[s]} {ratio - 1:+.0%}")
+    j.notas.append(f"sin {comp_nombre}, la estrella de su equipo ({len(sin)} partidos suyos sin él): "
+                   f"más tiros y balón para él por minuto ({', '.join(cambios)})")
 
 
 def _cambio_rol(ctx: Contexto, partidos: list[dict]) -> dict[str, float]:
@@ -548,6 +612,7 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
     for c in COMPONENTES[stat]:
         tasa = (sum(wi * p[c] for wi, p in zip(w, j.partidos)) + 2 * m_media * liga.get(c, 0.0)) / (sw_min + 2 * m_media)
         tasa_base += tasa
+        sin_bajas = tasa
         tasa *= j.ajuste_bajas.get(c, 1.0)
         f_def = defensa.get(c, 1.0)
         if c == "pts":
@@ -562,9 +627,10 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
         if nivel_hoy:
             mismos = [(wi, p) for wi, p in zip(w, j.partidos) if niveles[c].get(p["opp_id"]) == nivel_hoy]
             m_t = sum(wi * p["minutes"] for wi, p in mismos)
-            if m_t and tasa:
+            if m_t and sin_bajas:
+                # Contra su propio ritmo, no contra el ajustado por bajas (eso ya está en la tasa).
                 t_t = sum(wi * p[c] for wi, p in mismos) / m_t
-                f_tipo = math.sqrt(1 + (t_t / tasa - 1) * m_t / (m_t + K_TIPO_MIN))
+                f_tipo = math.sqrt(1 + (t_t / sin_bajas - 1) * m_t / (m_t + K_TIPO_MIN))
                 f_tipo = min(1.15, max(0.85, f_tipo))
         mu_c = tasa * f_def * f_tipo
         motor = j.motores[c]
@@ -851,6 +917,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         tabla_metricas(ctx, j, COMPONENTES[stat]) if detalle else [], es_titular(j),
         alertas(j, stat) + (["muy lejos de la casa"] if p_casa is not None and p_jug - p_casa > DISCREPANCIA_MAX
                             else [])
+        + ([f"sin {j.sin_estrella[0]}: más tiros para él"]
+           if lado == "menos" and j.sin_estrella and set(COMPONENTES[stat]) & SUBEN_SIN_ESTRELLA else [])
         + (["menos de una estrella al inicio de temporada"]
            if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),

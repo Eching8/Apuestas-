@@ -415,6 +415,34 @@ class BajasRivalTest(unittest.TestCase):
             self.assertEqual(preparar_jugador(ctx, "a1", "a1", "1", "2", fuera_rival=["nadie"]).bajas_rival, [])
 
 
+class EstrellaAusenteTest(unittest.TestCase):
+    def test_companeros_sin_la_estrella(self):
+        from unittest import mock
+        from apuestas.nba import modelo
+        with TemporaryDirectory() as tmp, mock.patch.object(modelo, "ESTRELLA_USO_36", 15.0):
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            self.assertTrue(modelo._es_estrella(ctx.por_jugador["a1"][:10]))      # 34 min y el que más tira
+            self.assertFalse(modelo._es_estrella(ctx.por_jugador["p11"][:10]))    # 28 min
+            base = preparar_jugador(ctx, "p11", "p11", "1", "2")
+            sin = preparar_jugador(ctx, "p11", "p11", "1", "2", ausentes=[("a1", "Ángel Pérez")])
+            self.assertEqual(sin.sin_estrella, ["Ángel Pérez"])
+            # Sin partidos suyos sin la estrella, se aplica el efecto medio entero sobre su ritmo normal.
+            self.assertAlmostEqual(predecir(ctx, sin, "points").mu / predecir(ctx, base, "points").mu, 1.075, 2)
+            self.assertAlmostEqual(predecir(ctx, sin, "rebounds").mu / predecir(ctx, base, "rebounds").mu, 1.02, 2)
+            # Un "menos" de puntos o asistencias no entra en combinadas; los rebotes y los "más", sí.
+            menos = modelo.evaluar(ctx, sin, "points", 99.5, detalle=False)
+            self.assertEqual(menos.lado, "menos")
+            self.assertIn("sin Ángel Pérez: más tiros para él", menos.alertas)
+            self.assertNotIn("sin Ángel Pérez: más tiros para él",
+                             modelo.evaluar(ctx, sin, "rebounds", 99.5, detalle=False).alertas)
+            self.assertNotIn("sin Ángel Pérez: más tiros para él",
+                             modelo.evaluar(ctx, sin, "points", 0.5, detalle=False).alertas)
+            # Un compañero que no es la estrella no cambia nada de esto.
+            self.assertEqual(preparar_jugador(ctx, "p12", "p12", "1", "2", ausentes=[("p11", "p11")]).sin_estrella, [])
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
