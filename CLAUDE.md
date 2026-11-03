@@ -32,6 +32,9 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
   rebotes, asistencias y defensa de titulares sí rinden (75 % frente a 65 % prometido, 25 oct-1 nov).
 
+- **Props vetadas por el usuario** (`modelo.VETADOS`): no se proponen nunca, por ningún lado. Isaiah Jackson
+  rebotes (2 nov 2026: menos de 7.5, hizo 8 y tumbó las dos apuestas reales). Si pide vetar otra, se agrega ahí.
+
 ## Con dinero real (desde el 30 oct 2026)
 
 7. **Sin excepciones a la regla 1**: una pata que no cumple la constancia de esta temporada no entra aunque

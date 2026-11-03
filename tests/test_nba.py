@@ -512,6 +512,13 @@ class CombinadasTest(unittest.TestCase):
         self.assertTrue(menos_aceptable(N(lado="menos", stat="rebounds", prob=0.65, acierto_10=(7, 10))))
         self.assertTrue(menos_aceptable(N(lado="más", stat="points", prob=0.65, acierto_10=(7, 10))))
 
+    def test_vetados(self):
+        from apuestas.nba.modelo import vetada
+        self.assertTrue(vetada("Isaiah Jackson", "rebounds"))
+        self.assertTrue(vetada("Isaiah Jackson", "pra"))
+        self.assertFalse(vetada("Isaiah Jackson", "points"))
+        self.assertFalse(vetada("Jaden McDaniels", "rebounds"))
+
     def test_apuestas_usuario(self):
         import json as _json
         from apuestas.nba import combinadas, usuario
