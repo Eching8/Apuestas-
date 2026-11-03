@@ -6,9 +6,8 @@ Tipos que se guardan cada día (todas "fantasma" hasta que el sistema esté cali
 - principales: la línea principal más probable de cada partido entre jugadores constantes.
 - cuota_2 / cuota_3 / cuota_5 / cuota_10 / cuota_15: la combinación de líneas principales de jugadores constantes con mayor
   probabilidad de acertar todas cuya cuota llega al objetivo.
-- valor_5 / valor_10 / valor_15 / valor_30: lo mismo, pero solo con props donde el modelo ve más probabilidad de la
-  que paga la casa (valor > +2 %). Las más seguras suelen tener valor negativo (la casa también las ve
-  seguras y paga poco); se registran ambas para ver con resultados reales cuál gana dinero.
+- Sin combinadas "de valor" (desde el 3 nov 2026): perseguir lo que la casa paga de más empujaba a "menos" de
+  estrellas y a patas flojas (0 de 5). Una cuota alta se arma con las patas más probables, no con valor.
 - racha_4 / racha_8: líneas principales que el jugador pasó en todos sus partidos de esta temporada (3+), con el
   modelo del mismo lado. Backtest al inicio de 2025-26 (25 oct - 20 nov, línea = mediana de sus últimos 10):
   esas props acertaron el 78 % (n = 361) cuando el modelo decía 68 %; las de 0 de N, el 25 % frente al 30 %. Se
@@ -24,12 +23,12 @@ from dataclasses import dataclass, field
 from itertools import combinations
 
 from ..db import now_iso
-from .analizador import Partido, combinada_segura
+from .analizador import Partido, combinada_segura, menos_aceptable
 from .db import NbaDB
 from .modelo import Evaluacion, Segura, valor
 
 OBJETIVOS = (2.0, 3.0, 5.0, 10.0, 15.0)
-MAX_SELECCIONES = 8
+MAX_SELECCIONES = 5     # con patas del ~70 %, más de 5 casi nunca aciertan todas (30 oct 2026)
 CANDIDATAS_MAX = 18
 
 
@@ -81,21 +80,6 @@ def principales(candidatas: list[tuple[Partido, Evaluacion]], n: int = 4) -> Com
     return Combinada("principales", [_pata_prop(p, e) for p, e in elegidas]) if len(elegidas) >= 2 else None
 
 
-def candidatas_valor(partidos: list[Partido], valor_min: float = 0.02, prob_min: float = 0.55,
-                     min_aciertos: int = 6) -> list[tuple[Partido, Evaluacion]]:
-    """Props donde el modelo ve más probabilidad que la que paga la casa, sin alertas y que la habrían
-    pasado en al menos 6 de sus últimos 10."""
-    out = []
-    for p in partidos:
-        for e in p.evaluaciones:
-            if e.alertas or not e.odd or e.prob < prob_min or e.prob * e.odd - 1 < valor_min:
-                continue
-            if e.acierto_10[1] < 8 or e.acierto_10[0] < min_aciertos:
-                continue
-            out.append((p, e))
-    return sorted(out, key=lambda x: x[1].prob, reverse=True)
-
-
 def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float, tipo: str = "cuota") -> Combinada | None:
     """La combinación de partidos distintos con más probabilidad de acertar todas y cuota >= objetivo."""
     # La mejor candidata de cada partido y, como alternativa, la segunda: así hay donde elegir sin repetir partido.
@@ -121,7 +105,6 @@ def con_cuota(candidatas: list[tuple[Partido, Evaluacion]], objetivo: float, tip
     return Combinada(f"{tipo}_{objetivo:g}", [_pata_prop(p, e) for p, e in mejor[1]])
 
 
-OBJETIVOS_VALOR = (5.0, 10.0, 15.0, 30.0)
 
 RACHA_MIN_PARTIDOS = 3
 RACHA_STATS = ("points", "rebounds", "assists", "threes", "pra", "pr", "pa", "ra")   # las del backtest
@@ -148,7 +131,7 @@ def candidatas_racha(partidos: list[Partido], prob_min: float = 0.52, min_aciert
                 continue
             if e.prob < prob_min or e.acierto_10[0] < min_aciertos or set(e.alertas) & RACHA_DESCARTA:
                 continue
-            if balance(e) < BALANCE_RACHA:
+            if balance(e) < BALANCE_RACHA or not menos_aceptable(e):
                 continue
             out.append((p, e))
     return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)
@@ -171,11 +154,8 @@ def de_rachas(candidatas: list[tuple[Partido, Evaluacion]], n: int, por_partido:
 
 
 def del_dia(partidos: list[Partido], candidatas: list[tuple[Partido, Evaluacion]]) -> list[Combinada]:
-    """Seguras (las más probables) y de valor (cuota mejor que su riesgo): se registran las dos para
-    comparar con resultados reales cuál conviene jugar."""
-    valor = candidatas_valor(partidos)
+    """Seguras (las más probables), con cuota objetivo y de rachas, todas con las patas más probables."""
     out = [alternas(partidos), principales(candidatas)] + [con_cuota(candidatas, o) for o in OBJETIVOS]
-    out += [con_cuota(valor, o, "valor") for o in OBJETIVOS_VALOR]
     rachas = candidatas_racha(partidos)
     out += [de_rachas(rachas, 4), de_rachas(rachas, 8)]
     return [c for c in out if c]
