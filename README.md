@@ -460,6 +460,12 @@ python -m apuestas nba backtest --desde 2026-02-01 --hasta 2026-03-31
   ±30 % con menos de 10 partidos), la línea de la casa pesa más (60 %): conoce el rol nuevo.
 - **Bajas**: si un compañero importante está fuera, compara al jugador con y sin él (minutos y tasas).
   Si ese compañero ya faltaba en los últimos partidos, la baja ya está en sus minutos y no se suma.
+- **Jugada a jugada** (`apuestas/nba/jugadas.py`): con la jugada a jugada de ESPN se sabe quién está en cancha
+  en cada momento (error medio de 0.25 minutos frente al box oficial). De ahí salen las oportunidades de rebote
+  reales (tiros fallados con él en pista, y cuántas convierte) y los puntos al contraataque (7 s tras robo o rebote
+  defensivo, ajustados a los "fast break points" oficiales). Los rebotes usan esas oportunidades; los puntos se
+  ajustan por el contraataque que concede el rival según cuánto corre el jugador (2025-26: rival que no deja correr,
+  -10 % para los que corren y -4 % para el resto; rival que deja correr, +4 % solo para los que corren).
 - **Estrella ausente**: si falta el que más jugadas usa de su equipo (28+ min, 20+ jugadas de tiro por 36'),
   sus compañeros suben por minuto +7.5 % en puntos, +4 % en triples, +6 % en asistencias y +2 % en rebotes sobre
   su ritmo normal, corregido con sus propios partidos sin la estrella, aunque ya llevara varios partidos fuera
