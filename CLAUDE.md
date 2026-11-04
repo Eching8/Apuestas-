@@ -47,7 +47,10 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
    prometido, y aun así perdieron las dos combinadas).
 
 Antes de recomendar, revisar lesiones del día y el parte (ESPN) y decir la probabilidad conjunta y la cuota
-justa. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+justa. **Cada pata se presenta con sus argumentos concretos** (`modelo.argumentos`, "En corto" en el informe; lo
+pidió el 4 nov 2026 con el ejemplo de un analista): cuántas veces la pasó esta temporada y por qué falló las que
+falló, con minutos normales, contra las mejores defensas, el puesto del rival (#N de 30) concediendo esa
+estadística a su posición y en su zona de tiro, las oportunidades (tiros, rebotes disponibles) y las bajas. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las

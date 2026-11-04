@@ -62,7 +62,8 @@ def _pata_prop(p: Partido, e: Evaluacion) -> dict:
             "stat": e.stat, "line": e.line, "side": e.lado, "prob": e.prob, "odd": e.odd,
             "defensa": e.defensa, "acierto_10": list(e.acierto_10), "acierto_temporada": list(e.acierto_temporada),
             "a_favor": sum(r.startswith("✅") for r in getattr(e, "razones", [])),
-            "en_contra": sum(r.startswith("❌") for r in getattr(e, "razones", []))}
+            "en_contra": sum(r.startswith("❌") for r in getattr(e, "razones", [])),
+            "argumentos": list(getattr(e, "argumentos", []))}
 
 
 def _pata_segura(p: Partido, s: Segura) -> dict:

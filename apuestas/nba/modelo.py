@@ -29,6 +29,7 @@ from ..model import negbin_pmf
 from .desglose import Motor, motores, promedios_equipo, tabla_metricas, tasas_liga, totales_por_partido
 from . import marcajes
 from .espn import grupo_posicion
+from .zonas import NOMBRES as NOMBRE_ZONA
 from .zonas import VALOR, ZONAS
 
 COMPONENTES = {
@@ -338,6 +339,7 @@ class Jugador:
     cambio_rol: dict[str, float] = field(default_factory=dict)   # stat básica -> tasa actual / anterior
     factor_paliza: float = 1.0               # minutos por partido desigual (ver PALIZA)
     bajas_rival: list[str] = field(default_factory=list)   # titulares del rival que no juegan
+    bajas_rival_ids: list[str] = field(default_factory=list)
     sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
 
     @property
@@ -565,6 +567,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         rec = ctx.por_jugador.get(pid, [])[:10]
         if rec and rec[0]["fecha"] >= hace_10 and sum(p["minutes"] for p in rec) / len(rec) >= TITULAR_MIN:
             j.bajas_rival.append(rec[0]["name"])
+            j.bajas_rival_ids.append(pid)
     return j
 
 
@@ -698,6 +701,7 @@ class Evaluacion:
     alertas: list = field(default_factory=list)       # motivos para no tomarla como pick "seguro"
     defensa: str = ""                                 # cómo defiende el rival esta estadística, en una línea
     razones: list = field(default_factory=list)       # el razonamiento completo, factor por factor
+    argumentos: list = field(default_factory=list)    # lo esencial en 4-7 datos concretos (ver argumentos())
 
 
 def _aciertos(partidos: list[dict], stat: str, line: float, lado: str) -> tuple[int, int]:
@@ -798,6 +802,131 @@ def razones(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: 
                    f"{'es' if len(j.bajas_rival) > 1 else ''}); +{efecto * 100:.1f}% en esta estadística.")
     for n_ in j.notas:
         out.append(f"⚠️ {n_}.")
+    return out
+
+
+# --- Argumentos: el pick explicado en pocos datos concretos -------------------------------
+# Al estilo de un analista: cuántas veces la pasó y por qué falló las que falló, con minutos normales, contra
+# defensas buenas, en qué puesto (de 30) está el rival concediendo esa estadística a su posición y en su zona de
+# tiro, cuántas oportunidades tiene (tiros, rebotes disponibles, canastas de compañeros) y las bajas que cambian
+# el partido. Lo pidió el usuario el 4 nov 2026.
+
+_ORDINAL_STAT = {"pts": "puntos", "reb": "rebotes", "ast": "asistencias", "tpm": "triples", "stl": "robos",
+                 "blk": "tapones", "tov": "pérdidas", "fgm": "tiros de campo", "ftm": "tiros libres", "fta": "libres"}
+
+
+def _puntos_equipo(t: dict) -> float:
+    return 2 * t.get("fgm", 0) + t.get("tpm", 0) + t.get("ftm", 0)
+
+
+def _margen_partido(ctx: Contexto, p: dict) -> float | None:
+    mio, suyo = ctx.equipo_partido.get((p["game_id"], p["team_id"])), ctx.equipo_partido.get((p["game_id"], p["opp_id"]))
+    if not mio or not suyo:
+        return None
+    return _puntos_equipo(mio) - _puntos_equipo(suyo)
+
+
+def _equipos_temporada(ctx: Contexto) -> set[str]:
+    """Los 30 equipos de esta temporada (fuera las selecciones del All-Star y similares). Se calcula una vez."""
+    if getattr(ctx, "_equipos", None) is None:
+        ctx._equipos = {p["team_id"] for p in ctx.filas if p.get("season") == ctx.temporada and p.get("minutes")}
+    return ctx._equipos
+
+
+def _puesto(valores: dict[str, float], equipo: str) -> int | None:
+    """Puesto de 1 a N del equipo, 1 = el que más concede."""
+    if equipo not in valores:
+        return None
+    orden = sorted(valores, key=lambda t: -valores[t])
+    return orden.index(equipo) + 1
+
+
+def _motivo_fallo(ctx: Contexto, j: Jugador, p: dict) -> str | None:
+    if p["minutes"] < j.minutos - 6:
+        return f"jugó {p['minutes']:.0f} min"
+    if p.get("pf", 0) >= 5:
+        return f"{p['pf']} faltas"
+    m = _margen_partido(ctx, p)
+    if m is not None and abs(m) >= 20:
+        return f"paliza de {abs(m):.0f}"
+    return None
+
+
+def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: Prediccion) -> list[str]:
+    out = []
+    pasa = (lambda v: v > line) if lado == "más" else (lambda v: v < line)
+    temp = [p for p in j.partidos if p["season"] == ctx.temporada]
+    # 1. Esta temporada, y por qué falló las que falló.
+    if temp:
+        fallos = [p for p in temp if not pasa(valor(p, stat))]
+        texto = f"La pasó en {len(temp) - len(fallos)} de {len(temp)} esta temporada"
+        motivos = [_motivo_fallo(ctx, j, p) for p in fallos]
+        if fallos and all(motivos):
+            texto += f"; los fallos, en partidos raros ({', '.join(motivos)})"
+        elif fallos:
+            texto += f" (falló con {', '.join(f'{valor(p, stat):g}' for p in fallos[:4])})"
+        out.append(texto)
+    # 2. Con sus minutos normales.
+    normales = [p for p in j.partidos[:15] if p["minutes"] >= j.minutos - 4]
+    if 3 <= len(normales) < len(j.partidos[:15]):
+        h = sum(pasa(valor(p, stat)) for p in normales)
+        out.append(f"Con {j.minutos - 4:.0f}+ minutos (hoy se esperan {j.minutos:.0f}): {h} de {len(normales)} "
+                   "en sus últimos 15")
+    c = COMPONENTES[stat][0]
+    # 3. Contra defensas fuertes en esa estadística (el tercio que menos concede, ~top 10).
+    niveles = ctx.nivel.get(j.grupo, {}).get(c, {})
+    fuertes = [p for p in j.partidos[:40] if niveles.get(p["opp_id"]) == "fuerte"]
+    if len(fuertes) >= 3:
+        h = sum(pasa(valor(p, stat)) for p in fuertes)
+        out.append(f"Contra las ~10 mejores defensas en {_ORDINAL_STAT.get(c, c)} a {GRUPOS_TEXTO[j.grupo]}: "
+                   f"{h} de {len(fuertes)} (últimos 40 partidos)")
+    # 4. Puesto del rival concediendo esa estadística a su posición.
+    equipos = _equipos_temporada(ctx)
+    concede = {t: d.get(j.grupo, {}).get(c) for t, d in ctx.defensa.items()
+               if t in equipos and d.get(j.grupo, {}).get(c)}
+    puesto = _puesto(concede, j.opp_id)
+    if puesto:
+        out.append(f"El rival es #{puesto} de {len(concede)} en {_ORDINAL_STAT.get(c, c)} que concede a "
+                   f"{GRUPOS_TEXTO[j.grupo]} por minuto (#1 = el que más concede; "
+                   f"{(concede[j.opp_id] - 1) * 100:+.0f}% frente a la media)")
+    # 5. Su zona de tiro principal contra lo que concede el rival ahí.
+    if c in ("pts", "tpm") and j.zonas:
+        zonas = {z: d for z, d in j.zonas.items() if c == "pts" or VALOR[z] == 3}
+        z, d = max(zonas.items(), key=lambda kv: kv[1]["reparto"])
+        rival_z = {t: v[z][0] for t, v in ctx.zona_rival.items() if z in v and t in equipos}
+        pz = _puesto(rival_z, j.opp_id)
+        if pz:
+            out.append(f"Su zona principal es {NOMBRE_ZONA[z]} ({d['reparto'] * 100:.0f}% de sus tiros, "
+                       f"{d['pct'] * 100:.0f}% de acierto); el rival es #{pz} de {len(rival_z)} en acierto que deja "
+                       f"ahí ({d['pct_rival'] * 100:.0f}%, liga {d['pct_liga'] * 100:.0f}%)")
+    # 6. Oportunidades: de dónde sale el número.
+    comp = pred.componentes.get(c, {})
+    datos = comp.get("datos", {})
+    if c == "reb" and datos:
+        out.append(f"Oportunidades: se esperan {datos['fallos_rival']:.0f} tiros fallados del rival y captura el "
+                   f"{datos['pct_dreb'] * 100:.0f}% de los que caen con él en pista (+ {datos['oreb']:.1f} ofensivos)")
+    elif c == "pts" and datos:
+        out.append(f"Oportunidades: {datos['fga']:.1f} tiros de campo y {datos['fta']:.1f} libres esperados "
+                   f"({datos['pts_por_tiro']:.2f} puntos por tiro)")
+    elif c == "tpm" and datos:
+        out.append(f"Oportunidades: {datos['tpa']:.1f} triples intentados esperados al {datos['tp_pct'] * 100:.0f}%")
+    elif c == "ast" and datos:
+        out.append(f"Oportunidades: asiste el {datos['pct_ast'] * 100:.0f}% de las canastas de sus compañeros con él "
+                   "en pista")
+    # 7. Bajas que cambian el partido.
+    if j.bajas_rival_ids:
+        partes = []
+        for pid, nombre in zip(j.bajas_rival_ids, j.bajas_rival):
+            rec = ctx.por_jugador.get(pid, [])[:10]
+            if rec:
+                media = sum(valor(p, stat) for p in rec) / len(rec)
+                partes.append(f"{nombre} ({media:.1f} {NOMBRES[stat]} por partido)")
+        if partes:
+            out.append("El rival no tiene a " + ", ".join(partes))
+    if j.sin_estrella and set(COMPONENTES[stat]) & SUBEN_SIN_ESTRELLA:
+        out.append(f"Su equipo no tiene a {', '.join(j.sin_estrella)}: más tiros y balón para él")
+    out.append(f"Minutos: {j.minutos:.0f} esperados ({'titular' if es_titular(j) else 'suplente'}, "
+               f"±{j.minutos_sd:.0f})")
     return out
 
 
@@ -937,6 +1066,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         + (["menos de una estrella al inicio de temporada"]
            if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),
+        argumentos(ctx, j, stat, line, lado, pred) if detalle else [],
     )
 
 

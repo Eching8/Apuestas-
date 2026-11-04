@@ -65,6 +65,8 @@ def _metrica(v: float | None, tipo: str) -> str:
 def por_que(e: Evaluacion) -> list[str]:
     """De dónde sale la media de la prop y las estadísticas relacionadas en que se basa."""
     out = [f"**¿Por qué {e.mu:.1f} {NOMBRES[e.stat]}?** (línea {e.line:g}; {e.factores['minutos']:.1f} minutos esperados)", ""]
+    if getattr(e, "argumentos", None):
+        out += ["En corto:", ""] + [f"- {a}" for a in e.argumentos] + [""]
     if e.razones:
         a_favor = sum(r.startswith("✅") for r in e.razones)
         en_contra = sum(r.startswith("❌") for r in e.razones)
@@ -216,6 +218,9 @@ def seccion_combinada_segura(candidatas: list[tuple[Partido, Evaluacion]], parti
         cuota *= e.odd
         if k >= 2:
             out.append(f"| {k} | **{_pct(prob)}** | {cuota:.2f} |")
+    for p, e in combi:
+        if e.argumentos:
+            out += ["", f"**{etiqueta(e)}** ({_pct(e.prob)}):", ""] + [f"- {a}" for a in e.argumentos]
     out += ["", "### Las más seguras con cuota", "", "| Partido " + CABECERA, "|---" + SEPARADOR]
     out += [_fila(e, p.titulo) for p, e in candidatas[:12]] + [""]
     return out
@@ -313,7 +318,8 @@ def seccion_cuotadas(combis: list) -> list[str]:
         out += [f"- {x['nombre']}: {x['side']} de {x['line']:g} {NOMBRES[x['stat']]} ({_pct(x['prob'])}, cuota "
                 f"{x['odd']:.2f}) — {x['partido']}"
                 + (f" — {x['a_favor']} factores a favor, {x['en_contra']} en contra" if "a_favor" in x else "")
-                + (f"\n  - {x['defensa']}" if x.get("defensa") else "")
+                + ("".join(f"\n  - {a}" for a in x["argumentos"]) if x.get("argumentos")
+                   else f"\n  - {x['defensa']}" if x.get("defensa") else "")
                 for x in c.patas] + [""]
     return out
 
