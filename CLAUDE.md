@@ -50,7 +50,11 @@ Antes de recomendar, revisar lesiones del día y el parte (ESPN) y decir la prob
 justa. **Cada pata se presenta con sus argumentos concretos** (`modelo.argumentos`, "En corto" en el informe; lo
 pidió el 4 nov 2026 con el ejemplo de un analista): cuántas veces la pasó esta temporada y por qué falló las que
 falló, con minutos normales, contra las mejores defensas, el puesto del rival (#N de 30) concediendo esa
-estadística a su posición y en su zona de tiro, las oportunidades (tiros, rebotes disponibles) y las bajas. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+estadística a su posición y en su zona de tiro, las oportunidades (tiros, rebotes disponibles) y las bajas.
+Los datos de pbpstats.com (`nba/pbpstats.py`: % de rebotes disponibles que se queda, transición tras robos) se bajan
+cada día; stats.nba.com no responde desde la nube. **Un "menos" que el jugador ya falló esta temporada en partidos
+normales** (30 %+ de sus partidos, sin pocos minutos, faltas ni paliza) lleva la alerta "falla en partidos normales"
+y no entra (backtest 2025-26: 63.8 % frente a 66 % prometido; PRA 59.8 %). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las

@@ -27,6 +27,7 @@ from .enfrentamientos import descargar_avanzadas, descargar_temporada
 from .espn import Espn
 from .informe import escribir, etiqueta
 from .modelo import NOMBRES, construir_contexto
+from . import pbpstats
 from .nbastats import TIPOS, NbaStats, temporada_nba
 from .recolector import descargar_alturas, descargar_dia, descargar_rango
 from .sgo import SportsGameOdds, ventana_dia
@@ -104,6 +105,10 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
         combinadas.liquidar(nba)
         n = descargar_dia(espn, nba, fecha, lesiones=True)
         print(f"{descargar_alturas(espn, nba)} jugadores con estatura (plantillas de ESPN).")
+        temporada = nba.conn.execute("SELECT MAX(season) FROM nba_games WHERE season_type = 2").fetchone()[0]
+        if temporada:
+            print(f"pbpstats: {pbpstats.descargar(nba.conn, temporada)} de {len(pbpstats.CONSULTAS)} consultas "
+                  "(rebotes disponibles y transición).")
         print(f"{n['partidos']} partidos el {fecha}; {n['lesiones']} jugadores en el parte de lesiones.")
         ventana = ventana_dia(fecha, cfg.zona_horaria)
         try:

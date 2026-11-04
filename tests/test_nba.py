@@ -459,6 +459,47 @@ class ArgumentosTest(unittest.TestCase):
             self.assertEqual(evaluar(ctx, j, "points", 20.5, detalle=False).argumentos, [])
 
 
+class PbpStatsTest(unittest.TestCase):
+    def test_descargar_y_cargar(self):
+        from apuestas.nba import pbpstats
+
+        class Resp:
+            def __init__(self, filas):
+                self.filas = filas
+
+            def raise_for_status(self):
+                pass
+
+            def json(self):
+                return {"multi_row_table_data": self.filas}
+
+        class Sesion:
+            def get(self, url, params=None, headers=None, timeout=None):
+                if params["Type"] == "Player":
+                    return Resp([{"Name": "Ángel Pérez Jr.", "GamesPlayed": 4, "Points": 8,
+                                  "DefFGReboundPct": 0.2, "OffFGReboundPct": 0.05}])
+                return Resp([{"Name": "NYK", "GamesPlayed": 5, "Points": 60}, {"Name": "BOS", "Points": 40}])
+
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            self.assertEqual(pbpstats.descargar(db.conn, 2027, Sesion(), pausa=0), len(pbpstats.CONSULTAS))
+            datos = pbpstats.cargar(db.conn, 2027)
+            self.assertIn("ANGEL_PEREZ_JR", datos["jugadores"])
+            self.assertIn("NY", datos["equipos"])                         # siglas de ESPN
+            self.assertEqual(pbpstats.por_partido(datos["equipos"]["NY"], "Points"), 12)
+            self.assertEqual(pbpstats.cargar(db.conn, 2026), {})
+
+    def test_falla_en_partidos_normales(self):
+        from apuestas.nba.modelo import _falla_en_normales
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "a1", "1", "2")
+            self.assertTrue(_falla_en_normales(ctx, j, "points", 20.5)[0].startswith("falla en partidos normales"))
+            self.assertEqual(_falla_en_normales(ctx, j, "points", 60.5), [])
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
