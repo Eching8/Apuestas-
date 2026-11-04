@@ -443,6 +443,22 @@ class EstrellaAusenteTest(unittest.TestCase):
             self.assertEqual(preparar_jugador(ctx, "p12", "p12", "1", "2", ausentes=[("p11", "p11")]).sin_estrella, [])
 
 
+class ArgumentosTest(unittest.TestCase):
+    def test_argumentos_del_pick(self):
+        from apuestas.nba.modelo import evaluar
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            j = preparar_jugador(ctx, "a1", "a1", "1", "2", fuera_rival=["p20"])
+            args = evaluar(ctx, j, "points", 20.5).argumentos
+            self.assertTrue(args[0].startswith("La pasó en "))
+            self.assertTrue(any(a.startswith("El rival es #") and "de 4 en puntos" in a for a in args))
+            self.assertTrue(any(a.startswith("El rival no tiene a Jugador 20") for a in args))
+            self.assertTrue(args[-1].startswith("Minutos: "))
+            self.assertEqual(evaluar(ctx, j, "points", 20.5, detalle=False).argumentos, [])
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
