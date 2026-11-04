@@ -377,6 +377,8 @@ class Jugador:
     bajas_rival: list[str] = field(default_factory=list)   # titulares del rival que no juegan
     bajas_rival_ids: list[str] = field(default_factory=list)
     sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
+    factor_transicion: float = 1.0           # puntos según el contraataque que concede el rival (ver TRANSICION)
+    transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
     @property
     def n(self) -> int:
@@ -411,6 +413,18 @@ K_ESTRELLA = 8          # partidos "virtuales" del efecto medio que se suman a l
 ESTRELLA_TOPE = (0.85, 1.40)
 NOMBRE_CORTO = {"pts": "puntos", "ast": "asistencias", "tpm": "triples"}
 SUBEN_SIN_ESTRELLA = {"pts", "fgm", "tpm", "ftm", "ast"}   # un "menos" de estas no entra en combinadas
+
+# Transición (jugadas.py): puntos al contraataque que concede el rival frente a la media de la liga, encogido con
+# sus partidos (K_TRANSICION). Backtest 2025-26 (4.949 titulares, puntos): frente a rivales que conceden 12 %+
+# más, los que sacan 15 %+ de sus puntos al contraataque anotaron un 4 % más de lo previsto; frente a los que
+# conceden 12 %+ menos, un 10 % menos (los que no corren, -4 %). Los "menos" de puntos del 60 %+ contra rivales
+# que conceden mucho acertaron 58.9 % prometiendo 66.3 % (n = 180).
+TRANSICION_PENDIENTE = 1.75     # rival que concede poco: pendiente × % de sus puntos al contraataque × (concede − 1)
+TRANSICION_PENDIENTE_ALTA = 2.9  # rival que concede mucho: solo lo que corra por encima de TRANSICION_CORRE
+TRANSICION_CORRE = 0.08
+TRANSICION_TOPE = 0.08
+K_TRANSICION = 10
+TRANSICION_ALTA = 1.12
 
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
@@ -488,6 +502,27 @@ def _bajas(ctx: Contexto, j: Jugador, ausentes: list[tuple[str, str]]) -> float:
                        + (f"; {', '.join(cambios)}" if cambios else ""))
     # Varias bajas del mismo puesto no se suman sin límite: los minutos se reparten entre varios.
     return min(6.0, delta_total)
+
+
+def _transicion(ctx: Contexto, j: Jugador) -> None:
+    concede = _por_equipo_temporada(ctx, "trans_pts", propio=False)
+    n = _por_equipo_temporada(ctx, "trans_pts", propio=False, contar=True).get(j.opp_id, 0)
+    if j.opp_id not in concede or len(concede) < 20:
+        return
+    liga = sum(concede.values()) / len(concede)
+    rel = 1 + (concede[j.opp_id] / liga - 1) * n / (n + K_TRANSICION)
+    j.transicion_rival = rel
+    prev = [p for p in j.partidos[:10] if p.get("trans_pts") is not None]
+    puntos = sum(p["pts"] for p in prev)
+    if len(prev) < 3 or not puntos:
+        return
+    corre = sum(p["trans_pts"] for p in prev) / puntos
+    if rel < 1:   # un rival que no deja correr le quita a todos, más a los que corren
+        efecto = TRANSICION_PENDIENTE * corre * (rel - 1)
+    else:         # uno que deja correr solo ayuda a los que corren
+        efecto = TRANSICION_PENDIENTE_ALTA * max(0.0, corre - TRANSICION_CORRE) * (rel - 1)
+    efecto = max(-TRANSICION_TOPE, min(TRANSICION_TOPE, efecto))
+    j.factor_transicion = 1 + efecto
 
 
 def _es_estrella(recientes: list[dict]) -> bool:
@@ -594,6 +629,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
             j.notas.append(f"partido desigual ({'favorito' if margen > 0 else 'no favorito'} por {abs(margen):.1f}): "
                            f"{'los titulares' if j.factor_paliza < 1 else 'los suplentes'} suelen jugar "
                            f"{(j.factor_paliza - 1) * 100:+.0f}% de minutos si se rompe")
+    _transicion(ctx, j)
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
@@ -684,6 +720,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
             componentes[c]["altura"] = ajuste
         if j.bajas_rival and c in BAJAS_RIVAL:
             mu_final *= 1 + BAJAS_RIVAL[c] * min(len(j.bajas_rival), BAJAS_RIVAL_MAX)
+            componentes[c]["final"] = mu_final
+        if j.factor_transicion != 1.0 and c in ("pts", "fgm"):
+            mu_final *= j.factor_transicion
             componentes[c]["final"] = mu_final
         if j.enfrentamiento and c in ("pts", "fgm", "tpm"):
             mu_final *= j.enfrentamiento.factor
@@ -906,13 +945,13 @@ def _falla_en_normales(ctx: Contexto, j: Jugador, stat: str, line: float) -> lis
     return [f"falla en partidos normales ({len(malos)} de {len(temp)} esta temporada)"]
 
 
-def _por_equipo_temporada(ctx: Contexto, campo: str, propio: bool) -> dict[str, float]:
+def _por_equipo_temporada(ctx: Contexto, campo: str, propio: bool, contar: bool = False) -> dict[str, float]:
     """Media por partido de esta temporada de un total de equipo de la jugada a jugada: el suyo (propio) o el del
     rival en sus partidos (lo que concede). Se calcula una vez por contexto."""
     cache = getattr(ctx, "_por_equipo", None)
     if cache is None:
         cache = ctx._por_equipo = {}
-    clave = (campo, propio)
+    clave = (campo, propio, contar)
     if clave not in cache:
         temporada = {f["game_id"] for f in ctx.filas if f.get("season") == ctx.temporada}
         por_partido: dict[str, list] = defaultdict(list)
@@ -927,7 +966,8 @@ def _por_equipo_temporada(ctx: Contexto, campo: str, propio: bool) -> dict[str, 
             acc[a["team_id"]].append((a if propio else b)[campo])
             acc[b["team_id"]].append((b if propio else a)[campo])
         equipos = _equipos_temporada(ctx)
-        cache[clave] = {t: sum(v) / len(v) for t, v in acc.items() if len(v) >= 2 and t in equipos}
+        cache[clave] = {t: (len(v) if contar else sum(v) / len(v)) for t, v in acc.items()
+                        if len(v) >= 2 and t in equipos}
     return cache[clave]
 
 
@@ -1016,6 +1056,8 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
             con_tr = [p for p in j.partidos[:10] if p.get("trans_pts") is not None and p.get("dreb_op") is not None]
             if len(con_tr) >= 3:
                 texto += f"; él anota {sum(p['trans_pts'] for p in con_tr) / len(con_tr):.1f} así por partido"
+            if j.factor_transicion != 1.0:
+                texto += f" (ajuste aplicado {(j.factor_transicion - 1) * 100:+.1f}%)"
             out.append(texto)
             linea_tr = True
     # 6b. pbpstats (respaldo si no hay jugada a jugada): rebotes disponibles que se queda y transición.
@@ -1189,7 +1231,9 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
            if lado == "menos" and j.sin_estrella and set(COMPONENTES[stat]) & SUBEN_SIN_ESTRELLA else [])
         + (["menos de una estrella al inicio de temporada"]
            if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else [])
-        + (_falla_en_normales(ctx, j, stat, line) if lado == "menos" else []),
+        + (_falla_en_normales(ctx, j, stat, line) if lado == "menos" else [])
+        + (["el rival concede mucho contraataque"] if lado == "menos" and "pts" in COMPONENTES[stat]
+           and (j.transicion_rival or 1) >= TRANSICION_ALTA else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),
         argumentos(ctx, j, stat, line, lado, pred) if detalle else [],
     )

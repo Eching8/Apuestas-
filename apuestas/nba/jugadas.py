@@ -9,7 +9,8 @@ ESPN no da estos datos hechos (stats.nba.com sí, pero no responde desde la nube
   oportunidad defensiva y los cinco que atacan, una ofensiva (los libres fallados no cuentan, como en el modelo).
   Con los rebotes de cada jugador sale qué % de sus oportunidades convierte.
 - Transición: puntos en los TRANSICION_SEG segundos siguientes a un robo o a un rebote defensivo de su equipo
-  (contraataque), por jugador y por equipo; lo que concede un equipo es la transición del rival.
+  (contraataque), por jugador y por equipo, ajustados a los "fast break points" oficiales del box cuando están;
+  lo que concede un equipo es la transición del rival.
 
 Una fila por jugador y partido en nba_jugadas, y una por equipo (player_id = "equipo:<id>") con los totales.
 """
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS nba_jugadas (
     oreb_op INTEGER,
     dreb INTEGER,
     oreb INTEGER,
-    trans_pts INTEGER,
+    trans_pts REAL,
     trans_fga INTEGER,
     PRIMARY KEY (game_id, player_id)
 );
@@ -41,13 +42,16 @@ CREATE TABLE IF NOT EXISTS nba_jugadas (
 
 def _segundos(clock: dict | None) -> float:
     v = (clock or {}).get("displayValue", "0") or "0"
-    if ":" in v:
-        m, s = v.split(":", 1)
-        return int(m) * 60 + float(s)
     try:
-        return float(v)
+        partes = [float(x) for x in v.split(":")]
     except ValueError:
         return 0.0
+    if len(partes) == 3 and partes[0] < 12 and partes[2] == 0:   # "1:39:00" = 1:39
+        partes = partes[:2]
+    total = 0.0
+    for x in partes:
+        total = total * 60 + x
+    return total
 
 
 def _duracion(periodo: int) -> float:
@@ -92,6 +96,8 @@ def parse_jugadas(summary: dict) -> list[dict]:
         titulares[tid] = []
         for g in t.get("statistics", []):
             for a in g.get("athletes", []):
+                if not a.get("athlete", {}).get("id"):
+                    continue   # ESPN a veces manda una ficha vacía
                 pid = str(a["athlete"]["id"])
                 equipo_de[pid] = tid
                 if a.get("starter"):
@@ -182,6 +188,25 @@ def parse_jugadas(summary: dict) -> list[dict]:
                 ladron = equipo_de.get(ids[1])
                 if ladron in rival:
                     ventana[ladron] = t
+    # La cuenta de 7 s sigue a los "fast break points" oficiales (correlación 0.84) pero da más puntos según la
+    # temporada (2025-26: 22.6 frente a 15.9). Si el box trae la cifra oficial, se usa para el equipo y se reparte
+    # entre sus jugadores en proporción a lo que anotó cada uno en esos 7 s.
+    for t in summary.get("boxscore", {}).get("teams", []):
+        tid = str(t.get("team", {}).get("id", ""))
+        oficial = next((x.get("displayValue") for x in t.get("statistics", []) if x.get("name") == "fastBreakPoints"),
+                       None)
+        eq = filas.get(f"equipo:{tid}")
+        if eq is None or oficial in (None, "", "-"):
+            continue
+        try:
+            oficial = float(oficial)
+        except ValueError:
+            continue
+        propio = eq["trans_pts"]
+        eq["trans_pts"] = oficial
+        for f in filas.values():
+            if f["team_id"] == tid and not f["player_id"].startswith("equipo:"):
+                f["trans_pts"] = f["trans_pts"] * oficial / propio if propio else 0.0
     return [f for f in filas.values() if f["team_id"]]
 
 

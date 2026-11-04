@@ -54,7 +54,12 @@ estadística a su posición y en su zona de tiro, las oportunidades (tiros, rebo
 Los datos de pbpstats.com (`nba/pbpstats.py`: % de rebotes disponibles que se queda, transición tras robos) se bajan
 cada día; stats.nba.com no responde desde la nube. **Un "menos" que el jugador ya falló esta temporada en partidos
 normales** (30 %+ de sus partidos, sin pocos minutos, faltas ni paliza) lleva la alerta "falla en partidos normales"
-y no entra (backtest 2025-26: 63.8 % frente a 66 % prometido; PRA 59.8 %). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+y no entra (backtest 2025-26: 63.8 % frente a 66 % prometido; PRA 59.8 %). **Jugada a jugada de ESPN**
+(`nba/jugadas.py`, `nba jugadas`): oportunidades de rebote reales con el jugador en pista y puntos al contraataque
+por jugador y partido (equipos ajustados a los "fast break points" oficiales). Los puntos se ajustan por el
+contraataque que concede el rival (`modelo.TRANSICION_*`), y un "menos" de puntos contra un rival que concede 12 %+
+más contraataque que la media lleva la alerta "el rival concede mucho contraataque" y no entra (2025-26: 58.9 %
+frente a 66.3 % prometido). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
