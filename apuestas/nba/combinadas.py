@@ -112,6 +112,7 @@ RACHA_STATS = ("points", "rebounds", "assists", "threes", "pra", "pr", "pa", "ra
 # "cambio de rol" y "traspaso reciente" no descartan: a menudo son justo la causa de la racha.
 RACHA_DESCARTA = {"suplente", "minutos inestables", "en el parte de lesiones", "muy lejos de la casa",
                   "menos de una estrella al inicio de temporada", "vetada por el usuario"}
+RACHA_DESCARTA_PREFIJOS = ("falla en partidos normales", "sin ")
 BALANCE_RACHA = 3
 
 
@@ -130,7 +131,8 @@ def candidatas_racha(partidos: list[Partido], prob_min: float = 0.52, min_aciert
             hits, n = e.acierto_temporada
             if n < RACHA_MIN_PARTIDOS or hits < n or e.stat not in RACHA_STATS or not e.odd:
                 continue
-            if e.prob < prob_min or e.acierto_10[0] < min_aciertos or set(e.alertas) & RACHA_DESCARTA:
+            if (e.prob < prob_min or e.acierto_10[0] < min_aciertos or set(e.alertas) & RACHA_DESCARTA
+                    or any(a.startswith(RACHA_DESCARTA_PREFIJOS) for a in e.alertas)):
                 continue
             if balance(e) < BALANCE_RACHA or not menos_aceptable(e):
                 continue

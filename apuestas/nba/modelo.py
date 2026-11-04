@@ -29,6 +29,8 @@ from ..model import negbin_pmf
 from .desglose import Motor, motores, promedios_equipo, tabla_metricas, tasas_liga, totales_por_partido
 from . import marcajes
 from .espn import grupo_posicion
+from . import pbpstats
+from .sgo import clave_nombre
 from .zonas import NOMBRES as NOMBRE_ZONA
 from .zonas import VALOR, ZONAS
 
@@ -149,6 +151,8 @@ class Contexto:
     altura: dict = field(default_factory=dict)          # jugador -> estatura (pulgadas)
     altura_rival: dict = field(default_factory=dict)    # equipo -> grupo -> estatura media por minutos
     margen: dict = field(default_factory=dict)          # equipo -> por cuánto se espera que gane hoy (± puntos)
+    pbp: dict = field(default_factory=dict)             # pbpstats.com (pbpstats.cargar), si se bajó
+    siglas: dict = field(default_factory=dict)          # equipo -> siglas de ESPN
 
 
 def _peso_temporada(season: int, actual: int) -> float:
@@ -271,10 +275,16 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
     equipo_partido = totales_por_partido(filas)
     equipo_prom, liga_equipo = promedios_equipo(equipo_partido, temporada_de, temporada, PESO_TEMPORADA_ANTERIOR)
     liga_motor = tasas_liga(filas, grupo, equipo_partido, temporada, PESO_TEMPORADA_ANTERIOR)
-    return Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
-                    zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor,
-                    marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo),
-                    _margenes(conn, fecha, temporada))
+    ctx = Contexto(fecha, temporada, filas, por_jugador, grupo, liga, defensa, nivel, zona_liga, zona_rival,
+                   zona_jugador, ritmo, ritmo_liga, ultimo, equipo_partido, equipo_prom, liga_equipo, liga_motor,
+                   marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo),
+                   _margenes(conn, fecha, temporada))
+    ctx.pbp = pbpstats.cargar(conn, temporada)
+    try:
+        ctx.siglas = {r[0]: r[1] for r in conn.execute("SELECT id, abbr FROM nba_teams")}
+    except Exception:
+        ctx.siglas = {}
+    return ctx
 
 
 # Partido desigual. Sin hándicap de la casa se estima con la diferencia media de puntos de cada equipo (temporada
@@ -852,6 +862,24 @@ def _motivo_fallo(ctx: Contexto, j: Jugador, p: dict) -> str | None:
     return None
 
 
+# "Menos" que el jugador ya falló esta temporada en partidos normales (sin pocos minutos, 5+ faltas ni paliza).
+# Backtest 2025-26 (titulares, picks del 62 %+): con 30 %+ de sus partidos así, acertaron 63.8 % prometiendo 66.0 %
+# (n = 1.579; PRA 59.8 % frente a 66.1 %, asistencias 60.9 % frente a 66.8 %); con 40 %+, 60.5 % frente a 65.8 %.
+# El resto de "menos" acertó lo prometido o más. En los "más" no se ve el efecto.
+FALLOS_NORMALES_MAX = 0.3
+FALLOS_NORMALES_MIN_PARTIDOS = 5
+
+
+def _falla_en_normales(ctx: Contexto, j: Jugador, stat: str, line: float) -> list[str]:
+    temp = [p for p in j.partidos if p["season"] == ctx.temporada]
+    if len(temp) < FALLOS_NORMALES_MIN_PARTIDOS:
+        return []
+    malos = [p for p in temp if valor(p, stat) >= line and not _motivo_fallo(ctx, j, p)]
+    if len(malos) / len(temp) < FALLOS_NORMALES_MAX:
+        return []
+    return [f"falla en partidos normales ({len(malos)} de {len(temp)} esta temporada)"]
+
+
 def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: Prediccion) -> list[str]:
     out = []
     pasa = (lambda v: v > line) if lado == "más" else (lambda v: v < line)
@@ -913,6 +941,25 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
     elif c == "ast" and datos:
         out.append(f"Oportunidades: asiste el {datos['pct_ast'] * 100:.0f}% de las canastas de sus compañeros con él "
                    "en pista")
+    # 6b. pbpstats: rebotes disponibles que se queda y transición.
+    fila = ctx.pbp.get("jugadores", {}).get(clave_nombre(j.nombre))
+    if c == "reb" and fila and fila.get("DefFGReboundPct") is not None:
+        out.append(f"Se queda el {fila['DefFGReboundPct'] * 100:.0f}% de los rebotes defensivos y el "
+                   f"{(fila.get('OffFGReboundPct') or 0) * 100:.0f}% de los ofensivos que caen con él en pista "
+                   f"(esta temporada, pbpstats)")
+    sigla_rival = ctx.siglas.get(j.opp_id)
+    concede_tr = {t: pbpstats.por_partido(f, "Points", ctx.pbp.get("equipos", {}).get(t, {}).get("GamesPlayed"))
+                  for t, f in ctx.pbp.get("rivales_transicion", {}).items()}
+    concede_tr = {t: v for t, v in concede_tr.items() if v is not None}
+    if c == "pts" and sigla_rival in concede_tr:
+        texto = (f"Transición: el rival concede {concede_tr[sigla_rival]:.1f} puntos por partido tras robos "
+                 f"(#{_puesto(concede_tr, sigla_rival)} de {len(concede_tr)}, #1 = el que más)")
+        propio = ctx.pbp.get("equipos_transicion", {}).get(ctx.siglas.get(j.team_id))
+        mio = pbpstats.por_partido(propio, "Points", ctx.pbp.get("equipos", {}).get(ctx.siglas.get(j.team_id), {})
+                                   .get("GamesPlayed")) if propio else None
+        if mio is not None:
+            texto += f"; su equipo anota {mio:.1f} así"
+        out.append(texto)
     # 7. Bajas que cambian el partido.
     if j.bajas_rival_ids:
         partes = []
@@ -1064,7 +1111,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         + ([f"sin {j.sin_estrella[0]}: más tiros para él"]
            if lado == "menos" and j.sin_estrella and set(COMPONENTES[stat]) & SUBEN_SIN_ESTRELLA else [])
         + (["menos de una estrella al inicio de temporada"]
-           if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else []),
+           if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else [])
+        + (_falla_en_normales(ctx, j, stat, line) if lado == "menos" else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),
         argumentos(ctx, j, stat, line, lado, pred) if detalle else [],
     )
