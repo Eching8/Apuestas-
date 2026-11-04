@@ -50,6 +50,10 @@ jobs:
           restore-keys: nba-db-
       - name: Historial de ESPN (desde el último día guardado)
         run: python -m apuestas nba historial
+      # Jugada a jugada de partidos ya guardados que aún no la tengan (la primera vez, ~1.400 partidos, ~25 min;
+      # después solo los que falten: los nuevos se procesan al bajarlos).
+      - name: Jugada a jugada (rebotes disponibles y transición)
+        run: python -m apuestas nba jugadas --desde 2025-10-20 --limite 1500
       - name: Props del día
         run: python -m apuestas nba analizar --top 25 ${{ inputs.fecha && format('--fecha {0}', inputs.fecha) || '' }}
       - name: Resultados acumulados

@@ -500,6 +500,47 @@ class PbpStatsTest(unittest.TestCase):
             self.assertEqual(_falla_en_normales(ctx, j, "points", 60.5), [])
 
 
+class JugadasTest(unittest.TestCase):
+    def test_en_cancha_rebotes_y_transicion(self):
+        from apuestas.nba.jugadas import parse_jugadas
+
+        def atl(pid, starter=True):
+            return {"athlete": {"id": pid}, "starter": starter, "stats": []}
+
+        def jugada(tipo, texto, equipo, ids, clock, periodo=1, tiro=False, anota=False, valor=0):
+            return {"type": {"text": tipo}, "text": texto, "team": {"id": equipo}, "clock": {"displayValue": clock},
+                    "period": {"number": periodo}, "shootingPlay": tiro, "scoringPlay": anota, "scoreValue": valor,
+                    "participants": [{"athlete": {"id": i}} for i in ids]}
+
+        local = [atl(f"h{i}") for i in range(5)] + [atl("h5", False)]
+        visita = [atl(f"a{i}") for i in range(5)]
+        s = {"boxscore": {"players": [{"team": {"id": "1"}, "statistics": [{"athletes": local}]},
+                                      {"team": {"id": "2"}, "statistics": [{"athletes": visita}]}]},
+             "plays": [
+                 jugada("Jump Shot", "a0 misses jumper", "2", ["a0"], "11:30", tiro=True),
+                 jugada("Defensive Rebound", "h0 defensive rebound", "1", ["h0"], "11:28"),
+                 jugada("Driving Layup Shot", "h1 makes layup", "1", ["h1"], "11:23", tiro=True, anota=True, valor=2),
+                 jugada("Substitution", "h5 enters the game for h4", "1", ["h5", "h4"], "6:00"),
+                 jugada("Jump Shot", "a1 misses jumper", "2", ["a1"], "5:30", tiro=True),
+                 jugada("Offensive Rebound", "a1 offensive rebound", "2", ["a1"], "5:28"),
+                 jugada("Jump Shot", "a1 makes jumper", "2", ["a1"], "5:20", tiro=True, anota=True, valor=2),
+                 jugada("End Period", "End", "1", [], "0:00"),
+             ]}
+        f = {x["player_id"]: x for x in parse_jugadas(s)}
+        self.assertEqual(f["h0"]["dreb"], 1)
+        self.assertEqual(f["h0"]["dreb_op"], 2)          # los dos fallos del rival con él en pista
+        self.assertEqual(f["h4"]["dreb_op"], 1)          # salió antes del segundo fallo
+        self.assertEqual(f["h5"]["dreb_op"], 1)          # entró antes del segundo fallo
+        self.assertEqual(f["a1"]["oreb"], 1)
+        self.assertEqual(f["a1"]["oreb_op"], 2)
+        self.assertEqual(f["h1"]["trans_pts"], 2)        # canasta 5 s después del rebote defensivo
+        self.assertEqual(f["equipo:1"]["trans_pts"], 2)
+        self.assertEqual(f["equipo:2"]["trans_pts"], 0)  # el rebote ofensivo no abre contraataque
+        self.assertAlmostEqual(f["h4"]["segundos"], 360)
+        self.assertAlmostEqual(f["h5"]["segundos"], 360)
+        self.assertAlmostEqual(f["h0"]["segundos"], 720)
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza

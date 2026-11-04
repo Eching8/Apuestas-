@@ -152,6 +152,7 @@ class Contexto:
     altura_rival: dict = field(default_factory=dict)    # equipo -> grupo -> estatura media por minutos
     margen: dict = field(default_factory=dict)          # equipo -> por cuánto se espera que gane hoy (± puntos)
     pbp: dict = field(default_factory=dict)             # pbpstats.com (pbpstats.cargar), si se bajó
+    jug_equipo: dict = field(default_factory=dict)      # (partido, equipo) -> jugada a jugada del equipo (jugadas.py)
     siglas: dict = field(default_factory=dict)          # equipo -> siglas de ESPN
 
 
@@ -189,12 +190,36 @@ def _alturas(conn, filas: list[dict], grupo: dict[str, str]) -> tuple[dict, dict
     return altura, {t: {g: x / n for g, (x, n) in por_g.items() if n} for t, por_g in acc.items()}
 
 
+def _unir_jugadas(conn, filas: list[dict], desde: str) -> dict:
+    """Añade a cada partido de jugador sus oportunidades de rebote y transición (jugadas.py), si están."""
+    try:
+        rows = conn.execute(
+            """SELECT j.* FROM nba_jugadas j JOIN nba_games g ON g.id = j.game_id WHERE g.fecha >= ?""",
+            (desde,)).fetchall()
+    except Exception:
+        return {}
+    por_jugador, por_equipo = {}, {}
+    for r in rows:
+        r = dict(r)
+        if r["player_id"].startswith("equipo:"):
+            por_equipo[(r["game_id"], r["team_id"])] = r
+        else:
+            por_jugador[(r["game_id"], r["player_id"])] = r
+    for f in filas:
+        j = por_jugador.get((f["game_id"], f["player_id"]))
+        if j:
+            f.update({"dreb_op": j["dreb_op"], "oreb_op": j["oreb_op"], "trans_pts": j["trans_pts"],
+                      "trans_fga": j["trans_fga"]})
+    return por_equipo
+
+
 def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
     desde = (date.fromisoformat(fecha) - timedelta(days=dias)).isoformat()
     filas = [dict(r) for r in conn.execute(
         """SELECT pg.*, g.fecha, g.season FROM nba_player_games pg JOIN nba_games g ON g.id = pg.game_id
            WHERE g.fecha < ? AND g.fecha >= ? AND g.season_type IN (2, 3, 5) ORDER BY g.fecha DESC""",
         (fecha, desde))]
+    jug_equipo = _unir_jugadas(conn, filas, desde)
     temporada = max((f["season"] for f in filas), default=0)
     por_jugador: dict[str, list[dict]] = defaultdict(list)
     grupo: dict[str, str] = {}
@@ -280,6 +305,7 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
                    marcajes.construir(conn, fecha, desde, grupo), *_alturas(conn, filas, grupo),
                    _margenes(conn, fecha, temporada))
     ctx.pbp = pbpstats.cargar(conn, temporada)
+    ctx.jug_equipo = jug_equipo
     try:
         ctx.siglas = {r[0]: r[1] for r in conn.execute("SELECT id, abbr FROM nba_teams")}
     except Exception:
@@ -880,6 +906,31 @@ def _falla_en_normales(ctx: Contexto, j: Jugador, stat: str, line: float) -> lis
     return [f"falla en partidos normales ({len(malos)} de {len(temp)} esta temporada)"]
 
 
+def _por_equipo_temporada(ctx: Contexto, campo: str, propio: bool) -> dict[str, float]:
+    """Media por partido de esta temporada de un total de equipo de la jugada a jugada: el suyo (propio) o el del
+    rival en sus partidos (lo que concede). Se calcula una vez por contexto."""
+    cache = getattr(ctx, "_por_equipo", None)
+    if cache is None:
+        cache = ctx._por_equipo = {}
+    clave = (campo, propio)
+    if clave not in cache:
+        temporada = {f["game_id"] for f in ctx.filas if f.get("season") == ctx.temporada}
+        por_partido: dict[str, list] = defaultdict(list)
+        for (gid, tid), r in ctx.jug_equipo.items():
+            if gid in temporada:
+                por_partido[gid].append(r)
+        acc = defaultdict(list)
+        for filas in por_partido.values():
+            if len(filas) != 2:
+                continue
+            a, b = filas
+            acc[a["team_id"]].append((a if propio else b)[campo])
+            acc[b["team_id"]].append((b if propio else a)[campo])
+        equipos = _equipos_temporada(ctx)
+        cache[clave] = {t: sum(v) / len(v) for t, v in acc.items() if len(v) >= 2 and t in equipos}
+    return cache[clave]
+
+
 def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pred: Prediccion) -> list[str]:
     out = []
     pasa = (lambda v: v > line) if lado == "más" else (lambda v: v < line)
@@ -941,9 +992,35 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
     elif c == "ast" and datos:
         out.append(f"Oportunidades: asiste el {datos['pct_ast'] * 100:.0f}% de las canastas de sus compañeros con él "
                    "en pista")
-    # 6b. pbpstats: rebotes disponibles que se queda y transición.
+    # 6a. Jugada a jugada (jugadas.py): oportunidades de rebote reales y transición, por partido.
+    con_jug = [p for p in j.partidos[:10] if p.get("dreb_op")]
+    linea_reb = linea_tr = False
+    if c == "reb" and len(con_jug) >= 3:
+        d_op = sum(p["dreb_op"] for p in con_jug)
+        o_op = sum(p["oreb_op"] for p in con_jug)
+        texto = (f"Oportunidades de rebote: {(d_op + o_op) / len(con_jug):.1f} por partido en sus últimos "
+                 f"{len(con_jug)} ({d_op / len(con_jug):.1f} defensivas y {o_op / len(con_jug):.1f} ofensivas); convierte "
+                 f"el {sum(p['dreb'] for p in con_jug) / max(1, d_op) * 100:.0f}% y el "
+                 f"{sum(p['oreb'] for p in con_jug) / max(1, o_op) * 100:.0f}%")
+        fallos = _por_equipo_temporada(ctx, "oreb_op", propio=True)
+        if j.opp_id in fallos:
+            texto += (f"; el rival falla {fallos[j.opp_id]:.1f} tiros por partido (#{_puesto(fallos, j.opp_id)} de "
+                      f"{len(fallos)}, #1 = el que más falla)")
+        out.append(texto)
+        linea_reb = True
+    if c == "pts":
+        concede = _por_equipo_temporada(ctx, "trans_pts", propio=False)
+        if j.opp_id in concede:
+            texto = (f"Transición: el rival concede {concede[j.opp_id]:.1f} puntos por partido al contraataque "
+                     f"(#{_puesto(concede, j.opp_id)} de {len(concede)}, #1 = el que más)")
+            con_tr = [p for p in j.partidos[:10] if p.get("trans_pts") is not None and p.get("dreb_op") is not None]
+            if len(con_tr) >= 3:
+                texto += f"; él anota {sum(p['trans_pts'] for p in con_tr) / len(con_tr):.1f} así por partido"
+            out.append(texto)
+            linea_tr = True
+    # 6b. pbpstats (respaldo si no hay jugada a jugada): rebotes disponibles que se queda y transición.
     fila = ctx.pbp.get("jugadores", {}).get(clave_nombre(j.nombre))
-    if c == "reb" and fila and fila.get("DefFGReboundPct") is not None:
+    if c == "reb" and not linea_reb and fila and fila.get("DefFGReboundPct") is not None:
         out.append(f"Se queda el {fila['DefFGReboundPct'] * 100:.0f}% de los rebotes defensivos y el "
                    f"{(fila.get('OffFGReboundPct') or 0) * 100:.0f}% de los ofensivos que caen con él en pista "
                    f"(esta temporada, pbpstats)")
@@ -951,7 +1028,7 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
     concede_tr = {t: pbpstats.por_partido(f, "Points", ctx.pbp.get("equipos", {}).get(t, {}).get("GamesPlayed"))
                   for t, f in ctx.pbp.get("rivales_transicion", {}).items()}
     concede_tr = {t: v for t, v in concede_tr.items() if v is not None}
-    if c == "pts" and sigla_rival in concede_tr:
+    if c == "pts" and not linea_tr and sigla_rival in concede_tr:
         texto = (f"Transición: el rival concede {concede_tr[sigla_rival]:.1f} puntos por partido tras robos "
                  f"(#{_puesto(concede_tr, sigla_rival)} de {len(concede_tr)}, #1 = el que más)")
         propio = ctx.pbp.get("equipos_transicion", {}).get(ctx.siglas.get(j.team_id))

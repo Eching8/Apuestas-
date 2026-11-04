@@ -29,7 +29,7 @@ from .informe import escribir, etiqueta
 from .modelo import NOMBRES, construir_contexto
 from . import pbpstats
 from .nbastats import TIPOS, NbaStats, temporada_nba
-from .recolector import descargar_alturas, descargar_dia, descargar_rango
+from .recolector import descargar_alturas, descargar_dia, descargar_rango, completar_jugadas
 from .sgo import SportsGameOdds, ventana_dia
 from .theodds import TheOddsApi
 
@@ -43,6 +43,14 @@ def _hoy(cfg: Config) -> date:
 
 def _fecha(value: str | None, cfg: Config, offset: int = 0) -> date:
     return date.fromisoformat(value) if value else _hoy(cfg) + timedelta(days=offset)
+
+
+def cmd_jugadas(args, cfg: Config, db: Database) -> int:
+    nba = NbaDB(db.conn)
+    espn = Espn()
+    n = completar_jugadas(espn, nba, args.desde, args.limite)
+    print(f"{n} partidos con jugada a jugada procesada (rebotes disponibles y transición).")
+    return 0
 
 
 def cmd_historial(args, cfg: Config, db: Database) -> int:
@@ -241,6 +249,11 @@ def registrar(sub) -> None:
     h.add_argument("--desde", help="AAAA-MM-DD, p. ej. 2025-10-21 (por defecto, desde el último día guardado)")
     h.add_argument("--hasta", help="AAAA-MM-DD (por defecto, ayer)")
     h.set_defaults(func=cmd_historial)
+
+    jp = s.add_parser("jugadas", help="procesa la jugada a jugada de ESPN de partidos ya guardados")
+    jp.add_argument("--desde", default="2025-10-01", help="AAAA-MM-DD (por defecto, la temporada 2025-26)")
+    jp.add_argument("--limite", type=int, default=600, help="máximo de partidos por ejecución")
+    jp.set_defaults(func=cmd_jugadas)
 
     e = s.add_parser("enfrentamientos",
                      help="descarga de stats.nba.com quién defendió a quién (solo desde una conexión de casa)")
