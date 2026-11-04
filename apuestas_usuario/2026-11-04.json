@@ -1,0 +1,106 @@
+{
+ "fecha": "2026-11-04",
+ "apuestas": [
+  {
+   "nombre": "4 bet builders 20.55 (apuesta gratis)",
+   "cuota": 20.55,
+   "prob": 0.021,
+   "real": true,
+   "monto": 0,
+   "freebet": 5000,
+   "ganancia_potencial": 97750,
+   "patas": [
+    {
+     "jugador": "Aaron Nesmith",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Jaylen Wells",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Cedric Coward",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Jalen Green",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Toumani Camara",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Miles Bridges",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Deni Avdija",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Davion Mitchell",
+     "stat": "points",
+     "lado": "más",
+     "linea": 10.5
+    },
+    {
+     "jugador": "Andrew Wiggins",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Klay Thompson",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Derrick Jones Jr.",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Dylan Harper",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Devin Vassell",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Stephon Castle",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    }
+   ]
+  }
+ ]
+}
