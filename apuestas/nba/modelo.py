@@ -77,6 +77,9 @@ PESO_MOTORES = 0.3
 # Contracción hacia 50 %: el backtest (feb-mar 2026, 19.700 props) mostró que sin ella el modelo era
 # ~3 puntos optimista por encima del 70 %. Con 0.9 queda calibrado (incluso algo conservador arriba).
 CALIBRACION = 0.9
+# Las defensivas y las pérdidas salían conservadoras con 0.9 (backtest 2025-26, 4.262 props de cada una: robos del
+# 70-80 % acertaban 76.7 % prometiendo 74.7 %). Con estos valores quedan calibradas y mejora el log-loss.
+CALIBRACION_STAT = {"steals": 1.0, "blocks": 0.95, "stocks": 1.0, "turnovers": 1.0}
 # Picks seguros: una línea más baja (p. ej. "15+ puntos") de un titular estable en vez de la línea normal.
 # Backtest (22 oct-25 nov 2025 y 20 feb-10 mar 2026), titulares con 30+ minutos: eligiendo la línea al
 # 85 % acertaron el 89-96 % según la estadística; al 90 %, el 93-99 %.
@@ -212,7 +215,7 @@ def _unir_jugadas(conn, filas: list[dict], desde: str) -> dict:
         if j:
             f.update({"dreb_op": j["dreb_op"], "oreb_op": j["oreb_op"], "trans_pts": j["trans_pts"],
                       "trans_fga": j["trans_fga"], "comp_fga": j.get("comp_fga"), "comp_fgm": j.get("comp_fgm"),
-                      "comp_xfgm": j.get("comp_xfgm")})
+                      "comp_xfgm": j.get("comp_xfgm"), "stl_op": j.get("stl_op"), "blk_op": j.get("blk_op")})
     return por_equipo
 
 
@@ -1301,6 +1304,55 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
         if mio is not None:
             texto += f"; su equipo anota {mio:.1f} así"
         out.append(texto)
+    # 6c. Estadísticas defensivas y pérdidas: sus oportunidades reales con él en pista y lo que hace el rival.
+    con_def = [p for p in j.partidos[:10] if p.get("stl_op")]
+    if c == "stl":
+        if len(con_def) >= 3:
+            op = sum(p["stl_op"] for p in con_def)
+            out.append(f"Oportunidades de robo (últimos {len(con_def)}): el rival perdió {op / len(con_def):.1f} balones por "
+                       f"partido con él en pista y robó el {sum(p['stl'] for p in con_def) / max(1, op) * 100:.0f}%")
+        pierde = {t: v.get("ataque", {}).get("tov") for t, v in ctx.equipo_prom.items()
+                  if t in equipos and v.get("ataque", {}).get("tov")}
+        pp = _puesto(pierde, j.opp_id)
+        if pp:
+            out.append(f"El rival es #{pp} de {len(pierde)} en balones que pierde (#1 = el que más; "
+                       f"{pierde[j.opp_id]:.1f} por partido)")
+    if c == "blk":
+        if len(con_def) >= 3:
+            op = sum(p["blk_op"] or 0 for p in con_def)
+            out.append(f"Oportunidades de tapón (últimos {len(con_def)}): {op / len(con_def):.1f} tiros de 2 del rival por "
+                       f"partido con él en pista; taponó el {sum(p['blk'] for p in con_def) / max(1, op) * 100:.1f}%")
+        dos = {t: v.get("ataque", {}).get("t2a") for t, v in ctx.equipo_prom.items()
+               if t in equipos and v.get("ataque", {}).get("t2a")}
+        pd = _puesto(dos, j.opp_id)
+        if pd:
+            out.append(f"El rival es #{pd} de {len(dos)} en tiros de 2 por partido (#1 = el que más; {dos[j.opp_id]:.1f})")
+        if getattr(ctx, "_cerca_aro", None) is None:
+            ctx._cerca_aro = {}
+            for t, partidos in ctx.tipos_equipo.items():
+                tot = cerca_aro = 0
+                for tipos in partidos.values():
+                    for tipo, r in tipos.items():
+                        tot += r["fga"]
+                        cerca_aro += r["fga"] if tipo in ("penetración", "corte", "palmeo", "aro", "poste") else 0
+                if tot >= 200 and t in equipos:
+                    ctx._cerca_aro[t] = cerca_aro / tot
+        cerca = ctx._cerca_aro
+        pc = _puesto(cerca, j.opp_id)
+        if pc:
+            out.append(f"El {cerca[j.opp_id] * 100:.0f}% de los tiros del rival son cerca del aro (penetración, corte, "
+                       f"poste, palmeo): #{pc} de {len(cerca)}")
+    if c == "tov":
+        fuerza = {t: v.get("defensa", {}).get("tov") for t, v in ctx.equipo_prom.items()
+                  if t in equipos and v.get("defensa", {}).get("tov")}
+        pf = _puesto(fuerza, j.opp_id)
+        if pf:
+            out.append(f"El rival es #{pf} de {len(fuerza)} en pérdidas que provoca (#1 = el que más presiona; "
+                       f"{fuerza[j.opp_id]:.1f} por partido)")
+        ult = j.partidos[:10]
+        jugadas = sum(p["fga"] + 0.44 * p["fta"] + p["tov"] for p in ult) / max(1, len(ult))
+        out.append(f"Usa {jugadas:.1f} jugadas por partido (tiros, libres y pérdidas) y pierde el "
+                   f"{sum(p['tov'] for p in ult) / max(1, jugadas * len(ult)) * 100:.0f}% de ellas")
     # 7. Bajas que cambian el partido.
     if j.bajas_rival_ids:
         partes = []
@@ -1337,7 +1389,7 @@ def _prob_jugador(j: Jugador, stat: str, line: float, lado: str, p_mod: float) -
     """Modelo mezclado con su acierto real sobre la línea en los últimos 15 y calibrado."""
     hits, n = _aciertos(j.partidos[:15], stat, line, lado)
     p_emp = (hits + 5 * p_mod) / (n + 5)
-    return 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION
+    return 0.5 + (PESO_MODELO * p_mod + (1 - PESO_MODELO) * p_emp - 0.5) * CALIBRACION_STAT.get(stat, CALIBRACION)
 
 
 MINUTOS_SD_ESTABLE = 6.0

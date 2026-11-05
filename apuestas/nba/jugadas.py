@@ -39,11 +39,13 @@ CREATE TABLE IF NOT EXISTS nba_jugadas (
     comp_xfgm REAL,
     pts_favor REAL,
     pts_contra REAL,
+    stl_op INTEGER,
+    blk_op INTEGER,
     PRIMARY KEY (game_id, player_id)
 );
 """
 COLUMNAS_NUEVAS = {"comp_fga": "INTEGER", "comp_fgm": "INTEGER", "comp_xfgm": "REAL", "pts_favor": "REAL",
-                   "pts_contra": "REAL"}
+                   "pts_contra": "REAL", "stl_op": "INTEGER", "blk_op": "INTEGER"}
 
 # Acierto de la liga por tipo de tiro (2025-26 y el inicio de 2026-27, 1.408 partidos): (de 2, de 3).
 ACIERTO_TIPO = {"recibe y tira": (0.434, 0.368), "creado": (0.436, 0.332), "penetración": (0.547, 0.216),
@@ -121,7 +123,8 @@ def parse_jugadas(summary: dict) -> list[dict]:
         if pid not in filas:
             filas[pid] = {"player_id": pid, "team_id": equipo_de.get(pid, ""), "segundos": 0.0, "dreb_op": 0,
                           "oreb_op": 0, "dreb": 0, "oreb": 0, "trans_pts": 0, "trans_fga": 0, "comp_fga": 0,
-                          "comp_fgm": 0, "comp_xfgm": 0.0, "pts_favor": 0, "pts_contra": 0}
+                          "comp_fgm": 0, "comp_xfgm": 0.0, "pts_favor": 0, "pts_contra": 0, "stl_op": 0,
+                          "blk_op": 0}
         return filas[pid]
 
     for tid in tids:
@@ -182,6 +185,15 @@ def parse_jugadas(summary: dict) -> list[dict]:
                     fila(pid)["pts_contra"] += p["scoreValue"]
                 fila(f"equipo:{equipo}")["pts_favor"] += p["scoreValue"]
                 fila(f"equipo:{rival[equipo]}")["pts_contra"] += p["scoreValue"]
+            # Oportunidades defensivas con él en pista: pérdidas del rival (robos) y tiros de 2 del rival (tapones).
+            if "turnover" in tipo.lower():
+                for pid in en_cancha.get(rival[equipo], []):
+                    fila(pid)["stl_op"] += 1
+                fila(f"equipo:{rival[equipo]}")["stl_op"] += 1
+            if es_tiro and not ((p.get("pointsAttempted") or 0) == 3 or "three point" in texto):
+                for pid in en_cancha.get(rival[equipo], []):
+                    fila(pid)["blk_op"] += 1
+                fila(f"equipo:{rival[equipo]}")["blk_op"] += 1
             # Tiros de sus compañeros con él en pista y lo que se esperaba que metieran según el tipo de tiro: la
             # base de sus asistencias "esperadas" (ESPN solo apunta la asistencia si el tiro entra).
             if es_tiro and ids:
@@ -257,9 +269,9 @@ def guardar(conn, game_id: str, filas: list[dict]) -> None:
     conn.execute("DELETE FROM nba_jugadas WHERE game_id = ?", (game_id,))
     conn.executemany(
         """INSERT INTO nba_jugadas (game_id, player_id, team_id, segundos, dreb_op, oreb_op, dreb, oreb, trans_pts,
-               trans_fga, comp_fga, comp_fgm, comp_xfgm, pts_favor, pts_contra) VALUES (:game_id, :player_id, :team_id,
-               :segundos, :dreb_op, :oreb_op, :dreb, :oreb, :trans_pts, :trans_fga, :comp_fga, :comp_fgm, :comp_xfgm,
-               :pts_favor, :pts_contra)""",
+               trans_fga, comp_fga, comp_fgm, comp_xfgm, pts_favor, pts_contra, stl_op, blk_op) VALUES (:game_id,
+               :player_id, :team_id, :segundos, :dreb_op, :oreb_op, :dreb, :oreb, :trans_pts, :trans_fga, :comp_fga,
+               :comp_fgm, :comp_xfgm, :pts_favor, :pts_contra, :stl_op, :blk_op)""",
         [{**f, "game_id": game_id} for f in filas])
 
 

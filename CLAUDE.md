@@ -73,7 +73,11 @@ da su segunda zona de tiro y el puesto del rival en tiros libres que concede a s
 (`modelo.PUNTERIA_*`): canastas en sus últimos 10 frente a las esperadas por sus tipos de tiro; corrige los puntos
 (±3 %) y un "menos" de puntos de un jugador que viene frío (0.95 o menos) lleva la alerta "viene fallando tiros que
 suele meter" y no entra (2025-26: 55.5 % frente a 65 % prometido). Probado y descartado: árbitros (no cambian tiros
-libres ni puntos) y peso defensivo de cada baja del rival (demasiado ruidoso). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+libres ni puntos) y peso defensivo de cada baja del rival (demasiado ruidoso). **Robos, tapones, robos+tapones y
+pérdidas** tienen su propio análisis: oportunidades reales con él en pista (pérdidas y tiros de 2 del rival), puesto
+del rival en balones que pierde, tiros de 2 y tiros cerca del aro, y pérdidas que provoca; su calibración es propia
+(`modelo.CALIBRACION_STAT`: con 0.9 salían conservadoras). Sus líneas de la casa solo llegan con SportsGameOdds o con
+The Odds API si `ODDS_API_DEFENSIVAS=1` (cuesta más créditos). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las

@@ -24,6 +24,10 @@ DEPORTE = "basketball_nba"
 # pero cada uno cuesta un crédito más por partido.
 MERCADOS = {"player_points": "points", "player_rebounds": "rebounds", "player_assists": "assists",
             "player_threes": "threes"}
+# Defensivas y pérdidas: cuestan un crédito más por partido cada una, así que solo se piden con
+# ODDS_API_DEFENSIVAS=1 (con el plan gratuito de 500 créditos no alcanza ni para los cuatro de arriba todo el mes).
+MERCADOS_DEFENSIVOS = {"player_steals": "steals", "player_blocks": "blocks", "player_blocks_steals": "stocks",
+                       "player_turnovers": "turnovers"}
 
 
 def _iso(t: datetime) -> str:
@@ -32,8 +36,9 @@ def _iso(t: datetime) -> str:
 
 class TheOddsApi:
     def __init__(self, api_key: str, session: requests.Session | None = None, base_url: str = BASE_URL,
-                 regiones: str = "us"):
+                 regiones: str = "us", defensivas: bool = False):
         self.api_key = api_key
+        self.mercados = {**MERCADOS, **(MERCADOS_DEFENSIVOS if defensivas else {})}
         self.session = session or requests.Session()
         self.base_url = base_url
         self.regiones = regiones
@@ -55,7 +60,7 @@ class TheOddsApi:
         out = []
         for ev in self._get(f"/sports/{DEPORTE}/events", commenceTimeFrom=_iso(inicio), commenceTimeTo=_iso(fin)):
             odds = self._get(f"/sports/{DEPORTE}/events/{ev['id']}/odds", regions=self.regiones,
-                             markets=",".join(MERCADOS), oddsFormat="decimal")
+                             markets=",".join(self.mercados), oddsFormat="decimal")
             out.append({"equipos": [(clave_nombre(ev["home_team"]), clave_nombre(ev["away_team"]))],
                         "props": parse_props(odds)})
         log.info("The Odds API: %d partidos, %s créditos restantes", len(out), self.restantes)
@@ -68,7 +73,7 @@ def parse_props(evento: dict) -> list[dict]:
         lambda: defaultdict(lambda: {"over": [], "under": [], "casas": set()}))
     for casa in evento.get("bookmakers", []):
         for mercado in casa.get("markets", []):
-            stat = MERCADOS.get(mercado.get("key"))
+            stat = MERCADOS.get(mercado.get("key")) or MERCADOS_DEFENSIVOS.get(mercado.get("key"))
             if not stat:
                 continue
             for o in mercado.get("outcomes", []):
