@@ -62,7 +62,10 @@ más contraataque que la media lleva la alerta "el rival concede mucho contraata
 frente a 66.3 % prometido). Si el rival jugó anoche y él no, +1.5 % de puntos y +2 % de asistencias
 (`modelo.RIVAL_CANSADO`). "En corto" también da el acierto con los minutos de hoy contando la temporada pasada
 (cuando le suben los minutos por bajas), el acierto con defensa como la de hoy y sus minutos a la vez, y el puesto
-del rival en rebotes y rebotes ofensivos que concede en total. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+del rival en rebotes y rebotes ofensivos que concede en total, y **cómo tira** (tipos de tiro de ESPN agrupados como
+los "play types": recibe y tira, creado, penetración, corte, poste, palmeo, aro; `jugadas.parse_tipos`) con el puesto
+del rival en lo que deja en su tipo principal. Esto último solo explica: en 2025-26 no movió los puntos ni los triples
+frente a lo que ya preveía el modelo. Las asistencias potenciales solo están en stats.nba.com (no responde desde la nube). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las

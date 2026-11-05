@@ -541,6 +541,31 @@ class JugadasTest(unittest.TestCase):
         self.assertAlmostEqual(f["h0"]["segundos"], 720)
 
 
+class TiposTiroTest(unittest.TestCase):
+    def test_clasificacion(self):
+        from apuestas.nba.jugadas import tipo_tiro
+        casos = {"Jump Shot": "recibe y tira", "Pullup Jump Shot": "creado", "Step Back Jump Shot": "creado",
+                 "Driving Layup Shot": "penetración", "Driving Floating Jump Shot": "penetración",
+                 "Cutting Dunk Shot": "corte", "Alley Oop Dunk Shot": "corte", "Turnaround Hook Shot": "poste",
+                 "Layup Shot Putback": "palmeo", "Tip Shot": "palmeo", "Dunk Shot": "aro",
+                 "Running Layup Shot": "penetración", "Heave Jump Shot": None}
+        for texto, tipo in casos.items():
+            self.assertEqual(tipo_tiro(texto), tipo, texto)
+
+    def test_parse_tipos(self):
+        from apuestas.nba.jugadas import parse_tipos
+        s = {"boxscore": {"players": [{"team": {"id": "1"}, "statistics": [{"athletes": [{"athlete": {"id": "a"}}]}]}]},
+             "plays": [{"type": {"text": "Jump Shot"}, "text": "a makes three point jumper (b assists)",
+                        "shootingPlay": True, "scoringPlay": True, "pointsAttempted": 3,
+                        "participants": [{"athlete": {"id": "a"}}]},
+                       {"type": {"text": "Pullup Jump Shot"}, "text": "a misses jumper", "shootingPlay": True,
+                        "scoringPlay": False, "pointsAttempted": 2, "participants": [{"athlete": {"id": "a"}}]}]}
+        f = {(x["player_id"], x["tipo"]): x for x in parse_tipos(s)}
+        self.assertEqual((f[("a", "recibe y tira")]["pts"], f[("a", "recibe y tira")]["asistidos"]), (3, 1))
+        self.assertEqual((f[("a", "creado")]["fga"], f[("a", "creado")]["fgm"]), (1, 0))
+        self.assertEqual(f[("equipo:1", "recibe y tira")]["tpm"], 1)
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza

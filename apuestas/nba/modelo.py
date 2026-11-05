@@ -153,6 +153,8 @@ class Contexto:
     margen: dict = field(default_factory=dict)          # equipo -> por cuánto se espera que gane hoy (± puntos)
     pbp: dict = field(default_factory=dict)             # pbpstats.com (pbpstats.cargar), si se bajó
     jug_equipo: dict = field(default_factory=dict)      # (partido, equipo) -> jugada a jugada del equipo (jugadas.py)
+    tipos_jugador: dict = field(default_factory=dict)   # jugador -> partido -> tipo de tiro -> fila (jugadas.py)
+    tipos_equipo: dict = field(default_factory=dict)    # equipo -> partido -> tipo de tiro -> fila
     siglas: dict = field(default_factory=dict)          # equipo -> siglas de ESPN
 
 
@@ -211,6 +213,23 @@ def _unir_jugadas(conn, filas: list[dict], desde: str) -> dict:
             f.update({"dreb_op": j["dreb_op"], "oreb_op": j["oreb_op"], "trans_pts": j["trans_pts"],
                       "trans_fga": j["trans_fga"]})
     return por_equipo
+
+
+def _cargar_tipos(conn, desde: str) -> tuple[dict, dict]:
+    try:
+        rows = conn.execute("""SELECT t.*, g.fecha, g.season FROM nba_tiros_tipo t JOIN nba_games g ON g.id = t.game_id
+                               WHERE g.fecha >= ?""", (desde,)).fetchall()
+    except Exception:
+        return {}, {}
+    jug: dict = defaultdict(lambda: defaultdict(dict))
+    eq: dict = defaultdict(lambda: defaultdict(dict))
+    for r in rows:
+        r = dict(r)
+        if r["player_id"].startswith("equipo:"):
+            eq[r["team_id"]][r["game_id"]][r["tipo"]] = r
+        else:
+            jug[r["player_id"]][r["game_id"]][r["tipo"]] = r
+    return jug, eq
 
 
 def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
@@ -306,6 +325,7 @@ def construir_contexto(conn, fecha: str, dias: int = 420) -> Contexto:
                    _margenes(conn, fecha, temporada))
     ctx.pbp = pbpstats.cargar(conn, temporada)
     ctx.jug_equipo = jug_equipo
+    ctx.tipos_jugador, ctx.tipos_equipo = _cargar_tipos(conn, desde)
     try:
         ctx.siglas = {r[0]: r[1] for r in conn.execute("SELECT id, abbr FROM nba_teams")}
     except Exception:
@@ -378,6 +398,8 @@ class Jugador:
     bajas_rival_ids: list[str] = field(default_factory=list)
     sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
     factor_transicion: float = 1.0           # puntos según el contraataque que concede el rival (ver TRANSICION)
+    mezcla_tiros: dict = field(default_factory=dict)   # tipo de tiro -> (parte de sus tiros, acierto) (ver TIPOS)
+    factor_tipos: float = 1.0                # lo que deja el rival en sus tipos de tiro frente a la media
     rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
@@ -531,6 +553,67 @@ def _transicion(ctx: Contexto, j: Jugador) -> None:
     j.factor_transicion = 1 + efecto
 
 
+# Tipos de tiro (jugadas.py): su mezcla en los últimos TIPOS_PARTIDOS partidos y lo que deja el rival en cada tipo
+# esta temporada (puntos por tiro de los equipos que le juegan, encogido con K_TIPOS tiros de media de liga).
+# Solo explica: en el backtest de 2025-26 (4.949 titulares) el emparejamiento por tipos no movió los puntos ni los
+# triples respecto a lo que ya preveía el modelo (zonas de tiro y defensa por posición), así que no entra en la media.
+TIPOS_PARTIDOS = 15
+K_TIPOS = 150.0
+
+
+def _defensa_tipos(ctx: Contexto) -> tuple[dict, dict]:
+    """equipo -> tipo -> puntos por tiro que deja (encogido); y la media de liga por tipo. Una vez por contexto."""
+    if getattr(ctx, "_def_tipos", None) is None:
+        temporada = {f["game_id"]: f["team_id"] for f in ctx.filas if f.get("season") == ctx.temporada}
+        rival_de = {}
+        for f in ctx.filas:
+            if f.get("season") == ctx.temporada:
+                rival_de[(f["game_id"], f["team_id"])] = f["opp_id"]
+        acc = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
+        liga = defaultdict(lambda: [0.0, 0.0])
+        for tid, partidos in ctx.tipos_equipo.items():
+            for gid, tipos in partidos.items():
+                defensor = rival_de.get((gid, tid))
+                if gid not in temporada or not defensor:
+                    continue
+                for tipo, r in tipos.items():
+                    acc[defensor][tipo][0] += r["pts"]
+                    acc[defensor][tipo][1] += r["fga"]
+                    liga[tipo][0] += r["pts"]
+                    liga[tipo][1] += r["fga"]
+        media = {t: p / a for t, (p, a) in liga.items() if a}
+        ctx._def_tipos = ({e: {t: (p + K_TIPOS * media.get(t, 0)) / (a + K_TIPOS) for t, (p, a) in d.items()}
+                           for e, d in acc.items()}, media)
+    return ctx._def_tipos
+
+
+def _tipos(ctx: Contexto, j: Jugador) -> None:
+    partidos = ctx.tipos_jugador.get(j.player_id, {})
+    ult = [partidos[p["game_id"]] for p in j.partidos[:TIPOS_PARTIDOS] if p["game_id"] in partidos]
+    if len(ult) < 3:
+        return
+    tot = defaultdict(lambda: [0, 0])
+    for tipos in ult:
+        for tipo, r in tipos.items():
+            tot[tipo][0] += r["fga"]
+            tot[tipo][1] += r["fgm"]
+    fga = sum(a for a, _ in tot.values())
+    if not fga:
+        return
+    j.mezcla_tiros = {t: (a / fga, m / a if a else 0.0) for t, (a, m) in tot.items()}
+    defensa, media = _defensa_tipos(ctx)
+    rival = defensa.get(j.opp_id)
+    if not rival:
+        return
+    num = den = 0.0
+    for t, (parte, _) in j.mezcla_tiros.items():
+        if media.get(t):
+            num += parte * rival.get(t, media[t]) / media[t]
+            den += parte
+    if den:
+        j.factor_tipos = num / den
+
+
 def _es_estrella(recientes: list[dict]) -> bool:
     """El que más tiros usa de su equipo: 28+ minutos y 20+ jugadas de tiro (tiros + 0.44 libres + pérdidas) por 36'."""
     if len(recientes) < 3:
@@ -637,6 +720,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
                            f"{'los titulares' if j.factor_paliza < 1 else 'los suplentes'} suelen jugar "
                            f"{(j.factor_paliza - 1) * 100:+.0f}% de minutos si se rompe")
     _transicion(ctx, j)
+    _tipos(ctx, j)
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
@@ -1057,6 +1141,19 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
             out.append(f"Su zona principal es {NOMBRE_ZONA[z]} ({d['reparto'] * 100:.0f}% de sus tiros, "
                        f"{d['pct'] * 100:.0f}% de acierto); el rival es #{pz} de {len(rival_z)} en acierto que deja "
                        f"ahí ({d['pct_rival'] * 100:.0f}%, liga {d['pct_liga'] * 100:.0f}%)")
+    # 5b. Tipos de tiro (parecido a los "play types"): cómo tira y lo que deja el rival en su tipo principal.
+    if c in ("pts", "tpm", "fgm") and j.mezcla_tiros:
+        orden = sorted(j.mezcla_tiros.items(), key=lambda kv: -kv[1][0])[:3]
+        texto = "Cómo tira (últimos 15): " + ", ".join(f"{t} {parte * 100:.0f}% ({pct * 100:.0f}% de acierto)"
+                                                      for t, (parte, pct) in orden)
+        defensa, media = _defensa_tipos(ctx)
+        principal = orden[0][0]
+        deja = {e: d[principal] for e, d in defensa.items() if principal in d and e in equipos}
+        pt = _puesto(deja, j.opp_id)
+        if pt and media.get(principal):
+            texto += (f"; en {principal} el rival es #{pt} de {len(deja)} en lo que deja (#1 = el que más; "
+                      f"{deja[j.opp_id]:.2f} puntos por tiro frente a {media[principal]:.2f} de media)")
+        out.append(texto)
     # 6. Oportunidades: de dónde sale el número.
     comp = pred.componentes.get(c, {})
     datos = comp.get("datos", {})
