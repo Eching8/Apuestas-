@@ -30,7 +30,7 @@ from .modelo import NOMBRES, construir_contexto
 from . import pbpstats
 from .nbastats import TIPOS, NbaStats, temporada_nba
 from .recolector import descargar_alturas, descargar_dia, descargar_rango, completar_jugadas
-from .sgo import SportsGameOdds, ventana_dia
+from .sgo import SportsGameOdds, clave_nombre, ventana_dia
 from .theodds import TheOddsApi
 
 log = logging.getLogger("apuestas")
@@ -100,6 +100,16 @@ def cmd_actualizar(args, cfg: Config, db: Database) -> int:
     return 0
 
 
+def _parejos(nba: NbaDB, fecha: str) -> dict:
+    """(clave del local, clave del visitante) -> diferencia esperada en valor absoluto (de ESPN; 99 si no hay)."""
+    out = {}
+    for r in nba.conn.execute(
+            """SELECT h.name, a.name, g.margen_esperado FROM nba_games g JOIN nba_teams h ON h.id = g.home_id
+               JOIN nba_teams a ON a.id = g.away_id WHERE g.fecha = ?""", (fecha,)):
+        out[(clave_nombre(r[0]), clave_nombre(r[1]))] = abs(r[2]) if r[2] is not None else 99.0
+    return out
+
+
 def cmd_analizar(args, cfg: Config, db: Database) -> int:
     nba = NbaDB(db.conn)
     fecha = _fecha(args.fecha, cfg).isoformat()
@@ -127,8 +137,13 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
             sin_emparejar = [f"SIN LÍNEAS DE LA CASA HOY: SportsGameOdds no respondió ({str(exc)[:120]})"]
         if not eventos and cfg.odds_api_key:
             try:
-                eventos = TheOddsApi(cfg.odds_api_key, defensivas=cfg.odds_api_defensivas).eventos(*ventana)
-                sin_emparejar = ["Líneas de The Odds API (SportsGameOdds sin respuesta)"] if eventos else sin_emparejar
+                api = TheOddsApi(cfg.odds_api_key, defensivas=cfg.odds_api_defensivas)
+                eventos = api.eventos(*ventana, prioridad=_parejos(nba, fecha))
+                if eventos:
+                    sin_emparejar = ["Líneas de The Odds API (SportsGameOdds sin respuesta)"
+                                     + (f"; para que los créditos lleguen a fin de mes solo se pidieron los {len(eventos)} "
+                                        f"partidos más parejos ({api.restantes} créditos restantes)"
+                                        if api.recortados else "")]
             except Exception as exc:   # sin líneas, el informe sale igual con lo que no depende de la casa
                 log.warning("The Odds API no respondió (%s)", exc)
         if eventos:   # sin respuesta no se borran las líneas que ya hubiera de una ejecución anterior

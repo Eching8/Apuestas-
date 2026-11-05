@@ -2,7 +2,8 @@
 
 Plan gratuito: 500 créditos al mes. Listar los partidos no gasta; las cuotas de un partido cuestan un crédito por
 mercado y región, así que con los cuatro mercados de MERCADOS y una región son ~40 créditos en un día de 10
-partidos. Por cada jugador y estadística se guarda la línea que más casas ofrecen y la mediana de sus cuotas.
+partidos: más de lo que da el plan. Por eso se racionan: cada día se piden solo los partidos que caben en los créditos
+restantes repartidos entre los días que faltan del mes, empezando por los más parejos. Por cada jugador y estadística se guarda la línea que más casas ofrecen y la mediana de sus cuotas.
 """
 from __future__ import annotations
 
@@ -44,6 +45,7 @@ class TheOddsApi:
         self.regiones = regiones
         self.peticiones = 0
         self.restantes: str | None = None
+        self.recortados = False
 
     def _get(self, ruta: str, **params) -> list | dict:
         resp = self.session.get(f"{self.base_url}{ruta}", params={"apiKey": self.api_key, **params}, timeout=30)
@@ -55,16 +57,41 @@ class TheOddsApi:
             raise ApiError(f"The Odds API {ruta}: HTTP {resp.status_code} {resp.text[:200]}")
         return resp.json()
 
-    def eventos(self, inicio: datetime, fin: datetime) -> list[dict]:
-        """Partidos de la NBA entre inicio y fin (UTC) con sus props, en el formato que lee emparejar_props."""
+    def eventos(self, inicio: datetime, fin: datetime, prioridad: dict | None = None) -> list[dict]:
+        """Partidos de la NBA entre inicio y fin (UTC) con sus props, en el formato que lee emparejar_props.
+
+        Reparte los créditos que quedan entre los días que faltan del mes (ver partidos_hoy): si no alcanzan para todos
+        los partidos, pide primero los de menor valor en `prioridad` ({(clave_local, clave_visita): valor}, p. ej. la
+        diferencia esperada: los más parejos, donde los titulares juegan sus minutos)."""
         out = []
-        for ev in self._get(f"/sports/{DEPORTE}/events", commenceTimeFrom=_iso(inicio), commenceTimeTo=_iso(fin)):
+        lista = self._get(f"/sports/{DEPORTE}/events", commenceTimeFrom=_iso(inicio), commenceTimeTo=_iso(fin))
+        maximo = partidos_hoy(self.restantes, inicio, len(self.mercados))
+        if maximo is not None and maximo < len(lista):
+            prioridad = prioridad or {}
+            lista = sorted(lista, key=lambda ev: prioridad.get((clave_nombre(ev["home_team"]),
+                                                                clave_nombre(ev["away_team"])), 99.0))[:maximo]
+            self.recortados = True
+        for ev in lista:
             odds = self._get(f"/sports/{DEPORTE}/events/{ev['id']}/odds", regions=self.regiones,
                              markets=",".join(self.mercados), oddsFormat="decimal")
             out.append({"equipos": [(clave_nombre(ev["home_team"]), clave_nombre(ev["away_team"]))],
                         "props": parse_props(odds)})
         log.info("The Odds API: %d partidos, %s créditos restantes", len(out), self.restantes)
         return out
+
+
+RESERVA = 8   # créditos que no se tocan (por si hace falta repetir un día)
+
+
+def partidos_hoy(restantes: str | None, dia: datetime, por_partido: int) -> int | None:
+    """Cuántos partidos se pueden pedir hoy para que los créditos lleguen a fin de mes (None = sin límite conocido)."""
+    try:
+        quedan = float(restantes) - RESERVA
+    except (TypeError, ValueError):
+        return None
+    import calendar
+    dias = calendar.monthrange(dia.year, dia.month)[1] - dia.day + 1
+    return max(0, int(quedan / max(1, dias) / max(1, por_partido)))
 
 
 def parse_props(evento: dict) -> list[dict]:

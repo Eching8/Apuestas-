@@ -613,6 +613,44 @@ class DefensivasTest(unittest.TestCase):
         self.assertEqual(CALIBRACION_STAT.get("points", CALIBRACION), 0.9)
 
 
+class RacionarOddsApiTest(unittest.TestCase):
+    def test_partidos_hoy(self):
+        from datetime import datetime
+        from apuestas.nba.theodds import partidos_hoy
+        self.assertEqual(partidos_hoy("229", datetime(2026, 11, 5), 4), 2)     # (229-8)/26 días/4 = 2.1
+        self.assertEqual(partidos_hoy("500", datetime(2026, 11, 30), 4), 123)  # último día: todo lo que queda
+        self.assertEqual(partidos_hoy("5", datetime(2026, 11, 5), 4), 0)
+        self.assertIsNone(partidos_hoy(None, datetime(2026, 11, 5), 4))
+
+    def test_pide_los_mas_parejos(self):
+        from datetime import datetime
+        from apuestas.nba.theodds import TheOddsApi
+
+        class Resp:
+            def __init__(self, datos, quedan):
+                self.datos, self.status_code, self.headers = datos, 200, {"x-requests-remaining": quedan}
+
+            def json(self):
+                return self.datos
+
+        class Sesion:
+            pedidos = []
+
+            def get(self, url, params=None, timeout=None):
+                if url.endswith("/events"):
+                    return Resp([{"id": "a", "home_team": "Boston Celtics", "away_team": "Utah Jazz"},
+                                 {"id": "b", "home_team": "Denver Nuggets", "away_team": "LA Clippers"}], "120")
+                self.pedidos.append(url)
+                return Resp({"bookmakers": []}, "46")
+
+        api = TheOddsApi("k", session=Sesion())
+        out = api.eventos(datetime(2026, 11, 5), datetime(2026, 11, 6),
+                          prioridad={("BOSTON_CELTICS", "UTAH_JAZZ"): 14.5, ("DENVER_NUGGETS", "LA_CLIPPERS"): 2.5})
+        self.assertEqual(len(out), 1)                                            # (120-8)/26 días/4 = 1 partido
+        self.assertTrue(api.recortados)
+        self.assertEqual([u.split("/")[-2] for u in Sesion.pedidos], ["b"])     # el más parejo
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
