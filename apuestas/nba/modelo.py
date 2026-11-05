@@ -211,7 +211,8 @@ def _unir_jugadas(conn, filas: list[dict], desde: str) -> dict:
         j = por_jugador.get((f["game_id"], f["player_id"]))
         if j:
             f.update({"dreb_op": j["dreb_op"], "oreb_op": j["oreb_op"], "trans_pts": j["trans_pts"],
-                      "trans_fga": j["trans_fga"]})
+                      "trans_fga": j["trans_fga"], "comp_fga": j.get("comp_fga"), "comp_fgm": j.get("comp_fgm"),
+                      "comp_xfgm": j.get("comp_xfgm")})
     return por_equipo
 
 
@@ -399,6 +400,9 @@ class Jugador:
     sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
     factor_transicion: float = 1.0           # puntos según el contraataque que concede el rival (ver TRANSICION)
     mezcla_tiros: dict = field(default_factory=dict)   # tipo de tiro -> (parte de sus tiros, acierto) (ver TIPOS)
+    suerte_companeros: float | None = None   # canastas de sus compañeros con él en pista / las esperadas (últimos 10)
+    asistencias_esperadas: float | None = None   # sus asistencias por partido si sus compañeros tiraran a su nivel
+    factor_suerte: float = 1.0               # corrección de sus asistencias por esa racha (ver SUERTE_ASISTENCIAS)
     factor_tipos: float = 1.0                # lo que deja el rival en sus tipos de tiro frente a la media
     rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
@@ -453,6 +457,16 @@ TRANSICION_ALTA = 1.12
 # a 15.030 con los dos descansados): +1.5 % de puntos y +2.3 % de asistencias por minuto; rebotes y triples, menos
 # de +1 %. Si los dos jugaron anoche, se compensa (ya hay -3 % de minutos por su propio cansancio).
 RIVAL_CANSADO = {"pts": 0.015, "fgm": 0.015, "ast": 0.02}
+
+# Asistencias y puntería de los compañeros (jugadas.py: tiros de sus compañeros con él en pista y los que se esperaba
+# que metieran según el tipo de tiro; lo que mide la "conversión de asistencias potenciales" de stats.nba.com).
+# Backtest 2025-26 (2.672 titulares con 3+ asistencias): con los compañeros fríos en sus últimos 10 (10 % más frío,
+# 0.95 o menos de lo esperado) sus asistencias salieron un 6 % por encima de lo previsto y los "menos" del 60 %+
+# acertaron 59.3 % prometiendo 67.6 %; con los compañeros calientes, un 3 % por debajo.
+SUERTE_PENDIENTE = 0.6             # compañeros fríos: sus asistencias vuelven a subir
+SUERTE_PENDIENTE_CALIENTES = 0.25  # compañeros calientes: bajan menos de lo que suben las de los fríos
+SUERTE_TOPE = 0.08
+SUERTE_MIN_PARTIDOS = 5
 
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
@@ -614,6 +628,20 @@ def _tipos(ctx: Contexto, j: Jugador) -> None:
         j.factor_tipos = num / den
 
 
+def _suerte_companeros(j: Jugador) -> None:
+    prev = [p for p in j.partidos[:10] if p.get("comp_xfgm")]
+    if len(prev) < SUERTE_MIN_PARTIDOS:
+        return
+    metidas = sum(p["comp_fgm"] for p in prev)
+    esperadas = sum(p["comp_xfgm"] for p in prev)
+    if not esperadas or not metidas:
+        return
+    j.suerte_companeros = metidas / esperadas
+    j.asistencias_esperadas = sum(p["ast"] for p in prev) / len(prev) / j.suerte_companeros
+    pendiente = SUERTE_PENDIENTE if j.suerte_companeros < 1 else SUERTE_PENDIENTE_CALIENTES
+    j.factor_suerte = 1 + max(-SUERTE_TOPE, min(SUERTE_TOPE, pendiente * (1 - j.suerte_companeros)))
+
+
 def _es_estrella(recientes: list[dict]) -> bool:
     """El que más tiros usa de su equipo: 28+ minutos y 20+ jugadas de tiro (tiros + 0.44 libres + pérdidas) por 36'."""
     if len(recientes) < 3:
@@ -721,6 +749,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
                            f"{(j.factor_paliza - 1) * 100:+.0f}% de minutos si se rompe")
     _transicion(ctx, j)
     _tipos(ctx, j)
+    _suerte_companeros(j)
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
@@ -811,6 +840,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
             componentes[c]["altura"] = ajuste
         if j.bajas_rival and c in BAJAS_RIVAL:
             mu_final *= 1 + BAJAS_RIVAL[c] * min(len(j.bajas_rival), BAJAS_RIVAL_MAX)
+            componentes[c]["final"] = mu_final
+        if j.factor_suerte != 1.0 and c == "ast":
+            mu_final *= j.factor_suerte
             componentes[c]["final"] = mu_final
         if j.rival_cansado and c in RIVAL_CANSADO:
             mu_final *= 1 + RIVAL_CANSADO[c]
@@ -1131,16 +1163,35 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
                 out.append(f"El rival es #{pr} de {len(conc)} en {texto} que concede en total (#1 = el que más)")
     if j.rival_cansado:
         out.append("El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)")
-    # 5. Su zona de tiro principal contra lo que concede el rival ahí.
+    # 5. Sus dos zonas de tiro principales contra lo que concede el rival ahí, y los tiros libres que concede.
     if c in ("pts", "tpm") and j.zonas:
         zonas = {z: d for z, d in j.zonas.items() if c == "pts" or VALOR[z] == 3}
-        z, d = max(zonas.items(), key=lambda kv: kv[1]["reparto"])
-        rival_z = {t: v[z][0] for t, v in ctx.zona_rival.items() if z in v and t in equipos}
-        pz = _puesto(rival_z, j.opp_id)
-        if pz:
-            out.append(f"Su zona principal es {NOMBRE_ZONA[z]} ({d['reparto'] * 100:.0f}% de sus tiros, "
-                       f"{d['pct'] * 100:.0f}% de acierto); el rival es #{pz} de {len(rival_z)} en acierto que deja "
-                       f"ahí ({d['pct_rival'] * 100:.0f}%, liga {d['pct_liga'] * 100:.0f}%)")
+        for k, (z, d) in enumerate(sorted(zonas.items(), key=lambda kv: -kv[1]["reparto"])[:2]):
+            if k and d["reparto"] < 0.2:
+                break
+            rival_z = {t: v[z][0] for t, v in ctx.zona_rival.items() if z in v and t in equipos}
+            pz = _puesto(rival_z, j.opp_id)
+            if pz:
+                out.append(f"{'Su zona principal' if not k else 'Su segunda zona'} es {NOMBRE_ZONA[z]} "
+                           f"({d['reparto'] * 100:.0f}% de sus tiros, {d['pct'] * 100:.0f}% de acierto); el rival es "
+                           f"#{pz} de {len(rival_z)} en acierto que deja ahí ({d['pct_rival'] * 100:.0f}%, liga "
+                           f"{d['pct_liga'] * 100:.0f}%)")
+    if c == "pts":
+        libres = {t: d.get(j.grupo, {}).get("fta") for t, d in ctx.defensa.items()
+                  if t in equipos and d.get(j.grupo, {}).get("fta")}
+        pl = _puesto(libres, j.opp_id)
+        if pl:
+            out.append(f"El rival es #{pl} de {len(libres)} en tiros libres que concede a {GRUPOS_TEXTO[j.grupo]} "
+                       f"(#1 = el que más; {(libres[j.opp_id] - 1) * 100:+.0f}% frente a la media)")
+    # 5c. Asistencias "esperadas": las que tendría si sus compañeros metieran lo normal con él en pista.
+    if c == "ast" and j.asistencias_esperadas is not None:
+        reales = sum(p["ast"] for p in j.partidos[:10]) / len(j.partidos[:10])
+        texto = (f"Asistencias esperadas: {j.asistencias_esperadas:.1f} por partido si sus compañeros metieran lo "
+                 f"normal (tiene {reales:.1f}; con él en pista metieron el {j.suerte_companeros * 100:.0f}% de lo "
+                 f"esperado por tipo de tiro, últimos 10)")
+        if j.factor_suerte != 1.0:
+            texto += f"; ajuste aplicado {(j.factor_suerte - 1) * 100:+.1f}%"
+        out.append(texto)
     # 5b. Tipos de tiro (parecido a los "play types"): cómo tira y lo que deja el rival en su tipo principal.
     if c in ("pts", "tpm", "fgm") and j.mezcla_tiros:
         orden = sorted(j.mezcla_tiros.items(), key=lambda kv: -kv[1][0])[:3]

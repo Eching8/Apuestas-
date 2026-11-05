@@ -566,6 +566,23 @@ class TiposTiroTest(unittest.TestCase):
         self.assertEqual(f[("equipo:1", "recibe y tira")]["tpm"], 1)
 
 
+class SuerteCompanerosTest(unittest.TestCase):
+    def test_asistencias_esperadas(self):
+        from apuestas.nba.modelo import Jugador, _suerte_companeros
+        partidos = [{"ast": 6, "comp_fgm": 30, "comp_xfgm": 40.0} for _ in range(6)]
+        j = Jugador("x", "x", "1", "2", "G", partidos, 34, 3)
+        _suerte_companeros(j)
+        self.assertAlmostEqual(j.suerte_companeros, 0.75)
+        self.assertAlmostEqual(j.asistencias_esperadas, 8.0)        # 6 / 0.75
+        self.assertAlmostEqual(j.factor_suerte, 1.08)               # 0.6 × 0.25 = +15 %, con tope de +8 %
+        caliente = Jugador("y", "y", "1", "2", "G", [{"ast": 6, "comp_fgm": 44, "comp_xfgm": 40.0}] * 6, 34, 3)
+        _suerte_companeros(caliente)
+        self.assertAlmostEqual(caliente.factor_suerte, 0.975)       # 0.25 × -0.10
+        pocos = Jugador("z", "z", "1", "2", "G", partidos[:4], 34, 3)
+        _suerte_companeros(pocos)
+        self.assertIsNone(pocos.suerte_companeros)
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza

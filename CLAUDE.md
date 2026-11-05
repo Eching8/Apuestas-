@@ -65,7 +65,11 @@ frente a 66.3 % prometido). Si el rival jugó anoche y él no, +1.5 % de puntos 
 del rival en rebotes y rebotes ofensivos que concede en total, y **cómo tira** (tipos de tiro de ESPN agrupados como
 los "play types": recibe y tira, creado, penetración, corte, poste, palmeo, aro; `jugadas.parse_tipos`) con el puesto
 del rival en lo que deja en su tipo principal. Esto último solo explica: en 2025-26 no movió los puntos ni los triples
-frente a lo que ya preveía el modelo. Las asistencias potenciales solo están en stats.nba.com (no responde desde la nube). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+frente a lo que ya preveía el modelo. Las asistencias potenciales solo están en stats.nba.com (no responde desde la nube); en su lugar, **asistencias
+esperadas** (`modelo.SUERTE_*`): con la jugada a jugada se sabe cuántos tiros metieron sus compañeros con él en pista
+frente a los esperados por tipo de tiro; si vienen fríos, sus asistencias suben (+6 % en 2025-26; los "menos" de
+asistencias con compañeros fríos acertaban 59.3 % prometiendo 67.6 %, ahora 64.2 % frente a 66.6 %). En corto también
+da su segunda zona de tiro y el puesto del rival en tiros libres que concede a su posición. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
