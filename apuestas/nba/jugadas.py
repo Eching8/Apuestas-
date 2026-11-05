@@ -218,3 +218,88 @@ def guardar(conn, game_id: str, filas: list[dict]) -> None:
                trans_fga) VALUES (:game_id, :player_id, :team_id, :segundos, :dreb_op, :oreb_op, :dreb, :oreb,
                :trans_pts, :trans_fga)""",
         [{**f, "game_id": game_id} for f in filas])
+
+
+# --- Tipos de tiro (parecido a los "play types" de Synergy, desde el tipo de tiro de ESPN) ----------------------
+# ESPN describe cada tiro ("Pullup Jump Shot", "Cutting Dunk Shot"...). Se agrupan así:
+TIPOS_TIRO = ("recibe y tira", "creado", "penetración", "corte", "poste", "palmeo", "aro")
+
+SCHEMA_TIPOS = """
+CREATE TABLE IF NOT EXISTS nba_tiros_tipo (
+    game_id TEXT,
+    player_id TEXT,
+    team_id TEXT,
+    tipo TEXT,
+    fga INTEGER,
+    fgm INTEGER,
+    tpa INTEGER,
+    tpm INTEGER,
+    pts INTEGER,
+    asistidos INTEGER,
+    PRIMARY KEY (game_id, player_id, tipo)
+);
+"""
+
+
+def tipo_tiro(texto: str) -> str | None:
+    t = texto.lower()
+    if "heave" in t or "no shot" in t:
+        return None
+    if "putback" in t or "tip " in t or t.startswith("tip"):
+        return "palmeo"
+    if "alley oop" in t or "cutting" in t:
+        return "corte"
+    if "driving" in t or ("running" in t and ("layup" in t or "dunk" in t or "finger roll" in t)):
+        return "penetración"
+    if "turnaround" in t or "hook" in t:
+        return "poste"
+    if "pullup" in t or "step back" in t or "fade away" in t or "fadeaway" in t:
+        return "creado"
+    if "floating" in t:
+        return "penetración"
+    if "jump shot" in t:
+        return "recibe y tira"
+    if "layup" in t or "dunk" in t or "finger roll" in t:
+        return "aro"
+    return None
+
+
+def parse_tipos(summary: dict) -> list[dict]:
+    """Tiros de campo de cada jugador por tipo, y los de cada equipo (player_id = "equipo:<id>")."""
+    equipo_de = {}
+    for t in summary.get("boxscore", {}).get("players", []):
+        for g in t.get("statistics", []):
+            for a in g.get("athletes", []):
+                if a.get("athlete", {}).get("id"):
+                    equipo_de[str(a["athlete"]["id"])] = str(t["team"]["id"])
+    filas: dict[tuple, dict] = {}
+    for p in summary.get("plays") or []:
+        if not p.get("shootingPlay") or "free throw" in p["type"]["text"].lower():
+            continue
+        tipo = tipo_tiro(p["type"]["text"])
+        ids = _ids(p)
+        if tipo is None or not ids or ids[0] not in equipo_de:
+            continue
+        triple = (p.get("pointsAttempted") or 0) == 3 or "three point" in (p.get("text") or "").lower()
+        anota = bool(p.get("scoringPlay"))
+        asistido = anota and "assist" in (p.get("text") or "").lower()
+        tid = equipo_de[ids[0]]
+        for pid in (ids[0], f"equipo:{tid}"):
+            f = filas.setdefault((pid, tipo), {"player_id": pid, "team_id": tid, "tipo": tipo, "fga": 0, "fgm": 0,
+                                               "tpa": 0, "tpm": 0, "pts": 0, "asistidos": 0})
+            f["fga"] += 1
+            f["fgm"] += anota
+            f["tpa"] += triple
+            f["tpm"] += anota and triple
+            f["pts"] += (3 if triple else 2) if anota else 0
+            f["asistidos"] += asistido
+    return list(filas.values())
+
+
+def guardar_tipos(conn, game_id: str, filas: list[dict]) -> None:
+    conn.executescript(SCHEMA_TIPOS)
+    conn.execute("DELETE FROM nba_tiros_tipo WHERE game_id = ?", (game_id,))
+    conn.executemany(
+        """INSERT INTO nba_tiros_tipo (game_id, player_id, team_id, tipo, fga, fgm, tpa, tpm, pts, asistidos)
+           VALUES (:game_id, :player_id, :team_id, :tipo, :fga, :fgm, :tpa, :tpm, :pts, :asistidos)""",
+        [{**f, "game_id": game_id} for f in filas])

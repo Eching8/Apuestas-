@@ -34,6 +34,7 @@ def descargar_dia(espn: Espn, db: NbaDB, fecha: str, lesiones: bool = False) -> 
             if players:
                 db.save_box(g["id"], g["home"]["id"], players, parse_shots(resumen))
                 jugadas.guardar(db.conn, g["id"], jugadas.parse_jugadas(resumen))
+                jugadas.guardar_tipos(db.conn, g["id"], jugadas.parse_tipos(resumen))
                 n["nuevos"] += 1
         else:
             filas = parse_injuries(resumen)
@@ -73,17 +74,23 @@ def descargar_alturas(espn: Espn, db: NbaDB) -> int:
 def completar_jugadas(espn: Espn, db: NbaDB, desde: str, limite: int = 600) -> int:
     """Pide de nuevo el resumen de los partidos ya guardados sin jugada a jugada procesada (desde una fecha)."""
     db.conn.executescript(jugadas.SCHEMA)
+    db.conn.executescript(jugadas.SCHEMA_TIPOS)
     faltan = [r[0] for r in db.conn.execute(
         """SELECT g.id FROM nba_games g WHERE g.box_ok = 1 AND g.fecha >= ? AND g.season_type IN (2, 3)
-           AND NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id) ORDER BY g.fecha DESC""", (desde,))]
+           AND (NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id)
+                OR NOT EXISTS (SELECT 1 FROM nba_tiros_tipo t WHERE t.game_id = g.id))
+           ORDER BY g.fecha DESC""", (desde,))]
     hechos = 0
     for gid in faltan[:limite]:
         try:
-            filas = jugadas.parse_jugadas(espn.resumen(gid))
+            resumen = espn.resumen(gid)
+            filas = jugadas.parse_jugadas(resumen)
+            tipos = jugadas.parse_tipos(resumen)
         except Exception as e:   # un partido sin jugada a jugada no frena el resto
             log.warning("jugadas de %s: %s", gid, e)
             continue
         jugadas.guardar(db.conn, gid, filas or [])
+        jugadas.guardar_tipos(db.conn, gid, tipos or [])
         hechos += 1
         if hechos % 50 == 0:
             db.commit()
