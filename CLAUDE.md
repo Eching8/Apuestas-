@@ -69,7 +69,11 @@ frente a lo que ya preveía el modelo. Las asistencias potenciales solo están e
 esperadas** (`modelo.SUERTE_*`): con la jugada a jugada se sabe cuántos tiros metieron sus compañeros con él en pista
 frente a los esperados por tipo de tiro; si vienen fríos, sus asistencias suben (+6 % en 2025-26; los "menos" de
 asistencias con compañeros fríos acertaban 59.3 % prometiendo 67.6 %, ahora 64.2 % frente a 66.6 %). En corto también
-da su segunda zona de tiro y el puesto del rival en tiros libres que concede a su posición. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+da su segunda zona de tiro y el puesto del rival en tiros libres que concede a su posición. **Su propia puntería**
+(`modelo.PUNTERIA_*`): canastas en sus últimos 10 frente a las esperadas por sus tipos de tiro; corrige los puntos
+(±3 %) y un "menos" de puntos de un jugador que viene frío (0.95 o menos) lleva la alerta "viene fallando tiros que
+suele meter" y no entra (2025-26: 55.5 % frente a 65 % prometido). Probado y descartado: árbitros (no cambian tiros
+libres ni puntos) y peso defensivo de cada baja del rival (demasiado ruidoso). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las

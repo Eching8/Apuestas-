@@ -35,6 +35,7 @@ def descargar_dia(espn: Espn, db: NbaDB, fecha: str, lesiones: bool = False) -> 
                 db.save_box(g["id"], g["home"]["id"], players, parse_shots(resumen))
                 jugadas.guardar(db.conn, g["id"], jugadas.parse_jugadas(resumen))
                 jugadas.guardar_tipos(db.conn, g["id"], jugadas.parse_tipos(resumen))
+                jugadas.guardar_arbitros(db.conn, g["id"], jugadas.parse_arbitros(resumen))
                 n["nuevos"] += 1
         else:
             filas = parse_injuries(resumen)
@@ -77,7 +78,7 @@ def completar_jugadas(espn: Espn, db: NbaDB, desde: str, limite: int = 600) -> i
     db.conn.executescript(jugadas.SCHEMA_TIPOS)
     faltan = [r[0] for r in db.conn.execute(
         """SELECT g.id FROM nba_games g WHERE g.box_ok = 1 AND g.fecha >= ? AND g.season_type IN (2, 3)
-           AND (NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id AND j.comp_fga IS NOT NULL)
+           AND (NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id AND j.pts_contra IS NOT NULL)
                 OR NOT EXISTS (SELECT 1 FROM nba_tiros_tipo t WHERE t.game_id = g.id))
            ORDER BY g.fecha DESC""", (desde,))]
     hechos = 0
@@ -86,11 +87,13 @@ def completar_jugadas(espn: Espn, db: NbaDB, desde: str, limite: int = 600) -> i
             resumen = espn.resumen(gid)
             filas = jugadas.parse_jugadas(resumen)
             tipos = jugadas.parse_tipos(resumen)
+            arbitros = jugadas.parse_arbitros(resumen)
         except Exception as e:   # un partido sin jugada a jugada no frena el resto
             log.warning("jugadas de %s: %s", gid, e)
             continue
         jugadas.guardar(db.conn, gid, filas or [])
         jugadas.guardar_tipos(db.conn, gid, tipos or [])
+        jugadas.guardar_arbitros(db.conn, gid, arbitros)
         hechos += 1
         if hechos % 50 == 0:
             db.commit()

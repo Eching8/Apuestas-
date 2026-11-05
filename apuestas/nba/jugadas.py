@@ -37,10 +37,13 @@ CREATE TABLE IF NOT EXISTS nba_jugadas (
     comp_fga INTEGER,
     comp_fgm INTEGER,
     comp_xfgm REAL,
+    pts_favor REAL,
+    pts_contra REAL,
     PRIMARY KEY (game_id, player_id)
 );
 """
-COLUMNAS_NUEVAS = {"comp_fga": "INTEGER", "comp_fgm": "INTEGER", "comp_xfgm": "REAL"}
+COLUMNAS_NUEVAS = {"comp_fga": "INTEGER", "comp_fgm": "INTEGER", "comp_xfgm": "REAL", "pts_favor": "REAL",
+                   "pts_contra": "REAL"}
 
 # Acierto de la liga por tipo de tiro (2025-26 y el inicio de 2026-27, 1.408 partidos): (de 2, de 3).
 ACIERTO_TIPO = {"recibe y tira": (0.434, 0.368), "creado": (0.436, 0.332), "penetración": (0.547, 0.216),
@@ -118,7 +121,7 @@ def parse_jugadas(summary: dict) -> list[dict]:
         if pid not in filas:
             filas[pid] = {"player_id": pid, "team_id": equipo_de.get(pid, ""), "segundos": 0.0, "dreb_op": 0,
                           "oreb_op": 0, "dreb": 0, "oreb": 0, "trans_pts": 0, "trans_fga": 0, "comp_fga": 0,
-                          "comp_fgm": 0, "comp_xfgm": 0.0}
+                          "comp_fgm": 0, "comp_xfgm": 0.0, "pts_favor": 0, "pts_contra": 0}
         return filas[pid]
 
     for tid in tids:
@@ -171,6 +174,14 @@ def parse_jugadas(summary: dict) -> list[dict]:
                         fila(ids[0])["trans_pts"] += puntos
                     fila(f"equipo:{equipo}")["trans_pts"] += puntos
             # Solo tiros de campo: el modelo multiplica la tasa por los fallos de campo esperados del rival.
+            # Puntos de cada equipo con cada jugador en pista (para su impacto defensivo: con él y sin él).
+            if p.get("scoringPlay") and p.get("scoreValue"):
+                for pid in en_cancha.get(equipo, []):
+                    fila(pid)["pts_favor"] += p["scoreValue"]
+                for pid in en_cancha.get(rival[equipo], []):
+                    fila(pid)["pts_contra"] += p["scoreValue"]
+                fila(f"equipo:{equipo}")["pts_favor"] += p["scoreValue"]
+                fila(f"equipo:{rival[equipo]}")["pts_contra"] += p["scoreValue"]
             # Tiros de sus compañeros con él en pista y lo que se esperaba que metieran según el tipo de tiro: la
             # base de sus asistencias "esperadas" (ESPN solo apunta la asistencia si el tiro entra).
             if es_tiro and ids:
@@ -246,8 +257,9 @@ def guardar(conn, game_id: str, filas: list[dict]) -> None:
     conn.execute("DELETE FROM nba_jugadas WHERE game_id = ?", (game_id,))
     conn.executemany(
         """INSERT INTO nba_jugadas (game_id, player_id, team_id, segundos, dreb_op, oreb_op, dreb, oreb, trans_pts,
-               trans_fga, comp_fga, comp_fgm, comp_xfgm) VALUES (:game_id, :player_id, :team_id, :segundos, :dreb_op,
-               :oreb_op, :dreb, :oreb, :trans_pts, :trans_fga, :comp_fga, :comp_fgm, :comp_xfgm)""",
+               trans_fga, comp_fga, comp_fgm, comp_xfgm, pts_favor, pts_contra) VALUES (:game_id, :player_id, :team_id,
+               :segundos, :dreb_op, :oreb_op, :dreb, :oreb, :trans_pts, :trans_fga, :comp_fga, :comp_fgm, :comp_xfgm,
+               :pts_favor, :pts_contra)""",
         [{**f, "game_id": game_id} for f in filas])
 
 
@@ -334,3 +346,27 @@ def guardar_tipos(conn, game_id: str, filas: list[dict]) -> None:
         """INSERT INTO nba_tiros_tipo (game_id, player_id, team_id, tipo, fga, fgm, tpa, tpm, pts, asistidos)
            VALUES (:game_id, :player_id, :team_id, :tipo, :fga, :fgm, :tpa, :tpm, :pts, :asistidos)""",
         [{**f, "game_id": game_id} for f in filas])
+
+
+# --- Árbitros ------------------------------------------------------------------------------------------------
+# Se guardan, pero no entran en el modelo: en 2025-26 (1.126 partidos) los equipos arbitrales que más pitan no
+# dejaron más tiros libres ni más puntos de lo esperado. Tampoco el impacto defensivo con/sin cada jugador
+# (pts_favor / pts_contra) mejoró el ajuste por bajas del rival: con una temporada es demasiado ruidoso.
+SCHEMA_ARBITROS = """
+CREATE TABLE IF NOT EXISTS nba_arbitros (
+    game_id TEXT,
+    nombre TEXT,
+    PRIMARY KEY (game_id, nombre)
+);
+"""
+
+
+def parse_arbitros(summary: dict) -> list[str]:
+    return [o.get("displayName") or o.get("fullName") for o in (summary.get("gameInfo") or {}).get("officials") or []
+            if o.get("displayName") or o.get("fullName")]
+
+
+def guardar_arbitros(conn, game_id: str, nombres: list[str]) -> None:
+    conn.executescript(SCHEMA_ARBITROS)
+    conn.execute("DELETE FROM nba_arbitros WHERE game_id = ?", (game_id,))
+    conn.executemany("INSERT OR IGNORE INTO nba_arbitros (game_id, nombre) VALUES (?, ?)", [(game_id, n) for n in nombres])

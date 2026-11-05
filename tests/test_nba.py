@@ -583,6 +583,21 @@ class SuerteCompanerosTest(unittest.TestCase):
         self.assertIsNone(pocos.suerte_companeros)
 
 
+class PunteriaTest(unittest.TestCase):
+    def test_punteria_y_arbitros(self):
+        from apuestas.nba.jugadas import parse_arbitros
+        from apuestas.nba.modelo import Contexto, Jugador, _punteria
+        partidos = [{"game_id": f"g{i}"} for i in range(6)]
+        tipos = {f"g{i}": {"recibe y tira": {"fga": 10, "fgm": 2, "tpa": 10}} for i in range(6)}
+        ctx = Contexto(*[None] * 14)
+        ctx.tipos_jugador = {"x": tipos}
+        j = Jugador("x", "x", "1", "2", "G", partidos, 34, 3)
+        _punteria(ctx, j)
+        self.assertAlmostEqual(j.punteria, 12 / (60 * 0.368))
+        self.assertEqual(parse_arbitros({"gameInfo": {"officials": [{"displayName": "A"}, {"fullName": "B"}]}}),
+                         ["A", "B"])
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza
