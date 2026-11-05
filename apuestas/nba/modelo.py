@@ -378,6 +378,7 @@ class Jugador:
     bajas_rival_ids: list[str] = field(default_factory=list)
     sin_estrella: list[str] = field(default_factory=list)  # estrellas de su equipo que no juegan hoy
     factor_transicion: float = 1.0           # puntos según el contraataque que concede el rival (ver TRANSICION)
+    rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
     @property
@@ -425,6 +426,11 @@ TRANSICION_CORRE = 0.08
 TRANSICION_TOPE = 0.08
 K_TRANSICION = 10
 TRANSICION_ALTA = 1.12
+
+# Rival en el segundo partido de dos noches seguidas (y él descansado). 2024-26 (2.672 partidos de titulares, frente
+# a 15.030 con los dos descansados): +1.5 % de puntos y +2.3 % de asistencias por minuto; rebotes y triples, menos
+# de +1 %. Si los dos jugaron anoche, se compensa (ya hay -3 % de minutos por su propio cansancio).
+RIVAL_CANSADO = {"pts": 0.015, "fgm": 0.015, "ast": 0.02}
 
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
@@ -618,6 +624,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         j.notas.append(f"solo {len(con_equipo)} partidos con su equipo actual: su rol puede haber cambiado, "
                        "se da más peso a la línea de la casa")
     ayer = (date.fromisoformat(ctx.fecha) - timedelta(days=1)).isoformat()
+    j.rival_cansado = ctx.ultimo_partido.get(opp_id) == ayer and ctx.ultimo_partido.get(team_id) != ayer
     if ctx.ultimo_partido.get(team_id) == ayer and j.minutos > 28:
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
@@ -720,6 +727,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
             componentes[c]["altura"] = ajuste
         if j.bajas_rival and c in BAJAS_RIVAL:
             mu_final *= 1 + BAJAS_RIVAL[c] * min(len(j.bajas_rival), BAJAS_RIVAL_MAX)
+            componentes[c]["final"] = mu_final
+        if j.rival_cansado and c in RIVAL_CANSADO:
+            mu_final *= 1 + RIVAL_CANSADO[c]
             componentes[c]["final"] = mu_final
         if j.factor_transicion != 1.0 and c in ("pts", "fgm"):
             mu_final *= j.factor_transicion
@@ -985,12 +995,22 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
         elif fallos:
             texto += f" (falló con {', '.join(f'{valor(p, stat):g}' for p in fallos[:4])})"
         out.append(texto)
-    # 2. Con sus minutos normales.
-    normales = [p for p in j.partidos[:15] if p["minutes"] >= j.minutos - 4]
+    # 2. Con los minutos que se esperan hoy, esta temporada y la pasada (sirve sobre todo cuando le suben los
+    #    minutos por bajas: cómo le fue la última vez que jugó tanto).
+    umbral = j.minutos - 4
+    normales = [p for p in j.partidos[:15] if p["minutes"] >= umbral]
     if 3 <= len(normales) < len(j.partidos[:15]):
         h = sum(pasa(valor(p, stat)) for p in normales)
-        out.append(f"Con {j.minutos - 4:.0f}+ minutos (hoy se esperan {j.minutos:.0f}): {h} de {len(normales)} "
+        out.append(f"Con {umbral:.0f}+ minutos (hoy se esperan {j.minutos:.0f}): {h} de {len(normales)} "
                    "en sus últimos 15")
+    recientes = sum(p["minutes"] for p in j.partidos[:10]) / max(1, len(j.partidos[:10]))
+    if j.minutos >= recientes + 3:
+        largos = [p for p in j.partidos[:82] if p["minutes"] >= umbral]
+        if len(largos) >= 5:
+            h = sum(pasa(valor(p, stat)) for p in largos)
+            out.append(f"Hoy juega más que de costumbre ({j.minutos:.0f} min frente a {recientes:.0f}): con {umbral:.0f}+ "
+                       f"minutos, esta temporada y la pasada, la pasó {h} de {len(largos)} "
+                       f"({h / len(largos) * 100:.0f}%)")
     c = COMPONENTES[stat][0]
     # 3. Contra defensas fuertes en esa estadística (el tercio que menos concede, ~top 10).
     niveles = ctx.nivel.get(j.grupo, {}).get(c, {})
@@ -999,6 +1019,15 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
         h = sum(pasa(valor(p, stat)) for p in fuertes)
         out.append(f"Contra las ~10 mejores defensas en {_ORDINAL_STAT.get(c, c)} a {GRUPOS_TEXTO[j.grupo]}: "
                    f"{h} de {len(fuertes)} (últimos 40 partidos)")
+    # 3b. Las dos condiciones de hoy a la vez: una defensa como la de hoy y sus minutos.
+    hoy = niveles.get(j.opp_id)
+    ambas = [p for p in j.partidos[:60] if hoy and niveles.get(p["opp_id"]) == hoy and p["minutes"] >= umbral]
+    if len(ambas) >= 4:
+        h = sum(pasa(valor(p, stat)) for p in ambas)
+        media = sum(valor(p, stat) for p in ambas) / len(ambas)
+        plural = {"fuerte": "fuertes", "media": "medias", "débil": "débiles"}.get(hoy, hoy)
+        out.append(f"Contra defensas {plural} como la de hoy y con {umbral:.0f}+ minutos: {h} de {len(ambas)}, "
+                   f"con {media:.1f} de media (últimos 60 partidos)")
     # 4. Puesto del rival concediendo esa estadística a su posición.
     equipos = _equipos_temporada(ctx)
     concede = {t: d.get(j.grupo, {}).get(c) for t, d in ctx.defensa.items()
@@ -1008,6 +1037,16 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
         out.append(f"El rival es #{puesto} de {len(concede)} en {_ORDINAL_STAT.get(c, c)} que concede a "
                    f"{GRUPOS_TEXTO[j.grupo]} por minuto (#1 = el que más concede; "
                    f"{(concede[j.opp_id] - 1) * 100:+.0f}% frente a la media)")
+    # 4b. Rebotes: lo que concede el rival a todos (no solo a su posición) y en rebotes ofensivos.
+    if c == "reb":
+        for clave, texto in (("reb", "rebotes"), ("oreb", "rebotes ofensivos")):
+            conc = {t: v.get("defensa", {}).get(clave) for t, v in ctx.equipo_prom.items()
+                    if t in equipos and v.get("defensa", {}).get(clave)}
+            pr = _puesto(conc, j.opp_id)
+            if pr:
+                out.append(f"El rival es #{pr} de {len(conc)} en {texto} que concede en total (#1 = el que más)")
+    if j.rival_cansado:
+        out.append("El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)")
     # 5. Su zona de tiro principal contra lo que concede el rival ahí.
     if c in ("pts", "tpm") and j.zonas:
         zonas = {z: d for z, d in j.zonas.items() if c == "pts" or VALOR[z] == 3}
@@ -1021,7 +1060,7 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
     # 6. Oportunidades: de dónde sale el número.
     comp = pred.componentes.get(c, {})
     datos = comp.get("datos", {})
-    if c == "reb" and datos:
+    if c == "reb" and datos and not any(p.get("dreb_op") for p in j.partidos[:10]):
         out.append(f"Oportunidades: se esperan {datos['fallos_rival']:.0f} tiros fallados del rival y captura el "
                    f"{datos['pct_dreb'] * 100:.0f}% de los que caen con él en pista (+ {datos['oreb']:.1f} ofensivos)")
     elif c == "pts" and datos:
@@ -1038,9 +1077,9 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
     if c == "reb" and len(con_jug) >= 3:
         d_op = sum(p["dreb_op"] for p in con_jug)
         o_op = sum(p["oreb_op"] for p in con_jug)
-        texto = (f"Oportunidades de rebote: {(d_op + o_op) / len(con_jug):.1f} por partido en sus últimos "
-                 f"{len(con_jug)} ({d_op / len(con_jug):.1f} defensivas y {o_op / len(con_jug):.1f} ofensivas); convierte "
-                 f"el {sum(p['dreb'] for p in con_jug) / max(1, d_op) * 100:.0f}% y el "
+        texto = (f"Rebotes disponibles con él en pista (últimos {len(con_jug)}): {d_op / len(con_jug):.1f} tiros "
+                 f"fallados del rival y {o_op / len(con_jug):.1f} de su equipo por partido; se queda el "
+                 f"{sum(p['dreb'] for p in con_jug) / max(1, d_op) * 100:.0f}% y el "
                  f"{sum(p['oreb'] for p in con_jug) / max(1, o_op) * 100:.0f}%")
         fallos = _por_equipo_temporada(ctx, "oreb_op", propio=True)
         if j.opp_id in fallos:

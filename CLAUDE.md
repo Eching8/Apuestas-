@@ -59,7 +59,10 @@ y no entra (backtest 2025-26: 63.8 % frente a 66 % prometido; PRA 59.8 %). **Jug
 por jugador y partido (equipos ajustados a los "fast break points" oficiales). Los puntos se ajustan por el
 contraataque que concede el rival (`modelo.TRANSICION_*`), y un "menos" de puntos contra un rival que concede 12 %+
 más contraataque que la media lleva la alerta "el rival concede mucho contraataque" y no entra (2025-26: 58.9 %
-frente a 66.3 % prometido). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+frente a 66.3 % prometido). Si el rival jugó anoche y él no, +1.5 % de puntos y +2 % de asistencias
+(`modelo.RIVAL_CANSADO`). "En corto" también da el acierto con los minutos de hoy contando la temporada pasada
+(cuando le suben los minutos por bajas), el acierto con defensa como la de hoy y sus minutos a la vez, y el puesto
+del rival en rebotes y rebotes ofensivos que concede en total. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
