@@ -77,7 +77,11 @@ libres ni puntos) y peso defensivo de cada baja del rival (demasiado ruidoso). *
 pérdidas** tienen su propio análisis: oportunidades reales con él en pista (pérdidas y tiros de 2 del rival), puesto
 del rival en balones que pierde, tiros de 2 y tiros cerca del aro, y pérdidas que provoca; su calibración es propia
 (`modelo.CALIBRACION_STAT`: con 0.9 salían conservadoras). Sus líneas de la casa solo llegan con SportsGameOdds o con
-The Odds API si `ODDS_API_DEFENSIVAS=1` (cuesta más créditos). Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+The Odds API si `ODDS_API_DEFENSIVAS=1` (cuesta más créditos). **El usuario sigue con el plan gratuito de The Odds
+API** (5 nov 2026): los créditos se racionan solos (`theodds.partidos_hoy`: los que quedan entre los días que faltan
+del mes) y, si no alcanzan, se piden primero los partidos más parejos. Los partidos sin líneas siguen teniendo picks
+seguros (líneas alternativas) y bet builders, que no necesitan la línea de la casa; cuando arme combinadas de líneas
+principales de esos partidos, pedirle al usuario las cuotas de Betano. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
