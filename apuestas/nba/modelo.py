@@ -404,6 +404,7 @@ class Jugador:
     asistencias_esperadas: float | None = None   # sus asistencias por partido si sus compañeros tiraran a su nivel
     factor_suerte: float = 1.0               # corrección de sus asistencias por esa racha (ver SUERTE_ASISTENCIAS)
     factor_tipos: float = 1.0                # lo que deja el rival en sus tipos de tiro frente a la media
+    punteria: float | None = None            # sus canastas / las esperadas por tipo de tiro (últimos 10)
     rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
@@ -642,6 +643,31 @@ def _suerte_companeros(j: Jugador) -> None:
     j.factor_suerte = 1 + max(-SUERTE_TOPE, min(SUERTE_TOPE, pendiente * (1 - j.suerte_companeros)))
 
 
+# Su propia puntería: canastas en sus últimos 10 frente a las esperadas por tipo de tiro (2 o 3). Backtest 2025-26
+# (4.992 titulares): los fríos (25 % más frío, 0.95 o menos) anotaron un 1.3 % más de lo previsto y los calientes
+# (10 % más caliente) un 2 % menos; los "menos" de puntos del 60 %+ de un jugador frío acertaron 54.3 % prometiendo
+# 65.0 % (n = 177): vuelve a meter lo de siempre.
+PUNTERIA_PENDIENTE = 0.1
+PUNTERIA_TOPE = 0.03
+PUNTERIA_FRIA = 0.95
+
+
+def _punteria(ctx: Contexto, j: Jugador) -> None:
+    from .jugadas import ACIERTO_TIPO
+    partidos = ctx.tipos_jugador.get(j.player_id, {})
+    ult = [partidos[p["game_id"]] for p in j.partidos[:10] if p["game_id"] in partidos]
+    if len(ult) < 5:
+        return
+    metidas = esperadas = 0.0
+    for tipos in ult:
+        for tipo, r in tipos.items():
+            p2, p3 = ACIERTO_TIPO.get(tipo, (0.5, 0.35))
+            metidas += r["fgm"]
+            esperadas += (r["fga"] - r["tpa"]) * p2 + r["tpa"] * p3
+    if esperadas >= 10:
+        j.punteria = metidas / esperadas
+
+
 def _es_estrella(recientes: list[dict]) -> bool:
     """El que más tiros usa de su equipo: 28+ minutos y 20+ jugadas de tiro (tiros + 0.44 libres + pérdidas) por 36'."""
     if len(recientes) < 3:
@@ -750,6 +776,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
     _transicion(ctx, j)
     _tipos(ctx, j)
     _suerte_companeros(j)
+    _punteria(ctx, j)
     j.zonas = perfil_zonas(ctx, player_id, opp_id)
     if player_id in ctx.altura and ctx.altura_rival.get(opp_id, {}).get(j.grupo):
         j.diferencia_altura = ctx.altura[player_id] - ctx.altura_rival[opp_id][j.grupo]
@@ -843,6 +870,9 @@ def predecir(ctx: Contexto, j: Jugador, stat: str) -> Prediccion:
             componentes[c]["final"] = mu_final
         if j.factor_suerte != 1.0 and c == "ast":
             mu_final *= j.factor_suerte
+            componentes[c]["final"] = mu_final
+        if j.punteria is not None and c in ("pts", "fgm"):
+            mu_final *= 1 + max(-PUNTERIA_TOPE, min(PUNTERIA_TOPE, PUNTERIA_PENDIENTE * (1 - j.punteria)))
             componentes[c]["final"] = mu_final
         if j.rival_cansado and c in RIVAL_CANSADO:
             mu_final *= 1 + RIVAL_CANSADO[c]
@@ -1183,6 +1213,11 @@ def argumentos(ctx: Contexto, j: Jugador, stat: str, line: float, lado: str, pre
         if pl:
             out.append(f"El rival es #{pl} de {len(libres)} en tiros libres que concede a {GRUPOS_TEXTO[j.grupo]} "
                        f"(#1 = el que más; {(libres[j.opp_id] - 1) * 100:+.0f}% frente a la media)")
+    # 5b2. Su puntería reciente frente a la esperada por sus tipos de tiro.
+    if c in ("pts", "fgm") and j.punteria is not None:
+        out.append(f"Puntería: en sus últimos 10 metió el {j.punteria * 100:.0f}% de las canastas esperadas por sus tipos "
+                   f"de tiro" + (" (viene frío: suele volver a su nivel)" if j.punteria < PUNTERIA_FRIA else
+                                 " (viene caliente: suele bajar un poco)" if j.punteria > 1.15 else ""))
     # 5c. Asistencias "esperadas": las que tendría si sus compañeros metieran lo normal con él en pista.
     if c == "ast" and j.asistencias_esperadas is not None:
         reales = sum(p["ast"] for p in j.partidos[:10]) / len(j.partidos[:10])
@@ -1419,6 +1454,8 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         + (["menos de una estrella al inicio de temporada"]
            if lado == "menos" and _menos_estrella_inicio(ctx, j, stat) else [])
         + (_falla_en_normales(ctx, j, stat, line) if lado == "menos" else [])
+        + (["viene fallando tiros que suele meter"] if lado == "menos" and "pts" in COMPONENTES[stat]
+           and j.punteria is not None and j.punteria < PUNTERIA_FRIA else [])
         + (["el rival concede mucho contraataque"] if lado == "menos" and "pts" in COMPONENTES[stat]
            and (j.transicion_rival or 1) >= TRANSICION_ALTA else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),
