@@ -598,6 +598,21 @@ class PunteriaTest(unittest.TestCase):
                          ["A", "B"])
 
 
+class DefensivasTest(unittest.TestCase):
+    def test_lineas_defensivas_y_calibracion(self):
+        from apuestas.nba import theodds
+        from apuestas.nba.modelo import CALIBRACION, CALIBRACION_STAT
+        ev = {"bookmakers": [{"key": "x", "markets": [{"key": "player_steals", "outcomes": [
+            {"name": "Over", "description": "Jordan Walsh", "point": 0.5, "price": 1.57},
+            {"name": "Under", "description": "Jordan Walsh", "point": 0.5, "price": 2.2}]}]}]}
+        fila = theodds.parse_props(ev)[0]
+        self.assertEqual((fila["stat"], fila["line"], fila["over_odd"]), ("steals", 0.5, 1.57))
+        self.assertNotIn("player_steals", theodds.TheOddsApi("k").mercados)
+        self.assertIn("player_steals", theodds.TheOddsApi("k", defensivas=True).mercados)
+        self.assertEqual(CALIBRACION_STAT["steals"], 1.0)
+        self.assertEqual(CALIBRACION_STAT.get("points", CALIBRACION), 0.9)
+
+
 class PalizaTest(unittest.TestCase):
     def test_factor(self):
         from apuestas.nba.modelo import factor_paliza

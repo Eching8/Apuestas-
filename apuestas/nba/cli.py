@@ -127,7 +127,7 @@ def cmd_analizar(args, cfg: Config, db: Database) -> int:
             sin_emparejar = [f"SIN LÍNEAS DE LA CASA HOY: SportsGameOdds no respondió ({str(exc)[:120]})"]
         if not eventos and cfg.odds_api_key:
             try:
-                eventos = TheOddsApi(cfg.odds_api_key).eventos(*ventana)
+                eventos = TheOddsApi(cfg.odds_api_key, defensivas=cfg.odds_api_defensivas).eventos(*ventana)
                 sin_emparejar = ["Líneas de The Odds API (SportsGameOdds sin respuesta)"] if eventos else sin_emparejar
             except Exception as exc:   # sin líneas, el informe sale igual con lo que no depende de la casa
                 log.warning("The Odds API no respondió (%s)", exc)

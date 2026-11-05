@@ -26,7 +26,8 @@ from .zonas import VALOR
 CAMPOS_EQUIPO = ("min", "fga", "fgm", "tpa", "tpm", "fta", "ftm", "oreb", "dreb", "reb", "ast", "stl", "blk", "tov")
 FT_LIGA = 0.78
 K_PARTIDOS = 3.0
-USAR_JUGADAS = True   # oportunidades de rebote reales (jugada a jugada) en vez de fallos del rival × minutos   # partidos "virtuales" de media de su posición que se suman a cada tasa del jugador
+USAR_JUGADAS = True
+USAR_JUGADAS_DEF = True   # pérdidas y tiros de 2 del rival con él en pista para robos y tapones   # oportunidades de rebote reales (jugada a jugada) en vez de fallos del rival × minutos   # partidos "virtuales" de media de su posición que se suman a cada tasa del jugador
 
 
 # --- Equipos --------------------------------------------------------------------------
@@ -101,6 +102,9 @@ def oportunidades(p: dict, mio: dict | None, rival: dict | None) -> dict[str, tu
     if USAR_JUGADAS and p.get("dreb_op") and p.get("oreb_op") is not None and p["minutes"] > 0:
         out["dreb"] = (p["dreb"], p["dreb_op"])
         out["oreb"] = (p["oreb"], p["oreb_op"])
+    if USAR_JUGADAS_DEF and p.get("stl_op") and p.get("blk_op") and p["minutes"] > 0:
+        out["stl"] = (p["stl"], p["stl_op"])
+        out["blk"] = (p["blk"], p["blk_op"])
     return out
 
 

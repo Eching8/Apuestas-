@@ -34,6 +34,8 @@ jobs:
       SPORTSGAMEODDS_KEY: ${{ secrets.SPORTSGAMEODDS_KEY }}
       # Respaldo si SportsGameOdds no responde (sin cupo): The Odds API. Vacío = sin respaldo.
       ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+      # "1" (variable del repositorio) para pedir también robos, tapones, robos+tapones y pérdidas (más créditos).
+      ODDS_API_DEFENSIVAS: ${{ vars.ODDS_API_DEFENSIVAS }}
       APUESTAS_TZ: America/Bogota
     steps:
       - uses: actions/checkout@v4
