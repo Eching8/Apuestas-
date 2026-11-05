@@ -1,0 +1,37 @@
+{
+ "fecha": "2026-11-05",
+ "apuestas": [
+  {
+   "nombre": "Agresiva doble bet builder 7.86",
+   "cuota": 7.86,
+   "prob": 0.13,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Bam Adebayo",
+     "stat": "threes",
+     "lado": "menos",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Brandin Podziemski",
+     "stat": "points",
+     "lado": "más",
+     "linea": 16.5
+    },
+    {
+     "jugador": "Miles Bridges",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Wendell Carter Jr.",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    }
+   ]
+  }
+ ]
+}
