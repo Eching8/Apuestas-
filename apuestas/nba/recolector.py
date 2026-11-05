@@ -73,11 +73,11 @@ def descargar_alturas(espn: Espn, db: NbaDB) -> int:
 
 def completar_jugadas(espn: Espn, db: NbaDB, desde: str, limite: int = 600) -> int:
     """Pide de nuevo el resumen de los partidos ya guardados sin jugada a jugada procesada (desde una fecha)."""
-    db.conn.executescript(jugadas.SCHEMA)
+    jugadas.preparar(db.conn)
     db.conn.executescript(jugadas.SCHEMA_TIPOS)
     faltan = [r[0] for r in db.conn.execute(
         """SELECT g.id FROM nba_games g WHERE g.box_ok = 1 AND g.fecha >= ? AND g.season_type IN (2, 3)
-           AND (NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id)
+           AND (NOT EXISTS (SELECT 1 FROM nba_jugadas j WHERE j.game_id = g.id AND j.comp_fga IS NOT NULL)
                 OR NOT EXISTS (SELECT 1 FROM nba_tiros_tipo t WHERE t.game_id = g.id))
            ORDER BY g.fecha DESC""", (desde,))]
     hechos = 0
