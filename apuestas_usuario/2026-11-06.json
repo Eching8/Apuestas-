@@ -1,0 +1,85 @@
+{
+ "fecha": "2026-11-06",
+ "apuestas": [
+  {
+   "nombre": "Agresiva 6 bet builders 10.61",
+   "cuota": 10.61,
+   "prob": 0.05,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "VJ Edgecombe",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Donovan Mitchell",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "RJ Barrett",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Ryan Rollins",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Jonathan Kuminga",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "LaMelo Ball",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Deni Avdija",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Matisse Thybulle",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "De'Andre Hunter",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Dylan Harper",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "CJ McCollum",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 0.5
+    },
+    {
+     "jugador": "Kyshawn George",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 2.5
+    }
+   ]
+  }
+ ]
+}
