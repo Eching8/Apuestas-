@@ -26,7 +26,13 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
 5. **Ninguna pata "moneda al aire"**: si una pata queda por debajo de ~60 % o la casa no ofrece la línea,
    cambiarla por la siguiente más segura de la lista, no por la que más paga.
 6. Si el usuario pide algo agresivo (cuota 30+), avisar de la probabilidad real y armarlo igual con estas
-   reglas, sin meter más de 2 patas del mismo partido.
+   reglas, sin meter más de 2 patas del mismo partido. **Agresivas (6 nov 2026):** no tenerle miedo a líneas más
+   altas que la mínima de Betano si el análisis las respalda (lo pidió él: "si me explicas bien que se le espera
+   tanto, le apuesto aunque tenga desventaja"). Ahí valen patas del 60 %+ (no monedas al aire, nunca bajo ~58 %),
+   cada una explicada al estilo de "En corto" (esperado frente a la línea, acierto con sus minutos y contra defensas
+   como la de hoy, puesto del rival, zona/tipo de tiro, oportunidades, bajas). Él manda la combinada con las líneas
+   de Betano y se le cambian las patas flojas por otras agresivas bien respaldadas, no por la que más paga. Las
+   reglas 7-9 (dinero real) siguen igual.
 
 - **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
