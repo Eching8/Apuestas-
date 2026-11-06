@@ -237,15 +237,20 @@ class ModeloTest(unittest.TestCase):
             ctx = construir_contexto(db.conn, FECHA)
             j = preparar_jugador(ctx, "a1", "Ángel Pérez Jr.", "1", "2")
             self.assertTrue(es_titular(j))
-            s = {x.stat: x for x in seguras(ctx, j, 0.85)}
-            # Titular con ~25 puntos: línea de puntos bastante por debajo de su media, al 85 % o más.
+            # Sin línea de la casa no se propone nada por debajo de la mínima que ofrecería (estimada).
+            from apuestas.nba.modelo import piso_casa, predecir
+            piso = piso_casa(j, "points", predecir(ctx, j, "points").mu)
+            self.assertTrue(all(x.line >= piso for x in seguras(ctx, j, 0.85) if x.stat == "points"))
+            # Con la principal de la casa en 17.5 (mínima 16.5): línea bastante por debajo de su media, al 85 %+.
+            s = {x.stat: x for x in seguras(ctx, j, 0.85, {("a1", "points"): 17.5})}
             self.assertIn("points", s)
+            self.assertGreaterEqual(s["points"].line, 16.5)
             self.assertGreaterEqual(s["points"].prob, 0.85)
             self.assertLess(s["points"].line, s["points"].mu)
             self.assertAlmostEqual(s["points"].cuota_minima, 1 / s["points"].prob)
             # Con menos de 30 minutos esperados no hay picks seguros.
             j.minutos = 25
-            self.assertEqual(seguras(ctx, j, 0.85), [])
+            self.assertEqual(seguras(ctx, j, 0.85, {("a1", "points"): 17.5}), [])
 
     def test_columna_tipo_en_bases_viejas(self):
         import sqlite3
@@ -792,5 +797,10 @@ class BuilderTest(unittest.TestCase):
         self.assertLess(p, 0.75 ** 4 + 0.06)
         from apuestas.nba.builder import linea_minima_casa
         self.assertEqual([linea_minima_casa(x) for x in (5.5, 8.5, 25.5, 32.5)], [4.5, 7.5, 23.5, 29.5])
+        from types import SimpleNamespace as N
+        from apuestas.nba.modelo import piso_casa
+        j = N(partidos=[{"pts": 12} for _ in range(10)])
+        self.assertEqual(piso_casa(j, "points", 12.0, 13.5), 12.5)     # con la principal de la casa
+        self.assertEqual(piso_casa(j, "points", 12.0), 11.5)            # estimada 12.5 -> mínima 11.5
         sola = prob_conjunta(piernas[:1], sims=40000)
         self.assertAlmostEqual(sola, 0.75, delta=0.01)

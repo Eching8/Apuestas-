@@ -1446,8 +1446,35 @@ class Segura:
         return 1 / self.prob
 
 
-def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA) -> list[Segura]:
-    """Para titulares estables, la línea de "más de" más alta que pasa con al menos esa probabilidad."""
+def linea_minima_casa(principal: float) -> float:
+    """La línea alternativa más baja que suele ofrecer la casa: la principal menos ~10 % (al menos 1).
+    27 oct 2026, Betano: Cade 8.5 asistencias -> 8+, Brunson 25.5 puntos -> 24+, Dončić 32.5 -> 30+,
+    Reaves 5.5 asistencias -> 5+ (en rebotes y en algunos puntos ofrece incluso algo más bajo)."""
+    return principal - max(1, math.floor(0.1 * principal))
+
+
+# Sin línea principal de la casa (p. ej. partidos sin líneas por el racionamiento de The Odds API) se estima: la
+# principal suele quedar en la media entre lo que espera el modelo y su media de los últimos 10. Contra las líneas
+# mínimas de Betano del 6 nov 2026 (12 props) la estimación acierta en 3 de cada 4 o queda por encima (se puede jugar);
+# con un punto más de margen no quedaba ningún bet builder ni pick seguro en 9 partidos, así que no se suma margen.
+MARGEN_SIN_LINEA = 0.0
+PROB_JUGABLE = 0.75   # pick "seguro" a la línea mínima de la casa cuando no hay ninguna al 85 %
+
+
+def piso_casa(j: Jugador, stat: str, mu: float, principal: float | None = None) -> float:
+    """La línea más baja de "más de" que se puede proponer: la mínima que ofrecería la casa."""
+    if principal is not None:
+        return linea_minima_casa(principal)
+    ult = j.partidos[:10]
+    media = sum(valor(p, stat) for p in ult) / len(ult) if ult else mu
+    estimada = math.floor((mu + media) / 2) + 0.5
+    return linea_minima_casa(estimada) + MARGEN_SIN_LINEA
+
+
+def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA,
+            principales: dict | None = None) -> list[Segura]:
+    """Para titulares estables, la línea de "más de" más alta que pasa con al menos esa probabilidad, sin bajar de
+    la mínima que ofrece la casa (si la línea queda por debajo, no es un pick seguro que se pueda jugar)."""
     if j.minutos < MIN_SEGURA or not es_titular(j):
         return []
     out = []
@@ -1459,12 +1486,23 @@ def seguras(ctx: Contexto, j: Jugador, objetivo: float = PROB_SEGURA) -> list[Se
         if media < minimo:
             continue
         pred = predecir(ctx, j, stat)
+        piso = piso_casa(j, stat, pred.mu, (principales or {}).get((j.player_id, stat)))
+        ultima = None
         for k in range(int(pred.mu), -1, -1):
+            if k + 0.5 < piso:
+                break
             p = _prob_jugador(j, stat, k + 0.5, "más", prob_lados(k + 0.5, pred.mu, pred.var)[0])
+            ultima = (k + 0.5, p)
             if p >= objetivo:
                 out.append(Segura(j.player_id, j.nombre, stat, k + 0.5, p, pred.mu, media,
                                   _aciertos(ult, stat, k + 0.5, "más")))
                 break
+        else:
+            ultima = None
+        # La casa no ofrece una línea tan baja como para el 85 %: la más baja que sí ofrece, si llega a PROB_JUGABLE.
+        if ultima and ultima[1] < objetivo and ultima[1] >= PROB_JUGABLE:
+            out.append(Segura(j.player_id, j.nombre, stat, ultima[0], ultima[1], pred.mu, media,
+                              _aciertos(ult, stat, ultima[0], "más")))
     return out
 
 
