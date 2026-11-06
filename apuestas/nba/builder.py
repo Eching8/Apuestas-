@@ -18,11 +18,14 @@ from dataclasses import dataclass, field
 from statistics import NormalDist
 
 from .analizador import Partido
-from .modelo import (Contexto, Jugador, NOMBRES, _aciertos, _prob_jugador, alertas, predecir, prob_lados, valor,
+from .modelo import (Contexto, linea_minima_casa, piso_casa, Jugador, NOMBRES, _aciertos, _prob_jugador, alertas, predecir, prob_lados, valor,
                      vetada)
 
 PROB_PIERNA = 0.72
 PIERNAS = 4
+# Con las líneas mínimas de la casa (piso_casa) muchos partidos no tienen 4 piernas del 72 %+ (6 nov 2026: ninguno de
+# 9): entonces el bet builder va con 3, que acierta más a menudo.
+PIERNAS_MIN = 3
 SIMULACIONES = 20000
 # Media mínima en sus últimos 10 para considerar la estadística.
 MINIMOS = {"points": 10, "assists": 3, "rebounds": 5, "threes": 1.5}
@@ -58,13 +61,6 @@ class Builder:
         return 1 / self.prob if self.prob else float("inf")
 
 
-def linea_minima_casa(principal: float) -> float:
-    """La línea alternativa más baja que suele ofrecer la casa: la principal menos ~10 % (al menos 1).
-    27 oct 2026, Betano: Cade 8.5 asistencias -> 8+, Brunson 25.5 puntos -> 24+, Dončić 32.5 -> 30+,
-    Reaves 5.5 asistencias -> 5+ (en rebotes y en algunos puntos ofrece incluso algo más bajo)."""
-    return principal - max(1, math.floor(0.1 * principal))
-
-
 # Con 3+ partidos esta temporada, la línea tiene que haberla pasado en al menos 2 de cada 3; si no, se prueba
 # una más baja (sin bajar de la mínima de la casa). Backtest 2025-26: inicio (25 oct-20 nov) prometían 50.9 % y
 # acertaron 61.0 % (sin el filtro, 48.1 % y 56.4 %); diciembre, 51.6 % y 55.8 % (sin él, 49.3 % y 52.9 %). Dar
@@ -85,8 +81,7 @@ def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
         if vetada(j.nombre, stat) or sum(valor(p, stat) for p in ult) / len(ult) < minimo:
             continue
         pred = predecir(ctx, j, stat)
-        principal = (principales or {}).get((j.player_id, stat))
-        piso = linea_minima_casa(principal) if principal is not None else -1
+        piso = piso_casa(j, stat, pred.mu, (principales or {}).get((j.player_id, stat)))
         actual = [x for x in j.partidos if x["season"] == ctx.temporada]
         for k in range(int(pred.mu), -1, -1):
             if k + 0.5 < piso:
@@ -143,7 +138,7 @@ def builder(ctx: Contexto, part: Partido, n: int = PIERNAS, objetivo: float = PR
             elegidas.append(p)
         if len(elegidas) == n:
             break
-    if len(elegidas) < n:
+    if len(elegidas) < min(n, PIERNAS_MIN):
         return None
     return Builder(part, elegidas, prob_conjunta(elegidas))
 

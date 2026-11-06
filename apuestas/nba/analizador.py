@@ -131,8 +131,9 @@ def analizar(db: NbaDB, fecha: str, min_partidos: int = 8, min_minutos: float = 
                     and hist[0]["fecha"] >= hace_3_semanas):
                 jugador(pid)
         part.evaluaciones.sort(key=lambda e: e.prob, reverse=True)
+        principales = {(e.player_id, e.stat): e.line for e in part.evaluaciones}
         for j in part.jugadores.values():
-            part.seguras += seguras(ctx, j, prob_segura)
+            part.seguras += seguras(ctx, j, prob_segura, principales)
         part.seguras.sort(key=lambda s: (s.prob, s.line), reverse=True)
         partidos.append(part)
     return partidos, ctx

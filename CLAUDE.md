@@ -81,7 +81,12 @@ The Odds API si `ODDS_API_DEFENSIVAS=1` (cuesta más créditos). **El usuario si
 API** (5 nov 2026): los créditos se racionan solos (`theodds.partidos_hoy`: los que quedan entre los días que faltan
 del mes) y, si no alcanzan, se piden primero los partidos más parejos. Los partidos sin líneas siguen teniendo picks
 seguros (líneas alternativas) y bet builders, que no necesitan la línea de la casa; cuando arme combinadas de líneas
-principales de esos partidos, pedirle al usuario las cuotas de Betano. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
+principales de esos partidos, pedirle al usuario las cuotas de Betano. **Líneas mínimas de Betano** (6 nov 2026: Betano
+solo abre sus alternativas ~2 por debajo de la principal en puntos y 1 en asistencias y rebotes; las patas del bet
+builder a 8+ o 23+ no existían): picks seguros y bet builders nunca proponen una línea por debajo de la mínima que
+ofrecería la casa (`modelo.piso_casa`, estimada si no hay línea); el bet builder puede ir con 3 patas, y si a esa
+mínima no hay pick al 85 %, sale la mínima con su probabilidad real si pasa del 75 %. Cuando el usuario mande las
+líneas de Betano, evaluar esas exactas y cambiar las que bajen del 70 %, no forzarlas. Cada apuesta que comparta va a `apuestas_usuario/AAAA-MM-DD.json` (`apuestas/nba/usuario.py`) para
 seguirla; hasta que diga lo contrario son de prueba (empieza con dinero real el 30 oct o el 2 nov).
 
 Estas reglas salen de un solo día de resultados: revisar en el acumulado del informe ("Acumulado de las
