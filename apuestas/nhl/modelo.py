@@ -58,13 +58,20 @@ K_PP_MIN = 8.0             # minutos virtuales de power play con la tasa de la l
 # Contracción hacia la media de su posición, en partidos "virtuales" con la tasa de la liga. Los goles y las
 # asistencias son raros y ruidosos: sin contraerlos más, el backtest de 2025-26 esperaba 1.22 puntos de los mejores
 # (hubo 1.06) y 0.21 de los que casi no anotan (hubo 0.27).
-K_PRIOR = {"sog": 2.0, "g": 2.0, "a": 2.0, "bs": 2.0, "hits": 2.0}
+# Backtest (log-loss total): 2 partidos en todo 0.5721; goles y asistencias 10, bloqueados y hits 3: 0.5698 (puntos
+# 0.6132 -> 0.6100, goles 0.4160 -> 0.4098, asistencias 0.5443 -> 0.5395). El % de tiro contraído (K_TIRO_PCT) dio
+# lo mismo o algo peor y queda apagado.
+K_PRIOR = {"sog": 2.0, "g": 10.0, "a": 10.0, "bs": 3.0, "hits": 3.0}
 # Goles = tiros × % de tiro: el % de tiro del jugador se contrae hacia el de la liga con K_TIRO_PCT tiros virtuales.
 K_TIRO_PCT: float | None = None
-PESO_MODELO = 0.75
-# Calibración (contracción hacia 50 %) por estadística: backtest de 2025-26 (ver README, "NHL").
-CALIBRACION = 0.9
-CALIBRACION_STAT: dict[str, float] = {}
+# Peso del modelo frente al acierto real del jugador sobre la línea en sus últimos 15. Backtest 2025-26 (log-loss):
+# 0.6 -> 0.5748, 0.75 -> 0.5733, 0.9 -> 0.5724, 1.0 -> 0.5721: en la NHL ese acierto solo mete ruido (con líneas de
+# 0.5 y 1.5, 15 partidos dicen poco). El acierto se sigue usando para elegir jugadores constantes (7+ de 10).
+PESO_MODELO = 1.0
+# Calibración (contracción hacia 50 %) por estadística, la que minimiza el log-loss en 2025-26 (`nhl backtest
+# --sin-calibrar`): casi 1 en todo una vez contraídos goles y asistencias (K_PRIOR).
+CALIBRACION = 1.0
+CALIBRACION_STAT: dict[str, float] = {"blocked": 0.94, "goals": 0.98, "assists": 0.99, "saves": 1.0}
 ESTADOS_FUERA = ("out", "injured reserve", "suspen", "doubtful")
 
 # Factores del hockey. Cada uno con su backtest (2025-26); los que no mejoraron quedan en 0 / desactivados y solo
