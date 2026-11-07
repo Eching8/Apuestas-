@@ -164,6 +164,10 @@ MENOS_ANOTACION_PROB = 0.75
 MENOS_ANOTACION_ACIERTOS = 8
 
 
+# Betano no ofrece "no anota" (como en la NFL): los "menos de 0.5 goles" no entran en combinadas aunque sean probables.
+NO_OFRECIDAS = {("goals", "menos")}
+
+
 def menos_aceptable(e: Evaluacion) -> bool:
     if e.lado != "menos" or e.stat not in STATS_ANOTACION:
         return True
@@ -186,7 +190,7 @@ def candidatas_seguras(partidos: list[Partido], cuota_min: float = 1.30, prob_mi
             hits_t, n_t = e.acierto_temporada
             if n_t >= 2 and hits_t / n_t < 0.6:
                 continue
-            if not menos_aceptable(e):
+            if not menos_aceptable(e) or (e.stat, e.lado) in NO_OFRECIDAS:
                 continue
             out.append((p, e))
     return sorted(out, key=lambda x: (x[1].prob, x[1].acierto_10[0]), reverse=True)

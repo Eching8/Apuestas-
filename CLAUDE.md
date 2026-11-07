@@ -198,3 +198,8 @@ points, goals, assists, blocked, hits, saves) y se liquidan solas.
 `ODDS_API_NHL=1` (variable del repositorio) y se queda con `ODDS_API_NHL_PARTE` (0.3) de la ración diaria; la NBA, con
 el resto (`nba.theodds.partidos_hoy`). Sin líneas, el informe sale con líneas y cuotas estimadas (la justa menos el
 margen de Betano, `analizador.MARGEN_CASA`): pedirle al usuario las cuotas de Betano antes de armar algo con dinero.
+
+**Backtest 2025-26** (`nhl backtest`, README "NHL"): calibrado por tramo (85 %+ prometía 90.1 % y acertó 89.8 %); lo que
+propondría el sistema (constantes, 62 %+) acertó 79.7 % prometiendo 79.8 %, y 80.7 % frente a 79.1 % fuera de muestra
+(2026-27). Los "menos de 0.5 goles" no entran (Betano no ofrece "no anota", `analizador.NO_OFRECIDAS`). Muestra pequeña
+y aún sin medir con líneas reales: "más" de asistencias y "menos" de paradas; revisarlos en `nhl rendimiento`.
