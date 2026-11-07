@@ -7,6 +7,7 @@
     python -m apuestas rendimiento
     python -m apuestas nba analizar          # props de la NBA (ver apuestas/nba/cli.py)
     python -m apuestas nfl analizar          # props y touchdowns de la NFL (ver apuestas/nfl/cli.py)
+    python -m apuestas nhl analizar          # props de la NHL (ver apuestas/nhl/cli.py)
 """
 from __future__ import annotations
 
@@ -25,6 +26,7 @@ from .db import Database
 from .football_data import FootballData, validate_day
 from .nba.cli import registrar as registrar_nba
 from .nfl.cli import registrar as registrar_nfl
+from .nhl.cli import registrar as registrar_nhl
 from .report import AVISO, save_picks, write_reports
 from .settle import settle_pending, summary
 
@@ -174,6 +176,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     registrar_nba(sub)
     registrar_nfl(sub)
+    registrar_nhl(sub)
     return p
 
 

@@ -8,6 +8,7 @@ restantes repartidos entre los días que faltan del mes, empezando por los más 
 from __future__ import annotations
 
 import logging
+import os
 from collections import defaultdict
 from datetime import datetime
 from statistics import median
@@ -65,7 +66,9 @@ class TheOddsApi:
         diferencia esperada: los más parejos, donde los titulares juegan sus minutos)."""
         out = []
         lista = self._get(f"/sports/{DEPORTE}/events", commenceTimeFrom=_iso(inicio), commenceTimeTo=_iso(fin))
-        maximo = partidos_hoy(self.restantes, inicio, len(self.mercados))
+        # Con la NHL activada (ODDS_API_NHL=1) los créditos del día se reparten: la NBA se queda con 1 - PARTE_NHL.
+        parte = 1 - parte_nhl() if os.environ.get("ODDS_API_NHL") == "1" else 1.0
+        maximo = partidos_hoy(self.restantes, inicio, len(self.mercados), parte)
         if maximo is not None and maximo < len(lista):
             prioridad = prioridad or {}
             lista = sorted(lista, key=lambda ev: prioridad.get((clave_nombre(ev["home_team"]),
@@ -83,24 +86,35 @@ class TheOddsApi:
 RESERVA = 8   # créditos que no se tocan (por si hace falta repetir un día)
 
 
-def partidos_hoy(restantes: str | None, dia: datetime, por_partido: int) -> int | None:
-    """Cuántos partidos se pueden pedir hoy para que los créditos lleguen a fin de mes (None = sin límite conocido)."""
+def parte_nhl() -> float:
+    """Parte de la ración diaria de créditos para la NHL cuando ODDS_API_NHL=1 (la NBA se queda con el resto)."""
+    try:
+        return min(0.5, max(0.0, float(os.environ.get("ODDS_API_NHL_PARTE", "0.3"))))
+    except ValueError:
+        return 0.3
+
+
+def partidos_hoy(restantes: str | None, dia: datetime, por_partido: int, parte: float = 1.0) -> int | None:
+    """Cuántos partidos se pueden pedir hoy para que los créditos lleguen a fin de mes (None = sin límite conocido).
+    `parte`: fracción de la ración del día (la NBA y la NHL comparten los créditos)."""
     try:
         quedan = float(restantes) - RESERVA
     except (TypeError, ValueError):
         return None
     import calendar
     dias = calendar.monthrange(dia.year, dia.month)[1] - dia.day + 1
-    return max(0, int(quedan / max(1, dias) / max(1, por_partido)))
+    return max(0, int(quedan * parte / max(1, dias) / max(1, por_partido)))
 
 
-def parse_props(evento: dict) -> list[dict]:
-    """Una fila por jugador y estadística: la línea que ofrecen más casas, con la mediana de sus cuotas."""
+def parse_props(evento: dict, mercados: dict[str, str] | None = None) -> list[dict]:
+    """Una fila por jugador y estadística: la línea que ofrecen más casas, con la mediana de sus cuotas.
+    `mercados`: mercado de The Odds API -> estadística (por defecto, los de la NBA)."""
+    mercados = mercados or {**MERCADOS, **MERCADOS_DEFENSIVOS}
     lineas: dict[tuple[str, str], dict[float, dict]] = defaultdict(
         lambda: defaultdict(lambda: {"over": [], "under": [], "casas": set()}))
     for casa in evento.get("bookmakers", []):
         for mercado in casa.get("markets", []):
-            stat = MERCADOS.get(mercado.get("key")) or MERCADOS_DEFENSIVOS.get(mercado.get("key"))
+            stat = mercados.get(mercado.get("key"))
             if not stat:
                 continue
             for o in mercado.get("outcomes", []):

@@ -94,6 +94,13 @@ class Config:
     nfl_theodds_horas: int = field(default_factory=lambda: _int("APUESTAS_NFL_THEODDS_HORAS", 24))
     nfl_theodds_reserva: int = field(default_factory=lambda: _int("APUESTAS_NFL_THEODDS_RESERVA", 100))
 
+    # NHL: umbral de las props del informe, partidos mínimos del jugador, peso de la casa y picks seguros.
+    nhl_prob_min: float = field(default_factory=lambda: _float("APUESTAS_NHL_PROB_MIN", 0.65))
+    nhl_min_partidos: int = field(default_factory=lambda: _int("APUESTAS_NHL_MIN_PARTIDOS", 8))
+    nhl_peso_mercado: float = field(default_factory=lambda: _float("APUESTAS_NHL_PESO_MERCADO", 0.4))
+    nhl_prob_segura: float = field(default_factory=lambda: _float("APUESTAS_NHL_PROB_SEGURA", 0.85))
+    nhl_cuota_min: float = field(default_factory=lambda: _float("APUESTAS_NHL_CUOTA_MIN", 1.30))
+
 
 def load_config() -> Config:
     return Config()
