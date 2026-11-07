@@ -57,6 +57,63 @@
      "linea": 3.5
     }
    ]
+  },
+  {
+   "nombre": "Agresiva 7 Betano 25.93",
+   "casa": "Betano",
+   "cuota": 25.93,
+   "prob": 0.021,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Stephen Curry",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Franz Wagner",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 31.5
+    },
+    {
+     "jugador": "Shai Gilgeous-Alexander",
+     "stat": "points",
+     "lado": "más",
+     "linea": 29.5
+    },
+    {
+     "jugador": "Alperen Sengun",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 5.5
+    },
+    {
+     "jugador": "Donovan Mitchell",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Michael Porter Jr.",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 28.5
+    },
+    {
+     "jugador": "Jamal Murray",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "blocks",
+     "lado": "menos",
+     "linea": 3.5
+    }
+   ]
   }
  ]
 }
