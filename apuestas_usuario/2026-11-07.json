@@ -59,10 +59,10 @@
    ]
   },
   {
-   "nombre": "Agresiva 7 Betano ajustada 21.55",
+   "nombre": "Agresiva 7 Betano ajustada 15.77",
    "casa": "Betano",
-   "cuota": 21.55,
-   "prob": 0.03,
+   "cuota": 15.77,
+   "prob": 0.043,
    "real": false,
    "patas": [
     {
@@ -102,14 +102,14 @@
      "linea": 4.5
     },
     {
-     "jugador": "Shai Gilgeous-Alexander",
-     "stat": "pra",
-     "lado": "menos",
-     "linea": 42.5
+     "jugador": "Damian Lillard",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 2.5
     },
     {
-     "jugador": "Stephon Castle",
-     "stat": "assists",
+     "jugador": "AJ Dybantsa",
+     "stat": "rebounds",
      "lado": "más",
      "linea": 4.5
     }
