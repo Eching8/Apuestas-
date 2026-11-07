@@ -5,7 +5,7 @@ Este repositorio contiene dos cosas:
 1. **`nbaev/` — sistema de props NBA con valor esperado** (en construcción por fases, ver abajo). Estima la
    probabilidad de cada prop de jugador con una simulación del partido, la compara con las cuotas sin margen y
    solo señala apuestas con EV positivo en mercados que hayan superado el backtest.
-2. **`apuestas/` — analizador** de fútbol, props NBA y **NFL** (props de todos los mercados, touchdowns, zona roja, hojas de picks y combinadas; documentado más abajo, en "Sistema anterior" y "NFL").
+2. **`apuestas/` — analizador** de fútbol, props NBA, **NFL** (props de todos los mercados, touchdowns, zona roja, hojas de picks y combinadas; documentado más abajo, en "Sistema anterior" y "NFL") y **NHL** (props de jugadores y porteros, combinadas y bet builders; sección "NHL").
 
 > Las apuestas implican riesgo de perder dinero. Ningún modelo garantiza ganancias: las casas tienen margen,
 > información y límites. Este sistema está pensado para medir con honestidad si existe ventaja y desactivar

@@ -155,3 +155,46 @@ completa antes de empezar de verdad), así que se registran y se liquidan todas,
   por pata (248 frente a ~547 la combinada).
 - **El bet builder de Betano recorta mucho las patas del mismo partido**: comparar su cuota con la justa y no
   aceptar la combinada si queda por debajo.
+
+# Apuestas NHL: cómo armar combinadas cuando el usuario las pida
+
+Mismo criterio que la NBA (arriba: ganar sus apuestas, no sacarle valor a la casa; probabilidad y constancia por
+encima de la cuota), traducido al hockey en `apuestas/nhl/` (`nhl analizar`, informe en la rama `nhl-informes`).
+Las apuestas que comparta van a `apuestas_usuario/nhl/AAAA-MM-DD.json` (`apuestas/nhl/usuario.py`; stat: shots,
+points, goals, assists, blocked, hits, saves) y se liquidan solas.
+
+## Reglas
+
+1. **Solo jugadores constantes** (`analizador.candidatas_seguras`): papel principal por tiempo en hielo (top 9 de
+   delanteros, 14+ min; top 4 de defensas, 17+ min), tiempo en hielo estable, sin alertas (`modelo.alertas`: papel
+   menor, tiempo en hielo inestable, cambio de unidad de PP, cambio de línea o de rol, traspaso reciente, vuelve de
+   lesión, en el parte de lesiones; porteros: portero no confirmado), que pasaron la línea en 7+ de sus últimos 10 y en
+   el 60 %+ de esta temporada. Cada pata con 62 %+. ESPN no da las líneas (quién juega con quién): el cambio de línea
+   se detecta por el tiempo en igualdad (±20 % en sus últimos 3).
+2. **Un partido por pata** en las combinadas. Bet builders (`nhl/builder.py`) como excepción: 2-3 "más de" del mismo
+   partido con el mismo guion, cada pierna pasada en 2 de cada 3 partidos de esta temporada y sin bajar de la línea
+   mínima de Betano.
+3. **Las menos patas posibles** para la cuota pedida (`combinadas.con_cuota`, máximo 5). Nada de combinadas "de valor".
+4. **Primero la segura A** (líneas alternativas al 85 %+) si pide algo muy seguro.
+5. **Ninguna pata moneda al aire**: bajo ~60 % o sin línea en Betano, se cambia por la siguiente más segura.
+6. **Agresivas**: valen líneas más altas que la mínima de Betano si el análisis las respalda (60 %+, nunca bajo ~58 %),
+   cada pata explicada con su "En corto".
+7. **Con dinero real**: patas del 70 %+, máximo 4-5 patas, no alargar ni subir líneas para llegar a una cuota.
+
+- **"Menos" de producción** (tiros a puerta, puntos, goles, asistencias) solo con 75 %+ y 8+ de 10, y nunca si falta
+  un compañero importante de su equipo (alerta "sin X: más hielo para él") ni si ya la falló en partidos normales
+  (alerta "falla en partidos normales"), hasta medirlos con líneas reales de la NHL.
+- **Portero**: las paradas solo con el portero probable de ESPN confirmado (`nhl_games.home_goalie_id`); el flujo corre
+  otra vez a las 16:47 de Bogotá para ver los porteros confirmados y las lesiones de última hora.
+- **"En corto"** (`modelo.argumentos`): acierto esta temporada y por qué falló las que falló (poco hielo, paliza), con
+  su tiempo en hielo normal, contra las mejores defensas y contra defensas como la de hoy, puesto del rival (#N de 32)
+  concediendo esa estadística a su posición, oportunidades (intentos de tiro, % a puerta, tiempo y puntos en power
+  play), portero rival (% de paradas, #N), penaltis del rival, bajas y diferencia esperada.
+- **Líneas mínimas de Betano** (`modelo.linea_minima_casa`, estimadas): puntos, goles y asistencias 0.5; tiros a puerta,
+  bloqueados y hits, una por debajo de la principal; paradas, ~4 por debajo. Cuando el usuario mande las líneas de
+  Betano, evaluar esas exactas, corregir estas estimaciones y cambiar las patas que bajen del 70 %.
+
+**Líneas de la casa**: The Odds API es el plan gratuito que comparte con la NBA. La NHL solo pide líneas con
+`ODDS_API_NHL=1` (variable del repositorio) y se queda con `ODDS_API_NHL_PARTE` (0.3) de la ración diaria; la NBA, con
+el resto (`nba.theodds.partidos_hoy`). Sin líneas, el informe sale con líneas y cuotas estimadas (la justa menos el
+margen de Betano, `analizador.MARGEN_CASA`): pedirle al usuario las cuotas de Betano antes de armar algo con dinero.
