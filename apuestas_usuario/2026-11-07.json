@@ -1,0 +1,62 @@
+{
+ "fecha": "2026-11-07",
+ "apuestas": [
+  {
+   "nombre": "Agresiva 8 mercados variados 7.24 (RushBet)",
+   "casa": "RushBet",
+   "cuota": 7.24,
+   "prob": 0.045,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Franz Wagner",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 29.5
+    },
+    {
+     "jugador": "Stephen Curry",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Shai Gilgeous-Alexander",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Alperen Sengun",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 5.5
+    },
+    {
+     "jugador": "Michael Porter Jr.",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 29.5
+    },
+    {
+     "jugador": "Jamal Murray",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "blocks",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Stephon Castle",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 3.5
+    }
+   ]
+  }
+ ]
+}
