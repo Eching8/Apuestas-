@@ -2,10 +2,10 @@
   "fecha": "2026-11-08",
   "apuestas": [
     {
-      "nombre": "Agresiva 8 Betano 19.45",
+      "nombre": "Agresiva 8 Betano ajustada 16.34",
       "casa": "Betano",
-      "cuota": 19.45,
-      "prob": 0.032,
+      "cuota": 16.34,
+      "prob": 0.04,
       "real": false,
       "patas": [
         {
@@ -27,18 +27,6 @@
           "linea": 22.5
         },
         {
-          "jugador": "Michael Porter Jr.",
-          "stat": "threes",
-          "lado": "más",
-          "linea": 2.5
-        },
-        {
-          "jugador": "Tyler Herro",
-          "stat": "pra",
-          "lado": "más",
-          "linea": 26.5
-        },
-        {
           "jugador": "Darius Garland",
           "stat": "assists",
           "lado": "más",
@@ -55,6 +43,18 @@
           "stat": "rebounds",
           "lado": "más",
           "linea": 4.5
+        },
+        {
+          "jugador": "Derrick White",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Julius Randle",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 27.5
         }
       ]
     }
