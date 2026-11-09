@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-11-09",
+  "apuestas": [
+    {
+      "nombre": "Combinada de 4 del usuario 18.15 (fuera del sistema)",
+      "casa": "Betano",
+      "cuota": 18.15,
+      "prob": 0.05,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Paul Reed",
+          "stat": "pra",
+          "lado": "menos",
+          "linea": 22.5
+        },
+        {
+          "jugador": "Stephon Castle",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Grayson Allen",
+          "stat": "points",
+          "lado": "menos",
+          "linea": 16.5
+        },
+        {
+          "jugador": "P.J. Washington",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 6.5
+        }
+      ]
+    }
+  ]
+}
