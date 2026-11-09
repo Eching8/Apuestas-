@@ -2,10 +2,10 @@
   "fecha": "2026-11-09",
   "apuestas": [
     {
-      "nombre": "Combinada de 4 del usuario 18.15 (fuera del sistema)",
+      "nombre": "Combinada de 5 del usuario 19.35 (fuera del sistema)",
       "casa": "Betano",
-      "cuota": 18.15,
-      "prob": 0.03,
+      "cuota": 19.35,
+      "prob": 0.054,
       "real": false,
       "patas": [
         {
@@ -33,10 +33,10 @@
           "linea": 16.5
         },
         {
-          "jugador": "P.J. Washington",
-          "stat": "rebounds",
-          "lado": "más",
-          "linea": 6.5
+          "jugador": "Dejounte Murray",
+          "stat": "threes",
+          "lado": "menos",
+          "linea": 1.5
         }
       ]
     }
