@@ -72,6 +72,45 @@
           "linea": 1.5
         }
       ]
+    },
+    {
+      "nombre": "Bet builder MIN@BUF 30.00 (fuera del sistema)",
+      "casa": "Betano",
+      "cuota": 30.0,
+      "prob": null,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Josh Allen",
+          "stat": "rush_att",
+          "lado": "menos",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Jordan Mason",
+          "stat": "tds",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "T.J. Hockenson",
+          "stat": "rec",
+          "lado": "menos",
+          "linea": 4.5
+        },
+        {
+          "jugador": "James Cook",
+          "stat": "rush_att",
+          "lado": "más",
+          "linea": 18.5
+        },
+        {
+          "jugador": "Dalton Kincaid",
+          "stat": "rec_yds",
+          "lado": "más",
+          "linea": 37.5
+        }
+      ]
     }
   ]
 }
