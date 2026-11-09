@@ -111,6 +111,12 @@
           "linea": 19.5
         },
         {
+          "jugador": "Duncan Robinson",
+          "stat": "threes",
+          "lado": "menos",
+          "linea": 3.5
+        },
+        {
           "jugador": "Brandin Podziemski",
           "stat": "assists",
           "lado": "más",
