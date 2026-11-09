@@ -5,7 +5,7 @@
       "nombre": "Combinada de 4 del usuario 18.15 (fuera del sistema)",
       "casa": "Betano",
       "cuota": 18.15,
-      "prob": 0.05,
+      "prob": 0.03,
       "real": false,
       "patas": [
         {
@@ -13,6 +13,12 @@
           "stat": "pra",
           "lado": "menos",
           "linea": 22.5
+        },
+        {
+          "jugador": "Jalen Green",
+          "stat": "threes",
+          "lado": "menos",
+          "linea": 1.5
         },
         {
           "jugador": "Stephon Castle",
