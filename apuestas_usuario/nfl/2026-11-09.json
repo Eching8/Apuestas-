@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-11-09",
+  "apuestas": [
+    {
+      "nombre": "Bet builder MIN@BUF 11.75 (fuera del sistema)",
+      "casa": "Betano",
+      "cuota": 11.75,
+      "prob": null,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Josh Allen",
+          "stat": "rush_att",
+          "lado": "menos",
+          "linea": 6.5
+        },
+        {
+          "jugador": "Dalton Kincaid",
+          "stat": "rec",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "T.J. Hockenson",
+          "stat": "rec_yds",
+          "lado": "menos",
+          "linea": 40.5
+        },
+        {
+          "jugador": "Aaron Jones",
+          "stat": "rec_yds",
+          "lado": "menos",
+          "linea": 9.5
+        }
+      ]
+    }
+  ]
+}
