@@ -90,6 +90,45 @@
           "linea": 3.5
         }
       ]
+    },
+    {
+      "nombre": "Combinada de 4 del usuario 23.14 (fuera del sistema)",
+      "casa": "Betano",
+      "cuota": 23.14,
+      "prob": 0.028,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Andrew Nembhard",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 5.5
+        },
+        {
+          "jugador": "Paul Reed",
+          "stat": "pr",
+          "lado": "menos",
+          "linea": 19.5
+        },
+        {
+          "jugador": "Brandin Podziemski",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Stephen Curry",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Grayson Allen",
+          "stat": "pr",
+          "lado": "menos",
+          "linea": 20.5
+        }
+      ]
     }
   ]
 }
