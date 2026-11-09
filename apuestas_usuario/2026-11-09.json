@@ -41,10 +41,10 @@
       ]
     },
     {
-      "nombre": "Agresiva del sistema Betano 16.16",
+      "nombre": "Agresiva del sistema Betano ajustada 15.03",
       "casa": "Betano",
-      "cuota": 16.16,
-      "prob": 0.043,
+      "cuota": 15.03,
+      "prob": 0.067,
       "real": false,
       "patas": [
         {
@@ -54,10 +54,10 @@
           "linea": 3.5
         },
         {
-          "jugador": "Miles Bridges",
+          "jugador": "Pascal Siakam",
           "stat": "points",
           "lado": "más",
-          "linea": 12.5
+          "linea": 18.5
         },
         {
           "jugador": "Evan Mobley",
@@ -66,10 +66,10 @@
           "linea": 25.5
         },
         {
-          "jugador": "Cade Cunningham",
-          "stat": "assists",
+          "jugador": "James Harden",
+          "stat": "pra",
           "lado": "más",
-          "linea": 7.5
+          "linea": 23.5
         },
         {
           "jugador": "Austin Reaves",
@@ -78,16 +78,16 @@
           "linea": 28.5
         },
         {
-          "jugador": "Jalen Johnson",
-          "stat": "rebounds",
-          "lado": "más",
-          "linea": 7.5
-        },
-        {
-          "jugador": "Pascal Siakam",
+          "jugador": "Miles Bridges",
           "stat": "points",
           "lado": "más",
-          "linea": 18.5
+          "linea": 12.5
+        },
+        {
+          "jugador": "Dylan Harper",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 3.5
         }
       ]
     }
