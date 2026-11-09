@@ -32,7 +32,13 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
    cada una explicada al estilo de "En corto" (esperado frente a la línea, acierto con sus minutos y contra defensas
    como la de hoy, puesto del rival, zona/tipo de tiro, oportunidades, bajas). Él manda la combinada con las líneas
    de Betano y se le cambian las patas flojas por otras agresivas bien respaldadas, no por la que más paga. Las
-   reglas 7-9 (dinero real) siguen igual.
+   reglas 7-9 (dinero real) siguen igual. **Mercados variados (7 nov 2026, lo pidió él):** las agresivas mezclan puntos,
+   PRA, asistencias, rebotes, triples y tapones de las estrellas con la línea que el análisis respalde (no la mínima de
+   Betano ni rellenos de 1+ triple o 1+ robo, que no suben la cuota); él ajusta la línea en su casa. Seguir armándolas
+   y registrarlas como fantasma aunque no se jueguen: sirven para calibrar (7 nov: las 7 primeras patas en cerrarse salieron todas).
+   **Segunda noche y no favorito** (`modelo.NO_FAVORITO_CANSADO`, 9 nov 2026): si jugó anoche y hoy es no favorito
+   por 5+, sus "más" llevan esa alerta y no entran (esta temporada 49 % frente a 66 % prometido; 2025-26, 62 %).
+   El resto de patas agresivas (línea más alta con 62 %+) cumplen: 69 % frente a 66 % en las dos temporadas.
 
 - **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de

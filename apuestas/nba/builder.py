@@ -73,7 +73,7 @@ DESCARTA = {"suplente", "minutos inestables", "traspaso reciente", "en el parte 
 def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
             principales: dict[tuple[str, str], float] | None = None) -> list[Pierna]:
     """Las piernas posibles del jugador. Con la línea principal de la casa, solo líneas que la casa ofrece."""
-    if set(alertas(j, "points")) & DESCARTA:
+    if set(alertas(j, "points")) & DESCARTA or j.cansado_no_favorito:
         return []
     out = []
     ult = j.partidos[:10]

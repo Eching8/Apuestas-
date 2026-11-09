@@ -409,6 +409,7 @@ class Jugador:
     factor_tipos: float = 1.0                # lo que deja el rival en sus tipos de tiro frente a la media
     punteria: float | None = None            # sus canastas / las esperadas por tipo de tiro (últimos 10)
     rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
+    cansado_no_favorito: bool = False        # jugó anoche y hoy es no favorito (ver NO_FAVORITO_CANSADO)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
     @property
@@ -474,6 +475,13 @@ SUERTE_MIN_PARTIDOS = 5
 
 PALIZA = {"titular": -0.03, "suplente": 0.04}
 PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
+
+
+# Segundo partido en dos noches siendo no favorito por NO_FAVORITO_CANSADO+ puntos: los "más" de titulares a la línea
+# más alta con 62 %+ acertaron 49.4 % prometiendo 65.8 % esta temporada (24 oct-7 nov 2026, 83 patas) y 62.2 % frente a
+# 65.8 % en 2025-26 (325); con el resto de patas al +3 %. Randle 28+ PRA el 8 nov 2026 (BKN, perdió por 37): 21. Llevan
+# la alerta "segunda noche y no favorito" y no entran en combinadas ni bet builders.
+NO_FAVORITO_CANSADO = 5.0
 
 
 def factor_paliza(minutos: float, margen: float) -> float:
@@ -769,6 +777,8 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
     margen = ctx.margen.get(team_id)
+    j.cansado_no_favorito = (ctx.ultimo_partido.get(team_id) == ayer and margen is not None
+                             and margen <= -NO_FAVORITO_CANSADO)
     if margen is not None:
         j.factor_paliza = factor_paliza(j.minutos, margen)
         if j.factor_paliza != 1.0:
@@ -1546,6 +1556,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         + (_falla_en_normales(ctx, j, stat, line) if lado == "menos" else [])
         + (["viene fallando tiros que suele meter"] if lado == "menos" and "pts" in COMPONENTES[stat]
            and j.punteria is not None and j.punteria < PUNTERIA_FRIA else [])
+        + (["segunda noche y no favorito"] if lado == "más" and j.cansado_no_favorito else [])
         + (["el rival concede mucho contraataque"] if lado == "menos" and "pts" in COMPONENTES[stat]
            and (j.transicion_rival or 1) >= TRANSICION_ALTA else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),

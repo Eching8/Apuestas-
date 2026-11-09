@@ -1,0 +1,119 @@
+{
+ "fecha": "2026-11-07",
+ "apuestas": [
+  {
+   "nombre": "Agresiva 8 mercados variados 7.24 (RushBet)",
+   "casa": "RushBet",
+   "cuota": 7.24,
+   "prob": 0.045,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Franz Wagner",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 29.5
+    },
+    {
+     "jugador": "Stephen Curry",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Shai Gilgeous-Alexander",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Alperen Sengun",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 5.5
+    },
+    {
+     "jugador": "Michael Porter Jr.",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 29.5
+    },
+    {
+     "jugador": "Jamal Murray",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Victor Wembanyama",
+     "stat": "blocks",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Stephon Castle",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 3.5
+    }
+   ]
+  },
+  {
+   "nombre": "Agresiva 7 Betano ajustada 15.77",
+   "casa": "Betano",
+   "cuota": 15.77,
+   "prob": 0.043,
+   "real": false,
+   "patas": [
+    {
+     "jugador": "Stephen Curry",
+     "stat": "points",
+     "lado": "más",
+     "linea": 23.5
+    },
+    {
+     "jugador": "Franz Wagner",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 31.5
+    },
+    {
+     "jugador": "Alperen Sengun",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 5.5
+    },
+    {
+     "jugador": "Donovan Mitchell",
+     "stat": "threes",
+     "lado": "más",
+     "linea": 1.5
+    },
+    {
+     "jugador": "Michael Porter Jr.",
+     "stat": "pra",
+     "lado": "más",
+     "linea": 28.5
+    },
+    {
+     "jugador": "Jamal Murray",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 4.5
+    },
+    {
+     "jugador": "Damian Lillard",
+     "stat": "assists",
+     "lado": "más",
+     "linea": 2.5
+    },
+    {
+     "jugador": "AJ Dybantsa",
+     "stat": "rebounds",
+     "lado": "más",
+     "linea": 4.5
+    }
+   ]
+  }
+ ]
+}

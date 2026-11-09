@@ -1,0 +1,62 @@
+{
+  "fecha": "2026-11-08",
+  "apuestas": [
+    {
+      "nombre": "Agresiva 8 Betano ajustada 16.34",
+      "casa": "Betano",
+      "cuota": 16.34,
+      "prob": 0.04,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Giannis Antetokounmpo",
+          "stat": "points",
+          "lado": "más",
+          "linea": 25.5
+        },
+        {
+          "jugador": "Domantas Sabonis",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 10.5
+        },
+        {
+          "jugador": "Tyrese Maxey",
+          "stat": "points",
+          "lado": "más",
+          "linea": 22.5
+        },
+        {
+          "jugador": "Darius Garland",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Jonathan Kuminga",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 21.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Derrick White",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Julius Randle",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 27.5
+        }
+      ]
+    }
+  ]
+}
