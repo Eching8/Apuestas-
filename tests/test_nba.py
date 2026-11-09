@@ -504,6 +504,21 @@ class PbpStatsTest(unittest.TestCase):
             self.assertTrue(_falla_en_normales(ctx, j, "points", 20.5)[0].startswith("falla en partidos normales"))
             self.assertEqual(_falla_en_normales(ctx, j, "points", 60.5), [])
 
+    def test_segunda_noche_no_favorito(self):
+        from datetime import date, timedelta
+        from apuestas.nba.modelo import NO_FAVORITO_CANSADO, evaluar
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            ctx.ultimo_partido["1"] = (date.fromisoformat(FECHA) - timedelta(days=1)).isoformat()
+            ctx.margen.update({"1": -NO_FAVORITO_CANSADO - 2, "2": NO_FAVORITO_CANSADO + 2})
+            j = preparar_jugador(ctx, "a1", "a1", "1", "2")
+            self.assertTrue(j.cansado_no_favorito)
+            self.assertIn("segunda noche y no favorito", evaluar(ctx, j, "points", 5.5).alertas)
+            ctx.margen.update({"1": 2.0, "2": -2.0})
+            self.assertFalse(preparar_jugador(ctx, "a1", "a1", "1", "2").cansado_no_favorito)
+
 
 class JugadasTest(unittest.TestCase):
     def test_en_cancha_rebotes_y_transicion(self):

@@ -36,6 +36,9 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
    PRA, asistencias, rebotes, triples y tapones de las estrellas con la línea que el análisis respalde (no la mínima de
    Betano ni rellenos de 1+ triple o 1+ robo, que no suben la cuota); él ajusta la línea en su casa. Seguir armándolas
    y registrarlas como fantasma aunque no se jueguen: sirven para calibrar (7 nov: las 7 primeras patas en cerrarse salieron todas).
+   **Segunda noche y no favorito** (`modelo.NO_FAVORITO_CANSADO`, 9 nov 2026): si jugó anoche y hoy es no favorito
+   por 5+, sus "más" llevan esa alerta y no entran (esta temporada 49 % frente a 66 % prometido; 2025-26, 62 %).
+   El resto de patas agresivas (línea más alta con 62 %+) cumplen: 69 % frente a 66 % en las dos temporadas.
 
 - **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
