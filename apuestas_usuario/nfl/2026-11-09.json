@@ -33,6 +33,45 @@
           "linea": 9.5
         }
       ]
+    },
+    {
+      "nombre": "Bet builder MIN@BUF 14.00 (fuera del sistema)",
+      "casa": "Betano",
+      "cuota": 14.0,
+      "prob": null,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Jordan Addison",
+          "stat": "rec_yds",
+          "lado": "más",
+          "linea": 37.5
+        },
+        {
+          "jugador": "Keon Coleman",
+          "stat": "rec_yds",
+          "lado": "más",
+          "linea": 29.5
+        },
+        {
+          "jugador": "Khalil Shakir",
+          "stat": "rec_yds",
+          "lado": "más",
+          "linea": 39.5
+        },
+        {
+          "jugador": "Josh Allen",
+          "stat": "rush_att",
+          "lado": "menos",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Carson Wentz",
+          "stat": "pass_tds",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
     }
   ]
 }
