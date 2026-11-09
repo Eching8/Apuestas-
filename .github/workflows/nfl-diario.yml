@@ -4,9 +4,8 @@ name: NFL diario
 # lesiones y traspasos), liquida las selecciones de los partidos jugados, analiza los próximos 7 días con las
 # líneas de SportsGameOdds y publica el informe en la rama nfl-informes (nfl/AAAA-MM-DD.md y ultimo.md).
 # La base se conserva con la caché de Actions; si se pierde, se reconstruye sola desde nflverse (~1 min).
+# Apagado el 9 nov 2026 a pedido del usuario (no lo va a usar): ya no corre solo, solo a mano desde Actions.
 on:
-  schedule:
-    - cron: "17 15 * * *"   # 9:17 en Ciudad de México
   workflow_dispatch:
 
 concurrency:

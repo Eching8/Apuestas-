@@ -4,13 +4,8 @@ name: NHL diario
 # porteros probables de hoy y publica el informe en la rama nhl-informes (nhl/AAAA-MM-DD.md y ultimo.md).
 # La base se conserva con la caché de Actions (la suya, aparte de la de la NBA); si se pierde, se reconstruye sola
 # desde ESPN (~10 min para la temporada 2025-26).
+# Apagado el 9 nov 2026 a pedido del usuario (no lo va a usar): ya no corre solo, solo a mano desde Actions.
 on:
-  schedule:
-    # 9:41 en Bogotá (14:41 UTC): después del de la NBA (8:13), que reparte primero los créditos de The Odds API.
-    - cron: "41 14 * * *"
-    # 16:47 en Bogotá (21:47 UTC), antes de los primeros partidos (19:00 hora del este): porteros confirmados y
-    # lesiones de última hora. No pide líneas (no gasta créditos).
-    - cron: "47 21 * * *"
   workflow_dispatch:
     inputs:
       fecha:

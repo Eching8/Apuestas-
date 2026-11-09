@@ -30,7 +30,7 @@ FEATURES = [
 
 def grupo_posicion(pos: str | None) -> str:
     """G (base/escolta), F (alero/ala-pívot) o C (pívot)."""
-    p = (pos or "").upper()
+    p = pos.upper() if isinstance(pos, str) else ""   # pandas da NaN (float) si falta la posición
     if p.startswith("C"):
         return "C"
     if p in ("PF", "SF", "F", "GF") or p.startswith("F"):
