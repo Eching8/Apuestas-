@@ -5,7 +5,7 @@ Este repositorio contiene dos cosas:
 1. **`nbaev/` — sistema de props NBA con valor esperado** (en construcción por fases, ver abajo). Estima la
    probabilidad de cada prop de jugador con una simulación del partido, la compara con las cuotas sin margen y
    solo señala apuestas con EV positivo en mercados que hayan superado el backtest.
-2. **`apuestas/` — analizador** de fútbol, props NBA y **NFL** (props de todos los mercados, touchdowns, zona roja, hojas de picks y combinadas; documentado más abajo, en "Sistema anterior" y "NFL").
+2. **`apuestas/` — analizador** de fútbol, props NBA, **NFL** (props de todos los mercados, touchdowns, zona roja, hojas de picks y combinadas; documentado más abajo, en "Sistema anterior" y "NFL") y **NHL** (props de jugadores y porteros, combinadas y bet builders; sección "NHL").
 
 > Las apuestas implican riesgo de perder dinero. Ningún modelo garantiza ganancias: las casas tienen margen,
 > información y límites. Este sistema está pensado para medir con honestidad si existe ventaja y desactivar
@@ -324,7 +324,78 @@ Limitaciones conocidas: para partidos pasados no existe el parte de lesiones de 
 toman de quién no jugó según el box score (incluye bajas de última hora que quizá no se sabían al apostar). Y las
 líneas de spread/total históricas son de cierre (en directo se usará la captura disponible a la hora de la predicción).
 
-### Pruebas
+### NHL: player props por probabilidad (`apuestas/nhl/`)
+
+Misma arquitectura y criterio que la NBA (ganar las apuestas, no sacarle valor a la casa), adaptada al hockey.
+
+```bash
+python -m apuestas nhl historial          # ESPN: la primera vez, la temporada 2025-26 entera (~10 min)
+python -m apuestas nhl analizar           # props de hoy: combinadas, bet builders, picks seguros e informe
+python -m apuestas nhl actualizar         # resultados de ayer + liquidación
+python -m apuestas nhl rendimiento        # ¿aciertan lo que prometen?
+python -m apuestas nhl backtest --desde 2025-11-01 --hasta 2026-04-16 [--sin-calibrar]
+python -m apuestas nhl correlaciones      # correlaciones entre jugadores del mismo partido
+```
+
+**Datos (ESPN, API pública).** Comprobado el 7 nov 2026: el box score trae por jugador tiempo en hielo total, en power
+play, en inferioridad y en igualdad, goles, asistencias, tiros a puerta ("S"; "SOG" son los goles en la tanda), tiros
+fuera, bloqueados, hits, +/-; los porteros, tiros recibidos y paradas por situación. La jugada a jugada trae cada tiro
+con coordenadas, tipo (muñeca, slap, desvío...) y situación (igualdad, PP, inferioridad), cada gol con sus asistentes y
+los penaltis. El scoreboard trae el **portero probable** de cada equipo y la moneyline y el total de la casa (de ahí,
+los goles esperados de cada equipo). ESPN **no** da las líneas (quién juega con quién) ni cuotas históricas. Tablas
+`nhl_*` en `data/apuestas.db`: 1.719 partidos (2025-26 con playoffs y 2026-27 hasta el 6 nov).
+
+**Modelo (`modelo.py`).** Media = tasa por minuto × tiempo en hielo esperado, en igualdad y en power play por separado,
+× defensa rival por posición (delanteros / defensas) × tipo de defensa × portero rival de hoy (goles y asistencias) ×
+segundo partido en dos noches × diferencia esperada (tiros y bloqueados). Binomial negativa (Poisson si no hay
+sobredispersión). Porteros: tiros que genera el rival × tiros que concede su equipo / media × su % de paradas.
+
+**Factores, cada uno medido en 2025-26 antes de entrar** (220.826 props simuladas, log-loss, menor es mejor):
+
+| Factor | Resultado | Decisión |
+|---|---|---|
+| Portero rival (% de paradas frente al de su equipo) | puntos 0.6154 → 0.6150, asistencias 0.5467 → 0.5464, goles 0.4184 → 0.4183 | entra |
+| Penaltis del rival (más power play) | 0.5734 sin él, 0.5735 con él | solo explicación |
+| Segundo partido en dos noches | rival cansado: +5.5 % tiros, +3 % puntos; propio: −2 % tiros, −4 % puntos; tiros 0.6298 → 0.6296 | entra |
+| Diferencia esperada | favorito +2.8 % tiros y −5.5 % bloqueados por gol; tiros y bloqueados mejoran un poco | entra |
+| Corrección de la media (tiros −2 %, bloqueados y hits −2.5 %) | media sin sesgo; log-loss igual | entra |
+| Acierto real del jugador sobre la línea (peso 0.25) | 0.5733 con él, 0.5721 sin él | fuera (solo para elegir constantes) |
+| Contracción de goles y asistencias (10 partidos) | 0.5721 → 0.5698 (puntos 0.6132 → 0.6100) | entra |
+| % de tiro contraído | igual o algo peor | fuera |
+
+**Calibración final** (líneas de referencia: tiros, bloqueados, hits y paradas, la mediana de sus últimos 10; puntos,
+goles y asistencias, 0.5):
+
+| El modelo dice | 2025-26 (n) | Pasó | 2026-27 fuera de muestra (n) | Pasó |
+|---|---|---|---|---|
+| 62-65 % | 17.758 | 63.3 % | 2.033 | 65.4 % |
+| 65-70 % | 29.908 | 68.0 % | 3.437 | 67.9 % |
+| 70-75 % | 29.839 | 73.2 % | 3.332 | 72.4 % |
+| 75-80 % | 28.321 | 78.0 % | 3.201 | 78.5 % |
+| 80-85 % | 23.647 | 82.3 % | 2.712 | 83.5 % |
+| 85 %+ (media 90 %) | 28.107 | 89.8 % | 2.840 | 89.0 % |
+
+Por estadística (2025-26, acierto frente a lo prometido): tiros 64.7 / 64.8 %, puntos 67.2 / 66.4 %, asistencias
+74.8 / 74.4 %, goles 84.0 / 83.6 %, bloqueados 67.0 / 66.9 %, hits 66.7 / 66.4 %, paradas 65.0 / 63.7 % (n = 1.910).
+**Lo que propondría el sistema** (jugadores constantes, 62 %+, 7+ de 10, 60 %+ de la temporada): 79.7 % prometiendo
+79.8 % (n = 43.192); con 70 %+, 81.9 % frente a 82.2 %. En 2026-27: 80.7 % frente a 79.1 % (n = 5.007). "Más de 0.5
+puntos": 66.0 % frente a 67.6 % (n = 1.115). Antes de contraer goles y asistencias esos mismos picks acertaban 65 %
+prometiendo 70 %. Límites: sin cuotas históricas ni partes de lesiones (solo entra quien jugó), y la casa pone líneas
+más difíciles que la mediana; `nhl rendimiento` es la medida honesta.
+
+**Combinadas (`combinadas.py`, `builder.py`).** Segura A (alternativas al 85 %+), segura B, cuota 2+/3+/5+ (las menos
+patas, partidos distintos, máximo 5) y bet builders de 2-3 "más de" del mismo partido con el mismo guion. Correlaciones
+medidas (`nhl correlaciones`): entre compañeros, puntos +0.12, asistencias +0.05, bloqueados +0.025, tiros +0.02; entre
+rivales, ~0. Sin líneas de la casa, las líneas y cuotas son estimadas (la justa / 1.08) y el usuario manda las de Betano.
+
+**Líneas de la casa.** The Odds API (plan gratuito, compartido con la NBA) solo con `ODDS_API_NHL=1`; la NHL se queda con
+`ODDS_API_NHL_PARTE` (0.3) de la ración diaria y la NBA con el resto. Mercados: tiros a puerta y puntos
+(`ODDS_API_NHL_EXTRA=1` añade asistencias, bloqueados y paradas).
+
+**Automático (`.github/workflows/nhl-diario.yml`).** 9:41 de Bogotá (después de la NBA) y 16:47 (porteros confirmados y
+lesiones de última hora, sin pedir líneas). Publica en la rama `nhl-informes`; caché de la base aparte de la de la NBA.
+
+## Pruebas
 
 ```bash
 python -m pytest tests/nbaev -q

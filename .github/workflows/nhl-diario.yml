@@ -1,0 +1,88 @@
+name: NHL diario
+
+# Cada día en los servidores de GitHub: guarda los resultados de ayer, liquida las props y combinadas, baja lesiones y
+# porteros probables de hoy y publica el informe en la rama nhl-informes (nhl/AAAA-MM-DD.md y ultimo.md).
+# La base se conserva con la caché de Actions (la suya, aparte de la de la NBA); si se pierde, se reconstruye sola
+# desde ESPN (~10 min para la temporada 2025-26).
+on:
+  schedule:
+    # 9:41 en Bogotá (14:41 UTC): después del de la NBA (8:13), que reparte primero los créditos de The Odds API.
+    - cron: "41 14 * * *"
+    # 16:47 en Bogotá (21:47 UTC), antes de los primeros partidos (19:00 hora del este): porteros confirmados y
+    # lesiones de última hora. No pide líneas (no gasta créditos).
+    - cron: "47 21 * * *"
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha AAAA-MM-DD del informe (vacío = hoy en Bogotá)"
+        required: false
+        default: ""
+
+concurrency:
+  group: nhl-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  informe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+      # Líneas de la casa solo si la variable del repositorio ODDS_API_NHL es "1", y solo en la ejecución de la mañana.
+      # Comparte los créditos del plan gratuito con la NBA (ver apuestas/nhl/theodds.py).
+      ODDS_API_NHL: ${{ github.event.schedule != '47 21 * * *' && vars.ODDS_API_NHL || '' }}
+      ODDS_API_NHL_PARTE: ${{ vars.ODDS_API_NHL_PARTE }}
+      APUESTAS_TZ: America/Bogota
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "requests>=2.31"
+      - name: Recuperar la base
+        uses: actions/cache/restore@v4
+        with:
+          path: data/apuestas.db
+          key: nhl-db-${{ github.run_id }}
+          restore-keys: nhl-db-
+      - name: Historial de ESPN (desde el último día guardado)
+        run: python -m apuestas nhl historial
+      - name: Props del día
+        run: python -m apuestas nhl analizar --top 25 ${{ inputs.fecha && format('--fecha {0}', inputs.fecha) || '' }}
+      - name: Resultados acumulados
+        run: python -m apuestas nhl rendimiento
+      - name: Guardar la base
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/apuestas.db
+          key: nhl-db-${{ github.run_id }}
+      - name: Publicar el informe en la rama nhl-informes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          ls reportes/nhl/*.md >/dev/null 2>&1 || { echo "Sin partidos: no hay informe."; exit 0; }
+          ultimo=$(ls -t reportes/nhl/*.md | head -1)
+          mkdir publicar && cd publicar
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q origin nhl-informes; then git checkout -q -b nhl-informes FETCH_HEAD; else git checkout -q --orphan nhl-informes; fi
+          mkdir -p nhl
+          cp ../reportes/nhl/*.md ../reportes/nhl/*.json nhl/
+          cp "../$ultimo" ultimo.md
+          git add -A
+          git commit -q -m "Informe NHL $(basename "$ultimo" .md)" || exit 0
+          git push -q origin nhl-informes
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: informe-nhl-${{ github.run_number }}
+          path: reportes/nhl/
+          retention-days: 30
+          if-no-files-found: ignore
