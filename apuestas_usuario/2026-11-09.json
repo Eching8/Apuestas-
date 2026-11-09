@@ -39,6 +39,57 @@
           "linea": 1.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva del sistema Betano 16.16",
+      "casa": "Betano",
+      "cuota": 16.16,
+      "prob": 0.043,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Stephen Curry",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Miles Bridges",
+          "stat": "points",
+          "lado": "más",
+          "linea": 12.5
+        },
+        {
+          "jugador": "Evan Mobley",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 25.5
+        },
+        {
+          "jugador": "Cade Cunningham",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Austin Reaves",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 28.5
+        },
+        {
+          "jugador": "Jalen Johnson",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Pascal Siakam",
+          "stat": "points",
+          "lado": "más",
+          "linea": 18.5
+        }
+      ]
     }
   ]
 }
