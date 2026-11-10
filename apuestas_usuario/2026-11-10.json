@@ -33,6 +33,63 @@
           "linea": 11.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva del sistema Betano 10.95",
+      "casa": "Betano",
+      "cuota": 10.95,
+      "prob": 0.057,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Jalen Brunson",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaylen Brown",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Paul George",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Devin Booker",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "points",
+          "lado": "más",
+          "linea": 21.5
+        },
+        {
+          "jugador": "Davion Mitchell",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 6.5
+        },
+        {
+          "jugador": "Ace Bailey",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Damian Lillard",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
     }
   ]
 }
