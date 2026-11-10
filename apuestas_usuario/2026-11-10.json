@@ -92,10 +92,10 @@
       ]
     },
     {
-      "nombre": "Agresiva 2 de líneas alternas Betano 14.64",
+      "nombre": "Agresiva 2 de líneas alternas Betano 12.78",
       "casa": "Betano",
-      "cuota": 14.64,
-      "prob": 0.038,
+      "cuota": 12.78,
+      "prob": 0.049,
       "real": false,
       "patas": [
         {
@@ -141,10 +141,10 @@
           "linea": 1.5
         },
         {
-          "jugador": "Damian Lillard",
-          "stat": "assists",
+          "jugador": "Paul George",
+          "stat": "threes",
           "lado": "más",
-          "linea": 3.5
+          "linea": 1.5
         }
       ]
     }
