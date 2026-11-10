@@ -90,6 +90,63 @@
           "linea": 1.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva 2 de líneas alternas Betano 14.64",
+      "casa": "Betano",
+      "cuota": 14.64,
+      "prob": 0.038,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Karl-Anthony Towns",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 10.5
+        },
+        {
+          "jugador": "Tyrese Maxey",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "VJ Edgecombe",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Darius Garland",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Davion Mitchell",
+          "stat": "points",
+          "lado": "más",
+          "linea": 13.5
+        },
+        {
+          "jugador": "Wendell Carter Jr.",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Damian Lillard",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        }
+      ]
     }
   ]
 }
