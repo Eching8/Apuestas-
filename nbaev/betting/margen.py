@@ -31,8 +31,10 @@ def power(cuotas) -> np.ndarray:
     q = implicitas(cuotas)
     if abs(q.sum() - 1) < 1e-12:
         return q
-    k = brentq(lambda k: (q ** k).sum() - 1.0, 1e-6, 50.0)
-    return q ** k
+    f = lambda k: (q ** k).sum() - 1.0
+    if f(1e-6) * f(50.0) > 0:
+        return multiplicativo(cuotas)
+    return q ** brentq(f, 1e-6, 50.0)
 
 
 def shin(cuotas) -> np.ndarray:
@@ -44,8 +46,10 @@ def shin(cuotas) -> np.ndarray:
     def probs(z):
         return (np.sqrt(z ** 2 + 4 * (1 - z) * q ** 2 / s) - z) / (2 * (1 - z))
 
-    z = brentq(lambda z: probs(z).sum() - 1.0, 0.0, 0.999)
-    return probs(z)
+    f = lambda z: probs(z).sum() - 1.0
+    if f(0.0) * f(0.999) > 0:   # sin margen positivo (p. ej. cuotas de casas distintas): no hay z de Shin
+        return multiplicativo(cuotas)
+    return probs(brentq(f, 0.0, 0.999))
 
 
 METODOS = {"multiplicativo": multiplicativo, "power": power, "shin": shin}
