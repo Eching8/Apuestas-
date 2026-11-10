@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-11-10",
+  "apuestas": [
+    {
+      "nombre": "Segura B ajustada Betano 5.09",
+      "casa": "Betano",
+      "cuota": 5.09,
+      "prob": 0.21,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Darius Garland",
+          "stat": "steals",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaxson Hayes",
+          "stat": "blocks",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Jaylen Brown",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Donovan Clingan",
+          "stat": "rebounds",
+          "lado": "menos",
+          "linea": 11.5
+        }
+      ]
+    }
+  ]
+}
