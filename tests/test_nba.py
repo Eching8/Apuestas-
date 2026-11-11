@@ -519,6 +519,24 @@ class PbpStatsTest(unittest.TestCase):
             ctx.margen.update({"1": 2.0, "2": -2.0})
             self.assertFalse(preparar_jugador(ctx, "a1", "a1", "1", "2").cansado_no_favorito)
 
+    def test_riesgo_de_paliza(self):
+        from apuestas.nba.modelo import PALIZA_ANOTACION, PALIZA_TRIPLES, evaluar, riesgo_paliza
+        with TemporaryDirectory() as tmp:
+            db = NbaDB(Database(Path(tmp) / "t.db").conn)
+            _llenar(db)
+            ctx = construir_contexto(db.conn, FECHA)
+            ctx.margen.update({"1": PALIZA_ANOTACION + 1, "2": -PALIZA_ANOTACION - 1})
+            j = preparar_jugador(ctx, "a1", "a1", "1", "2")
+            self.assertTrue(riesgo_paliza(j, "points") and riesgo_paliza(j, "threes"))
+            self.assertFalse(riesgo_paliza(j, "rebounds") or riesgo_paliza(j, "assists"))
+            self.assertIn("riesgo de paliza", evaluar(ctx, j, "points", 5.5).alertas)
+            ctx.margen.update({"1": PALIZA_TRIPLES + 1, "2": -PALIZA_TRIPLES - 1})
+            j = preparar_jugador(ctx, "a1", "a1", "1", "2")
+            self.assertTrue(riesgo_paliza(j, "threes"))
+            self.assertFalse(riesgo_paliza(j, "points"))
+            rival = preparar_jugador(ctx, "p20", "p20", "2", "1")
+            self.assertFalse(riesgo_paliza(rival, "points"))
+
 
 class JugadasTest(unittest.TestCase):
     def test_en_cancha_rebotes_y_transicion(self):

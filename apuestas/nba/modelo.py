@@ -410,6 +410,7 @@ class Jugador:
     punteria: float | None = None            # sus canastas / las esperadas por tipo de tiro (últimos 10)
     rival_cansado: bool = False              # el rival jugó anoche y él no (ver RIVAL_CANSADO)
     cansado_no_favorito: bool = False        # jugó anoche y hoy es no favorito (ver NO_FAVORITO_CANSADO)
+    margen: float | None = None              # por cuánto se espera que gane su equipo hoy (ver riesgo_paliza)
     transicion_rival: float | None = None    # contraataque que concede el rival frente a la media (1 = media)
 
     @property
@@ -482,6 +483,22 @@ PALIZA_DESDE, PALIZA_PLENO = 9.0, 12.0
 # 65.8 % en 2025-26 (325); con el resto de patas al +3 %. Randle 28+ PRA el 8 nov 2026 (BKN, perdió por 37): 21. Llevan
 # la alerta "segunda noche y no favorito" y no entran en combinadas ni bet builders.
 NO_FAVORITO_CANSADO = 5.0
+
+# Riesgo de paliza a favor (lo pidió el usuario el 10 nov 2026: Brunson 2+ triples con NYK favorito por 15.5, ganó por 32
+# y metió 1 en 28 min). Los "más" agresivos de anotación de un gran favorito pierden el colchón del resto (+3-4 %): con
+# 14+ puntos de ventaja esperada, puntos/PRA 65.1 % frente a 64.7 % prometido esta temporada (106) y 65.9 % frente a 64.4 %
+# en 2025-26 (208); triples con 11+, 62 % frente a 68.4 % en 2025-26 (50). Sus rebotes y asistencias sí rinden (82 % y
+# 77 % frente a 68 %): Towns hizo 16 rebotes esa noche. Llevan la alerta "riesgo de paliza" y no entran.
+PALIZA_ANOTACION = 14.0
+PALIZA_TRIPLES = 11.0
+
+
+def riesgo_paliza(j: "Jugador", stat: str) -> bool:
+    m = j.margen
+    if m is None:
+        return False
+    comp = COMPONENTES.get(stat, ())
+    return ("tpm" in comp and m >= PALIZA_TRIPLES) or ("pts" in comp and m >= PALIZA_ANOTACION)
 
 
 def factor_paliza(minutos: float, margen: float) -> float:
@@ -777,6 +794,7 @@ def preparar_jugador(ctx: Contexto, player_id: str, nombre: str, team_id: str, o
         j.minutos *= 0.97
         j.notas.append("segundo partido en dos noches: -3% de minutos")
     margen = ctx.margen.get(team_id)
+    j.margen = margen
     j.cansado_no_favorito = (ctx.ultimo_partido.get(team_id) == ayer and margen is not None
                              and margen <= -NO_FAVORITO_CANSADO)
     if margen is not None:
@@ -1557,6 +1575,7 @@ def evaluar(ctx: Contexto, j: Jugador, stat: str, line: float, over_odd: float |
         + (["viene fallando tiros que suele meter"] if lado == "menos" and "pts" in COMPONENTES[stat]
            and j.punteria is not None and j.punteria < PUNTERIA_FRIA else [])
         + (["segunda noche y no favorito"] if lado == "más" and j.cansado_no_favorito else [])
+        + (["riesgo de paliza"] if lado == "más" and riesgo_paliza(j, stat) else [])
         + (["el rival concede mucho contraataque"] if lado == "menos" and "pts" in COMPONENTES[stat]
            and (j.transicion_rival or 1) >= TRANSICION_ALTA else []),
         texto_defensa(ctx, j, stat, pred), razones(ctx, j, stat, line, lado, pred),

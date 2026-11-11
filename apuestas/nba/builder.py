@@ -19,7 +19,7 @@ from statistics import NormalDist
 
 from .analizador import Partido
 from .modelo import (Contexto, linea_minima_casa, piso_casa, Jugador, NOMBRES, _aciertos, _prob_jugador, alertas, predecir, prob_lados, valor,
-                     vetada)
+                     riesgo_paliza, vetada)
 
 PROB_PIERNA = 0.72
 PIERNAS = 4
@@ -78,7 +78,7 @@ def piernas(ctx: Contexto, j: Jugador, objetivo: float = PROB_PIERNA,
     out = []
     ult = j.partidos[:10]
     for stat, minimo in MINIMOS.items():
-        if vetada(j.nombre, stat) or sum(valor(p, stat) for p in ult) / len(ult) < minimo:
+        if vetada(j.nombre, stat) or riesgo_paliza(j, stat) or sum(valor(p, stat) for p in ult) / len(ult) < minimo:
             continue
         pred = predecir(ctx, j, stat)
         piso = piso_casa(j, stat, pred.mu, (principales or {}).get((j.player_id, stat)))
