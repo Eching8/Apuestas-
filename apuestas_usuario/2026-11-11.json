@@ -39,6 +39,63 @@
           "linea": 1.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva del sistema Betano 12.69",
+      "casa": "Betano",
+      "cuota": 12.69,
+      "prob": 0.066,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Donovan Mitchell",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Ty Jerome",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Cameron Boozer",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Wendell Carter Jr.",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 7.5
+        },
+        {
+          "jugador": "Pascal Siakam",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Trae Young",
+          "stat": "pr",
+          "lado": "más",
+          "linea": 20.5
+        },
+        {
+          "jugador": "RJ Barrett",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Ja'Kobe Walter",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
     }
   ]
 }
