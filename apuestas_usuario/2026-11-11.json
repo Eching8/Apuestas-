@@ -1,0 +1,44 @@
+{
+  "fecha": "2026-11-11",
+  "apuestas": [
+    {
+      "nombre": "Segura 5+ y B combinadas Betano 7.23",
+      "casa": "Betano",
+      "cuota": 7.23,
+      "prob": 0.135,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Kenrich Williams",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Kyshawn George",
+          "stat": "blocks",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Cedric Coward",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "OG Anunoby",
+          "stat": "steals",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "De'Aaron Fox",
+          "stat": "steals",
+          "lado": "menos",
+          "linea": 1.5
+        }
+      ]
+    }
+  ]
+}
