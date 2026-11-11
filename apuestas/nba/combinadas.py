@@ -112,7 +112,7 @@ RACHA_STATS = ("points", "rebounds", "assists", "threes", "pra", "pr", "pa", "ra
 # "cambio de rol" y "traspaso reciente" no descartan: a menudo son justo la causa de la racha.
 RACHA_DESCARTA = {"suplente", "minutos inestables", "en el parte de lesiones", "muy lejos de la casa",
                   "menos de una estrella al inicio de temporada", "vetada por el usuario",
-                  "segunda noche y no favorito"}
+                  "segunda noche y no favorito", "riesgo de paliza"}
 RACHA_DESCARTA_PREFIJOS = ("falla en partidos normales", "sin ")
 BALANCE_RACHA = 3
 

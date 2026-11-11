@@ -39,6 +39,11 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
    **Segunda noche y no favorito** (`modelo.NO_FAVORITO_CANSADO`, 9 nov 2026): si jugó anoche y hoy es no favorito
    por 5+, sus "más" llevan esa alerta y no entran (esta temporada 49 % frente a 66 % prometido; 2025-26, 62 %).
    El resto de patas agresivas (línea más alta con 62 %+) cumplen: 69 % frente a 66 % en las dos temporadas.
+   **Riesgo de paliza** (`modelo.riesgo_paliza`, 10 nov 2026, lo pidió él: "si ya sabemos que eso va a pasar, evitemos
+   esas apuestas"): nada de "más" de puntos/PRA de un favorito por 14+ ni de triples de un favorito por 11+ (alerta
+   "riesgo de paliza"; Brunson 2+ triples con NYK favorito por 15.5 se quedó en 1). De ese equipo, rebotes y asistencias
+   (rinden 77-82 % frente a 68 %; Towns hizo 16 rebotes esa noche). Y cuando se avise de un riesgo así al proponer una
+   pata, no proponerla: cambiarla antes de dársela.
 
 - **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
