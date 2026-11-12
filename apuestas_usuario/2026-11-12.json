@@ -39,6 +39,51 @@
           "linea": 0.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva del sistema Betano 9.43",
+      "casa": "Betano",
+      "cuota": 9.43,
+      "prob": 0.1,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Duncan Robinson",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Rudy Gobert",
+          "stat": "pr",
+          "lado": "más",
+          "linea": 20.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Devin Booker",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Naz Reid",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Tyrese Maxey",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
     }
   ]
 }
