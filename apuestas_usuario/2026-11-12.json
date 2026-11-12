@@ -41,9 +41,9 @@
       ]
     },
     {
-      "nombre": "Agresiva del sistema Betano 9.43",
+      "nombre": "Agresiva del sistema Betano ajustada 7.35",
       "casa": "Betano",
-      "cuota": 9.43,
+      "cuota": 7.35,
       "prob": 0.1,
       "real": false,
       "patas": [
@@ -52,12 +52,6 @@
           "stat": "threes",
           "lado": "más",
           "linea": 2.5
-        },
-        {
-          "jugador": "Rudy Gobert",
-          "stat": "pr",
-          "lado": "más",
-          "linea": 20.5
         },
         {
           "jugador": "Jaden McDaniels",
@@ -82,6 +76,12 @@
           "stat": "threes",
           "lado": "más",
           "linea": 1.5
+        },
+        {
+          "jugador": "P.J. Washington",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 5.5
         }
       ]
     }
