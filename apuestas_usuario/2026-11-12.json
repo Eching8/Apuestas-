@@ -2,10 +2,10 @@
   "fecha": "2026-11-12",
   "apuestas": [
     {
-      "nombre": "Bet builder PHX + Davis + Brown Betano 4.29",
+      "nombre": "Bet builder PHX + Davis + Brown Betano 3.34",
       "casa": "Betano",
-      "cuota": 4.29,
-      "prob": 0.21,
+      "cuota": 3.34,
+      "prob": 0.244,
       "real": false,
       "patas": [
         {
@@ -28,7 +28,7 @@
         },
         {
           "jugador": "Anthony Davis",
-          "stat": "blocks",
+          "stat": "steals",
           "lado": "menos",
           "linea": 1.5
         },
