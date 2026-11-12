@@ -1,0 +1,44 @@
+{
+  "fecha": "2026-11-12",
+  "apuestas": [
+    {
+      "nombre": "Bet builder PHX + Davis + Brown Betano 4.29",
+      "casa": "Betano",
+      "cuota": 4.29,
+      "prob": 0.21,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Jalen Green",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Dillon Brooks",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Devin Booker",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Anthony Davis",
+          "stat": "blocks",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaylen Brown",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        }
+      ]
+    }
+  ]
+}
