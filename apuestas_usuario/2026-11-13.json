@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-11-13",
+  "apuestas": [
+    {
+      "nombre": "Segura 5+ ajustada Betano 5.11",
+      "casa": "Betano",
+      "cuota": 5.11,
+      "prob": 0.22,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "Stephon Castle",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Brook Lopez",
+          "stat": "blocks",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Alperen Sengun",
+          "stat": "blocks",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Landry Shamet",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
+    }
+  ]
+}
