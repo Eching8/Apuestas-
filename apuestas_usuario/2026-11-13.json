@@ -35,17 +35,17 @@
       ]
     },
     {
-      "nombre": "Agresiva del sistema Betano 24.23",
+      "nombre": "Agresiva del sistema Betano ajustada 8.93",
       "casa": "Betano",
-      "cuota": 24.23,
-      "prob": 0.038,
+      "cuota": 8.93,
+      "prob": 0.09,
       "real": false,
       "patas": [
         {
           "jugador": "James Harden",
           "stat": "threes",
           "lado": "más",
-          "linea": 2.5
+          "linea": 1.5
         },
         {
           "jugador": "Kevin Durant",
@@ -70,12 +70,6 @@
           "stat": "threes",
           "lado": "más",
           "linea": 1.5
-        },
-        {
-          "jugador": "Josh Hart",
-          "stat": "assists",
-          "lado": "más",
-          "linea": 3.5
         },
         {
           "jugador": "Andrew Nembhard",
