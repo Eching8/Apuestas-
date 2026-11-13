@@ -33,6 +33,63 @@
           "linea": 1.5
         }
       ]
+    },
+    {
+      "nombre": "Agresiva del sistema Betano 24.23",
+      "casa": "Betano",
+      "cuota": 24.23,
+      "prob": 0.038,
+      "real": false,
+      "patas": [
+        {
+          "jugador": "James Harden",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Kevin Durant",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Brandin Podziemski",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Tyler Herro",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Josh Hart",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Andrew Nembhard",
+          "stat": "pra",
+          "lado": "más",
+          "linea": 23.5
+        },
+        {
+          "jugador": "Ty Jerome",
+          "stat": "points",
+          "lado": "más",
+          "linea": 21.5
+        }
+      ]
     }
   ]
 }
