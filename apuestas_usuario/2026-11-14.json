@@ -1,0 +1,64 @@
+{
+  "fecha": "2026-11-14",
+  "apuestas": [
+    {
+      "nombre": "Betano 15.97 (real)",
+      "casa": "Betano",
+      "cuota": 15.97,
+      "prob": 0.058,
+      "real": true,
+      "patas": [
+        {
+          "jugador": "Cameron Johnson",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Kyrie Irving",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "James Harden",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Cedric Coward",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Michael Porter Jr.",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 5.5
+        },
+        {
+          "jugador": "Duncan Robinson",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Bam Adebayo",
+          "stat": "stocks",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        }
+      ],
+      "monto": 10000,
+      "ganancia_potencial": 159709
+    }
+  ]
+}
