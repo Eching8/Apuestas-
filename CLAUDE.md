@@ -44,6 +44,10 @@ elegir entre dos; la cuota solo sirve para llegar a la que pide con las patas m�
    "riesgo de paliza"; Brunson 2+ triples con NYK favorito por 15.5 se quedó en 1). De ese equipo, rebotes y asistencias
    (rinden 77-82 % frente a 68 %; Towns hizo 16 rebotes esa noche). Y cuando se avise de un riesgo así al proponer una
    pata, no proponerla: cambiarla antes de dársela.
+   **Plan diario (14 nov 2026, lo aceptó él):** cada día se le da **una segura de 2-3 patas** (las seguras 2+ y 3+ del
+   informe, las que ganan: 8 de 11 y 6 de 10, +5.7 u y +8.9 u al 13 nov) y **una agresiva corta de 4-5 patas** con las
+   mejores del día (~25 % con patas del 70 %). La agresiva de 7-8 patas queda solo como fantasma: sus patas aciertan
+   lo prometido (43 de 59, ~73 %, del 7 al 12 nov) pero con 8 patas solo se gana ~1 de cada 15 (0 de ~10).
 
 - **"Menos" de anotación** (puntos, triples, PRA, P+R, P+A) solo con 75 %+ y 8+ de 10, y nunca de un compañero
   de una estrella ausente (`analizador.menos_aceptable`, alerta "sin X: más tiros para él"). Los "menos" de
