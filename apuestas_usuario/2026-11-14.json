@@ -7,8 +7,6 @@
       "cuota": 15.97,
       "prob": 0.058,
       "real": true,
-      "apostado": 10000,
-      "moneda": "COP",
       "patas": [
         {
           "jugador": "Cameron Johnson",
@@ -58,7 +56,9 @@
           "lado": "más",
           "linea": 4.5
         }
-      ]
+      ],
+      "monto": 10000,
+      "ganancia_potencial": 159709
     }
   ]
 }
