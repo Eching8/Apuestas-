@@ -1,0 +1,58 @@
+{
+  "fecha": "2026-11-15",
+  "apuestas": [
+    {
+      "nombre": "Betano 7.11 (real)",
+      "casa": "Betano",
+      "cuota": 7.11,
+      "prob": 0.075,
+      "real": true,
+      "monto": 10000,
+      "ganancia_potencial": 71154,
+      "patas": [
+        {
+          "jugador": "Jaylen Brown",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Darryn Peterson",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Ja'Kobe Walter",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Kevin Durant",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Kyshawn George",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Tyler Herro",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
+    }
+  ]
+}
