@@ -2,19 +2,25 @@
   "fecha": "2026-11-15",
   "apuestas": [
     {
-      "nombre": "Betano 7.11 (real)",
+      "nombre": "Betano 4.41 (real)",
       "casa": "Betano",
-      "cuota": 7.11,
-      "prob": 0.075,
+      "cuota": 4.41,
+      "prob": 0.13,
       "real": true,
       "monto": 10000,
-      "ganancia_potencial": 71154,
+      "ganancia_potencial": 44198,
       "patas": [
         {
           "jugador": "Jaylen Brown",
           "stat": "assists",
           "lado": "más",
           "linea": 2.5
+        },
+        {
+          "jugador": "Luka Doncic",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 3.5
         },
         {
           "jugador": "Darryn Peterson",
@@ -29,18 +35,6 @@
           "linea": 1.5
         },
         {
-          "jugador": "Kevin Durant",
-          "stat": "assists",
-          "lado": "más",
-          "linea": 3.5
-        },
-        {
-          "jugador": "Kyshawn George",
-          "stat": "assists",
-          "lado": "más",
-          "linea": 3.5
-        },
-        {
           "jugador": "Tyler Herro",
           "stat": "threes",
           "lado": "más",
@@ -52,7 +46,8 @@
           "lado": "más",
           "linea": 1.5
         }
-      ]
+      ],
+      "nota": "Reemplaza a la de 7.11 antes de empezar: salen Durant y Kyshawn George 4+ ast (~60 %), entra Luka 4+ triples."
     }
   ]
 }
