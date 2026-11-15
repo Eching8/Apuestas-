@@ -58,7 +58,10 @@
         }
       ],
       "monto": 10000,
-      "ganancia_potencial": 159709
+      "ganancia_potencial": 159709,
+      "resultado_casa": "ganada",
+      "cobrado": 19800,
+      "nota": "Betano anuló los tres bet builders (Harden y MPJ no jugaron; el de Robinson+Bam también quedó anulado) y pagó a 1.98 con Cam Johnson y McDaniels."
     }
   ]
 }
