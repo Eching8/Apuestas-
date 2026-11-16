@@ -40,10 +40,10 @@
       ]
     },
     {
-      "nombre": "Betano 11.77 (fantasma)",
+      "nombre": "Betano 9.49 (fantasma)",
       "casa": "Betano",
-      "cuota": 11.77,
-      "prob": 0.09,
+      "cuota": 9.49,
+      "prob": 0.11,
       "patas": [
         {
           "jugador": "AJ Dybantsa",
@@ -82,12 +82,13 @@
           "linea": 1.5
         },
         {
-          "jugador": "Desmond Bane",
-          "stat": "pr",
+          "jugador": "Zion Williamson",
+          "stat": "pra",
           "lado": "más",
-          "linea": 21.5
+          "linea": 27.5
         }
-      ]
+      ],
+      "nota": "Antes 11.77: Bane más de 21.5 P+R (62 %) cambiado por Zion 28+ PRA (77 %)."
     }
   ]
 }
