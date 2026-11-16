@@ -1,0 +1,43 @@
+{
+  "fecha": "2026-11-16",
+  "apuestas": [
+    {
+      "nombre": "Betano 5.32 (agresiva)",
+      "casa": "Betano",
+      "cuota": 5.32,
+      "prob": 0.2,
+      "patas": [
+        {
+          "jugador": "AJ Dybantsa",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Donovan Mitchell",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Amen Thompson",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Michael Porter Jr.",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 5.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        }
+      ]
+    }
+  ]
+}
