@@ -38,6 +38,56 @@
           "linea": 4.5
         }
       ]
+    },
+    {
+      "nombre": "Betano 11.77 (fantasma)",
+      "casa": "Betano",
+      "cuota": 11.77,
+      "prob": 0.09,
+      "patas": [
+        {
+          "jugador": "AJ Dybantsa",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Donovan Mitchell",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Amen Thompson",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Michael Porter Jr.",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 5.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Jamal Murray",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Desmond Bane",
+          "stat": "pr",
+          "lado": "más",
+          "linea": 21.5
+        }
+      ]
     }
   ]
 }
