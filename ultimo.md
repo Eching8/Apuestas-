@@ -117,22 +117,21 @@ Ganadas 2 de 12 liquidadas.
 
 Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad (solo para saber cuánto debería pagar; se elige por probabilidad). Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).
 
-### Doble: Chicago Bulls @ Cleveland Cavaliers + Houston Rockets @ Miami Heat
+### Doble: Houston Rockets @ Miami Heat + Chicago Bulls @ Cleveland Cavaliers
 
-Probabilidad de acertar los dos bet builders: **16%** (1 de cada 6); cuota justa **6.28**.
+Probabilidad de acertar los dos bet builders: **23%** (1 de cada 4); cuota justa **4.29**.
 
-**Chicago Bulls @ Cleveland Cavaliers** — acertar las 4: **43%**, cuota justa 2.35
+**Houston Rockets @ Miami Heat** — acertar las 4: **55%**, cuota justa 1.83
+
+- Kevin Durant 3+ asistencias (74%; esperado 4.1; últ. 10: 8/10)
+- Davion Mitchell 1+ triples (85%; esperado 2.3; últ. 10: 8/10)
+- Jabari Smith Jr. 1+ triples (87%; esperado 2.2; últ. 10: 10/10)
+
+**Chicago Bulls @ Cleveland Cavaliers** — acertar las 4: **43%**, cuota justa 2.34
 
 - James Harden 2+ triples (73%; esperado 2.7; últ. 10: 9/10)
 - Donovan Mitchell 2+ triples (74%; esperado 2.8; últ. 10: 7/10)
 - Josh Giddey 1+ triples (79%; esperado 1.8; últ. 10: 10/10)
-
-**Houston Rockets @ Miami Heat** — acertar las 4: **37%**, cuota justa 2.67
-
-- Davion Mitchell 13+ puntos (73%; esperado 16.0; últ. 10: 8/10)
-- Kevin Durant 3+ asistencias (74%; esperado 4.1; últ. 10: 8/10)
-- Amen Thompson 3+ asistencias (76%; esperado 4.7; últ. 10: 7/10)
-- Jabari Smith Jr. 1+ triples (88%; esperado 2.5; últ. 10: 10/10)
 
 **Memphis Grizzlies @ Washington Wizards** — acertar las 4: **37%**, cuota justa 2.69
 
@@ -143,33 +142,22 @@ Probabilidad de acertar los dos bet builders: **16%** (1 de cada 6); cuota justa
 
 ## Combinada segura del día
 
-**Opción A, líneas alternativas (la más segura):** el pick seguro más probable de cada partido, de titulares estables. Búscalas en las líneas alternativas de tu casa ("15+", "20+"...): cada una vale la pena si paga al menos su cuota mínima.
-
-| Partido | Selección | Prob. | Cuota mínima | Esperado | Últ. 10 |
-|---|---|---|---|---|---|
-| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 21.5 pts+reb+ast** | **78%** | 1.29 | 26.9 | 9/10 |
-| Golden State Warriors @ New Orleans Pelicans | **Zion Williamson: más de 27.5 pts+reb+ast** | **77%** | 1.30 | 34.0 | 8/10 |
-
-| Selecciones | Probabilidad de acertar todas |
-|---|---|
-| 2 | **60%** |
-
-**Opción B, líneas principales con cuota real:**
+**Opción A, líneas principales con cuota real:**
 
 Se elige por **probabilidad**, no por valor: la más probable de cada partido entre jugadores constantes (titulares con minutos estables, sin cambio de rol, traspaso ni lesión, que la habrían pasado en 7+ de sus últimos 10 y en el 60 %+ de esta temporada) y con cuota real de la casa. Si tu casa no ofrece esa línea, usa la siguiente de la lista "Las más seguras con cuota".
 
 | Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |
 |---|---|---|---|---|---|
 | Golden State Warriors @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 robos**<br>el rival concede -3% de robos por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -3% | **70%** | 1.51 | 8/10 | 11/14 |
+| Philadelphia 76ers @ Brooklyn Nets | **Jaylen Brown: más de 0.5 robos**<br>el rival concede +5% de robos por minuto a bases/escoltas (defensa media); ajuste aplicado +5% | **69%** | 1.44 | 9/10 | 12/13 |
 | Houston Rockets @ Miami Heat | **Amen Thompson: menos de 1.5 robos**<br>el rival concede -11% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -11% | **68%** | 1.62 | 9/10 | 12/14 |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos**<br>el rival concede +5% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5% | **68%** | 1.47 | 7/10 | 8/12 |
-| Memphis Grizzlies @ Washington Wizards | **Anthony Davis: menos de 1.5 robos**<br>el rival concede -1% de robos por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -1% | **67%** | 1.43 | 9/10 | 10/12 |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos**<br>el rival concede +5% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5% | **68%** | 1.49 | 7/10 | 8/12 |
 
 | Selecciones | Probabilidad de acertar todas | Cuota |
 |---|---|---|
-| 2 | **48%** | 2.45 |
-| 3 | **32%** | 3.62 |
-| 4 | **22%** | 5.16 |
+| 2 | **49%** | 2.18 |
+| 3 | **33%** | 3.55 |
+| 4 | **22%** | 5.28 |
 
 **Herbert Jones: menos de 1.5 robos** (70%):
 
@@ -182,6 +170,17 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 - El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
 - El rival no tiene a Stephen Curry (0.9 robos por partido)
 - Minutos: 28 esperados (titular, ±5)
+
+**Jaylen Brown: más de 0.5 robos** (69%):
+
+- La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+- Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
+- El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 13%
+- El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+- Minutos: 32 esperados (titular, ±4)
 
 **Amen Thompson: menos de 1.5 robos** (68%):
 
@@ -205,39 +204,28 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 - El rival es #13 de 30 en balones que pierde (#1 = el que más; 14.3 por partido)
 - Minutos: 32 esperados (titular, ±5)
 
-**Anthony Davis: menos de 1.5 robos** (67%):
-
-- La pasó en 10 de 12 esta temporada (falló con 4, 2)
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 10 de 13 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 30+ minutos: 5 de 6, con 1.3 de media (últimos 60 partidos)
-- El rival es #16 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -1% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 8.8 balones por partido con él en pista y robó el 14%
-- El rival es #9 de 30 en balones que pierde (#1 = el que más; 14.6 por partido)
-- El rival no tiene a Ty Jerome (0.8 robos por partido)
-- Minutos: 34 esperados (titular, ±5)
-
 ### Las más seguras con cuota
 
 | Partido | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|---|
 | Golden State Warriors @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 robos** | **70%** | 77% | 61% | 0.9 ± 1.1 | 8/10 | 11/14 | 0, 5, 2 | 1.51 (66%) |
+| Philadelphia 76ers @ Brooklyn Nets | **Jaylen Brown: más de 0.5 robos** | **69%** | 73% | 64% | 1.2 ± 1.1 | 9/10 | 12/13 | 2, 1, 2, 1 | 1.44 (69%) |
 | Houston Rockets @ Miami Heat | **Amen Thompson: menos de 1.5 robos** | **68%** | 76% | 57% | 1.0 ± 1.0 | 9/10 | 12/14 | 0, 1 | 1.62 (62%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.47 (68%) |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.49 (67%) |
 | Memphis Grizzlies @ Washington Wizards | **Anthony Davis: menos de 1.5 robos** | **67%** | 69% | 65% | 1.2 ± 1.1 | 9/10 | 10/12 | - | 1.43 (70%) |
-| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.48 (68%) |
-| Philadelphia 76ers @ Brooklyn Nets | **Jaylen Brown: menos de 1.5 robos** | **66%** | 66% | 66% | 1.2 ± 1.1 | 7/10 | 9/13 | 2, 1, 2, 1 | 1.40 (72%) |
-| Houston Rockets @ Miami Heat | **Giannis Antetokounmpo: más de 0.5 tapones** | **65%** | 65% | 66% | 1.1 ± 1.0 | 8/10 | 9/13 | 1 | 1.44 (70%) |
-| Houston Rockets @ Miami Heat | **Jabari Smith Jr.: más de 1.5 triples** | **65%** | 68% | 61% | 2.5 ± 1.6 | 7/10 | 10/14 | 2 | 1.53 (65%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Rudy Gobert: menos de 1.5 tapones** | **65%** | 69% | 59% | 1.2 ± 1.2 | 8/10 | 10/12 | 1, 2, 0, 1 | 1.57 (63%) |
-| Phoenix Suns @ Denver Nuggets | **Cameron Johnson: más de 0.5 robos** | **64%** | 66% | 63% | 1.0 ± 1.0 | 9/10 | 7/8 | 1, 1, 0, 1 | 1.50 (67%) |
-| Phoenix Suns @ Denver Nuggets | **Devin Booker: menos de 3.5 rebotes** | **64%** | 67% | 60% | 2.7 ± 1.8 | 9/10 | 9/12 | 2, 3, 4, 3 | 1.57 (64%) |
-| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 1.5 triples** | **64%** | 68% | 59% | 2.3 ± 1.5 | 8/10 | 10/13 | 3, 2 | 1.58 (63%) |
+| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.47 (68%) |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Rudy Gobert: menos de 1.5 tapones** | **64%** | 69% | 59% | 1.2 ± 1.2 | 8/10 | 10/12 | 1, 2, 0, 1 | 1.59 (63%) |
+| Phoenix Suns @ Denver Nuggets | **Devin Booker: menos de 3.5 rebotes** | **64%** | 67% | 60% | 2.7 ± 1.8 | 9/10 | 9/12 | 2, 3, 4, 3 | 1.57 (63%) |
+| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 1.5 triples** | **64%** | 67% | 59% | 2.3 ± 1.5 | 8/10 | 10/13 | 3, 2 | 1.59 (63%) |
+| Phoenix Suns @ Denver Nuggets | **Cameron Johnson: más de 0.5 robos** | **63%** | 66% | 61% | 1.0 ± 1.0 | 9/10 | 7/8 | 1, 1, 0, 1 | 1.55 (65%) |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Donovan Clingan: más de 0.5 triples** | **63%** | 65% | 61% | 1.0 ± 1.0 | 8/10 | 9/12 | 1, 2, 2, 2 | 1.54 (65%) |
+| Orlando Magic @ Boston Celtics | **Jalen Suggs: más de 2.5 rebotes** | **63%** | 73% | 56% | 4.2 ± 2.2 | 7/10 | 3/4 | 6, 8, 3 | 1.67 (60%) |
 
 ## Combinadas con cuota objetivo
 
 La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse o superar esa probabilidad. Se eligen solo por probabilidad de acertar (nunca por valor): como mucho 5 patas, sin "menos" de anotación dudosos.
 
-**Segura, cuota 2+ (2 patas):** cuota 2.45, probabilidad de acertar todas **48%** (1 de cada 2)
+**Segura, cuota 2+ (2 patas):** cuota 2.18, probabilidad de acertar todas **49%** (1 de cada 2)
 
 - Herbert Jones: menos de 1.5 robos (70%, cuota 1.51) — Golden State Warriors @ New Orleans Pelicans — 4 factores a favor, 1 en contra
   - La pasó en 11 de 14 esta temporada (falló con 3, 2, 2)
@@ -249,17 +237,17 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
   - El rival no tiene a Stephen Curry (0.9 robos por partido)
   - Minutos: 28 esperados (titular, ±5)
-- Amen Thompson: menos de 1.5 robos (68%, cuota 1.62) — Houston Rockets @ Miami Heat — 5 factores a favor, 0 en contra
-  - La pasó en 12 de 14 esta temporada (falló con 4, 2)
-  - Con 28+ minutos (hoy se esperan 32): 10 de 12 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a bases/escoltas: 10 de 14 (últimos 40 partidos)
-  - Contra defensas fuertes como la de hoy y con 28+ minutos: 12 de 19, con 1.6 de media (últimos 60 partidos)
-  - El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 12%
-  - El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
-  - Minutos: 32 esperados (titular, ±5)
+- Jaylen Brown: más de 0.5 robos (69%, cuota 1.44) — Philadelphia 76ers @ Brooklyn Nets — 5 factores a favor, 0 en contra
+  - La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+  - Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
+  - Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
+  - El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 13%
+  - El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+  - Minutos: 32 esperados (titular, ±4)
 
-**Segura, cuota 3+ (3 patas):** cuota 3.62, probabilidad de acertar todas **32%** (1 de cada 3)
+**Segura, cuota 3+ (3 patas):** cuota 3.55, probabilidad de acertar todas **33%** (1 de cada 3)
 
 - Herbert Jones: menos de 1.5 robos (70%, cuota 1.51) — Golden State Warriors @ New Orleans Pelicans — 4 factores a favor, 1 en contra
   - La pasó en 11 de 14 esta temporada (falló con 3, 2, 2)
@@ -271,6 +259,15 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
   - El rival no tiene a Stephen Curry (0.9 robos por partido)
   - Minutos: 28 esperados (titular, ±5)
+- Jaylen Brown: más de 0.5 robos (69%, cuota 1.44) — Philadelphia 76ers @ Brooklyn Nets — 5 factores a favor, 0 en contra
+  - La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+  - Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
+  - Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
+  - El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 13%
+  - El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+  - Minutos: 32 esperados (titular, ±4)
 - Amen Thompson: menos de 1.5 robos (68%, cuota 1.62) — Houston Rockets @ Miami Heat — 5 factores a favor, 0 en contra
   - La pasó en 12 de 14 esta temporada (falló con 4, 2)
   - Con 28+ minutos (hoy se esperan 32): 10 de 12 en sus últimos 15
@@ -280,7 +277,38 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 12%
   - El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
   - Minutos: 32 esperados (titular, ±5)
-- Toumani Camara: menos de 1.5 robos (68%, cuota 1.47) — Portland Trail Blazers @ Minnesota Timberwolves — 4 factores a favor, 1 en contra
+
+**Segura, cuota 5+ (4 patas):** cuota 5.28, probabilidad de acertar todas **22%** (1 de cada 4)
+
+- Herbert Jones: menos de 1.5 robos (70%, cuota 1.51) — Golden State Warriors @ New Orleans Pelicans — 4 factores a favor, 1 en contra
+  - La pasó en 11 de 14 esta temporada (falló con 3, 2, 2)
+  - Con 24+ minutos (hoy se esperan 28): 5 de 7 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 9 de 13 (últimos 40 partidos)
+  - Contra defensas medias como la de hoy y con 24+ minutos: 6 de 13, con 1.7 de media (últimos 60 partidos)
+  - El rival es #19 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -3% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 9.8 balones por partido con él en pista y robó el 8%
+  - El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
+  - El rival no tiene a Stephen Curry (0.9 robos por partido)
+  - Minutos: 28 esperados (titular, ±5)
+- Jaylen Brown: más de 0.5 robos (69%, cuota 1.44) — Philadelphia 76ers @ Brooklyn Nets — 5 factores a favor, 0 en contra
+  - La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+  - Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
+  - Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
+  - El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 13%
+  - El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+  - Minutos: 32 esperados (titular, ±4)
+- Amen Thompson: menos de 1.5 robos (68%, cuota 1.62) — Houston Rockets @ Miami Heat — 5 factores a favor, 0 en contra
+  - La pasó en 12 de 14 esta temporada (falló con 4, 2)
+  - Con 28+ minutos (hoy se esperan 32): 10 de 12 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a bases/escoltas: 10 de 14 (últimos 40 partidos)
+  - Contra defensas fuertes como la de hoy y con 28+ minutos: 12 de 19, con 1.6 de media (últimos 60 partidos)
+  - El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 12%
+  - El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
+  - Minutos: 32 esperados (titular, ±5)
+- Toumani Camara: menos de 1.5 robos (68%, cuota 1.49) — Portland Trail Blazers @ Minnesota Timberwolves — 4 factores a favor, 1 en contra
   - La pasó en 8 de 12 esta temporada (falló con 2, 2, 2, 2)
   - Con 28+ minutos (hoy se esperan 32): 8 de 10 en sus últimos 15
   - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 16 de 20 (últimos 40 partidos)
@@ -290,7 +318,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #13 de 30 en balones que pierde (#1 = el que más; 14.3 por partido)
   - Minutos: 32 esperados (titular, ±5)
 
-**Segura, cuota 5+ (4 patas):** cuota 5.16, probabilidad de acertar todas **22%** (1 de cada 5)
+**Segura, cuota 10+ (5 patas):** cuota 10.28, probabilidad de acertar todas **12%** (1 de cada 8)
 
 - Herbert Jones: menos de 1.5 robos (70%, cuota 1.51) — Golden State Warriors @ New Orleans Pelicans — 4 factores a favor, 1 en contra
   - La pasó en 11 de 14 esta temporada (falló con 3, 2, 2)
@@ -311,47 +339,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 12%
   - El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
   - Minutos: 32 esperados (titular, ±5)
-- Toumani Camara: menos de 1.5 robos (68%, cuota 1.47) — Portland Trail Blazers @ Minnesota Timberwolves — 4 factores a favor, 1 en contra
-  - La pasó en 8 de 12 esta temporada (falló con 2, 2, 2, 2)
-  - Con 28+ minutos (hoy se esperan 32): 8 de 10 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 16 de 20 (últimos 40 partidos)
-  - Contra defensas débiles como la de hoy y con 28+ minutos: 9 de 12, con 1.3 de media (últimos 60 partidos)
-  - El rival es #10 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 8.1 balones por partido con él en pista y robó el 10%
-  - El rival es #13 de 30 en balones que pierde (#1 = el que más; 14.3 por partido)
-  - Minutos: 32 esperados (titular, ±5)
-- Anthony Davis: menos de 1.5 robos (67%, cuota 1.43) — Memphis Grizzlies @ Washington Wizards — 3 factores a favor, 0 en contra
-  - La pasó en 10 de 12 esta temporada (falló con 4, 2)
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 10 de 13 (últimos 40 partidos)
-  - Contra defensas medias como la de hoy y con 30+ minutos: 5 de 6, con 1.3 de media (últimos 60 partidos)
-  - El rival es #16 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -1% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 8.8 balones por partido con él en pista y robó el 14%
-  - El rival es #9 de 30 en balones que pierde (#1 = el que más; 14.6 por partido)
-  - El rival no tiene a Ty Jerome (0.8 robos por partido)
-  - Minutos: 34 esperados (titular, ±5)
-
-**Segura, cuota 10+ (5 patas):** cuota 10.10, probabilidad de acertar todas **12%** (1 de cada 8)
-
-- Herbert Jones: menos de 1.5 robos (70%, cuota 1.51) — Golden State Warriors @ New Orleans Pelicans — 4 factores a favor, 1 en contra
-  - La pasó en 11 de 14 esta temporada (falló con 3, 2, 2)
-  - Con 24+ minutos (hoy se esperan 28): 5 de 7 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 9 de 13 (últimos 40 partidos)
-  - Contra defensas medias como la de hoy y con 24+ minutos: 6 de 13, con 1.7 de media (últimos 60 partidos)
-  - El rival es #19 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -3% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 9.8 balones por partido con él en pista y robó el 8%
-  - El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
-  - El rival no tiene a Stephen Curry (0.9 robos por partido)
-  - Minutos: 28 esperados (titular, ±5)
-- Amen Thompson: menos de 1.5 robos (68%, cuota 1.62) — Houston Rockets @ Miami Heat — 5 factores a favor, 0 en contra
-  - La pasó en 12 de 14 esta temporada (falló con 4, 2)
-  - Con 28+ minutos (hoy se esperan 32): 10 de 12 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a bases/escoltas: 10 de 14 (últimos 40 partidos)
-  - Contra defensas fuertes como la de hoy y con 28+ minutos: 12 de 19, con 1.6 de media (últimos 60 partidos)
-  - El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 12%
-  - El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
-  - Minutos: 32 esperados (titular, ±5)
-- Rudy Gobert: menos de 1.5 tapones (65%, cuota 1.57) — Portland Trail Blazers @ Minnesota Timberwolves — 3 factores a favor, 2 en contra
+- Rudy Gobert: menos de 1.5 tapones (64%, cuota 1.59) — Portland Trail Blazers @ Minnesota Timberwolves — 3 factores a favor, 2 en contra
   - La pasó en 10 de 12 esta temporada (falló con 2, 4)
   - Con 24+ minutos (hoy se esperan 28): 10 de 11 en sus últimos 15
   - Contra las ~10 mejores defensas en tapones a pívots: 13 de 18 (últimos 40 partidos)
@@ -388,50 +376,47 @@ Líneas bajas (alternativas) de titulares con 30+ minutos: mejor un "15+ puntos"
 
 | Partido | Jugador | Pick seguro | Prob. | Cuota mínima | Esperado | Últ. 10 |
 |---|---|---|---|---|---|---|
-| Houston Rockets @ Miami Heat | Davion Mitchell | **más de 21.5 pts+reb+ast** | **78%** | 1.29 | 26.9 | 9/10 |
-| Golden State Warriors @ New Orleans Pelicans | Zion Williamson | **más de 27.5 pts+reb+ast** | **77%** | 1.30 | 34.0 | 8/10 |
+| Houston Rockets @ Miami Heat | Davion Mitchell | **más de 21.5 pts+reb+ast** | **76%** | 1.31 | 26.6 | 9/10 |
 
 ## Las más probables del día
 
 | Partido | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|---|
-| Golden State Warriors @ New Orleans Pelicans | **Will Richard: menos de 1.5 robos** | **76%** | 87% | 63% | 0.6 ± 0.9 | 9/10 | 11/12 | 2, 0, 0 | 1.48 (68%) |
-| Golden State Warriors @ New Orleans Pelicans | **Brandin Podziemski: menos de 1.5 robos** | **72%** | 78% | 65% | 0.8 ± 0.9 | 7/10 | 7/11 | 1, 2, 1, 0 | 1.41 (71%) |
+| Golden State Warriors @ New Orleans Pelicans | **Will Richard: menos de 1.5 robos** | **77%** | 87% | 64% | 0.6 ± 0.9 | 9/10 | 11/12 | 2, 0, 0 | 1.44 (69%) |
+| Golden State Warriors @ New Orleans Pelicans | **Brandin Podziemski: menos de 1.5 robos** | **72%** | 78% | 66% | 0.8 ± 0.9 | 7/10 | 7/11 | 1, 2, 1, 0 | 1.42 (71%) |
 | Golden State Warriors @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 robos** | **70%** | 77% | 61% | 0.9 ± 1.1 | 8/10 | 11/14 | 0, 5, 2 | 1.51 (66%) |
 | Phoenix Suns @ Denver Nuggets | **Collin Gillespie: más de 0.5 robos** ⚠️ suplente | **69%** | 73% | 65% | 1.3 ± 1.2 | 7/10 | 9/12 | 4, 1, 1, 0 | 1.47 (68%) |
-| Chicago Bulls @ Cleveland Cavaliers | **Jarrett Allen: más de 0.5 tapones** | **69%** | 73% | 65% | 1.3 ± 1.2 | 8/10 | 9/11 | 1, 2, 2 | 1.42 (71%) |
-| Orlando Magic @ Boston Celtics | **Franz Wagner: menos de 1.5 robos** | **68%** | 71% | 65% | 1.0 ± 1.0 | 6/10 | 8/12 | 0, 1, 0, 2, 0 | 1.43 (70%) |
+| Golden State Warriors @ New Orleans Pelicans | **Derik Queen: más de 0.5 robos** ⚠️ suplente | **69%** | 72% | 66% | 1.3 ± 1.2 | 7/10 | 9/14 | 0, 0, 0, 0 | 1.44 (69%) |
+| Chicago Bulls @ Cleveland Cavaliers | **Jarrett Allen: más de 0.5 tapones** | **69%** | 73% | 66% | 1.3 ± 1.2 | 8/10 | 9/11 | 1, 2, 2 | 1.42 (71%) |
+| Houston Rockets @ Miami Heat | **Fred VanVleet: menos de 1.5 robos** | **69%** | 73% | 65% | 1.0 ± 1.2 | 7/10 | 7/11 | - | 1.43 (70%) |
+| Philadelphia 76ers @ Brooklyn Nets | **Jaylen Brown: más de 0.5 robos** | **69%** | 73% | 64% | 1.2 ± 1.1 | 9/10 | 12/13 | 2, 1, 2, 1 | 1.44 (69%) |
+| Orlando Magic @ Boston Celtics | **Franz Wagner: menos de 1.5 robos** | **68%** | 71% | 65% | 1.0 ± 1.0 | 6/10 | 8/12 | 0, 1, 0, 2, 0 | 1.42 (71%) |
 | Houston Rockets @ Miami Heat | **Amen Thompson: menos de 1.5 robos** | **68%** | 76% | 57% | 1.0 ± 1.0 | 9/10 | 12/14 | 0, 1 | 1.62 (62%) |
-| Memphis Grizzlies @ Washington Wizards | **Alex Sarr: más de 0.5 triples** | **68%** | 70% | 65% | 1.5 ± 1.3 | 7/10 | 8/13 | 1, 2 | 1.44 (69%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.47 (68%) |
-| Memphis Grizzlies @ Washington Wizards | **AJ Dybantsa: menos de 1.5 triples** | **68%** | 70% | 66% | 1.2 ± 1.1 | 9/10 | 9/10 | - | 1.42 (70%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Jonathan Kuminga: más de 0.5 robos** | **67%** | 68% | 66% | 1.3 ± 1.2 | 6/10 | 9/13 | 2, 2 | 1.44 (69%) |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.49 (67%) |
+| Memphis Grizzlies @ Washington Wizards | **AJ Dybantsa: menos de 1.5 triples** | **67%** | 70% | 65% | 1.2 ± 1.1 | 9/10 | 9/10 | - | 1.44 (69%) |
 | Memphis Grizzlies @ Washington Wizards | **Anthony Davis: menos de 1.5 robos** | **67%** | 69% | 65% | 1.2 ± 1.1 | 9/10 | 10/12 | - | 1.43 (70%) |
-| Houston Rockets @ Miami Heat | **Bobby Portis: menos de 1.5 triples** ⚠️ suplente | **67%** | 68% | 66% | 1.1 ± 1.1 | 8/10 | 9/13 | 1 | 1.40 (71%) |
+| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.47 (68%) |
 | Houston Rockets @ Miami Heat | **Reed Sheppard: más de 0.5 robos** ⚠️ suplente | **67%** | 69% | 65% | 1.1 ± 1.1 | 8/10 | 9/11 | 4, 1 | 1.48 (68%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Jaden McDaniels: más de 0.5 robos** | **67%** | 67% | 66% | 1.2 ± 1.1 | 6/10 | 7/13 | 5, 3, 2, 1 | 1.44 (70%) |
-| Houston Rockets @ Miami Heat | **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.48 (68%) |
-| Golden State Warriors @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 triples** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 11/14 | 2, 1, 0 | 1.44 (69%) |
-| Houston Rockets @ Miami Heat | **Pelle Larsson: más de 0.5 robos** ⚠️ suplente | **67%** | 68% | 65% | 1.1 ± 1.0 | 9/10 | 10/11 | 0, 0 | 1.46 (69%) |
-| Memphis Grizzlies @ Washington Wizards | **Zach Edey: menos de 1.5 asistencias** | **66%** | 64% | 69% | 1.3 ± 1.1 | 8/10 | 8/10 | - | 1.37 (73%) |
-| Philadelphia 76ers @ Brooklyn Nets | **Jaylen Brown: menos de 1.5 robos** | **66%** | 66% | 66% | 1.2 ± 1.1 | 7/10 | 9/13 | 2, 1, 2, 1 | 1.40 (72%) |
+| Houston Rockets @ Miami Heat | **Pelle Larsson: más de 0.5 robos** ⚠️ suplente | **67%** | 68% | 66% | 1.1 ± 1.0 | 9/10 | 10/11 | 0, 0 | 1.44 (69%) |
+| Memphis Grizzlies @ Washington Wizards | **Zach Edey: menos de 1.5 asistencias** | **67%** | 64% | 69% | 1.3 ± 1.1 | 8/10 | 8/10 | - | 1.33 (75%) |
+| Portland Trail Blazers @ Minnesota Timberwolves | **Jaden McDaniels: más de 0.5 robos** | **66%** | 67% | 66% | 1.2 ± 1.1 | 6/10 | 7/13 | 5, 3, 2, 1 | 1.45 (69%) |
+| Golden State Warriors @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 triples** | **66%** | 68% | 64% | 1.2 ± 1.2 | 7/10 | 11/14 | 2, 1, 0 | 1.45 (69%) |
 | Philadelphia 76ers @ Brooklyn Nets | **Day'Ron Sharpe: menos de 0.5 triples** | **66%** | 65% | 67% | 0.4 ± 0.7 | 7/10 | 8/12 | 1, 1, 0 | 1.39 (72%) |
-| Houston Rockets @ Miami Heat | **Giannis Antetokounmpo: más de 0.5 tapones** | **65%** | 65% | 66% | 1.1 ± 1.0 | 8/10 | 9/13 | 1 | 1.44 (70%) |
-| Phoenix Suns @ Denver Nuggets | **Collin Gillespie: menos de 3.5 rebotes** ⚠️ suplente | **65%** | 69% | 60% | 2.7 ± 1.7 | 9/10 | 10/12 | 3, 3, 0, 2 | 1.56 (64%) |
+| Memphis Grizzlies @ Washington Wizards | **Cam Spencer: menos de 2.5 triples** ⚠️ suplente | **65%** | 67% | 63% | 1.9 ± 1.5 | 7/10 | 8/13 | 0, 4 | 1.50 (67%) |
 
 **Si haces combinada:** cada selección que añades multiplica el riesgo. Probabilidad de acertar todas con las más probables de partidos distintos:
 
 - 2 selecciones: **53%**
 - 3 selecciones: **37%**
 - 4 selecciones: **25%**
-- 5 selecciones: **17%**
-- 6 selecciones: **11%**
+- 5 selecciones: **18%**
+- 6 selecciones: **12%**
 
 Dentro de un mismo partido (bet builder) las selecciones no son independientes y el cálculo es aún menos fiable. Con 12 selecciones al 65 % la probabilidad de acertar todas es menor del 1 %.
 
 ### En qué se basan las 10 más probables
 
-#### Will Richard: menos de 1.5 robos (76%) — Golden State Warriors @ New Orleans Pelicans
+#### Will Richard: menos de 1.5 robos (77%) — Golden State Warriors @ New Orleans Pelicans
 
 **¿Por qué 0.6 robos?** (línea 1.5; 24.8 minutos esperados)
 
@@ -579,6 +564,44 @@ Razonamiento (3 factores a favor, 3 en contra):
 | Robos | 0.6 | 1.6 | 1.8 | 1.2 | 1.5 |
 | % de las pérdidas del rival que roba | 8.6% | 17.2% | 20.2% | 13.7% | 18.8% |
 
+#### Derik Queen: más de 0.5 robos (69%) — Golden State Warriors @ New Orleans Pelicans
+
+**¿Por qué 1.3 robos?** (línea 0.5; 25.0 minutos esperados)
+
+En corto:
+
+- La pasó en 9 de 14 esta temporada (falló con 0, 0, 0, 0)
+- Con 21+ minutos (hoy se esperan 25): 7 de 10 en sus últimos 15
+- Hoy juega más que de costumbre (25 min frente a 21): con 21+ minutos, esta temporada y la pasada, la pasó 39 de 55 (71%)
+- Contra las ~10 mejores defensas en robos a pívots: 3 de 9 (últimos 40 partidos)
+- Contra defensas débiles como la de hoy y con 21+ minutos: 9 de 11, con 1.8 de media (últimos 60 partidos)
+- El rival es #11 de 30 en robos que concede a pívots por minuto (#1 = el que más concede; +5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 6.9 balones por partido con él en pista y robó el 14%
+- El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
+- El rival no tiene a Stephen Curry (0.9 robos por partido)
+- Minutos: 25 esperados (suplente, ±5)
+
+Razonamiento (3 factores a favor, 2 en contra):
+
+- ❌ Minutos: 25.0 esperados (suplente, ±4.8).
+- ✅ Forma: 1.2 en sus últimos 5, 1.0 esta temporada (14 partidos), 1.0 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 13.8% de las pérdidas del rival en pista × 15.0 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede +5% de robos por minuto a pívots (defensa débil); ajuste aplicado +5%.
+- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ❌ Contra este rival: 0, 0, 0, 0 (0 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ sin Dejounte Murray (72 partidos): 26.0 min vs 20.2 con él; reb +7%/min, ast +25%/min.
+- ⚠️ Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- ⚠️ Alertas: suplente.
+- Robos **1.3** (por componentes 1.3 · por tasa por minuto y defensa rival 1.4): roba el 13.8% de las pérdidas del rival en pista × 15.0 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 20.8 | 21.0 | 21.9 | 25.0 | 20.0 |
+| Robos | 1.2 | 1.0 | 1.0 | 1.0 | 0.0 |
+| % de las pérdidas del rival que roba | 20.7% | 14.5% | 13.9% | 14.4% | 0.0% |
+
 #### Jarrett Allen: más de 0.5 tapones (69%) — Chicago Bulls @ Cleveland Cavaliers
 
 **¿Por qué 1.3 tapones?** (línea 0.5; 26.4 minutos esperados)
@@ -617,6 +640,74 @@ Razonamiento (5 factores a favor, 2 en contra):
 | Minutos | 23.6 | 25.6 | 25.8 | 27.4 | 27.7 |
 | Tapones | 0.8 | 1.3 | 1.4 | 1.1 | 1.7 |
 | % de los tiros de 2 del rival que tapona | 3.0% | 4.7% | 4.8% | 3.5% | 5.3% |
+
+#### Fred VanVleet: menos de 1.5 robos (69%) — Houston Rockets @ Miami Heat
+
+**¿Por qué 1.0 robos?** (línea 1.5; 30.0 minutos esperados)
+
+En corto:
+
+- La pasó en 7 de 11 esta temporada (falló con 3, 2, 3, 3)
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 3 de 4 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 26+ minutos: 3 de 4, con 1.0 de media (últimos 60 partidos)
+- El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 9.0 balones por partido con él en pista y robó el 11%
+- El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
+- Minutos: 30 esperados (titular, ±3)
+
+Razonamiento (4 factores a favor, 0 en contra):
+
+- ✅ Minutos: 30.0 esperados (titular, ±3.0).
+- ✅ Forma: 0.6 en sus últimos 5, 1.2 esta temporada (11 partidos) (línea 1.5).
+- ➖ Cómo produce robos: roba el 12.2% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede -11% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -11%.
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ en el parte de lesiones: day-to-day.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- ⚠️ Alertas: en el parte de lesiones.
+- Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.0): roba el 12.2% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 31.0 | 30.5 | 30.5 | - | - |
+| Robos | 0.6 | 1.0 | 1.2 | - | - |
+| % de las pérdidas del rival que roba | 6.2% | 11.1% | 12.6% | - | - |
+
+#### Jaylen Brown: más de 0.5 robos (69%) — Philadelphia 76ers @ Brooklyn Nets
+
+**¿Por qué 1.2 robos?** (línea 0.5; 32.4 minutos esperados)
+
+En corto:
+
+- La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+- Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
+- El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 9.3 balones por partido con él en pista y robó el 13%
+- El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+- Minutos: 32 esperados (titular, ±4)
+
+Razonamiento (5 factores a favor, 0 en contra):
+
+- ✅ Minutos: 32.4 esperados (titular, ±3.6).
+- ✅ Forma: 1.4 en sus últimos 5, 1.3 esta temporada (13 partidos), 0.9 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede +5% de robos por minuto a bases/escoltas (defensa media); ajuste aplicado +5%.
+- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 2, 1, 2, 1 (4 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 9 de 10.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- Robos **1.2** (por componentes 1.3 · por tasa por minuto y defensa rival 1.2): roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 32.6 | 34.5 | 34.8 | 33.6 | 35.0 |
+| Robos | 1.4 | 1.2 | 1.3 | 1.0 | 1.5 |
+| % de las pérdidas del rival que roba | 19.4% | 12.9% | 12.1% | 12.2% | 14.6% |
 
 #### Franz Wagner: menos de 1.5 robos (68%) — Orlando Magic @ Boston Celtics
 
@@ -678,7 +769,6 @@ Razonamiento (5 factores a favor, 0 en contra):
 - ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
 - ✅ Contra este rival: 0, 1 (2 de 2 a favor).
 - ✅ Últimos 10: la habría pasado 9 de 10.
-- ⚠️ sin Fred VanVleet (3 partidos): 32.0 min vs 33.6 con él; ast +17%/min.
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
 - Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.0): roba el 12.0% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
@@ -688,123 +778,6 @@ Razonamiento (5 factores a favor, 0 en contra):
 | Minutos | 34.6 | 33.0 | 33.3 | 37.9 | 38.5 |
 | Robos | 0.8 | 1.1 | 1.1 | 1.5 | 0.5 |
 | % de las pérdidas del rival que roba | 10.0% | 11.8% | 10.7% | 14.9% | 6.7% |
-
-#### Alex Sarr: más de 0.5 triples (68%) — Memphis Grizzlies @ Washington Wizards
-
-**¿Por qué 1.5 triples?** (línea 0.5; 28.7 minutos esperados)
-
-En corto:
-
-- La pasó en 8 de 13 esta temporada (falló con 0, 0, 0, 0)
-- Con 25+ minutos (hoy se esperan 29): 8 de 10 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a pívots: 10 de 14 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 25+ minutos: 8 de 16, con 0.9 de media (últimos 60 partidos)
-- El rival es #19 de 30 en triples que concede a pívots por minuto (#1 = el que más concede; -6% frente a la media)
-- Su zona principal es triple frontal (23% de sus tiros, 33% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 41% (34% de acierto), penetración 14% (58% de acierto), corte 13% (83% de acierto); en recibe y tira el rival es #21 de 30 en lo que deja (#1 = el que más; 1.03 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 4.5 triples intentados esperados al 33%
-- El rival no tiene a Ty Jerome (2.3 triples por partido)
-- Minutos: 29 esperados (titular, ±7)
-
-Razonamiento (4 factores a favor, 2 en contra):
-
-- ❌ Minutos: 28.7 esperados (titular, ±6.9).
-- ✅ Forma: 1.8 en sus últimos 5, 1.1 esta temporada (13 partidos), 1.0 la temporada pasada (línea 0.5).
-- ➖ Cómo produce triples: 4.5 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
-- ❌ Defensa: el rival concede -6% de triples por minuto a pívots (defensa media); ajuste aplicado -3%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 2 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ✅ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson (10 partidos): 27.1 min vs 27.3 con él; pts +9%/min, reb +7%/min, ast +17%/min.
-- ⚠️ segundo partido en dos noches: -3% de minutos.
-
-- ⚠️ Alertas: minutos inestables.
-- Triples **1.5** (por componentes 1.5 · por tasa por minuto y defensa rival 1.4): 4.5 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.8 | 28.3 | 27.3 | 27.2 | 26.0 |
-| Triples anotados | 1.8 | 1.3 | 1.1 | 1.0 | 1.5 |
-| Triples intentados | 5.2 | 4.0 | 3.5 | 3.1 | 5.0 |
-| % triples | 34.6% | 32.5% | 30.4% | 33.3% | 30.0% |
-
-#### Toumani Camara: menos de 1.5 robos (68%) — Portland Trail Blazers @ Minnesota Timberwolves
-
-**¿Por qué 1.1 robos?** (línea 1.5; 31.7 minutos esperados)
-
-En corto:
-
-- La pasó en 8 de 12 esta temporada (falló con 2, 2, 2, 2)
-- Con 28+ minutos (hoy se esperan 32): 8 de 10 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 16 de 20 (últimos 40 partidos)
-- Contra defensas débiles como la de hoy y con 28+ minutos: 9 de 12, con 1.3 de media (últimos 60 partidos)
-- El rival es #10 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 8.1 balones por partido con él en pista y robó el 10%
-- El rival es #13 de 30 en balones que pierde (#1 = el que más; 14.3 por partido)
-- Minutos: 32 esperados (titular, ±5)
-
-Razonamiento (4 factores a favor, 1 en contra):
-
-- ✅ Minutos: 31.7 esperados (titular, ±5.3).
-- ✅ Forma: 0.6 en sus últimos 5, 0.8 esta temporada (12 partidos), 1.2 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 11.0% de las pérdidas del rival en pista × 14.9 pérdidas esperadas del rival.
-- ❌ Defensa: el rival concede +5% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5%.
-- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 1, 0, 0 (4 de 4 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ⚠️ Ja Morant ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.1): roba el 11.0% de las pérdidas del rival en pista × 14.9 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 31.0 | 29.9 | 29.1 | 33.3 | 34.5 |
-| Robos | 0.6 | 0.8 | 0.8 | 1.2 | 0.5 |
-| % de las pérdidas del rival que roba | 7.0% | 9.9% | 10.0% | 11.5% | 4.3% |
-
-#### AJ Dybantsa: menos de 1.5 triples (68%) — Memphis Grizzlies @ Washington Wizards
-
-**¿Por qué 1.2 triples?** (línea 1.5; 33.5 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 10 esta temporada; los fallos, en partidos raros (paliza de 28)
-- Con 30+ minutos (hoy se esperan 34): 8 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 2 de 3 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 30+ minutos: 4 de 4, con 0.8 de media (últimos 60 partidos)
-- El rival es #13 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +2% frente a la media)
-- Su zona principal es triple frontal (14% de sus tiros, 31% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): penetración 36% (41% de acierto), creado 23% (41% de acierto), recibe y tira 23% (28% de acierto); en penetración el rival es #25 de 30 en lo que deja (#1 = el que más; 1.03 puntos por tiro frente a 1.08 de media)
-- Oportunidades: 4.2 triples intentados esperados al 31%
-- El rival no tiene a Ty Jerome (2.3 triples por partido)
-- Minutos: 34 esperados (titular, ±5)
-
-Razonamiento (3 factores a favor, 2 en contra):
-
-- ✅ Minutos: 33.5 esperados (titular, ±5.1).
-- ✅ Forma: 1.0 en sus últimos 5, 0.9 esta temporada (10 partidos) (línea 1.5).
-- ➖ Cómo produce triples: 4.2 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 31% esperado.
-- ➖ Defensa: el rival concede +2% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado +1%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ❌ Altura: mide 6'9", 1.8 pulgadas más que los aleros/ala-pívots del rival (+0.6% en esta estadística).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Últimos 10: la habría pasado 9 de 10.
-- ❌ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson: muestra insuficiente (2 partidos sin él).
-- ⚠️ segundo partido en dos noches: -3% de minutos.
-
-- Triples **1.2** (por componentes 1.3 · por tasa por minuto y defensa rival 1.0): 4.2 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 31% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 35.2 | 33.4 | 33.4 | - | - |
-| Triples anotados | 1.0 | 0.9 | 0.9 | - | - |
-| Triples intentados | 4.8 | 3.7 | 3.7 | - | - |
-| % triples | 20.8% | 24.3% | 24.3% | - | - |
 
 
 ## Orlando Magic @ Boston Celtics
@@ -832,14 +805,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Franz Wagner: menos de 1.5 robos** | **68%** | 71% | 65% | 1.0 ± 1.0 | 6/10 | 8/12 | 0, 1, 0, 2, 0 | 1.43 (70%) |
-| **Derrick White: menos de 2.5 triples** | **64%** | 68% | 59% | 1.8 ± 1.4 | 7/10 | 9/13 | 2, 2, 3, 1 | 1.58 (63%) |
-| **Derrick White: más de 0.5 robos** | **64%** | 67% | 60% | 1.0 ± 1.0 | 8/10 | 11/13 | 2, 2, 3, 3 | 1.56 (64%) |
-| **Payton Pritchard: menos de 2.5 triples** ⚠️ suplente | **63%** | 66% | 60% | 2.0 ± 1.9 | 6/10 | 8/13 | 0, 1, 1, 5 | 1.55 (65%) |
+| **Franz Wagner: menos de 1.5 robos** | **68%** | 71% | 65% | 1.0 ± 1.0 | 6/10 | 8/12 | 0, 1, 0, 2, 0 | 1.42 (71%) |
+| **Paul George: menos de 3.5 triples** | **65%** | 69% | 60% | 2.5 ± 1.8 | 7/10 | 7/11 | 3, 1, 0 | 1.56 (64%) |
+| **Derrick White: menos de 2.5 triples** | **64%** | 68% | 60% | 1.8 ± 1.4 | 7/10 | 9/13 | 2, 2, 3, 1 | 1.57 (64%) |
+| **Derrick White: más de 0.5 robos** | **64%** | 67% | 61% | 1.0 ± 1.0 | 8/10 | 11/13 | 2, 2, 3, 3 | 1.53 (66%) |
+| **Payton Pritchard: menos de 2.5 triples** ⚠️ suplente | **63%** | 66% | 60% | 2.0 ± 1.9 | 6/10 | 8/13 | 0, 1, 1, 5 | 1.54 (65%) |
 | **Jalen Suggs: más de 2.5 rebotes** | **63%** | 73% | 56% | 4.2 ± 2.2 | 7/10 | 3/4 | 6, 8, 3 | 1.67 (60%) |
+| **Jalen Suggs: más de 0.5 robos** | **62%** | 69% | 58% | 1.2 ± 1.1 | 7/10 | 3/4 | 1, 3, 0 | 1.64 (61%) |
 | **Anthony Black: más de 1.5 robos+tapones** | **62%** | 62% | 62% | 2.2 ± 1.7 | 7/10 | 6/9 | 2, 2, 1, 1, 5 | 1.53 (66%) |
-| **Neemias Queta: menos de 1.5 tapones** | **62%** | 61% | 63% | 1.3 ± 1.2 | 7/10 | 7/13 | 2, 0, 1, 2 | 1.48 (68%) |
-| **Jalen Suggs: más de 0.5 robos** | **62%** | 69% | 57% | 1.2 ± 1.1 | 7/10 | 3/4 | 1, 3, 0 | 1.66 (60%) |
 
 ### Fichas de los jugadores destacados
 
@@ -894,6 +867,57 @@ Razonamiento (4 factores a favor, 1 en contra):
 | triple frontal | 21% | 31% | 35% | 35% |
 | media distancia | 8% | 35% | 41% | 42% |
 | triple de esquina | 6% | 34% | 38% | 36% |
+
+#### Paul George (aleros/ala-pívots) vs Orlando Magic
+
+- Minutos esperados: **27.5** (± 4.2); 60 partidos en la base.
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Paul George: menos de 3.5 triples** (65%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
+- Defensa de Orlando Magic contra aleros/ala-pívots en triples: -2% respecto a la media; ajuste por su historial contra defensas similares: -4%.
+
+**¿Por qué 2.5 triples?** (línea 3.5; 27.5 minutos esperados)
+
+En corto:
+
+- La pasó en 7 de 11 esta temporada (falló con 6, 5, 5, 7)
+- Con 24+ minutos (hoy se esperan 28): 8 de 14 en sus últimos 15
+- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 8 de 9 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 24+ minutos: 10 de 12, con 2.0 de media (últimos 60 partidos)
+- El rival es #23 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
+- Su zona principal es triple frontal (39% de sus tiros, 39% de acierto); el rival es #16 de 30 en acierto que deja ahí (35%, liga 35%)
+- Cómo tira (últimos 15): recibe y tira 41% (42% de acierto), creado 37% (40% de acierto), penetración 14% (61% de acierto); en recibe y tira el rival es #3 de 30 en lo que deja (#1 = el que más; 1.15 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 5.9 triples intentados esperados al 40%
+- Minutos: 28 esperados (titular, ±4)
+
+Razonamiento (5 factores a favor, 1 en contra):
+
+- ✅ Minutos: 27.5 esperados (titular, ±4.2).
+- ❌ Forma: 3.8 en sus últimos 5, 3.5 esta temporada (11 partidos), 2.8 la temporada pasada (línea 3.5).
+- ➖ Cómo produce triples: 5.9 triples intentados (su ritmo 8.3 por 36'; el rival concede -5% de triples en su reparto) × 40% esperado.
+- ✅ Defensa: el rival concede -5% de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -2%; en su zona principal (triple) el rival concede 35% (liga 35%).
+- ✅ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 3, 1, 0 (3 de 3 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- Triples **2.5** (por componentes 2.4 · por tasa por minuto y defensa rival 2.6): 5.9 triples intentados (su ritmo 8.3 por 36'; el rival concede -5% de triples en su reparto) × 40% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 28.0 | 29.5 | 29.6 | 31.9 | 34.0 |
+| Triples anotados | 3.8 | 3.1 | 3.5 | 2.8 | 1.3 |
+| Triples intentados | 7.8 | 7.6 | 8.0 | 6.8 | 7.7 |
+| % triples | 48.7% | 40.8% | 43.2% | 41.0% | 17.4% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -24%, vs defensa media +14%, vs defensa débil +18%; rebotes: vs defensa fuerte -5%, vs defensa media +1%, vs defensa débil +8%; asistencias: vs defensa fuerte -10%, vs defensa media -7%, vs defensa débil +18%; triples: vs defensa fuerte -34%, vs defensa media -2%, vs defensa débil +16%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 39% | 39% | 35% | 35% |
+| media distancia | 22% | 41% | 41% | 43% |
+| pintura | 14% | 47% | 45% | 45% |
+| bajo el aro | 14% | 64% | 68% | 69% |
+| triple de esquina | 11% | 46% | 38% | 38% |
 
 #### Derrick White (bases/escoltas) vs Orlando Magic
 
@@ -1054,68 +1078,9 @@ Razonamiento (4 factores a favor, 1 en contra):
 | triple de esquina | 12% | 33% | 38% | 36% |
 | media distancia | 9% | 43% | 41% | 42% |
 
-#### Anthony Black (bases/escoltas) vs Boston Celtics
-
-- Minutos esperados: **34.5** (± 4.4); 82 partidos en la base.
-- sin Paolo Banchero, la estrella de su equipo (19 partidos suyos sin él): más tiros y balón para él por minuto (puntos +4%, triples -10%, asistencias -10%)
-- Paolo Banchero ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- cambio de rol esta temporada (por minuto): reb +34%, ast +45%; se da más peso a la línea de la casa
-- Su prop más probable hoy: **Anthony Black: más de 1.5 robos+tapones** (62%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
-- Defensa de Boston Celtics contra bases/escoltas en robos+tapones: -17% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 2.2 robos+tapones?** (línea 1.5; 34.5 minutos esperados)
-
-En corto:
-
-- La pasó en 6 de 9 esta temporada (falló con 1, 1, 1)
-- Con 31+ minutos (hoy se esperan 35): 6 de 10 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a bases/escoltas: 10 de 14 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 31+ minutos: 10 de 15, con 2.2 de media (últimos 60 partidos)
-- El rival es #30 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -21% frente a la media)
-- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
-- Oportunidades de robo (últimos 10): el rival perdió 9.9 balones por partido con él en pista y robó el 21%
-- El rival es #29 de 30 en balones que pierde (#1 = el que más; 12.0 por partido)
-- Minutos: 35 esperados (titular, ±4)
-
-Razonamiento (5 factores a favor, 2 en contra):
-
-- ✅ Minutos: 34.5 esperados (titular, ±4.4).
-- ✅ Forma: 3.2 en sus últimos 5, 2.6 esta temporada (9 partidos), 2.2 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 17.1% de las pérdidas del rival en pista × 12.3 pérdidas esperadas del rival.
-- ➖ Cómo produce tapones: tapona el 2.3% de los tiros de 2 del rival en pista × 47.4 tiros de 2 esperados del rival.
-- ❌ Defensa: el rival concede -21% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -17%.
-- ✅ Altura: mide 6'7", 2.5 pulgadas más que los bases/escoltas del rival (+1.9% en esta estadística).
-- ❌ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 2, 2, 1, 1, 5 (3 de 5 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ⚠️ sin Paolo Banchero, la estrella de su equipo (19 partidos suyos sin él): más tiros y balón para él por minuto (puntos +4%, triples -10%, asistencias -10%).
-- ⚠️ Paolo Banchero ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ cambio de rol esta temporada (por minuto): reb +34%, ast +45%; se da más peso a la línea de la casa.
-
-- Robos **1.4** (por componentes 1.5 · por tasa por minuto y defensa rival 1.4): roba el 17.1% de las pérdidas del rival en pista × 12.3 pérdidas esperadas del rival.
-- Tapones **0.8** (por componentes 0.8 · por tasa por minuto y defensa rival 0.8): tapona el 2.3% de los tiros de 2 del rival en pista × 47.4 tiros de 2 esperados del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 35.6 | 32.3 | 32.2 | 29.6 | 26.6 |
-| Robos | 2.2 | 2.1 | 1.8 | 1.5 | 1.8 |
-| % de las pérdidas del rival que roba | 19.3% | 21.2% | 18.2% | 16.9% | 26.5% |
-| Tapones | 1.0 | 0.7 | 0.8 | 0.7 | 0.4 |
-| % de los tiros de 2 del rival que tapona | 3.2% | 2.4% | 2.6% | 2.1% | 1.4% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -3%, vs defensa media -4%, vs defensa débil +7%; rebotes: vs defensa fuerte -8%, vs defensa media +10%, vs defensa débil +3%; asistencias: vs defensa fuerte -11%, vs defensa media -2%, vs defensa débil +17%; triples: vs defensa fuerte -11%, vs defensa media +4%, vs defensa débil +8%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 28% | 33% | 35% | 35% |
-| bajo el aro | 27% | 69% | 68% | 65% |
-| pintura | 27% | 38% | 45% | 43% |
-| triple de esquina | 12% | 38% | 38% | 36% |
-| media distancia | 7% | 34% | 41% | 42% |
-
 ## Chicago Bulls @ Cleveland Cavaliers
 
-Diferencia esperada: Cleveland Cavaliers por 9.5 — algo desigual: titulares hasta -1.5% de minutos.
+Diferencia esperada: Cleveland Cavaliers por 8.5.
 
 Parte de lesiones: Sam Merrill (Out); Jalen Smith (Day-To-Day); Evan Mobley (Out); Peyton Watson (Day-To-Day); Jaylon Tyson (Day-To-Day); Caleb Wilson (Out); Tobe Awaka (Out); Nae'Qwan Tomlin (Out).
 
@@ -1123,12 +1088,12 @@ Ventajas del partido (los dos lados): puntos esperados frente a su media de los 
 
 | Equipo | Jugador | Puntos esperados | Su media (últ. 10) | Defensa rival en puntos | Rebotes esperados | Altura vs rival |
 |---|---|---|---|---|---|---|
-| CLE | Donovan Mitchell | 24.7 | 21.9 | +1% | 3.8 | -2.5" |
-| CLE | James Harden | 19.0 | 17.3 | +1% | 4.8 | +0.5" |
+| CLE | Donovan Mitchell | 24.9 | 21.9 | +1% | 3.8 | -2.5" |
+| CLE | James Harden | 19.1 | 17.3 | +1% | 4.8 | +0.5" |
 | CHI | Josh Giddey | 13.3 | 11.7 | -1% | 5.9 | +2.9" |
-| CHI | Norman Powell | 21.7 | 21.1 | -1% | 3.2 | -0.1" |
-| CLE | Jaylon Tyson | 14.5 | 8.2 | +0% | 4.1 | +1.5" |
-| CHI | Matas Buzelis | 16.2 | 14.0 | +1% | 5.6 | +0.2" |
+| CHI | Norman Powell | 21.8 | 21.1 | -1% | 3.2 | -0.1" |
+| CLE | Jaylon Tyson | 14.5 | 8.2 | +0% | 4.2 | +1.5" |
+| CHI | Matas Buzelis | 16.3 | 14.0 | +1% | 5.7 | +0.2" |
 | CLE | Tyrese Proctor | 15.3 | 11.4 | +1% | 6.4 | -0.5" |
 | CLE | Peyton Watson | 13.4 | 10.6 | +0% | 4.6 | +3.5" |
 | CHI | Jalen Smith | 14.6 | 12.8 | +1% | 8.0 | +0.2" |
@@ -1138,13 +1103,13 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Jarrett Allen: más de 0.5 tapones** | **69%** | 73% | 65% | 1.3 ± 1.2 | 8/10 | 9/11 | 1, 2, 2 | 1.42 (71%) |
-| **Jaylon Tyson: menos de 2.5 triples** ⚠️ suplente | **63%** | 64% | 61% | 2.2 ± 1.6 | 7/10 | 5/8 | 2, 0, 2, 3 | 1.53 (66%) |
-| **Peyton Watson: menos de 1.5 tapones** | **62%** | 63% | 62% | 1.3 ± 1.3 | 5/10 | 6/11 | 3 | 1.50 (67%) |
-| **Jarrett Allen: menos de 0.5 triples** | **61%** | 72% | 50% | 0.3 ± 0.6 | 7/10 | 8/11 | 0, 0, 0 | 1.04 (96%) |
-| **Matas Buzelis: menos de 2.5 triples** | **61%** | 62% | 59% | 2.2 ± 1.5 | 6/10 | 8/12 | 2, 2, 0, 0 | 1.57 (64%) |
-| **Norman Powell: más de 1.5 asistencias** | **61%** | 64% | 58% | 2.4 ± 1.6 | 6/10 | 6/10 | 2, 2, 5, 2 | 1.59 (63%) |
-| **Matas Buzelis: menos de 2.5 asistencias** | **60%** | 60% | 59% | 2.3 ± 1.5 | 8/10 | 9/12 | 0, 1, 1, 0 | 1.57 (64%) |
+| **Jarrett Allen: más de 0.5 tapones** | **69%** | 73% | 66% | 1.3 ± 1.2 | 8/10 | 9/11 | 1, 2, 2 | 1.42 (71%) |
+| **Jaylon Tyson: menos de 2.5 triples** ⚠️ suplente | **63%** | 64% | 62% | 2.2 ± 1.6 | 7/10 | 5/8 | 2, 0, 2, 3 | 1.50 (67%) |
+| **Peyton Watson: menos de 1.5 tapones** | **62%** | 63% | 61% | 1.3 ± 1.3 | 5/10 | 6/11 | 3 | 1.51 (66%) |
+| **Jarrett Allen: más de 1.5 robos+tapones** | **61%** | 62% | 61% | 2.0 ± 1.5 | 7/10 | 8/11 | 3, 3, 3 | 1.56 (64%) |
+| **Matas Buzelis: menos de 2.5 triples** | **61%** | 62% | 59% | 2.2 ± 1.5 | 6/10 | 8/12 | 2, 2, 0, 0 | 1.57 (63%) |
+| **Norman Powell: más de 1.5 asistencias** | **61%** | 64% | 58% | 2.4 ± 1.6 | 6/10 | 6/10 | 2, 2, 5, 2 | 1.62 (62%) |
+| **Matas Buzelis: menos de 2.5 asistencias** | **59%** | 60% | 59% | 2.3 ± 1.5 | 8/10 | 9/12 | 0, 1, 1, 0 | 1.60 (62%) |
 | **Donovan Mitchell: menos de 1.5 robos** | **59%** | 56% | 63% | 1.5 ± 1.3 | 6/10 | 7/13 | 0, 1 | 1.47 (68%) |
 
 ### Fichas de los jugadores destacados
@@ -1206,16 +1171,15 @@ Razonamiento (5 factores a favor, 2 en contra):
 
 #### Jaylon Tyson (bases/escoltas) vs Chicago Bulls
 
-- Minutos esperados: **28.7** (± 6.0); 88 partidos en la base.
+- Minutos esperados: **28.8** (± 6.0); 88 partidos en la base.
 - en el parte de lesiones: day-to-day
 - Sam Merrill ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - sin Evan Mobley (17 partidos): 27.5 min vs 23.7 con él; pts +8%/min, reb -5%/min
 - cambio de rol esta temporada (por minuto): reb -32%; se da más peso a la línea de la casa
-- partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe
 - Su prop más probable hoy: **Jaylon Tyson: menos de 2.5 triples** (63%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
 - Defensa de Chicago Bulls contra bases/escoltas en triples: +2% respecto a la media; ajuste por su historial contra defensas similares: +1%.
 
-**¿Por qué 2.2 triples?** (línea 2.5; 28.7 minutos esperados)
+**¿Por qué 2.2 triples?** (línea 2.5; 28.8 minutos esperados)
 
 En corto:
 
@@ -1232,7 +1196,7 @@ En corto:
 
 Razonamiento (3 factores a favor, 4 en contra):
 
-- ❌ Minutos: 28.7 esperados (suplente, ±6.0).
+- ❌ Minutos: 28.8 esperados (suplente, ±6.0).
 - ✅ Forma: 2.0 en sus últimos 5, 1.6 esta temporada (8 partidos), 1.6 la temporada pasada (línea 2.5).
 - ➖ Cómo produce triples: 5.9 triples intentados (su ritmo 7.1 por 36'; el rival concede -3% de triples en su reparto) × 40% esperado.
 - ➖ Defensa: el rival concede +2% de triples por minuto a bases/escoltas (defensa media); ajuste aplicado +2%; en su zona principal (triple) el rival concede 36% (liga 35%).
@@ -1245,10 +1209,9 @@ Razonamiento (3 factores a favor, 4 en contra):
 - ⚠️ Sam Merrill ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
 - ⚠️ sin Evan Mobley (17 partidos): 27.5 min vs 23.7 con él; pts +8%/min, reb -5%/min.
 - ⚠️ cambio de rol esta temporada (por minuto): reb -32%; se da más peso a la línea de la casa.
-- ⚠️ partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe.
 
 - ⚠️ Alertas: suplente, minutos inestables, en el parte de lesiones.
-- Triples **2.2** (por componentes 2.4 · por tasa por minuto y defensa rival 2.0): 5.9 triples intentados (su ritmo 7.1 por 36'; el rival concede -3% de triples en su reparto) × 40% esperado.
+- Triples **2.2** (por componentes 2.4 · por tasa por minuto y defensa rival 2.1): 5.9 triples intentados (su ritmo 7.1 por 36'; el rival concede -3% de triples en su reparto) × 40% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
@@ -1326,31 +1289,30 @@ Razonamiento (2 factores a favor, 4 en contra):
 
 #### Matas Buzelis (aleros/ala-pívots) vs Cleveland Cavaliers
 
-- Minutos esperados: **28.5** (± 3.6); 89 partidos en la base.
+- Minutos esperados: **28.6** (± 3.6); 89 partidos en la base.
 - sin Caleb Wilson, la estrella de su equipo (2 partidos suyos sin él): más tiros y balón para él por minuto (puntos +6%, triples +4%, asistencias +4%)
-- partido desigual (no favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe
 - Su prop más probable hoy: **Matas Buzelis: menos de 2.5 triples** (61%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
 - Defensa de Cleveland Cavaliers contra aleros/ala-pívots en triples: +3% respecto a la media; ajuste por su historial contra defensas similares: +1%.
 
-**¿Por qué 2.2 triples?** (línea 2.5; 28.5 minutos esperados)
+**¿Por qué 2.2 triples?** (línea 2.5; 28.6 minutos esperados)
 
 En corto:
 
 - La pasó en 8 de 12 esta temporada (falló con 3, 3, 3, 3)
-- Con 24+ minutos (hoy se esperan 28): 5 de 10 en sus últimos 15
+- Con 25+ minutos (hoy se esperan 29): 5 de 10 en sus últimos 15
 - Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 8 de 14 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 24+ minutos: 6 de 14, con 2.9 de media (últimos 60 partidos)
+- Contra defensas medias como la de hoy y con 25+ minutos: 6 de 14, con 2.9 de media (últimos 60 partidos)
 - El rival es #12 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +3% frente a la media)
 - Su zona principal es triple frontal (36% de sus tiros, 34% de acierto); el rival es #5 de 30 en acierto que deja ahí (36%, liga 35%)
 - Cómo tira (últimos 15): recibe y tira 45% (35% de acierto), penetración 27% (54% de acierto), creado 15% (22% de acierto); en recibe y tira el rival es #12 de 30 en lo que deja (#1 = el que más; 1.09 puntos por tiro frente a 1.06 de media)
 - Oportunidades: 6.0 triples intentados esperados al 36%
 - El rival no tiene a Evan Mobley (2.0 triples por partido)
 - Su equipo no tiene a Caleb Wilson: más tiros y balón para él
-- Minutos: 28 esperados (titular, ±4)
+- Minutos: 29 esperados (titular, ±4)
 
 Razonamiento (2 factores a favor, 3 en contra):
 
-- ✅ Minutos: 28.5 esperados (titular, ±3.6).
+- ✅ Minutos: 28.6 esperados (titular, ±3.6).
 - ➖ Forma: 2.4 en sus últimos 5, 1.8 esta temporada (12 partidos), 2.4 la temporada pasada (línea 2.5).
 - ➖ Cómo produce triples: 6.0 triples intentados (su ritmo 7.2 por 36'; el rival concede +0% de triples en su reparto) × 36% esperado.
 - ❌ Defensa: el rival concede +3% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado +3%; en su zona principal (triple) el rival concede 36% (liga 35%).
@@ -1359,10 +1321,9 @@ Razonamiento (2 factores a favor, 3 en contra):
 - ➖ Últimos 10: la habría pasado 6 de 10.
 - ❌ Bajas del rival: sin Evan Mobley (titular); +1.7% en esta estadística.
 - ⚠️ sin Caleb Wilson, la estrella de su equipo (2 partidos suyos sin él): más tiros y balón para él por minuto (puntos +6%, triples +4%, asistencias +4%).
-- ⚠️ partido desigual (no favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe.
 
 - ⚠️ Alertas: sin Caleb Wilson: más tiros para él, falla en partidos normales (4 de 12 esta temporada).
-- Triples **2.2** (por componentes 2.1 · por tasa por minuto y defensa rival 2.1): 6.0 triples intentados (su ritmo 7.2 por 36'; el rival concede +0% de triples en su reparto) × 36% esperado.
+- Triples **2.2** (por componentes 2.2 · por tasa por minuto y defensa rival 2.2): 6.0 triples intentados (su ritmo 7.2 por 36'; el rival concede +0% de triples en su reparto) × 36% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
@@ -1383,13 +1344,12 @@ Razonamiento (2 factores a favor, 3 en contra):
 
 #### Norman Powell (bases/escoltas) vs Cleveland Cavaliers
 
-- Minutos esperados: **29.0** (± 4.2); 71 partidos en la base.
+- Minutos esperados: **29.2** (± 4.2); 71 partidos en la base.
 - sin Caleb Wilson, la estrella de su equipo (2 partidos suyos sin él): más tiros y balón para él por minuto (puntos +7%, triples +5%, asistencias +6%)
-- partido desigual (no favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe
 - Su prop más probable hoy: **Norman Powell: más de 1.5 asistencias** (61%). Con 80% de probabilidad: más de 0.5 / menos de 4.5.
 - Defensa de Cleveland Cavaliers contra bases/escoltas en asistencias: +1% respecto a la media; ajuste por su historial contra defensas similares: -3%.
 
-**¿Por qué 2.4 asistencias?** (línea 1.5; 29.0 minutos esperados)
+**¿Por qué 2.4 asistencias?** (línea 1.5; 29.2 minutos esperados)
 
 En corto:
 
@@ -1406,18 +1366,17 @@ En corto:
 
 Razonamiento (5 factores a favor, 0 en contra):
 
-- ✅ Minutos: 29.0 esperados (titular, ±4.2).
+- ✅ Minutos: 29.2 esperados (titular, ±4.2).
 - ✅ Forma: 1.8 en sus últimos 5, 1.8 esta temporada (10 partidos), 2.4 la temporada pasada (línea 1.5).
-- ➖ Cómo produce asistencias: asiste el 11.1% de las canastas de sus compañeros en pista × 18.3 canastas de compañeros esperadas (su equipo 41.5 por 48' contra esta defensa).
+- ➖ Cómo produce asistencias: asiste el 11.1% de las canastas de sus compañeros en pista × 18.4 canastas de compañeros esperadas (su equipo 41.5 por 48' contra esta defensa).
 - ➖ Defensa: el rival concede +1% de asistencias por minuto a bases/escoltas (defensa media); ajuste aplicado +1%.
 - ✅ Ritmo del partido: +2% de posesiones frente a la media (ya incluido en lo que concede el rival).
 - ✅ Contra este rival: 2, 2, 5, 2 (4 de 4 a favor).
 - ➖ Últimos 10: la habría pasado 6 de 10.
 - ✅ Bajas del rival: sin Evan Mobley (titular); +1.5% en esta estadística.
 - ⚠️ sin Caleb Wilson, la estrella de su equipo (2 partidos suyos sin él): más tiros y balón para él por minuto (puntos +7%, triples +5%, asistencias +6%).
-- ⚠️ partido desigual (no favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe.
 
-- Asistencias **2.4** (por componentes 2.1 · por tasa por minuto y defensa rival 2.3): asiste el 11.1% de las canastas de sus compañeros en pista × 18.3 canastas de compañeros esperadas (su equipo 41.5 por 48' contra esta defensa).
+- Asistencias **2.4** (por componentes 2.2 · por tasa por minuto y defensa rival 2.3): asiste el 11.1% de las canastas de sus compañeros en pista × 18.4 canastas de compañeros esperadas (su equipo 41.5 por 48' contra esta defensa).
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
@@ -1440,7 +1399,7 @@ Razonamiento (5 factores a favor, 0 en contra):
 
 Diferencia esperada: Memphis Grizzlies por 3.5.
 
-Parte de lesiones: Ty Jerome (Out); Reece Beekman (Out); Isaiah Stewart (Day-To-Day); Justin Champagnie (Out); Quinten Post (Out); Zach Edey (Day-To-Day); Jamir Watkins (Out); Tristan Vukcevic (Out); GG Jackson (Out); Tre Johnson (Out).
+Parte de lesiones: Ty Jerome (Out); Reece Beekman (Out); Isaiah Stewart (Day-To-Day); Justin Champagnie (Out); Quinten Post (Out); Zach Edey (Day-To-Day); Jamir Watkins (Out); Tristan Vukcevic (Out); GG Jackson (Out); Tre Johnson (Day-To-Day).
 
 Ventajas del partido (los dos lados): puntos esperados frente a su media de los últimos 10, ajuste por la defensa rival y diferencia de estatura con los rivales de su posición.
 
@@ -1449,10 +1408,10 @@ Ventajas del partido (los dos lados): puntos esperados frente a su media de los 
 | WSH | Anthony Davis | 24.0 | 25.3 | +2% | 10.6 | +2.8" |
 | WSH | AJ Dybantsa | 15.6 | 15.1 | +2% | 6.6 | +1.8" |
 | WSH | Trae Young | 18.9 | 16.7 | +2% | 3.0 | -1.3" |
-| WSH | Kyshawn George | 13.5 | 17.6 | +1% | 4.2 | +0.8" |
+| WSH | Kyshawn George | 16.6 | 17.6 | +1% | 4.9 | +0.8" |
 | MEM | Cameron Boozer | 17.4 | 15.6 | +4% | 9.5 | -0.8" |
 | MEM | Cedric Coward | 17.6 | 14.1 | +4% | 7.2 | -3.8" |
-| WSH | Alex Sarr | 15.4 | 13.6 | +2% | 8.8 | +0.2" |
+| WSH | Alex Sarr | 14.0 | 13.6 | +2% | 8.2 | +0.2" |
 | MEM | Jaylen Wells | 14.4 | 10.3 | +5% | 3.6 | -1.8" |
 | MEM | Cam Spencer | 12.1 | 10.6 | +1% | 3.2 | -1.5" |
 | MEM | Zach Edey | 12.6 | 7.6 | +7% | 10.3 | +3.0" |
@@ -1461,85 +1420,24 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Alex Sarr: más de 0.5 triples** | **68%** | 70% | 65% | 1.5 ± 1.3 | 7/10 | 8/13 | 1, 2 | 1.44 (69%) |
-| **AJ Dybantsa: menos de 1.5 triples** | **68%** | 70% | 66% | 1.2 ± 1.1 | 9/10 | 9/10 | - | 1.42 (70%) |
+| **AJ Dybantsa: menos de 1.5 triples** | **67%** | 70% | 65% | 1.2 ± 1.1 | 9/10 | 9/10 | - | 1.44 (69%) |
 | **Anthony Davis: menos de 1.5 robos** | **67%** | 69% | 65% | 1.2 ± 1.1 | 9/10 | 10/12 | - | 1.43 (70%) |
-| **Zach Edey: menos de 1.5 asistencias** | **66%** | 64% | 69% | 1.3 ± 1.1 | 8/10 | 8/10 | - | 1.37 (73%) |
+| **Zach Edey: menos de 1.5 asistencias** | **67%** | 64% | 69% | 1.3 ± 1.1 | 8/10 | 8/10 | - | 1.33 (75%) |
+| **Cam Spencer: menos de 2.5 triples** ⚠️ suplente | **65%** | 67% | 63% | 1.9 ± 1.5 | 7/10 | 8/13 | 0, 4 | 1.50 (67%) |
+| **Alex Sarr: más de 0.5 triples** | **65%** | 65% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 1, 2 | 1.44 (70%) |
 | **Zach Edey: más de 15.5 pts+reb** | **64%** | 76% | 52% | 22.9 ± 8.0 | 5/10 | 5/10 | - | 1.80 (56%) |
-| **Kyshawn George: menos de 2.5 triples** | **63%** | 65% | 61% | 1.9 ± 1.4 | 4/10 | 8/14 | 3 | 1.53 (65%) |
 | **AJ Dybantsa: más de 0.5 robos** | **63%** | 60% | 65% | 1.1 ± 1.3 | 6/10 | 6/10 | - | 1.44 (70%) |
-| **Alex Sarr: menos de 1.5 tapones** | **62%** | 68% | 55% | 1.2 ± 1.3 | 7/10 | 9/13 | 6, 1 | 1.69 (59%) |
+| **Trae Young: menos de 2.5 triples** | **62%** | 63% | 59% | 2.0 ± 1.6 | 6/10 | 8/14 | - | 1.57 (64%) |
 
 ### Fichas de los jugadores destacados
-
-#### Alex Sarr (pívots) vs Memphis Grizzlies
-
-- Minutos esperados: **28.7** (± 6.9); 61 partidos en la base.
-- Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- sin Tre Johnson (10 partidos): 27.1 min vs 27.3 con él; pts +9%/min, reb +7%/min, ast +17%/min
-- segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Alex Sarr: más de 0.5 triples** (68%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Memphis Grizzlies contra pívots en triples: -3% respecto a la media; ajuste por su historial contra defensas similares: +4%.
-
-**¿Por qué 1.5 triples?** (línea 0.5; 28.7 minutos esperados)
-
-En corto:
-
-- La pasó en 8 de 13 esta temporada (falló con 0, 0, 0, 0)
-- Con 25+ minutos (hoy se esperan 29): 8 de 10 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a pívots: 10 de 14 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 25+ minutos: 8 de 16, con 0.9 de media (últimos 60 partidos)
-- El rival es #19 de 30 en triples que concede a pívots por minuto (#1 = el que más concede; -6% frente a la media)
-- Su zona principal es triple frontal (23% de sus tiros, 33% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 41% (34% de acierto), penetración 14% (58% de acierto), corte 13% (83% de acierto); en recibe y tira el rival es #21 de 30 en lo que deja (#1 = el que más; 1.03 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 4.5 triples intentados esperados al 33%
-- El rival no tiene a Ty Jerome (2.3 triples por partido)
-- Minutos: 29 esperados (titular, ±7)
-
-Razonamiento (4 factores a favor, 2 en contra):
-
-- ❌ Minutos: 28.7 esperados (titular, ±6.9).
-- ✅ Forma: 1.8 en sus últimos 5, 1.1 esta temporada (13 partidos), 1.0 la temporada pasada (línea 0.5).
-- ➖ Cómo produce triples: 4.5 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
-- ❌ Defensa: el rival concede -6% de triples por minuto a pívots (defensa media); ajuste aplicado -3%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 2 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ✅ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson (10 partidos): 27.1 min vs 27.3 con él; pts +9%/min, reb +7%/min, ast +17%/min.
-- ⚠️ segundo partido en dos noches: -3% de minutos.
-
-- ⚠️ Alertas: minutos inestables.
-- Triples **1.5** (por componentes 1.5 · por tasa por minuto y defensa rival 1.4): 4.5 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.8 | 28.3 | 27.3 | 27.2 | 26.0 |
-| Triples anotados | 1.8 | 1.3 | 1.1 | 1.0 | 1.5 |
-| Triples intentados | 5.2 | 4.0 | 3.5 | 3.1 | 5.0 |
-| % triples | 34.6% | 32.5% | 30.4% | 33.3% | 30.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -5%, vs defensa media +3%, vs defensa débil +6%; rebotes: vs defensa fuerte -7%, vs defensa media +3%, vs defensa débil +7%; asistencias: vs defensa fuerte -0%, vs defensa media +6%, vs defensa débil -6%; triples: vs defensa fuerte -23%, vs defensa media -9%, vs defensa débil +40%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 33% | 75% | 68% | 69% |
-| pintura | 31% | 42% | 45% | 46% |
-| triple frontal | 23% | 33% | 35% | 34% |
-| media distancia | 8% | 37% | 41% | 43% |
-| triple de esquina | 5% | 35% | 38% | 39% |
 
 #### AJ Dybantsa (aleros/ala-pívots) vs Memphis Grizzlies
 
 - Minutos esperados: **33.5** (± 5.1); 10 partidos en la base.
 - Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- sin Tre Johnson: muestra insuficiente (2 partidos sin él)
 - segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **AJ Dybantsa: menos de 1.5 triples** (68%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **AJ Dybantsa: menos de 1.5 triples** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Memphis Grizzlies contra aleros/ala-pívots en triples: +1% respecto a la media; ajuste por su historial contra defensas similares: -4%.
 
 **¿Por qué 1.2 triples?** (línea 1.5; 33.5 minutos esperados)
@@ -1569,7 +1467,6 @@ Razonamiento (3 factores a favor, 2 en contra):
 - ❌ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
 - ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
 - ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson: muestra insuficiente (2 partidos sin él).
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
 - Triples **1.2** (por componentes 1.3 · por tasa por minuto y defensa rival 1.0): 4.2 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 31% esperado.
@@ -1596,7 +1493,6 @@ Razonamiento (3 factores a favor, 2 en contra):
 - Minutos esperados: **33.7** (± 4.6); 32 partidos en la base.
 - Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- sin Tre Johnson: muestra insuficiente (2 partidos sin él)
 - segundo partido en dos noches: -3% de minutos
 - Su prop más probable hoy: **Anthony Davis: menos de 1.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Memphis Grizzlies contra aleros/ala-pívots en robos: -1% respecto a la media; ajuste por su historial contra defensas similares: +5%.
@@ -1624,7 +1520,6 @@ Razonamiento (3 factores a favor, 0 en contra):
 - ✅ Últimos 10: la habría pasado 9 de 10.
 - ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
 - ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson: muestra insuficiente (2 partidos sin él).
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
 - Robos **1.2** (por componentes 1.3 · por tasa por minuto y defensa rival 1.2): roba el 13.1% de las pérdidas del rival en pista × 13.7 pérdidas esperadas del rival.
@@ -1651,7 +1546,7 @@ Razonamiento (3 factores a favor, 0 en contra):
 - en el parte de lesiones: day-to-day
 - sin Ty Jerome, la estrella de su equipo (12 partidos suyos sin él): más tiros y balón para él por minuto (puntos +13%, triples -3%, asistencias +1%)
 - sin Ty Jerome (12 partidos): 25.2 min vs 21.1 con él
-- Su prop más probable hoy: **Zach Edey: menos de 1.5 asistencias** (66%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Zach Edey: menos de 1.5 asistencias** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Washington Wizards contra pívots en asistencias: +5% respecto a la media; ajuste por su historial contra defensas similares: +3%.
 
 **¿Por qué 1.3 asistencias?** (línea 1.5; 24.0 minutos esperados)
@@ -1702,65 +1597,120 @@ Razonamiento (3 factores a favor, 1 en contra):
 | media distancia | 1% | 40% | 41% | 43% |
 | triple de esquina | 1% | 38% | 38% | 39% |
 
-#### Kyshawn George (aleros/ala-pívots) vs Memphis Grizzlies
+#### Cam Spencer (bases/escoltas) vs Washington Wizards
 
-- Minutos esperados: **31.8** (± 4.6); 62 partidos en la base.
-- Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- sin Tre Johnson (13 partidos): 28.3 min vs 30.2 con él; pts -19%/min, reb -13%/min, ast +8%/min
-- segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Kyshawn George: menos de 2.5 triples** (63%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
-- Defensa de Memphis Grizzlies contra aleros/ala-pívots en triples: +1% respecto a la media; ajuste por su historial contra defensas similares: +1%.
+- Minutos esperados: **26.5** (± 5.9); 85 partidos en la base.
+- sin Ty Jerome, la estrella de su equipo (20 partidos suyos sin él): más tiros y balón para él por minuto (puntos -2%, triples -9%, asistencias +11%)
+- sin Ty Jerome (61 partidos): 24.2 min vs 21.5 con él
+- Su prop más probable hoy: **Cam Spencer: menos de 2.5 triples** (65%). Con 80% de probabilidad: más de 0.5 / menos de 3.5.
+- Defensa de Washington Wizards contra bases/escoltas en triples: -3% respecto a la media; ajuste por su historial contra defensas similares: -3%.
 
-**¿Por qué 1.9 triples?** (línea 2.5; 31.8 minutos esperados)
+**¿Por qué 1.9 triples?** (línea 2.5; 26.5 minutos esperados)
 
 En corto:
 
-- La pasó en 8 de 14 esta temporada (falló con 3, 5, 5, 3)
-- Con 28+ minutos (hoy se esperan 32): 7 de 12 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 8 de 14 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 28+ minutos: 5 de 10, con 2.5 de media (últimos 60 partidos)
-- El rival es #13 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +2% frente a la media)
-- Su zona principal es triple frontal (34% de sus tiros, 37% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 30% (44% de acierto), penetración 28% (46% de acierto), creado 28% (43% de acierto); en recibe y tira el rival es #21 de 30 en lo que deja (#1 = el que más; 1.03 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 4.7 triples intentados esperados al 38%
-- El rival no tiene a Ty Jerome (2.3 triples por partido)
-- Minutos: 32 esperados (titular, ±5)
+- La pasó en 8 de 13 esta temporada (falló con 3, 3, 3, 3)
+- Con 22+ minutos (hoy se esperan 26): 3 de 5 en sus últimos 15
+- Hoy juega más que de costumbre (26 min frente a 22): con 22+ minutos, esta temporada y la pasada, la pasó 27 de 47 (57%)
+- Contra las ~10 mejores defensas en triples a bases/escoltas: 11 de 13 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 22+ minutos: 14 de 18, con 1.6 de media (últimos 60 partidos)
+- El rival es #25 de 30 en triples que concede a bases/escoltas por minuto (#1 = el que más concede; -5% frente a la media)
+- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
+- Su zona principal es triple frontal (51% de sus tiros, 45% de acierto); el rival es #21 de 30 en acierto que deja ahí (34%, liga 35%)
+- Cómo tira (últimos 15): creado 50% (57% de acierto), recibe y tira 27% (64% de acierto), penetración 17% (50% de acierto); en creado el rival es #20 de 30 en lo que deja (#1 = el que más; 0.92 puntos por tiro frente a 0.94 de media)
+- Oportunidades: 4.1 triples intentados esperados al 45%
+- Su equipo no tiene a Ty Jerome: más tiros y balón para él
+- Minutos: 26 esperados (suplente, ±6)
 
-Razonamiento (1 factores a favor, 3 en contra):
+Razonamiento (3 factores a favor, 1 en contra):
 
-- ✅ Minutos: 31.8 esperados (titular, ±4.6).
-- ➖ Forma: 2.6 en sus últimos 5, 2.4 esta temporada (14 partidos), 2.1 la temporada pasada (línea 2.5).
-- ➖ Cómo produce triples: 4.7 triples intentados (su ritmo 6.3 por 36'; el rival concede +1% de triples en su reparto) × 38% esperado.
-- ➖ Defensa: el rival concede +2% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado +1%; en su zona principal (triple) el rival concede 34% (liga 35%).
+- ❌ Minutos: 26.5 esperados (suplente, ±5.9).
+- ✅ Forma: 2.2 en sus últimos 5, 2.0 esta temporada (13 partidos), 2.0 la temporada pasada (línea 2.5).
+- ➖ Cómo produce triples: 4.1 triples intentados (su ritmo 6.1 por 36'; el rival concede -3% de triples en su reparto) × 45% esperado.
+- ✅ Defensa: el rival concede -5% de triples por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -3%; en su zona principal (triple) el rival concede 34% (liga 35%).
 - ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ❌ Contra este rival: 3 (0 de 1 a favor).
-- ❌ Últimos 10: la habría pasado 4 de 10.
-- ❌ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Tre Johnson (13 partidos): 28.3 min vs 30.2 con él; pts -19%/min, reb -13%/min, ast +8%/min.
-- ⚠️ segundo partido en dos noches: -3% de minutos.
+- ➖ Contra este rival: 0, 4 (1 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ sin Ty Jerome, la estrella de su equipo (20 partidos suyos sin él): más tiros y balón para él por minuto (puntos -2%, triples -9%, asistencias +11%).
+- ⚠️ sin Ty Jerome (61 partidos): 24.2 min vs 21.5 con él.
 
-- ⚠️ Alertas: falla en partidos normales (5 de 14 esta temporada).
-- Triples **1.9** (por componentes 1.8 · por tasa por minuto y defensa rival 1.9): 4.7 triples intentados (su ritmo 6.3 por 36'; el rival concede +1% de triples en su reparto) × 38% esperado.
+- ⚠️ Alertas: suplente, sin Ty Jerome: más tiros para él.
+- Triples **1.9** (por componentes 1.8 · por tasa por minuto y defensa rival 2.0): 4.1 triples intentados (su ritmo 6.1 por 36'; el rival concede -3% de triples en su reparto) × 45% esperado.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 32.0 | 34.1 | 32.9 | 28.9 | 39.0 |
-| Triples anotados | 2.6 | 2.9 | 2.4 | 2.1 | 3.0 |
-| Triples intentados | 5.8 | 6.3 | 5.7 | 5.4 | 7.0 |
-| % triples | 44.8% | 46.0% | 41.2% | 38.1% | 42.9% |
+| Minutos | 22.8 | 22.3 | 20.9 | 23.8 | 32.0 |
+| Triples anotados | 2.2 | 1.9 | 2.0 | 2.0 | 2.0 |
+| Triples intentados | 3.6 | 3.3 | 3.5 | 4.5 | 7.5 |
+| % triples | 61.1% | 57.6% | 57.8% | 44.9% | 26.7% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media -6%, vs defensa débil +19%; rebotes: vs defensa fuerte -9%, vs defensa media -6%, vs defensa débil +18%; asistencias: vs defensa fuerte -3%, vs defensa media +1%, vs defensa débil +5%; triples: vs defensa fuerte -1%, vs defensa media +11%, vs defensa débil -11%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media -1%, vs defensa débil +9%; rebotes: vs defensa fuerte -12%, vs defensa media -0%, vs defensa débil +20%; asistencias: vs defensa fuerte -1%, vs defensa media -7%, vs defensa débil +8%; triples: vs defensa fuerte -15%, vs defensa media -3%, vs defensa débil +17%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 34% | 37% | 35% | 34% |
-| pintura | 23% | 40% | 45% | 46% |
-| bajo el aro | 20% | 68% | 68% | 69% |
-| media distancia | 13% | 42% | 41% | 43% |
-| triple de esquina | 10% | 44% | 38% | 39% |
+| triple frontal | 51% | 45% | 35% | 34% |
+| pintura | 21% | 47% | 45% | 42% |
+| media distancia | 14% | 48% | 41% | 43% |
+| bajo el aro | 8% | 64% | 68% | 69% |
+| triple de esquina | 6% | 46% | 38% | 39% |
+
+#### Alex Sarr (pívots) vs Memphis Grizzlies
+
+- Minutos esperados: **28.7** (± 6.9); 61 partidos en la base.
+- Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Alex Sarr: más de 0.5 triples** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Memphis Grizzlies contra pívots en triples: -3% respecto a la media; ajuste por su historial contra defensas similares: +4%.
+
+**¿Por qué 1.2 triples?** (línea 0.5; 28.7 minutos esperados)
+
+En corto:
+
+- La pasó en 8 de 13 esta temporada (falló con 0, 0, 0, 0)
+- Con 25+ minutos (hoy se esperan 29): 8 de 10 en sus últimos 15
+- Contra las ~10 mejores defensas en triples a pívots: 10 de 14 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 25+ minutos: 8 de 16, con 0.9 de media (últimos 60 partidos)
+- El rival es #19 de 30 en triples que concede a pívots por minuto (#1 = el que más concede; -6% frente a la media)
+- Su zona principal es triple frontal (23% de sus tiros, 33% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
+- Cómo tira (últimos 15): recibe y tira 41% (34% de acierto), penetración 14% (58% de acierto), corte 13% (83% de acierto); en recibe y tira el rival es #21 de 30 en lo que deja (#1 = el que más; 1.03 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 3.6 triples intentados esperados al 33%
+- El rival no tiene a Ty Jerome (2.3 triples por partido)
+- Minutos: 29 esperados (titular, ±7)
+
+Razonamiento (4 factores a favor, 2 en contra):
+
+- ❌ Minutos: 28.7 esperados (titular, ±6.9).
+- ✅ Forma: 1.8 en sus últimos 5, 1.1 esta temporada (13 partidos), 1.0 la temporada pasada (línea 0.5).
+- ➖ Cómo produce triples: 3.6 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
+- ❌ Defensa: el rival concede -6% de triples por minuto a pívots (defensa media); ajuste aplicado -3%; en su zona principal (triple) el rival concede 34% (liga 35%).
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 1, 2 (2 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ✅ Bajas del rival: sin Ty Jerome (titular); +1.7% en esta estadística.
+- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- ⚠️ Alertas: minutos inestables.
+- Triples **1.2** (por componentes 1.2 · por tasa por minuto y defensa rival 1.1): 3.6 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 33% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 29.8 | 28.3 | 27.3 | 27.2 | 26.0 |
+| Triples anotados | 1.8 | 1.3 | 1.1 | 1.0 | 1.5 |
+| Triples intentados | 5.2 | 4.0 | 3.5 | 3.1 | 5.0 |
+| % triples | 34.6% | 32.5% | 30.4% | 33.3% | 30.0% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -5%, vs defensa media +3%, vs defensa débil +6%; rebotes: vs defensa fuerte -7%, vs defensa media +3%, vs defensa débil +7%; asistencias: vs defensa fuerte -0%, vs defensa media +6%, vs defensa débil -6%; triples: vs defensa fuerte -23%, vs defensa media -9%, vs defensa débil +40%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 33% | 75% | 68% | 69% |
+| pintura | 31% | 42% | 45% | 46% |
+| triple frontal | 23% | 33% | 35% | 34% |
+| media distancia | 8% | 37% | 41% | 43% |
+| triple de esquina | 5% | 35% | 38% | 39% |
 
 ## Philadelphia 76ers @ Brooklyn Nets
 
@@ -1787,14 +1737,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Jaylen Brown: menos de 1.5 robos** | **66%** | 66% | 66% | 1.2 ± 1.1 | 7/10 | 9/13 | 2, 1, 2, 1 | 1.40 (72%) |
+| **Jaylen Brown: más de 0.5 robos** | **69%** | 73% | 64% | 1.2 ± 1.1 | 9/10 | 12/13 | 2, 1, 2, 1 | 1.44 (69%) |
 | **Day'Ron Sharpe: menos de 0.5 triples** | **66%** | 65% | 67% | 0.4 ± 0.7 | 7/10 | 8/12 | 1, 1, 0 | 1.39 (72%) |
-| **Anfernee Simons: menos de 2.5 triples** ⚠️ suplente | **63%** | 65% | 61% | 2.0 ± 1.7 | 5/10 | 8/14 | 2, 1, 2, 2 | 1.51 (66%) |
-| **Dean Wade: menos de 1.5 triples** ⚠️ suplente | **62%** | 64% | 60% | 1.2 ± 1.1 | 6/10 | 7/12 | 3, 1 | 1.56 (64%) |
-| **Joel Embiid: menos de 34.5 pts+reb+ast** | **61%** | 71% | 51% | 30.0 ± 8.5 | 8/10 | 9/11 | 37 | 1.85 (54%) |
-| **Tyrese Maxey: menos de 1.5 robos** | **61%** | 62% | 60% | 1.3 ± 1.1 | 7/10 | 8/14 | 4, 1, 1 | 1.56 (64%) |
+| **Anfernee Simons: menos de 2.5 triples** ⚠️ suplente | **63%** | 65% | 62% | 2.0 ± 1.7 | 5/10 | 8/14 | 2, 1, 2, 2 | 1.52 (66%) |
+| **Dean Wade: menos de 1.5 triples** ⚠️ suplente | **63%** | 64% | 60% | 1.2 ± 1.1 | 6/10 | 7/12 | 3, 1 | 1.54 (65%) |
+| **Tyrese Maxey: menos de 1.5 robos** | **61%** | 62% | 60% | 1.3 ± 1.1 | 7/10 | 8/14 | 4, 1, 1 | 1.55 (65%) |
 | **Julius Randle: menos de 1.5 triples** | **61%** | 59% | 63% | 1.4 ± 1.4 | 6/10 | 6/12 | 1, 1 | 1.49 (67%) |
-| **Joel Embiid: menos de 22.5 puntos** | **60%** | 68% | 52% | 19.2 ± 7.1 | 7/10 | 8/11 | 27 | 1.82 (55%) |
+| **Jaylen Brown: menos de 6.5 rebotes** | **60%** | 63% | 57% | 5.6 ± 2.6 | 6/10 | 7/13 | 7, 10, 8, 4 | 1.65 (61%) |
+| **Joel Embiid: menos de 22.5 puntos** | **60%** | 68% | 51% | 19.2 ± 7.1 | 7/10 | 8/11 | 27 | 1.83 (55%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1802,15 +1752,15 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 - Minutos esperados: **32.4** (± 3.6); 94 partidos en la base.
 - segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Jaylen Brown: menos de 1.5 robos** (66%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Jaylen Brown: más de 0.5 robos** (69%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Brooklyn Nets contra bases/escoltas en robos: +5% respecto a la media; ajuste por su historial contra defensas similares: -1%.
 
-**¿Por qué 1.2 robos?** (línea 1.5; 32.4 minutos esperados)
+**¿Por qué 1.2 robos?** (línea 0.5; 32.4 minutos esperados)
 
 En corto:
 
-- La pasó en 9 de 13 esta temporada (falló con 2, 2, 2, 3)
-- Con 28+ minutos (hoy se esperan 32): 10 de 13 en sus últimos 15
+- La pasó en 12 de 13 esta temporada; los fallos, en partidos raros (5 faltas)
+- Con 28+ minutos (hoy se esperan 32): 11 de 13 en sus últimos 15
 - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 22 (últimos 40 partidos)
 - Contra defensas medias como la de hoy y con 28+ minutos: 11 de 15, con 1.1 de media (últimos 60 partidos)
 - El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
@@ -1818,15 +1768,15 @@ En corto:
 - El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
 - Minutos: 32 esperados (titular, ±4)
 
-Razonamiento (3 factores a favor, 1 en contra):
+Razonamiento (5 factores a favor, 0 en contra):
 
 - ✅ Minutos: 32.4 esperados (titular, ±3.6).
-- ✅ Forma: 1.4 en sus últimos 5, 1.3 esta temporada (13 partidos), 0.9 la temporada pasada (línea 1.5).
+- ✅ Forma: 1.4 en sus últimos 5, 1.3 esta temporada (13 partidos), 0.9 la temporada pasada (línea 0.5).
 - ➖ Cómo produce robos: roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
-- ❌ Defensa: el rival concede +5% de robos por minuto a bases/escoltas (defensa media); ajuste aplicado +5%.
+- ✅ Defensa: el rival concede +5% de robos por minuto a bases/escoltas (defensa media); ajuste aplicado +5%.
 - ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ➖ Contra este rival: 2, 1, 2, 1 (2 de 4 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
+- ✅ Contra este rival: 2, 1, 2, 1 (4 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 9 de 10.
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
 - Robos **1.2** (por componentes 1.3 · por tasa por minuto y defensa rival 1.2): roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
@@ -1951,7 +1901,7 @@ Razonamiento (2 factores a favor, 2 en contra):
 #### Dean Wade (aleros/ala-pívots) vs Brooklyn Nets
 
 - Minutos esperados: **27.1** (± 6.6); 86 partidos en la base.
-- Su prop más probable hoy: **Dean Wade: menos de 1.5 triples** (62%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Dean Wade: menos de 1.5 triples** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Brooklyn Nets contra aleros/ala-pívots en triples: -1% respecto a la media; ajuste por su historial contra defensas similares: +3%.
 
 **¿Por qué 1.2 triples?** (línea 1.5; 27.1 minutos esperados)
@@ -1999,125 +1949,150 @@ Razonamiento (1 factores a favor, 1 en contra):
 | pintura | 5% | 48% | 45% | 46% |
 | media distancia | 3% | 40% | 41% | 40% |
 
-#### Joel Embiid (pívots) vs Brooklyn Nets
+#### Tyrese Maxey (bases/escoltas) vs Brooklyn Nets
 
-- Minutos esperados: **29.0** (± 3.6); 56 partidos en la base.
-- en el parte de lesiones: day-to-day
+- Minutos esperados: **34.1** (± 3.0); 99 partidos en la base.
 - segundo partido en dos noches: -3% de minutos
-- Su prop más probable hoy: **Joel Embiid: menos de 34.5 pts+reb+ast** (61%). Con 80% de probabilidad: más de 22.5 / menos de 37.5.
-- Defensa de Brooklyn Nets contra pívots en pts+reb+ast: +0% respecto a la media; ajuste por su historial contra defensas similares: +1%.
+- Su prop más probable hoy: **Tyrese Maxey: menos de 1.5 robos** (61%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Brooklyn Nets contra bases/escoltas en robos: +5% respecto a la media; ajuste por su historial contra defensas similares: -1%.
 
-**¿Por qué 30.0 pts+reb+ast?** (línea 34.5; 29.0 minutos esperados)
+**¿Por qué 1.3 robos?** (línea 1.5; 34.1 minutos esperados)
 
 En corto:
 
-- La pasó en 9 de 11 esta temporada (falló con 43, 49)
-- Contra las ~10 mejores defensas en puntos a pívots: 8 de 19 (últimos 40 partidos)
-- Contra defensas débiles como la de hoy y con 25+ minutos: 6 de 17, con 38.9 de media (últimos 60 partidos)
-- El rival es #7 de 30 en puntos que concede a pívots por minuto (#1 = el que más concede; +5% frente a la media)
-- Su zona principal es media distancia (30% de sus tiros, 46% de acierto); el rival es #26 de 30 en acierto que deja ahí (40%, liga 41%)
-- Su segunda zona es bajo el aro (24% de sus tiros, 65% de acierto); el rival es #8 de 30 en acierto que deja ahí (69%, liga 68%)
-- El rival es #2 de 30 en tiros libres que concede a pívots (#1 = el que más; +17% frente a la media)
-- Puntería: en sus últimos 10 metió el 81% de las canastas esperadas por sus tipos de tiro (viene frío: suele volver a su nivel)
-- Cómo tira (últimos 15): recibe y tira 44% (34% de acierto), creado 17% (26% de acierto), penetración 13% (48% de acierto); en recibe y tira el rival es #14 de 30 en lo que deja (#1 = el que más; 1.08 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 13.0 tiros de campo y 6.9 libres esperados (0.99 puntos por tiro)
-- Transición: el rival concede 14.8 puntos por partido al contraataque (#13 de 30, #1 = el que más); él anota 0.5 así por partido
-- Minutos: 29 esperados (titular, ±4)
+- La pasó en 8 de 14 esta temporada (falló con 2, 2, 2, 3)
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 15 de 22 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 30+ minutos: 10 de 16, con 1.3 de media (últimos 60 partidos)
+- El rival es #12 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; +5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 9.0 balones por partido con él en pista y robó el 11%
+- El rival es #2 de 30 en balones que pierde (#1 = el que más; 15.3 por partido)
+- Minutos: 34 esperados (titular, ±3)
 
-Razonamiento (3 factores a favor, 2 en contra):
+Razonamiento (4 factores a favor, 1 en contra):
 
-- ✅ Minutos: 29.0 esperados (titular, ±3.6).
-- ✅ Forma: 28.0 en sus últimos 5, 30.5 esta temporada (11 partidos), 38.2 la temporada pasada (línea 34.5).
-- ➖ Cómo produce puntos: 13.0 tiros de campo (su ritmo 18.0 por 36'; el rival concede -5% de tiros) × 0.99 puntos por tiro [media distancia 30% de sus tiros al 46% (rival concede 40%, liga 41%); bajo el aro 24% de sus tiros al 65% (rival concede 69%, liga 68%); pintura 24% de sus tiros al 44% (rival concede 46%, liga 45%); triple frontal 21% de sus tiros al 27% (rival concede 36%, liga 35%)] + 6.9 tiros libres × 86%.
-- ➖ Cómo produce rebotes: defensivos 5.5 = captura el 19.5% de los fallos del rival en pista × 47.0 fallos esperados del rival (liga 47.0) × 60% del partido; ofensivos 2.0 = 7.6% de los fallos de su equipo × 43.6.
-- ➖ Cómo produce asistencias: asiste el 16.4% de las canastas de sus compañeros en pista × 18.6 canastas de compañeros esperadas (su equipo 40.8 por 48' contra esta defensa).
-- ➖ Defensa: el rival concede +5% de puntos por minuto a pívots (defensa débil); ajuste aplicado +0%; en su zona principal (media) el rival concede 40% (liga 41%).
-- ❌ Altura: mide 7'0", 1.5 pulgadas más que los pívots del rival (+0.9% en esta estadística).
+- ✅ Minutos: 34.1 esperados (titular, ±3.0).
+- ✅ Forma: 0.8 en sus últimos 5, 1.3 esta temporada (14 partidos), 1.7 la temporada pasada (línea 1.5).
+- ➖ Cómo produce robos: roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
+- ❌ Defensa: el rival concede +5% de robos por minuto a bases/escoltas (defensa media); ajuste aplicado +5%.
 - ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ❌ Contra este rival: 37 (0 de 1 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ⚠️ en el parte de lesiones: day-to-day.
+- ✅ Contra este rival: 4, 1, 1 (2 de 3 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
-- ⚠️ Alertas: en el parte de lesiones, viene fallando tiros que suele meter.
-- Puntos **19.2** (por componentes 18.8 · por tasa por minuto y defensa rival 18.8): 13.0 tiros de campo (su ritmo 18.0 por 36'; el rival concede -5% de tiros) × 0.99 puntos por tiro [media distancia 30% de sus tiros al 46% (rival concede 40%, liga 41%); bajo el aro 24% de sus tiros al 65% (rival concede 69%, liga 68%); pintura 24% de sus tiros al 44% (rival concede 46%, liga 45%); triple frontal 21% de sus tiros al 27% (rival concede 36%, liga 35%)] + 6.9 tiros libres × 86%.
-- Rebotes **7.7** (por componentes 7.5 · por tasa por minuto y defensa rival 7.6): defensivos 5.5 = captura el 19.5% de los fallos del rival en pista × 47.0 fallos esperados del rival (liga 47.0) × 60% del partido; ofensivos 2.0 = 7.6% de los fallos de su equipo × 43.6.
-- Asistencias **3.1** (por componentes 3.1 · por tasa por minuto y defensa rival 3.2): asiste el 16.4% de las canastas de sus compañeros en pista × 18.6 canastas de compañeros esperadas (su equipo 40.8 por 48' contra esta defensa).
+- ⚠️ Alertas: falla en partidos normales (6 de 14 esta temporada).
+- Robos **1.3** (por componentes 1.4 · por tasa por minuto y defensa rival 1.3): roba el 12.6% de las pérdidas del rival en pista × 15.7 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 29.2 | 31.3 | 31.5 | 31.8 | 31.0 |
-| Puntos | 17.2 | 18.4 | 17.9 | 26.4 | 27.0 |
-| Tiros de campo intentados | 14.4 | 14.8 | 14.8 | 18.2 | 13.0 |
-| % tiros de campo | 33.3% | 38.5% | 37.4% | 48.5% | 61.5% |
-| Triples intentados | 2.6 | 2.9 | 3.3 | 4.2 | 1.0 |
-| % triples | 7.7% | 6.9% | 11.1% | 31.0% | 100.0% |
-| Tiros libres intentados | 8.0 | 7.6 | 7.3 | 8.8 | 12.0 |
-| % tiros libres | 92.5% | 89.5% | 88.8% | 85.0% | 83.3% |
-| Jugadas que usa por 36 min | 25.1 | 24.1 | 24.0 | 28.1 | 24.7 |
-| Rebotes | 8.4 | 8.6 | 8.8 | 7.6 | 6.0 |
-| % de los fallos del rival que captura | 19.1% | 19.7% | 19.9% | 18.0% | 14.3% |
-| % de los fallos de su equipo que captura | 11.0% | 7.7% | 7.4% | 6.1% | 4.0% |
-| Asistencias | 2.4 | 3.5 | 3.7 | 4.2 | 4.0 |
-| % de las canastas de compañeros que asiste | 11.6% | 15.7% | 16.7% | 19.7% | 24.8% |
-| Pérdidas por jugada | 11.8% | 13.4% | 13.9% | 11.1% | 14.1% |
+| Minutos | 34.6 | 35.5 | 36.2 | 37.3 | 40.0 |
+| Robos | 0.8 | 1.0 | 1.3 | 1.7 | 2.0 |
+| % de las pérdidas del rival que roba | 9.8% | 11.1% | 12.3% | 15.4% | 14.3% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -9%, vs defensa media -1%, vs defensa débil +14%; rebotes: vs defensa fuerte +3%, vs defensa media -8%, vs defensa débil +0%; asistencias: vs defensa fuerte +4%, vs defensa media +3%, vs defensa débil -10%; triples: vs defensa fuerte -44%, vs defensa media +15%, vs defensa débil +31%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -6%, vs defensa media +4%, vs defensa débil +6%; rebotes: vs defensa fuerte -9%, vs defensa media +2%, vs defensa débil +10%; asistencias: vs defensa fuerte -8%, vs defensa media -8%, vs defensa débil +22%; triples: vs defensa fuerte -7%, vs defensa media +3%, vs defensa débil +4%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| media distancia | 30% | 46% | 41% | 40% |
-| bajo el aro | 24% | 65% | 68% | 69% |
-| pintura | 24% | 44% | 45% | 46% |
-| triple frontal | 21% | 27% | 35% | 36% |
-| triple de esquina | 1% | 36% | 38% | 40% |
+| triple frontal | 36% | 37% | 35% | 36% |
+| bajo el aro | 28% | 67% | 68% | 69% |
+| pintura | 20% | 42% | 45% | 46% |
+| media distancia | 13% | 43% | 41% | 40% |
+| triple de esquina | 3% | 31% | 38% | 40% |
 
 ## Houston Rockets @ Miami Heat
 
 Diferencia esperada: Houston Rockets por 2.5.
 
-Parte de lesiones: Marcus Smart (Suspension); Fred VanVleet (Out); Clint Capela (Out); Pelle Larsson (Day-To-Day).
+Parte de lesiones: Marcus Smart (Suspension); Fred VanVleet (Day-To-Day); Clint Capela (Out); Pelle Larsson (Day-To-Day); Julian Phillips (Day-To-Day).
 
 Ventajas del partido (los dos lados): puntos esperados frente a su media de los últimos 10, ajuste por la defensa rival y diferencia de estatura con los rivales de su posición.
 
 | Equipo | Jugador | Puntos esperados | Su media (últ. 10) | Defensa rival en puntos | Rebotes esperados | Altura vs rival |
 |---|---|---|---|---|---|---|
-| MIA | Davion Mitchell | 16.0 | 16.7 | -2% | 2.8 | -3.6" |
-| MIA | Bam Adebayo | 19.7 | 21.4 | -3% | 9.3 | -1.4" |
-| HOU | Alperen Sengun | 19.1 | 22.1 | +0% | 9.7 | +2.0" |
-| MIA | Giannis Antetokounmpo | 27.2 | 29.1 | -3% | 10.6 | +1.1" |
-| HOU | Kevin Durant | 20.7 | 20.4 | +1% | 5.1 | +2.1" |
-| HOU | Amen Thompson | 16.9 | 15.3 | +3% | 7.0 | +4.0" |
-| HOU | Jabari Smith Jr. | 15.4 | 14.9 | +1% | 6.7 | +2.1" |
-| MIA | Pelle Larsson | 12.2 | 12.3 | -2% | 3.4 | +1.4" |
-| HOU | Tari Eason | 14.3 | 10.5 | +1% | 6.0 | -0.9" |
-| MIA | Klay Thompson | 15.0 | 16.8 | -3% | 1.9 | +1.4" |
+| MIA | Davion Mitchell | 15.8 | 16.7 | -2% | 2.8 | -3.6" |
+| MIA | Bam Adebayo | 19.4 | 21.4 | -3% | 9.3 | -1.4" |
+| HOU | Alperen Sengun | 20.2 | 22.1 | +0% | 9.6 | +2.0" |
+| MIA | Giannis Antetokounmpo | 26.7 | 29.1 | -3% | 10.6 | +1.1" |
+| HOU | Kevin Durant | 20.4 | 20.4 | +1% | 5.7 | +2.1" |
+| HOU | Amen Thompson | 16.2 | 15.3 | +3% | 6.9 | +4.0" |
+| HOU | Jabari Smith Jr. | 14.2 | 14.9 | +1% | 6.3 | +2.1" |
+| HOU | Fred VanVleet | 14.5 | 14.8 | +4% | 3.4 | -3.0" |
+| MIA | Pelle Larsson | 12.0 | 12.3 | -2% | 3.4 | +1.4" |
+| MIA | Klay Thompson | 14.7 | 16.8 | -3% | 1.9 | +1.4" |
 
 Picks seguros de titulares estables:
 
 | Jugador | Pick seguro | Prob. | Cuota mínima | Esperado | Últ. 10 |
 |---|---|---|---|---|---|
-| Davion Mitchell | **más de 21.5 pts+reb+ast** | **78%** | 1.29 | 26.9 | 9/10 |
+| Davion Mitchell | **más de 21.5 pts+reb+ast** | **76%** | 1.31 | 26.6 | 9/10 |
 
 Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen ganar o perder juntas).
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
+| **Fred VanVleet: menos de 1.5 robos** | **69%** | 73% | 65% | 1.0 ± 1.2 | 7/10 | 7/11 | - | 1.43 (70%) |
 | **Amen Thompson: menos de 1.5 robos** | **68%** | 76% | 57% | 1.0 ± 1.0 | 9/10 | 12/14 | 0, 1 | 1.62 (62%) |
-| **Bobby Portis: menos de 1.5 triples** ⚠️ suplente | **67%** | 68% | 66% | 1.1 ± 1.1 | 8/10 | 9/13 | 1 | 1.40 (71%) |
+| **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.47 (68%) |
 | **Reed Sheppard: más de 0.5 robos** ⚠️ suplente | **67%** | 69% | 65% | 1.1 ± 1.1 | 8/10 | 9/11 | 4, 1 | 1.48 (68%) |
-| **Davion Mitchell: más de 0.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 8/13 | 2, 0 | 1.48 (68%) |
-| **Pelle Larsson: más de 0.5 robos** ⚠️ suplente | **67%** | 68% | 65% | 1.1 ± 1.0 | 9/10 | 10/11 | 0, 0 | 1.46 (69%) |
-| **Giannis Antetokounmpo: más de 0.5 tapones** | **65%** | 65% | 66% | 1.1 ± 1.0 | 8/10 | 9/13 | 1 | 1.44 (70%) |
+| **Pelle Larsson: más de 0.5 robos** ⚠️ suplente | **67%** | 68% | 66% | 1.1 ± 1.0 | 9/10 | 10/11 | 0, 0 | 1.44 (69%) |
 | **Reed Sheppard: menos de 2.5 rebotes** ⚠️ suplente | **65%** | 70% | 59% | 1.9 ± 1.7 | 8/10 | 9/11 | 2, 4 | 1.59 (63%) |
-| **Jabari Smith Jr.: más de 1.5 triples** | **65%** | 68% | 61% | 2.5 ± 1.6 | 7/10 | 10/14 | 2 | 1.53 (65%) |
+| **Bobby Portis: más de 0.5 triples** ⚠️ suplente | **65%** | 66% | 63% | 1.1 ± 1.1 | 7/10 | 10/13 | 1 | 1.46 (69%) |
+| **Davion Mitchell: más de 1.5 triples** | **64%** | 67% | 59% | 2.3 ± 1.5 | 8/10 | 10/13 | 3, 2 | 1.59 (63%) |
 
 ### Fichas de los jugadores destacados
+
+#### Fred VanVleet (bases/escoltas) vs Miami Heat
+
+- Minutos esperados: **30.0** (± 3.0); 11 partidos en la base.
+- en el parte de lesiones: day-to-day
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Fred VanVleet: menos de 1.5 robos** (69%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Miami Heat contra bases/escoltas en robos: -11% respecto a la media; ajuste por su historial contra defensas similares: -2%.
+
+**¿Por qué 1.0 robos?** (línea 1.5; 30.0 minutos esperados)
+
+En corto:
+
+- La pasó en 7 de 11 esta temporada (falló con 3, 2, 3, 3)
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 3 de 4 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 26+ minutos: 3 de 4, con 1.0 de media (últimos 60 partidos)
+- El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 9.0 balones por partido con él en pista y robó el 11%
+- El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
+- Minutos: 30 esperados (titular, ±3)
+
+Razonamiento (4 factores a favor, 0 en contra):
+
+- ✅ Minutos: 30.0 esperados (titular, ±3.0).
+- ✅ Forma: 0.6 en sus últimos 5, 1.2 esta temporada (11 partidos) (línea 1.5).
+- ➖ Cómo produce robos: roba el 12.2% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede -11% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -11%.
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ en el parte de lesiones: day-to-day.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- ⚠️ Alertas: en el parte de lesiones.
+- Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.0): roba el 12.2% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 31.0 | 30.5 | 30.5 | - | - |
+| Robos | 0.6 | 1.0 | 1.2 | - | - |
+| % de las pérdidas del rival que roba | 6.2% | 11.1% | 12.6% | - | - |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -28%, vs defensa media -2%, vs defensa débil +38%; rebotes: vs defensa media -5%, vs defensa débil +17%; asistencias: vs defensa fuerte -1%, vs defensa media -17%, vs defensa débil +13%; triples: vs defensa fuerte -18%, vs defensa media +15%, vs defensa débil +16%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 61% | 40% | 35% | 36% |
+| media distancia | 18% | 47% | 41% | 41% |
+| pintura | 11% | 49% | 45% | 47% |
+| triple de esquina | 7% | 35% | 38% | 39% |
+| bajo el aro | 4% | 64% | 68% | 66% |
 
 #### Amen Thompson (bases/escoltas) vs Miami Heat
 
 - Minutos esperados: **32.2** (± 5.2); 99 partidos en la base.
-- sin Fred VanVleet (3 partidos): 32.0 min vs 33.6 con él; ast +17%/min
 - segundo partido en dos noches: -3% de minutos
 - Su prop más probable hoy: **Amen Thompson: menos de 1.5 robos** (68%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Miami Heat contra bases/escoltas en robos: -11% respecto a la media; ajuste por su historial contra defensas similares: +1%.
@@ -2144,7 +2119,6 @@ Razonamiento (5 factores a favor, 0 en contra):
 - ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
 - ✅ Contra este rival: 0, 1 (2 de 2 a favor).
 - ✅ Últimos 10: la habría pasado 9 de 10.
-- ⚠️ sin Fred VanVleet (3 partidos): 32.0 min vs 33.6 con él; ast +17%/min.
 - ⚠️ segundo partido en dos noches: -3% de minutos.
 
 - Robos **1.0** (por componentes 1.0 · por tasa por minuto y defensa rival 1.0): roba el 12.0% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
@@ -2165,108 +2139,6 @@ Razonamiento (5 factores a favor, 0 en contra):
 | triple de esquina | 6% | 29% | 38% | 39% |
 | triple frontal | 4% | 29% | 35% | 36% |
 
-#### Bobby Portis (aleros/ala-pívots) vs Houston Rockets
-
-- Minutos esperados: **17.5** (± 3.0); 80 partidos en la base.
-- Su prop más probable hoy: **Bobby Portis: menos de 1.5 triples** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Houston Rockets contra aleros/ala-pívots en triples: -9% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 1.1 triples?** (línea 1.5; 17.5 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 13 esta temporada (falló con 2, 3, 2, 3)
-- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 6 de 12 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 14+ minutos: 7 de 19, con 1.8 de media (últimos 60 partidos)
-- El rival es #30 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -15% frente a la media)
-- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
-- Su zona principal es triple frontal (26% de sus tiros, 39% de acierto); el rival es #28 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 59% (31% de acierto), penetración 15% (47% de acierto), poste 10% (18% de acierto); en recibe y tira el rival es #30 de 30 en lo que deja (#1 = el que más; 0.96 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 3.2 triples intentados esperados al 40%
-- El rival no tiene a Fred VanVleet (3.0 triples por partido)
-- Minutos: 18 esperados (suplente, ±3)
-
-Razonamiento (4 factores a favor, 2 en contra):
-
-- ❌ Minutos: 17.5 esperados (suplente, ±3.0).
-- ✅ Forma: 0.8 en sus últimos 5, 1.2 esta temporada (13 partidos), 2.1 la temporada pasada (línea 1.5).
-- ➖ Cómo produce triples: 3.2 triples intentados (su ritmo 6.8 por 36'; el rival concede -3% de triples en su reparto) × 40% esperado.
-- ✅ Defensa: el rival concede -15% de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -9%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1 (1 de 1 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ❌ Bajas del rival: sin Fred VanVleet (titular); +1.7% en esta estadística.
-
-- ⚠️ Alertas: suplente.
-- Triples **1.1** (por componentes 1.3 · por tasa por minuto y defensa rival 1.1): 3.2 triples intentados (su ritmo 6.8 por 36'; el rival concede -3% de triples en su reparto) × 40% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 16.8 | 18.4 | 19.8 | 24.1 | 24.0 |
-| Triples anotados | 0.8 | 1.0 | 1.2 | 2.0 | 1.0 |
-| Triples intentados | 3.4 | 3.8 | 3.9 | 4.4 | 1.0 |
-| % triples | 23.5% | 26.3% | 31.4% | 45.6% | 100.0% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -12%, vs defensa media +6%, vs defensa débil +5%; rebotes: vs defensa fuerte -4%, vs defensa media +10%, vs defensa débil -5%; asistencias: vs defensa fuerte +7%, vs defensa media +23%, vs defensa débil -26%; triples: vs defensa fuerte -2%, vs defensa media -4%, vs defensa débil +8%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| media distancia | 26% | 44% | 41% | 41% |
-| triple frontal | 26% | 39% | 35% | 34% |
-| pintura | 18% | 47% | 45% | 46% |
-| triple de esquina | 17% | 43% | 38% | 37% |
-| bajo el aro | 13% | 63% | 68% | 67% |
-
-#### Reed Sheppard (bases/escoltas) vs Miami Heat
-
-- Minutos esperados: **20.7** (± 4.2); 99 partidos en la base.
-- sin Fred VanVleet: muestra insuficiente (2 partidos sin él)
-- Su prop más probable hoy: **Reed Sheppard: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Miami Heat contra bases/escoltas en robos: -11% respecto a la media; ajuste por su historial contra defensas similares: -3%.
-
-**¿Por qué 1.1 robos?** (línea 0.5; 20.7 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 11 esta temporada (falló con 0, 0)
-- Con 17+ minutos (hoy se esperan 21): 11 de 13 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a bases/escoltas: 8 de 12 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 17+ minutos: 14 de 19, con 1.2 de media (últimos 60 partidos)
-- El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 6.1 balones por partido con él en pista y robó el 21%
-- El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
-- Minutos: 21 esperados (suplente, ±4)
-
-Razonamiento (3 factores a favor, 2 en contra):
-
-- ❌ Minutos: 20.7 esperados (suplente, ±4.2).
-- ✅ Forma: 1.0 en sus últimos 5, 1.4 esta temporada (11 partidos), 1.6 la temporada pasada (línea 0.5).
-- ➖ Cómo produce robos: roba el 19.7% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
-- ❌ Defensa: el rival concede -11% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -11%.
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 4, 1 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ⚠️ sin Fred VanVleet: muestra insuficiente (2 partidos sin él).
-
-- ⚠️ Alertas: suplente.
-- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.1): roba el 19.7% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 19.0 | 21.0 | 20.5 | 26.6 | 36.5 |
-| Robos | 1.0 | 1.3 | 1.4 | 1.5 | 2.5 |
-| % de las pérdidas del rival que roba | 20.8% | 21.3% | 21.7% | 21.1% | 29.4% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +8%, vs defensa media -10%, vs defensa débil +4%; rebotes: vs defensa fuerte -12%, vs defensa media +10%, vs defensa débil +5%; asistencias: vs defensa fuerte -15%, vs defensa media -1%, vs defensa débil +11%; triples: vs defensa fuerte -2%, vs defensa media -6%, vs defensa débil +9%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 53% | 37% | 35% | 36% |
-| pintura | 16% | 46% | 45% | 47% |
-| media distancia | 11% | 39% | 41% | 41% |
-| triple de esquina | 10% | 38% | 38% | 39% |
-| bajo el aro | 10% | 64% | 68% | 66% |
-
 #### Davion Mitchell (bases/escoltas) vs Houston Rockets
 
 - Minutos esperados: **36.5** (± 3.8); 84 partidos en la base.
@@ -2285,7 +2157,6 @@ En corto:
 - El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
 - Oportunidades de robo (últimos 10): el rival perdió 11.5 balones por partido con él en pista y robó el 13%
 - El rival es #17 de 30 en balones que pierde (#1 = el que más; 13.9 por partido)
-- El rival no tiene a Fred VanVleet (1.0 robos por partido)
 - Minutos: 36 esperados (titular, ±4)
 
 Razonamiento (3 factores a favor, 0 en contra):
@@ -2316,6 +2187,54 @@ Razonamiento (3 factores a favor, 0 en contra):
 | media distancia | 6% | 42% | 41% | 41% |
 | triple de esquina | 6% | 38% | 38% | 37% |
 
+#### Reed Sheppard (bases/escoltas) vs Miami Heat
+
+- Minutos esperados: **20.7** (± 4.2); 99 partidos en la base.
+- Su prop más probable hoy: **Reed Sheppard: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Miami Heat contra bases/escoltas en robos: -11% respecto a la media; ajuste por su historial contra defensas similares: -3%.
+
+**¿Por qué 1.1 robos?** (línea 0.5; 20.7 minutos esperados)
+
+En corto:
+
+- La pasó en 9 de 11 esta temporada (falló con 0, 0)
+- Con 17+ minutos (hoy se esperan 21): 11 de 13 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 8 de 12 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 17+ minutos: 14 de 19, con 1.2 de media (últimos 60 partidos)
+- El rival es #26 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -11% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 6.1 balones por partido con él en pista y robó el 21%
+- El rival es #23 de 30 en balones que pierde (#1 = el que más; 13.2 por partido)
+- Minutos: 21 esperados (suplente, ±4)
+
+Razonamiento (3 factores a favor, 2 en contra):
+
+- ❌ Minutos: 20.7 esperados (suplente, ±4.2).
+- ✅ Forma: 1.0 en sus últimos 5, 1.4 esta temporada (11 partidos), 1.6 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 19.7% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+- ❌ Defensa: el rival concede -11% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -11%.
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 4, 1 (2 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
+
+- ⚠️ Alertas: suplente.
+- Robos **1.1** (por componentes 1.1 · por tasa por minuto y defensa rival 1.1): roba el 19.7% de las pérdidas del rival en pista × 12.5 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 19.0 | 21.0 | 20.5 | 26.6 | 36.5 |
+| Robos | 1.0 | 1.3 | 1.4 | 1.5 | 2.5 |
+| % de las pérdidas del rival que roba | 20.8% | 21.3% | 21.7% | 21.1% | 29.4% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +8%, vs defensa media -10%, vs defensa débil +4%; rebotes: vs defensa fuerte -12%, vs defensa media +10%, vs defensa débil +5%; asistencias: vs defensa fuerte -15%, vs defensa media -1%, vs defensa débil +11%; triples: vs defensa fuerte -2%, vs defensa media -6%, vs defensa débil +9%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 53% | 37% | 35% | 36% |
+| pintura | 16% | 46% | 45% | 47% |
+| media distancia | 11% | 39% | 41% | 41% |
+| triple de esquina | 10% | 38% | 38% | 39% |
+| bajo el aro | 10% | 64% | 68% | 66% |
+
 #### Pelle Larsson (bases/escoltas) vs Houston Rockets
 
 - Minutos esperados: **29.2** (± 4.4); 82 partidos en la base.
@@ -2335,7 +2254,6 @@ En corto:
 - El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
 - Oportunidades de robo (últimos 10): el rival perdió 11.3 balones por partido con él en pista y robó el 12%
 - El rival es #17 de 30 en balones que pierde (#1 = el que más; 13.9 por partido)
-- El rival no tiene a Fred VanVleet (1.0 robos por partido)
 - Minutos: 29 esperados (suplente, ±4)
 
 Razonamiento (2 factores a favor, 2 en contra):
@@ -2370,7 +2288,7 @@ Razonamiento (2 factores a favor, 2 en contra):
 
 ## Portland Trail Blazers @ Minnesota Timberwolves
 
-Diferencia esperada: Minnesota Timberwolves por 1.5.
+Diferencia esperada: Minnesota Timberwolves por 2.5.
 
 Parte de lesiones: Donte DiVincenzo (Out); Ja Morant (Out); Jaylen Clark (Out); Vit Krejci (Out); Anthony Edwards (Out); Chris Youngblood (Out); Shaedon Sharpe (Out).
 
@@ -2393,14 +2311,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.47 (68%) |
-| **Jonathan Kuminga: más de 0.5 robos** | **67%** | 68% | 66% | 1.3 ± 1.2 | 6/10 | 9/13 | 2, 2 | 1.44 (69%) |
-| **Jaden McDaniels: más de 0.5 robos** | **67%** | 67% | 66% | 1.2 ± 1.1 | 6/10 | 7/13 | 5, 3, 2, 1 | 1.44 (70%) |
-| **Rudy Gobert: menos de 1.5 tapones** | **65%** | 69% | 59% | 1.2 ± 1.2 | 8/10 | 10/12 | 1, 2, 0, 1 | 1.57 (63%) |
-| **Jrue Holiday: más de 0.5 robos** ⚠️ suplente | **64%** | 64% | 64% | 0.9 ± 1.0 | 8/10 | 10/12 | 0, 1, 0, 3 | 1.50 (67%) |
+| **Toumani Camara: menos de 1.5 robos** | **68%** | 72% | 63% | 1.1 ± 1.1 | 7/10 | 8/12 | 1, 1, 0, 0 | 1.49 (67%) |
+| **Jaden McDaniels: más de 0.5 robos** | **66%** | 67% | 66% | 1.2 ± 1.1 | 6/10 | 7/13 | 5, 3, 2, 1 | 1.45 (69%) |
+| **Rudy Gobert: menos de 1.5 tapones** | **64%** | 69% | 59% | 1.2 ± 1.2 | 8/10 | 10/12 | 1, 2, 0, 1 | 1.59 (63%) |
+| **Jrue Holiday: más de 0.5 robos** ⚠️ suplente | **64%** | 64% | 63% | 0.9 ± 1.0 | 8/10 | 10/12 | 0, 1, 0, 3 | 1.50 (67%) |
 | **Donovan Clingan: más de 0.5 triples** | **63%** | 65% | 61% | 1.0 ± 1.0 | 8/10 | 9/12 | 1, 2, 2, 2 | 1.54 (65%) |
-| **Sidy Cissoko: menos de 1.5 triples** | **62%** | 63% | 62% | 1.2 ± 1.1 | 6/10 | 7/12 | 0, 0 | 1.52 (66%) |
-| **Terrence Shannon Jr.: menos de 1.5 triples** ⚠️ suplente | **62%** | 64% | 60% | 1.2 ± 1.2 | 5/10 | 5/10 | 0, 0, 2 | 1.56 (64%) |
+| **Jrue Holiday: menos de 2.5 triples** ⚠️ suplente | **63%** | 63% | 62% | 2.0 ± 1.5 | 6/10 | 7/12 | 1, 2, 5, 1 | 1.51 (66%) |
+| **Sidy Cissoko: menos de 1.5 triples** | **62%** | 63% | 62% | 1.2 ± 1.1 | 6/10 | 7/12 | 0, 0 | 1.51 (66%) |
+| **Terrence Shannon Jr.: menos de 1.5 triples** ⚠️ suplente | **62%** | 64% | 60% | 1.2 ± 1.2 | 5/10 | 5/10 | 0, 0, 2 | 1.55 (64%) |
 
 ### Fichas de los jugadores destacados
 
@@ -2453,66 +2371,13 @@ Razonamiento (4 factores a favor, 1 en contra):
 | pintura | 11% | 46% | 45% | 42% |
 | media distancia | 2% | 40% | 41% | 38% |
 
-#### Jonathan Kuminga (aleros/ala-pívots) vs Portland Trail Blazers
-
-- Minutos esperados: **30.7** (± 5.3); 55 partidos en la base.
-- Donte DiVincenzo ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- sin Anthony Edwards, la estrella de su equipo (9 partidos suyos sin él): más tiros y balón para él por minuto (puntos +5%, triples +4%, asistencias +1%)
-- Anthony Edwards ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Jonathan Kuminga: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Portland Trail Blazers contra aleros/ala-pívots en robos: +24% respecto a la media; ajuste por su historial contra defensas similares: +4%.
-
-**¿Por qué 1.3 robos?** (línea 0.5; 30.7 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 13 esta temporada (falló con 0, 0, 0, 0)
-- Con 27+ minutos (hoy se esperan 31): 7 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 8 de 17 (últimos 40 partidos)
-- Contra defensas débiles como la de hoy y con 27+ minutos: 4 de 6, con 1.2 de media (últimos 60 partidos)
-- El rival es #1 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +24% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 11.1 balones por partido con él en pista y robó el 7%
-- El rival es #1 de 30 en balones que pierde (#1 = el que más; 16.1 por partido)
-- Minutos: 31 esperados (titular, ±5)
-
-Razonamiento (4 factores a favor, 0 en contra):
-
-- ✅ Minutos: 30.7 esperados (titular, ±5.3).
-- ✅ Forma: 1.0 en sus últimos 5, 1.2 esta temporada (13 partidos), 0.6 la temporada pasada (línea 0.5).
-- ➖ Cómo produce robos: roba el 10.2% de las pérdidas del rival en pista × 16.6 pérdidas esperadas del rival.
-- ✅ Defensa: el rival concede +24% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +24%.
-- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 2, 2 (2 de 2 a favor).
-- ➖ Últimos 10: la habría pasado 6 de 10.
-- ⚠️ Donte DiVincenzo ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ sin Anthony Edwards, la estrella de su equipo (9 partidos suyos sin él): más tiros y balón para él por minuto (puntos +5%, triples +4%, asistencias +1%).
-- ⚠️ Anthony Edwards ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- Robos **1.3** (por componentes 1.1 · por tasa por minuto y defensa rival 1.3): roba el 10.2% de las pérdidas del rival en pista × 16.6 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 30.0 | 31.3 | 30.5 | 23.5 | 24.5 |
-| Robos | 1.0 | 0.8 | 1.2 | 0.6 | 2.0 |
-| % de las pérdidas del rival que roba | 9.6% | 7.2% | 10.9% | 7.8% | 21.1% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -4%, vs defensa media +2%, vs defensa débil +4%; rebotes: vs defensa fuerte -9%, vs defensa media +15%, vs defensa débil -4%; asistencias: vs defensa fuerte -12%, vs defensa media +17%, vs defensa débil +2%; triples: vs defensa fuerte +15%, vs defensa media +23%, vs defensa débil -32%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 34% | 64% | 68% | 66% |
-| pintura | 23% | 42% | 45% | 46% |
-| triple de esquina | 20% | 34% | 38% | 38% |
-| triple frontal | 16% | 36% | 35% | 34% |
-| media distancia | 8% | 38% | 41% | 42% |
-
 #### Jaden McDaniels (aleros/ala-pívots) vs Portland Trail Blazers
 
 - Minutos esperados: **33.9** (± 5.0); 97 partidos en la base.
 - Donte DiVincenzo ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - sin Anthony Edwards, la estrella de su equipo (20 partidos suyos sin él): más tiros y balón para él por minuto (puntos +3%, triples +13%, asistencias -2%)
 - Anthony Edwards ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Jaden McDaniels: más de 0.5 robos** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Jaden McDaniels: más de 0.5 robos** (66%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Portland Trail Blazers contra aleros/ala-pívots en robos: +24% respecto a la media; ajuste por su historial contra defensas similares: +7%.
 
 **¿Por qué 1.2 robos?** (línea 0.5; 33.9 minutos esperados)
@@ -2565,7 +2430,7 @@ Razonamiento (4 factores a favor, 0 en contra):
 - Donte DiVincenzo ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - sin Anthony Edwards, la estrella de su equipo (20 partidos suyos sin él): más tiros y balón para él por minuto (puntos +17%, asistencias -12%)
 - Anthony Edwards ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Rudy Gobert: menos de 1.5 tapones** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Rudy Gobert: menos de 1.5 tapones** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Portland Trail Blazers contra pívots en tapones: +18% respecto a la media; ajuste por su historial contra defensas similares: -4%.
 
 **¿Por qué 1.2 tapones?** (línea 1.5; 27.8 minutos esperados)
@@ -2663,6 +2528,57 @@ Razonamiento (2 factores a favor, 2 en contra):
 | triple de esquina | 10% | 44% | 38% | 38% |
 | media distancia | 7% | 40% | 41% | 38% |
 
+#### Donovan Clingan (pívots) vs Minnesota Timberwolves
+
+- Minutos esperados: **26.8** (± 3.7); 95 partidos en la base.
+- Ja Morant ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Su prop más probable hoy: **Donovan Clingan: más de 0.5 triples** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Minnesota Timberwolves contra pívots en triples: +1% respecto a la media; ajuste por su historial contra defensas similares: -1%.
+
+**¿Por qué 1.0 triples?** (línea 0.5; 26.8 minutos esperados)
+
+En corto:
+
+- La pasó en 9 de 12 esta temporada (falló con 0, 0, 0)
+- Con 23+ minutos (hoy se esperan 27): 9 de 9 en sus últimos 15
+- Contra las ~10 mejores defensas en triples a pívots: 8 de 13 (últimos 40 partidos)
+- Contra defensas débiles como la de hoy y con 23+ minutos: 12 de 15, con 1.4 de media (últimos 60 partidos)
+- El rival es #10 de 30 en triples que concede a pívots por minuto (#1 = el que más concede; +5% frente a la media)
+- Su zona principal es triple frontal (34% de sus tiros, 36% de acierto); el rival es #29 de 30 en acierto que deja ahí (34%, liga 35%)
+- Cómo tira (últimos 15): recibe y tira 36% (34% de acierto), corte 22% (78% de acierto), penetración 14% (41% de acierto); en recibe y tira el rival es #29 de 30 en lo que deja (#1 = el que más; 0.98 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 2.6 triples intentados esperados al 34%
+- Minutos: 27 esperados (titular, ±4)
+
+Razonamiento (4 factores a favor, 0 en contra):
+
+- ✅ Minutos: 26.8 esperados (titular, ±3.7).
+- ✅ Forma: 1.2 en sus últimos 5, 1.1 esta temporada (12 partidos), 1.2 la temporada pasada (línea 0.5).
+- ➖ Cómo produce triples: 2.6 triples intentados (su ritmo 3.7 por 36'; el rival concede -8% de triples en su reparto) × 34% esperado.
+- ➖ Defensa: el rival concede +5% de triples por minuto a pívots (defensa débil); ajuste aplicado +1%; en su zona principal (triple) el rival concede 34% (liga 35%).
+- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 1, 2, 2, 2 (4 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
+- ⚠️ Ja Morant ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- Triples **1.0** (por componentes 0.9 · por tasa por minuto y defensa rival 1.1): 2.6 triples intentados (su ritmo 3.7 por 36'; el rival concede -8% de triples en su reparto) × 34% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 26.6 | 26.4 | 25.5 | 26.9 | 31.2 |
+| Triples anotados | 1.2 | 1.1 | 1.1 | 1.1 | 1.8 |
+| Triples intentados | 3.0 | 2.6 | 2.5 | 3.3 | 4.2 |
+| % triples | 40.0% | 42.3% | 43.3% | 32.5% | 41.2% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -4%, vs defensa media -1%, vs defensa débil +6%; rebotes: vs defensa fuerte -11%, vs defensa media +5%, vs defensa débil +9%; asistencias: vs defensa fuerte -26%, vs defensa media +26%, vs defensa débil +4%; triples: vs defensa fuerte -16%, vs defensa media +3%, vs defensa débil +16%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 50% | 65% | 68% | 65% |
+| triple frontal | 34% | 36% | 35% | 34% |
+| pintura | 13% | 47% | 45% | 42% |
+| triple de esquina | 3% | 31% | 38% | 38% |
+| media distancia | 1% | 41% | 41% | 38% |
+
 ## Golden State Warriors @ New Orleans Pelicans
 
 Diferencia esperada: Golden State Warriors por 3.5.
@@ -2684,24 +2600,18 @@ Ventajas del partido (los dos lados): puntos esperados frente a su media de los 
 | GS | Draymond Green | 6.3 | 3.4 | -0% | 4.5 | -1.7" |
 | GS | De'Anthony Melton | 14.0 | 9.4 | +4% | 3.9 | -2.0" |
 
-Picks seguros de titulares estables:
-
-| Jugador | Pick seguro | Prob. | Cuota mínima | Esperado | Últ. 10 |
-|---|---|---|---|---|---|
-| Zion Williamson | **más de 27.5 pts+reb+ast** | **77%** | 1.30 | 34.0 | 8/10 |
-
 Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen ganar o perder juntas).
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Will Richard: menos de 1.5 robos** | **76%** | 87% | 63% | 0.6 ± 0.9 | 9/10 | 11/12 | 2, 0, 0 | 1.48 (68%) |
-| **Brandin Podziemski: menos de 1.5 robos** | **72%** | 78% | 65% | 0.8 ± 0.9 | 7/10 | 7/11 | 1, 2, 1, 0 | 1.41 (71%) |
+| **Will Richard: menos de 1.5 robos** | **77%** | 87% | 64% | 0.6 ± 0.9 | 9/10 | 11/12 | 2, 0, 0 | 1.44 (69%) |
+| **Brandin Podziemski: menos de 1.5 robos** | **72%** | 78% | 66% | 0.8 ± 0.9 | 7/10 | 7/11 | 1, 2, 1, 0 | 1.42 (71%) |
 | **Herbert Jones: menos de 1.5 robos** | **70%** | 77% | 61% | 0.9 ± 1.1 | 8/10 | 11/14 | 0, 5, 2 | 1.51 (66%) |
-| **Herbert Jones: menos de 1.5 triples** | **67%** | 68% | 65% | 1.2 ± 1.2 | 7/10 | 11/14 | 2, 1, 0 | 1.44 (69%) |
+| **Derik Queen: más de 0.5 robos** ⚠️ suplente | **69%** | 72% | 66% | 1.3 ± 1.2 | 7/10 | 9/14 | 0, 0, 0, 0 | 1.44 (69%) |
+| **Herbert Jones: menos de 1.5 triples** | **66%** | 68% | 64% | 1.2 ± 1.2 | 7/10 | 11/14 | 2, 1, 0 | 1.45 (69%) |
 | **Will Richard: menos de 1.5 triples** | **64%** | 65% | 63% | 1.2 ± 1.2 | 6/10 | 8/12 | 0, 1, 1 | 1.49 (67%) |
-| **Draymond Green: menos de 5.5 rebotes** | **63%** | 69% | 57% | 4.5 ± 2.4 | 8/10 | 9/11 | 3, 7, 9, 10 | 1.63 (61%) |
-| **Jeremiah Fears: más de 4.5 rebotes** | **63%** | 71% | 51% | 6.6 ± 2.6 | 6/10 | 7/14 | 3, 3, 6, 5 | 1.83 (55%) |
-| **Gui Santos: más de 6.5 puntos** ⚠️ suplente | **63%** | 72% | 53% | 11.1 ± 5.7 | 4/10 | 4/10 | 3, 15, 3 | 1.77 (57%) |
+| **Draymond Green: menos de 5.5 rebotes** | **63%** | 69% | 56% | 4.5 ± 2.4 | 8/10 | 9/11 | 3, 7, 9, 10 | 1.67 (60%) |
+| **Derik Queen: más de 5.5 rebotes** ⚠️ suplente | **63%** | 68% | 55% | 7.7 ± 3.3 | 4/10 | 8/14 | 4, 7, 3, 7 | 1.71 (58%) |
 
 ### Fichas de los jugadores destacados
 
@@ -2711,7 +2621,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 - Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos
 - sin Stephen Curry (35 partidos): 23.3 min vs 16.6 con él; reb -8%/min, ast -17%/min
 - Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Will Richard: menos de 1.5 robos** (76%). Con 80% de probabilidad: más de - / menos de 1.5.
+- Su prop más probable hoy: **Will Richard: menos de 1.5 robos** (77%). Con 80% de probabilidad: más de - / menos de 1.5.
 - Defensa de New Orleans Pelicans contra bases/escoltas en robos: -5% respecto a la media; ajuste por su historial contra defensas similares: -3%.
 
 **¿Por qué 0.6 robos?** (línea 1.5; 24.8 minutos esperados)
@@ -2868,6 +2778,60 @@ Razonamiento (4 factores a favor, 1 en contra):
 | pintura | 17% | 38% | 45% | 47% |
 | media distancia | 5% | 39% | 41% | 44% |
 
+#### Derik Queen (pívots) vs Golden State Warriors
+
+- Minutos esperados: **25.0** (± 4.8); 95 partidos en la base.
+- sin Dejounte Murray (72 partidos): 26.0 min vs 20.2 con él; reb +7%/min, ast +25%/min
+- Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Su prop más probable hoy: **Derik Queen: más de 0.5 robos** (69%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Golden State Warriors contra pívots en robos: +5% respecto a la media; ajuste por su historial contra defensas similares: +3%.
+
+**¿Por qué 1.3 robos?** (línea 0.5; 25.0 minutos esperados)
+
+En corto:
+
+- La pasó en 9 de 14 esta temporada (falló con 0, 0, 0, 0)
+- Con 21+ minutos (hoy se esperan 25): 7 de 10 en sus últimos 15
+- Hoy juega más que de costumbre (25 min frente a 21): con 21+ minutos, esta temporada y la pasada, la pasó 39 de 55 (71%)
+- Contra las ~10 mejores defensas en robos a pívots: 3 de 9 (últimos 40 partidos)
+- Contra defensas débiles como la de hoy y con 21+ minutos: 9 de 11, con 1.8 de media (últimos 60 partidos)
+- El rival es #11 de 30 en robos que concede a pívots por minuto (#1 = el que más concede; +5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 6.9 balones por partido con él en pista y robó el 14%
+- El rival es #6 de 30 en balones que pierde (#1 = el que más; 15.1 por partido)
+- El rival no tiene a Stephen Curry (0.9 robos por partido)
+- Minutos: 25 esperados (suplente, ±5)
+
+Razonamiento (3 factores a favor, 2 en contra):
+
+- ❌ Minutos: 25.0 esperados (suplente, ±4.8).
+- ✅ Forma: 1.2 en sus últimos 5, 1.0 esta temporada (14 partidos), 1.0 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 13.8% de las pérdidas del rival en pista × 15.0 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede +5% de robos por minuto a pívots (defensa débil); ajuste aplicado +5%.
+- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ❌ Contra este rival: 0, 0, 0, 0 (0 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ sin Dejounte Murray (72 partidos): 26.0 min vs 20.2 con él; reb +7%/min, ast +25%/min.
+- ⚠️ Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- ⚠️ Alertas: suplente.
+- Robos **1.3** (por componentes 1.3 · por tasa por minuto y defensa rival 1.4): roba el 13.8% de las pérdidas del rival en pista × 15.0 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 20.8 | 21.0 | 21.9 | 25.0 | 20.0 |
+| Robos | 1.2 | 1.0 | 1.0 | 1.0 | 0.0 |
+| % de las pérdidas del rival que roba | 20.7% | 14.5% | 13.9% | 14.4% | 0.0% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media +13%, vs defensa débil -2%; rebotes: vs defensa fuerte -8%, vs defensa media +5%, vs defensa débil +3%; asistencias: vs defensa fuerte -24%, vs defensa media +14%, vs defensa débil +10%; triples: vs defensa fuerte -33%, vs defensa media +3%, vs defensa débil +31%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 44% | 62% | 68% | 71% |
+| pintura | 33% | 40% | 45% | 47% |
+| media distancia | 10% | 37% | 41% | 44% |
+| triple frontal | 8% | 32% | 35% | 34% |
+| triple de esquina | 4% | 33% | 38% | 40% |
+
 #### Draymond Green (aleros/ala-pívots) vs New Orleans Pelicans
 
 - Minutos esperados: **24.6** (± 6.4); 81 partidos en la base.
@@ -2926,60 +2890,6 @@ Razonamiento (3 factores a favor, 3 en contra):
 | pintura | 13% | 41% | 45% | 49% |
 | media distancia | 3% | 37% | 41% | 41% |
 
-#### Jeremiah Fears (bases/escoltas) vs Golden State Warriors
-
-- Minutos esperados: **35.7** (± 3.0); 96 partidos en la base.
-- sin Dejounte Murray (73 partidos): 27.2 min vs 23.3 con él; pts -6%/min, reb +23%/min
-- Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Jeremiah Fears: más de 4.5 rebotes** (63%). Con 80% de probabilidad: más de 3.5 / menos de 9.5.
-- Defensa de Golden State Warriors contra bases/escoltas en rebotes: +0% respecto a la media; ajuste por su historial contra defensas similares: +1%.
-
-**¿Por qué 6.6 rebotes?** (línea 4.5; 35.7 minutos esperados)
-
-En corto:
-
-- La pasó en 7 de 14 esta temporada; los fallos, en partidos raros (5 faltas, jugó 28 min, jugó 29 min, 5 faltas, jugó 24 min, jugó 24 min, jugó 21 min)
-- Con 32+ minutos (hoy se esperan 36): 4 de 6 en sus últimos 15
-- Hoy juega más que de costumbre (36 min frente a 32): con 32+ minutos, esta temporada y la pasada, la pasó 12 de 18 (67%)
-- Contra las ~10 mejores defensas en rebotes a bases/escoltas: 2 de 16 (últimos 40 partidos)
-- El rival es #14 de 30 en rebotes que concede a bases/escoltas por minuto (#1 = el que más concede; +0% frente a la media)
-- El rival es #16 de 30 en rebotes que concede en total (#1 = el que más)
-- El rival es #17 de 30 en rebotes ofensivos que concede en total (#1 = el que más)
-- Rebotes disponibles con él en pista (últimos 10): 28.9 tiros fallados del rival y 30.3 de su equipo por partido; se queda el 14% y el 3%; el rival falla 47.8 tiros por partido (#19 de 30, #1 = el que más falla)
-- El rival no tiene a Stephen Curry (3.7 rebotes por partido)
-- Minutos: 36 esperados (titular, ±3)
-
-Razonamiento (1 factores a favor, 0 en contra):
-
-- ✅ Minutos: 35.7 esperados (titular, ±3.0).
-- ➖ Forma: 4.4 en sus últimos 5, 4.5 esta temporada (14 partidos), 3.8 la temporada pasada (línea 4.5).
-- ➖ Cómo produce rebotes: defensivos 5.3 = captura el 12.3% de los fallos del rival en pista × 46.7 fallos esperados del rival (liga 47.0) × 74% del partido; ofensivos 1.4 = 3.2% de los fallos de su equipo × 46.2.
-- ➖ Defensa: el rival concede +0% de rebotes por minuto a bases/escoltas (defensa media); ajuste aplicado +0%.
-- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ➖ Contra este rival: 3, 3, 6, 5 (2 de 4 a favor).
-- ➖ Últimos 10: la habría pasado 6 de 10.
-- ⚠️ sin Dejounte Murray (73 partidos): 27.2 min vs 23.3 con él; pts -6%/min, reb +23%/min.
-- ⚠️ Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- Rebotes **6.6** (por componentes 6.6 · por tasa por minuto y defensa rival 6.6): defensivos 5.3 = captura el 12.3% de los fallos del rival en pista × 46.7 fallos esperados del rival (liga 47.0) × 74% del partido; ofensivos 1.4 = 3.2% de los fallos de su equipo × 46.2.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 30.6 | 32.1 | 29.5 | 25.7 | 27.8 |
-| Rebotes | 4.4 | 5.0 | 4.5 | 3.7 | 4.2 |
-| % de los fallos del rival que captura | 15.6% | 14.2% | 13.0% | 11.5% | 10.2% |
-| % de los fallos de su equipo que captura | 0.6% | 3.0% | 3.5% | 2.8% | 3.1% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media +2%, vs defensa débil +5%; rebotes: vs defensa fuerte -8%, vs defensa media -3%, vs defensa débil +9%; asistencias: vs defensa fuerte -15%, vs defensa media +2%, vs defensa débil +14%; triples: vs defensa fuerte -24%, vs defensa media -8%, vs defensa débil +37%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 38% | 60% | 68% | 71% |
-| triple frontal | 26% | 30% | 35% | 34% |
-| pintura | 23% | 39% | 45% | 47% |
-| media distancia | 9% | 36% | 41% | 44% |
-| triple de esquina | 4% | 41% | 38% | 40% |
-
 ## Phoenix Suns @ Denver Nuggets
 
 Diferencia esperada: Denver Nuggets por 9.5 — algo desigual: titulares hasta -1.5% de minutos.
@@ -3006,13 +2916,13 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Collin Gillespie: más de 0.5 robos** ⚠️ suplente | **69%** | 73% | 65% | 1.3 ± 1.2 | 7/10 | 9/12 | 4, 1, 1, 0 | 1.47 (68%) |
-| **Collin Gillespie: menos de 3.5 rebotes** ⚠️ suplente | **65%** | 69% | 60% | 2.7 ± 1.7 | 9/10 | 10/12 | 3, 3, 0, 2 | 1.56 (64%) |
-| **Cameron Johnson: más de 0.5 robos** | **64%** | 66% | 63% | 1.0 ± 1.0 | 9/10 | 7/8 | 1, 1, 0, 1 | 1.50 (67%) |
-| **Devin Booker: menos de 3.5 rebotes** | **64%** | 67% | 60% | 2.7 ± 1.8 | 9/10 | 9/12 | 2, 3, 4, 3 | 1.57 (64%) |
-| **Jordan Goodwin: menos de 1.5 robos** ⚠️ suplente | **64%** | 64% | 63% | 1.2 ± 1.2 | 5/10 | 4/8 | 2, 2, 1, 2 | 1.46 (68%) |
+| **Collin Gillespie: menos de 3.5 rebotes** ⚠️ suplente | **65%** | 69% | 59% | 2.7 ± 1.7 | 9/10 | 10/12 | 3, 3, 0, 2 | 1.57 (63%) |
+| **Jordan Goodwin: menos de 1.5 robos** ⚠️ suplente | **64%** | 64% | 64% | 1.2 ± 1.2 | 5/10 | 4/8 | 2, 2, 1, 2 | 1.45 (69%) |
+| **Devin Booker: menos de 3.5 rebotes** | **64%** | 67% | 60% | 2.7 ± 1.8 | 9/10 | 9/12 | 2, 3, 4, 3 | 1.57 (63%) |
+| **Cameron Johnson: más de 0.5 robos** | **63%** | 66% | 61% | 1.0 ± 1.0 | 9/10 | 7/8 | 1, 1, 0, 1 | 1.55 (65%) |
 | **Nikola Jokic: menos de 1.5 triples** | **63%** | 69% | 57% | 1.1 ± 1.1 | 8/10 | 9/11 | 0, 0, 2, 0 | 1.65 (61%) |
 | **Jalen Green: menos de 1.5 triples** | **63%** | 67% | 58% | 1.2 ± 1.4 | 8/10 | 9/12 | 0, 3 | 1.62 (62%) |
-| **Nikola Jokic: más de 0.5 tapones** | **62%** | 64% | 60% | 1.0 ± 1.0 | 6/10 | 7/11 | 0, 0, 0, 0 | 1.59 (63%) |
+| **Nikola Jokic: más de 0.5 tapones** | **62%** | 64% | 59% | 1.0 ± 1.0 | 6/10 | 7/11 | 0, 0, 0, 0 | 1.62 (62%) |
 
 ### Fichas de los jugadores destacados
 
@@ -3066,55 +2976,59 @@ Razonamiento (3 factores a favor, 3 en contra):
 | triple de esquina | 11% | 41% | 38% | 37% |
 | bajo el aro | 7% | 61% | 68% | 69% |
 
-#### Cameron Johnson (aleros/ala-pívots) vs Phoenix Suns
+#### Jordan Goodwin (bases/escoltas) vs Denver Nuggets
 
-- Minutos esperados: **29.8** (± 4.6); 67 partidos en la base.
-- partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe
-- Su prop más probable hoy: **Cameron Johnson: más de 0.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Phoenix Suns contra aleros/ala-pívots en robos: -2% respecto a la media; ajuste por su historial contra defensas similares: -2%.
+- Minutos esperados: **21.7** (± 7.3); 81 partidos en la base.
+- Mark Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- cambio de rol esta temporada (por minuto): ast +45%, tpm +53%; se da más peso a la línea de la casa
+- partido desigual (no favorito por 9.5): los suplentes suelen jugar +1% de minutos si se rompe
+- Su prop más probable hoy: **Jordan Goodwin: menos de 1.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Denver Nuggets contra bases/escoltas en robos: -7% respecto a la media; ajuste por su historial contra defensas similares: -2%.
 
-**¿Por qué 1.0 robos?** (línea 0.5; 29.8 minutos esperados)
+**¿Por qué 1.2 robos?** (línea 1.5; 21.7 minutos esperados)
 
 En corto:
 
-- La pasó en 7 de 8 esta temporada; los fallos, en partidos raros (jugó 11 min)
-- Con 26+ minutos (hoy se esperan 30): 11 de 13 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 5 de 14 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 26+ minutos: 13 de 20, con 0.8 de media (últimos 60 partidos)
-- El rival es #17 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -2% frente a la media)
-- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
-- Oportunidades de robo (últimos 10): el rival perdió 8.5 balones por partido con él en pista y robó el 15%
-- El rival es #21 de 30 en balones que pierde (#1 = el que más; 13.5 por partido)
-- Minutos: 30 esperados (titular, ±5)
+- La pasó en 4 de 8 esta temporada (falló con 2, 2, 3, 2)
+- Con 18+ minutos (hoy se esperan 22): 3 de 9 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a bases/escoltas: 7 de 13 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 18+ minutos: 9 de 19, con 1.3 de media (últimos 60 partidos)
+- El rival es #24 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -7% frente a la media)
+- Oportunidades de robo (últimos 9): el rival perdió 7.6 balones por partido con él en pista y robó el 18%
+- El rival es #28 de 30 en balones que pierde (#1 = el que más; 12.1 por partido)
+- Minutos: 22 esperados (suplente, ±7)
 
-Razonamiento (4 factores a favor, 1 en contra):
+Razonamiento (3 factores a favor, 2 en contra):
 
-- ✅ Minutos: 29.8 esperados (titular, ±4.6).
-- ✅ Forma: 1.2 en sus últimos 5, 1.1 esta temporada (8 partidos), 0.8 la temporada pasada (línea 0.5).
-- ➖ Cómo produce robos: roba el 13.2% de las pérdidas del rival en pista × 11.4 pérdidas esperadas del rival.
-- ➖ Defensa: el rival concede -2% de robos por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -2%.
-- ❌ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 1, 0, 1 (3 de 4 a favor).
-- ✅ Últimos 10: la habría pasado 9 de 10.
-- ⚠️ partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe.
+- ❌ Minutos: 21.7 esperados (suplente, ±7.3).
+- ✅ Forma: 1.4 en sus últimos 5, 1.5 esta temporada (8 partidos), 1.6 la temporada pasada (línea 1.5).
+- ➖ Cómo produce robos: roba el 17.4% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
+- ✅ Defensa: el rival concede -7% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -7%.
+- ✅ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ❌ Contra este rival: 2, 2, 1, 2 (1 de 4 a favor).
+- ➖ Últimos 10: la habría pasado 5 de 10.
+- ⚠️ Mark Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ cambio de rol esta temporada (por minuto): ast +45%, tpm +53%; se da más peso a la línea de la casa.
+- ⚠️ partido desigual (no favorito por 9.5): los suplentes suelen jugar +1% de minutos si se rompe.
 
-- Robos **1.0** (por componentes 0.9 · por tasa por minuto y defensa rival 1.0): roba el 13.2% de las pérdidas del rival en pista × 11.4 pérdidas esperadas del rival.
+- ⚠️ Alertas: suplente, minutos inestables, falla en partidos normales (3 de 8 esta temporada).
+- Robos **1.2** (por componentes 1.1 · por tasa por minuto y defensa rival 1.3): roba el 17.4% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 30.2 | 29.3 | 28.8 | 30.4 | 31.8 |
-| Robos | 1.2 | 1.3 | 1.1 | 0.8 | 0.8 |
-| % de las pérdidas del rival que roba | 15.8% | 15.3% | 14.5% | 10.5% | 10.3% |
+| Minutos | 20.8 | 20.2 | 20.4 | 22.5 | 17.8 |
+| Robos | 1.4 | 1.8 | 1.5 | 1.5 | 1.8 |
+| % de las pérdidas del rival que roba | 15.9% | 21.9% | 17.9% | 19.7% | 25.0% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -10%, vs defensa media +7%, vs defensa débil +17%; rebotes: vs defensa fuerte +11%, vs defensa media -21%, vs defensa débil +8%; asistencias: vs defensa fuerte -10%, vs defensa media +6%, vs defensa débil +6%; triples: vs defensa fuerte -15%, vs defensa media +9%, vs defensa débil +32%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -0%, vs defensa media +11%, vs defensa débil -8%; rebotes: vs defensa fuerte +4%, vs defensa media -13%, vs defensa débil +12%; asistencias: vs defensa fuerte -31%, vs defensa media -5%, vs defensa débil +50%; triples: vs defensa fuerte -17%, vs defensa media -7%, vs defensa débil +31%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 35% | 40% | 35% | 35% |
-| bajo el aro | 23% | 71% | 68% | 69% |
-| triple de esquina | 20% | 40% | 38% | 37% |
-| pintura | 14% | 45% | 45% | 46% |
-| media distancia | 9% | 36% | 41% | 40% |
+| triple frontal | 36% | 36% | 35% | 35% |
+| bajo el aro | 23% | 58% | 68% | 69% |
+| triple de esquina | 22% | 40% | 38% | 37% |
+| pintura | 14% | 42% | 45% | 45% |
+| media distancia | 5% | 36% | 41% | 40% |
 
 #### Devin Booker (bases/escoltas) vs Denver Nuggets
 
@@ -3170,59 +3084,55 @@ Razonamiento (6 factores a favor, 0 en contra):
 | bajo el aro | 15% | 67% | 68% | 69% |
 | triple de esquina | 3% | 33% | 38% | 37% |
 
-#### Jordan Goodwin (bases/escoltas) vs Denver Nuggets
+#### Cameron Johnson (aleros/ala-pívots) vs Phoenix Suns
 
-- Minutos esperados: **21.7** (± 7.3); 81 partidos en la base.
-- Mark Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- cambio de rol esta temporada (por minuto): ast +45%, tpm +53%; se da más peso a la línea de la casa
-- partido desigual (no favorito por 9.5): los suplentes suelen jugar +1% de minutos si se rompe
-- Su prop más probable hoy: **Jordan Goodwin: menos de 1.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Denver Nuggets contra bases/escoltas en robos: -7% respecto a la media; ajuste por su historial contra defensas similares: -2%.
+- Minutos esperados: **29.8** (± 4.6); 67 partidos en la base.
+- partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe
+- Su prop más probable hoy: **Cameron Johnson: más de 0.5 robos** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Phoenix Suns contra aleros/ala-pívots en robos: -2% respecto a la media; ajuste por su historial contra defensas similares: -2%.
 
-**¿Por qué 1.2 robos?** (línea 1.5; 21.7 minutos esperados)
+**¿Por qué 1.0 robos?** (línea 0.5; 29.8 minutos esperados)
 
 En corto:
 
-- La pasó en 4 de 8 esta temporada (falló con 2, 2, 3, 2)
-- Con 18+ minutos (hoy se esperan 22): 3 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a bases/escoltas: 7 de 13 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 18+ minutos: 9 de 19, con 1.3 de media (últimos 60 partidos)
-- El rival es #24 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -7% frente a la media)
-- Oportunidades de robo (últimos 9): el rival perdió 7.6 balones por partido con él en pista y robó el 18%
-- El rival es #28 de 30 en balones que pierde (#1 = el que más; 12.1 por partido)
-- Minutos: 22 esperados (suplente, ±7)
+- La pasó en 7 de 8 esta temporada; los fallos, en partidos raros (jugó 11 min)
+- Con 26+ minutos (hoy se esperan 30): 11 de 13 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 5 de 14 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 26+ minutos: 13 de 20, con 0.8 de media (últimos 60 partidos)
+- El rival es #17 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -2% frente a la media)
+- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
+- Oportunidades de robo (últimos 10): el rival perdió 8.5 balones por partido con él en pista y robó el 15%
+- El rival es #21 de 30 en balones que pierde (#1 = el que más; 13.5 por partido)
+- Minutos: 30 esperados (titular, ±5)
 
-Razonamiento (3 factores a favor, 2 en contra):
+Razonamiento (4 factores a favor, 1 en contra):
 
-- ❌ Minutos: 21.7 esperados (suplente, ±7.3).
-- ✅ Forma: 1.4 en sus últimos 5, 1.5 esta temporada (8 partidos), 1.6 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 17.4% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
-- ✅ Defensa: el rival concede -7% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -7%.
-- ✅ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ❌ Contra este rival: 2, 2, 1, 2 (1 de 4 a favor).
-- ➖ Últimos 10: la habría pasado 5 de 10.
-- ⚠️ Mark Williams ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ cambio de rol esta temporada (por minuto): ast +45%, tpm +53%; se da más peso a la línea de la casa.
-- ⚠️ partido desigual (no favorito por 9.5): los suplentes suelen jugar +1% de minutos si se rompe.
+- ✅ Minutos: 29.8 esperados (titular, ±4.6).
+- ✅ Forma: 1.2 en sus últimos 5, 1.1 esta temporada (8 partidos), 0.8 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 13.2% de las pérdidas del rival en pista × 11.4 pérdidas esperadas del rival.
+- ➖ Defensa: el rival concede -2% de robos por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -2%.
+- ❌ Ritmo del partido: -2% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 1, 1, 0, 1 (3 de 4 a favor).
+- ✅ Últimos 10: la habría pasado 9 de 10.
+- ⚠️ partido desigual (favorito por 9.5): los titulares suelen jugar -1% de minutos si se rompe.
 
-- ⚠️ Alertas: suplente, minutos inestables, falla en partidos normales (3 de 8 esta temporada).
-- Robos **1.2** (por componentes 1.1 · por tasa por minuto y defensa rival 1.3): roba el 17.4% de las pérdidas del rival en pista × 13.4 pérdidas esperadas del rival.
+- Robos **1.0** (por componentes 0.9 · por tasa por minuto y defensa rival 1.0): roba el 13.2% de las pérdidas del rival en pista × 11.4 pérdidas esperadas del rival.
 
 | Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
 |---|---|---|---|---|---|
-| Minutos | 20.8 | 20.2 | 20.4 | 22.5 | 17.8 |
-| Robos | 1.4 | 1.8 | 1.5 | 1.5 | 1.8 |
-| % de las pérdidas del rival que roba | 15.9% | 21.9% | 17.9% | 19.7% | 25.0% |
+| Minutos | 30.2 | 29.3 | 28.8 | 30.4 | 31.8 |
+| Robos | 1.2 | 1.3 | 1.1 | 0.8 | 0.8 |
+| % de las pérdidas del rival que roba | 15.8% | 15.3% | 14.5% | 10.5% | 10.3% |
 
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -0%, vs defensa media +11%, vs defensa débil -8%; rebotes: vs defensa fuerte +4%, vs defensa media -13%, vs defensa débil +12%; asistencias: vs defensa fuerte -31%, vs defensa media -5%, vs defensa débil +50%; triples: vs defensa fuerte -17%, vs defensa media -7%, vs defensa débil +31%.
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -10%, vs defensa media +7%, vs defensa débil +17%; rebotes: vs defensa fuerte +11%, vs defensa media -21%, vs defensa débil +8%; asistencias: vs defensa fuerte -10%, vs defensa media +6%, vs defensa débil +6%; triples: vs defensa fuerte -15%, vs defensa media +9%, vs defensa débil +32%.
 
 | Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
 |---|---|---|---|---|
-| triple frontal | 36% | 36% | 35% | 35% |
-| bajo el aro | 23% | 58% | 68% | 69% |
-| triple de esquina | 22% | 40% | 38% | 37% |
-| pintura | 14% | 42% | 45% | 45% |
-| media distancia | 5% | 36% | 41% | 40% |
+| triple frontal | 35% | 40% | 35% | 35% |
+| bajo el aro | 23% | 71% | 68% | 69% |
+| triple de esquina | 20% | 40% | 38% | 37% |
+| pintura | 14% | 45% | 45% | 46% |
+| media distancia | 9% | 36% | 41% | 40% |
 
 #### Nikola Jokic (pívots) vs Phoenix Suns
 
