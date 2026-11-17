@@ -37,7 +37,9 @@
           "lado": "más",
           "linea": 4.5
         }
-      ]
+      ],
+      "resultado_casa": "ganada",
+      "nota": "Ganada con Amen Thompson anulado (no jugó): cuota efectiva ~4.09. Dybantsa 5 reb, Mitchell 2 triples, Porter Jr. 6 reb, McDaniels 6 reb."
     },
     {
       "nombre": "Betano 9.49 (fantasma)",
@@ -88,7 +90,8 @@
           "linea": 27.5
         }
       ],
-      "nota": "Antes 11.77: Bane más de 21.5 P+R (62 %) cambiado por Zion 28+ PRA (77 %)."
+      "nota": "Antes 11.77: Bane más de 21.5 P+R (62 %) cambiado por Zion 28+ PRA (77 %). Perdida: Murray 1 triple; Zion 24 PRA en 25 min (NOP ganó por 21, GSW con muchas bajas).",
+      "resultado_casa": "perdida"
     }
   ]
 }
