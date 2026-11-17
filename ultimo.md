@@ -148,15 +148,15 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 | Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |
 |---|---|---|---|---|---|
 | Detroit Pistons @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos**<br>el rival concede +5% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5% | **71%** | 1.41 | 7/10 | 10/14 |
-| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos**<br>el rival concede -16% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -16% | **68%** | 1.47 | 8/10 | 9/11 |
-| Charlotte Hornets @ Los Angeles Lakers | **Moussa Diabate: más de 1.5 asistencias**<br>el rival concede -3% de asistencias por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -3% | **64%** | 1.63 | 8/10 | 9/11 |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Jaden McDaniels: más de 1.5 robos+tapones**<br>el rival concede +23% de robos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +14% | **62%** | 1.57 | 7/10 | 10/14 |
+| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos**<br>el rival concede -16% de robos por minuto a bases/escoltas (defensa fuerte); ajuste aplicado -16% | **68%** | 1.46 | 8/10 | 9/11 |
+| Utah Jazz @ LA Clippers | **Derrick Jones Jr.: más de 10.5 pts+ast**<br>el rival concede +5% de puntos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5%; en su zona principal (aro) el rival concede 71% (liga 68%) | **65%** | 1.77 | 9/10 | 10/11 |
+| Charlotte Hornets @ Los Angeles Lakers | **Moussa Diabate: más de 1.5 asistencias**<br>el rival concede -3% de asistencias por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -3% | **64%** | 1.64 | 8/10 | 9/11 |
 
 | Selecciones | Probabilidad de acertar todas | Cuota |
 |---|---|---|
-| 2 | **48%** | 2.07 |
-| 3 | **31%** | 3.38 |
-| 4 | **19%** | 5.31 |
+| 2 | **48%** | 2.06 |
+| 3 | **31%** | 3.64 |
+| 4 | **20%** | 5.95 |
 
 **Victor Wembanyama: menos de 1.5 robos** (71%):
 
@@ -181,6 +181,22 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 - El rival es #25 de 30 en balones que pierde (#1 = el que más; 12.7 por partido)
 - Minutos: 33 esperados (titular, ±4)
 
+**Derrick Jones Jr.: más de 10.5 pts+ast** (65%):
+
+- La pasó en 10 de 11 esta temporada (falló con 10)
+- Con 24+ minutos (hoy se esperan 28): 10 de 11 en sus últimos 15
+- Contra las ~10 mejores defensas en puntos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
+- Contra defensas débiles como la de hoy y con 24+ minutos: 7 de 9, con 13.3 de media (últimos 60 partidos)
+- El rival es #5 de 30 en puntos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
+- Su zona principal es bajo el aro (35% de sus tiros, 70% de acierto); el rival es #2 de 30 en acierto que deja ahí (71%, liga 68%)
+- Su segunda zona es triple frontal (24% de sus tiros, 40% de acierto); el rival es #2 de 30 en acierto que deja ahí (37%, liga 35%)
+- El rival es #3 de 30 en tiros libres que concede a aleros/ala-pívots (#1 = el que más; +11% frente a la media)
+- Puntería: en sus últimos 10 metió el 110% de las canastas esperadas por sus tipos de tiro
+- Cómo tira (últimos 15): recibe y tira 45% (46% de acierto), penetración 17% (39% de acierto), corte 12% (69% de acierto); en recibe y tira el rival es #25 de 30 en lo que deja (#1 = el que más; 1.02 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 8.4 tiros de campo y 1.9 libres esperados (1.25 puntos por tiro)
+- Transición: el rival concede 16.7 puntos por partido al contraataque (#4 de 30, #1 = el que más); él anota 2.2 así por partido (ajuste aplicado +2.9%)
+- Minutos: 28 esperados (titular, ±4)
+
 **Moussa Diabate: más de 1.5 asistencias** (64%):
 
 - La pasó en 9 de 11 esta temporada (falló con 1, 1)
@@ -193,36 +209,25 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 - El rival no tiene a Austin Reaves (4.1 asistencias por partido), Walker Kessler (2.2 asistencias por partido)
 - Minutos: 31 esperados (titular, ±4)
 
-**Jaden McDaniels: más de 1.5 robos+tapones** (62%):
-
-- La pasó en 10 de 14 esta temporada (falló con 1, 0, 0, 0)
-- Con 28+ minutos (hoy se esperan 32): 10 de 13 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 6 de 20 (últimos 40 partidos)
-- Contra defensas débiles como la de hoy y con 28+ minutos: 11 de 12, con 3.8 de media (últimos 60 partidos)
-- El rival es #1 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +23% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 12.8 balones por partido con él en pista y robó el 9%
-- El rival es #1 de 30 en balones que pierde (#1 = el que más; 16.0 por partido)
-- Minutos: 32 esperados (titular, ±5)
-
 ### Las más seguras con cuota
 
 | Partido | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|---|
 | Detroit Pistons @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **71%** | 74% | 66% | 1.0 ± 1.0 | 7/10 | 10/14 | 0, 1 | 1.41 (71%) |
 | Detroit Pistons @ San Antonio Spurs | **John Collins: menos de 1.5 asistencias** | **70%** | 76% | 62% | 0.9 ± 1.0 | 9/10 | 11/12 | 0, 4 | 1.52 (66%) |
-| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.47 (68%) |
+| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.46 (69%) |
 | New York Knicks @ Toronto Raptors | **Ja'Kobe Walter: más de 0.5 robos** | **67%** | 69% | 65% | 1.1 ± 1.1 | 7/10 | 10/13 | 0, 1, 2, 0, 0 | 1.44 (69%) |
-| Charlotte Hornets @ Los Angeles Lakers | **Moussa Diabate: más de 1.5 asistencias** | **64%** | 72% | 57% | 2.6 ± 1.6 | 8/10 | 9/11 | 2, 1 | 1.63 (61%) |
+| Utah Jazz @ LA Clippers | **Derrick Jones Jr.: más de 10.5 pts+ast** | **65%** | 76% | 53% | 13.5 ± 4.1 | 9/10 | 10/11 | 11, 13 | 1.77 (57%) |
+| Charlotte Hornets @ Los Angeles Lakers | **Moussa Diabate: más de 1.5 asistencias** | **64%** | 72% | 57% | 2.6 ± 1.6 | 8/10 | 9/11 | 2, 1 | 1.64 (61%) |
 | Charlotte Hornets @ Los Angeles Lakers | **Grayson Allen: más de 0.5 robos** | **63%** | 63% | 63% | 1.1 ± 1.0 | 7/10 | 8/13 | 1, 1, 3 | 1.50 (67%) |
-| Charlotte Hornets @ Los Angeles Lakers | **Matisse Thybulle: más de 1.5 robos** | **63%** | 66% | 58% | 2.2 ± 1.5 | 9/10 | 11/14 | 2, 2 | 1.61 (62%) |
-| Portland Trail Blazers @ Minnesota Timberwolves | **Jaden McDaniels: más de 1.5 robos+tapones** | **62%** | 64% | 61% | 2.2 ± 1.5 | 7/10 | 10/14 | 4, 6, 8, 4, 4 | 1.57 (64%) |
+| Charlotte Hornets @ Los Angeles Lakers | **Matisse Thybulle: más de 1.5 robos** | **63%** | 66% | 58% | 2.2 ± 1.5 | 9/10 | 11/14 | 2, 2 | 1.62 (62%) |
 | Detroit Pistons @ San Antonio Spurs | **Julian Champagnie: más de 1.5 triples** | **62%** | 63% | 61% | 2.2 ± 1.7 | 7/10 | 11/14 | 3, 5 | 1.55 (65%) |
 
 ## Combinadas con cuota objetivo
 
 La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse o superar esa probabilidad. Se eligen solo por probabilidad de acertar (nunca por valor): como mucho 5 patas, sin "menos" de anotación dudosos.
 
-**Segura, cuota 2+ (2 patas):** cuota 2.07, probabilidad de acertar todas **48%** (1 de cada 2)
+**Segura, cuota 2+ (2 patas):** cuota 2.06, probabilidad de acertar todas **48%** (1 de cada 2)
 
 - Victor Wembanyama: menos de 1.5 robos (71%, cuota 1.41) — Detroit Pistons @ San Antonio Spurs — 4 factores a favor, 1 en contra
   - La pasó en 10 de 14 esta temporada (falló con 2, 2, 2, 2)
@@ -234,7 +239,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #15 de 30 en balones que pierde (#1 = el que más; 14.1 por partido)
   - El rival no tiene a Duncan Robinson (1.3 robos por partido)
   - Minutos: 29 esperados (titular, ±6)
-- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.47) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
+- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.46) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
   - La pasó en 9 de 11 esta temporada (falló con 0, 0)
   - Con 29+ minutos (hoy se esperan 33): 5 de 7 en sus últimos 15
   - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 18 (últimos 40 partidos)
@@ -244,7 +249,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #25 de 30 en balones que pierde (#1 = el que más; 12.7 por partido)
   - Minutos: 33 esperados (titular, ±4)
 
-**Segura, cuota 3+ (3 patas):** cuota 3.38, probabilidad de acertar todas **31%** (1 de cada 3)
+**Segura, cuota 3+ (3 patas):** cuota 3.64, probabilidad de acertar todas **31%** (1 de cada 3)
 
 - Victor Wembanyama: menos de 1.5 robos (71%, cuota 1.41) — Detroit Pistons @ San Antonio Spurs — 4 factores a favor, 1 en contra
   - La pasó en 10 de 14 esta temporada (falló con 2, 2, 2, 2)
@@ -256,7 +261,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #15 de 30 en balones que pierde (#1 = el que más; 14.1 por partido)
   - El rival no tiene a Duncan Robinson (1.3 robos por partido)
   - Minutos: 29 esperados (titular, ±6)
-- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.47) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
+- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.46) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
   - La pasó en 9 de 11 esta temporada (falló con 0, 0)
   - Con 29+ minutos (hoy se esperan 33): 5 de 7 en sus últimos 15
   - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 18 (últimos 40 partidos)
@@ -265,7 +270,57 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - Oportunidades de robo (últimos 10): el rival perdió 10.8 balones por partido con él en pista y robó el 10%
   - El rival es #25 de 30 en balones que pierde (#1 = el que más; 12.7 por partido)
   - Minutos: 33 esperados (titular, ±4)
-- Moussa Diabate: más de 1.5 asistencias (64%, cuota 1.63) — Charlotte Hornets @ Los Angeles Lakers — 4 factores a favor, 2 en contra
+- Derrick Jones Jr.: más de 10.5 pts+ast (65%, cuota 1.77) — Utah Jazz @ LA Clippers — 5 factores a favor, 1 en contra
+  - La pasó en 10 de 11 esta temporada (falló con 10)
+  - Con 24+ minutos (hoy se esperan 28): 10 de 11 en sus últimos 15
+  - Contra las ~10 mejores defensas en puntos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
+  - Contra defensas débiles como la de hoy y con 24+ minutos: 7 de 9, con 13.3 de media (últimos 60 partidos)
+  - El rival es #5 de 30 en puntos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
+  - Su zona principal es bajo el aro (35% de sus tiros, 70% de acierto); el rival es #2 de 30 en acierto que deja ahí (71%, liga 68%)
+  - Su segunda zona es triple frontal (24% de sus tiros, 40% de acierto); el rival es #2 de 30 en acierto que deja ahí (37%, liga 35%)
+  - El rival es #3 de 30 en tiros libres que concede a aleros/ala-pívots (#1 = el que más; +11% frente a la media)
+  - Puntería: en sus últimos 10 metió el 110% de las canastas esperadas por sus tipos de tiro
+  - Cómo tira (últimos 15): recibe y tira 45% (46% de acierto), penetración 17% (39% de acierto), corte 12% (69% de acierto); en recibe y tira el rival es #25 de 30 en lo que deja (#1 = el que más; 1.02 puntos por tiro frente a 1.06 de media)
+  - Oportunidades: 8.4 tiros de campo y 1.9 libres esperados (1.25 puntos por tiro)
+  - Transición: el rival concede 16.7 puntos por partido al contraataque (#4 de 30, #1 = el que más); él anota 2.2 así por partido (ajuste aplicado +2.9%)
+  - Minutos: 28 esperados (titular, ±4)
+
+**Segura, cuota 5+ (4 patas):** cuota 5.95, probabilidad de acertar todas **20%** (1 de cada 5)
+
+- Victor Wembanyama: menos de 1.5 robos (71%, cuota 1.41) — Detroit Pistons @ San Antonio Spurs — 4 factores a favor, 1 en contra
+  - La pasó en 10 de 14 esta temporada (falló con 2, 2, 2, 2)
+  - Con 25+ minutos (hoy se esperan 29): 8 de 12 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
+  - Contra defensas débiles como la de hoy y con 25+ minutos: 12 de 16, con 0.9 de media (últimos 60 partidos)
+  - El rival es #9 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 8.1 balones por partido con él en pista y robó el 14%
+  - El rival es #15 de 30 en balones que pierde (#1 = el que más; 14.1 por partido)
+  - El rival no tiene a Duncan Robinson (1.3 robos por partido)
+  - Minutos: 29 esperados (titular, ±6)
+- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.46) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
+  - La pasó en 9 de 11 esta temporada (falló con 0, 0)
+  - Con 29+ minutos (hoy se esperan 33): 5 de 7 en sus últimos 15
+  - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 18 (últimos 40 partidos)
+  - Contra defensas fuertes como la de hoy y con 29+ minutos: 18 de 20, con 1.4 de media (últimos 60 partidos)
+  - El rival es #29 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -16% frente a la media)
+  - Oportunidades de robo (últimos 10): el rival perdió 10.8 balones por partido con él en pista y robó el 10%
+  - El rival es #25 de 30 en balones que pierde (#1 = el que más; 12.7 por partido)
+  - Minutos: 33 esperados (titular, ±4)
+- Derrick Jones Jr.: más de 10.5 pts+ast (65%, cuota 1.77) — Utah Jazz @ LA Clippers — 5 factores a favor, 1 en contra
+  - La pasó en 10 de 11 esta temporada (falló con 10)
+  - Con 24+ minutos (hoy se esperan 28): 10 de 11 en sus últimos 15
+  - Contra las ~10 mejores defensas en puntos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
+  - Contra defensas débiles como la de hoy y con 24+ minutos: 7 de 9, con 13.3 de media (últimos 60 partidos)
+  - El rival es #5 de 30 en puntos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
+  - Su zona principal es bajo el aro (35% de sus tiros, 70% de acierto); el rival es #2 de 30 en acierto que deja ahí (71%, liga 68%)
+  - Su segunda zona es triple frontal (24% de sus tiros, 40% de acierto); el rival es #2 de 30 en acierto que deja ahí (37%, liga 35%)
+  - El rival es #3 de 30 en tiros libres que concede a aleros/ala-pívots (#1 = el que más; +11% frente a la media)
+  - Puntería: en sus últimos 10 metió el 110% de las canastas esperadas por sus tipos de tiro
+  - Cómo tira (últimos 15): recibe y tira 45% (46% de acierto), penetración 17% (39% de acierto), corte 12% (69% de acierto); en recibe y tira el rival es #25 de 30 en lo que deja (#1 = el que más; 1.02 puntos por tiro frente a 1.06 de media)
+  - Oportunidades: 8.4 tiros de campo y 1.9 libres esperados (1.25 puntos por tiro)
+  - Transición: el rival concede 16.7 puntos por partido al contraataque (#4 de 30, #1 = el que más); él anota 2.2 así por partido (ajuste aplicado +2.9%)
+  - Minutos: 28 esperados (titular, ±4)
+- Moussa Diabate: más de 1.5 asistencias (64%, cuota 1.64) — Charlotte Hornets @ Los Angeles Lakers — 4 factores a favor, 2 en contra
   - La pasó en 9 de 11 esta temporada (falló con 1, 1)
   - Con 27+ minutos (hoy se esperan 31): 6 de 8 en sus últimos 15
   - Contra las ~10 mejores defensas en asistencias a aleros/ala-pívots: 11 de 14 (últimos 40 partidos)
@@ -275,47 +330,6 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - Oportunidades: asiste el 11% de las canastas de sus compañeros con él en pista
   - El rival no tiene a Austin Reaves (4.1 asistencias por partido), Walker Kessler (2.2 asistencias por partido)
   - Minutos: 31 esperados (titular, ±4)
-
-**Segura, cuota 5+ (4 patas):** cuota 5.31, probabilidad de acertar todas **19%** (1 de cada 5)
-
-- Victor Wembanyama: menos de 1.5 robos (71%, cuota 1.41) — Detroit Pistons @ San Antonio Spurs — 4 factores a favor, 1 en contra
-  - La pasó en 10 de 14 esta temporada (falló con 2, 2, 2, 2)
-  - Con 25+ minutos (hoy se esperan 29): 8 de 12 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
-  - Contra defensas débiles como la de hoy y con 25+ minutos: 12 de 16, con 0.9 de media (últimos 60 partidos)
-  - El rival es #9 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 8.1 balones por partido con él en pista y robó el 14%
-  - El rival es #15 de 30 en balones que pierde (#1 = el que más; 14.1 por partido)
-  - El rival no tiene a Duncan Robinson (1.3 robos por partido)
-  - Minutos: 29 esperados (titular, ±6)
-- Immanuel Quickley: más de 0.5 robos (68%, cuota 1.47) — New York Knicks @ Toronto Raptors — 4 factores a favor, 1 en contra
-  - La pasó en 9 de 11 esta temporada (falló con 0, 0)
-  - Con 29+ minutos (hoy se esperan 33): 5 de 7 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a bases/escoltas: 16 de 18 (últimos 40 partidos)
-  - Contra defensas fuertes como la de hoy y con 29+ minutos: 18 de 20, con 1.4 de media (últimos 60 partidos)
-  - El rival es #29 de 30 en robos que concede a bases/escoltas por minuto (#1 = el que más concede; -16% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 10.8 balones por partido con él en pista y robó el 10%
-  - El rival es #25 de 30 en balones que pierde (#1 = el que más; 12.7 por partido)
-  - Minutos: 33 esperados (titular, ±4)
-- Moussa Diabate: más de 1.5 asistencias (64%, cuota 1.63) — Charlotte Hornets @ Los Angeles Lakers — 4 factores a favor, 2 en contra
-  - La pasó en 9 de 11 esta temporada (falló con 1, 1)
-  - Con 27+ minutos (hoy se esperan 31): 6 de 8 en sus últimos 15
-  - Contra las ~10 mejores defensas en asistencias a aleros/ala-pívots: 11 de 14 (últimos 40 partidos)
-  - Contra defensas fuertes como la de hoy y con 27+ minutos: 9 de 10, con 3.7 de media (últimos 60 partidos)
-  - El rival es #22 de 30 en asistencias que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -3% frente a la media)
-  - Asistencias esperadas: 2.4 por partido si sus compañeros metieran lo normal (tiene 2.0; con él en pista metieron el 82% de lo esperado por tipo de tiro, últimos 10); ajuste aplicado +8.0%
-  - Oportunidades: asiste el 11% de las canastas de sus compañeros con él en pista
-  - El rival no tiene a Austin Reaves (4.1 asistencias por partido), Walker Kessler (2.2 asistencias por partido)
-  - Minutos: 31 esperados (titular, ±4)
-- Jaden McDaniels: más de 1.5 robos+tapones (62%, cuota 1.57) — Portland Trail Blazers @ Minnesota Timberwolves — 6 factores a favor, 0 en contra
-  - La pasó en 10 de 14 esta temporada (falló con 1, 0, 0, 0)
-  - Con 28+ minutos (hoy se esperan 32): 10 de 13 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 6 de 20 (últimos 40 partidos)
-  - Contra defensas débiles como la de hoy y con 28+ minutos: 11 de 12, con 3.8 de media (últimos 60 partidos)
-  - El rival es #1 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +23% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 12.8 balones por partido con él en pista y robó el 9%
-  - El rival es #1 de 30 en balones que pierde (#1 = el que más; 16.0 por partido)
-  - Minutos: 32 esperados (titular, ±5)
 
 ## Las más probables del día
 
@@ -324,7 +338,7 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
 | Charlotte Hornets @ Los Angeles Lakers | **Sandro Mamukelashvili: menos de 7.5 rebotes** ⚠️ suplente | **74%** | 86% | 58% | 4.4 ± 2.3 | 8/10 | 12/14 | 3, 3, 3, 4 | 1.60 (63%) |
 | Detroit Pistons @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **71%** | 74% | 66% | 1.0 ± 1.0 | 7/10 | 10/14 | 0, 1 | 1.41 (71%) |
 | Detroit Pistons @ San Antonio Spurs | **John Collins: menos de 1.5 asistencias** | **70%** | 76% | 62% | 0.9 ± 1.0 | 9/10 | 11/12 | 0, 4 | 1.52 (66%) |
-| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.47 (68%) |
+| New York Knicks @ Toronto Raptors | **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.46 (69%) |
 | New York Knicks @ Toronto Raptors | **OG Anunoby: menos de 1.5 robos** | **67%** | 69% | 66% | 1.1 ± 1.1 | 6/10 | 9/13 | 1, 0, 0, 6, 2 | 1.43 (70%) |
 | New York Knicks @ Toronto Raptors | **Ja'Kobe Walter: más de 0.5 robos** | **67%** | 69% | 65% | 1.1 ± 1.1 | 7/10 | 10/13 | 0, 1, 2, 0, 0 | 1.44 (69%) |
 | Charlotte Hornets @ Los Angeles Lakers | **Collin Sexton: menos de 2.5 rebotes** ⚠️ suplente | **66%** | 70% | 60% | 1.8 ± 1.4 | 7/10 | 10/13 | 2 | 1.53 (65%) |
@@ -689,7 +703,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.47 (68%) |
+| **Immanuel Quickley: más de 0.5 robos** | **68%** | 71% | 64% | 1.1 ± 1.1 | 8/10 | 9/11 | 2, 2, 1, 0 | 1.46 (69%) |
 | **OG Anunoby: menos de 1.5 robos** | **67%** | 69% | 66% | 1.1 ± 1.1 | 6/10 | 9/13 | 1, 0, 0, 6, 2 | 1.43 (70%) |
 | **Ja'Kobe Walter: más de 0.5 robos** | **67%** | 69% | 65% | 1.1 ± 1.1 | 7/10 | 10/13 | 0, 1, 2, 0, 0 | 1.44 (69%) |
 | **Landry Shamet: menos de 2.5 rebotes** ⚠️ suplente | **65%** | 69% | 60% | 2.0 ± 1.5 | 8/10 | 11/13 | 2, 1, 0, 4 | 1.55 (64%) |
@@ -974,11 +988,11 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Scoot Henderson: menos de 1.5 triples** ⚠️ suplente | **64%** | 68% | 59% | 1.2 ± 1.1 | 7/10 | 10/13 | 0, 0, 1, 3 | 1.57 (64%) |
-| **Sidy Cissoko: menos de 1.5 triples** | **64%** | 63% | 65% | 1.2 ± 1.1 | 6/10 | 8/13 | 1, 0, 0 | 1.43 (70%) |
-| **Jaden McDaniels: más de 1.5 robos+tapones** | **62%** | 64% | 61% | 2.2 ± 1.5 | 7/10 | 10/14 | 4, 6, 8, 4, 4 | 1.57 (64%) |
+| **Sidy Cissoko: menos de 1.5 triples** | **64%** | 63% | 65% | 1.2 ± 1.1 | 6/10 | 8/13 | 1, 0, 0 | 1.44 (70%) |
+| **Jaden McDaniels: más de 1.5 robos+tapones** | **62%** | 64% | 60% | 2.2 ± 1.5 | 7/10 | 10/14 | 4, 6, 8, 4, 4 | 1.60 (63%) |
 | **LaMelo Ball: menos de 25.5 pts+reb** | **62%** | 70% | 50% | 21.7 ± 7.5 | 6/10 | 10/14 | 11, 18, 19 | 1.87 (53%) |
 | **Donovan Clingan: menos de 2.5 tapones** | **62%** | 62% | 61% | 2.2 ± 1.6 | 5/10 | 7/13 | 5, 3, 2, 2, 1 | 1.50 (67%) |
-| **Damian Lillard: menos de 3.5 rebotes** | **61%** | 65% | 57% | 2.9 ± 1.8 | 8/10 | 9/13 | 2 | 1.65 (61%) |
+| **Damian Lillard: menos de 3.5 rebotes** | **61%** | 65% | 57% | 2.9 ± 1.8 | 8/10 | 9/13 | 2 | 1.64 (61%) |
 | **LaMelo Ball: menos de 21.5 puntos** | **61%** | 68% | 51% | 17.9 ± 6.8 | 5/10 | 9/14 | 6, 14, 15 | 1.82 (55%) |
 | **Donovan Clingan: más de 0.5 triples** | **61%** | 61% | 60% | 0.9 ± 1.0 | 7/10 | 9/13 | 0, 1, 2, 2, 2 | 1.56 (64%) |
 
@@ -1304,7 +1318,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **De'Aaron Fox: menos de 1.5 triples** | **65%** | 68% | 61% | 1.0 ± 1.0 | 7/10 | 8/13 | 4, 0 | 1.54 (65%) |
 | **Ausar Thompson: más de 0.5 tapones** | **64%** | 66% | 62% | 1.2 ± 1.1 | 7/10 | 7/11 | 1, 0 | 1.53 (66%) |
 | **John Collins: menos de 1.5 triples** | **64%** | 67% | 61% | 1.2 ± 1.3 | 6/10 | 7/12 | 0, 0 | 1.53 (65%) |
-| **Keldon Johnson: más de 4.5 rebotes** ⚠️ suplente | **63%** | 69% | 53% | 5.9 ± 2.5 | 9/10 | 11/14 | 4, 4 | 1.75 (57%) |
+| **Keldon Johnson: más de 4.5 rebotes** ⚠️ suplente | **63%** | 69% | 53% | 5.9 ± 2.5 | 9/10 | 11/14 | 4, 4 | 1.74 (57%) |
 | **Julian Champagnie: más de 1.5 triples** | **62%** | 63% | 61% | 2.2 ± 1.7 | 7/10 | 11/14 | 3, 5 | 1.55 (65%) |
 | **Dylan Harper: menos de 1.5 triples** | **61%** | 62% | 60% | 1.3 ± 1.1 | 6/10 | 9/14 | 1, 0 | 1.56 (64%) |
 
@@ -1598,14 +1612,14 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Ace Bailey: más de 1.5 asistencias** | **65%** | 70% | 57% | 2.7 ± 1.7 | 5/10 | 9/14 | 0, 2 | 1.64 (61%) |
-| **Ace Bailey: más de 15.5 pts+ast** | **64%** | 72% | 52% | 21.1 ± 6.6 | 5/10 | 7/14 | 20, 4 | 1.79 (56%) |
+| **Ace Bailey: más de 1.5 asistencias** | **65%** | 70% | 58% | 2.7 ± 1.7 | 5/10 | 9/14 | 0, 2 | 1.61 (62%) |
+| **Derrick Jones Jr.: más de 10.5 pts+ast** | **65%** | 76% | 53% | 13.5 ± 4.1 | 9/10 | 10/11 | 11, 13 | 1.77 (57%) |
 | **Mo Bamba: menos de 11.5 reb+ast** ⚠️ suplente | **64%** | 78% | 50% | 8.4 ± 4.6 | 10/10 | 10/10 | - | 2.00 (50%) |
 | **Keyonte George: menos de 4.5 rebotes** | **63%** | 69% | 56% | 3.5 ± 2.2 | 6/10 | 8/13 | 2 | 1.67 (60%) |
 | **Mo Bamba: menos de 21.5 pts+reb** ⚠️ suplente | **62%** | 75% | 50% | 17.1 ± 7.8 | 9/10 | 9/10 | - | 2.00 (50%) |
-| **Derrick Jones Jr.: más de 9.5 puntos** | **62%** | 70% | 52% | 11.9 ± 3.8 | 8/10 | 8/11 | 10, 12 | 1.80 (56%) |
+| **Ace Bailey: más de 13.5 puntos** | **62%** | 70% | 52% | 18.3 ± 6.5 | 5/10 | 7/14 | 20, 2 | 1.82 (55%) |
+| **Derrick Jones Jr.: más de 9.5 puntos** | **62%** | 70% | 52% | 11.9 ± 3.8 | 8/10 | 8/11 | 10, 12 | 1.81 (55%) |
 | **Keyonte George: más de 0.5 robos** | **61%** | 61% | 62% | 1.0 ± 1.1 | 4/10 | 7/13 | 2 | 1.53 (65%) |
-| **Keaton Wagler: más de 2.5 asistencias** ⚠️ suplente | **61%** | 63% | 58% | 3.3 ± 1.9 | 7/10 | 9/12 | - | 1.61 (62%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1667,6 +1681,74 @@ Razonamiento (2 factores a favor, 0 en contra):
 | bajo el aro | 19% | 70% | 68% | 70% |
 | pintura | 16% | 58% | 45% | 45% |
 | triple de esquina | 13% | 32% | 38% | 39% |
+
+#### Derrick Jones Jr. (aleros/ala-pívots) vs Utah Jazz
+
+- Minutos esperados: **28.3** (± 3.6); 62 partidos en la base.
+- Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Su prop más probable hoy: **Derrick Jones Jr.: más de 10.5 pts+ast** (65%). Con 80% de probabilidad: más de 9.5 / menos de 17.5.
+- Defensa de Utah Jazz contra aleros/ala-pívots en pts+ast: +5% respecto a la media; ajuste por su historial contra defensas similares: -0%.
+
+**¿Por qué 13.5 pts+ast?** (línea 10.5; 28.3 minutos esperados)
+
+En corto:
+
+- La pasó en 10 de 11 esta temporada (falló con 10)
+- Con 24+ minutos (hoy se esperan 28): 10 de 11 en sus últimos 15
+- Contra las ~10 mejores defensas en puntos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
+- Contra defensas débiles como la de hoy y con 24+ minutos: 7 de 9, con 13.3 de media (últimos 60 partidos)
+- El rival es #5 de 30 en puntos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
+- Su zona principal es bajo el aro (35% de sus tiros, 70% de acierto); el rival es #2 de 30 en acierto que deja ahí (71%, liga 68%)
+- Su segunda zona es triple frontal (24% de sus tiros, 40% de acierto); el rival es #2 de 30 en acierto que deja ahí (37%, liga 35%)
+- El rival es #3 de 30 en tiros libres que concede a aleros/ala-pívots (#1 = el que más; +11% frente a la media)
+- Puntería: en sus últimos 10 metió el 110% de las canastas esperadas por sus tipos de tiro
+- Cómo tira (últimos 15): recibe y tira 45% (46% de acierto), penetración 17% (39% de acierto), corte 12% (69% de acierto); en recibe y tira el rival es #25 de 30 en lo que deja (#1 = el que más; 1.02 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 8.4 tiros de campo y 1.9 libres esperados (1.25 puntos por tiro)
+- Transición: el rival concede 16.7 puntos por partido al contraataque (#4 de 30, #1 = el que más); él anota 2.2 así por partido (ajuste aplicado +2.9%)
+- Minutos: 28 esperados (titular, ±4)
+
+Razonamiento (5 factores a favor, 1 en contra):
+
+- ✅ Minutos: 28.3 esperados (titular, ±3.6).
+- ✅ Forma: 12.6 en sus últimos 5, 12.8 esta temporada (11 partidos), 11.5 la temporada pasada (línea 10.5).
+- ➖ Cómo produce puntos: 8.4 tiros de campo (su ritmo 10.0 por 36'; el rival concede +1% de tiros) × 1.25 puntos por tiro [bajo el aro 35% de sus tiros al 70% (rival concede 71%, liga 68%); triple frontal 24% de sus tiros al 40% (rival concede 37%, liga 35%); triple de esquina 20% de sus tiros al 40% (rival concede 37%, liga 38%); pintura 19% de sus tiros al 42% (rival concede 49%, liga 45%)] + 1.9 tiros libres × 74%.
+- ➖ Cómo produce asistencias: asiste el 7.1% de las canastas de sus compañeros en pista × 20.3 canastas de compañeros esperadas (su equipo 42.1 por 48' contra esta defensa).
+- ✅ Defensa: el rival concede +5% de puntos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +5%; en su zona principal (aro) el rival concede 71% (liga 68%).
+- ❌ Altura: mide 6'6", 3.2 pulgadas menos que los aleros/ala-pívots del rival (-0.6% en esta estadística).
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 11, 13 (2 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 9 de 10.
+- ⚠️ Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- Puntos **11.9** (por componentes 11.9 · por tasa por minuto y defensa rival 11.7): 8.4 tiros de campo (su ritmo 10.0 por 36'; el rival concede +1% de tiros) × 1.25 puntos por tiro [bajo el aro 35% de sus tiros al 70% (rival concede 71%, liga 68%); triple frontal 24% de sus tiros al 40% (rival concede 37%, liga 35%); triple de esquina 20% de sus tiros al 40% (rival concede 37%, liga 38%); pintura 19% de sus tiros al 42% (rival concede 49%, liga 45%)] + 1.9 tiros libres × 74%.
+- Asistencias **1.6** (por componentes 1.4 · por tasa por minuto y defensa rival 1.6): asiste el 7.1% de las canastas de sus compañeros en pista × 20.3 canastas de compañeros esperadas (su equipo 42.1 por 48' contra esta defensa).
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 29.0 | 29.2 | 28.9 | 26.9 | 21.0 |
+| Puntos | 11.6 | 11.9 | 11.5 | 10.1 | 11.0 |
+| Tiros de campo intentados | 7.8 | 8.4 | 8.0 | 7.6 | 7.0 |
+| % tiros de campo | 53.8% | 52.4% | 53.4% | 50.0% | 64.3% |
+| Triples intentados | 4.2 | 4.4 | 4.2 | 3.1 | 3.0 |
+| % triples | 52.4% | 52.3% | 52.2% | 35.7% | 50.0% |
+| Tiros libres intentados | 1.6 | 1.2 | 1.3 | 1.9 | 1.0 |
+| % tiros libres | 62.5% | 66.7% | 64.3% | 76.8% | 50.0% |
+| Jugadas que usa por 36 min | 12.3 | 12.6 | 12.2 | 12.3 | 15.3 |
+| Asistencias | 1.0 | 0.9 | 1.3 | 1.4 | 1.0 |
+| % de las canastas de compañeros que asiste | 4.5% | 4.4% | 6.1% | 6.6% | 6.5% |
+| Pérdidas por jugada | 14.1% | 12.7% | 12.9% | 8.5% | 16.8% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -3%, vs defensa media +4%, vs defensa débil +1%; rebotes: vs defensa fuerte -6%, vs defensa media +8%, vs defensa débil -1%; asistencias: vs defensa fuerte -10%, vs defensa media -5%, vs defensa débil +13%; triples: vs defensa fuerte -12%, vs defensa media -25%, vs defensa débil +61%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 35% | 70% | 68% | 71% |
+| triple frontal | 24% | 40% | 35% | 37% |
+| triple de esquina | 20% | 40% | 38% | 37% |
+| pintura | 19% | 42% | 45% | 49% |
+| media distancia | 2% | 37% | 41% | 42% |
 
 #### Mo Bamba (pívots) vs LA Clippers
 
@@ -1794,120 +1876,6 @@ Razonamiento (3 factores a favor, 1 en contra):
 | bajo el aro | 13% | 68% | 68% | 70% |
 | triple de esquina | 5% | 35% | 38% | 39% |
 
-#### Derrick Jones Jr. (aleros/ala-pívots) vs Utah Jazz
-
-- Minutos esperados: **28.3** (± 3.6); 62 partidos en la base.
-- Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Derrick Jones Jr.: más de 9.5 puntos** (62%). Con 80% de probabilidad: más de 8.5 / menos de 15.5.
-- Defensa de Utah Jazz contra aleros/ala-pívots en puntos: +4% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 11.9 puntos?** (línea 9.5; 28.3 minutos esperados)
-
-En corto:
-
-- La pasó en 8 de 11 esta temporada (falló con 8, 9, 8)
-- Con 24+ minutos (hoy se esperan 28): 8 de 11 en sus últimos 15
-- Contra las ~10 mejores defensas en puntos a aleros/ala-pívots: 12 de 18 (últimos 40 partidos)
-- Contra defensas débiles como la de hoy y con 24+ minutos: 6 de 9, con 11.3 de media (últimos 60 partidos)
-- El rival es #5 de 30 en puntos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +5% frente a la media)
-- Su zona principal es bajo el aro (35% de sus tiros, 70% de acierto); el rival es #2 de 30 en acierto que deja ahí (71%, liga 68%)
-- Su segunda zona es triple frontal (24% de sus tiros, 40% de acierto); el rival es #2 de 30 en acierto que deja ahí (37%, liga 35%)
-- El rival es #3 de 30 en tiros libres que concede a aleros/ala-pívots (#1 = el que más; +11% frente a la media)
-- Puntería: en sus últimos 10 metió el 110% de las canastas esperadas por sus tipos de tiro
-- Cómo tira (últimos 15): recibe y tira 45% (46% de acierto), penetración 17% (39% de acierto), corte 12% (69% de acierto); en recibe y tira el rival es #25 de 30 en lo que deja (#1 = el que más; 1.02 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 8.4 tiros de campo y 1.9 libres esperados (1.25 puntos por tiro)
-- Transición: el rival concede 16.7 puntos por partido al contraataque (#4 de 30, #1 = el que más); él anota 2.2 así por partido (ajuste aplicado +2.9%)
-- Minutos: 28 esperados (titular, ±4)
-
-Razonamiento (5 factores a favor, 1 en contra):
-
-- ✅ Minutos: 28.3 esperados (titular, ±3.6).
-- ✅ Forma: 11.6 en sus últimos 5, 11.5 esta temporada (11 partidos), 10.1 la temporada pasada (línea 9.5).
-- ➖ Cómo produce puntos: 8.4 tiros de campo (su ritmo 10.0 por 36'; el rival concede +1% de tiros) × 1.25 puntos por tiro [bajo el aro 35% de sus tiros al 70% (rival concede 71%, liga 68%); triple frontal 24% de sus tiros al 40% (rival concede 37%, liga 35%); triple de esquina 20% de sus tiros al 40% (rival concede 37%, liga 38%); pintura 19% de sus tiros al 42% (rival concede 49%, liga 45%)] + 1.9 tiros libres × 74%.
-- ✅ Defensa: el rival concede +5% de puntos por minuto a aleros/ala-pívots (defensa débil); ajuste aplicado +4%; en su zona principal (aro) el rival concede 71% (liga 68%).
-- ❌ Altura: mide 6'6", 3.2 pulgadas menos que los aleros/ala-pívots del rival (-0.6% en esta estadística).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 10, 12 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ⚠️ Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- Puntos **11.9** (por componentes 11.9 · por tasa por minuto y defensa rival 11.7): 8.4 tiros de campo (su ritmo 10.0 por 36'; el rival concede +1% de tiros) × 1.25 puntos por tiro [bajo el aro 35% de sus tiros al 70% (rival concede 71%, liga 68%); triple frontal 24% de sus tiros al 40% (rival concede 37%, liga 35%); triple de esquina 20% de sus tiros al 40% (rival concede 37%, liga 38%); pintura 19% de sus tiros al 42% (rival concede 49%, liga 45%)] + 1.9 tiros libres × 74%.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.0 | 29.2 | 28.9 | 26.9 | 21.0 |
-| Puntos | 11.6 | 11.9 | 11.5 | 10.1 | 11.0 |
-| Tiros de campo intentados | 7.8 | 8.4 | 8.0 | 7.6 | 7.0 |
-| % tiros de campo | 53.8% | 52.4% | 53.4% | 50.0% | 64.3% |
-| Triples intentados | 4.2 | 4.4 | 4.2 | 3.1 | 3.0 |
-| % triples | 52.4% | 52.3% | 52.2% | 35.7% | 50.0% |
-| Tiros libres intentados | 1.6 | 1.2 | 1.3 | 1.9 | 1.0 |
-| % tiros libres | 62.5% | 66.7% | 64.3% | 76.8% | 50.0% |
-| Jugadas que usa por 36 min | 12.3 | 12.6 | 12.2 | 12.3 | 15.3 |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -3%, vs defensa media +4%, vs defensa débil +1%; rebotes: vs defensa fuerte -6%, vs defensa media +8%, vs defensa débil -1%; asistencias: vs defensa fuerte -10%, vs defensa media -5%, vs defensa débil +13%; triples: vs defensa fuerte -12%, vs defensa media -25%, vs defensa débil +61%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 35% | 70% | 68% | 71% |
-| triple frontal | 24% | 40% | 35% | 37% |
-| triple de esquina | 20% | 40% | 38% | 37% |
-| pintura | 19% | 42% | 45% | 49% |
-| media distancia | 2% | 37% | 41% | 42% |
-
-#### Keaton Wagler (bases/escoltas) vs Utah Jazz
-
-- Minutos esperados: **22.2** (± 4.4); 12 partidos en la base.
-- Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Keaton Wagler: más de 2.5 asistencias** (61%). Con 80% de probabilidad: más de 1.5 / menos de 5.5.
-- Defensa de Utah Jazz contra bases/escoltas en asistencias: +10% respecto a la media; ajuste por su historial contra defensas similares: -1%.
-
-**¿Por qué 3.3 asistencias?** (línea 2.5; 22.2 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 12 esta temporada (falló con 1, 1, 2)
-- Con 18+ minutos (hoy se esperan 22): 8 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en asistencias a bases/escoltas: 4 de 5 (últimos 40 partidos)
-- El rival es #2 de 30 en asistencias que concede a bases/escoltas por minuto (#1 = el que más concede; +10% frente a la media)
-- Asistencias esperadas: 3.2 por partido si sus compañeros metieran lo normal (tiene 3.2; con él en pista metieron el 101% de lo esperado por tipo de tiro, últimos 10); ajuste aplicado -0.2%
-- Oportunidades: asiste el 19% de las canastas de sus compañeros con él en pista
-- Minutos: 22 esperados (suplente, ±4)
-
-Razonamiento (3 factores a favor, 1 en contra):
-
-- ❌ Minutos: 22.2 esperados (suplente, ±4.4).
-- ✅ Forma: 3.0 en sus últimos 5, 3.3 esta temporada (12 partidos) (línea 2.5).
-- ➖ Cómo produce asistencias: asiste el 18.9% de las canastas de sus compañeros en pista × 16.1 canastas de compañeros esperadas (su equipo 42.1 por 48' contra esta defensa).
-- ✅ Defensa: el rival concede +10% de asistencias por minuto a bases/escoltas (defensa débil); ajuste aplicado +10%.
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ⚠️ Jordan Miller ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Bradley Beal ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- ⚠️ Alertas: suplente.
-- Asistencias **3.3** (por componentes 3.0 · por tasa por minuto y defensa rival 3.4): asiste el 18.9% de las canastas de sus compañeros en pista × 16.1 canastas de compañeros esperadas (su equipo 42.1 por 48' contra esta defensa).
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 20.6 | 22.5 | 23.2 | - | - |
-| Asistencias | 3.0 | 3.2 | 3.3 | - | - |
-| % de las canastas de compañeros que asiste | 18.7% | 19.5% | 19.3% | - | - |
-| Pérdidas por jugada | 13.3% | 14.5% | 15.2% | - | - |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -3%, vs defensa media -5%, vs defensa débil +10%; rebotes: vs defensa fuerte -6%, vs defensa media -6%; asistencias: vs defensa fuerte -4%, vs defensa débil -9%; triples: vs defensa media -33%, vs defensa débil +48%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| triple frontal | 50% | 34% | 35% | 37% |
-| pintura | 20% | 38% | 45% | 49% |
-| bajo el aro | 12% | 64% | 68% | 71% |
-| media distancia | 11% | 34% | 41% | 42% |
-| triple de esquina | 6% | 40% | 38% | 37% |
-
 ## Charlotte Hornets @ Los Angeles Lakers
 
 Diferencia esperada: Los Angeles Lakers por 7.5.
@@ -1936,11 +1904,11 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Sandro Mamukelashvili: menos de 7.5 rebotes** ⚠️ suplente | **74%** | 86% | 58% | 4.4 ± 2.3 | 8/10 | 12/14 | 3, 3, 3, 4 | 1.60 (63%) |
 | **Collin Sexton: menos de 2.5 rebotes** ⚠️ suplente | **66%** | 70% | 60% | 1.8 ± 1.4 | 7/10 | 10/13 | 2 | 1.53 (65%) |
 | **Sandro Mamukelashvili: menos de 2.5 asistencias** ⚠️ suplente | **66%** | 71% | 58% | 1.8 ± 1.4 | 6/10 | 10/14 | 2, 1, 0, 1 | 1.60 (63%) |
-| **Moussa Diabate: más de 1.5 asistencias** | **64%** | 72% | 57% | 2.6 ± 1.6 | 8/10 | 9/11 | 2, 1 | 1.63 (61%) |
-| **Quentin Grimes: más de 0.5 robos** ⚠️ suplente | **64%** | 61% | 66% | 1.0 ± 1.1 | 5/10 | 7/12 | 1, 1, 0 | 1.44 (69%) |
+| **Moussa Diabate: más de 1.5 asistencias** | **64%** | 72% | 57% | 2.6 ± 1.6 | 8/10 | 9/11 | 2, 1 | 1.64 (61%) |
+| **Quentin Grimes: más de 0.5 robos** ⚠️ suplente | **63%** | 61% | 66% | 1.0 ± 1.1 | 5/10 | 7/12 | 1, 1, 0 | 1.44 (69%) |
 | **Grayson Allen: más de 0.5 robos** | **63%** | 63% | 63% | 1.1 ± 1.0 | 7/10 | 8/13 | 1, 1, 3 | 1.50 (67%) |
 | **Brandon Miller: más de 0.5 robos** | **63%** | 65% | 61% | 1.1 ± 1.1 | 7/10 | 7/11 | 1 | 1.56 (64%) |
-| **Matisse Thybulle: más de 1.5 robos** | **63%** | 66% | 58% | 2.2 ± 1.5 | 9/10 | 11/14 | 2, 2 | 1.61 (62%) |
+| **Matisse Thybulle: más de 1.5 robos** | **63%** | 66% | 58% | 2.2 ± 1.5 | 9/10 | 11/14 | 2, 2 | 1.62 (62%) |
 
 ### Fichas de los jugadores destacados
 
@@ -2111,7 +2079,7 @@ Razonamiento (4 factores a favor, 2 en contra):
 - Minutos esperados: **28.4** (± 6.6); 99 partidos en la base.
 - sin Austin Reaves, la estrella de su equipo (1 partidos suyos sin él): más tiros y balón para él por minuto (puntos +9%, triples +12%, asistencias +2%)
 - sin Walker Kessler: muestra insuficiente (0 partidos sin él)
-- Su prop más probable hoy: **Quentin Grimes: más de 0.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **Quentin Grimes: más de 0.5 robos** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de Charlotte Hornets contra bases/escoltas en robos: +6% respecto a la media; ajuste por su historial contra defensas similares: +5%.
 
 **¿Por qué 1.0 robos?** (línea 0.5; 28.4 minutos esperados)
