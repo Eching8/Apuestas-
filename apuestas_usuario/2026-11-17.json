@@ -1,0 +1,115 @@
+{
+  "fecha": "2026-11-17",
+  "apuestas": [
+    {
+      "nombre": "Betano 12.47 (segura + agresiva, fantasma)",
+      "casa": "Betano",
+      "cuota": 12.47,
+      "prob": 0.09,
+      "nota": "Incluye bet builder TOR-NYK (Quickley 1+ robo, Barrett 3+ ast, Towns 11+ reb) a 2.67.",
+      "patas": [
+        {
+          "jugador": "John Collins",
+          "stat": "assists",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Immanuel Quickley",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "RJ Barrett",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Karl-Anthony Towns",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 10.5
+        },
+        {
+          "jugador": "Darius Garland",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Moussa Diabate",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
+    },
+    {
+      "nombre": "Segura del sistema (fantasma)",
+      "casa": "Betano",
+      "cuota": 3.5,
+      "prob": 0.33,
+      "nota": "Collins en lugar de Wembanyama (Betano solo daba 0.5 robos). Cuota con las de la casa.",
+      "patas": [
+        {
+          "jugador": "John Collins",
+          "stat": "assists",
+          "lado": "menos",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Immanuel Quickley",
+          "stat": "steals",
+          "lado": "más",
+          "linea": 0.5
+        },
+        {
+          "jugador": "Moussa Diabate",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
+    },
+    {
+      "nombre": "Agresiva corta del sistema (fantasma)",
+      "casa": "Betano",
+      "cuota": null,
+      "prob": 0.25,
+      "patas": [
+        {
+          "jugador": "RJ Barrett",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 2.5
+        },
+        {
+          "jugador": "Karl-Anthony Towns",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 11.5
+        },
+        {
+          "jugador": "Darius Garland",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Jaden McDaniels",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        }
+      ]
+    }
+  ]
+}
