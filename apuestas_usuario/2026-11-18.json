@@ -38,6 +38,77 @@
           "linea": 4.5
         }
       ]
+    },
+    {
+      "nombre": "Betano 6.11 (agresiva + segura, fantasma)",
+      "casa": "Betano",
+      "cuota": 6.11,
+      "prob": 0.12,
+      "patas": [
+        {
+          "jugador": "Paul George",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Cameron Boozer",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "AJ Dybantsa",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Luka Doncic",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 6.5
+        },
+        {
+          "jugador": "Brandin Podziemski",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Tyrese Maxey",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
+    },
+    {
+      "nombre": "Segura del sistema (fantasma)",
+      "casa": "Betano",
+      "cuota": 1.4,
+      "prob": 0.59,
+      "nota": "Cuota con las de Betano (1.19 y 1.18).",
+      "patas": [
+        {
+          "jugador": "Tyrese Maxey",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "Darius Acuff Jr.",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        }
+      ]
     }
   ]
 }
