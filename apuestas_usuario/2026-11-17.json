@@ -6,7 +6,7 @@
       "casa": "Betano",
       "cuota": 12.47,
       "prob": 0.09,
-      "nota": "Incluye bet builder TOR-NYK (Quickley 1+ robo, Barrett 3+ ast, Towns 11+ reb) a 2.67.",
+      "nota": "Incluye bet builder TOR-NYK (Quickley 1+ robo, Barrett 3+ ast, Towns 11+ reb) a 2.67. Perdida solo por Quickley (0 robos); las otras 6 salieron.",
       "patas": [
         {
           "jugador": "John Collins",
@@ -50,14 +50,15 @@
           "lado": "más",
           "linea": 1.5
         }
-      ]
+      ],
+      "resultado_casa": "perdida"
     },
     {
       "nombre": "Segura del sistema (fantasma)",
       "casa": "Betano",
       "cuota": 3.5,
       "prob": 0.33,
-      "nota": "Collins en lugar de Wembanyama (Betano solo daba 0.5 robos). Cuota con las de la casa.",
+      "nota": "Collins en lugar de Wembanyama (Betano solo daba 0.5 robos). Cuota con las de la casa. Perdida por Quickley (0 robos); Collins 0 ast y Diabate 2 ast salieron.",
       "patas": [
         {
           "jugador": "John Collins",
@@ -77,7 +78,8 @@
           "lado": "más",
           "linea": 1.5
         }
-      ]
+      ],
+      "resultado_casa": "perdida"
     },
     {
       "nombre": "Agresiva corta del sistema (fantasma)",
@@ -109,7 +111,9 @@
           "lado": "más",
           "linea": 4.5
         }
-      ]
+      ],
+      "resultado_casa": "ganada",
+      "nota": "Ganada: Barrett 5 ast, Towns 16 reb, Garland 2 triples, McDaniels 5 reb."
     }
   ]
 }
