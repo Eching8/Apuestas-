@@ -1,0 +1,43 @@
+{
+  "fecha": "2026-11-18",
+  "apuestas": [
+    {
+      "nombre": "Betano 4.35 (agresiva corta)",
+      "casa": "Betano",
+      "cuota": 4.35,
+      "prob": 0.2,
+      "patas": [
+        {
+          "jugador": "Paul George",
+          "stat": "threes",
+          "lado": "más",
+          "linea": 1.5
+        },
+        {
+          "jugador": "Cameron Boozer",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 3.5
+        },
+        {
+          "jugador": "AJ Dybantsa",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        },
+        {
+          "jugador": "Luka Doncic",
+          "stat": "assists",
+          "lado": "más",
+          "linea": 6.5
+        },
+        {
+          "jugador": "Brandin Podziemski",
+          "stat": "rebounds",
+          "lado": "más",
+          "linea": 4.5
+        }
+      ]
+    }
+  ]
+}
