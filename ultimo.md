@@ -113,15 +113,9 @@ Ganadas 3 de 11 liquidadas.
 
 Por partido, 4 "más de" de titulares estables sin alertas, en líneas un poco por debajo de su nivel (cada pierna ~72 %+). La probabilidad de acertar todas tiene en cuenta que los jugadores de un mismo partido se mueven algo juntos. **Cuota justa** = 1 / probabilidad (solo para saber cuánto debería pagar; se elige por probabilidad). Backtest 2025-26: prometían ~32 % y acertaron 38-40 % (conservador).
 
-### Doble: Houston Rockets @ Indiana Pacers + Philadelphia 76ers @ Orlando Magic
+### Doble: Philadelphia 76ers @ Orlando Magic + Boston Celtics @ Denver Nuggets
 
-Probabilidad de acertar los dos bet builders: **18%** (1 de cada 6); cuota justa **5.52**.
-
-**Houston Rockets @ Indiana Pacers** — acertar las 4: **44%**, cuota justa 2.29
-
-- Pascal Siakam 19+ puntos (73%; esperado 22.3; últ. 10: 8/10)
-- Fred VanVleet 2+ triples (72%; esperado 2.5; últ. 10: 9/10)
-- Aaron Nesmith 1+ triples (81%; esperado 2.1; últ. 10: 7/10)
+Probabilidad de acertar los dos bet builders: **16%** (1 de cada 6); cuota justa **6.12**.
 
 **Philadelphia 76ers @ Orlando Magic** — acertar las 4: **42%**, cuota justa 2.41
 
@@ -375,18 +369,18 @@ Líneas bajas (alternativas) de titulares con 30+ minutos: mejor un "15+ puntos"
 | Atlanta Hawks @ Oklahoma City Thunder | **Ajay Mitchell: menos de 1.5 triples** | **67%** | 73% | 61% | 1.0 ± 1.1 | 8/10 | 10/12 | 0, 2 | 1.53 (66%) |
 | Atlanta Hawks @ Oklahoma City Thunder | **Shai Gilgeous-Alexander: menos de 1.5 robos** | **67%** | 72% | 60% | 1.0 ± 1.0 | 9/10 | 11/14 | 2, 1 | 1.54 (65%) |
 | Milwaukee Bucks @ Miami Heat | **Giannis Antetokounmpo: menos de 1.5 tapones** | **67%** | 69% | 65% | 1.1 ± 1.0 | 5/10 | 9/14 | - | 1.44 (70%) |
-| Washington Wizards @ Toronto Raptors | **Alex Sarr: menos de 1.5 triples** | **67%** | 69% | 64% | 1.1 ± 1.1 | 7/10 | 11/14 | 1, 1 | 1.47 (68%) |
 | Atlanta Hawks @ Oklahoma City Thunder | **Jalen Johnson: menos de 1.5 robos** | **67%** | 69% | 65% | 1.1 ± 1.1 | 7/10 | 8/11 | - | 1.42 (71%) |
 | Detroit Pistons @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 triples** | **67%** | 70% | 62% | 1.0 ± 1.1 | 6/10 | 11/15 | 3 | 1.48 (67%) |
-| Detroit Pistons @ New Orleans Pelicans | **Zion Williamson: menos de 3.5 asistencias** | **67%** | 72% | 59% | 2.5 ± 1.6 | 6/10 | 10/14 | 2, 0 | 1.57 (64%) |
+| Detroit Pistons @ New Orleans Pelicans | **Zion Williamson: menos de 3.5 asistencias** | **67%** | 72% | 60% | 2.5 ± 1.6 | 6/10 | 10/14 | 2, 0 | 1.56 (64%) |
+| Washington Wizards @ Toronto Raptors | **AJ Dybantsa: menos de 1.5 triples** | **67%** | 71% | 62% | 1.1 ± 1.1 | 9/10 | 10/11 | - | 1.49 (67%) |
+| Washington Wizards @ Toronto Raptors | **Alex Sarr: menos de 1.5 triples** | **67%** | 69% | 63% | 1.1 ± 1.1 | 7/10 | 11/14 | 1, 1 | 1.48 (68%) |
 | Philadelphia 76ers @ Orlando Magic | **Franz Wagner: más de 0.5 robos** | **67%** | 68% | 65% | 1.1 ± 1.0 | 8/10 | 10/13 | 0, 1, 0 | 1.46 (69%) |
-| Washington Wizards @ Toronto Raptors | **AJ Dybantsa: menos de 1.5 triples** | **67%** | 71% | 62% | 1.1 ± 1.1 | 9/10 | 10/11 | - | 1.50 (67%) |
 | Detroit Pistons @ New Orleans Pelicans | **Herbert Jones: menos de 1.5 robos** | **67%** | 71% | 60% | 1.1 ± 1.2 | 8/10 | 11/15 | 0 | 1.54 (65%) |
 | Philadelphia 76ers @ Orlando Magic | **LeBron James: menos de 1.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.1 | 7/10 | 8/11 | 3, 0 | 1.41 (71%) |
 | Atlanta Hawks @ Oklahoma City Thunder | **Isaiah Hartenstein: más de 0.5 robos** | **66%** | 67% | 65% | 1.1 ± 1.1 | 7/10 | 9/14 | 2 | 1.46 (69%) |
 | Milwaukee Bucks @ Miami Heat | **Klay Thompson: menos de 2.5 rebotes** | **66%** | 71% | 60% | 1.9 ± 1.4 | 9/10 | 11/13 | 2 | 1.56 (64%) |
 | Golden State Warriors @ Dallas Mavericks | **Naji Marshall: más de 0.5 robos** ⚠️ suplente | **66%** | 70% | 60% | 1.1 ± 1.1 | 9/10 | 10/11 | 1, 0, 0 | 1.58 (63%) |
-| Boston Celtics @ Denver Nuggets | **Neemias Queta: menos de 1.5 tapones** | **65%** | 66% | 65% | 1.1 ± 1.1 | 7/10 | 7/13 | 1, 0 | 1.42 (71%) |
+| Boston Celtics @ Denver Nuggets | **Neemias Queta: menos de 1.5 tapones** | **65%** | 66% | 65% | 1.1 ± 1.1 | 7/10 | 7/13 | 1, 0 | 1.43 (70%) |
 | Washington Wizards @ Toronto Raptors | **Collin Murray-Boyles: más de 0.5 tapones** | **65%** | 66% | 64% | 1.3 ± 1.3 | 6/10 | 8/13 | 0 | 1.44 (69%) |
 | Phoenix Suns @ Sacramento Kings | **Devin Booker: más de 0.5 robos** | **65%** | 63% | 68% | 1.1 ± 1.1 | 7/10 | 8/13 | 0, 0, 1, 1 | 1.41 (71%) |
 
@@ -699,45 +693,6 @@ Razonamiento (2 factores a favor, 2 en contra):
 | Tapones | 1.8 | 1.6 | 1.3 | 0.7 | - |
 | % de los tiros de 2 del rival que tapona | 5.8% | 5.1% | 4.1% | 2.1% | - |
 
-#### Alex Sarr: menos de 1.5 triples (67%) — Washington Wizards @ Toronto Raptors
-
-**¿Por qué 1.1 triples?** (línea 1.5; 30.0 minutos esperados)
-
-En corto:
-
-- La pasó en 11 de 14 esta temporada (falló con 3, 4, 2)
-- Con 26+ minutos (hoy se esperan 30): 4 de 6 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a pívots: 12 de 14 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 26+ minutos: 10 de 13, con 1.0 de media (últimos 60 partidos)
-- El rival es #28 de 30 en triples que concede a pívots por minuto (#1 = el que más concede; -13% frente a la media)
-- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
-- Su zona principal es triple frontal (22% de sus tiros, 32% de acierto); el rival es #22 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 43% (32% de acierto), corte 15% (80% de acierto), penetración 13% (53% de acierto); en recibe y tira el rival es #14 de 30 en lo que deja (#1 = el que más; 1.08 puntos por tiro frente a 1.06 de media)
-- Oportunidades: 3.6 triples intentados esperados al 32%
-- Minutos: 30 esperados (titular, ±6)
-
-Razonamiento (3 factores a favor, 2 en contra):
-
-- ❌ Minutos: 30.0 esperados (titular, ±6.2).
-- ❌ Forma: 1.8 en sus últimos 5, 1.1 esta temporada (14 partidos), 1.0 la temporada pasada (línea 1.5).
-- ➖ Cómo produce triples: 3.6 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 32% esperado.
-- ✅ Defensa: el rival concede -13% de triples por minuto a pívots (defensa fuerte); ajuste aplicado -7%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 1 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- ⚠️ Alertas: minutos inestables.
-- Triples **1.1** (por componentes 1.2 · por tasa por minuto y defensa rival 1.1): 3.6 triples intentados (su ritmo 4.4 por 36'; el rival concede +1% de triples en su reparto) × 32% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 30.4 | 28.8 | 27.6 | 27.2 | 24.5 |
-| Triples anotados | 1.8 | 1.4 | 1.1 | 1.0 | 1.0 |
-| Triples intentados | 4.4 | 4.3 | 3.6 | 3.1 | 1.5 |
-| % triples | 40.9% | 32.6% | 29.4% | 33.3% | 66.7% |
-
 #### Jalen Johnson: menos de 1.5 robos (67%) — Atlanta Hawks @ Oklahoma City Thunder
 
 **¿Por qué 1.1 robos?** (línea 1.5; 36.4 minutos esperados)
@@ -772,6 +727,46 @@ Razonamiento (4 factores a favor, 1 en contra):
 | Robos | 0.8 | 1.0 | 0.9 | 1.2 | - |
 | % de las pérdidas del rival que roba | 5.4% | 7.3% | 6.8% | 11.2% | - |
 
+#### Herbert Jones: menos de 1.5 triples (67%) — Detroit Pistons @ New Orleans Pelicans
+
+**¿Por qué 1.0 triples?** (línea 1.5; 25.7 minutos esperados)
+
+En corto:
+
+- La pasó en 11 de 15 esta temporada (falló con 2, 2, 2, 3)
+- Con 22+ minutos (hoy se esperan 26): 5 de 9 en sus últimos 15
+- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 10 de 17 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 22+ minutos: 13 de 19, con 1.3 de media (últimos 60 partidos)
+- El rival es #19 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -2% frente a la media)
+- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
+- Su zona principal es triple frontal (33% de sus tiros, 32% de acierto); el rival es #30 de 30 en acierto que deja ahí (32%, liga 35%)
+- Cómo tira (últimos 15): recibe y tira 39% (29% de acierto), penetración 33% (37% de acierto), creado 19% (35% de acierto); en recibe y tira el rival es #18 de 30 en lo que deja (#1 = el que más; 1.05 puntos por tiro frente a 1.06 de media)
+- Oportunidades: 3.6 triples intentados esperados al 30%
+- El rival no tiene a Duncan Robinson (3.7 triples por partido)
+- Minutos: 26 esperados (titular, ±5)
+
+Razonamiento (3 factores a favor, 2 en contra):
+
+- ✅ Minutos: 25.7 esperados (titular, ±4.9).
+- ✅ Forma: 1.2 en sus últimos 5, 0.8 esta temporada (15 partidos), 1.4 la temporada pasada (línea 1.5).
+- ➖ Cómo produce triples: 3.6 triples intentados (su ritmo 5.2 por 36'; el rival concede +2% de triples en su reparto) × 30% esperado.
+- ✅ Defensa: el rival concede -2% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -3%; en su zona principal (triple) el rival concede 32% (liga 35%).
+- ➖ Ritmo del partido: +1% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ❌ Contra este rival: 3 (0 de 1 a favor).
+- ➖ Últimos 10: la habría pasado 6 de 10.
+- ❌ Bajas del rival: sin Duncan Robinson (titular); +1.7% en esta estadística.
+- ⚠️ Dejounte Murray ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Trey Murphy III ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- Triples **1.0** (por componentes 1.1 · por tasa por minuto y defensa rival 1.0): 3.6 triples intentados (su ritmo 5.2 por 36'; el rival concede +2% de triples en su reparto) × 30% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 26.4 | 25.6 | 23.9 | 28.4 | 27.0 |
+| Triples anotados | 1.2 | 1.0 | 0.8 | 1.4 | 3.0 |
+| Triples intentados | 4.2 | 3.7 | 3.1 | 4.6 | 6.0 |
+| % triples | 28.6% | 27.0% | 26.1% | 30.9% | 50.0% |
+
 
 ## Memphis Grizzlies @ Cleveland Cavaliers
 
@@ -805,13 +800,13 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Cedric Coward: menos de 1.5 robos** | **62%** | 61% | 65% | 1.4 ± 1.2 | 4/10 | 7/13 | 1, 0 | 1.44 (69%) |
-| **Cam Spencer: más de 1.5 triples** ⚠️ suplente | **62%** | 62% | 61% | 2.3 ± 1.6 | 5/10 | 8/14 | 2, 0 | 1.54 (65%) |
+| **Cam Spencer: más de 1.5 triples** ⚠️ suplente | **62%** | 62% | 61% | 2.3 ± 1.6 | 5/10 | 8/14 | 2, 0 | 1.55 (65%) |
 | **Donovan Mitchell: más de 4.5 asistencias** | **61%** | 64% | 57% | 6.0 ± 2.6 | 5/10 | 7/14 | 5 | 1.65 (60%) |
 | **Cam Spencer: menos de 21.5 pts+ast** ⚠️ suplente | **61%** | 67% | 51% | 19.5 ± 6.5 | 8/10 | 12/14 | 18, 6 | 1.83 (55%) |
 | **Tyrese Proctor: más de 1.5 triples** ⚠️ suplente | **60%** | 63% | 57% | 2.4 ± 1.6 | 8/10 | 8/14 | 1, 0 | 1.65 (61%) |
 | **Jarrett Allen: menos de 1.5 tapones** | **60%** | 60% | 60% | 1.3 ± 1.2 | 7/10 | 7/12 | 2, 1 | 1.54 (65%) |
 | **Cedric Coward: más de 1.5 triples** | **60%** | 61% | 59% | 2.0 ± 1.4 | 7/10 | 9/13 | 2, 2 | 1.57 (64%) |
-| **Peyton Watson: menos de 1.5 tapones** | **60%** | 61% | 58% | 1.3 ± 1.3 | 5/10 | 7/12 | 1 | 1.60 (62%) |
+| **Jerami Grant: menos de 2.5 rebotes** ⚠️ suplente | **60%** | 60% | 60% | 2.3 ± 1.5 | 7/10 | 9/13 | 2, 5 | 1.56 (64%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1120,7 +1115,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Jabari Smith Jr.: menos de 2.5 triples** | **64%** | 65% | 61% | 2.0 ± 1.5 | 7/10 | 10/15 | 3, 3 | 1.53 (66%) |
 | **Kelly Oubre Jr.: menos de 1.5 triples** | **63%** | 65% | 61% | 1.2 ± 1.1 | 8/10 | 10/12 | 2, 4 | 1.53 (66%) |
 | **Pascal Siakam: más de 0.5 robos** | **63%** | 66% | 59% | 1.1 ± 1.0 | 7/10 | 9/13 | 1, 1 | 1.61 (62%) |
-| **Alperen Sengun: más de 0.5 tapones** | **63%** | 62% | 65% | 0.9 ± 1.0 | 8/10 | 9/13 | 0 | 1.47 (68%) |
+| **Alperen Sengun: más de 0.5 tapones** | **63%** | 62% | 65% | 0.9 ± 1.0 | 8/10 | 9/13 | 0 | 1.48 (68%) |
 | **Alperen Sengun: más de 0.5 robos** | **60%** | 56% | 66% | 1.1 ± 1.4 | 7/10 | 8/13 | 0 | 1.44 (69%) |
 
 ### Fichas de los jugadores destacados
@@ -1407,7 +1402,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Pelle Larsson: menos de 1.5 triples** ⚠️ suplente | **63%** | 60% | 66% | 1.4 ± 1.2 | 6/10 | 7/11 | 2, 0, 2 | 1.42 (71%) |
 | **Brayden Burries: menos de 1.5 triples** | **61%** | 66% | 54% | 1.3 ± 1.2 | 9/10 | 12/14 | - | 1.73 (58%) |
 | **Jaime Jaquez Jr.: más de 4.5 rebotes** ⚠️ suplente | **61%** | 65% | 56% | 5.6 ± 2.4 | 6/10 | 10/14 | - | 1.71 (59%) |
-| **Nate Ament: más de 6.5 puntos** ⚠️ suplente | **60%** | 67% | 53% | 8.6 ± 3.7 | 7/10 | 8/12 | - | 1.76 (57%) |
+| **Nate Ament: más de 6.5 puntos** ⚠️ suplente | **61%** | 67% | 53% | 8.6 ± 3.7 | 7/10 | 8/12 | - | 1.75 (57%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1696,7 +1691,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Franz Wagner: más de 0.5 robos** | **67%** | 68% | 65% | 1.1 ± 1.0 | 8/10 | 10/13 | 0, 1, 0 | 1.46 (69%) |
 | **LeBron James: menos de 1.5 robos** | **67%** | 68% | 65% | 1.2 ± 1.1 | 7/10 | 8/11 | 3, 0 | 1.41 (71%) |
 | **Dean Wade: menos de 1.5 triples** ⚠️ suplente | **65%** | 65% | 64% | 1.2 ± 1.1 | 6/10 | 8/13 | 0, 0, 0, 2 | 1.46 (68%) |
-| **Kentavious Caldwell-Pope: menos de 1.5 triples** ⚠️ suplente | **65%** | 64% | 65% | 1.2 ± 1.2 | 7/10 | 10/15 | 1, 0 | 1.43 (70%) |
+| **Kentavious Caldwell-Pope: menos de 1.5 triples** ⚠️ suplente | **65%** | 64% | 65% | 1.2 ± 1.2 | 7/10 | 10/15 | 1, 0 | 1.44 (70%) |
 | **Desmond Bane: más de 0.5 robos** | **64%** | 63% | 65% | 0.9 ± 1.0 | 6/10 | 8/12 | 0, 0, 2, 0 | 1.47 (68%) |
 | **Tyrese Maxey: menos de 1.5 robos** | **64%** | 64% | 63% | 1.2 ± 1.1 | 7/10 | 9/15 | 1, 3, 1, 1 | 1.48 (68%) |
 | **LeBron James: menos de 1.5 triples** | **63%** | 65% | 61% | 1.2 ± 1.1 | 7/10 | 8/11 | 0, 2 | 1.51 (66%) |
@@ -2289,8 +2284,8 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Alex Sarr: menos de 1.5 triples** | **67%** | 69% | 64% | 1.1 ± 1.1 | 7/10 | 11/14 | 1, 1 | 1.47 (68%) |
-| **AJ Dybantsa: menos de 1.5 triples** | **67%** | 71% | 62% | 1.1 ± 1.1 | 9/10 | 10/11 | - | 1.50 (67%) |
+| **AJ Dybantsa: menos de 1.5 triples** | **67%** | 71% | 62% | 1.1 ± 1.1 | 9/10 | 10/11 | - | 1.49 (67%) |
+| **Alex Sarr: menos de 1.5 triples** | **67%** | 69% | 63% | 1.1 ± 1.1 | 7/10 | 11/14 | 1, 1 | 1.48 (68%) |
 | **Collin Murray-Boyles: más de 0.5 tapones** | **65%** | 66% | 64% | 1.3 ± 1.3 | 6/10 | 8/13 | 0 | 1.44 (69%) |
 | **AJ Dybantsa: más de 0.5 robos** | **64%** | 63% | 65% | 1.2 ± 1.3 | 7/10 | 7/11 | - | 1.44 (69%) |
 | **Collin Murray-Boyles: menos de 1.5 robos** | **64%** | 62% | 66% | 1.5 ± 1.4 | 8/10 | 10/13 | 3 | 1.40 (71%) |
@@ -2299,6 +2294,59 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Bilal Coulibaly: menos de 1.5 asistencias** ⚠️ suplente | **62%** | 67% | 55% | 1.2 ± 1.3 | 7/10 | 11/14 | 0, 4, 1, 2 | 1.69 (59%) |
 
 ### Fichas de los jugadores destacados
+
+#### AJ Dybantsa (aleros/ala-pívots) vs Toronto Raptors
+
+- Minutos esperados: **34.2** (± 4.5); 11 partidos en la base.
+- Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Su prop más probable hoy: **AJ Dybantsa: menos de 1.5 triples** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Toronto Raptors contra aleros/ala-pívots en triples: -6% respecto a la media; ajuste por su historial contra defensas similares: -0%.
+
+**¿Por qué 1.1 triples?** (línea 1.5; 34.2 minutos esperados)
+
+En corto:
+
+- La pasó en 10 de 11 esta temporada; los fallos, en partidos raros (paliza de 28)
+- Con 30+ minutos (hoy se esperan 34): 8 de 8 en sus últimos 15
+- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 2 de 3 (últimos 40 partidos)
+- El rival es #29 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -11% frente a la media)
+- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
+- Su zona principal es triple de esquina (15% de sus tiros, 30% de acierto); el rival es #15 de 30 en acierto que deja ahí (38%, liga 38%)
+- Cómo tira (últimos 15): penetración 36% (41% de acierto), recibe y tira 24% (27% de acierto), creado 23% (42% de acierto); en penetración el rival es #18 de 30 en lo que deja (#1 = el que más; 1.08 puntos por tiro frente a 1.08 de media)
+- Oportunidades: 4.3 triples intentados esperados al 30%
+- Minutos: 34 esperados (titular, ±5)
+
+Razonamiento (4 factores a favor, 1 en contra):
+
+- ✅ Minutos: 34.2 esperados (titular, ±4.5).
+- ✅ Forma: 1.0 en sus últimos 5, 0.9 esta temporada (11 partidos) (línea 1.5).
+- ➖ Cómo produce triples: 4.3 triples intentados (su ritmo 4.7 por 36'; el rival concede +1% de triples en su reparto) × 30% esperado.
+- ✅ Defensa: el rival concede -11% de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -6%; en su zona principal (esquina3) el rival concede 38% (liga 38%).
+- ❌ Altura: mide 6'9", 1.9 pulgadas más que los aleros/ala-pívots del rival (+0.7% en esta estadística).
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Últimos 10: la habría pasado 9 de 10.
+- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+
+- Triples **1.1** (por componentes 1.3 · por tasa por minuto y defensa rival 1.0): 4.3 triples intentados (su ritmo 4.7 por 36'; el rival concede +1% de triples en su reparto) × 30% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 35.4 | 33.9 | 33.3 | - | - |
+| Triples anotados | 1.0 | 0.9 | 0.9 | - | - |
+| Triples intentados | 5.2 | 4.1 | 4.0 | - | - |
+| % triples | 19.2% | 22.0% | 22.7% | - | - |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +22%, vs defensa media +5%, vs defensa débil -37%; rebotes: vs defensa fuerte +16%, vs defensa media -10%, vs defensa débil -2%; asistencias: vs defensa fuerte -14%, vs defensa media +18%; triples: vs defensa fuerte +13%, vs defensa media -12%, vs defensa débil +20%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 30% | 64% | 68% | 68% |
+| pintura | 27% | 40% | 45% | 44% |
+| triple de esquina | 15% | 30% | 38% | 38% |
+| triple frontal | 14% | 30% | 35% | 34% |
+| media distancia | 14% | 39% | 41% | 39% |
 
 #### Alex Sarr (pívots) vs Toronto Raptors
 
@@ -2354,59 +2402,6 @@ Razonamiento (3 factores a favor, 2 en contra):
 | triple frontal | 22% | 32% | 35% | 34% |
 | media distancia | 8% | 37% | 41% | 39% |
 | triple de esquina | 6% | 35% | 38% | 38% |
-
-#### AJ Dybantsa (aleros/ala-pívots) vs Toronto Raptors
-
-- Minutos esperados: **34.2** (± 4.5); 11 partidos en la base.
-- Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **AJ Dybantsa: menos de 1.5 triples** (67%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de Toronto Raptors contra aleros/ala-pívots en triples: -6% respecto a la media; ajuste por su historial contra defensas similares: -0%.
-
-**¿Por qué 1.1 triples?** (línea 1.5; 34.2 minutos esperados)
-
-En corto:
-
-- La pasó en 10 de 11 esta temporada; los fallos, en partidos raros (paliza de 28)
-- Con 30+ minutos (hoy se esperan 34): 8 de 8 en sus últimos 15
-- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 2 de 3 (últimos 40 partidos)
-- El rival es #29 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -11% frente a la media)
-- El rival jugó anoche y él no: +1.5% de puntos y +2% de asistencias aplicados (2024-26)
-- Su zona principal es triple de esquina (15% de sus tiros, 30% de acierto); el rival es #15 de 30 en acierto que deja ahí (38%, liga 38%)
-- Cómo tira (últimos 15): penetración 36% (41% de acierto), recibe y tira 24% (27% de acierto), creado 23% (42% de acierto); en penetración el rival es #18 de 30 en lo que deja (#1 = el que más; 1.08 puntos por tiro frente a 1.08 de media)
-- Oportunidades: 4.3 triples intentados esperados al 30%
-- Minutos: 34 esperados (titular, ±5)
-
-Razonamiento (4 factores a favor, 1 en contra):
-
-- ✅ Minutos: 34.2 esperados (titular, ±4.5).
-- ✅ Forma: 1.0 en sus últimos 5, 0.9 esta temporada (11 partidos) (línea 1.5).
-- ➖ Cómo produce triples: 4.3 triples intentados (su ritmo 4.7 por 36'; el rival concede +1% de triples en su reparto) × 30% esperado.
-- ✅ Defensa: el rival concede -11% de triples por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -6%; en su zona principal (esquina3) el rival concede 38% (liga 38%).
-- ❌ Altura: mide 6'9", 1.9 pulgadas más que los aleros/ala-pívots del rival (+0.7% en esta estadística).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Últimos 10: la habría pasado 9 de 10.
-- ⚠️ Justin Champagnie ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Jamir Watkins ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- Triples **1.1** (por componentes 1.3 · por tasa por minuto y defensa rival 1.0): 4.3 triples intentados (su ritmo 4.7 por 36'; el rival concede +1% de triples en su reparto) × 30% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 35.4 | 33.9 | 33.3 | - | - |
-| Triples anotados | 1.0 | 0.9 | 0.9 | - | - |
-| Triples intentados | 5.2 | 4.1 | 4.0 | - | - |
-| % triples | 19.2% | 22.0% | 22.7% | - | - |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +22%, vs defensa media +5%, vs defensa débil -37%; rebotes: vs defensa fuerte +16%, vs defensa media -10%, vs defensa débil -2%; asistencias: vs defensa fuerte -14%, vs defensa media +18%; triples: vs defensa fuerte +13%, vs defensa media -12%, vs defensa débil +20%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 30% | 64% | 68% | 68% |
-| pintura | 27% | 40% | 45% | 44% |
-| triple de esquina | 15% | 30% | 38% | 38% |
-| triple frontal | 14% | 30% | 35% | 34% |
-| media distancia | 14% | 39% | 41% | 39% |
 
 #### Collin Murray-Boyles (aleros/ala-pívots) vs Washington Wizards
 
@@ -2594,10 +2589,10 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Herbert Jones: menos de 1.5 triples** | **67%** | 70% | 62% | 1.0 ± 1.1 | 6/10 | 11/15 | 3 | 1.48 (67%) |
-| **Zion Williamson: menos de 3.5 asistencias** | **67%** | 72% | 59% | 2.5 ± 1.6 | 6/10 | 10/14 | 2, 0 | 1.57 (64%) |
+| **Zion Williamson: menos de 3.5 asistencias** | **67%** | 72% | 60% | 2.5 ± 1.6 | 6/10 | 10/14 | 2, 0 | 1.56 (64%) |
 | **Herbert Jones: menos de 1.5 robos** | **67%** | 71% | 60% | 1.1 ± 1.2 | 8/10 | 11/15 | 0 | 1.54 (65%) |
 | **Jeremiah Fears: menos de 1.5 robos** | **65%** | 69% | 59% | 1.1 ± 1.1 | 6/10 | 10/15 | 1, 2 | 1.58 (63%) |
-| **John Collins: menos de 1.5 triples** | **64%** | 64% | 63% | 1.3 ± 1.3 | 7/10 | 8/13 | 3, 0, 1, 1 | 1.48 (68%) |
+| **John Collins: menos de 1.5 triples** | **63%** | 64% | 62% | 1.3 ± 1.3 | 7/10 | 8/13 | 3, 0, 1, 1 | 1.50 (67%) |
 | **Kevin Huerter: menos de 2.5 triples** ⚠️ suplente | **62%** | 63% | 61% | 2.3 ± 1.6 | 8/10 | 11/13 | 4, 2, 4 | 1.52 (66%) |
 | **Daniss Jenkins: más de 1.5 triples** | **62%** | 64% | 60% | 2.6 ± 2.0 | 6/10 | 7/13 | 5, 2 | 1.56 (64%) |
 | **Cade Cunningham: menos de 2.5 triples** | **62%** | 66% | 57% | 1.9 ± 1.4 | 6/10 | 8/13 | - | 1.65 (61%) |
@@ -2773,7 +2768,7 @@ Razonamiento (2 factores a favor, 0 en contra):
 - Minutos esperados: **25.3** (± 3.3); 83 partidos en la base.
 - sin Duncan Robinson: muestra insuficiente (1 partidos sin él)
 - Jalen Duren ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **John Collins: menos de 1.5 triples** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Su prop más probable hoy: **John Collins: menos de 1.5 triples** (63%). Con 80% de probabilidad: más de - / menos de 2.5.
 - Defensa de New Orleans Pelicans contra aleros/ala-pívots en triples: -2% respecto a la media; ajuste por su historial contra defensas similares: +5%.
 
 **¿Por qué 1.3 triples?** (línea 1.5; 25.3 minutos esperados)
@@ -3500,7 +3495,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Neemias Queta: menos de 1.5 tapones** | **65%** | 66% | 65% | 1.1 ± 1.1 | 7/10 | 7/13 | 1, 0 | 1.42 (71%) |
+| **Neemias Queta: menos de 1.5 tapones** | **65%** | 66% | 65% | 1.1 ± 1.1 | 7/10 | 7/13 | 1, 0 | 1.43 (70%) |
 | **Nikola Jokic: menos de 9.5 asistencias** | **62%** | 68% | 54% | 7.8 ± 2.9 | 5/10 | 6/12 | 6 | 1.73 (58%) |
 | **Sam Hauser: menos de 2.5 triples** ⚠️ suplente | **61%** | 61% | 62% | 2.1 ± 1.6 | 6/10 | 7/14 | 1, 2 | 1.51 (66%) |
 | **Derrick White: más de 0.5 robos** | **61%** | 62% | 60% | 0.9 ± 1.0 | 8/10 | 11/14 | 1, 0 | 1.58 (63%) |
@@ -4088,10 +4083,10 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Devin Booker: más de 0.5 robos** | **65%** | 63% | 68% | 1.1 ± 1.1 | 7/10 | 8/13 | 0, 0, 1, 1 | 1.41 (71%) |
-| **Collin Gillespie: menos de 3.5 rebotes** ⚠️ suplente | **63%** | 69% | 56% | 2.8 ± 1.7 | 9/10 | 11/13 | 5, 2, 3, 2 | 1.68 (60%) |
+| **Collin Gillespie: menos de 3.5 rebotes** ⚠️ suplente | **63%** | 69% | 55% | 2.8 ± 1.7 | 9/10 | 11/13 | 5, 2, 3, 2 | 1.69 (59%) |
 | **Jalen Green: más de 0.5 robos** | **62%** | 61% | 64% | 1.0 ± 1.1 | 6/10 | 7/13 | 4 | 1.49 (67%) |
 | **De'Andre Hunter: más de 3.5 rebotes** | **62%** | 67% | 57% | 5.1 ± 2.3 | 7/10 | 7/11 | 3 | 1.66 (60%) |
-| **Jordan Goodwin: más de 1.5 asistencias** ⚠️ suplente | **61%** | 65% | 59% | 2.6 ± 1.8 | 7/10 | 7/9 | 6, 2 | 1.58 (63%) |
+| **Jordan Goodwin: más de 1.5 asistencias** ⚠️ suplente | **61%** | 65% | 59% | 2.6 ± 1.8 | 7/10 | 7/9 | 6, 2 | 1.59 (63%) |
 | **Zach LaVine: más de 2.5 rebotes** | **61%** | 63% | 59% | 3.2 ± 1.9 | 8/10 | 10/12 | 2, 2 | 1.59 (63%) |
 | **Domantas Sabonis: menos de 18.5 reb+ast** | **61%** | 69% | 51% | 15.9 ± 4.6 | 7/10 | 7/12 | - | 1.83 (55%) |
 | **Zach LaVine: más de 0.5 robos** | **60%** | 61% | 60% | 0.9 ± 1.0 | 6/10 | 7/12 | 1, 0 | 1.60 (63%) |
