@@ -157,23 +157,12 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 
 | Partido | Selección | Prob. | Cuota | Últ. 10 | Temporada |
 |---|---|---|---|---|---|
-| LA Clippers @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos**<br>el rival concede -5% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5% | **73%** | 1.39 | 8/10 | 11/15 |
 | New York Knicks @ Minnesota Timberwolves | **Rudy Gobert: menos de 1.5 tapones**<br>el rival concede -7% de tapones por minuto a pívots (defensa fuerte); ajuste aplicado -7% | **68%** | 1.52 | 7/10 | 11/14 |
+| LA Clippers @ San Antonio Spurs | **Derrick Jones Jr.: menos de 1.5 asistencias**<br>el rival concede -4% de asistencias por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -4% | **64%** | 1.53 | 9/10 | 10/12 |
 
 | Selecciones | Probabilidad de acertar todas | Cuota |
 |---|---|---|
-| 2 | **49%** | 2.11 |
-
-**Victor Wembanyama: menos de 1.5 robos** (73%):
-
-- La pasó en 11 de 15 esta temporada (falló con 2, 2, 2, 2)
-- Con 27+ minutos (hoy se esperan 31): 6 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 11 de 16 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 27+ minutos: 13 de 20, con 1.2 de media (últimos 60 partidos)
-- El rival es #23 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 13%
-- El rival es #14 de 30 en balones que pierde (#1 = el que más; 14.2 por partido)
-- Minutos: 31 esperados (titular, ±5)
+| 2 | **44%** | 2.32 |
 
 **Rudy Gobert: menos de 1.5 tapones** (68%):
 
@@ -187,15 +176,27 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 - El 44% de los tiros del rival son cerca del aro (penetración, corte, poste, palmeo): #23 de 30
 - Minutos: 27 esperados (titular, ±4)
 
+**Derrick Jones Jr.: menos de 1.5 asistencias** (64%):
+
+- La pasó en 10 de 12 esta temporada (falló con 3, 5)
+- Con 23+ minutos (hoy se esperan 27): 10 de 12 en sus últimos 15
+- Contra las ~10 mejores defensas en asistencias a aleros/ala-pívots: 12 de 16 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 23+ minutos: 13 de 21, con 1.4 de media (últimos 60 partidos)
+- El rival es #22 de 30 en asistencias que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -4% frente a la media)
+- Asistencias esperadas: 0.9 por partido si sus compañeros metieran lo normal (tiene 0.9; con él en pista metieron el 96% de lo esperado por tipo de tiro, últimos 10); ajuste aplicado +2.6%
+- Oportunidades: asiste el 7% de las canastas de sus compañeros con él en pista
+- El rival no tiene a Dylan Harper (4.4 asistencias por partido)
+- Minutos: 27 esperados (titular, ±3)
+
 ### Las más seguras con cuota
 
 | Partido | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|---|
-| LA Clippers @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **73%** | 77% | 65% | 0.9 ± 0.9 | 8/10 | 11/15 | 1, 1 | 1.39 (72%) |
 | New York Knicks @ Minnesota Timberwolves | **Rudy Gobert: menos de 1.5 tapones** | **68%** | 73% | 61% | 1.0 ± 1.1 | 7/10 | 11/14 | 3, 0 | 1.52 (66%) |
 | New York Knicks @ Minnesota Timberwolves | **Karl-Anthony Towns: más de 0.5 robos** | **65%** | 65% | 65% | 1.1 ± 1.0 | 7/10 | 9/14 | 1, 0 | 1.47 (68%) |
 | New York Knicks @ Minnesota Timberwolves | **Ayo Dosunmu: más de 0.5 robos** | **64%** | 63% | 66% | 1.1 ± 1.1 | 7/10 | 10/15 | 1 | 1.44 (69%) |
 | LA Clippers @ San Antonio Spurs | **Derrick Jones Jr.: menos de 1.5 asistencias** | **64%** | 67% | 61% | 1.3 ± 1.2 | 9/10 | 10/12 | 1, 1, 2 | 1.53 (66%) |
+| LA Clippers @ San Antonio Spurs | **Victor Wembanyama: más de 0.5 robos** | **64%** | 62% | 66% | 0.9 ± 0.9 | 8/10 | 12/15 | 1, 1 | 1.40 (71%) |
 | LA Clippers @ San Antonio Spurs | **Stephon Castle: menos de 7.5 asistencias** | **63%** | 69% | 55% | 6.4 ± 2.7 | 9/10 | 12/15 | 5, 8, 8 | 1.69 (59%) |
 | New York Knicks @ Minnesota Timberwolves | **OG Anunoby: menos de 1.5 robos** | **63%** | 64% | 62% | 1.3 ± 1.1 | 7/10 | 10/14 | 2 | 1.49 (67%) |
 | New York Knicks @ Minnesota Timberwolves | **Jaden McDaniels: más de 0.5 robos** | **63%** | 61% | 65% | 1.0 ± 1.0 | 8/10 | 9/15 | 0 | 1.48 (68%) |
@@ -204,17 +205,8 @@ Se elige por **probabilidad**, no por valor: la más probable de cada partido en
 
 La combinación de jugadores constantes (mismos filtros que la opción B, partidos distintos) con más probabilidad de acertar todas cuya cuota llega al objetivo. Se registran como picks de prueba y se liquidan solas: `nba rendimiento` dice cuándo el sistema está listo para dinero real. Una cuota alta nunca es segura: cuota 15 justa acierta 1 de cada 15. Lo que la data puede hacer es acercarse o superar esa probabilidad. Se eligen solo por probabilidad de acertar (nunca por valor): como mucho 5 patas, sin "menos" de anotación dudosos.
 
-**Segura, cuota 2+ (2 patas):** cuota 2.11, probabilidad de acertar todas **49%** (1 de cada 2)
+**Segura, cuota 2+ (2 patas):** cuota 2.32, probabilidad de acertar todas **44%** (1 de cada 2)
 
-- Victor Wembanyama: menos de 1.5 robos (73%, cuota 1.39) — LA Clippers @ San Antonio Spurs — 5 factores a favor, 0 en contra
-  - La pasó en 11 de 15 esta temporada (falló con 2, 2, 2, 2)
-  - Con 27+ minutos (hoy se esperan 31): 6 de 9 en sus últimos 15
-  - Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 11 de 16 (últimos 40 partidos)
-  - Contra defensas fuertes como la de hoy y con 27+ minutos: 13 de 20, con 1.2 de media (últimos 60 partidos)
-  - El rival es #23 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
-  - Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 13%
-  - El rival es #14 de 30 en balones que pierde (#1 = el que más; 14.2 por partido)
-  - Minutos: 31 esperados (titular, ±5)
 - Rudy Gobert: menos de 1.5 tapones (68%, cuota 1.52) — New York Knicks @ Minnesota Timberwolves — 4 factores a favor, 0 en contra
   - La pasó en 11 de 14 esta temporada (falló con 2, 2, 4)
   - Con 23+ minutos (hoy se esperan 27): 9 de 12 en sus últimos 15
@@ -225,65 +217,40 @@ La combinación de jugadores constantes (mismos filtros que la opción B, partid
   - El rival es #19 de 30 en tiros de 2 por partido (#1 = el que más; 50.4)
   - El 44% de los tiros del rival son cerca del aro (penetración, corte, poste, palmeo): #23 de 30
   - Minutos: 27 esperados (titular, ±4)
+- Derrick Jones Jr.: menos de 1.5 asistencias (64%, cuota 1.53) — LA Clippers @ San Antonio Spurs — 5 factores a favor, 1 en contra
+  - La pasó en 10 de 12 esta temporada (falló con 3, 5)
+  - Con 23+ minutos (hoy se esperan 27): 10 de 12 en sus últimos 15
+  - Contra las ~10 mejores defensas en asistencias a aleros/ala-pívots: 12 de 16 (últimos 40 partidos)
+  - Contra defensas fuertes como la de hoy y con 23+ minutos: 13 de 21, con 1.4 de media (últimos 60 partidos)
+  - El rival es #22 de 30 en asistencias que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -4% frente a la media)
+  - Asistencias esperadas: 0.9 por partido si sus compañeros metieran lo normal (tiene 0.9; con él en pista metieron el 96% de lo esperado por tipo de tiro, últimos 10); ajuste aplicado +2.6%
+  - Oportunidades: asiste el 7% de las canastas de sus compañeros con él en pista
+  - El rival no tiene a Dylan Harper (4.4 asistencias por partido)
+  - Minutos: 27 esperados (titular, ±3)
 
 ## Las más probables del día
 
 | Partido | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|---|
-| LA Clippers @ San Antonio Spurs | **Victor Wembanyama: menos de 1.5 robos** | **73%** | 77% | 65% | 0.9 ± 0.9 | 8/10 | 11/15 | 1, 1 | 1.39 (72%) |
 | Golden State Warriors @ Memphis Grizzlies | **Brandin Podziemski: menos de 1.5 robos** | **69%** | 71% | 65% | 1.1 ± 1.1 | 7/10 | 9/13 | 3, 0, 1, 1 | 1.41 (71%) |
 | New York Knicks @ Minnesota Timberwolves | **Rudy Gobert: menos de 1.5 tapones** | **68%** | 73% | 61% | 1.0 ± 1.1 | 7/10 | 11/14 | 3, 0 | 1.52 (66%) |
+| Golden State Warriors @ Memphis Grizzlies | **Cameron Boozer: menos de 2.5 triples** | **66%** | 69% | 61% | 1.9 ± 2.0 | 8/10 | 11/15 | 4 | 1.53 (66%) |
 | Portland Trail Blazers @ Milwaukee Bucks | **Jrue Holiday: más de 0.5 robos** ⚠️ suplente | **66%** | 65% | 67% | 1.0 ± 1.0 | 7/10 | 11/14 | 1 | 1.42 (71%) |
 | New York Knicks @ Minnesota Timberwolves | **Mikal Bridges: menos de 1.5 triples** | **66%** | 68% | 64% | 1.1 ± 1.1 | 7/10 | 10/14 | 1, 3 | 1.47 (68%) |
-| Golden State Warriors @ Memphis Grizzlies | **Cameron Boozer: menos de 2.5 triples** | **66%** | 69% | 61% | 1.9 ± 2.0 | 8/10 | 11/15 | 4 | 1.54 (65%) |
-| LA Clippers @ San Antonio Spurs | **Julian Champagnie: menos de 5.5 rebotes** | **66%** | 73% | 55% | 3.9 ± 2.4 | 6/10 | 10/15 | 8, 8, 9 | 1.71 (58%) |
+| LA Clippers @ San Antonio Spurs | **Julian Champagnie: menos de 5.5 rebotes** | **66%** | 73% | 55% | 3.9 ± 2.4 | 6/10 | 10/15 | 8, 8, 9 | 1.71 (59%) |
 | Golden State Warriors @ Memphis Grizzlies | **Charles Bassey: menos de 1.5 asistencias** ⚠️ suplente | **66%** | 76% | 52% | 0.9 ± 0.9 | 8/10 | 11/13 | - | 1.82 (55%) |
+| New York Knicks @ Minnesota Timberwolves | **Karl-Anthony Towns: más de 0.5 robos** | **65%** | 65% | 65% | 1.1 ± 1.0 | 7/10 | 9/14 | 1, 0 | 1.47 (68%) |
 | LA Clippers @ San Antonio Spurs | **Stephon Castle: más de 0.5 robos** | **65%** | 66% | 63% | 1.4 ± 1.3 | 4/10 | 8/15 | 0, 1, 0 | 1.51 (66%) |
 
 **Si haces combinada:** cada selección que añades multiplica el riesgo. Probabilidad de acertar todas con las más probables de partidos distintos:
 
-- 2 selecciones: **50%**
-- 3 selecciones: **34%**
-- 4 selecciones: **22%**
+- 2 selecciones: **47%**
+- 3 selecciones: **31%**
+- 4 selecciones: **20%**
 
 Dentro de un mismo partido (bet builder) las selecciones no son independientes y el cálculo es aún menos fiable. Con 12 selecciones al 65 % la probabilidad de acertar todas es menor del 1 %.
 
 ### En qué se basan las 10 más probables
-
-#### Victor Wembanyama: menos de 1.5 robos (73%) — LA Clippers @ San Antonio Spurs
-
-**¿Por qué 0.9 robos?** (línea 1.5; 31.4 minutos esperados)
-
-En corto:
-
-- La pasó en 11 de 15 esta temporada (falló con 2, 2, 2, 2)
-- Con 27+ minutos (hoy se esperan 31): 6 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 11 de 16 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 27+ minutos: 13 de 20, con 1.2 de media (últimos 60 partidos)
-- El rival es #23 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 13%
-- El rival es #14 de 30 en balones que pierde (#1 = el que más; 14.2 por partido)
-- Minutos: 31 esperados (titular, ±5)
-
-Razonamiento (5 factores a favor, 0 en contra):
-
-- ✅ Minutos: 31.4 esperados (titular, ±5.3).
-- ✅ Forma: 1.0 en sus últimos 5, 1.1 esta temporada (15 partidos), 1.1 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
-- ✅ Defensa: el rival concede -5% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5%.
-- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 1 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ⚠️ sin Dylan Harper (9 partidos): 33.9 min vs 30.0 con él; pts -6%/min, ast +21%/min.
-- ⚠️ partido desigual (favorito por 15.5): los titulares suelen jugar -3% de minutos si se rompe.
-
-- Robos **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.4 | 28.9 | 30.0 | 29.9 | 28.0 |
-| Robos | 1.0 | 1.0 | 1.1 | 1.0 | 1.0 |
-| % de las pérdidas del rival que roba | 11.6% | 12.7% | 11.9% | 12.3% | 14.3% |
 
 #### Brandin Podziemski: menos de 1.5 robos (69%) — Golden State Warriors @ Memphis Grizzlies
 
@@ -361,6 +328,47 @@ Razonamiento (4 factores a favor, 0 en contra):
 | Tapones | 1.0 | 1.2 | 1.0 | 1.6 | 1.5 |
 | % de los tiros de 2 del rival que tapona | 3.2% | 4.1% | 3.3% | 4.4% | 3.4% |
 
+#### Cameron Boozer: menos de 2.5 triples (66%) — Golden State Warriors @ Memphis Grizzlies
+
+**¿Por qué 1.9 triples?** (línea 2.5; 28.6 minutos esperados)
+
+En corto:
+
+- La pasó en 11 de 15 esta temporada (falló con 7, 3, 4, 4)
+- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 3 de 4 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 25+ minutos: 4 de 6, con 2.2 de media (últimos 60 partidos)
+- El rival es #17 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -1% frente a la media)
+- Su zona principal es triple frontal (38% de sus tiros, 31% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
+- Cómo tira (últimos 15): recibe y tira 36% (31% de acierto), penetración 31% (46% de acierto), creado 11% (26% de acierto); en recibe y tira el rival es #11 de 30 en lo que deja (#1 = el que más; 1.09 puntos por tiro frente a 1.07 de media)
+- Oportunidades: 5.5 triples intentados esperados al 32%
+- El rival no tiene a Stephen Curry (4.3 triples por partido)
+- Su equipo no tiene a Ty Jerome: más tiros y balón para él
+- Minutos: 29 esperados (titular, ±3)
+
+Razonamiento (3 factores a favor, 2 en contra):
+
+- ✅ Minutos: 28.6 esperados (titular, ±3.0).
+- ✅ Forma: 2.2 en sus últimos 5, 1.9 esta temporada (15 partidos) (línea 2.5).
+- ➖ Cómo produce triples: 5.5 triples intentados (su ritmo 6.6 por 36'; el rival concede -1% de triples en su reparto) × 32% esperado.
+- ➖ Defensa: el rival concede -1% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -1%; en su zona principal (triple) el rival concede 34% (liga 35%).
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ❌ Contra este rival: 4 (0 de 1 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
+- ❌ Bajas del rival: sin Stephen Curry (titular); +1.7% en esta estadística.
+- ⚠️ sin Ty Jerome, la estrella de su equipo (4 partidos suyos sin él): más tiros y balón para él por minuto (puntos +8%, triples +6%, asistencias +4%).
+- ⚠️ Ty Jerome ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- ⚠️ Alertas: sin Ty Jerome: más tiros para él.
+- Triples **1.9** (por componentes 1.8 · por tasa por minuto y defensa rival 1.9): 5.5 triples intentados (su ritmo 6.6 por 36'; el rival concede -1% de triples en su reparto) × 32% esperado.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 28.8 | 30.5 | 31.0 | - | 37.0 |
+| Triples anotados | 2.2 | 1.8 | 1.9 | - | 4.0 |
+| Triples intentados | 5.6 | 5.8 | 5.9 | - | 7.0 |
+| % triples | 39.3% | 31.0% | 32.6% | - | 57.1% |
+
 #### Jrue Holiday: más de 0.5 robos (66%) — Portland Trail Blazers @ Milwaukee Bucks
 
 **¿Por qué 1.0 robos?** (línea 0.5; 27.5 minutos esperados)
@@ -432,47 +440,6 @@ Razonamiento (3 factores a favor, 1 en contra):
 | Triples anotados | 0.8 | 0.9 | 0.9 | 1.8 | 2.0 |
 | Triples intentados | 2.2 | 2.7 | 3.2 | 4.9 | 7.0 |
 | % triples | 36.4% | 33.3% | 28.9% | 37.0% | 28.6% |
-
-#### Cameron Boozer: menos de 2.5 triples (66%) — Golden State Warriors @ Memphis Grizzlies
-
-**¿Por qué 1.9 triples?** (línea 2.5; 28.6 minutos esperados)
-
-En corto:
-
-- La pasó en 11 de 15 esta temporada (falló con 7, 3, 4, 4)
-- Contra las ~10 mejores defensas en triples a aleros/ala-pívots: 3 de 4 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 25+ minutos: 4 de 6, con 2.2 de media (últimos 60 partidos)
-- El rival es #17 de 30 en triples que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -1% frente a la media)
-- Su zona principal es triple frontal (38% de sus tiros, 31% de acierto); el rival es #23 de 30 en acierto que deja ahí (34%, liga 35%)
-- Cómo tira (últimos 15): recibe y tira 36% (31% de acierto), penetración 31% (46% de acierto), creado 11% (26% de acierto); en recibe y tira el rival es #11 de 30 en lo que deja (#1 = el que más; 1.09 puntos por tiro frente a 1.07 de media)
-- Oportunidades: 5.5 triples intentados esperados al 32%
-- El rival no tiene a Stephen Curry (4.3 triples por partido)
-- Su equipo no tiene a Ty Jerome: más tiros y balón para él
-- Minutos: 29 esperados (titular, ±3)
-
-Razonamiento (3 factores a favor, 2 en contra):
-
-- ✅ Minutos: 28.6 esperados (titular, ±3.0).
-- ✅ Forma: 2.2 en sus últimos 5, 1.9 esta temporada (15 partidos) (línea 2.5).
-- ➖ Cómo produce triples: 5.5 triples intentados (su ritmo 6.6 por 36'; el rival concede -1% de triples en su reparto) × 32% esperado.
-- ➖ Defensa: el rival concede -1% de triples por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -1%; en su zona principal (triple) el rival concede 34% (liga 35%).
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ❌ Contra este rival: 4 (0 de 1 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ❌ Bajas del rival: sin Stephen Curry (titular); +1.7% en esta estadística.
-- ⚠️ sin Ty Jerome, la estrella de su equipo (4 partidos suyos sin él): más tiros y balón para él por minuto (puntos +8%, triples +6%, asistencias +4%).
-- ⚠️ Ty Jerome ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ segundo partido en dos noches: -3% de minutos.
-
-- ⚠️ Alertas: sin Ty Jerome: más tiros para él.
-- Triples **1.9** (por componentes 1.8 · por tasa por minuto y defensa rival 1.9): 5.5 triples intentados (su ritmo 6.6 por 36'; el rival concede -1% de triples en su reparto) × 32% esperado.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 28.8 | 30.5 | 31.0 | - | 37.0 |
-| Triples anotados | 2.2 | 1.8 | 1.9 | - | 4.0 |
-| Triples intentados | 5.6 | 5.8 | 5.9 | - | 7.0 |
-| % triples | 39.3% | 31.0% | 32.6% | - | 57.1% |
 
 #### Julian Champagnie: menos de 5.5 rebotes (66%) — LA Clippers @ San Antonio Spurs
 
@@ -549,6 +516,39 @@ Razonamiento (2 factores a favor, 3 en contra):
 | % de las canastas de compañeros que asiste | 5.0% | 5.9% | 5.3% | 6.4% | - |
 | Pérdidas por jugada | 19.7% | 16.3% | 16.1% | 9.7% | - |
 
+#### Karl-Anthony Towns: más de 0.5 robos (65%) — New York Knicks @ Minnesota Timberwolves
+
+**¿Por qué 1.1 robos?** (línea 0.5; 34.8 minutos esperados)
+
+En corto:
+
+- La pasó en 9 de 14 esta temporada (falló con 0, 0, 0, 0)
+- Con 31+ minutos (hoy se esperan 35): 5 de 10 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a pívots: 9 de 19 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 31+ minutos: 5 de 7, con 1.6 de media (últimos 60 partidos)
+- El rival es #19 de 30 en robos que concede a pívots por minuto (#1 = el que más concede; -5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 10.2 balones por partido con él en pista y robó el 11%
+- El rival es #11 de 30 en balones que pierde (#1 = el que más; 14.3 por partido)
+- Minutos: 35 esperados (titular, ±5)
+
+Razonamiento (3 factores a favor, 1 en contra):
+
+- ✅ Minutos: 34.8 esperados (titular, ±5.0).
+- ✅ Forma: 1.4 en sus últimos 5, 0.9 esta temporada (14 partidos), 0.9 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 10.5% de las pérdidas del rival en pista × 13.8 pérdidas esperadas del rival.
+- ❌ Defensa: el rival concede -5% de robos por minuto a pívots (defensa media); ajuste aplicado -5%.
+- ➖ Ritmo del partido: -1% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ➖ Contra este rival: 1, 0 (1 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+
+- Robos **1.1** (por componentes 1.0 · por tasa por minuto y defensa rival 1.1): roba el 10.5% de las pérdidas del rival en pista × 13.8 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 34.8 | 33.1 | 32.7 | 30.3 | 33.0 |
+| Robos | 1.4 | 1.1 | 0.9 | 0.9 | 0.5 |
+| % de las pérdidas del rival que roba | 14.3% | 10.8% | 9.9% | 10.7% | 5.3% |
+
 #### Stephon Castle: más de 0.5 robos (65%) — LA Clippers @ San Antonio Spurs
 
 **¿Por qué 1.4 robos?** (línea 0.5; 29.3 minutos esperados)
@@ -611,13 +611,13 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
 | **Brandin Podziemski: menos de 1.5 robos** | **69%** | 71% | 65% | 1.1 ± 1.1 | 7/10 | 9/13 | 3, 0, 1, 1 | 1.41 (71%) |
-| **Cameron Boozer: menos de 2.5 triples** | **66%** | 69% | 61% | 1.9 ± 2.0 | 8/10 | 11/15 | 4 | 1.54 (65%) |
+| **Cameron Boozer: menos de 2.5 triples** | **66%** | 69% | 61% | 1.9 ± 2.0 | 8/10 | 11/15 | 4 | 1.53 (66%) |
 | **Charles Bassey: menos de 1.5 asistencias** ⚠️ suplente | **66%** | 76% | 52% | 0.9 ± 0.9 | 8/10 | 11/13 | - | 1.82 (55%) |
+| **Yaxel Lendeborg: más de 0.5 robos** | **65%** | 66% | 63% | 1.1 ± 1.0 | 7/10 | 10/15 | 3 | 1.50 (67%) |
 | **Zach Edey: menos de 1.5 asistencias** | **64%** | 68% | 59% | 1.1 ± 1.1 | 9/10 | 10/12 | 3 | 1.60 (63%) |
 | **Gui Santos: menos de 2.5 asistencias** ⚠️ suplente | **64%** | 67% | 59% | 1.9 ± 1.7 | 7/10 | 9/12 | 2, 4, 2, 0 | 1.57 (64%) |
 | **Jaylen Wells: más de 9.5 puntos** | **63%** | 69% | 52% | 13.5 ± 5.7 | 4/10 | 9/15 | 17, 8, 10, 10 | 1.80 (56%) |
 | **Jaylen Wells: más de 12.5 pts+reb** | **62%** | 69% | 52% | 16.8 ± 6.1 | 4/10 | 8/15 | 21, 10, 13, 11 | 1.80 (56%) |
-| **Cedric Coward: menos de 1.5 robos** | **62%** | 61% | 64% | 1.3 ± 1.2 | 4/10 | 7/14 | 0, 0 | 1.44 (70%) |
 
 ### Fichas de los jugadores destacados
 
@@ -792,6 +792,63 @@ Razonamiento (2 factores a favor, 3 en contra):
 | triple de esquina | 2% | 36% | 38% | 39% |
 | media distancia | 2% | 42% | 41% | 43% |
 
+#### Yaxel Lendeborg (aleros/ala-pívots) vs Memphis Grizzlies
+
+- Minutos esperados: **29.6** (± 4.1); 15 partidos en la base.
+- Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Stephen Curry ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos
+- segundo partido en dos noches: -3% de minutos
+- Su prop más probable hoy: **Yaxel Lendeborg: más de 0.5 robos** (65%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de Memphis Grizzlies contra aleros/ala-pívots en robos: +0% respecto a la media; ajuste por su historial contra defensas similares: +3%.
+
+**¿Por qué 1.1 robos?** (línea 0.5; 29.6 minutos esperados)
+
+En corto:
+
+- La pasó en 10 de 15 esta temporada (falló con 0, 0, 0, 0)
+- Con 26+ minutos (hoy se esperan 30): 10 de 13 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 2 de 5 (últimos 40 partidos)
+- Contra defensas medias como la de hoy y con 26+ minutos: 4 de 5, con 1.4 de media (últimos 60 partidos)
+- El rival es #15 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; +0% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 14%
+- El rival es #9 de 30 en balones que pierde (#1 = el que más; 14.6 por partido)
+- El rival no tiene a Ty Jerome (0.8 robos por partido)
+- Minutos: 30 esperados (titular, ±4)
+
+Razonamiento (4 factores a favor, 0 en contra):
+
+- ✅ Minutos: 29.6 esperados (titular, ±4.1).
+- ✅ Forma: 1.2 en sus últimos 5, 1.1 esta temporada (15 partidos) (línea 0.5).
+- ➖ Cómo produce robos: roba el 11.7% de las pérdidas del rival en pista × 15.9 pérdidas esperadas del rival.
+- ➖ Defensa: el rival concede +0% de robos por minuto a aleros/ala-pívots (defensa media); ajuste aplicado +0%.
+- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 3 (1 de 1 a favor).
+- ✅ Últimos 10: la habría pasado 7 de 10.
+- ⚠️ Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Stephen Curry ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
+- ⚠️ segundo partido en dos noches: -3% de minutos.
+
+- ⚠️ Alertas: segunda noche y no favorito.
+- Robos **1.1** (por componentes 1.2 · por tasa por minuto y defensa rival 1.0): roba el 11.7% de las pérdidas del rival en pista × 15.9 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 30.0 | 30.4 | 31.5 | - | 37.0 |
+| Robos | 1.2 | 1.1 | 1.1 | - | 3.0 |
+| % de las pérdidas del rival que roba | 18.8% | 13.9% | 11.3% | - | 13.6% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte +6%, vs defensa media -9%, vs defensa débil +12%; rebotes: vs defensa fuerte -18%, vs defensa media +17%, vs defensa débil +23%; asistencias: vs defensa fuerte -66%, vs defensa media +42%, vs defensa débil +43%; triples: vs defensa fuerte +32%, vs defensa media -27%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| triple frontal | 30% | 36% | 35% | 34% |
+| bajo el aro | 27% | 66% | 68% | 69% |
+| pintura | 27% | 46% | 45% | 45% |
+| media distancia | 9% | 34% | 41% | 43% |
+| triple de esquina | 6% | 40% | 38% | 39% |
+
 #### Zach Edey (pívots) vs Golden State Warriors
 
 - Minutos esperados: **23.6** (± 3.0); 23 partidos en la base.
@@ -848,63 +905,6 @@ Razonamiento (3 factores a favor, 3 en contra):
 | media distancia | 2% | 39% | 41% | 43% |
 | triple de esquina | 0% | 38% | 38% | 39% |
 
-#### Gui Santos (aleros/ala-pívots) vs Memphis Grizzlies
-
-- Minutos esperados: **17.4** (± 4.3); 82 partidos en la base.
-- Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Stephen Curry ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos
-- Su prop más probable hoy: **Gui Santos: menos de 2.5 asistencias** (64%). Con 80% de probabilidad: más de - / menos de 3.5.
-- Defensa de Memphis Grizzlies contra aleros/ala-pívots en asistencias: -1% respecto a la media; ajuste por su historial contra defensas similares: +5%.
-
-**¿Por qué 1.9 asistencias?** (línea 2.5; 17.4 minutos esperados)
-
-En corto:
-
-- La pasó en 9 de 12 esta temporada (falló con 6, 4, 3)
-- Con 13+ minutos (hoy se esperan 17): 7 de 12 en sus últimos 15
-- Contra las ~10 mejores defensas en asistencias a aleros/ala-pívots: 9 de 15 (últimos 40 partidos)
-- Contra defensas medias como la de hoy y con 13+ minutos: 4 de 17, con 3.8 de media (últimos 60 partidos)
-- El rival es #17 de 30 en asistencias que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -1% frente a la media)
-- Asistencias esperadas: 1.9 por partido si sus compañeros metieran lo normal (tiene 2.0; con él en pista metieron el 104% de lo esperado por tipo de tiro, últimos 10); ajuste aplicado -1.1%
-- Oportunidades: asiste el 14% de las canastas de sus compañeros con él en pista
-- El rival no tiene a Ty Jerome (5.1 asistencias por partido)
-- Minutos: 17 esperados (suplente, ±4)
-
-Razonamiento (2 factores a favor, 3 en contra):
-
-- ❌ Minutos: 17.4 esperados (suplente, ±4.3).
-- ❌ Forma: 2.8 en sus últimos 5, 1.8 esta temporada (12 partidos), 2.8 la temporada pasada (línea 2.5).
-- ➖ Cómo produce asistencias: asiste el 14.3% de las canastas de sus compañeros en pista × 12.5 canastas de compañeros esperadas (su equipo 41.9 por 48' contra esta defensa).
-- ➖ Defensa: el rival concede -1% de asistencias por minuto a aleros/ala-pívots (defensa media); ajuste aplicado -1%.
-- ➖ Ritmo del partido: +0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 2, 4, 2, 0 (3 de 4 a favor).
-- ✅ Últimos 10: la habría pasado 7 de 10.
-- ❌ Bajas del rival: sin Ty Jerome (titular); +1.5% en esta estadística.
-- ⚠️ Kristaps Porzingis ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Stephen Curry ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-- ⚠️ Moses Moody ya no jugó en sus últimos partidos: la baja ya está en sus minutos.
-
-- ⚠️ Alertas: suplente.
-- Asistencias **1.9** (por componentes 1.8 · por tasa por minuto y defensa rival 2.0): asiste el 14.3% de las canastas de sus compañeros en pista × 12.5 canastas de compañeros esperadas (su equipo 41.9 por 48' contra esta defensa).
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 18.0 | 17.8 | 18.6 | 20.9 | 20.5 |
-| Asistencias | 2.8 | 2.0 | 1.8 | 2.4 | 2.0 |
-| % de las canastas de compañeros que asiste | 21.2% | 14.4% | 12.9% | 15.5% | 12.2% |
-| Pérdidas por jugada | 17.3% | 18.1% | 15.0% | 16.9% | 17.2% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -8%, vs defensa media +7%, vs defensa débil +4%; rebotes: vs defensa fuerte -4%, vs defensa media -4%, vs defensa débil +8%; asistencias: vs defensa fuerte -19%, vs defensa media +22%, vs defensa débil -2%; triples: vs defensa fuerte -4%, vs defensa media -20%, vs defensa débil +26%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 34% | 71% | 68% | 69% |
-| triple frontal | 32% | 31% | 35% | 34% |
-| pintura | 19% | 43% | 45% | 45% |
-| triple de esquina | 14% | 41% | 38% | 39% |
-| media distancia | 1% | 40% | 41% | 43% |
-
 ## Portland Trail Blazers @ Milwaukee Bucks
 
 Diferencia esperada: Portland Trail Blazers por 10.5 — algo desigual: titulares hasta -1.5% de minutos.
@@ -937,7 +937,7 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 | **Scoot Henderson: menos de 2.5 asistencias** ⚠️ suplente | **63%** | 69% | 54% | 2.0 ± 1.6 | 9/10 | 12/14 | 4 | 1.73 (58%) |
 | **Sidy Cissoko: más de 1.5 asistencias** | **63%** | 66% | 60% | 2.6 ± 1.7 | 4/10 | 7/14 | 3, 2 | 1.56 (64%) |
 | **Donovan Clingan: más de 0.5 triples** | **62%** | 62% | 63% | 1.0 ± 1.0 | 6/10 | 9/14 | 1, 2 | 1.47 (68%) |
-| **Scoot Henderson: menos de 2.5 rebotes** ⚠️ suplente | **62%** | 67% | 55% | 2.1 ± 1.5 | 9/10 | 12/14 | 3 | 1.69 (59%) |
+| **Scoot Henderson: menos de 2.5 rebotes** ⚠️ suplente | **62%** | 67% | 55% | 2.1 ± 1.5 | 9/10 | 12/14 | 3 | 1.70 (59%) |
 
 ### Fichas de los jugadores destacados
 
@@ -1509,67 +1509,16 @@ Las 8 más probables (máximo 2 por jugador: las de un mismo jugador suelen gana
 
 | Prop | Prob. final | Modelo | Casa | Esperado | Últ. 10 | Temporada | vs este rival | Cuota (implícita) |
 |---|---|---|---|---|---|---|---|---|
-| **Victor Wembanyama: menos de 1.5 robos** | **73%** | 77% | 65% | 0.9 ± 0.9 | 8/10 | 11/15 | 1, 1 | 1.39 (72%) |
-| **Julian Champagnie: menos de 5.5 rebotes** | **66%** | 73% | 55% | 3.9 ± 2.4 | 6/10 | 10/15 | 8, 8, 9 | 1.71 (58%) |
+| **Julian Champagnie: menos de 5.5 rebotes** | **66%** | 73% | 55% | 3.9 ± 2.4 | 6/10 | 10/15 | 8, 8, 9 | 1.71 (59%) |
 | **Stephon Castle: más de 0.5 robos** | **65%** | 66% | 63% | 1.4 ± 1.3 | 4/10 | 8/15 | 0, 1, 0 | 1.51 (66%) |
-| **De'Aaron Fox: menos de 6.5 asistencias** | **65%** | 72% | 54% | 4.8 ± 2.5 | 8/10 | 9/14 | 5, 6, 9 | 1.74 (58%) |
+| **De'Aaron Fox: menos de 6.5 asistencias** | **65%** | 72% | 54% | 4.8 ± 2.5 | 8/10 | 9/14 | 5, 6, 9 | 1.74 (57%) |
 | **Derrick Jones Jr.: menos de 1.5 asistencias** | **64%** | 67% | 61% | 1.3 ± 1.2 | 9/10 | 10/12 | 1, 1, 2 | 1.53 (66%) |
+| **Victor Wembanyama: más de 0.5 robos** | **64%** | 62% | 66% | 0.9 ± 0.9 | 8/10 | 12/15 | 1, 1 | 1.40 (71%) |
 | **Stephon Castle: menos de 7.5 asistencias** | **63%** | 69% | 55% | 6.4 ± 2.7 | 9/10 | 12/15 | 5, 8, 8 | 1.69 (59%) |
 | **Brook Lopez: más de 0.5 tapones** | **63%** | 63% | 63% | 1.0 ± 1.0 | 6/10 | 9/13 | 1, 2, 0 | 1.50 (67%) |
-| **De'Aaron Fox: menos de 1.5 robos** | **63%** | 61% | 65% | 1.4 ± 1.2 | 7/10 | 9/14 | 3, 0, 1 | 1.43 (70%) |
+| **De'Aaron Fox: menos de 1.5 triples** | **63%** | 65% | 60% | 1.2 ± 1.1 | 8/10 | 9/14 | 1, 0, 1 | 1.56 (64%) |
 
 ### Fichas de los jugadores destacados
-
-#### Victor Wembanyama (aleros/ala-pívots) vs LA Clippers
-
-- Minutos esperados: **31.4** (± 5.3); 104 partidos en la base.
-- sin Dylan Harper (9 partidos): 33.9 min vs 30.0 con él; pts -6%/min, ast +21%/min
-- partido desigual (favorito por 15.5): los titulares suelen jugar -3% de minutos si se rompe
-- Su prop más probable hoy: **Victor Wembanyama: menos de 1.5 robos** (73%). Con 80% de probabilidad: más de - / menos de 2.5.
-- Defensa de LA Clippers contra aleros/ala-pívots en robos: -5% respecto a la media; ajuste por su historial contra defensas similares: -3%.
-
-**¿Por qué 0.9 robos?** (línea 1.5; 31.4 minutos esperados)
-
-En corto:
-
-- La pasó en 11 de 15 esta temporada (falló con 2, 2, 2, 2)
-- Con 27+ minutos (hoy se esperan 31): 6 de 9 en sus últimos 15
-- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 11 de 16 (últimos 40 partidos)
-- Contra defensas fuertes como la de hoy y con 27+ minutos: 13 de 20, con 1.2 de media (últimos 60 partidos)
-- El rival es #23 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
-- Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 13%
-- El rival es #14 de 30 en balones que pierde (#1 = el que más; 14.2 por partido)
-- Minutos: 31 esperados (titular, ±5)
-
-Razonamiento (5 factores a favor, 0 en contra):
-
-- ✅ Minutos: 31.4 esperados (titular, ±5.3).
-- ✅ Forma: 1.0 en sus últimos 5, 1.1 esta temporada (15 partidos), 1.1 la temporada pasada (línea 1.5).
-- ➖ Cómo produce robos: roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
-- ✅ Defensa: el rival concede -5% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5%.
-- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
-- ✅ Contra este rival: 1, 1 (2 de 2 a favor).
-- ✅ Últimos 10: la habría pasado 8 de 10.
-- ⚠️ sin Dylan Harper (9 partidos): 33.9 min vs 30.0 con él; pts -6%/min, ast +21%/min.
-- ⚠️ partido desigual (favorito por 15.5): los titulares suelen jugar -3% de minutos si se rompe.
-
-- Robos **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
-
-| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
-|---|---|---|---|---|---|
-| Minutos | 29.4 | 28.9 | 30.0 | 29.9 | 28.0 |
-| Robos | 1.0 | 1.0 | 1.1 | 1.0 | 1.0 |
-| % de las pérdidas del rival que roba | 11.6% | 12.7% | 11.9% | 12.3% | 14.3% |
-
-- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media -1%, vs defensa débil +16%; rebotes: vs defensa fuerte -6%, vs defensa media +5%, vs defensa débil +1%; asistencias: vs defensa fuerte -16%, vs defensa media -4%, vs defensa débil +31%; triples: vs defensa fuerte -14%, vs defensa media -2%, vs defensa débil +13%.
-
-| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
-|---|---|---|---|---|
-| bajo el aro | 37% | 75% | 68% | 70% |
-| triple frontal | 30% | 33% | 35% | 36% |
-| pintura | 16% | 47% | 45% | 45% |
-| media distancia | 15% | 36% | 41% | 40% |
-| triple de esquina | 2% | 39% | 38% | 40% |
 
 #### Julian Champagnie (aleros/ala-pívots) vs LA Clippers
 
@@ -1781,3 +1730,54 @@ Razonamiento (5 factores a favor, 1 en contra):
 | triple de esquina | 19% | 40% | 38% | 36% |
 | pintura | 19% | 42% | 45% | 42% |
 | media distancia | 2% | 37% | 41% | 41% |
+
+#### Victor Wembanyama (aleros/ala-pívots) vs LA Clippers
+
+- Minutos esperados: **31.4** (± 5.3); 104 partidos en la base.
+- sin Dylan Harper (9 partidos): 33.9 min vs 30.0 con él; pts -6%/min, ast +21%/min
+- partido desigual (favorito por 15.5): los titulares suelen jugar -3% de minutos si se rompe
+- Su prop más probable hoy: **Victor Wembanyama: más de 0.5 robos** (64%). Con 80% de probabilidad: más de - / menos de 2.5.
+- Defensa de LA Clippers contra aleros/ala-pívots en robos: -5% respecto a la media; ajuste por su historial contra defensas similares: -3%.
+
+**¿Por qué 0.9 robos?** (línea 0.5; 31.4 minutos esperados)
+
+En corto:
+
+- La pasó en 12 de 15 esta temporada (falló con 0, 0, 0)
+- Con 27+ minutos (hoy se esperan 31): 8 de 9 en sus últimos 15
+- Contra las ~10 mejores defensas en robos a aleros/ala-pívots: 12 de 16 (últimos 40 partidos)
+- Contra defensas fuertes como la de hoy y con 27+ minutos: 17 de 20, con 1.2 de media (últimos 60 partidos)
+- El rival es #23 de 30 en robos que concede a aleros/ala-pívots por minuto (#1 = el que más concede; -5% frente a la media)
+- Oportunidades de robo (últimos 10): el rival perdió 7.9 balones por partido con él en pista y robó el 13%
+- El rival es #14 de 30 en balones que pierde (#1 = el que más; 14.2 por partido)
+- Minutos: 31 esperados (titular, ±5)
+
+Razonamiento (4 factores a favor, 1 en contra):
+
+- ✅ Minutos: 31.4 esperados (titular, ±5.3).
+- ✅ Forma: 1.0 en sus últimos 5, 1.1 esta temporada (15 partidos), 1.1 la temporada pasada (línea 0.5).
+- ➖ Cómo produce robos: roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
+- ❌ Defensa: el rival concede -5% de robos por minuto a aleros/ala-pívots (defensa fuerte); ajuste aplicado -5%.
+- ➖ Ritmo del partido: -0% de posesiones frente a la media (ya incluido en lo que concede el rival).
+- ✅ Contra este rival: 1, 1 (2 de 2 a favor).
+- ✅ Últimos 10: la habría pasado 8 de 10.
+- ⚠️ sin Dylan Harper (9 partidos): 33.9 min vs 30.0 con él; pts -6%/min, ast +21%/min.
+- ⚠️ partido desigual (favorito por 15.5): los titulares suelen jugar -3% de minutos si se rompe.
+
+- Robos **0.9** (por componentes 0.9 · por tasa por minuto y defensa rival 0.9): roba el 11.9% de las pérdidas del rival en pista × 12.8 pérdidas esperadas del rival.
+
+| Estadística | Últ. 5 | Últ. 10 | Temporada | Temp. anterior | vs este rival |
+|---|---|---|---|---|---|
+| Minutos | 29.4 | 28.9 | 30.0 | 29.9 | 28.0 |
+| Robos | 1.0 | 1.0 | 1.1 | 1.0 | 1.0 |
+| % de las pérdidas del rival que roba | 11.6% | 12.7% | 11.9% | 12.3% | 14.3% |
+
+- Rendimiento por minuto según la defensa rival (frente a su media): puntos: vs defensa fuerte -7%, vs defensa media -1%, vs defensa débil +16%; rebotes: vs defensa fuerte -6%, vs defensa media +5%, vs defensa débil +1%; asistencias: vs defensa fuerte -16%, vs defensa media -4%, vs defensa débil +31%; triples: vs defensa fuerte -14%, vs defensa media -2%, vs defensa débil +13%.
+
+| Zona | Reparto de sus tiros | Su acierto | Media liga | Concede el rival |
+|---|---|---|---|---|
+| bajo el aro | 37% | 75% | 68% | 70% |
+| triple frontal | 30% | 33% | 35% | 36% |
+| pintura | 16% | 47% | 45% | 45% |
+| media distancia | 15% | 36% | 41% | 40% |
+| triple de esquina | 2% | 39% | 38% | 40% |
