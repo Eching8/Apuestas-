@@ -37,7 +37,9 @@
           "lado": "más",
           "linea": 4.5
         }
-      ]
+      ],
+      "resultado_casa": "perdida",
+      "nota": " Perdida por Podziemski (3 reb, GSW perdió por 22) y Paul George (1 triple). Salieron Dybantsa 12 reb, Boozer 5 ast, Luka 7 ast."
     },
     {
       "nombre": "Betano 6.11 (agresiva + segura, fantasma)",
@@ -87,14 +89,16 @@
           "lado": "más",
           "linea": 1.5
         }
-      ]
+      ],
+      "resultado_casa": "perdida",
+      "nota": " Perdida por Podziemski (3 reb, GSW perdió por 22) y Paul George (1 triple). Salieron Dybantsa 12 reb, Boozer 5 ast, Luka 7 ast, Acuff 6 triples; Maxey anulado."
     },
     {
       "nombre": "Segura del sistema (fantasma)",
       "casa": "Betano",
       "cuota": 1.4,
       "prob": 0.59,
-      "nota": "Cuota con las de Betano (1.19 y 1.18).",
+      "nota": "Cuota con las de Betano (1.19 y 1.18). Ganada a 1.18: Maxey no jugó (decisión del entrenador, anulada) y Acuff metió 6 triples.",
       "patas": [
         {
           "jugador": "Tyrese Maxey",
@@ -108,7 +112,8 @@
           "lado": "más",
           "linea": 1.5
         }
-      ]
+      ],
+      "resultado_casa": "ganada"
     }
   ]
 }
